@@ -119,3 +119,7 @@ def findlongeststring(s, sub):
         size = len(w)
         stream += sub[l]
     return offset, size
+
+def md5(s):
+    import md5
+    return md5.md5(s).hexdigest()

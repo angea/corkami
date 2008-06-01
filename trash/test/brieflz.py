@@ -12,32 +12,19 @@ debug = False
         self.bzoffset = 0
 
     def __literal(self):
-        if debug: print "blz: literal {", \
-            self.bzoffset, self.data[self.bzoffset:]
         self.writebit(0)
         self.writebyte(self.data[self.bzoffset])
         self.bzoffset += 1
-        if debug: print "}"
         return
 
     def __windowblock(self, offset, length):
-        assert offset >= 1
-        assert length >= 4
-        if debug: print "blz: windowcopy {", offset, length
         self.writebit(1)
         self.writevariablenumber(length - 2)
         offset -= 1
         self.writevariablenumber(((offset >> 8) + 2) & 0xFF)
         self.writebyte(offset & 0xFF)
         self.bzoffset += length
-        if debug: print "}"
         return
-
-    def __determine(self, offset, length):
-        """returns the correct encoding function based on the entry found"""
-        if offset >= 1 and length >= 4:
-            return self.__windowblock(offset, length)
-        return self.__literal()
 
     def do(self):
         self.writebyte(self.data[self.bzoffset])
@@ -45,8 +32,10 @@ debug = False
         while self.bzoffset < len(self.data):
             offset, length = misc.findlongeststring(self.data[:self.bzoffset],
                 self.data[self.bzoffset:])
-            if debug: print offset, length
-            self.__determine(offset, length)
+            if offset >= 1 and length >= 4:
+                self.__windowblock(offset, length)
+            else:
+                self.__literal()
         return self.getdata()
 
 

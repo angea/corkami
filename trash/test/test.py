@@ -5,6 +5,9 @@ import misc
 import testdata
 
 
+teststring = "this is a very very original string to decompress. let's see if it " \
+    "decompresses correctly. let's add a few original strings to enhance compression."
+testmd5 = "c388a7e2b0f63d7fc2f7a00b7a5d0aca"
 
 def lz_compdec(testnb=5, length=300):
     import lz
@@ -114,17 +117,19 @@ def aplib_decompress():
     if m != "e08ab6d88b9a21ae7d8fe8bc5887ce4c":
         print "aplib decompress test error"
 
+
 def brieflz_decompress():
     import brieflz
 
-    data = testdata.brieflz1
-    blz = brieflz.decompress(data,len(data))
-    decomp, offset = blz.do()
+    data = teststring
+    c = brieflz.compress(data)
+    comp = c.do()
+    d = brieflz.decompress(comp, len(comp))
+    decomp, offset = d.do()
 
-    m = md5.md5(decomp).hexdigest()
-    #"this is a very very original string to decompress. let's see if it " \
-    #"decompresses correctly. let's add a few original strings to enhance compression."
-    if m != "c388a7e2b0f63d7fc2f7a00b7a5d0aca":
+    if misc.md5(comp) != "05cf0b772e62f03d954dd1e3ed7a1658":
+        print "brieflz comp error"
+    if misc.md5(decomp) != "c388a7e2b0f63d7fc2f7a00b7a5d0aca":
         print "brieflz decomp serror"
 
 
