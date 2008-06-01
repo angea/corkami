@@ -6,7 +6,7 @@ import testdata
 
 
 
-def lz_compdec(testnb=100, length=300):
+def lz_compdec(testnb=5, length=300):
     import lz
 
     def setbyte(c):
@@ -117,57 +117,49 @@ def aplib_decompress():
 def brieflz_decompress():
     import brieflz
 
-    #blzpack starts at offset 24, hiew files start at 32:
-    offset = 32
-    data = testdata.brieflz1[offset:]
+    data = testdata.brieflz1
     blz = brieflz.decompress(data,len(data))
     decomp, offset = blz.do()
 
     m = md5.md5(decomp).hexdigest()
-    if m != "1431f20d9110546ae22541b45af69a21":
-        print "hiew.blz brieflz error"
+    #"this is a very very original string to decompress. let's see if it " \
+    #"decompresses correctly. let's add a few original strings to enhance compression."
+    if m != "c388a7e2b0f63d7fc2f7a00b7a5d0aca":
+        print "brieflz decomp serror"
 
 
-def brieflz_compdec(testnb=10, testlength=50):
+def brieflz_compdec(testnb=10, testlength=300):
     import brieflz
     for i in xrange(testnb):
         data = "".join([chr(random.randrange(40,125)) for x in xrange(10)])
         for j in xrange(testlength - 1):
             c = random.randrange(0,10)
-            if c > 7:
+            if c > 8:
                 start = random.randrange(0, max(len(data) - 10, 1))
                 size = random.randrange(1, len(data) / 5)
                 data += data[start:start + size]
             else:
                 data += chr(random.randrange(40,125))
-        #data = "".join([chr(random.randrange(0,255)) for i in xrange(testlength)])
         c = brieflz.compress(data)
         compressed = c.do()
         d = brieflz.decompress(compressed, len(compressed))
         decompressed , consumed = d.do()
         if  decompressed != data:
-            print "fail"
+            print "brieflz compdec fail"
             print "original", data, len(data)
             print "result  ", decompressed, len(decompressed)
             limit = misc.getlongestcommon(data, decompressed)
             print limit
             print misc.gethyphenstr(data[:limit]), misc.gethyphenstr(data[limit:])
             print misc.gethyphenstr(decompressed[:limit]), misc.gethyphenstr(decompressed[limit:])
-            #print "compressed", temp
             print
             return
-        else:
-            #print "ok"
-            #print data
-            #print final
-            pass
 
 
 if __name__ == '__main__':
-
     debug = False
-    lz_compdec(5,200)
+    lz_compdec()
     brieflz_decompress()
     jcalg_decompress()
     aplib_decompress()
-#    brieflz_compdec()
+    brieflz_compdec()

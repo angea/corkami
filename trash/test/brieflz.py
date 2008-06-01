@@ -21,18 +21,21 @@ debug = False
         return
 
     def __windowblock(self, offset, length):
+        assert offset >= 1
+        assert length >= 4
         if debug: print "blz: windowcopy {", offset, length
         self.writebit(1)
         self.writevariablenumber(length - 2)
+        offset -= 1
         self.writevariablenumber(((offset >> 8) + 2) & 0xFF)
-        self.writebyte((offset - 1) & 0xFF)
+        self.writebyte(offset & 0xFF)
         self.bzoffset += length
         if debug: print "}"
         return
 
     def __determine(self, offset, length):
         """returns the correct encoding function based on the entry found"""
-        if offset >= 1 or length >= 3:
+        if offset >= 1 and length >= 4:
             return self.__windowblock(offset, length)
         return self.__literal()
 
@@ -42,6 +45,7 @@ debug = False
         while self.bzoffset < len(self.data):
             offset, length = misc.findlongeststring(self.data[:self.bzoffset],
                 self.data[self.bzoffset:])
+            if debug: print offset, length
             self.__determine(offset, length)
         return self.getdata()
 
@@ -78,8 +82,8 @@ debug = False
 
     def __windowblock(self):
         length = self.readvariablenumber() + 2
-        offset = self.readvariablenumber() - 2
-        offset = (offset << 8) + ord(self.readbyte()) + 1
+        offset = ((self.readvariablenumber() - 2) << 8) + \
+            ord(self.readbyte()) + 1
         if debug:print "block read",offset, length
         try:
             self.windowblockcopy(offset, length)
@@ -90,14 +94,6 @@ debug = False
 
 
 if __name__ == '__main__':
-    import test
-    #test.brieflz_decompress()
-    #test.brieflz_compdec(100,5)
-    #s = "nO_NWS0>l>nnn2"
-    original = "nn"
-    c = compress(original)
-    compressed = c.do()
-    print original
-    d = decompress(compressed, len(compressed))
-    decompressed, consumed = d.do()
-    print original, decompressed
+    import test, md5
+    test.brieflz_decompress()
+    test.brieflz_compdec()

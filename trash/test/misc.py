@@ -82,6 +82,7 @@ def write_snippet(filename):
 
 
 def checkfindest(dic, stream, offset, length):
+    """checks that findlongeststring result is correct"""
     temp = dic[:]
     for i in xrange(length):
             temp += temp[-offset]
@@ -94,8 +95,6 @@ def checkfindest(dic, stream, offset, length):
 def findlongeststring(s, sub):
     stream = s[:]
     """returns the number of byte to look backward and the length of byte to copy)"""
-#    if sub :
-#        return -1, -1
     l = 0
     offset = -1
     size = 0
@@ -103,11 +102,8 @@ def findlongeststring(s, sub):
 
     w += sub[l]
     i = stream.find(w)
-    if debug:print offset, size, stream, w
     if i == -1:
-        if debug: print "notfound1"
-        return -1, -1
-
+        return offset, size
     offset = len(s) - i
     size = len(w)
     stream += sub[l]
@@ -116,18 +112,10 @@ def findlongeststring(s, sub):
         l += 1
         w += sub[l]
 
-        if debug:print offset, size, "'", stream, "'", w
         i = stream.find(w)
         if i == -1:
-            if debug: print "not found2"
-            assert checkfindest(s, sub, offset, size)
-
             return offset, size
-        stream += sub[l]
         offset = len(s) - i
         size = len(w)
-
-    else:
-        #print "end of while"
-        pass
+        stream += sub[l]
     return offset, size

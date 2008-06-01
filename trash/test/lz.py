@@ -177,7 +177,7 @@ class compress:
         return result
 
     def readvariablenumber(self):
-        """return a variable bit-length number x, x <= 2
+        """return a variable bit-length number x, x >= 2
 
         reads a bit until the next bit in the pair is not set"""
         result = 1
