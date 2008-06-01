@@ -1,14 +1,9 @@
-"""Kabopan project, 2008,
-
-written by Ange Albertini - not to be distributed
-
-"""
 import lz
 
 class decompress(lz.decompress):
     """aplib decompression class. inherits bitstream"""
     def __init__(self, data):
-        self.data = lz.decompress.__init__(self, data, cmdsize=1)
+        self.data = lz.decompress.__init__(self, data, tagsize=1)
         self.decompressed = ""
 
         # aplib specific

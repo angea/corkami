@@ -1,8 +1,3 @@
-"""Kabopan project, 2008,
-
-written by Ange Albertini - not to be distributed
-
-"""
 import md5
 import random
 
@@ -11,8 +6,7 @@ import testdata
 
 
 
-
-def lz(testnb = 100, length = 300):
+def lz_compdec(testnb=100, length=300):
     import lz
 
     def setbyte(c):
@@ -96,7 +90,7 @@ def lz(testnb = 100, length = 300):
     return fail
 
 
-def jcalgdecompress():
+def jcalg_decompress():
     import jcalg
 
     data = testdata.jcalg1[10:]    # skip header
@@ -110,7 +104,7 @@ def lz(testnb = 100, length = 300):
     else:
         pass
 
-def aplibdecompress():
+def aplib_decompress():
     import aplib
 
     ap = aplib.decompress(testdata.aplib1)
@@ -120,7 +114,7 @@ def aplibdecompress():
     if m != "e08ab6d88b9a21ae7d8fe8bc5887ce4c":
         print "aplib decompress test error"
 
-def brieflzdecompress():
+def brieflz_decompress():
     import brieflz
 
     #blzpack starts at offset 24, hiew files start at 32:
@@ -134,7 +128,7 @@ def brieflzdecompress():
         print "hiew.blz brieflz error"
 
 
-def brieflzcompdec(testnb = 10, testlength = 50):
+def brieflz_compdec(testnb=10, testlength=50):
     import brieflz
     for i in xrange(testnb):
         data = "".join([chr(random.randrange(40,125)) for x in xrange(10)])
@@ -155,7 +149,7 @@ def brieflzdecompress():
             print "fail"
             print "original", data, len(data)
             print "result  ", final, len(final)
-            limit = getlongestcommon(data, final)
+            limit = misc.getlongestcommon(data, final)
             print limit
             print misc.gethyphenstr(data[:limit]), misc.gethyphenstr(data[limit:])
             print misc.gethyphenstr(final[:limit]), misc.gethyphenstr(final[limit:])
@@ -169,11 +163,11 @@ def brieflzdecompress():
             pass
 
 
+if __name__ == '__main__':
 
-debug = False
-
-lz(5,200)
-brieflzdecompress()
-jcalgdecompress()
-aplibdecompress()
-brieflzcompdec()
+    debug = False
+    lz_compdec(5,200)
+    brieflz_decompress()
+    jcalg_decompress()
+    aplib_decompress()
+    brieflz_compdec()

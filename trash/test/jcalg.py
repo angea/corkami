@@ -1,15 +1,10 @@
-"""Kabopan project, 2008,
-
-written by Ange Albertini - not to be distributed
-
-"""
 import lz
 
 
 class decompress(lz.decompress):
     """brieflz decompression class. inherits bitstream"""
     def __init__(self, data):
-        self.data = lz.decompress.__init__(self, data, cmdsize=4)
+        self.data = lz.decompress.__init__(self, data, tagsize=4)
         self.decompressed = ""
 
         # jcalg specific

@@ -1,10 +1,5 @@
-"""Kabopan project, 2008,
-
-written by Ange Albertini - not to be distributed
-
-"""
-
 debug = False
+
 def getbinlen(value):
     """return the bit length of an integer"""
     result = 0

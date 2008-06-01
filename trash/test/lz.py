@@ -1,22 +1,17 @@
-"""Kabopan project, 2008,
-
-written by Ange Albertini - not to be distributed
-
-"""
 import misc
 
 debug = False
 
 class compress:
-    def __init__(self, cmdsize):
+    def __init__(self, tagsize):
         self.bsdata = ""
         self.status = ""
-        self.cmdsize = cmdsize
-        self.cmd = 0
-        self.cmdoffset = -1
-        self.maxbit = (self.cmdsize * 8) - 1
+        self.tagsize = tagsize
+        self.tag = 0
+        self.tagoffset = -1
+        self.maxbit = (self.tagsize * 8) - 1
         self.currentbit = 0
-        self.isfirstcmd = True
+        self.isfirsttag = True
 
     def getunkbinstr(self, value):
         """returns a binary string representation of the command/tag
@@ -29,18 +24,18 @@ class compress:
         mod = countmissing(len(s), self.maxbit + 1)
         return s + "x" * mod
 
-    def __getstrcmd(self):
+    def __getstrtag(self):
         """returns the current tag as binary value, little-endian"""
         result = ""
-        for i in xrange(self.cmdsize):
-            result  = result + chr((self.cmd >> (8 * i)) & 0xFF )
+        for i in xrange(self.tagsize):
+            result  = result + chr((self.tag >> (8 * i)) & 0xFF )
         return result
 
     def getstatus(self):
         return "status " + " / ".join([
-            gethyphenstr(gethexstr(self.bsdata[:self.cmdoffset])) ,
-            self.getunkbinstr(self.cmd) + " %0X" % (self.cmd),
-            gethexstr(self.bsdata[self.cmdoffset + self.cmdsize:])]).strip(" /")
+            gethyphenstr(gethexstr(self.bsdata[:self.tagoffset])) ,
+            self.getunkbinstr(self.tag) + " %0X" % (self.tag),
+            gethexstr(self.bsdata[self.tagoffset + self.tagsize:])]).strip(" /")
 
     def printstatus(self):
         if not debug:
@@ -51,40 +46,40 @@ class compress:
             print newstatus
 
     def getdata(self):
-        return self.bsdata[:self.cmdoffset] + self.__getstrcmd() \
-               + self.bsdata[self.cmdoffset + self.cmdsize:]
+        return self.bsdata[:self.tagoffset] + self.__getstrtag() \
+               + self.bsdata[self.tagoffset + self.tagsize:]
 
     def writebit(self, value):
         self.printstatus()
         if self.currentbit != 0:
             self.currentbit -= 1
         else:
-            # write the cmd to the string
+            # write the tag to the string
             if debug:
-                print "cmd full {"
+                print "tag full {"
 
-            if self.isfirstcmd:
+            if self.isfirsttag:
                 if debug:
                     print "first"
-                self.isfirstcmd = False
+                self.isfirsttag = False
             else:
                 self.printstatus()
-                self.bsdata = self.bsdata[:self.cmdoffset] \
-                              + self.__getstrcmd() \
-                              + self.bsdata[self.cmdoffset + self.cmdsize:]
+                self.bsdata = self.bsdata[:self.tagoffset] \
+                              + self.__getstrtag() \
+                              + self.bsdata[self.tagoffset + self.tagsize:]
                 self.printstatus()
-            self.cmdoffset = len(self.bsdata)
-            self.bsdata += "".join(["\x00"] * self.cmdsize)
+            self.tagoffset = len(self.bsdata)
+            self.bsdata += "".join(["\x00"] * self.tagsize)
             self.printstatus()
             self.currentbit = self.maxbit
-            self.cmd = 0
+            self.tag = 0
             if debug:
                 print "}"
 
         if value:
             if debug:
                 print "write b1"
-            self.cmd |= (1 << self.currentbit)
+            self.tag |= (1 << self.currentbit)
         else:
             if debug:
                 print "write b0"
@@ -137,11 +132,11 @@ class compress:
 
 class decompress:
     """decompression bitstream class"""
-    def __init__(self, data, cmdsize):
+    def __init__(self, data, tagsize):
         self.currentbit = 0
         self.offset = 0
-        self.cmd = None
-        self.cmdsize = cmdsize
+        self.tag = None
+        self.tagsize = tagsize
         self.bsdata = data
 
     def getoffset(self):
@@ -156,13 +151,13 @@ class compress:
         if self.currentbit != 0:
             self.currentbit -= 1
         else:
-            self.currentbit = (self.cmdsize * 8) - 1
-            self.cmd = ord(self.readbyte())
-            for i in xrange(self.cmdsize - 1):
-                self.cmd += ord(self.readbyte()) << (8 * (i + 1))
+            self.currentbit = (self.tagsize * 8) - 1
+            self.tag = ord(self.readbyte())
+            for i in xrange(self.tagsize - 1):
+                self.tag += ord(self.readbyte()) << (8 * (i + 1))
 
-        bit = (self.cmd  >> ((self.cmdsize * 8) - 1)) & 0x01
-        self.cmd <<= 1
+        bit = (self.tag  >> ((self.tagsize * 8) - 1)) & 0x01
+        self.tag <<= 1
         return bit
 
     def readbyte(self):
