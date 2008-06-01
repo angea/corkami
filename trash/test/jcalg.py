@@ -13,7 +13,7 @@ class decompress(lz.decompress):
         self.literalbits = 0
         self.literaloffset = 0
         self.functions = [
-            self.__nextbyte,
+            self.__literal,
             self.__normalphrase,
             self.__onebyteorliteralchange,
             self.__shortmatch,
@@ -29,7 +29,7 @@ class decompress(lz.decompress):
                 break
         return self.decompressed, self.offset
 
-    def __nextbyte(self):
+    def __literal(self):
         # literal
         self.decompressed += chr(self.readfixednumber(self.literalbits)
              + self.literaloffset)

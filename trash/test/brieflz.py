@@ -11,38 +11,38 @@ debug = False
         self.compressed = ""
         self.bzoffset = 0
 
-    def __literal(self, foundoff, foundlen):
-        if debug: print "blz: literal {", self.bzoffset, \
-            self.data[self.bzoffset:]
+    def __literal(self):
+        if debug: print "blz: literal {", \
+            self.bzoffset, self.data[self.bzoffset:]
         self.writebit(0)
         self.writebyte(self.data[self.bzoffset])
         self.bzoffset += 1
         if debug: print "}"
         return
 
-    def __windowblock(self, foundoff, foundlen):
-        if debug: print "blz: windowcopy {", foundoff, foundlen
+    def __windowblock(self, offset, length):
+        if debug: print "blz: windowcopy {", offset, length
         self.writebit(1)
-        self.writevariablenumber(foundlen - 2)
-        self.writevariablenumber(((foundoff >> 8) + 2) & 0xFF)
-        self.writebyte((foundoff - 1) & 0xFF)
-        self.bzoffset += foundlen
+        self.writevariablenumber(length - 2)
+        self.writevariablenumber(((offset >> 8) + 2) & 0xFF)
+        self.writebyte((offset - 1) & 0xFF)
+        self.bzoffset += length
         if debug: print "}"
         return
 
-    def __determine(self, foundoff, foundlen):
+    def __determine(self, offset, length):
         """returns the correct encoding function based on the entry found"""
-        if foundoff >= 1 or foundlen >= 3:
-            return self.__windowblock
-        return self.__literal
+        if offset >= 1 or length >= 3:
+            return self.__windowblock(offset, length)
+        return self.__literal()
 
     def do(self):
         self.writebyte(self.data[self.bzoffset])
         self.bzoffset += 1
         while self.bzoffset < len(self.data):
-            foundoff, foundlen = misc.findlongeststring(self.data[:self.bzoffset],
+            offset, length = misc.findlongeststring(self.data[:self.bzoffset],
                 self.data[self.bzoffset:])
-            self.__determine(foundoff, foundlen)(foundoff, foundlen)
+            self.__determine(offset, length)
         return self.getdata()
 
 
@@ -84,7 +84,6 @@ debug = False
         try:
             self.windowblockcopy(offset, length)
         except:
-            print
             print "error windowblock"
             return True
         return False
@@ -92,5 +91,13 @@ debug = False
 
 if __name__ == '__main__':
     import test
-    test.brieflz_decompress()
-    test.brieflz_compdec()
+    #test.brieflz_decompress()
+    #test.brieflz_compdec(100,5)
+    #s = "nO_NWS0>l>nnn2"
+    original = "nn"
+    c = compress(original)
+    compressed = c.do()
+    print original
+    d = decompress(compressed, len(compressed))
+    decompressed, consumed = d.do()
+    print original, decompressed

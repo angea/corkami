@@ -141,18 +141,18 @@ def brieflz_decompress():
             else:
                 data += chr(random.randrange(40,125))
         #data = "".join([chr(random.randrange(0,255)) for i in xrange(testlength)])
-        comp = brieflz.compress(data)
-        temp = comp.do()
-        dec = brieflz.decompress(temp, len(temp))
-        final , consumed = dec.do()
-        if  final != data:
+        c = brieflz.compress(data)
+        compressed = c.do()
+        d = brieflz.decompress(compressed, len(compressed))
+        decompressed , consumed = d.do()
+        if  decompressed != data:
             print "fail"
             print "original", data, len(data)
-            print "result  ", final, len(final)
-            limit = misc.getlongestcommon(data, final)
+            print "result  ", decompressed, len(decompressed)
+            limit = misc.getlongestcommon(data, decompressed)
             print limit
             print misc.gethyphenstr(data[:limit]), misc.gethyphenstr(data[limit:])
-            print misc.gethyphenstr(final[:limit]), misc.gethyphenstr(final[limit:])
+            print misc.gethyphenstr(decompressed[:limit]), misc.gethyphenstr(decompressed[limit:])
             #print "compressed", temp
             print
             return
@@ -170,4 +170,4 @@ def brieflz_decompress():
     brieflz_decompress()
     jcalg_decompress()
     aplib_decompress()
-    brieflz_compdec()
+#    brieflz_compdec()

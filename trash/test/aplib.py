@@ -10,7 +10,7 @@ class decompress(lz.decompress):
         self.iscopylast = False
         self.lastcopyoffset = 0
         self.functions = [
-            self.__nextbyte,
+            self.__literal,
             self.__farwindowblock,
             self.__shortwindowblock,
             self.__windowbyte]
@@ -18,7 +18,7 @@ class decompress(lz.decompress):
         self.functionsbits = len(self.functions) - 1
         return
 
-    def __nextbyte(self):
+    def __literal(self):
         """copy literally the next byte from the bitstream"""
         self.decompressed += self.readbyte()
         self.iscopylast = False
