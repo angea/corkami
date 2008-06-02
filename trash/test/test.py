@@ -5,10 +5,6 @@ import misc
 import testdata
 
 
-teststring = "this is a very very original string to decompress. let's see if it " \
-    "decompresses correctly. let's add a few original strings to enhance compression."
-testmd5 = "c388a7e2b0f63d7fc2f7a00b7a5d0aca"
-
 def lz_compdec(testnb=5, length=300):
     import lz
 
@@ -121,27 +117,26 @@ def aplib_decompress():
 def brieflz_decompress():
     import brieflz
 
-    data = teststring
+    data = testdata.teststring
     c = brieflz.compress(data)
     comp = c.do()
     d = brieflz.decompress(comp, len(comp))
     decomp, offset = d.do()
-
-    if misc.md5(comp) != "05cf0b772e62f03d954dd1e3ed7a1658":
+    if misc.md5(comp) not in testdata.brieflz1:
         print "brieflz comp error"
-    if misc.md5(decomp) != "c388a7e2b0f63d7fc2f7a00b7a5d0aca":
+    if misc.md5(decomp) != testdata.testmd5:
         print "brieflz decomp serror"
 
 
-def brieflz_compdec(testnb=10, testlength=300):
+def brieflz_compdec(testnb=100, testlength=60):
     import brieflz
     for i in xrange(testnb):
         data = "".join([chr(random.randrange(40,125)) for x in xrange(10)])
         for j in xrange(testlength - 1):
             c = random.randrange(0,10)
-            if c > 8:
-                start = random.randrange(0, max(len(data) - 10, 1))
-                size = random.randrange(1, len(data) / 5)
+            if c > 7:
+                start = random.randrange(0, len(data))
+                size = random.randrange(1, len(data))
                 data += data[start:start + size]
             else:
                 data += chr(random.randrange(40,125))

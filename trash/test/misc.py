@@ -46,26 +46,32 @@ def countmissing(value, modulo):
     return modulo - result
 
 def getpadbinstr(value,bits):
-    """return a 0-padded binary string
-
-    getpadbinstr(8,8) = "00001000"
-
-    """
+    """return a 0-padded binary string. ex:getpadbinstr(8,8) = "00001000" """
     s = getbinstr(value)
     l = len(s)
     mod = countmissing(l,bits)
-
     return "0" * mod + s
+
+    def getunkbinstr(value, currentbit, maxbit):
+        """returns a binary string representation of the command/tag
+
+        including unset bits, according to currentbit: ex : 11010xxx"
+
+        """
+        s = getpadbinstr(value, maxbit + 1)\
+            [:maxbit - currentbit + 1]
+        mod = countmissing(len(s), maxbit + 1)
+        return s + "x" * mod
 
 def gethexstr(string):
     return " ".join(map(lambda i: "%02X" % (ord(i)),string))
 
-def brutting_snippet(data):
+def brutting_snippet(data, function):
     maxlen = 0
     result = {}
     for i in xrange(50):
-        blz = jcalg_decompress(data[i:])
-        decomp, offset = blz.do()
+        blz = function(data[i:])
+        decomp, consumed = blz.do()
         maxlen = max(len(decomp), maxlen)
         result[len(decomp)] = i
         print
@@ -74,12 +80,11 @@ def brutting_snippet(data):
     print maxlen, result[maxlen]
     return result[maxlen]
 
-def write_snippet(filename):
+def write_snippet(filename, data):
     f = open(filename + ".out", "wb")
-    for i in decomp:
+    for i in data:
         f.write(i)
     f.close()
-
 
 def checkfindest(dic, stream, offset, length):
     """checks that findlongeststring result is correct"""
@@ -92,32 +97,43 @@ def checkfindest(dic, stream, offset, length):
         return False
     return True
 
+def findmax(s, sub, limit):
+    """returns latest <sub> occurence in <s> within [0; <limit>]"""
+    result = -1
+    pos = s.find(sub, result + 1, limit + 1)
+    while result < pos:
+        result = pos
+        pos = s.find(sub, result + 1, limit + 1)
+    return result
+
 def findlongeststring(s, sub):
-    stream = s[:]
+    limit = len(s)
+    dic = s[:]
     """returns the number of byte to look backward and the length of byte to copy)"""
     l = 0
     offset = -1
     size = 0
-    w = ""
+    word = ""
 
-    w += sub[l]
-    i = stream.find(w)
-    if i == -1:
+    word += sub[l]
+    pos = findmax(dic, word, limit)
+    if pos == -1:
         return offset, size
-    offset = len(s) - i
-    size = len(w)
-    stream += sub[l]
+
+    offset = limit - pos
+    size = len(word)
+    dic += sub[l]
 
     while l < len(sub) - 1:
         l += 1
-        w += sub[l]
+        word += sub[l]
 
-        i = stream.find(w)
-        if i == -1:
+        pos = findmax(dic, word, limit)
+        if pos == -1:
             return offset, size
-        offset = len(s) - i
-        size = len(w)
-        stream += sub[l]
+        offset = limit - pos
+        size = len(word)
+        dic += sub[l]
     return offset, size
 
 def md5(s):

@@ -11906,6 +11906,8 @@ aplib1 = "\x8C\x38\x0E\x46\x07\x57\x49\x4E\x4D\x11\x2E\x64\x6C\xC7\x81\x80"\
     "\x4E\xF6\xFF\x0C\xD0\x06\x00\x00\x00\x00\x00\x00\x00\x00\x00\x10"\
     "\xB3\x09\x00\x0C\xD0\x06\x00"
 
-brieflz1 = "t\x05\x00his is a very\x00\x00\x04original str\x00\x00ing to decompr"\
-    "es\x00\x00s. let's see if \x00+it\x1bes co\xc0\x01rrectly'ad\xf0\x01d a"\
-    " fewV\x03@sWenhance \x00\x80]ion."
+teststring = "this is a very very original string to decompress. let's see if it " \
+    "decompresses correctly. let's add a few original strings to enhance compression."
+testmd5 = "c388a7e2b0f63d7fc2f7a00b7a5d0aca"
+
+brieflz1 = ["05cf0b772e62f03d954dd1e3ed7a1658", "ada336ab80f728261a1f746e56c13ec8"]

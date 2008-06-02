@@ -13,17 +13,6 @@ class compress:
         self.currentbit = 0
         self.isfirsttag = True
 
-    def getunkbinstr(self, value):
-        """returns a binary string representation of the command/tag
-
-        including unset bits, according to currentbit: ex : 11010xxx"
-
-        """
-        s = getpadbinstr(value, self.maxbit + 1)\
-            [:self.maxbit - self.currentbit + 1]
-        mod = countmissing(len(s), self.maxbit + 1)
-        return s + "x" * mod
-
     def __getstrtag(self):
         """returns the current tag as binary value, little-endian"""
         result = ""
@@ -34,7 +23,7 @@ class compress:
     def getstatus(self):
         return "status " + " / ".join([
             gethyphenstr(gethexstr(self.bsdata[:self.tagoffset])) ,
-            self.getunkbinstr(self.tag) + " %0X" % (self.tag),
+            self.getunkbinstr(self.tag, self.currentbit, self.maxbit) + " %0X" % (self.tag),
             gethexstr(self.bsdata[self.tagoffset + self.tagsize:])]).strip(" /")
 
     def printstatus(self):
@@ -198,3 +187,8 @@ class compress:
         for i in xrange(length):
             self.decompressed += self.decompressed[-offset]
         return
+
+if __name__ == '__main__':
+    import test
+    debug = False
+    test.lz_compdec()
