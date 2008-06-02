@@ -5,36 +5,37 @@ debug = False
 
 
 class compress(lz.compress):
-    def __init__(self, data):
+    def __init__(self, data, length = 0):
         lz.compress.__init__(self, 2)
-        self.data = data
-        self.compressed = ""
-        self.bzoffset = 0
+        self.__in = data
+        self.__length = length if length != 0 else len(data)
+        self.__offset = 0
 
     def __literal(self):
         self.writebit(0)
-        self.writebyte(self.data[self.bzoffset])
-        self.bzoffset += 1
+        self.writebyte(self.__in[self.__offset])
+        self.__offset += 1
         return
 
     def __windowblock(self, offset, length):
+        assert offset >= 1
+        assert length >= 4
         self.writebit(1)
         self.writevariablenumber(length - 2)
-        assert offset >= 1
         offset -= 1
         high = ((offset >> 8) + 2) & 0xFF
         low = offset & 0xFF
         self.writevariablenumber(high)
-        self.writebyte(low)
-        self.bzoffset += length
+        self.writebyte(chr(low))
+        self.__offset += length
         return
 
     def do(self):
-        self.writebyte(self.data[self.bzoffset])
-        self.bzoffset += 1
-        while self.bzoffset < len(self.data):
-            offset, length = misc.findlongeststring(self.data[:self.bzoffset],
-                self.data[self.bzoffset:])
+        self.writebyte(self.__in[self.__offset])
+        self.__offset += 1
+        while self.__offset < self.__length:
+            offset, length = misc.findlongeststring(self.__in[:self.__offset],
+                self.__in[self.__offset:])
             if offset >= 1 and length >= 4:
                 self.__windowblock(offset, length)
             else:

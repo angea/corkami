@@ -7,15 +7,26 @@ class compress(lz.compress):
         return
 
     def __literal(self):
+        self.writebit(0)
         return
         
-    def __windowbyte(self):
-        return
     def __farwindowblock(self):
-        return
-    def __shortwindowblock(self):
+        self.writebitstr("10")
         return
 
+    def __shortwindowblock(self):
+        self.writebitstr("110")
+        return
+
+    def __windowbyte(self):
+        self.writebitstr("1110")
+        return
+
+    def do(self):
+        
+        self.writebitstr("1110")
+        self.writebyte(chr(0))
+        return self.getdata()
 
 class decompress(lz.decompress):
     def __init__(self, data):

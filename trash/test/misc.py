@@ -139,3 +139,14 @@ def findlongeststring(s, sub):
 def md5(s):
     import md5
     return md5.md5(s).hexdigest()
+    
+def modifystring(s, sub, offset):
+    return s[:offset] + sub + s[offset + len(sub):]
+        
+def int2lebin(value, size):
+    """returns a binary string of an integer, as little-endian"""
+    result = ""
+    for i in xrange(size):
+        result = result + chr((value >> (8 * i)) & 0xFF )
+    return result
+
