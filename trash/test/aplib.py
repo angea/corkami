@@ -2,8 +2,9 @@ import lz
 
 
 class compress(lz.compress):
-    def __init(self, data):
-        self.data = lz.compress.__init__(self, data, tagsize=1)
+    def __init__(self, data):
+        lz.compress.__init__(self, 1)
+        self.__in = data
         return
 
     def __literal(self):
@@ -23,8 +24,11 @@ class compress(lz.compress):
         return
 
     def do(self):
-        
-        self.writebitstr("1110")
+        self.writebyte(self.__in[0])
+        for char in self.__in[1:]:
+            self.writebit(0)
+            self.writebyte(char)
+        self.writebitstr("110")
         self.writebyte(chr(0))
         return self.getdata()
 
@@ -118,7 +122,7 @@ class compress(lz.compress):
         return self.out, self.getoffset()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':
     import test, md5
     test.aplib_decompress()
-
+    test.aplib_compdec()

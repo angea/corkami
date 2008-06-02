@@ -128,24 +128,40 @@ def brieflz_decompress():
         print "brieflz decomp serror"
 
 
-def brieflz_compdec(testnb=100, testlength=60):
+def generatedata(length):
+    data = "".join([chr(random.randrange(40,125)) for x in xrange(10)])
+    for j in xrange(length - 1):
+        c = random.randrange(0,10)
+        if c > 7:
+            start = random.randrange(0, len(data))
+            size = random.randrange(1, len(data))
+            data += data[start:start + size]
+        else:
+            data += chr(random.randrange(40,125))
+    return data
+
+def brieflz_compdecsingle(data):
     import brieflz
+    c = brieflz.compress(data)
+    compressed = c.do()
+    d = brieflz.decompress(compressed, len(compressed))
+    decompressed , consumed = d.do()
+    return compressed, decompressed
+
+def aplib_compdecsingle(data):
+    import aplib
+    c = aplib.compress(data)
+    compressed = c.do()
+    d = aplib.decompress(compressed)
+    decompressed , consumed = d.do()
+    return compressed, decompressed
+
+def generic_compdec(testnb, testlength, compdecfunc, testdesc):
     for i in xrange(testnb):
-        data = "".join([chr(random.randrange(40,125)) for x in xrange(10)])
-        for j in xrange(testlength - 1):
-            c = random.randrange(0,10)
-            if c > 7:
-                start = random.randrange(0, len(data))
-                size = random.randrange(1, len(data))
-                data += data[start:start + size]
-            else:
-                data += chr(random.randrange(40,125))
-        c = brieflz.compress(data)
-        compressed = c.do()
-        d = brieflz.decompress(compressed, len(compressed))
-        decompressed , consumed = d.do()
+        data = generatedata(60)
+        compressed, decompressed = compdecfunc(data)
         if  decompressed != data:
-            print "brieflz compdec fail"
+            print testdesc + " fail"
             print "original", data, len(data)
             print "result  ", decompressed, len(decompressed)
             limit = misc.getlongestcommon(data, decompressed)
@@ -156,6 +172,13 @@ def brieflz_decompress():
             return
 
 
+def brieflz_compdec(testnb=100, testlength=60):
+    generic_compdec(testnb, testlength, brieflz_compdecsingle, "brieflz compdec")
+
+def aplib_compdec(testnb=100, testlength=60):
+    generic_compdec(testnb, testlength, aplib_compdecsingle, "aplib compdec")
+
+
 if __name__ == '__main__':
     debug = False
     lz_compdec()
@@ -163,3 +186,4 @@ def brieflz_decompress():
     jcalg_decompress()
     aplib_decompress()
     brieflz_compdec()
+    aplib_compdec()
