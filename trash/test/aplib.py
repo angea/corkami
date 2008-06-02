@@ -1,45 +1,50 @@
 import lz
 
-class decompress(lz.decompress):
-    """aplib decompression class. inherits bitstream"""
-    def __init__(self, data):
-        self.data = lz.decompress.__init__(self, data, tagsize=1)
-        self.decompressed = ""
 
-        # aplib specific
-        self.iscopylast = False
-        self.lastcopyoffset = 0
-        self.functions = [
+class compress(lz.compress):
+    def __init(self, data):
+        self.data = lz.compress.__init__(self, data, tagsize=1)
+        return
+
+    def __literal(self):
+        return
+        
+    def __windowbyte(self):
+        return
+    def __farwindowblock(self):
+        return
+    def __shortwindowblock(self):
+        return
+
+
+class decompress(lz.decompress):
+    def __init__(self, data):
+        lz.decompress.__init__(self, data, tagsize=1)
+        self.__iscopylast = False
+        self.__lastcopyoffset = 0
+        self.__functions = [
             self.__literal,
             self.__farwindowblock,
             self.__shortwindowblock,
             self.__windowbyte]
 
-        self.functionsbits = len(self.functions) - 1
+        self.__functionsbits = len(self.__functions) - 1
         return
 
     def __literal(self):
         """copy literally the next byte from the bitstream"""
-        self.decompressed += self.readbyte()
-        self.iscopylast = False
+        self.copyliteral()
+        self.__iscopylast = False
         return False
-
-    def do(self):
-        """starts. returns decompressed buffer and consumed bytes counter"""
-        self.decompressed += self.readbyte()
-        while True:
-            if self.functions[self.countbits(self.functionsbits)]():
-                break
-        return self.decompressed, self.offset
 
     def __windowbyte(self):
         """copy a single byte from the sliding window, or a null byte"""
         offset = self.readfixednumber(4)
         if offset:
-            self.decompressed += self.decompressed[-offset]
+            self.copywindow(offset)
         else:
-            self.decompressed += '\x00'
-        self.iscopylast = False
+            self.out += '\x00'
+        self.__iscopylast = False
         return False
 
     def __shortwindowblock(self):
@@ -55,11 +60,11 @@ class decompress(lz.decompress):
         length = 2 + (offset & 0x0001)
         offset >>= 1
         if offset:
-            self.windowblockcopy(offset, length)
+            self.copywindow(offset, length)
         else:
             return True
-        self.lastcopyoffset = offset
-        self.iscopylast = True
+        self.__lastcopyoffset = offset
+        self.__iscopylast = True
         return False
 
     def __farwindowblock(self):
@@ -69,12 +74,12 @@ class decompress(lz.decompress):
 
         """
         offset = self.readvariablenumber()
-        if not self.iscopylast and offset == 2:
-            offset = self.lastcopyoffset
+        if not self.__iscopylast and offset == 2:
+            offset = self.__lastcopyoffset
             length = self.readvariablenumber()
-            self.windowblockcopy(offset, length)
+            self.copywindow(offset, length)
         else:
-            if not self.iscopylast:
+            if not self.__iscopylast:
                 offset -= 3
             else:
                 offset -= 2
@@ -87,7 +92,22 @@ class decompress(lz.decompress):
                 length += 1
             if offset < 128:
                 length += 2
-            self.windowblockcopy(offset, length)
-            self.lastcopyoffset = offset
-        self.iscopylast = True
+            self.copywindow(offset, length)
+            self.__lastcopyoffset = offset
+        self.__iscopylast = True
         return False
+
+
+    def do(self):
+        """starts. returns decompressed buffer and consumed bytes counter"""
+        self.copyliteral()
+        while True:
+            if self.__functions[self.countbits(self.__functionsbits)]():
+                break
+        return self.out, self.getoffset()
+
+
+if __name__ == '__main__':
+    import test, md5
+    test.aplib_decompress()
+

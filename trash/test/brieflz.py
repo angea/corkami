@@ -20,9 +20,12 @@ debug = False
     def __windowblock(self, offset, length):
         self.writebit(1)
         self.writevariablenumber(length - 2)
+        assert offset >= 1
         offset -= 1
-        self.writevariablenumber(((offset >> 8) + 2) & 0xFF)
-        self.writebyte(offset & 0xFF)
+        high = ((offset >> 8) + 2) & 0xFF
+        low = offset & 0xFF
+        self.writevariablenumber(high)
+        self.writebyte(low)
         self.bzoffset += length
         return
 
@@ -41,45 +44,41 @@ debug = False
 
 class decompress(lz.decompress):
     def __init__(self, data, length):
-        self.data = lz.decompress.__init__(self, data, 2)
-        self.decompressed = ""
+        lz.decompress.__init__(self, data, 2)
 
         # brieflz specific
         self.length = length
-        self.functions = [
-            self.__literal,
+        self.__functions = [
+            self.copyliteral,
             self.__windowblock
             ]
 
-        self.functionsbits = len(self.functions) - 1
+        self.__functionsbits = len(self.__functions) - 1
         return
-
-    def do(self):
-        """returns decompressed buffer and consumed bytes counter"""
-        self.decompressed += self.readbyte()
-        while self.offset < self.length:
-            if self.functions[self.countbits(self.functionsbits)]():
-                print "error"
-                break
-
-        return self.decompressed, self.offset
-
-    def __literal(self):
-        """copy literally the next byte from the bitstream"""
-        self.decompressed += self.readbyte()
-        return False
 
     def __windowblock(self):
         length = self.readvariablenumber() + 2
-        offset = ((self.readvariablenumber() - 2) << 8) + \
-            ord(self.readbyte()) + 1
+        high = self.readvariablenumber() - 2
+        low = ord(self.readbyte())
+        offset = (high << 8) + low + 1
         if debug:print "block read",offset, length
         try:
-            self.windowblockcopy(offset, length)
+            self.copywindow(offset, length)
         except:
             print "error windowblock"
             return True
         return False
+
+    def do(self):
+        """returns decompressed buffer and consumed bytes counter"""
+        self.copyliteral()
+        while self.getoffset() < self.length:
+            if self.__functions[self.countbits(self.__functionsbits)]():
+                print "error"
+                break
+
+        return self.out, self.getoffset()
+
 
 
 if __name__ == '__main__':

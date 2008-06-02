@@ -122,40 +122,41 @@ class compress:
 class decompress:
     """decompression bitstream class"""
     def __init__(self, data, tagsize):
-        self.currentbit = 0
-        self.offset = 0
-        self.tag = None
-        self.tagsize = tagsize
-        self.bsdata = data
+        self.__curbit = 0
+        self.__offset = 0
+        self.__tag = None
+        self.__tagsize = tagsize
+        self.__in = data
+        self.out = ""
 
     def getoffset(self):
         """return the current byte offset"""
-        return self.offset
+        return self.__offset
 
-    def getdata(self):
-        return self.bsdata
+#    def getdata(self):
+#        return self.__lzdata
 
     def readbit(self):
         """read next bit from the stream"""
-        if self.currentbit != 0:
-            self.currentbit -= 1
+        if self.__curbit != 0:
+            self.__curbit -= 1
         else:
-            self.currentbit = (self.tagsize * 8) - 1
-            self.tag = ord(self.readbyte())
-            for i in xrange(self.tagsize - 1):
-                self.tag += ord(self.readbyte()) << (8 * (i + 1))
+            self.__curbit = (self.__tagsize * 8) - 1
+            self.__tag = ord(self.readbyte())
+            for i in xrange(self.__tagsize - 1):
+                self.__tag += ord(self.readbyte()) << (8 * (i + 1))
 
-        bit = (self.tag  >> ((self.tagsize * 8) - 1)) & 0x01
-        self.tag <<= 1
+        bit = (self.__tag  >> ((self.__tagsize * 8) - 1)) & 0x01
+        self.__tag <<= 1
         return bit
 
     def readbyte(self):
         """read next byte from the stream"""
-        if type(self.bsdata) == str:
-            result = self.bsdata[self.offset]
-        elif type(self.bsdata) == file:
-            result = self.bsdata.read(1)
-        self.offset += 1
+        if type(self.__in) == str:
+            result = self.__in[self.__offset]
+        elif type(self.__in) == file:
+            result = self.__in.read(1)
+        self.__offset += 1
         return result
 
     def readfixednumber(self, nbbit, init=0):
@@ -182,11 +183,17 @@ class compress:
             result += 1
         return result
 
-    def windowblockcopy(self, offset, length):
+    def copywindow(self, offset, length=1):
         """copies <length> bytes from <offset> (updated backward position)"""
         for i in xrange(length):
-            self.decompressed += self.decompressed[-offset]
+            self.out += self.out[-offset]
         return
+
+    def copyliteral(self):
+        """copy literally the next byte from the bitstream"""
+        self.out += self.readbyte()
+        return False
+
 
 if __name__ == '__main__':
     import test
