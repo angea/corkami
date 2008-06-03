@@ -140,15 +140,16 @@ class compress:
             result += 1
         return result
 
-    def copywindow(self, offset, length=1):
-        """copies <length> bytes from <offset> (updated backward position)"""
+    def dictcopy(self, offset, length=1):
         for i in xrange(length):
             self.out += self.out[-offset]
         return
 
-    def copyliteral(self):
-        """copy literally the next byte from the bitstream"""
-        self.out += self.readbyte()
+    def literal(self, value=None):
+        if value is None:
+            self.out += self.readbyte()
+        else:
+            self.out += value
         return False
 
 

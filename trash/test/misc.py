@@ -106,7 +106,7 @@ def findmax(s, sub, limit):
         pos = s.find(sub, result + 1, limit + 1)
     return result
 
-def findlongeststring(s, sub):
+def searchdict(s, sub):
     limit = len(s)
     dic = s[:]
     """returns the number of byte to look backward and the length of byte to copy)"""

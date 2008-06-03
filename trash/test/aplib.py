@@ -20,7 +20,7 @@ class compress(lz.compress):
         return
 
     def __windowbyte(self):
-        self.writebitstr("1110")
+        self.writebitstr("111")
         return
 
     def do(self):
@@ -35,89 +35,73 @@ class compress(lz.compress):
 class decompress(lz.decompress):
     def __init__(self, data):
         lz.decompress.__init__(self, data, tagsize=1)
-        self.__iscopylast = False
+        self.__pair = True    # paired sequence
         self.__lastcopyoffset = 0
         self.__functions = [
             self.__literal,
             self.__farwindowblock,
             self.__shortwindowblock,
             self.__windowbyte]
-
-        self.__functionsbits = len(self.__functions) - 1
         return
 
     def __literal(self):
         """copy literally the next byte from the bitstream"""
-        self.copyliteral()
-        self.__iscopylast = False
+        self.literal()
+        self.__pair = True
         return False
 
     def __windowbyte(self):
         """copy a single byte from the sliding window, or a null byte"""
-        offset = self.readfixednumber(4)
+        offset = self.readfixednumber(4) # 0-15
         if offset:
-            self.copywindow(offset)
+            self.dictcopy(offset)
         else:
-            self.out += '\x00'
-        self.__iscopylast = False
+            self.literal('\x00')
+        self.__pair = True
         return False
 
     def __shortwindowblock(self):
-        """copy a short block from the sliding window
-
-        offset and length are stored on a single byte.
-        source block size range is 2-3, offset range is 2-510
-
-        if offset is null, finishes decompression.
-
-        """
-        offset = ord(self.readbyte())
-        length = 2 + (offset & 0x0001)
-        offset >>= 1
-        if offset:
-            self.copywindow(offset, length)
-        else:
+        """copy a short block from the sliding window"""
+        b = ord(self.readbyte())
+        if b <= 1:    # likely 0
             return True
-        self.__lastcopyoffset = offset
-        self.__iscopylast = True
+        length = 2 + (b & 0x01)    # 2-3
+        offset = b >> 1    # 0-127
+        self.dictcopy(offset, length)
+        self.__lastoffset = offset
+        self.__pair = False
         return False
 
     def __farwindowblock(self):
-        """copy a block from the sliding window.
-
-        Offset and length are variable-length numbers
-
-        """
-        offset = self.readvariablenumber()
-        if not self.__iscopylast and offset == 2:
-            offset = self.__lastcopyoffset
-            length = self.readvariablenumber()
-            self.copywindow(offset, length)
+        """copy a block from the sliding window."""
+        b = self.readvariablenumber()    # 2-
+        if b == 2 and self.__pair :    # reuse the same offset
+            offset = self.__lastoffset
+            length = self.readvariablenumber()    # 2-
         else:
-            if not self.__iscopylast:
-                offset -= 3
-            else:
-                offset -= 2
-            offset <<= 8
-            offset += ord(self.readbyte())
-            length = self.readvariablenumber()
-            if offset >= 32000:
-                length += 1
-            if offset >= 1280:
-                length += 1
-            if offset < 128:
+            high = b - 2    # 0-
+            if self.__pair:
+                high -= 1
+            offset = (high << 8) + ord(self.readbyte())
+            length = self.readvariablenumber()    # 2-
+            if offset < 0x80:
                 length += 2
-            self.copywindow(offset, length)
-            self.__lastcopyoffset = offset
-        self.__iscopylast = True
+            else:
+                if offset >= 0x7D00:
+                    length += 1
+                if offset >= 0x500:
+                    length += 1
+        self.__lastoffset = offset
+        self.dictcopy(offset, length)
+        self.__pair = False
         return False
 
 
     def do(self):
         """starts. returns decompressed buffer and consumed bytes counter"""
-        self.copyliteral()
+        self.literal()
         while True:
-            if self.__functions[self.countbits(self.__functionsbits)]():
+            if self.__functions[self.countbits(3)]():
                 break
         return self.out, self.getoffset()
 

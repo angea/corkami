@@ -15,14 +15,12 @@ class decompress(lz.decompress):
             self.__onebyteorliteralchange,
             self.__shortmatch,
             ]
-
-        self.__functionsbits = len(self.__functions) - 1
         return
 
     def __literal(self):
         # literal
-        self.out += chr(self.readfixednumber(self.__literalbits)
-             + self.__literaloffset)
+        self.literal(chr(self.readfixednumber(self.__literalbits)
+             + self.__literaloffset))
         return False
 
     def __normalphrase(self):
@@ -34,7 +32,6 @@ class decompress(lz.decompress):
         if (HighIndex == 2):
             # use the last index
             length = self.readvariablenumber();
-            self.copywindow(self.__lastindex, length)
         else:
             self.__lastindex = ((HighIndex - 3) << self.__indexbase) \
                 + self.readfixednumber(self.__indexbase);
@@ -47,11 +44,11 @@ class decompress(lz.decompress):
                 length += 1;
             elif self.__lastindex <= 127:
                 length += 4;
-            try:
-                self.copywindow(self.__lastindex, length)
-            except:
-                print "error"
-                return True
+        try:
+            self.dictcopy(self.__lastindex, length)
+        except:
+            print "error"
+            return True
         return False
 
 
@@ -59,11 +56,11 @@ class decompress(lz.decompress):
         # one byte phrase or literal size change 100
         onebytephrasevalue = self.readfixednumber(4) - 1
         if onebytephrasevalue == 0:
-            self.out += "\0x00"
+            self.literal("\0x00")
         else:
             if onebytephrasevalue > 0:
                 try:
-                    self.copywindow(onebytephrasevalue)
+                    self.dictcopy(onebytephrasevalue)
                 except:
                     print "error onebyte"
                     return True
@@ -96,7 +93,7 @@ class decompress(lz.decompress):
         else:
             self.__lastindex = newindex
             try:
-                self.copywindow(self.__lastindex, matchlength)
+                self.dictcopy(self.__lastindex, matchlength)
             except:
                 return True
         return False
@@ -104,7 +101,7 @@ class decompress(lz.decompress):
     def do(self):
         """returns decompressed buffer and consumed bytes counter"""
         while True:
-            if self.__functions[self.countbits(max=self.__functionsbits, set=0)]():
+            if self.__functions[self.countbits(3, 0)]():
                 break
         return self.out, self.getoffset()
 

@@ -5,10 +5,10 @@ debug = False
 
 
 class compress(lz.compress):
-    def __init__(self, data, length = 0):
+    def __init__(self, data, length=None):
         lz.compress.__init__(self, 2)
         self.__in = data
-        self.__length = length if length != 0 else len(data)
+        self.__length = length if length is not None else len(data)
         self.__offset = 0
 
     def __literal(self):
@@ -17,16 +17,16 @@ debug = False
         self.__offset += 1
         return
 
-    def __windowblock(self, offset, length):
+    def __dictcopy(self, offset, length):
         assert offset >= 1
         assert length >= 4
         self.writebit(1)
         self.writevariablenumber(length - 2)
-        offset -= 1
-        high = ((offset >> 8) + 2) & 0xFF
-        low = offset & 0xFF
-        self.writevariablenumber(high)
-        self.writebyte(chr(low))
+        value = offset - 1
+        high = ((value >> 8) & 0xFF) + 2    # 2-257
+        low = value & 0xFF
+        self.writevariablenumber(high)  # 2-
+        self.writebyte(chr(low))    # 0-255
         self.__offset += length
         return
 
@@ -34,10 +34,10 @@ debug = False
         self.writebyte(self.__in[self.__offset])
         self.__offset += 1
         while self.__offset < self.__length:
-            offset, length = misc.findlongeststring(self.__in[:self.__offset],
+            offset, length = misc.searchdict(self.__in[:self.__offset],
                 self.__in[self.__offset:])
             if offset >= 1 and length >= 4:
-                self.__windowblock(offset, length)
+                self.__dictcopy(offset, length)
             else:
                 self.__literal()
         return self.getdata()
@@ -50,36 +50,25 @@ debug = False
         # brieflz specific
         self.length = length
         self.__functions = [
-            self.copyliteral,
-            self.__windowblock
+            self.literal,
+            self.__dictcopy
             ]
-
-        self.__functionsbits = len(self.__functions) - 1
         return
 
-    def __windowblock(self):
+    def __dictcopy(self):
         length = self.readvariablenumber() + 2
         high = self.readvariablenumber() - 2
         low = ord(self.readbyte())
         offset = (high << 8) + low + 1
-        if debug:print "block read",offset, length
-        try:
-            self.copywindow(offset, length)
-        except:
-            print "error windowblock"
-            return True
-        return False
+        self.dictcopy(offset, length)
+        return
 
     def do(self):
         """returns decompressed buffer and consumed bytes counter"""
-        self.copyliteral()
+        self.literal()
         while self.getoffset() < self.length:
-            if self.__functions[self.countbits(self.__functionsbits)]():
-                print "error"
-                break
-
+            self.__functions[self.countbits(1)]()
         return self.out, self.getoffset()
-
 
 
 if __name__ == '__main__':
