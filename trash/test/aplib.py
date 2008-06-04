@@ -1,16 +1,22 @@
 import lz
+import misc
 
 
 class compress(lz.compress):
-    def __init__(self, data):
+    def __init__(self, data, length=None):
         lz.compress.__init__(self, 1)
         self.__in = data
+        self.__length = length if length is not None else len(data)
+        self.__offset = 0
         return
 
-    def __literal(self):
-        self.writebit(0)
+    def __literal(self, marker=True):
+        if marker:
+            self.writebit(0)
+        self.writebyte(self.__in[self.__offset])
+        self.__offset += 1
         return
-        
+
     def __farwindowblock(self):
         self.writebitstr("10")
         return
@@ -19,17 +25,35 @@ class compress(lz.compress):
         self.writebitstr("110")
         return
 
-    def __windowbyte(self):
+    def __windowbyte(self, offset):
+        assert 0 <= offset < 16, "wrong windowbyte offset parameter"
         self.writebitstr("111")
+        self.writefixednumber(offset, 4)
+        self.__offset += 1
+        return
+
+    def __end(self):
+        self.writebitstr("110")
+        self.writebyte(chr(0))
         return
 
     def do(self):
-        self.writebyte(self.__in[0])
-        for char in self.__in[1:]:
-            self.writebit(0)
-            self.writebyte(char)
-        self.writebitstr("110")
-        self.writebyte(chr(0))
+        self.__literal(False)
+        while self.__offset < self.__length:
+           # print self.__offset, self.__length
+            offset, length = misc.searchdict(self.__in[:self.__offset],
+                self.__in[self.__offset:])
+            if offset == -1:
+                c = self.__in[self.__offset]
+                if c == "\x00":
+                    self.__windowbyte(0)
+                else:
+                    self.__literal()
+            elif 0 <= offset < 16: # and length == 1
+                self.__windowbyte(offset)
+            else:
+                self.__literal()
+        self.__end()
         return self.getdata()
 
 class decompress(lz.decompress):
@@ -48,28 +72,6 @@ class compress(lz.compress):
         """copy literally the next byte from the bitstream"""
         self.literal()
         self.__pair = True
-        return False
-
-    def __windowbyte(self):
-        """copy a single byte from the sliding window, or a null byte"""
-        offset = self.readfixednumber(4) # 0-15
-        if offset:
-            self.dictcopy(offset)
-        else:
-            self.literal('\x00')
-        self.__pair = True
-        return False
-
-    def __shortwindowblock(self):
-        """copy a short block from the sliding window"""
-        b = ord(self.readbyte())
-        if b <= 1:    # likely 0
-            return True
-        length = 2 + (b & 0x01)    # 2-3
-        offset = b >> 1    # 0-127
-        self.dictcopy(offset, length)
-        self.__lastoffset = offset
-        self.__pair = False
         return False
 
     def __farwindowblock(self):
@@ -96,6 +98,27 @@ class compress(lz.compress):
         self.__pair = False
         return False
 
+    def __shortwindowblock(self):
+        """copy a short block from the sliding window"""
+        b = ord(self.readbyte())
+        if b <= 1:    # likely 0
+            return True
+        length = 2 + (b & 0x01)    # 2-3
+        offset = b >> 1    # 0-127
+        self.dictcopy(offset, length)
+        self.__lastoffset = offset
+        self.__pair = False
+        return False
+
+    def __windowbyte(self):
+        """copy a single byte from the sliding window, or a null byte"""
+        offset = self.readfixednumber(4) # 0-15
+        if offset:
+            self.dictcopy(offset)
+        else:
+            self.literal('\x00')
+        self.__pair = True
+        return False
 
     def do(self):
         """starts. returns decompressed buffer and consumed bytes counter"""

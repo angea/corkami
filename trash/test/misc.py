@@ -112,16 +112,16 @@ def searchdict(s, sub):
     """returns the number of byte to look backward and the length of byte to copy)"""
     l = 0
     offset = -1
-    size = 0
+    length = 0
     word = ""
 
     word += sub[l]
     pos = findmax(dic, word, limit)
     if pos == -1:
-        return offset, size
+        return offset, length
 
     offset = limit - pos
-    size = len(word)
+    length = len(word)
     dic += sub[l]
 
     while l < len(sub) - 1:
@@ -130,11 +130,11 @@ def searchdict(s, sub):
 
         pos = findmax(dic, word, limit)
         if pos == -1:
-            return offset, size
+            return offset, length
         offset = limit - pos
-        size = len(word)
+        length = len(word)
         dic += sub[l]
-    return offset, size
+    return offset, length
 
 def md5(s):
     import md5

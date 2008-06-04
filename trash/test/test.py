@@ -130,7 +130,7 @@ def brieflz_decompress():
 
 def generatedata(length):
     data = "".join([chr(random.randrange(40,125)) for x in xrange(10)])
-    for j in xrange(length - 1):
+    while len(data) < length:
         c = random.randrange(0,10)
         if c > 7:
             start = random.randrange(0, len(data))
@@ -158,7 +158,7 @@ def aplib_compdecsingle(data):
 
 def generic_compdec(testnb, testlength, compdecfunc, testdesc):
     for i in xrange(testnb):
-        data = generatedata(60)
+        data = generatedata(testlength)
         compressed, decompressed = compdecfunc(data)
         if  decompressed != data:
             print testdesc + " fail"
@@ -172,10 +172,10 @@ def generic_compdec(testnb, testlength, compdecfunc, testdesc):
             return
 
 
-def brieflz_compdec(testnb=100, testlength=60):
+def brieflz_compdec(testnb=100, testlength=300):
     generic_compdec(testnb, testlength, brieflz_compdecsingle, "brieflz compdec")
 
-def aplib_compdec(testnb=100, testlength=60):
+def aplib_compdec(testnb=5, testlength=300):
     generic_compdec(testnb, testlength, aplib_compdecsingle, "aplib compdec")
 
 
