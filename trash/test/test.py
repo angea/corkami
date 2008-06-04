@@ -160,14 +160,13 @@ def generic_compdec(testnb, testlength, compdecfunc, testdesc):
     for i in xrange(testnb):
         data = generatedata(testlength)
         compressed, decompressed = compdecfunc(data)
+        #print len(compressed), len(decompressed) , "|",
         if  decompressed != data:
             print testdesc + " fail"
-            print "original", data, len(data)
-            print "result  ", decompressed, len(decompressed)
             limit = misc.getlongestcommon(data, decompressed)
             print limit
-            print misc.gethyphenstr(data[:limit]), misc.gethyphenstr(data[limit:])
-            print misc.gethyphenstr(decompressed[:limit]), misc.gethyphenstr(decompressed[limit:])
+            print "original", misc.gethyphenstr(data[:limit]), misc.gethyphenstr(data[limit:]), len(data)
+            print "result  ", misc.gethyphenstr(decompressed[:limit]), misc.gethyphenstr(decompressed[limit:]), len(decompressed)
             print
             return
 

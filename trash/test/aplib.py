@@ -8,6 +8,7 @@ class compress(lz.compress):
         self.__in = data
         self.__length = length if length is not None else len(data)
         self.__offset = 0
+        self.__lastoffset = 0
         return
 
     def __literal(self, marker=True):
@@ -17,8 +18,29 @@ class compress(lz.compress):
         self.__offset += 1
         return
 
-    def __farwindowblock(self):
+    def __farwindowblock(self, offset, length, pair=False):
+        assert offset >= 2 # maybe wrong, as is for now until pair is implemented
+        self.__lastoffset = offset
         self.writebitstr("10")
+        if pair:
+            self.writevariablenumber(2)
+            self.writevariablenumber(length)
+        else:
+            high = (offset >> 8) + 2    # +1 if pair...
+            self.writevariablenumber(high)
+            low = offset & 0xFF
+            self.writebyte(low)
+            b = length
+            if offset < 0x80:
+                b -= 2
+            else:
+                if offset >= 0x7D00:
+                    b -= 1
+                if offset >= 0x500:
+                    b -= 1
+            self.writevariablenumber(b)
+
+        self.__offset += length
         return
 
     def __shortwindowblock(self, offset, length):
@@ -28,6 +50,7 @@ class compress(lz.compress):
         b = (offset << 1 ) + (length - 2)
         self.writebyte(b)
         self.__offset += length
+        self.__lastoffset = offset
         return
 
     def __windowbyte(self, offset):
@@ -54,12 +77,15 @@ class compress(lz.compress):
                     self.__windowbyte(0)
                 else:
                     self.__literal()
-            elif 0 < offset <= 127 and 2 <= length <= 3:
-                self.__shortwindowblock(offset, length)
-            elif 0 <= offset < 16 and length == 1:
+            elif length == 1 and 0 <= offset < 16:
                 self.__windowbyte(offset)
+            elif 2 <= length <= 3 and 0 < offset <= 127:
+                self.__shortwindowblock(offset, length)
+#            elif 2 <= length and 2 <= offset: #2 <= offset:
+#                self.__farwindowblock(offset, length)
             else:
                 self.__literal()
+                #raise ValueError("no parsing found", offset, length)
         self.__end()
         return self.getdata()
 
@@ -84,6 +110,7 @@ class compress(lz.compress):
     def __farwindowblock(self):
         """copy a block from the sliding window."""
         b = self.readvariablenumber()    # 2-
+        #self.__pair = False    # for test until pair is ok
         if b == 2 and self.__pair :    # reuse the same offset
             offset = self.__lastoffset
             length = self.readvariablenumber()    # 2-
