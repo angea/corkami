@@ -175,7 +175,7 @@ def generic_compdec(testnb, testlength, compdecfunc, testdesc):
 def brieflz_compdec(testnb=100, testlength=300):
     generic_compdec(testnb, testlength, brieflz_compdecsingle, "brieflz compdec")
 
-def aplib_compdec(testnb=5, testlength=300):
+def aplib_compdec(testnb=30, testlength=300):
     generic_compdec(testnb, testlength, aplib_compdecsingle, "aplib compdec")
 
 

@@ -21,12 +21,17 @@ class compress(lz.compress):
         self.writebitstr("10")
         return
 
-    def __shortwindowblock(self):
+    def __shortwindowblock(self, offset, length):
+        assert 2 <= length <= 3
+        assert 0 < offset <= 127
         self.writebitstr("110")
+        b = (offset << 1 ) + (length - 2)
+        self.writebyte(b)
+        self.__offset += length
         return
 
     def __windowbyte(self, offset):
-        assert 0 <= offset < 16, "wrong windowbyte offset parameter"
+        assert 0 <= offset < 16
         self.writebitstr("111")
         self.writefixednumber(offset, 4)
         self.__offset += 1
@@ -49,7 +54,9 @@ class compress(lz.compress):
                     self.__windowbyte(0)
                 else:
                     self.__literal()
-            elif 0 <= offset < 16: # and length == 1
+            elif 0 < offset <= 127 and 2 <= length <= 3:
+                self.__shortwindowblock(offset, length)
+            elif 0 <= offset < 16 and length == 1:
                 self.__windowbyte(offset)
             else:
                 self.__literal()
@@ -104,7 +111,7 @@ class compress(lz.compress):
         if b <= 1:    # likely 0
             return True
         length = 2 + (b & 0x01)    # 2-3
-        offset = b >> 1    # 0-127
+        offset = b >> 1    # 1-127 (if 0 then return True already)
         self.dictcopy(offset, length)
         self.__lastoffset = offset
         self.__pair = False

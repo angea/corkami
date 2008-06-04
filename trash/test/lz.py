@@ -39,8 +39,9 @@ class compress:
             self.writebit(0 if c == "0" else 1)
         return
         
-    def writebyte(self, byte):
-        self.out += byte
+    def writebyte(self, b):
+        assert len(b) == 1 if isinstance(b,str) else 0 <= b <= 255
+        self.out += b[0:1] if isinstance(b, str) else chr(b)
         return
 
     def writefixednumber(self, value, nbbit):
