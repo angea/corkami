@@ -24,9 +24,7 @@ class decompress(lz.decompress):
         return False
 
     def __normalphrase(self):
-        """
-        """
-
+        # dictionary copy with same or new offset
         HighIndex = self.readvariablenumber()
 
         if (HighIndex == 2):
@@ -44,26 +42,18 @@ class decompress(lz.decompress):
                 length += 1;
             elif self.__lastindex <= 127:
                 length += 4;
-        try:
-            self.dictcopy(self.__lastindex, length)
-        except:
-            print "error"
-            return True
+        self.dictcopy(self.__lastindex, length)
         return False
 
 
     def __onebyteorliteralchange(self):
-        # one byte phrase or literal size change 100
+        # null literal, one byte word, 256-blocks read, or literal size
         onebytephrasevalue = self.readfixednumber(4) - 1
         if onebytephrasevalue == 0:
             self.literal("\0x00")
         else:
             if onebytephrasevalue > 0:
-                try:
-                    self.dictcopy(onebytephrasevalue)
-                except:
-                    print "error onebyte"
-                    return True
+                self.dictcopy(onebytephrasevalue)
             else:
                 if self.readbit():
                     # next block
@@ -81,21 +71,16 @@ class decompress(lz.decompress):
         return False
 
     def __shortmatch(self):
-        # shortmatch
+        # shortmatch, end or indexbase change
         newindex = self.readfixednumber(7)
         matchlength = 2 + self.readfixednumber(2)
         if newindex == 0:
-            # extended short
             if matchlength == 2:
-                # end of decompression
                 return True
             self.__indexbase = self.readfixednumber(matchlength + 1)
         else:
             self.__lastindex = newindex
-            try:
-                self.dictcopy(self.__lastindex, matchlength)
-            except:
-                return True
+            self.dictcopy(self.__lastindex, matchlength)
         return False
 
     def do(self):

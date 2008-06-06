@@ -89,7 +89,11 @@ import testdata
     return fail
 
 
-def jcalg_decompress():
+teststring = "this is a very very original string to decompress. let's see if it " \
+    "decompresses correctly. let's add a few original strings to enhance compression."
+testmd5 = "c388a7e2b0f63d7fc2f7a00b7a5d0aca"
+
+def jcalg_decompress():
     import jcalg
 
     data = testdata.jcalg1[10:]    # skip header
@@ -104,27 +108,20 @@ import testdata
         pass
 
 def aplib_decompress():
-    import aplib
-
-    ap = aplib.decompress(testdata.aplib1)
-    decomp, offset = ap.do()
-
-    m = md5.md5(decomp).hexdigest()
-    if m != "e08ab6d88b9a21ae7d8fe8bc5887ce4c":
-        print "aplib decompress test error"
-
+    data = teststring
+    comp, decomp = aplib_compdecsingle(data)
+    if misc.md5(comp) not in ["a10554fc5762f6d65076121a4aed4c4e"]:
+        print "aplib comp error"
+    if misc.md5(decomp) != testmd5:
+        print "aplib decomp serror"
 
 def brieflz_decompress():
-    import brieflz
-
-    data = testdata.teststring
-    c = brieflz.compress(data)
-    comp = c.do()
-    d = brieflz.decompress(comp, len(comp))
-    decomp, offset = d.do()
-    if misc.md5(comp) not in testdata.brieflz1:
+    data = teststring
+    comp, decomp = brieflz_compdecsingle(data)
+    if misc.md5(comp) not in ["05cf0b772e62f03d954dd1e3ed7a1658",
+        "ada336ab80f728261a1f746e56c13ec8"]:
         print "brieflz comp error"
-    if misc.md5(decomp) != testdata.testmd5:
+    if misc.md5(decomp) != testmd5:
         print "brieflz decomp serror"
 
 
@@ -132,7 +129,7 @@ def brieflz_decompress():
     data = "".join([chr(random.randrange(40,125)) for x in xrange(10)])
     while len(data) < length:
         c = random.randrange(0,10)
-        if c > 7:
+        if c > 8:
             start = random.randrange(0, len(data))
             size = random.randrange(1, len(data))
             data += data[start:start + size]
