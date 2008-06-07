@@ -25,15 +25,28 @@ def lengthdelta(x):
 
     def __literal(self):
         self.writebit(0)
+        self.writefixednumber(ord(self.__in[self.__offset]) - self.__literaloffset, self.__literalbits)
+        self.__ofset += 1
         return
 
     def __block(self, offset, length):
         assert offset >= 2
+        if offset == self.__lastindex:
+            self.writevariablenumber(2)
+            self.writevariablenumber(length)
+        else:
+            #tbc
         self.writebitstr("10")
         return
 
     def __shortblock(self, offset, length):
         self.writebitstr("110")
+        return
+
+    def __nullliteral(self):
+        self.writebitstr("110")
+        self.writefixednumber(1,4)
+        self.__ofset += 1
         return
 
     def __singlebyte(self, offset):
@@ -95,7 +108,7 @@ def lengthdelta(x):
             self.__onebyteorliteralchange,
             self.__shortmatch,
             ]
-        return
+        return 
 
     def __literal(self):
         # literal
