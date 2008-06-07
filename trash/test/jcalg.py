@@ -47,22 +47,28 @@ class decompress(lz.decompress):
 
 
     def __onebyteorliteralchange(self):
-        # null literal, one byte word, 256-blocks read, or literal size
         onebytephrasevalue = self.readfixednumber(4) - 1
         if onebytephrasevalue == 0:
+
+            # null literal
             self.literal("\0x00")
         else:
             if onebytephrasevalue > 0:
+
+                # single byte
                 self.dictcopy(onebytephrasevalue)
             else:
+
                 if self.readbit():
-                    # next block
+
+                    # 256 * 8 bit blocks until readbit
                     for i in xrange(256):
                         self.out += self.readfixednumber(8)
                     while self.readbit():
                         for i in xrange(256):
                             self.out += self.readfixednumber(8)
                 else:
+
                     # new literal size
                     self.__literalbits = 7 + self.readbit()
                     self.__literaloffset = 0
@@ -92,5 +98,5 @@ class decompress(lz.decompress):
 
 
 if __name__ == '__main__':
-    import test, md5
+    import test
     test.jcalg_decompress()

@@ -72,6 +72,6 @@ debug = False
 
 
 if __name__ == '__main__':
-    import test, md5
+    import test
     test.brieflz_decompress()
     test.brieflz_compdec()
