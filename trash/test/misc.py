@@ -97,15 +97,6 @@ def checkfindest(dic, stream, offset, length):
         return False
     return True
 
-def findmax(s, sub, limit):
-    """returns latest <sub> occurence in <s> within [0; <limit>]"""
-    result = -1
-    pos = s.find(sub, result + 1, limit + 1)
-    while result < pos:
-        result = pos
-        pos = s.find(sub, result + 1, limit + 1)
-    return result
-
 def searchdict(s, sub):
     limit = len(s)
     dic = s[:]
@@ -113,12 +104,14 @@ def searchdict(s, sub):
     l = 0
     offset = -1
     length = 0
+    first = 0
     word = ""
 
     word += sub[l]
-    pos = findmax(dic, word, limit)
+    pos = dic.rfind(word, 0, limit + 1)
     if pos == -1:
         return offset, length
+    #print first, pos
 
     offset = limit - pos
     length = len(word)
@@ -128,7 +121,7 @@ def searchdict(s, sub):
         l += 1
         word += sub[l]
 
-        pos = findmax(dic, word, limit)
+        pos = dic.rfind(word, 0, limit + 1)
         if pos == -1:
             return offset, length
         offset = limit - pos
@@ -150,3 +143,6 @@ def int2lebin(value, size):
         result = result + chr((value >> (8 * i)) & 0xFF )
     return result
 
+if __name__ == '__main__':
+    import test
+    test.search()

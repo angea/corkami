@@ -168,12 +168,24 @@ def generic_compdec(testnb, testlength, compdecfunc, testdesc):
             return
 
 
-def brieflz_compdec(testnb=5, testlength=65536):
+def brieflz_compdec(testnb, testlength):
     generic_compdec(testnb, testlength, brieflz_compdecsingle, "brieflz compdec")
 
-def aplib_compdec(testnb=5, testlength=65536):
+def aplib_compdec(testnb, testlength):
     generic_compdec(testnb, testlength, aplib_compdecsingle, "aplib compdec")
 
+
+def search():
+    import misc
+    tests = [
+        ["abab", "a", (2,1)],
+        ["s", "sss", (1,2)],
+        ["ababababab","ab", (2,2)],
+        ]
+    for l in tests:
+        r = misc.searchdict(l[0], l[1])
+        if r != l[2]:
+            print l, r
 
 if __name__ == '__main__':
     debug = False
@@ -181,5 +193,6 @@ def aplib_compdec(testnb=5, testlength=65536):
     brieflz_decompress()
     jcalg_decompress()
     aplib_decompress()
-    brieflz_compdec()
-    aplib_compdec()
+    brieflz_compdec(5,100)
+    aplib_compdec(5,100)
+    search()
