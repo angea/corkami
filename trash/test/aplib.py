@@ -8,7 +8,8 @@ def lengthdelta(offset):
         return 1
     return 0
 
-class compress(lz.compress):
+
+class compress(lz.compress):
     def __init__(self, data, length=None):
         lz.compress.__init__(self, 1)
         self.__in = data
@@ -96,6 +97,7 @@ class compress(lz.compress):
         self.__end()
         return self.getdata()
 
+
 class decompress(lz.decompress):
     def __init__(self, data):
         lz.decompress.__init__(self, data, tagsize=1)
@@ -135,7 +137,7 @@ class compress(lz.compress):
         if b <= 1:    # likely 0
             return True
         length = 2 + (b & 0x01)    # 2-3
-        offset = b >> 1    # 1-127 (if 0 then return True already)
+        offset = b >> 1    # 1-127
         self.dictcopy(offset, length)
         self.__lastoffset = offset
         self.__pair = False
@@ -162,4 +164,4 @@ class compress(lz.compress):
 if __name__ == '__main__':
     import test
     test.aplib_decompress()
-    test.aplib_compdec(2,128000)
+    test.aplib_compdec(1,128000)

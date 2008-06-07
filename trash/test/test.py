@@ -193,6 +193,6 @@ def aplib_compdec(testnb, testlength):
     brieflz_decompress()
     jcalg_decompress()
     aplib_decompress()
-    brieflz_compdec(5,100)
-    aplib_compdec(5,100)
+    brieflz_compdec(1,70000)
+    aplib_compdec(1,70000)
     search()
