@@ -182,27 +182,36 @@ def getemptyslots(matrix):
 
 
 mymax = 14
-def solve(matrix, curset):
+def solve(matrix, curset, cursol):
+#    print cursol
     global mymax , valtotal
     if len(curset) < mymax:
         mymax = len(curset)
+        
         print
+        print mymax
         printmat(matrix)
     slots = getemptyslots(matrix)
     for x,y,z in slots:
-        for p in curset:
+        for p in curset[0:1]:
             for rx,ry,rz in crange(3,3,3):
                 l = getpiece(p,rx,ry,rz)
                 valtotal += 1
+                if (valtotal % 10000) == 0:
+                    print
+                    print valtotal
+                    printmat(matrix)
                 m = addpiece(matrix[:], l, x,y,z,pieces_tags[p])
                 if m is None:
                     continue;
                 if len(curset) == 1:
+                    print
+                    print "success"
                     pprint(m)
                 else:
                     c = curset[:]
                     c.remove(p)
-                    solve(m, c)
+                    solve(m, c, cursol + [[p,rx,ry,rz]])
 
-solve(base[:], range(13))
+solve(base[:], range(13), [])
 print valtotal
