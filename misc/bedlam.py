@@ -1,4 +1,8 @@
 import sys
+from pprint import pprint
+
+debug = None
+valtotal = 0
 
 """bedlam cube solution solving, Ange Albertini 2008
 
@@ -18,54 +22,68 @@ x
 """
 pieces_tags = "0123456789ABCDEF"
 pieces = [
-[[0,1,0],[1,0,0],[1,1,0],[1,2,0],[2,1,0]], #  x
+[[0,1,0],[1,0,0],[1,1,0],[1,2,0],[2,1,0]], #  x    0
                                            # xxx
                                            #  x
 
-[[0,0,0],[0,1,0],[0,1,1],[0,2,0],[1,1,0]], #xXx
+[[0,0,0],[0,1,0],[0,1,1],[0,2,0],[1,1,0]], #xXx    1
                                            # x
 
-[[0,0,0],[0,1,0],[0,2,0],[1,2,0],[1,2,1]], #xxx
+[[0,0,0],[0,1,0],[0,2,0],[1,2,0],[1,2,1]], #xxx    2
                                            #  X
 
-[[0,0,0],[1,0,0],[0,1,0],[0,2,0],[0,2,1]], # xxX
+[[0,0,0],[1,0,0],[0,1,0],[0,2,0],[0,2,1]], # xxX   3
                                            # x
 
-[[0,0,0],[0,1,0],[1,1,0],[1,2,0],[2,2,0]], # xx
+[[0,0,0],[0,1,0],[1,1,0],[1,2,0],[2,2,0]], # xx    4
                                            #  xx
                                            #   x
 
-[[0,0,0],[0,1,0],[1,1,0],[1,2,0],[2,1,0]], # xx
+[[0,0,0],[0,1,0],[1,1,0],[1,2,0],[2,1,0]], # xx    5
                                            #  xx
                                            #  x
 
-[[0,0,0],[0,1,0],[0,2,0],[1,1,0],[1,1,1]], # xxx
+[[0,0,0],[0,1,0],[0,2,0],[1,1,0],[1,1,1]], # xxx   6
                                            #  X
 
-[[0,0,0],[0,1,0],[0,2,0],[1,0,0],[0,0,1]], # Xxx
+[[0,0,0],[0,1,0],[0,2,0],[1,0,0],[0,0,1]], # Xxx   7
                                            # x
 
-[[0,0,0],[0,1,0],[0,1,1],[0,2,1],[1,0,0]], # xX`
+[[0,0,0],[0,1,0],[0,1,1],[0,2,1],[1,0,0]], # xX`   8
                                            # x
 
-[[0,0,0],[0,1,0],[0,2,0],[0,2,1],[1,1,0]], # xxX
+[[0,0,0],[0,1,0],[0,2,0],[0,2,1],[1,1,0]], # xxX   9
                                            #  x
 
-[[0,0,0],[0,1,0],[0,1,1],[0,2,1],[1,1,0]], # xX`
+[[0,0,0],[0,1,0],[0,1,1],[0,2,1],[1,1,0]], # xX`   A
                                            #  x
 
-[[0,0,0],[0,1,0],[0,1,1],[1,1,1],[1,2,1]], # xX
+[[0,0,0],[0,1,0],[0,1,1],[1,1,1],[1,2,1]], # xX    B
                                            #  ``
 
-[[0,0,0],[0,1,0],[1,0,0],[1,0,1]]
+[[0,0,0],[0,1,0],[1,0,0],[1,0,1]]  # xx
+                                   # X
+#
 ]
+
+def testpieceset():
+    for i in range(len(pieces)):
+        range2 = range(len(pieces))
+        range2.remove(i)
+        for i1 in range2:
+            for x,y,z,xx,yy,zz in crange(3,3,3,3,3,3):
+                p1 = getpiece(i, x, y ,z)
+                p2 = getpiece(i1, xx, yy, zz)
+                if p1 == p2:
+                    print " collision !" , p1, p2, i, x, y ,z, i1, xx, yy, zz
+
 
 def rotate_x(l):return [ l[0], -l[2], l[1]]
 def rotate_y(l):return [-l[2],  l[1], l[0]]
 def rotate_z(l):return [-l[1],  l[0], l[2]]
 
 def adjust(l):
-    m = [5]*3
+    m = [5 for i in range(3)]
     ll = []
     for i in l:
         for j in range(3):
@@ -81,19 +99,37 @@ def adjust(l):
         ll += [l2]
     return ll
 
-#print pieces[1]
-#print map(rotate_x,pieces[1])
-#print adjust(map(rotate_x,pieces[1]))
+def printmat(m):
+    for x in range(4):
+        l = ""
+        for z in range(4):
+            
+            for y in range(4):
+                v = getmatvalue(m, x,y,z)
+                l += v if v is not None else "_"
+            l += " "
+        print l
 
 def getpiece(index, x,y,z):
+    global debug
+    if [index, x, y, z] == [3,0,1,1]:
+        #debug = 1
+        pass
+    if debug: print 
+        
     p = pieces[index][:]
+    if debug: print p
     for i in range(x):
-        p = map(rotate_x, p[:])
+        p = adjust(map(rotate_x, p[:]))
+        if debug: print p
     for i in range(y):
-        p = map(rotate_y, p[:])
+        p = adjust(map(rotate_y, p[:]))
+        if debug: print p
     for i in range(z):
-        p = map(rotate_z, p[:])
-    return adjust(p)
+        p = adjust(map(rotate_z, p[:]))
+        if debug: print p
+    debug = None
+    return p
 
 def crange(*args):
     """return a cross product of multiple ranges - avoid useless nested loops - should be iterable"""
@@ -103,18 +139,7 @@ def crange(*args):
     return result
 
 
-def testpieceset():
-    for i in range(len(pieces)):
-        range2 = range(len(pieces))
-        range2.remove(i)
-        for i1 in range2:
-            for x,y,z,xx,yy,zz in crange(3,3,3,3,3,3):
-                p1 = getpiece(i, x, y ,z)
-                p2 = getpiece(i1, xx, yy, zz)
-                if p1 == p2:
-                    print " collision !" , p1, p2, i, x, y ,z, i1, xx, yy, zz
-
-base = [ [None] * 64]
+base = [ None for i in range(64)]
 
 def getmatvalue(matrix, x,y,z):
     try:
@@ -126,14 +151,26 @@ def getmatvalue(matrix, x,y,z):
 def setmatvalue(matrix, x,y,z, value):
     matrix[x + 4 * ( y + 4 *z)] = value
 
+
 def addpiece(matrix, l, x,y,z, tag="1"):
     for i in l:
         xx,yy, zz = i
-        if (xx + x >3) or (yy + y >3) or (xx + x > 3):
+        if ((xx + x )>3) or ((yy + y )>3) or ((xx + x )> 3):
+            return None
+        if ((xx + x )<0) or ((yy + y )<0) or ((xx + x )< 0):
             return None
         if getmatvalue(matrix, xx + x, yy + y, zz + z) is not None:
             return None
         setmatvalue(matrix, xx + x, yy + y, zz + z, tag)
+    for x,y,z in crange(4,4,4):
+        if getmatvalue(matrix, x,y,z) is None:
+            l = [[x-1,y,z], [x+1,y,z],[x,y-1,z],[x,y+1,z],[x,y,z-1],[x,y,z+1]]
+            l = filter(lambda(x,y,z): 0<x<3 and 0<y<3 and 0<z<3, l[:])
+            if l != []:
+                r = filter(lambda(x,y,z):getmatvalue(matrix, x,y,z) is None, l)
+                if r == []:
+                    return None
+    debug = None
     return matrix
 
 def getemptyslots(matrix):
@@ -143,24 +180,29 @@ def getemptyslots(matrix):
             results += [[i,j,k]]
     return results
 
-def solve(matrix, curset, mini):
-    if len(curset) < len(mini):
-        mini = curset[:]
-        print mini
+
+mymax = 14
+def solve(matrix, curset):
+    global mymax , valtotal
+    if len(curset) < mymax:
+        mymax = len(curset)
+        print
+        printmat(matrix)
     slots = getemptyslots(matrix)
-    print matrix
     for x,y,z in slots:
         for p in curset:
             for rx,ry,rz in crange(3,3,3):
                 l = getpiece(p,rx,ry,rz)
+                valtotal += 1
                 m = addpiece(matrix[:], l, x,y,z,pieces_tags[p])
                 if m is None:
                     continue;
                 if len(curset) == 1:
-                    print m
+                    pprint(m)
                 else:
                     c = curset[:]
                     c.remove(p)
-                    solve(m, c, mini)
+                    solve(m, c)
 
-solve(base, range(13), range(14))
+solve(base[:], range(13))
+print valtotal
