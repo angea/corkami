@@ -1,4 +1,4 @@
-import sys
+import sys, psyco
 from pprint import pprint
 import md5,random
 
@@ -23,14 +23,19 @@ x
 
 best found so far:
 2
-7774 7554 BB55 _B5_ 
-7222 1114 81A4 _BB_ 
-9992 8192 8AA4 _CA3 
-_9__ 8833 _CC3 _CA3 
+7774 7554 BB55 _B5_
+7222 1114 81A4 _BB_
+9992 8192 8AA4 _CA3
+_9__ 8833 _CC3 _CA3
+
+
+  x    0 xXx    1 xxx    2  xxX   3  xx    4  xx    5  xxx   6  Xxx   7  xX`   8  xxX   9  xX`   A  xX    B  xx    C
+ xxx      x         X       x         xx       xx       X       x        x         x        x        ``      X
+  x                                    x       x
 
 
 """
-pieces_tags = "0123456789ABCDEF"
+pieces_tags = "0123456789ABC"
 pieces = [
 [[0,1,0],[1,0,0],[1,1,0],[1,2,0],[2,1,0]], #  x    0
                                            # xxx
@@ -77,15 +82,20 @@ pieces = [
 ]
 
 def testpieceset():
-    for i in range(len(pieces)):
-        range2 = range(len(pieces))
-        range2.remove(i)
-        for i1 in range2:
-            for x,y,z,xx,yy,zz in crange(3,3,3,3,3,3):
-                p1 = getpiece(i, x, y ,z)
-                p2 = getpiece(i1, xx, yy, zz)
-                if p1 == p2:
-                    print " collision !" , p1, p2, i, x, y ,z, i1, xx, yy, zz
+    rotations = [0 for i in range(13)]
+    for i in range(13):
+        rotations[i] = []
+        for x,y,z in crange(5,5,5):
+            p = getpiece(i, x, y ,z)
+            p.sort()
+            if p not in rotations[i]:
+                rotations[i].append(p)
+
+#    for i in rotations:
+#        print 
+#        for j in i:
+#            print j
+    return rotations
 
 
 def rotate_x(l):return [ l[0], -l[2], l[1]]
@@ -113,7 +123,7 @@ def printmat(m):
     for x in range(4):
         l = ""
         for z in range(4):
-            
+
             for y in range(4):
                 v = getmatvalue(m, x,y,z)
                 l += v if v is not None else "_"
@@ -125,8 +135,8 @@ def getpiece(index, x,y,z):
     if [index, x, y, z] == [3,0,1,1]:
         #debug = 1
         pass
-    if debug: print 
-        
+    if debug: print
+
     p = pieces[index][:]
     if debug: print p
     for i in range(x):
@@ -162,26 +172,53 @@ def setmatvalue(matrix, x,y,z, value):
     matrix[x + 4 * ( y + 4 *z)] = value
 
 
-def addpiece(matrix, l, x,y,z, tag="1"):
+def isclose(l1,l2):
+    x1,y1,z1 = l1
+    x2,y2,z2 = l2
+    return (abs(x1-x2) + abs(y1-y2) + abs(z1-z2)) == 1
+
+def addpiece(matrix, l, x,y,z, slots, tag, curset):
     for i in l:
         xx,yy, zz = i
-        if ((xx + x )>3) or ((yy + y )>3) or ((xx + x )> 3):
-            return None
-        if ((xx + x )<0) or ((yy + y )<0) or ((xx + x )< 0):
-            return None
-        if getmatvalue(matrix, xx + x, yy + y, zz + z) is not None:
-            return None
+        if ((xx + x )>3) or ((yy + y )>3) or ((xx + x )> 3) or ((xx + x )<0) or ((yy + y )<0) or ((xx + x )< 0) or \
+            getmatvalue(matrix, xx + x, yy + y, zz + z) is not None:
+            return None, None
         setmatvalue(matrix, xx + x, yy + y, zz + z, tag)
-    for x,y,z in crange(4,4,4):
-        if getmatvalue(matrix, x,y,z) is None:
-            l = [[x-1,y,z], [x+1,y,z],[x,y-1,z],[x,y+1,z],[x,y,z-1],[x,y,z+1]]
-            l = filter(lambda(x,y,z): 0<x<3 and 0<y<3 and 0<z<3, l[:])
-            if l != []:
-                r = filter(lambda(x,y,z):getmatvalue(matrix, x,y,z) is None, l)
-                if r == []:
-                    return None
+        slots.remove([xx + x, yy + y, zz + z])
+    slotgroups = []
+    for s1 in slots:
+        foundgroup = False
+        for slotgroup in slotgroups:
+            for slot in slotgroup:
+                if isclose(s1,slot):
+                    slotgroup.append(s1)
+                    foundgroup = True
+                    break
+            if foundgroup == True:
+                break
+        else:
+            slotgroups.append([s1])
+    #print slotgroups
+    limit = 3 if 13 in curset else 4
+    for slotgroup in slotgroups:
+        if len(slotgroup) < limit:
+#            for s in slotgroups:
+#              print s
+#            print
+#            print slots
+#            print
+#            print
+            return None, None
+
+        #if getmatvalue(matrix, x,y,z) is None:
+        #    l = [[x-1,y,z], [x+1,y,z],[x,y-1,z],[x,y+1,z],[x,y,z-1],[x,y,z+1]]
+        #    l = filter(lambda(x,y,z): 0<=x<=3 and 0<=y<=3 and 0<=z<=3, l[:])
+        #    if l != []:
+        #        r = filter(lambda(x,y,z):getmatvalue(matrix, x,y,z) is None, l)
+        #        if r == []:
+        #            return None, None
     debug = None
-    return matrix
+    return matrix, slots
 
 def getemptyslots(matrix):
     results = []
@@ -190,46 +227,45 @@ def getemptyslots(matrix):
             results += [[i,j,k]]
     return results
 
-def getmatchecksum(matrix):
-    return md5.new("".join(map(lambda(x): "_" if x is None else x, matrix))).digest()
+def getmatchecksum(matrix, curset): #curset should be sorted
+    return md5.new("".join(map(lambda(x): "_" if x is None else "1", matrix)) + "".join(map(str, sorted(curset)))).digest()
 
-mymax = 14
-def solve(matrix, curset, cursol):
+mymax = 4
+def solve(matrix, curset, slots):
 #    print cursol
     global mymax , valtotal
     if len(curset) < mymax:
         mymax = len(curset)
-        
+
         print
         print mymax
         printmat(matrix)
-    slots = getemptyslots(matrix)
-    random.shuffle(curset)
+    #slots = getemptyslots(matrix)
     for x,y,z in slots:
+        #random.shuffle(curset)
         for p in curset:
-            for rx,ry,rz in crange(3,3,3):
-                l = getpiece(p,rx,ry,rz)
+            for pos, l in enumerate(rotations[p]):
+                #l = getpiece(p,rx,ry,rz)
                 valtotal += 1
                 if (valtotal % 10000) == 0:
-                    print
-#                    print valtotal
-#                    printmat(matrix)
-                m = addpiece(matrix[:], l, x,y,z,pieces_tags[p])
-                if m is None:
+                    print "_",
+                newmat,s = addpiece(matrix[:], l, x,y,z, slots[:], pieces_tags[p], curset)
+                if newmat is None:
                     continue;
                 if len(curset) == 1:
                     print
                     print "success"
-                    pprint(m)
+                    pprint(newmat)
                 else:
-                    check = getmatchecksum(m)
+                    check = getmatchecksum(newmat, curset)
                     if check in sols:
                         continue
                     sols[check] = None
 #                    print len(sols)
-                    c = curset[:]
-                    c.remove(p)
-                    solve(m, c, cursol + [[p,rx,ry,rz]])
+                    newset = curset[:]
+                    newset.remove(p)
+                    solve(newmat, newset, s)
 
-solve(base[:], range(13), [])
+rotations = testpieceset()
+solve(base[:], range(13), [[x,y,z] for x,y,z in crange(4,4,4)])
 print valtotal
