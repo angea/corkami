@@ -1,9 +1,10 @@
 import sys
 from pprint import pprint
+import md5,random
 
 debug = None
 valtotal = 0
-
+sols = {}
 """bedlam cube solution solving, Ange Albertini 2008
 
    z
@@ -18,6 +19,15 @@ x
 #Rotation Z: Y = x,  X = -y
 #Rotation Y: Z = x,  X = -z
 #Rotation X: Z = y,  Y = -z
+
+
+best found so far:
+2
+7774 7554 BB55 _B5_ 
+7222 1114 81A4 _BB_ 
+9992 8192 8AA4 _CA3 
+_9__ 8833 _CC3 _CA3 
+
 
 """
 pieces_tags = "0123456789ABCDEF"
@@ -61,8 +71,8 @@ pieces = [
 [[0,0,0],[0,1,0],[0,1,1],[1,1,1],[1,2,1]], # xX    B
                                            #  ``
 
-[[0,0,0],[0,1,0],[1,0,0],[1,0,1]]  # xx
-                                   # X
+[[0,0,0],[0,1,0],[1,0,0],[1,0,1]]          # xx    C
+                                           # X
 #
 ]
 
@@ -180,6 +190,8 @@ def getemptyslots(matrix):
             results += [[i,j,k]]
     return results
 
+def getmatchecksum(matrix):
+    return md5.new("".join(map(lambda(x): "_" if x is None else x, matrix))).digest()
 
 mymax = 14
 def solve(matrix, curset, cursol):
@@ -192,15 +204,16 @@ def solve(matrix, curset, cursol):
         print mymax
         printmat(matrix)
     slots = getemptyslots(matrix)
+    random.shuffle(curset)
     for x,y,z in slots:
-        for p in curset[0:1]:
+        for p in curset:
             for rx,ry,rz in crange(3,3,3):
                 l = getpiece(p,rx,ry,rz)
                 valtotal += 1
                 if (valtotal % 10000) == 0:
                     print
-                    print valtotal
-                    printmat(matrix)
+#                    print valtotal
+#                    printmat(matrix)
                 m = addpiece(matrix[:], l, x,y,z,pieces_tags[p])
                 if m is None:
                     continue;
@@ -209,6 +222,11 @@ def solve(matrix, curset, cursol):
                     print "success"
                     pprint(m)
                 else:
+                    check = getmatchecksum(m)
+                    if check in sols:
+                        continue
+                    sols[check] = None
+#                    print len(sols)
                     c = curset[:]
                     c.remove(p)
                     solve(m, c, cursol + [[p,rx,ry,rz]])
