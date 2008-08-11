@@ -206,7 +206,7 @@ def isclose(l1,l2):
 def addpiece(matrix, l, x,y,z, slots, tag, curset):
     for i in l:
         xx,yy, zz = i
-        if ((xx + x ) >3) or ((yy + y ) >3) or ((xx + x ) > 3) or ((xx + x )<0) or ((yy + y )<0) or ((xx + x )< 0) or \
+        if ((xx + x ) >3) or ((yy + y ) >3) or ((xx + x ) > 3) or ((zz + z )<0) or ((yy + y )<0) or ((zz + z )< 0) or \
             getmatvalue(matrix, xx + x, yy + y, zz + z) is not None:
             return None, None
         setmatvalue(matrix, xx + x, yy + y, zz + z, tag)
@@ -284,7 +284,7 @@ def solve(matrix, curset, slots):
                 else:
                     check = getmatchecksum(newmat, curset)
                     if check in sols:
-                        print "skip"
+                        #print "skip"
                         continue
                     for rx,ry,rz in crange(4,4,4):
                         m = rotatematrix(newmat[:],rx,ry,rz)
