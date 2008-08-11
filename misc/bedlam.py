@@ -81,6 +81,14 @@ pieces = [
 ]
 
 psize = len(pieces)
+
+def getpieceoffset(p):
+    miny = [5,5]
+    for i in p:
+        if i[1] == 0:
+            miny = min(miny, [i[0], i[2]])
+    return miny
+    
 def testpieceset():
     rotations = [0 for i in range(psize)]
     for i in range(psize):
@@ -88,6 +96,7 @@ def testpieceset():
         for x,y,z in crange(5,5,5):
             p = getpiece(i, x, y ,z)
             p.sort()
+            p = [p, getpieceoffset(p)]
             if p not in rotations[i]:
                 rotations[i].append(p)
 
@@ -156,6 +165,7 @@ def rotatematrix(m, x, y ,z):
     for i in xrange(z):
         m = rotatem_z(m)
     return m
+
 def getpiece(index, x,y,z):
     global debug
     if [index, x, y, z] == [3,0,1,1]:
@@ -203,14 +213,19 @@ def isclose(l1,l2):
     x2,y2,z2 = l2
     return (abs(x1-x2) + abs(y1-y2) + abs(z1-z2)) == 1
 
-def addpiece(matrix, l, x,y,z, slots, tag, curset):
+def addpiece(matrix, l, x,y,z, slots, tag, curset, offset):
     for i in l:
         xx,yy, zz = i
-        if ((xx + x ) >3) or ((yy + y ) >3) or ((xx + x ) > 3) or ((zz + z )<0) or ((yy + y )<0) or ((zz + z )< 0) or \
+        if ((xx + x ) >3) or ((yy + y ) >3) or ((zz + z ) > 3) or ((xx + x - offset[0] )<0) or ((yy + y )<0) or ((zz + z - offset[1]  )< 0) or \
             getmatvalue(matrix, xx + x, yy + y, zz + z) is not None:
             return None, None
         setmatvalue(matrix, xx + x, yy + y, zz + z, tag)
-        slots.remove([xx + x, yy + y, zz + z])
+        try:
+            slots.remove([xx + x, yy + y, zz + z])
+        except:
+            print slots
+            print [xx + x - offset[0], yy + y, zz + z - offset[1]]
+            sys.exit()
     slotgroups = []
     for s1 in slots:
         foundgroup = False
@@ -265,8 +280,8 @@ def solve(matrix, curset, slots):
         print
         print mymax
         printmat(matrix)
-    #slots = getemptyslots(matrix)
-    for x,y,z in crange(4,4,4):
+    slots = getemptyslots(matrix)
+    for x,y,z in slots:
         #random.shuffle(curset)
         for p in curset:
             for pos, l in enumerate(rotations[p]):
@@ -274,7 +289,7 @@ def solve(matrix, curset, slots):
                 valtotal += 1
                 if (valtotal % 100000) == 0:
                     print "_",
-                newmat,s = addpiece(matrix[:], l, x,y,z, slots[:], pieces_tags[p], curset)
+                newmat,s = addpiece(matrix[:], l[0], x - l[1][0],y,z - l[1][1], slots[:], pieces_tags[p], curset, l[1])
                 if newmat is None:
                     continue;
                 if len(curset) == 1:
@@ -282,13 +297,12 @@ def solve(matrix, curset, slots):
                     print "success"
                     pprint(newmat)
                 else:
-                    check = getmatchecksum(newmat, curset)
-                    if check in sols:
-                        #print "skip"
-                        continue
-                    for rx,ry,rz in crange(4,4,4):
-                        m = rotatematrix(newmat[:],rx,ry,rz)
-                        sols[getmatchecksum(m, curset)] = None
+#                    check = getmatchecksum(newmat, curset)
+#                    if check in sols:
+#                        continue
+#                    for rx,ry,rz in crange(4,4,4):
+#                        m = rotatematrix(newmat[:],rx,ry,rz)
+#                        sols[getmatchecksum(m, curset)] = None
                     #sols[check] = None
 #                    print len(sols)
                     newset = curset[:]
@@ -298,6 +312,7 @@ def solve(matrix, curset, slots):
 rotations = testpieceset()
 total = 0
 for i in rotations:
+#    pprint(i)
     total += len(i)
 total *= 6227020800 # 13!
 total *= 64
