@@ -83,6 +83,7 @@ pieces = [
 psize = len(pieces)
 
 def getpieceoffset(p):
+    """"""
     miny = [5,5]
     for i in p:
         if i[1] == 0:
@@ -158,6 +159,7 @@ def rotatem_z(m):
     return matrix
 
 def rotatematrix(m, x, y ,z):
+    """rotates the complete matrix according to x,y,z"""
     for i in xrange(x):
         m = rotatem_x(m)
     for i in xrange(y):
