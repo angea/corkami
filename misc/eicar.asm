@@ -46,3 +46,5 @@ skip_string:
 ;    int 021h
 ;    int 020h
 ;aString db 'EICAR-STANDARD-ANTIVIRUS-TEST-FILE!', '$'
+
+; Ange Albertini 2009
