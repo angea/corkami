@@ -14,8 +14,6 @@ _POPr equ 3
 _JNZ equ 4
 _EXIT equ 5
 
-DUMMY equ 0
-
 .code smc ; /SECTION:smc,erw
 
 Main proc
@@ -91,7 +89,7 @@ dd _POPr, 1
 dd _PUSH, 1     ; mov ebx, 1
 dd _POPr, 2
 LOOP_ equ $ - virtual_code
-dd _PUSHr, 2    ; mov edx, ebx ; _loop, 30
+dd _PUSHr, 2    ; mov edx, ebx
 dd _POPr, 3
 
 dd _PUSHr, 1    ; add edx, eax

@@ -17,27 +17,37 @@ option casemap :none
 include c:\masm32\include\kernel32.inc
 includelib c:\masm32\lib\kernel32.lib
 
-_NB EQU -1
-
-.code smc   ;  /SECTION:smc,erw
+.code smc   ; /SECTION:smc,erw
 
 Main proc
 
+; standard opcode
+_OP macro a, b, c
+    dd a - virtual_code, b - virtual_code, c - virtual_code
+endm
+
+; opcode with no branch => c = @next_line
+_NB macro a, b
+    local _1
+    dd a - virtual_code, b - virtual_code, _1 - virtual_code
+_1:
+endm
+
 _CLR macro a
-    dd a, a, _NB
+    _NB a, a
 endm
 
 _CLZ macro
-    dd Z, Z, _NB
+    _NB Z, Z
 endm
 
 _JMP macro label    ; clears Z too
-    dd Z, Z, label
+    _OP Z, Z, label
 endm
 
 _ADD macro a, b
-    dd a, Z, _NB
-    dd Z, b, _NB
+    _NB a, Z
+    _NB Z, b
     _CLZ
 endm
 
@@ -48,36 +58,32 @@ endm
 
 _JNZ macro b, label
     local _PZ, _Z   ; Positive or Zero, Zero
-    dd b, Z, _PZ    ; branch if b >= 0
+    _OP b, Z, _PZ    ; branch if b >= 0
     _JMP label
 _PZ:
     _CLZ
-    dd Z, b, _Z     ; branch if b <= 0 => with previous if b = 0
+    _OP Z, b, _Z     ; branch if b <= 0 => with previous if b = 0
     _JMP label
 _Z:
 endm
 
 vm_start:
-    mov esi, virtual_code ; esi is our virtual EIP
+    mov esi, virtual_code
 nop
 vm_fetch:
     cmp esi, offset _end
     jz vm_end
 nop
-    lodsd
-    mov ebx, eax
-    mov ebx, dword ptr [ebx]
-    lodsd
-    mov ecx, eax
-    sub [ecx],ebx
-nop
-    lodsd
-    cmp eax, _NB
-    jz vm_fetch
-nop
-    cmp dword ptr [ecx], 0
+    mov eax, dword ptr [esi + 0 * 4]
+    mov ebx, dword ptr [esi + 1 * 4]
+    mov ecx, dword ptr [esi + 2 * 4]
+    add esi, 3 * 4
+
+    mov eax, dword ptr [eax + virtual_code]
+    sub [ebx + virtual_code],eax
+    cmp dword ptr [ebx + virtual_code], 0
     jg vm_fetch
-    mov esi, eax ;lea esi, [virtual_code + eax]
+    lea esi, [ecx + virtual_code]
     jmp vm_fetch
 nop
 vm_end:
@@ -108,7 +114,7 @@ _ADD rom3, reg0     ; add ecx, -1
 _JNZ reg0, LOOP_    ; jnz _loop
 _MOV reg2, reg0     ; mov ecx, ebx
 _end:
-nop
+dd 0
 align 4
 virtual_memory:
 registers:
@@ -117,6 +123,8 @@ registers:
     reg1 dd 0
     reg2 dd 0
     reg3 dd 0
+dd 0
+align 4
 rom:
     rom1 dd 046
     rom2 dd 1

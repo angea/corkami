@@ -33,9 +33,10 @@ refresh_ip:
     lea esi, [esi + virtual_code]
 nop
 vm_fetch:
-    lodsd
-    mov ebx, eax
-    lodsd
+    mov ebx, dword ptr [esi]
+    mov eax, dword ptr [esi + 4]
+    add esi, 8
+nop
     mov eax, dword ptr [eax]
     cmp [conditional], 0
     jz data_transport
