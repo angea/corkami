@@ -11,6 +11,49 @@ BITS 32
 
 %define _  dd 90909090h;align 8, db 090h    ; turning on alignment makes yasm crawls...
 
+;prefixes
+
+%define PREFIX_FS db 64h
+%define PREFIX_BRANCH_TAKEN db 3eh
+%define PREFIX_BRANCH_NOT_TAKEN db 2eh
+
+    lock and word [fs:bx + si], si
+_
+; branch hints
+    PREFIX_BRANCH_TAKEN
+    jnz $ + 2
+_
+    PREFIX_BRANCH_NOT_TAKEN
+    jnz $ + 2
+_
+    movsd
+_
+    PREFIX_FS
+    movsd ;dword [es:edi], dword [fs:esi]
+_
+
+;default segments
+
+;ds
+mov eax, [ebx]
+_
+;es
+    mov eax, [ebp]
+_
+    mov eax, [esp]
+_
+    mov [es:eax], al                ;26 8800
+_
+    mov [cs:eax], al                ;2e 8800
+_
+    mov [ss:eax], al                ;36 8800
+_
+    mov [ds:eax], al                ;3e 8800
+_
+    mov [fs:eax], al                ;64 8800
+_
+    mov [gs:eax], al                ;65 8800
+_
 ;retn_ macro Iw
 ;db 0c2h
 ;dw Iw
@@ -1168,18 +1211,6 @@ _
     paddw mm0, qword [eax]          ;0ffd00
 _
     paddd mm0, qword [eax]          ;0ffe00
-_
-    add [es:eax], al                ;26 0000
-_
-    add [cs:eax], al                ;2e 0000
-_
-    add [ss:eax], al                ;36 0000
-_
-    add [ds:eax], al                ;3e 0000
-_
-    add [fs:eax], al                ;64 0000
-_
-    add [gs:eax], al                ;65 0000
 _
 
     bound eax, [eax]                ;6200
