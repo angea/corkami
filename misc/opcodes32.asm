@@ -17,6 +17,8 @@ BITS 32
 %define PREFIX_BRANCH_TAKEN db 3eh
 %define PREFIX_BRANCH_NOT_TAKEN db 2eh
 
+jmp _start
+
     lock and word [fs:bx + si], si
 _
 ; branch hints
@@ -74,7 +76,6 @@ _
 ;%endmacro
 
 
-;jmp _start
 ; one byte, no arguments
 _
     cwde ; 98 66 version too
@@ -411,7 +412,6 @@ _
 
     ;Eb,Gb
     ; add... 00 + test 84 + 86 xchg + 88 mov
-    _start:
     add [eax], al ; 00 xx add
 _
     or  [eax], al ; 08 xx logical or
@@ -523,29 +523,6 @@ _
 
     test eax, 012345678h
 _
-
-    ; 66 prefix
-    ; turns dword operand size to word
-    ;40-4f
-    ;inc, dec
-    inc eax ; 40
-    inc ecx ; 41
-    inc edx ; 42
-    inc ebx ; 43
-    inc esp ; 44
-    inc ebp ; 45
-    inc esi ; 46
-    inc edi ; 47
-
-    dec eax ; 48
-    dec ecx ; 49
-    dec edx ; 4A
-    dec ebx ; 4B
-    dec esp ; 4C
-    dec ebp ; 4D
-    dec esi ; 4E
-    dec edi ; 4F
-
 
     ;Jz
     call 012345678h
@@ -664,7 +641,7 @@ _
     vmwrite eax         , dword [eax]       ; 0f 79 00
 _
     ;swapgs                      ; 0F 1F F8 64B ONLY?
-_
+;_
     rdtscp                      ; 0f 01 f9
 _
     lar eax, [eax]          ; 0f 02 *
@@ -706,7 +683,6 @@ _
 _
     movhpd [eax], xmm0      ; 66 0f 17 *
 _
-
     movss xmm0, [eax]   ; f3 0f 10 *
 _
     movss [eax], xmm0   ; f3 0f 11 *
@@ -715,7 +691,6 @@ _
 _
     movshdup xmm0, [eax]; f3 0f 16 *
 _
-
     movsd xmm0, [eax]   ; f2 0f 10 *
 _
     movsd [eax], xmm0   ; f2 0f 11 *
@@ -772,7 +747,7 @@ _
     pavgb mm0, [eax]    ; 0f e0
 _
     popcnt eax , [eax] ; 0FB8 *
-
+_
     lddqu xmm0, [eax] ; f2 0f f0 00
 _
     bsr eax, [eax] ; 0f bd *
@@ -791,10 +766,6 @@ _
     crc32 eax, byte [eax]   ; f2 0f 38 f0 *
 _
     crc32 eax, [eax]        ; f2 0f 38 f1 *
-_
-    ; AESkeygen assist
-    ;db 066h, 0fh, 03ah, 0dfh, 0 ;
-    dd 0,0
 _
 
 ; from a to z...
@@ -839,7 +810,7 @@ _
     movhps qword [eax], xmm0        ;0f1700
 _
     prefetchnta [eax]               ;0f1800
-_
+;_
     ;nop dword [eax]                 ;0f1f00
 _
     movaps xmm0, dqword [eax]       ;0f2800
@@ -971,10 +942,6 @@ _
     pcmpeqd mm0, qword [eax]        ;0f7600
 _
     emms                            ;0f77
-_
-    vmread dword [eax], eax         ;0f7800
-_
-    vmwrite eax, dword [eax]        ;0f7900
 _
     movd dword [eax], mm0           ;0f7e00
 _
@@ -1115,20 +1082,20 @@ _
     shufps xmm0, dqword [eax], 0x0  ;0fc600 00
 _
     bswap eax                       ;0fc8
-_
-    bswap ecx                       ;0fc9
-_
-    bswap edx                       ;0fca
-_
-    bswap ebx                       ;0fcb
-_
-    bswap esp                       ;0fcc
-_
-    bswap ebp                       ;0fcd
-_
-    bswap esi                       ;0fce
-_
-    bswap edi                       ;0fcf
+;_
+;    bswap ecx                       ;0fc9
+;_
+;    bswap edx                       ;0fca
+;_
+;    bswap ebx                       ;0fcb
+;_
+;    bswap esp                       ;0fcc
+;_
+;    bswap ebp                       ;0fcd
+;_
+;    bswap esi                       ;0fce
+;_
+;    bswap edi                       ;0fcf
 _
     psrlw mm0, qword [eax]          ;0fd100
 _
@@ -1280,17 +1247,9 @@ _
 _
     setg byte [eax]                 ;66 0f9f00
 _
-    push word fs                    ;66 0fa0
-_
-    pop word fs                     ;66 0fa1
-_
     shld [eax], ax, 0x0             ;66 0fa400 00
 _
     shld [eax], ax, cl              ;66 0fa500
-_
-    push word gs                    ;66 0fa8
-_
-    pop word gs                     ;66 0fa9
 _
     rsm                             ;66 0faa
 _
@@ -1428,7 +1387,16 @@ _
 _
     movdqa dqword [eax], xmm0       ;660f7f00
 _
+    cmppd xmm0, dqword [eax], 0     ;660fc20000
+_
     cmpeqpd xmm0, dqword [eax]      ;660fc20000
+    cmpltpd xmm0, dqword [eax]      ;660fc20001
+    cmplepd xmm0, dqword [eax]      ;660fc20002
+    cmpunordpd xmm0, dqword [eax]   ;660fc20003
+    cmpneqpd xmm0, dqword [eax]     ;660fc20004
+    cmpnltpd xmm0, dqword [eax]     ;660fc20005
+    cmpnlepd xmm0, dqword [eax]     ;660fc20006
+    cmpordpd xmm0, dqword [eax]     ;660fc20007
 _
     pinsrw xmm0, word [eax], 0x0    ;660fc400 00
 _
@@ -1605,6 +1573,8 @@ _
     mov es, [eax]                   ;8e00
 _
     pop dword [eax]                 ;8f00
+_
+    xchg eax, eax                   ;90
 _
     nop                             ;90
 _
@@ -1848,7 +1818,16 @@ _
 _
     hsubps xmm0, dqword [eax]       ;f20f7d00
 _
-    cmpeqsd xmm0, qword [eax]       ;f20fc20000
+    cmpsd xmm0, [eax], 0
+_
+    cmpeqsd xmm0, [eax]      ;f20fc20000
+    cmpltsd xmm0, [eax]      ;f20fc20001
+    cmplesd xmm0, [eax]      ;f20fc20002
+    cmpunordsd xmm0, [eax]   ;f20fc20003
+    cmpneqsd xmm0, [eax]     ;f20fc20004
+    cmpnltsd xmm0, [eax]     ;f20fc20005
+    cmpnlesd xmm0, [eax]     ;f20fc20006
+    cmpordsd xmm0, [eax]     ;f20fc20007
 _
     addsubps xmm0, dqword [eax]     ;f20fd000
 _
@@ -2090,119 +2069,17 @@ _
     vpshlw      xmm0, xmm0, xmm0
 _
 
-
-    ;f2xm1     ; 2 to the x power minus 1
-    ;fabs      ; absolute value of st0(0)
-    ;fadd      ; add two floating point values
-    ;faddp     ; add two floating point values and pop st0(0)
-    ;fbld      ; load bcd data from memory
-    ;fbstp     ; store bcd data to memory
-    ;fchs      ; change the sign of st0(0)
-    ;fclex     ; clear exceptions
-    ;fcmovcc   ; conditional move based on cpu flags
-    ;fcom      ; compare st0(0) to a floating point value
-    ;fcomi     ; compare st0(0) to st0(i) and set cpu flags
-    ;fcomip    ; compare st0(0) to st0(i) and set cpu flags and pop st0(0)
-    ;fcomp     ; compare st0(0) to a floating point value and pop st0(0)
-    ;fcompp    ; compare st0(0) to st0(1) and pop both registers
-    ;fcos      ; cosine of the angle value in st0(0)
-    ;fdecstp   ; decrease stack pointer
-    ;fdiv      ; divide two floating point values
-    ;fdivp     ; divide two floating point values and pop st0(0)
-    ;fdivr     ; divide in reverse two floating point values
-    ;fdivrp    ; divide in reverse two floating point values and pop st0(0)
-    ;ffree     ; free a data register
-    ;fiadd     ; add an integer located in memory to st0(0)
-    ;ficom     ; compare st0(0) to an integer value
-    ;ficomp    ; compare st0(0) to an integer value and pop st0(0)
-    ;fidiv     ; divide st0(0) by an integer located in memory
-    ;fidivr    ; divide an integer located in memory by st0(0)
-    ;fild      ; load integer from memory
-    ;fimul     ; multiply st0(0) by an integer located in memory
-    ;fincstp   ; increase stack pointer
-    ;finit     ; initialize the fpu
-    ;fist      ; store integer to memory
-    ;fistp     ; store integer to memory and pop st0(0)
-    ;fisub     ; subtract an integer located in memory from st0(0)
-    ;fisubr    ; subtract st0(0) from an integer located in memory
-    ;fld       ; load real number
-    ;fld1      ; load the value of 1
-    ;fldcw     ; load control word
-    ;fldenv    ; load environment
-    ;fldl2e    ; load the log base 2 of e (napierian constant)
-    ;fldl2t    ; load the log base 2 of ten
-    ;fldlg2    ; load the log base 10 of 2 (common log of 2)
-    ;fldln2    ; load the log base e of 2 (natural log of 2)
-    ;fldpi     ; load the value of pi
-    ;fldz      ; load the value of zero
-    ;fmul      ; multiply two floating point values
-    ;fmulp     ; multiply two floating point values and pop st0(0)
-    ;fnop      ; no operation
-    ;fpatan    ; partial arctangent of the ratio st0(1)/st0(0)
-    ;fprem     ; partial remainder
-    ;fprem1    ; partial remainder 1
-    ;fptan     ; partial tangent of the angle value in st0(0)
-    ;frndint   ; round st0(0) to an integer
-    ;frstor    ; restore all registers
-    ;fsave     ; save state of fpu
-    ;fscale    ; scale st0(0) by st0(1)
-    ;fsin      ; sine of the angle value in st0(0)
-    ;fsincos   ; sine and cosine of the angle value in st0(0)
-    ;fsqrt     ; square root of st0(0)
-    ;fst       ; store real number
-    ;fstcw     ; store control word
-    ;fstenv    ; store environment
-    ;fstp      ; store real number and pop st0(0)
-    ;fstsw     ; store status word
-    ;fsub      ; subtract two floating point values
-    ;fsubp     ; subtract two floating point values and pop st0(0)
-    ;fsubr     ; subtract in reverse two floating point values
-    ;fsubrp    ; subtract in reverse two floating point values and pop st0(0)
-    ;ftst      ; test st0(0) by comparing it to +0.0
-    ;fucom     ; unordered compare st0(0) to a floating point value
-    ;fucomi    ; unordered compare st0(0) to st0(i) and set cpu flags
-    ;fucomip   ; unordered compare st0(0) to st0(i) and set cpu flags and pop st0(0)
-    ;fucomp    ; unordered compare st0(0) to a floating point value and pop st0(0)
-    ;fucompp   ; unordered compare st0(0) to st0(1) and pop both registers
-    ;fwait     ; wait while fpu is busy
-    ;fxam      ; examine the content of st0(0)
-    ;fxch      ; exchange the top data register with another data register
-    ;fxtract   ; extract exponent and significand
-    ;fyl2x     ; y*log2x
-    ;fyl2xp1   ; y*log2(x+1)
-
-    ; nowait fpus
-    ;fnclex    clear exceptions (no wait)
-    ;fninit    initialize the fpu (no wait)
-    ;fnsave    save state of fpu (no wait)
-    ;fnstcw    store control word (no wait)
-    ;fnstenv   store environment (no wait)
-;fnstsw    store status word (no wait)
-
-    fdisi               ;dbe1
-    fcos                ;d9ff
-    fldz                ;d9ee
-    fclex               ;dbe2
-    fwait               ;9b
-    fnclex              ;9bdbe2
-    f2xm1               ;d9f0
-    fldpi               ;d9eb
-    fyl2x               ;d9f1
-    fprem               ;d9f8
-    fsin                ;d9fe
-    fld1                ;d9e8
-    finit               ;dbe3
-    fninit              ;9bdbe3
-    fptan               ;d9f2
-    fnop                ;d9d0
-    fsqrt               ;d9fa
-    f2xm1               ;d9f0
+_start:
+    f2xm1               ;d9f0 ; 2 to the x power minus 1
+    fabs      ; absolute value of st0(0)
     fadd dword [eax]    ;d800
     fadd qword [eax]    ;dc00
     fadd st0,st0        ;d8c0
     faddp st0,st0       ;dec0
     fbld tword [eax]    ;df20
     fbstp tword [eax]   ;df30
+    fchs
+    fclex               ;9b dbe2
     fcmovb st0,st0      ;dac0
     fcmovbe st0,st0     ;dad0
     fcmove st0,st0      ;dac8
@@ -2215,9 +2092,14 @@ _
     fcom qword [eax]    ;dc10
     fcom st0            ;d8d0
     fcomi st0,st0       ;dbf0
+    fcomip st0, st0     ; compare st0(0) to st0(i) and set cpu flags and pop st0(0)
     fcomp dword [eax]   ;d818
     fcomp qword [eax]   ;dc18
     fcomp st0           ;d8d8
+    fcompp    ; compare st0(0) to st0(1) and pop both registers
+    fcos                ;d9ff
+    fdecstp   ; decrease stack pointer
+    fdisi               ;dbe1 = ???
     fdiv dword [eax]    ;d830
     fdiv qword [eax]    ;dc30
     fdiv st0,st0        ;d8f0
@@ -2225,10 +2107,10 @@ _
     fdivp st0,st0       ;def8
     fdivr dword [eax]   ;d838
     fdivr qword [eax]   ;dc38
-    fdivr st0,st0       ;dcf0
     fdivr st0,st0       ;d8f8
+    fdivr st0,st0       ;dcf0
     fdivrp st0,st0      ;def0
-    feni                ;dbe0 undoc
+    feni                ;dbe0 = ??
     ffree st0           ;ddc0
     ffreep st0          ;dfc0 undoc ?
     fiadd dword [eax]   ;da00
@@ -2246,11 +2128,14 @@ _
     fild word [eax]     ;df00
     fimul dword [eax]   ;da08
     fimul word [eax]    ;de08
+    fincstp   ; increase stack pointer
+    finit               ;dbe3
     fist dword [eax]    ;db10
     fist word [eax]     ;df10
     fistp dword [eax]   ;db18
     fistp qword [eax]   ;df38
     fistp word [eax]    ;df18
+    fisttp word [eax]
     fisub dword [eax]   ;da20
     fisub word [eax]    ;de20
     fisubr dword [eax]  ;da28
@@ -2262,43 +2147,91 @@ _
     fld1                ;d9e8
     fldcw word [eax]    ;d928
     fldenv [eax]        ;d920
+    fldl2e    ; load the log base 2 of e (napierian constant)
+    fldl2t    ; load the log base 2 of ten
+    fldlg2    ; load the log base 10 of 2 (common log of 2)
+    fldln2    ; load the log base e of 2 (natural log of 2)
+    fldpi               ;d9eb
+    fldz                ;d9ee
     fmul dword [eax]    ;d808
     fmul qword [eax]    ;dc08
     fmul st0,st0        ;d8c8
     fmul st0,st0        ;dcc8
     fmulp st0,st0       ;dec8
+    fnclex              ;9bdbe2
+    fndisi              ;dbe2
+    fneni               ;dbe1
+    fninit              ;9bdbe3
     fnop                ;d9d0
-    fprem               ;d9f8
-    frstor [eax]        ;dd20
-    fsave [eax]         ;dd30
     fnsave [eax]        ;9bdd30
+    fnstcw word [eax]   ;9bd938
+    fnstenv [eax]       ;9bd930
+    fnstsw word [eax]   ;9bdd38
+    fpatan    ; partial arctangent of the ratio st0(1)/st0(0)
+    fprem               ;d9f8
+    fprem1    ; partial remainder 1
+    fptan               ;d9f2
+    frndint   ; round st0(0) to an integer
+    frstor [eax]        ;dd20
+    frstpm              ; replaced by fwait ?
+    fsave [eax]         ;dd30
+    fscale    ; scale st0(0) by st0(1)
+    fsetpm              ; db e4
+    fsin                ;d9fe
+    fsincos   ; sine and cosine of the angle value in st0(0)
+    fsqrt               ;d9fa
+    ;fstsg ax
     fst dword [eax]     ;d910
     fst qword [eax]     ;dd10
     fst st0             ;ddd0
     fstcw word [eax]    ;d938
-    fnstcw word [eax]   ;9bd938
     fstenv [eax]        ;d930
-    fnstenv [eax]       ;9bd930
     fstp dword [eax]    ;d918
     fstp qword [eax]    ;dd18
     fstp st0            ;ddd8
-    ;fstp tbyte [eax]   ;db38
+    fstp tword [eax]   ;db38
     fstsw word [eax]    ;dd38
-    fnstsw word [eax]   ;9bdd38
     fsub dword [eax]    ;d820
     fsub qword [eax]    ;dc20
     fsub st0,st0        ;d8e0
-    fsub st0,st0        ;dce8
+;   fsub st0,st0        ;dce8
     fsubp st0,st0       ;dee8
     fsubr dword [eax]   ;d828
     fsubr qword [eax]   ;dc28
     fsubr st0,st0       ;d8e8
-    fsubr st0,st0       ;dce0
+;   fsubr st0,st0       ;dce0
     fsubrp st0,st0      ;dee0
+    ftst
     fucom st0           ;dde0
     fucomi st0,st0      ;dbe8
+    fucomip st0         ; unordered compare st0(0) to st0(i) and set cpu flags and pop st0(0)
+    fucomp st0          ; unordered compare st0(0) to a floating point value and pop st0(0)
     fucomp st0          ;dde8
+    fucompp             ; unordered compare st0(0) to st0(1) and pop both registers
+    fxam
     fxch st0            ;d9c8
+    fxtract             ; extract exponent and significand
+    fyl2x               ;d9f1
+    fyl2xp1             ; y*log2(x+1)
+    fwait               ;9b
+    nop
+
+;undocumented fpu
+    db 0d9h, 0d8h       ; fstp1 st0
+_
+    db 0dch, 0d0h       ; fcom2
+_
+    db 0dch, 0d8h       ; fcomp3
+_
+    db 0ddh, 0c8h       ; fxch4 st0
+_
+    db 0deh, 0d0h       ;fcomp5 st0
+_
+    db 0dfh, 0c8h       ; fxchg7 st0
+_
+    db 0dfh, 0d0h       ; fstp8 st0
+_
+    db 0dfh, 0d8h       ; fstp9 st0
 
 
     sldt [eax]                ;0f0000
@@ -2333,7 +2266,8 @@ _
     lfence                    ;0faee8
     sfence                    ;0faef8
 
-    test byte [eax], 0
+    test byte [eax], 0 ; f6 00 00
+    db 0f6h, 08h, 00 ;     test byte [eax], 0
 
     not  byte [eax]
     neg  byte [eax]
@@ -2343,6 +2277,8 @@ _
     idiv byte [eax]
 
     test dword [eax], 0
+    db 0f7h, 08h,
+        dd 00 ;     test dword [eax], 0
 
     not  dword [eax]
     neg  dword [eax]
@@ -2350,14 +2286,13 @@ _
     imul dword [eax]
     div  dword [eax]
     idiv dword [eax]
-
     rol  byte [eax], 0
     ror  byte [eax], 0
     rcl  byte [eax], 0
     rcr  byte [eax], 0
     shl  byte [eax], 0
     shr  byte [eax], 0
-    sal  byte [eax], 0 ; sal = shl
+    db 0c0h, 30h, 00h ; sal = shl
     sar  byte [eax], 0
 
     rol  dword [eax], 0
@@ -2366,21 +2301,22 @@ _
     rcr  dword [eax], 0
     shl  dword [eax], 0
     shr  dword [eax], 0
+    db 0c1h, 30h, 0h ; sal = shl
     sal  dword [eax], 0 ; sal = shl
     sar  dword [eax], 0
 
-    inc byte [eax]
-    dec byte [eax]
+    ;inc byte [eax]
+    ;dec byte [eax]
 
-    inc dword [eax]
-    dec dword [eax]
+    ;inc dword [eax]
+    ;dec dword [eax]
     call [eax]
     call far [eax]
-    jmp [eax]
-    jmp far [eax]
+    ;jmp [eax]
+    ;jmp far [eax]
     push dword [eax]
-    db 0fh, 1fh, 00
-    db 0fh, 1fh, 01
+    db 0fh, 1fh, 00 ;nop [eax]
+    db 0fh, 1fh, 01 ;nop [ecx]
 
     addpd xmm0, dqword [eax]        ;660f5800
     vaddpd xmm0, dqword [eax]        ;660f5800
@@ -2438,14 +2374,14 @@ _
     vfmadd213pd xmm0, xmm0, xmm0
     vfmadd231pd xmm0, xmm0, xmm0
 
-    pshufb xmm0, dqword [eax]
-    phaddw xmm0, dqword [eax]
-    phaddd xmm0, dqword [eax]
-    phaddsw xmm0, dqword [eax]
-    pmaddubsw xmm0, dqword [eax]
-    phsubw xmm0, dqword [eax]
-    phsubd xmm0, dqword [eax]
-    phsubsw xmm0, dqword [eax]
+    pshufb xmm0, dqword [eax]       ; 66:0F380000
+    phaddw xmm0, dqword [eax]       ; 66:0F380100
+    phaddd xmm0, dqword [eax]       ; 66:0F380200
+    phaddsw xmm0, dqword [eax]      ; 66:0F380300
+    pmaddubsw xmm0, dqword [eax]    ; 66:0F380400
+    phsubw xmm0, dqword [eax]       ; 66:0F380500
+    phsubd xmm0, dqword [eax]       ; 66:0F380600
+    phsubsw xmm0, dqword [eax]      ; 66:0F380700
 
     pblendvb xmm0, xmm0
     blendvps xmm0, xmm0
@@ -2509,12 +2445,12 @@ _
     pinsrb xmm0, eax, 0
     insertps xmm0, xmm0, 0 ; not eax ?
     pinsrw xmm0, eax, 0
-    
+
     dpps xmm0, xmm0, 0
     dppd xmm0, xmm0, 0
     mpsadbw xmm0, xmm0, 0
     pclmulqdq xmm0, xmm0, 0
-    
+
     pcmpestrm xmm0, xmm0, 0
     pcmpestri xmm0, xmm0, 0
     pcmpistrm xmm0, xmm0, 0
@@ -2527,7 +2463,7 @@ _
     blendps xmm0, xmm0, 0
     blendpd xmm0, xmm0, 0
     pblendw xmm0, xmm0, 0
-    palignr xmm0, xmm0, 0
-    palignr mm0, mm0, 0
+    palignr xmm0, xmm0, 0   ; 66:0F3A0FC000
+    palignr mm0, mm0, 0     ; 0F3A0FC000
 
 ; Ange Albertini 2009-2010.
