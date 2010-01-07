@@ -1,21 +1,12 @@
 ; A file that contains most x86 opcodes, including AVX, SSE, FPU...
-; messy, because released as-is, but interesting, and useful to test the ability of your disassembler
+; not complete yet
 ; compile with Yasm
 
-BITS 32
+bits 32
 
 %define int1 db 0f1h
 
 %define _  ;times 15 db 090h ;align 8, db 090h    ; turning on alignment makes yasm crawls...
-
-;conditionals
-; b = c
-; nb = nc
-; nbe = a
-; nl = ge
-; nle = g
-; z = e
-; z = ne
 
 ;prefixes
 
@@ -26,60 +17,13 @@ BITS 32
 %define PREFIX_BRANCH_NOT_TAKEN db 2eh
 
 jmp _start
+_start:
 
-;PREFIXES
-    lock and word [fs:bx + si], si          ;646766f02130 just for fun
-_
-; branch hints
-    jnz $ + 2                               ;7500
-    PREFIX_BRANCH_TAKEN
-    jnz $ + 2                               ;3e7500
-    PREFIX_BRANCH_NOT_TAKEN
-    jnz $ + 2                               ;2e7500
-_
-
-;SEGMENTS
-;default segments
-;ds
-    ; eax, ecx, ebx, edx, esi, edi, immediate
-    mov eax, [eax]                          ;8b00
-;es
-    ; es:edi <= ds:esi
-    movsd                                   ;a5
-;ss
-    ; sp, bp
-    mov eax, [ebp]                          ;8b4500
-    mov eax, [esp]                          ;8b0424
-_
-    mov eax, [fs:ebp]                       ;648b4500 'undetermined' but works, fault under 64b
-
-    PREFIX_FS
-    movsd ;dword [es:edi], dword [fs:esi]   ;64a5 same trick with cmps*
-_
-    mov [es:eax], eax                       ;26 8900
-    mov [cs:eax], eax                       ;2e 8900
-    mov [ss:eax], eax                       ;36 8900
-    mov [ds:eax], eax                       ;3e 8900
-    mov [fs:eax], eax                       ;64 8900
-    mov [gs:eax], eax                       ;65 8900
-_
-    movsb                                   ;a4
-    repz movsb                              ;f3a4 = repe
-    repnz movsb                             ;f2a4 = repne
-_
-    mov [eax], eax                          ;8900
-    lock mov [eax], eax                     ;f08900
-    lock mov eax, eax                       ;f089c0 incorrect, memory only
-_
-    add [eax], al                           ;0000
-    add [bx+si], al                         ;67 0000
-_
 ; one byte, no arguments
     cwde                                    ;98
     cbw                                     ;6698
     cdq                                     ;99
     cwd                                     ;6699
-    ; cdqe ;64b only
 _
     cmc                                     ;F5 complement carry flag
     stc                                     ;F9 set carry flag
@@ -99,7 +43,7 @@ _
 _
     leave                                   ;C9 high-level procedure exit
 _
-    int1                                    ;F1 ICE BreakPoint/INT01, undocumented
+    int1                                    ;F1 ICE BreakPoint/INT01, undocumented = icebp
     int 1                                   ;CD 01
     int3                                    ;CC interruption 3 (not 'int 3')
     int 3                                   ;CD 03
@@ -110,7 +54,6 @@ _
     iretw                                   ;66CF
     iret                                    ;66CF grammar stuff
 _
-    ; one immediate word argument, iw
     ret                                     ;C3 return
     retn 01234h                             ;C2 xxxx return near
     db 0c2h, 0,0                            ;C2 is synonym of C3 retn but usually simplified by assemblers
@@ -192,12 +135,12 @@ _
     inc edi                                 ;47
     dec eax                                 ;48
     dec ecx                                 ;49
-    dec edx                                 ;4A
-    dec ebx                                 ;4B
-    dec esp                                 ;4C
-    dec ebp                                 ;4D
-    dec esi                                 ;4E
-    dec edi                                 ;4F
+    dec edx                                 ;4a
+    dec ebx                                 ;4b
+    dec esp                                 ;4c
+    dec ebp                                 ;4d
+    dec esi                                 ;4e
+    dec edi                                 ;4f
     inc byte [eax]                          ;fe00
     inc dword [eax]                         ;ff00
     dec byte [eax]                          ;fe08
@@ -227,20 +170,16 @@ _
     out dx, al                              ;ee
     out dx, eax                             ;ef
 _
-    loop   $ + 2                            ;e2 xx decrement ?ecx then jump if ?cx is not null
-    PREFIX_ADDRESSSIZE
-    loop   $ + 2                            ;e2 xx decrement ?ecx then jump if ?cx is not null
-_
-    loope  $ + 2                            ;e1 xx decrement ?ecx then jump if ?cx is not null and Z is set
-    ; = loopz
-
-    PREFIX_ADDRESSSIZE
-    loope  $ + 2                            ;e1 xx decrement ?ecx then jump if ?cx is not null and Z is set
-_
-    loopne $ + 2                            ;e0 xx decrement ?ecx then jump if ?cx is not null and Z is not set
-    ; = loopnz
-    PREFIX_ADDRESSSIZE
-    loopne $ + 2                            ;e0 xx decrement ?ecx then jump if ?cx is not null and Z is not set
+    loop   $ + 2                            ;e2 xx decrement ecx then jump if ecx is not null
+    loope  $ + 2      ;=loopz               ;e1 xx decrement ecx then jump if ecx is not null and Z is set
+    loopne $ + 2      ;=loopnz              ;e0 xx decrement ecx then jump if ecx is not null and Z is not set
+    ;same thing, on cx (loopw for some disassembler)
+    PREFIX_OPERANDSIZE
+    loop   $ + 2                            ;67e2 xx decrement ?ecx then jump if ?cx is not null
+    PREFIX_OPERANDSIZE
+    loope $ + 2                             ;67e0 xx decrement ?ecx then jump if ?cx is not null and Z is not set
+    PREFIX_OPERANDSIZE
+    loopne $ + 2                            ;67e0 xx decrement ?ecx then jump if ?cx is not null and Z is not set
 _
     jecxz  $ + 2                            ;e3 xx jump if ecx is null
     jcxz  $ + 2                             ;e3 xx jump if cx is null
@@ -254,6 +193,8 @@ _
     aam 255                                 ;d4 xx
     aad                                     ;d5 0a
     aad 255                                 ;d5 xx
+    adx                                     ;d4 TODO
+    amx                                     ;d5 TODO
 _
     adc [eax], al                           ;10 xx add + carry
     adc [eax], eax                          ;11 xx add + carry
@@ -340,12 +281,12 @@ _
 _
     ;Jz
     call 012345678h                         ;e8
-    call far 0x0:0x0                        ;9a 00000000 0000
+    call far 0x0:0x0                        ;9a 00000000 0000 = callf
     call [eax]                              ;ff10
     call far [eax]                          ;ff18
     jmp short $ + 2                         ;eb
     jmp near $ + 5                          ;e9
-    jmp far 0x0:0x0                         ;ea 00000000 0000
+    jmp far 0x0:0x0                         ;ea 00000000 0000 = jmpf
     jmp [eax]                               ;ff20
     jmp far [eax]                           ;ff28
 _
@@ -354,7 +295,7 @@ _
     loadall                                 ;0f07
 _
 ;   getsec                                  ;0f37 not in yasm
-    db 0fh, 37h
+    db 0fh, 37h,
 _
     cpuid                                   ;0fa2
 _
@@ -394,26 +335,24 @@ _
     vmread  [eax],eax                       ;0f78 00
     vmwrite eax, dword [eax]                ;0f79 00
 _
-    ;swapgs                                 ;0f1F F8 64B ONLY?
-;_
     rdtscp                                  ;0f01 f9
 _
-    lar eax, [eax]                          ;0f02 *
-    lsl eax, [eax]                          ;0f03 *
+    lar eax, [eax]                          ;0f02
+    lsl eax, [eax]                          ;0f03
 _
-    movups xmm0, [eax]                      ;0f10 *
-    movups [eax], xmm0                      ;0f11 *
+    movups xmm0, [eax]                      ;0f10
+    movups [eax], xmm0                      ;0f11
 _
-    movlps xmm0, [eax]                      ;0f12 *
-    movlps [eax], xmm0                      ;0f13 *
 _
-    unpcklps xmm0, [eax]                    ;0f14 *
-    unpckhps xmm0, [eax]                    ;0f15 *
+    unpcklps xmm0, [eax]                    ;0f14
+    unpckhps xmm0, [eax]                    ;0f15
 _
-    movhps xmm0, [eax]                      ;0f16 *
-    movhps [eax], xmm0                      ;0f17 *
-_
-    prefetchnta [eax]                       ;0f1800
+    movlps xmm0, [eax]                      ;0f12
+    movlps [eax], xmm0                      ;0f13
+    movhlps xmm0, xmm0                      ;0f12
+    movlhps xmm0, xmm0                      ;0f16
+    movhps xmm0, [eax]                      ;0f16
+    movhps [eax], xmm0                      ;0f17
 _
     mov eax, cr0                            ;0f20 ??
     mov eax, dr0                            ;0f21 ??
@@ -421,18 +360,17 @@ _
     mov dr0, eax                            ;0f23
 _
     movmskps eax, xmm0                      ;0f50c0
+    movmskpd eax, xmm0                      ;660f50 c0
 _
     pavgb mm0, [eax]                        ;0fe0
 _
-    popcnt eax , [eax]                      ;0fb8 *
+    popcnt eax , [eax]                      ;0fb8
 _
-    ;db 0fh, 024h, 0c0h, 00
+    crc32 eax, byte [eax]                   ;f20f 38 f0
+    crc32 eax, [eax]                        ;f20f 38 f1
 _
-    crc32 eax, byte [eax]                   ;f20f 38 f0 *
-    crc32 eax, [eax]                        ;f20f 38 f1 *
-_
-    syscall                                 ;0f05 64b only
-    sysret                                  ;0f07 64b only
+    syscall                                 ;0f05 64b only ?
+    sysret                                  ;0f07 64b only ?
 _
     clts                                    ;0f06
 _
@@ -442,6 +380,10 @@ _
     ud2                                     ;0f0b
 _
     prefetch [eax]                          ;0f0d00
+    prefetchnta [eax]                       ;0f1800
+    prefetcht0 [eax]                        ;0f18 08
+    prefetcht1 [eax]                        ;0f18 10
+    prefetcht2 [eax]                        ;0f18 18
 _
     movaps xmm0, dqword [eax]               ;0f2800
     movaps dqword [eax], xmm0               ;0f2900
@@ -465,13 +407,19 @@ _
     sysexit                                 ;0f35
 _
     sqrtps xmm0, dqword [eax]               ;0f5100
+    sqrtpd xmm0, dqword [eax]               ;660f5100
+    sqrtsd xmm0, qword [eax]                ;f20f5100
+    sqrtss xmm0, dword [eax]                ;f30f5100
     rsqrtps xmm0, dqword [eax]              ;0f5200
+    rsqrtss xmm0, dword [eax]               ;f30f5200
 _
     rcpps xmm0, dqword [eax]                ;0f5300
     rcpss xmm0, dword [eax]                 ;f30f5300
 _
     andps xmm0, dqword [eax]                ;0f5400
     andnps xmm0, dqword [eax]               ;0f5500
+    andpd xmm0, [eax]                       ;660f54
+    andnpd xmm0, [eax]                      ;660f55
 _
     orps xmm0, dqword [eax]                 ;0f5600
     xorps xmm0, dqword [eax]                ;0f5700
@@ -541,6 +489,8 @@ _
 _
     emms                                    ;0f77
     femms                                   ;0f0e
+    cpuid                                   ;0fa2
+    rsm                                     ;0faa
 _
     movd mm0, dword [eax]                   ;0f6e00
     movq mm0, qword [eax]                   ;0f6f00
@@ -554,8 +504,6 @@ _
     movq xmm0, qword [eax]                  ;f30f7e00
     movdqu dqword [eax], xmm0               ;f30f7f00
 _
-    cpuid                                   ;0fa2
-_
     bt [eax], eax                           ;0fa300
     bts [eax], eax                          ;0fab00
     btr [eax], eax                          ;0fb300
@@ -565,14 +513,12 @@ _
     shrd [eax], eax, 0x0                    ;0fac00 00
     shrd [eax], eax, cl                     ;0fad00
 _
-    rsm                                     ;0faa
-_
     fxsave [eax]                            ;0fae00
 _
     cmpxchg [eax], al                       ;0fb000
     cmpxchg [eax], eax                      ;0fb100
-    cmpxchg8b [eax]                         ;0fc708
-    ; cmpxchg16b [eax]                      ;64b mode
+    cmpxchg8b [eax]                         ;0fc7c0
+    lock cmpxchg8b [eax]                    ;f00fc7c0 famous for crashing pentiums
 _
     vmptrld [eax]                           ;0fc730
     vmclear [eax]                           ;660fc730
@@ -580,7 +526,6 @@ _
     vmptrst [eax]                           ;0fc738
 _
     lss eax, dword [eax]                    ;0fb200
-_
     lfs eax, dword [eax]                    ;0fb400
     lgs eax, dword [eax]                    ;0fb500
 _
@@ -623,13 +568,6 @@ _
     PREFIX_OPERANDSIZE                      ;660fce
     bswap eax ; xor ax, ax : result officially undefined, actually typically 0
 _
-    psrlw mm0, qword [eax]                  ;0fd100
-    psrld mm0, qword [eax]                  ;0fd200
-    psrlq mm0, qword [eax]                  ;0fd300
-_
-    pmulhw mm0, qword [eax]                 ;0fe500
-    pmullw mm0, qword [eax]                 ;0fd500
-_
     psubusb mm0, qword [eax]                ;0fd800
     psubusw mm0, qword [eax]                ;0fd900
 _
@@ -647,11 +585,6 @@ _
     pavgb mm0, qword [eax]                  ;0fe000
     pavgw mm0, qword [eax]                  ;0fe300
 _
-    psraw mm0, qword [eax]                  ;0fe100
-    psrad mm0, qword [eax]                  ;0fe200
-_
-    pmulhuw mm0, qword [eax]                ;0fe400
-_
     movntq qword [eax], mm0                 ;0fe700
     movntdq dqword [eax], xmm0              ;660fe700
 _
@@ -664,15 +597,60 @@ _
     paddsb mm0, qword [eax]                 ;0fec00
     paddsw mm0, qword [eax]                 ;0fed00
 _
+    psraw mm0, qword [eax]                  ;0fe100
+    psrad mm0, qword [eax]                  ;0fe200
+    psraw xmm0, dqword [eax]                ;660fe100
+    psrad xmm0, dqword [eax]                ;660fe200
+    psraw mm0, 0                            ;0f71e000
+    psrad mm0, 0                            ;0f72e000
+    psraw xmm0, 0                           ;660f71e000
+    psrad xmm0, 0                           ;660f72e000
+_
+    psrlw mm0, 0                            ;0f71d000
+    psrld mm0, 0                            ;0f72d000
+    psrlq mm0, 0                            ;0f73d000
+    psllw mm0, 0                            ;0f71f000
+    pslld mm0, 0                            ;0f72f000
+    psllq mm0, 0                            ;0f73f000
+    psrlw xmm0, 0                           ;660f71d000
+    psrld xmm0, 0                           ;660f72d000
+    psrlq xmm0, 0                           ;660f73d000
+    psllw xmm0, 0                           ;660f71f000
+    pslld xmm0, 0                           ;660f72f000
+    psllq xmm0, 0                           ;660f73f000
+    psrldq xmm0, 0                          ;660f73d800
+    pslldq xmm0, 0                          ;660f73f800
+
+    psrlw mm0, qword [eax]                  ;0fd100
+    psrld mm0, qword [eax]                  ;0fd200
+    psrlq mm0, qword [eax]                  ;0fd300
+    psrlw xmm0, dqword [eax]                ;660fd100
+    psrld xmm0, dqword [eax]                ;660fd200
+    psrlq xmm0, dqword [eax]                ;660fd300
     psllw mm0, qword [eax]                  ;0ff100
     pslld mm0, qword [eax]                  ;0ff200
     psllq mm0, qword [eax]                  ;0ff300
+    psllw xmm0, dqword [eax]                ;660ff100
+    pslld xmm0, dqword [eax]                ;660ff200
+    psllq xmm0, dqword [eax]                ;660ff300
 _
+    pmullw mm0, qword [eax]                 ;0fd500
+    pmullw xmm0, dqword [eax]               ;660fd500
+    pmulhuw mm0, qword [eax]                ;0fe400
+    pmulhuw xmm0, dqword [eax]              ;660fe400
+    pmulhw mm0, qword [eax]                 ;0fe500
+    pmulhw xmm0, dqword [eax]               ;660fe500
     pmuludq mm0, qword [eax]                ;0ff400
+    pmuludq xmm0, dqword [eax]              ;660ff400
 _
     pmaddwd mm0, qword [eax]                ;0ff500
-_
+    pmaddwd xmm0, dqword [eax]              ;660ff500
     psadbw mm0, qword [eax]                 ;0ff600
+    psadbw xmm0, dqword [eax]               ;660ff600
+_
+    maskmovq mm0, mm0                       ;0ff7
+    maskmovdqu xmm0, xmm0                   ;660ff7
+    pmovmskb eax, mm0                       ;0fd7
 _
     psubb mm0, qword [eax]                  ;0ff800
     psubw mm0, qword [eax]                  ;0ff900
@@ -687,8 +665,6 @@ _
     bound eax, [eax]                        ;6200
 _
     arpl [eax], ax                          ;6300
-_
-    rsm                                     ;660faa
 _
     movupd xmm0, dqword [eax]               ;660f1000
     movupd dqword [eax], xmm0               ;660f1100
@@ -705,8 +681,6 @@ _
     movapd xmm0, dqword [eax]               ;660f2800
     movapd dqword [eax], xmm0               ;660f2900
 _
-    sqrtpd xmm0, dqword [eax]               ;660f5100
-_
     punpcklqdq xmm0, dqword [eax]           ;660f6c00
     punpckhqdq xmm0, dqword [eax]           ;660f6d00
 _
@@ -722,15 +696,11 @@ _
 _
     addsubpd xmm0, dqword [eax]             ;660fd000
 _
-    psrlw xmm0, dqword [eax]                ;660fd100
-    psrld xmm0, dqword [eax]                ;660fd200
-    psrlq xmm0, dqword [eax]                ;660fd300
-_
     paddq xmm0, dqword [eax]                ;660fd400
 _
-    pmullw xmm0, dqword [eax]               ;660fd500
-_
     movq qword [eax], xmm0                  ;660fd600
+    movdq2q mm0, xmm0                       ;f20fd6
+    movq2dq xmm0, mm0                       ;f30fd6
 _
     psubusb xmm0, dqword [eax]              ;660fd800
     psubusw xmm0, dqword [eax]              ;660fd900
@@ -747,12 +717,6 @@ _
     pavgb xmm0, dqword [eax]                ;660fe000
     pavgw xmm0, dqword [eax]                ;660fe300
 _
-    psraw xmm0, dqword [eax]                ;660fe100
-    psrad xmm0, dqword [eax]                ;660fe200
-_
-    pmulhuw xmm0, dqword [eax]              ;660fe400
-    pmulhw xmm0, dqword [eax]               ;660fe500
-_
     psubsb xmm0, dqword [eax]               ;660fe800
     psubsw xmm0, dqword [eax]               ;660fe900
 _
@@ -765,16 +729,6 @@ _
     paddsw xmm0, dqword [eax]               ;660fed00
 _
     pxor xmm0, dqword [eax]                 ;660fef00
-_
-    psllw xmm0, dqword [eax]                ;660ff100
-    pslld xmm0, dqword [eax]                ;660ff200
-    psllq xmm0, dqword [eax]                ;660ff300
-_
-    pmuludq xmm0, dqword [eax]              ;660ff400
-_
-    pmaddwd xmm0, dqword [eax]              ;660ff500
-_
-    psadbw xmm0, dqword [eax]               ;660ff600
 _
     psubb xmm0, dqword [eax]                ;660ff800
     psubw xmm0, dqword [eax]                ;660ff900
@@ -796,7 +750,20 @@ _
     outsb                                   ;6e
     outsd                                   ;6f
 _
-_start:
+; FLAGS
+; b = c = nae
+; nb = nc = ae
+; z = e
+; nz = ne
+; be = na
+; nbe = a
+; p = jpe
+; np = po
+; l = nge
+; nl = ge
+; le = ng
+; nle = g
+
     jo $ + 2                                ;70 00
     jno $ + 2                               ;71 00
     jb  $ + 2                               ;72 00
@@ -813,22 +780,6 @@ _start:
     jge $ + 2                               ;7d 00
     jle $ + 2                               ;7e 00
     jg  $ + 2                               ;7f 00
-_
-    jo word  $ + 5                          ;660f80 0000
-    jno word $ + 5                          ;660f81 0000
-    jb word  $ + 5                          ;660f82 0000
-    jae word $ + 5                          ;660f83 0000
-    jz word  $ + 5                          ;660f84 0000
-    jnz word $ + 5                          ;660f85 0000
-    jbe word $ + 5                          ;660f86 0000
-    js word  $ + 5                          ;660f88 0000
-    jns word $ + 5                          ;660f89 0000
-    jp word  $ + 5                          ;660f8a 0000
-    jnp word $ + 5                          ;660f8b 0000
-    jl word  $ + 5                          ;660f8c 0000
-    jge word $ + 5                          ;660f8d 0000
-    jle word $ + 5                          ;660f8e 0000
-    jg word  $ + 5                          ;660f8f 0000
 _
     jo  dword $ + 6                         ;0f80 00000000
     jno dword $ + 6                         ;0f81 00000000
@@ -847,22 +798,22 @@ _
     jle dword $ + 6                         ;0f8e 00000000
     jg  dword $ + 6                         ;0f8f 00000000
 _
-    seto byte [eax]                         ;660f9000
-    setno byte [eax]                        ;660f9100
-    setb byte [eax]                         ;660f9200
-    setae byte [eax]                        ;660f9300
-    setz byte [eax]                         ;660f9400
-    setnz byte [eax]                        ;660f9500
-    setbe byte [eax]                        ;660f9600
-    seta byte [eax]                         ;660f9700
-    sets byte [eax]                         ;660f9800
-    setns byte [eax]                        ;660f9900
-    setp byte [eax]                         ;660f9a00
-    setnp byte [eax]                        ;660f9b00
-    setl byte [eax]                         ;660f9c00
-    setge byte [eax]                        ;660f9d00
-    setle byte [eax]                        ;660f9e00
-    setg byte [eax]                         ;660f9f00
+    seto [eax]                              ;660f9000
+    setno [eax]                             ;660f9100
+    setb [eax]                              ;660f9200
+    setae [eax]                             ;660f9300
+    setz [eax]                              ;660f9400
+    setnz [eax]                             ;660f9500
+    setbe [eax]                             ;660f9600
+    seta [eax]                              ;660f9700
+    sets [eax]                              ;660f9800
+    setns [eax]                             ;660f9900
+    setp [eax]                              ;660f9a00
+    setnp [eax]                             ;660f9b00
+    setl [eax]                              ;660f9c00
+    setge [eax]                             ;660f9d00
+    setle [eax]                             ;660f9e00
+    setg [eax]                              ;660f9f00
 _
     cmovo eax, [eax]                        ;0f4000
     cmovno eax, [eax]                       ;0f4100
@@ -903,18 +854,19 @@ _
     xchg edi, eax                           ;97
 _
     movsb                                   ;a4
+    movsw                                   ;a5
     movsd                                   ;a5
-_
     cmpsb                                   ;a6
+    cmpsw                                   ;a7
     cmpsd                                   ;a7
-_
     stosb                                   ;aa
+    stosw                                   ;ab
     stosd                                   ;ab
-_
     lodsb                                   ;ac
+    lodsw                                   ;ad
     lodsd                                   ;ad
-_
     scasb                                   ;ae
+    scasw                                   ;af
     scasd                                   ;af
 _
     rol byte [eax], 0x0                     ;c000 00
@@ -945,7 +897,7 @@ _
     cvtdq2ps xmm0, dqword [eax]             ;0f5b00
     cvtps2dq xmm0, dqword [eax]             ;660f5b00
     cvttps2dq xmm0, dqword [eax]            ;f30f5b00
-_ 
+_
     cvttpd2dq xmm0, dqword [eax]            ;660fe600
     cvtpd2dq xmm0, dqword [eax]             ;f20fe600
     cvtdq2pd xmm0, qword [eax]              ;f30fe600
@@ -964,8 +916,6 @@ _
     cvtsd2si eax, qword [eax]               ;f20f2d00
     cvtss2si eax, dword [eax]               ;f30f2d00
     cvtpd2pi mm0, dqword [eax]              ;660f2d00
-_
-    sqrtsd xmm0, qword [eax]                ;f20f5100
 _
     addsd xmm0, qword [eax]                 ;f20f5800
     subsd xmm0, qword [eax]                 ;f20f5c00
@@ -1025,9 +975,6 @@ _
 _
     movsldup xmm0, dqword [eax]             ;f30f1200
     movshdup xmm0, dqword [eax]             ;f30f1600
-_
-    sqrtss xmm0, dword [eax]                ;f30f5100
-    rsqrtss xmm0, dword [eax]               ;f30f5200
 _
     addss xmm0, dword [eax]                 ;f30f5800
     subss xmm0, dword [eax]                 ;f30f5c00
@@ -1264,6 +1211,7 @@ _
     fsave [eax]                             ;dd30
     fscale                                  ;d9fd scale st0(0) by st0(1)
     fsetpm                                  ;dbe4
+    db 0dbh, 0e4h       ;fnsetpm            ;dbe4
     fsin                                    ;d9fe
     fsincos                                 ;d9fb sine and cosine of the angle value in st0(0)
     fsqrt                                   ;d9fa
@@ -1303,17 +1251,17 @@ _
     nop
     wait                                    ;9b
     nop
-
-;undocumented fpu
+_
+;fpu aliases
     db 0d9h, 0d8h       ;fstp1 st0          ;d9d8
     db 0dch, 0d0h       ;fcom2              ;dcd0
     db 0dch, 0d8h       ;fcomp3             ;dcd8
     db 0ddh, 0c8h       ;fxch4 st0          ;ddc8
     db 0deh, 0d0h       ;fcomp5 st0         ;ded0
-    db 0dfh, 0c8h       ;fxchg7 st0         ;dfc8
+    db 0dfh, 0c8h       ;fxch7 st0          ;dfc8
     db 0dfh, 0d0h       ;fstp8 st0          ;dfd0
     db 0dfh, 0d8h       ;fstp9 st0          ;dfd8
-
+_
     sldt [eax]                              ;0f0000
     sldt eax                                ;660f0000
     str  [eax]                              ;0f0008
@@ -1326,7 +1274,7 @@ _
     verr ax                                 ;0f00e0
     verw [eax]                              ;0f0028
     verw ax                                 ;0f00e8
-
+_
     sgdt [eax]                              ;0f0100
     sidt [eax]                              ;0f0108
     lgdt [eax]                              ;0f0110
@@ -1334,7 +1282,7 @@ _
     smsw [eax]                              ;0f0120
     lmsw [eax]                              ;0f0130
     invlpg [eax]                            ;0f0138
-
+_
     smsw ax                                 ;660f01e0
     smsw eax                                ;0f01e0 ;TODO undocumented?
     lmsw ax                                 ;0f01f0
@@ -1345,11 +1293,11 @@ _
     xsave [eax]                             ;0fae20
     xrstor [eax]                            ;0fae28
     clflush [eax]                           ;0fae38
-
+_
     mfence                                  ;0faef0
     lfence                                  ;0faee8
     sfence                                  ;0faef8
-
+_
     test byte [eax], 0                      ;f6 00 00
     ;alternate encoding
     db 0f6h, 08h, 00 ; test byte [eax], 0   ;f60800
@@ -1532,5 +1480,70 @@ _
 _
     palignr xmm0, xmm0, 0                   ;660f3a0fc000
     palignr mm0, mm0, 0                     ;0f3a0fc000
+_
+;PREFIXES
+    lock and word [fs:bx + si], si          ;646766f02130 just for fun
+_
+; branch hints
+    jnz $ + 2                               ;7500
+    PREFIX_BRANCH_TAKEN
+    jnz $ + 2                               ;3e7500
+    PREFIX_BRANCH_NOT_TAKEN
+    jnz $ + 2                               ;2e7500
+_
+
+;SEGMENTS
+;default segments
+;ds
+    ; eax, ecx, ebx, edx, esi, edi, immediate
+    mov eax, [eax]                          ;8b00
+;es
+    ; es:edi <= ds:esi
+    movsd                                   ;a5
+;ss
+    ; sp, bp
+    mov eax, [ebp]                          ;8b4500
+    mov eax, [esp]                          ;8b0424
+_
+    mov eax, [fs:ebp]                       ;648b4500 'undetermined' but works, fault under 64b
+
+    PREFIX_FS
+    movsd ;dword [es:edi], dword [fs:esi]   ;64a5 same trick with cmps*
+_
+    mov [es:eax], eax                       ;26 8900
+    mov [cs:eax], eax                       ;2e 8900
+    mov [ss:eax], eax                       ;36 8900
+    mov [ds:eax], eax                       ;3e 8900
+    mov [fs:eax], eax                       ;64 8900
+    mov [gs:eax], eax                       ;65 8900
+_
+    movsb                                   ;a4
+    repz movsb                              ;f3a4 = repe
+    repnz movsb                             ;f2a4 = repne
+_
+    mov [eax], eax                          ;8900
+    lock mov [eax], eax                     ;f08900
+    lock mov eax, eax                       ;f089c0 incorrect, memory only
+_
+    add [eax], al                           ;0000
+    add [bx+si], al                         ;67 0000
+    PREFIX_ADDRESSSIZE
+    jmp $ + 2                               ;66 EB00 will jump to (word)<NEXT EIP>
+    PREFIX_ADDRESSSIZE
+    loop $ + 2                              ;66e200
+    PREFIX_ADDRESSSIZE
+    call $ + 5                              ;66e8000000
+    PREFIX_ADDRESSSIZE
+    ret                                     ;66e3
+_
+; just to make the opcodes present, to be moved...
+bits 64
+    pextrq [eax], xmm0, 0                   ;660f3a16 64b only (for yasm)
+    pinsrd xmm0, [eax], 0                   ;660f3a22 64b only (for yasm)
+    pinsrq xmm0, [eax], 0                   ;660f3a22 64b only (for yasm)
+    swapgs                                  ;0f1f f8  64b only
+    cdqe                                    ;98 64b only
+    cmpxchg16b [eax]                        ;67480f0c7 64b mode
+    db 0fh, 00, 78h,00  ; jmpe              ;0f007800
 
 ; Ange Albertini 2009-2010.
