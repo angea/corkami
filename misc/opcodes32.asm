@@ -71,6 +71,9 @@ _
     lock mov [eax], eax                     ;f08900
     lock mov eax, eax                       ;f089c0 incorrect, memory only
 _
+    add [eax], al                           ;0000
+    add [bx+si], al                         ;67 0000
+_
 ; one byte, no arguments
     cwde                                    ;98
     cbw                                     ;6698
@@ -112,6 +115,7 @@ _
     retn 01234h                             ;C2 xxxx return near
     db 0c2h, 0,0                            ;C2 is synonym of C3 retn but usually simplified by assemblers
     retf 01234h                             ;CA xxxx return far
+    retf                                    ;cb
 _
     hlt                                     ;F4 halt
 _
@@ -172,6 +176,11 @@ _
 _
     push 0                                  ;6a 00
     push 01234578h                          ;68 00000000
+_
+    push fs                                 ;0fa0
+    pop fs                                  ;0fa1
+    push gs                                 ;0fa8
+    pop gs                                  ;0fa9
 _
     inc eax                                 ;40
     inc ecx                                 ;41
@@ -245,9 +254,6 @@ _
     aam 255                                 ;d4 xx
     aad                                     ;d5 0a
     aad 255                                 ;d5 xx
-_
-    int3                                    ;cd 03
-    int_3                                   ;cc
 _
     adc [eax], al                           ;10 xx add + carry
     adc [eax], eax                          ;11 xx add + carry
@@ -342,155 +348,113 @@ _
     jmp far 0x0:0x0                         ;ea 00000000 0000
     jmp [eax]                               ;ff20
     jmp far [eax]                           ;ff28
-
-_
-    clts                                    ;0f 06
-_
-    loadall                                 ;0f 07
-_
-    wrmsr                                   ;0f 30
-    rdtsc                                   ;0f 31
-    rdmsr                                   ;0f 32
-    rdpmc                                   ;0f 33
-_
-    sysenter                                ;0f 34
-    sysexit                                 ;0f 35
-_
-;   getsec                                  ;0f 37 not in yasm
-    db 0fh, 37h
-_
-    cpuid                                   ;0f a2
-_
-    push    fs                              ;0f a0
-    pop     fs                              ;0f a1
-    push    gs                              ;0f a8
-    pop     gs                              ;0f a9
-_
-    invd                                    ;0f 08
-    wbinvd                                  ;0f 09
-_
-    vmcall                                  ;0f 01 c1
-    vmlaunch                                ;0f 01 c2
-    vmresume                                ;0f 01 c3
-    vmxoff                                  ;0f 01 c4
-_
-    monitor                                 ;0f 01 c8
-    mwait                                   ;0f 01 c9
-_
-    xgetbv                                  ;0f 01 d0
-    xsetbv                                  ;0f 01 d1
-_
-    vmrun                                   ;0f 01 d8
-    vmmcall                                 ;0f 01 d9
-    vmload                                  ;0f 01 da
-    vmsave                                  ;0f 01 db
-_
-    stgi                                    ;0f 01 dc
-    clgi                                    ;0f 01 dd
-_
-    skinit                                  ;0f 01 de
-_
-    invlpga                                 ;0f 01 df
-_
-    pause                                   ;f3 90
-_
-    vmread  [eax],eax                       ;0f 78 00
-    vmwrite eax, dword [eax]                ;0f 79 00
-_
-    ;swapgs                                 ;0F 1F F8 64B ONLY?
-;_
-    rdtscp                                  ;0f 01 f9
-_
-    lar eax, [eax]                          ;0f 02 *
-    lsl eax, [eax]                          ;0f 03 *
-_
-    movups xmm0, [eax]                      ;0f 10 *
-    movups [eax], xmm0                      ;0f 11 *
-_
-    movlps xmm0, [eax]                      ;0f 12 *
-    movlps [eax], xmm0                      ;0f 13 *
-_
-    unpcklps xmm0, [eax]                    ;0f 14 *
-    unpckhps xmm0, [eax]                    ;0f 15 *
-_
-    movhps xmm0, [eax]                      ;0f 16 *
-    movhps [eax], xmm0                      ;0f 17 *
-_
-    prefetchnta [eax]                       ;0f1800
-_
-    movupd xmm0, [eax]                      ;66 0f 10 *
-    movupd [eax], xmm0                      ;66 0f 11 *
-_
-    movlpd xmm0, [eax]                      ;66 0f 12 *
-    movlpd [eax], xmm0                      ;66 0f 13 *
-_
-    unpcklpd xmm0, [eax]                    ;66 0f 14 *
-    unpckhpd xmm0, [eax]                    ;66 0f 15 *
-_
-    movhpd xmm0, [eax]                      ;66 0f 16 *
-    movhpd [eax], xmm0                      ;66 0f 17 *
-_
-    movss xmm0, [eax]                       ;f3 0f 10 *
-    movss [eax], xmm0                       ;f3 0f 11 *
-_
-    movsldup xmm0, [eax]                    ;f3 0f 12 *
-    movshdup xmm0, [eax]                    ;f3 0f 16 *
-_
-    movsd xmm0, [eax]                       ;f2 0f 10 *
-    movsd [eax], xmm0                       ;f2 0f 11 *
-_
-    movddup xmm0, [eax]                     ;f2 0f 12 *
-_
-    mov eax, cr0                            ;0f 20 ??
-    mov eax, dr0                            ;0f 21 ??
-    mov cr0, eax                            ;0f 22 ??
-    mov dr0, eax                            ;0f 23
-_
-    movmskps eax, xmm0                      ;0f50c0
-_
-    pavgb mm0, [eax]                        ;0f e0
-_
-    popcnt eax , [eax]                      ;0fb8 *
-    popcnt eax, [eax]                       ;f3 0f b8 * ??
-_
-    lddqu xmm0, [eax]                       ;f2 0f f0 00
-_
-    ;db 0fh, 024h, 0c0h, 00
-_
-    crc32 eax, byte [eax]                   ;f2 0f 38 f0 *
-    crc32 eax, [eax]                        ;f2 0f 38 f1 *
-_
-    syscall                                 ;0f05 64b only
 _
     clts                                    ;0f06
 _
-    sysret                                  ;0f07 64b only
+    loadall                                 ;0f07
+_
+;   getsec                                  ;0f37 not in yasm
+    db 0fh, 37h
+_
+    cpuid                                   ;0fa2
+_
+    push    fs                              ;0fa0
+    pop     fs                              ;0fa1
+    push    gs                              ;0fa8
+    pop     gs                              ;0fa9
 _
     invd                                    ;0f08
+    wbinvd                                  ;0f09
 _
+    vmcall                                  ;0f01 c1
+    vmlaunch                                ;0f01 c2
+    vmresume                                ;0f01 c3
+    vmxoff                                  ;0f01 c4
+_
+    monitor                                 ;0f01 c8
+    mwait                                   ;0f01 c9
+_
+    xgetbv                                  ;0f01 d0
+    xsetbv                                  ;0f01 d1
+_
+    vmrun                                   ;0f01 d8
+    vmmcall                                 ;0f01 d9
+    vmload                                  ;0f01 da
+    vmsave                                  ;0f01 db
+_
+    stgi                                    ;0f01 dc
+    clgi                                    ;0f01 dd
+_
+    skinit                                  ;0f01 de
+_
+    invlpga                                 ;0f01 df
+_
+    pause                                   ;f390
+_
+    vmread  [eax],eax                       ;0f78 00
+    vmwrite eax, dword [eax]                ;0f79 00
+_
+    ;swapgs                                 ;0f1F F8 64B ONLY?
+;_
+    rdtscp                                  ;0f01 f9
+_
+    lar eax, [eax]                          ;0f02 *
+    lsl eax, [eax]                          ;0f03 *
+_
+    movups xmm0, [eax]                      ;0f10 *
+    movups [eax], xmm0                      ;0f11 *
+_
+    movlps xmm0, [eax]                      ;0f12 *
+    movlps [eax], xmm0                      ;0f13 *
+_
+    unpcklps xmm0, [eax]                    ;0f14 *
+    unpckhps xmm0, [eax]                    ;0f15 *
+_
+    movhps xmm0, [eax]                      ;0f16 *
+    movhps [eax], xmm0                      ;0f17 *
+_
+    prefetchnta [eax]                       ;0f1800
+_
+    mov eax, cr0                            ;0f20 ??
+    mov eax, dr0                            ;0f21 ??
+    mov cr0, eax                            ;0f22 ??
+    mov dr0, eax                            ;0f23
+_
+    movmskps eax, xmm0                      ;0f50c0
+_
+    pavgb mm0, [eax]                        ;0fe0
+_
+    popcnt eax , [eax]                      ;0fb8 *
+_
+    ;db 0fh, 024h, 0c0h, 00
+_
+    crc32 eax, byte [eax]                   ;f20f 38 f0 *
+    crc32 eax, [eax]                        ;f20f 38 f1 *
+_
+    syscall                                 ;0f05 64b only
+    sysret                                  ;0f07 64b only
+_
+    clts                                    ;0f06
+_
+    invd                                    ;0f08
     wbinvd                                  ;0f09
 _
     ud2                                     ;0f0b
 _
     prefetch [eax]                          ;0f0d00
 _
-    femms                                   ;0f0e
-_
-    ;nop dword [eax]                        ;0f1f00
-;_
     movaps xmm0, dqword [eax]               ;0f2800
     movaps dqword [eax], xmm0               ;0f2900
 _
-    cvtpi2ps xmm0, qword [eax]              ;0f2a00
-_
     movntps dqword [eax], xmm0              ;0f2b00
-_
-    cvttps2pi mm0, qword [eax]              ;0f2c00
-_
-    cvtps2pi mm0, qword [eax]               ;0f2d00
+    movntsd qword [eax], xmm0               ;f20f2b00
+    movntpd dqword [eax], xmm0              ;660f2b00
+    movntss dword [eax], xmm0               ;f30f2b00
 _
     ucomiss xmm0, dword [eax]               ;0f2e00
     comiss xmm0, dword [eax]                ;0f2f00
+    ucomisd xmm0, qword [eax]               ;660f2e00
+    comisd xmm0, qword [eax]                ;660f2f00
 _
     wrmsr                                   ;0f30
     rdtsc                                   ;0f31
@@ -500,119 +464,114 @@ _
     sysenter                                ;0f34
     sysexit                                 ;0f35
 _
-    cmovo eax, [eax]                        ;0f4000
-    cmovno eax, [eax]                       ;0f4100
-    cmovb eax, [eax]                        ;0f4200
-    cmovae eax, [eax]                       ;0f4300
-    cmovz eax, [eax]                        ;0f4400
-    cmovnz eax, [eax]                       ;0f4500
-    cmovbe eax, [eax]                       ;0f4600
-    cmova eax, [eax]                        ;0f4700
-    cmovs eax, [eax]                        ;0f4800
-    cmovns eax, [eax]                       ;0f4900
-    cmovp eax, [eax]                        ;0f4a00
-    cmovnp eax, [eax]                       ;0f4b00
-    cmovl eax, [eax]                        ;0f4c00
-    cmovge eax, [eax]                       ;0f4d00
-    cmovle eax, [eax]                       ;0f4e00
-    cmovg eax, [eax]                        ;0f4f00
-_
     sqrtps xmm0, dqword [eax]               ;0f5100
     rsqrtps xmm0, dqword [eax]              ;0f5200
 _
     rcpps xmm0, dqword [eax]                ;0f5300
+    rcpss xmm0, dword [eax]                 ;f30f5300
 _
     andps xmm0, dqword [eax]                ;0f5400
     andnps xmm0, dqword [eax]               ;0f5500
 _
     orps xmm0, dqword [eax]                 ;0f5600
     xorps xmm0, dqword [eax]                ;0f5700
+    orpd xmm0, dqword [eax]                 ;660f5600
+    xorpd xmm0, dqword [eax]                ;660f5700
 _
     addps xmm0, dqword [eax]                ;0f5800
     subps xmm0, dqword [eax]                ;0f5c00
     mulps xmm0, dqword [eax]                ;0f5900
     divps xmm0, dqword [eax]                ;0f5e00
-_
-    cvtps2pd xmm0, qword [eax]              ;0f5a00
-    cvtdq2ps xmm0, dqword [eax]             ;0f5b00
+    addpd xmm0, dqword [eax]                ;660f5800
+    subpd xmm0, dqword [eax]                ;660f5c00
+    mulpd xmm0, dqword [eax]                ;660f5900
+    divpd xmm0, dqword [eax]                ;660f5e00
 _
     minps xmm0, dqword [eax]                ;0f5d00
     maxps xmm0, dqword [eax]                ;0f5f00
+    minpd xmm0, dqword [eax]                ;660f5d00
+    maxpd xmm0, dqword [eax]                ;660f5f00
+    minsd xmm0, qword [eax]                 ;f20f5d00
+    maxsd xmm0, qword [eax]                 ;f20f5f00
+    minss xmm0, dword [eax]                 ;f30f5d00
+    maxss xmm0, dword [eax]                 ;f30f5f00
 _
     punpcklbw mm0, qword [eax]              ;0f6000
     punpcklwd mm0, qword [eax]              ;0f6100
     punpckldq mm0, qword [eax]              ;0f6200
+    punpcklbw xmm0, dqword [eax]            ;660f6000
+    punpcklwd xmm0, dqword [eax]            ;660f6100
+    punpckldq xmm0, dqword [eax]            ;660f6200
 _
     packsswb mm0, qword [eax]               ;0f6300
     packuswb mm0, qword [eax]               ;0f6700
+    packsswb xmm0, dqword [eax]             ;660f6300
+    packuswb xmm0, dqword [eax]             ;660f6700
 _
     pcmpgtb mm0, qword [eax]                ;0f6400
     pcmpgtw mm0, qword [eax]                ;0f6500
     pcmpgtd mm0, qword [eax]                ;0f6600
+    pcmpgtb xmm0, dqword [eax]              ;660f6400
+    pcmpgtw xmm0, dqword [eax]              ;660f6500
+    pcmpgtd xmm0, dqword [eax]              ;660f6600
 _
     punpckhbw mm0, qword [eax]              ;0f6800
     punpckhwd mm0, qword [eax]              ;0f6900
     punpckhdq mm0, qword [eax]              ;0f6a00
+    punpckhbw xmm0, dqword [eax]            ;660f6800
+    punpckhwd xmm0, dqword [eax]            ;660f6900
+    punpckhdq xmm0, dqword [eax]            ;660f6a00
 _
     packssdw mm0, qword [eax]               ;0f6b00
+    packssdw xmm0, dqword [eax]             ;660f6b00
 _
     pshufb mm0, qword [eax]                 ;0f380000
-    pshufw mm0, qword [eax], 0x0            ;0f7000 00
+    pshufw mm0, qword [eax], 0x0            ;0f700000
+    pshufb xmm0, dqword [eax]               ;660f380000
+    pshufd xmm0, dqword [eax], 0x0          ;660f700000
+    pshuflw xmm0, dqword [eax], 0x0         ;f20f700000
+    pshufhw xmm0, dqword [eax], 0x0         ;f30f7000 00
 _
     pcmpeqb mm0, qword [eax]                ;0f7400
     pcmpeqw mm0, qword [eax]                ;0f7500
     pcmpeqd mm0, qword [eax]                ;0f7600
+    pcmpeqb xmm0, dqword [eax]              ;660f7400
+    pcmpeqw xmm0, dqword [eax]              ;660f7500
+    pcmpeqd xmm0, dqword [eax]              ;660f7600
 _
     emms                                    ;0f77
+    femms                                   ;0f0e
 _
     movd mm0, dword [eax]                   ;0f6e00
     movq mm0, qword [eax]                   ;0f6f00
     movd dword [eax], mm0                   ;0f7e00
     movq qword [eax], mm0                   ;0f7f00
-_
-    seto byte [eax]                         ;0f9000
-    setno byte [eax]                        ;0f9100
-    setb byte [eax]                         ;0f9200
-    setae byte [eax]                        ;0f9300
-    setz byte [eax]                         ;0f9400
-    setnz byte [eax]                        ;0f9500
-    setbe byte [eax]                        ;0f9600
-    seta byte [eax]                         ;0f9700
-    sets byte [eax]                         ;0f9800
-    setns byte [eax]                        ;0f9900
-    setp byte [eax]                         ;0f9a00
-    setnp byte [eax]                        ;0f9b00
-    setl byte [eax]                         ;0f9c00
-    setge byte [eax]                        ;0f9d00
-    setle byte [eax]                        ;0f9e00
-    setg byte [eax]                         ;0f9f00
+    movd xmm0, dword [eax]                  ;660f6e00
+    movdqa xmm0, dqword [eax]               ;660f6f00
+    movd dword [eax], xmm0                  ;660f7e00
+    movdqa dqword [eax], xmm0               ;660f7f00
+    movdqu xmm0, dqword [eax]               ;f30f6f00
+    movq xmm0, qword [eax]                  ;f30f7e00
+    movdqu dqword [eax], xmm0               ;f30f7f00
 _
     cpuid                                   ;0fa2
 _
     bt [eax], eax                           ;0fa300
+    bts [eax], eax                          ;0fab00
+    btr [eax], eax                          ;0fb300
 _
     shld [eax], eax, 0x0                    ;0fa400 00
     shld [eax], eax, cl                     ;0fa500
-_
-    push fs                                 ;0fa0
-    pop fs                                  ;0fa1
-    push gs                                 ;0fa8
-    pop gs                                  ;0fa9
-_
-    rsm                                     ;0faa
-_
-    bts [eax], eax                          ;0fab00
-_
     shrd [eax], eax, 0x0                    ;0fac00 00
     shrd [eax], eax, cl                     ;0fad00
 _
-    fxsave [eax]                            ;0fae00
+    rsm                                     ;0faa
 _
-    imul eax, [eax]                         ;0faf00
+    fxsave [eax]                            ;0fae00
 _
     cmpxchg [eax], al                       ;0fb000
     cmpxchg [eax], eax                      ;0fb100
-    cmpxchg8b [eax]
+    cmpxchg8b [eax]                         ;0fc708
     ; cmpxchg16b [eax]                      ;64b mode
 _
     vmptrld [eax]                           ;0fc730
@@ -621,8 +580,6 @@ _
     vmptrst [eax]                           ;0fc738
 _
     lss eax, dword [eax]                    ;0fb200
-_
-    btr [eax], eax                          ;0fb300
 _
     lfs eax, dword [eax]                    ;0fb400
     lgs eax, dword [eax]                    ;0fb500
@@ -643,12 +600,14 @@ _
     xadd [eax], al                          ;0fc000
     xadd [eax], eax                         ;0fc100
 _
-    cmpeqps xmm0, dqword [eax]              ;0fc20000
-_
     movnti [eax], eax                       ;0fc300
 _
     pinsrw mm0, word [eax], 0x0             ;0fc400 00
+    pinsrw xmm0, word [eax], 0x0            ;660fc400 00
     pextrw eax, mm0, 0                      ;0fc5c000
+    pextrw eax, xmm0, 0                     ;660fc5c000
+    pextrb eax, xmm0, 0                     ;660f3a14c000
+    pextrd eax, xmm0, 0                     ;660f3a16c000
 _
     shufps xmm0, dqword [eax], 0x0          ;0fc600 00
 _
@@ -694,6 +653,7 @@ _
     pmulhuw mm0, qword [eax]                ;0fe400
 _
     movntq qword [eax], mm0                 ;0fe700
+    movntdq dqword [eax], xmm0              ;660fe700
 _
     psubsb mm0, qword [eax]                 ;0fe800
     psubsw mm0, qword [eax]                 ;0fe900
@@ -728,32 +688,7 @@ _
 _
     arpl [eax], ax                          ;6300
 _
-    shld [eax], ax, 0x0                     ;66 0fa400 00
-    shld [eax], ax, cl                      ;66 0fa500
-_
-    rsm                                     ;66 0faa
-_
-    shrd [eax], ax, 0x0                     ;66 0fac00 00
-    shrd [eax], ax, cl                      ;66 0fad00
-_
-    lss ax, word [eax]                      ;66 0fb200
-_
-    lfs ax, word [eax]                      ;66 0fb400
-_
-    lgs ax, word [eax]                      ;66 0fb500
-_
-    movzx ax, byte [eax]                    ;66 0fb600
-    movzx ax, [eax]                         ;66 0fb700
-_
-    ud2                                     ;66 0fb9
-_
-    movsx ax, byte [eax]                    ;66 0fbe00
-    movsx ax, [eax]                         ;66 0fbf00
-_
-    xadd [eax], al                          ;66 0fc000
-    xadd [eax], ax                          ;66 0fc100
-_
-    movnti [eax], eax                       ;66 0fc300
+    rsm                                     ;660faa
 _
     movupd xmm0, dqword [eax]               ;660f1000
     movupd dqword [eax], xmm0               ;660f1100
@@ -770,85 +705,18 @@ _
     movapd xmm0, dqword [eax]               ;660f2800
     movapd dqword [eax], xmm0               ;660f2900
 _
-    movntpd dqword [eax], xmm0              ;660f2b00
-_
-    cvtpi2pd xmm0, qword [eax]              ;660f2a00
-    cvttpd2pi mm0, dqword [eax]             ;660f2c00
-    cvtpd2pi mm0, dqword [eax]              ;660f2d00
-_
-    ucomisd xmm0, qword [eax]               ;660f2e00
-    comisd xmm0, qword [eax]                ;660f2f00
-_
-    pshufb xmm0, dqword [eax]               ;660f380000
-    pshufd xmm0, dqword [eax], 0x0          ;660f700000
-_
     sqrtpd xmm0, dqword [eax]               ;660f5100
-_
-    orpd xmm0, dqword [eax]                 ;660f5600
-    xorpd xmm0, dqword [eax]                ;660f5700
-_
-    addpd xmm0, dqword [eax]                ;660f5800
-    subpd xmm0, dqword [eax]                ;660f5c00
-_
-    mulpd xmm0, dqword [eax]                ;660f5900
-    divpd xmm0, dqword [eax]                ;660f5e00
-_
-    cvtpd2ps xmm0, dqword [eax]             ;660f5a00
-    cvtps2dq xmm0, dqword [eax]             ;660f5b00
-_
-    minpd xmm0, dqword [eax]                ;660f5d00
-    maxpd xmm0, dqword [eax]                ;660f5f00
-_
-    punpcklbw xmm0, dqword [eax]            ;660f6000
-    punpcklwd xmm0, dqword [eax]            ;660f6100
-    punpckldq xmm0, dqword [eax]            ;660f6200
-_
-    packsswb xmm0, dqword [eax]             ;660f6300
-_
-    pcmpgtb xmm0, dqword [eax]              ;660f6400
-    pcmpgtw xmm0, dqword [eax]              ;660f6500
-    pcmpgtd xmm0, dqword [eax]              ;660f6600
-_
-    packuswb xmm0, dqword [eax]             ;660f6700
-_
-    punpckhbw xmm0, dqword [eax]            ;660f6800
-    punpckhwd xmm0, dqword [eax]            ;660f6900
-    punpckhdq xmm0, dqword [eax]            ;660f6a00
-_
-    packssdw xmm0, dqword [eax]             ;660f6b00
 _
     punpcklqdq xmm0, dqword [eax]           ;660f6c00
     punpckhqdq xmm0, dqword [eax]           ;660f6d00
-_
-    movd xmm0, dword [eax]                  ;660f6e00
-    movd dword [eax], xmm0                  ;660f7e00
-_
-    movdqa xmm0, dqword [eax]               ;660f6f00
-    movdqa dqword [eax], xmm0               ;660f7f00
-_
-    pcmpeqb xmm0, dqword [eax]              ;660f7400
-    pcmpeqw xmm0, dqword [eax]              ;660f7500
-    pcmpeqd xmm0, dqword [eax]              ;660f7600
 _
     extrq xmm0, 0x0, 0x0                    ;660f7800 00 00
     extrq xmm0, xmm0                        ;660f7900
 _
     haddpd xmm0, dqword [eax]               ;660f7c00
     hsubpd xmm0, dqword [eax]               ;660f7d00
-_
-    cmppd xmm0, dqword [eax], 0             ;660fc20000
-_
-    cmpeqpd xmm0, dqword [eax]              ;660fc20000
-    cmpltpd xmm0, dqword [eax]              ;660fc20001
-    cmplepd xmm0, dqword [eax]              ;660fc20002
-    cmpunordpd xmm0, dqword [eax]           ;660fc20003
-    cmpneqpd xmm0, dqword [eax]             ;660fc20004
-    cmpnltpd xmm0, dqword [eax]             ;660fc20005
-    cmpnlepd xmm0, dqword [eax]             ;660fc20006
-    cmpordpd xmm0, dqword [eax]             ;660fc20007
-_
-    pinsrw xmm0, word [eax], 0x0            ;660fc400 00
-    pextrw eax, xmm0, 0                     ;66 0fc5c000
+    haddps xmm0, dqword [eax]               ;f20f7c00
+    hsubps xmm0, dqword [eax]               ;f20f7d00
 _
     shufpd xmm0, dqword [eax], 0x0          ;660fc600 00
 _
@@ -885,10 +753,6 @@ _
     pmulhuw xmm0, dqword [eax]              ;660fe400
     pmulhw xmm0, dqword [eax]               ;660fe500
 _
-    cvttpd2dq xmm0, dqword [eax]            ;660fe600
-_
-    movntdq dqword [eax], xmm0              ;660fe700
-_
     psubsb xmm0, dqword [eax]               ;660fe800
     psubsw xmm0, dqword [eax]               ;660fe900
 _
@@ -922,10 +786,9 @@ _
     paddd xmm0, dqword [eax]                ;660ffe00
     paddq xmm0, dqword [eax]                ;660ffe00
 _
-    add [bx+si], al                         ;67 0000
-_
-    imul eax, [eax], 012345678h             ;6900 00000000
-    imul eax, [eax], 0                      ;6b00 00
+    imul eax, [eax], 012345678h             ;690000000000
+    imul eax, [eax], 0                      ;6b0000
+    imul eax, [eax]                         ;0faf00
 _
     insb                                    ;6c
     insd                                    ;6d
@@ -951,21 +814,21 @@ _start:
     jle $ + 2                               ;7e 00
     jg  $ + 2                               ;7f 00
 _
-    jo word  $ + 5                          ;66 0f80 0000
-    jno word $ + 5                          ;66 0f81 0000
-    jb word  $ + 5                          ;66 0f82 0000
-    jae word $ + 5                          ;66 0f83 0000
-    jz word  $ + 5                          ;66 0f84 0000
-    jnz word $ + 5                          ;66 0f85 0000
-    jbe word $ + 5                          ;66 0f86 0000
-    js word  $ + 5                          ;66 0f88 0000
-    jns word $ + 5                          ;66 0f89 0000
-    jp word  $ + 5                          ;66 0f8a 0000
-    jnp word $ + 5                          ;66 0f8b 0000
-    jl word  $ + 5                          ;66 0f8c 0000
-    jge word $ + 5                          ;66 0f8d 0000
-    jle word $ + 5                          ;66 0f8e 0000
-    jg word  $ + 5                          ;66 0f8f 0000
+    jo word  $ + 5                          ;660f80 0000
+    jno word $ + 5                          ;660f81 0000
+    jb word  $ + 5                          ;660f82 0000
+    jae word $ + 5                          ;660f83 0000
+    jz word  $ + 5                          ;660f84 0000
+    jnz word $ + 5                          ;660f85 0000
+    jbe word $ + 5                          ;660f86 0000
+    js word  $ + 5                          ;660f88 0000
+    jns word $ + 5                          ;660f89 0000
+    jp word  $ + 5                          ;660f8a 0000
+    jnp word $ + 5                          ;660f8b 0000
+    jl word  $ + 5                          ;660f8c 0000
+    jge word $ + 5                          ;660f8d 0000
+    jle word $ + 5                          ;660f8e 0000
+    jg word  $ + 5                          ;660f8f 0000
 _
     jo  dword $ + 6                         ;0f80 00000000
     jno dword $ + 6                         ;0f81 00000000
@@ -984,22 +847,39 @@ _
     jle dword $ + 6                         ;0f8e 00000000
     jg  dword $ + 6                         ;0f8f 00000000
 _
-    seto byte [eax]                         ;66 0f9000
-    setno byte [eax]                        ;66 0f9100
-    setb byte [eax]                         ;66 0f9200
-    setae byte [eax]                        ;66 0f9300
-    setz byte [eax]                         ;66 0f9400
-    setnz byte [eax]                        ;66 0f9500
-    setbe byte [eax]                        ;66 0f9600
-    seta byte [eax]                         ;66 0f9700
-    sets byte [eax]                         ;66 0f9800
-    setns byte [eax]                        ;66 0f9900
-    setp byte [eax]                         ;66 0f9a00
-    setnp byte [eax]                        ;66 0f9b00
-    setl byte [eax]                         ;66 0f9c00
-    setge byte [eax]                        ;66 0f9d00
-    setle byte [eax]                        ;66 0f9e00
-    setg byte [eax]                         ;66 0f9f00
+    seto byte [eax]                         ;660f9000
+    setno byte [eax]                        ;660f9100
+    setb byte [eax]                         ;660f9200
+    setae byte [eax]                        ;660f9300
+    setz byte [eax]                         ;660f9400
+    setnz byte [eax]                        ;660f9500
+    setbe byte [eax]                        ;660f9600
+    seta byte [eax]                         ;660f9700
+    sets byte [eax]                         ;660f9800
+    setns byte [eax]                        ;660f9900
+    setp byte [eax]                         ;660f9a00
+    setnp byte [eax]                        ;660f9b00
+    setl byte [eax]                         ;660f9c00
+    setge byte [eax]                        ;660f9d00
+    setle byte [eax]                        ;660f9e00
+    setg byte [eax]                         ;660f9f00
+_
+    cmovo eax, [eax]                        ;0f4000
+    cmovno eax, [eax]                       ;0f4100
+    cmovb eax, [eax]                        ;0f4200
+    cmovae eax, [eax]                       ;0f4300
+    cmovz eax, [eax]                        ;0f4400
+    cmovnz eax, [eax]                       ;0f4500
+    cmovbe eax, [eax]                       ;0f4600
+    cmova eax, [eax]                        ;0f4700
+    cmovs eax, [eax]                        ;0f4800
+    cmovns eax, [eax]                       ;0f4900
+    cmovp eax, [eax]                        ;0f4a00
+    cmovnp eax, [eax]                       ;0f4b00
+    cmovl eax, [eax]                        ;0f4c00
+    cmovge eax, [eax]                       ;0f4d00
+    cmovle eax, [eax]                       ;0f4e00
+    cmovg eax, [eax]                        ;0f4f00
 _
     mov al, [eax]                           ;8a00
     mov eax, [eax]                          ;8b00
@@ -1040,23 +920,11 @@ _
     rol byte [eax], 0x0                     ;c000 00
     rol dword [eax], 0x0                    ;c100 00
 _
-    ret 0x0                                 ;c2 0000
-    ret                                     ;c3
-_
     les eax, dword [eax]                    ;c400
     lds eax, dword [eax]                    ;c500
 _
     mov byte [eax], 0x0                     ;c600 00
     mov dword [eax], 0x0                    ;c700 00000000
-_
-    enter 0x0, 0x0                          ;c8 0000 00
-_
-    leave                                   ;c9
-_
-    retf 0x0                                ;ca 0000
-    retf                                    ;cb
-_
-    int 0x0                                 ;cd 00
 _
     rol byte [eax], 0                       ;d000
     rol dword [eax], 0                      ;d100
@@ -1064,26 +932,38 @@ _
     rol byte [eax], cl                      ;d200
     rol dword [eax], cl                     ;d300
 _
-    in al, 0x0                              ;e4 00
-    in eax, 0x0                             ;e5 00
-_
-    out 0x0, al                             ;e6 00
-    out 0x0, eax                            ;e7 00
-_
-    lock add [eax], al                      ;f0 0000
-_
     movsd xmm0, qword [eax]                 ;f20f1000
     movsd qword [eax], xmm0                 ;f20f1100
 _
     movddup xmm0, qword [eax]               ;f20f1200
 _
-    cvtsi2sd xmm0, dword [eax]              ;f20f2a00
+    cvtps2pd xmm0, qword [eax]              ;0f5a00
+    cvtpd2ps xmm0, dqword [eax]             ;660f5a00
+    cvtsd2ss xmm0, qword [eax]              ;f20f5a00
+    cvtss2sd xmm0, dword [eax]              ;f30f5a00
 _
-    movntsd qword [eax], xmm0               ;f20f2b00
+    cvtdq2ps xmm0, dqword [eax]             ;0f5b00
+    cvtps2dq xmm0, dqword [eax]             ;660f5b00
+    cvttps2dq xmm0, dqword [eax]            ;f30f5b00
+_ 
+    cvttpd2dq xmm0, dqword [eax]            ;660fe600
+    cvtpd2dq xmm0, dqword [eax]             ;f20fe600
+    cvtdq2pd xmm0, qword [eax]              ;f30fe600
 _
+    cvttps2pi mm0, qword [eax]              ;0f2c00
+    cvttpd2pi mm0, dqword [eax]             ;660f2c00
     cvttsd2si eax, qword [eax]              ;f20f2c00
+    cvttss2si eax, dword [eax]              ;f30f2c00
 _
+    cvtpi2ps xmm0, qword [eax]              ;0f2a00
+    cvtpi2pd xmm0, qword [eax]              ;660f2a00
+    cvtsi2sd xmm0, dword [eax]              ;f20f2a00
+    cvtsi2ss xmm0, dword [eax]              ;f30f2a00
+_
+    cvtps2pi mm0, qword [eax]               ;0f2d00
     cvtsd2si eax, qword [eax]               ;f20f2d00
+    cvtss2si eax, dword [eax]               ;f30f2d00
+    cvtpd2pi mm0, dqword [eax]              ;660f2d00
 _
     sqrtsd xmm0, qword [eax]                ;f20f5100
 _
@@ -1092,15 +972,16 @@ _
     mulsd xmm0, qword [eax]                 ;f20f5900
     divsd xmm0, qword [eax]                 ;f20f5e00
 _
-    cvtsd2ss xmm0, qword [eax]              ;f20f5a00
+    cmpps xmm0, [eax], 0                    ;0fc20000
 _
-    minsd xmm0, qword [eax]                 ;f20f5d00
-    maxsd xmm0, qword [eax]                 ;f20f5f00
-_
-    pshuflw xmm0, dqword [eax], 0x0         ;f20f7000 00
-_
-    haddps xmm0, dqword [eax]               ;f20f7c00
-    hsubps xmm0, dqword [eax]               ;f20f7d00
+    cmpeqps xmm0, [eax]                     ;0fc20000
+    cmpltps xmm0, [eax]                     ;0fc20001
+    cmpleps xmm0, [eax]                     ;0fc20002
+    cmpunordps xmm0, [eax]                  ;0fc20003
+    cmpneqps xmm0, [eax]                    ;0fc20004
+    cmpnltps xmm0, [eax]                    ;0fc20005
+    cmpnleps xmm0, [eax]                    ;0fc20006
+    cmpordps xmm0, [eax]                    ;0fc20007
 _
     cmpsd xmm0, [eax], 0                    ;f20fc20000
 _
@@ -1113,9 +994,29 @@ _
     cmpnlesd xmm0, [eax]                    ;f20fc20006
     cmpordsd xmm0, [eax]                    ;f20fc20007
 _
-    addsubps xmm0, dqword [eax]             ;f20fd000
+    cmppd xmm0, dqword [eax], 0             ;660fc20000 ; grammar difference with what's next...
 _
-    cvtpd2dq xmm0, dqword [eax]             ;f20fe600
+    cmpeqpd xmm0, dqword [eax]              ;660fc20000
+    cmpltpd xmm0, dqword [eax]              ;660fc20001
+    cmplepd xmm0, dqword [eax]              ;660fc20002
+    cmpunordpd xmm0, dqword [eax]           ;660fc20003
+    cmpneqpd xmm0, dqword [eax]             ;660fc20004
+    cmpnltpd xmm0, dqword [eax]             ;660fc20005
+    cmpnlepd xmm0, dqword [eax]             ;660fc20006
+    cmpordpd xmm0, dqword [eax]             ;660fc20007
+_
+    cmpss xmm0, [eax], 0                    ;f30fc20000 grammar
+_
+    cmpeqss xmm0, [eax]                     ;f30fc20000
+    cmpltss xmm0, [eax]                     ;f30fc20001
+    cmpless xmm0, [eax]                     ;f30fc20002
+    cmpunordss xmm0, [eax]                  ;f30fc20003
+    cmpneqss xmm0, [eax]                    ;f30fc20004
+    cmpnltss xmm0, [eax]                    ;f30fc20005
+    cmpnless xmm0, [eax]                    ;f30fc20006
+    cmpordss xmm0, [eax]                    ;f30fc20007
+_
+    addsubps xmm0, dqword [eax]             ;f20fd000
 _
     lddqu xmm0, [eax]                       ;f20ff000
 _
@@ -1125,43 +1026,15 @@ _
     movsldup xmm0, dqword [eax]             ;f30f1200
     movshdup xmm0, dqword [eax]             ;f30f1600
 _
-    cvtsi2ss xmm0, dword [eax]              ;f30f2a00
-_
-    movntss dword [eax], xmm0               ;f30f2b00
-_
-    cvttss2si eax, dword [eax]              ;f30f2c00
-_
-    cvtss2si eax, dword [eax]               ;f30f2d00
-_
     sqrtss xmm0, dword [eax]                ;f30f5100
     rsqrtss xmm0, dword [eax]               ;f30f5200
-_
-    rcpss xmm0, dword [eax]                 ;f30f5300
 _
     addss xmm0, dword [eax]                 ;f30f5800
     subss xmm0, dword [eax]                 ;f30f5c00
     mulss xmm0, dword [eax]                 ;f30f5900
     divss xmm0, dword [eax]                 ;f30f5e00
 _
-    cvtss2sd xmm0, dword [eax]              ;f30f5a00
-_
-    cvttps2dq xmm0, dqword [eax]            ;f30f5b00
-_
-    minss xmm0, dword [eax]                 ;f30f5d00
-    maxss xmm0, dword [eax]                 ;f30f5f00
-_
-    movdqu xmm0, dqword [eax]               ;f30f6f00
-    movdqu dqword [eax], xmm0               ;f30f7f00
-_
-    pshufhw xmm0, dqword [eax], 0x0         ;f30f7000 00
-_
-    movq xmm0, qword [eax]                  ;f30f7e00
-_
     lzcnt eax, [eax]                        ;f30fbd00
-_
-    cmpeqss xmm0, dword [eax]               ;f30fc20000
-_
-    cvtdq2pd xmm0, qword [eax]              ;f30fe600
 _
 ;XOP
     vpmadcsswd  xmm0, xmm0, xmm0, xmm0      ;8fe878a6c000
@@ -1169,31 +1042,45 @@ _
     vcvtph2ps   xmm0, xmm0, 0               ;8fe878a0c000
     vcvtps2ph   xmm0, xmm0, 0               ;8fe878a1c000
 _
-    vfmaddpd    xmm0, xmm0, xmm0, xmm0      ;c4e37969c000
-    vfmaddps    xmm0, xmm0, xmm0, xmm0      ;c4e37968c000
-    vfmaddsd    xmm0, xmm0, xmm0, xmm0      ;c4e3796bc000
-    vfmaddss    xmm0, xmm0, xmm0, xmm0      ;c4e3796ac000
+    vfmaddpd xmm0, xmm0, xmm0, xmm0         ;c4e37969c000
+    vfmaddps xmm0, xmm0, xmm0, xmm0         ;c4e37968c000
+    vfmaddsd xmm0, xmm0, xmm0, xmm0         ;c4e3796bc000
+    vfmaddss xmm0, xmm0, xmm0, xmm0         ;c4e3796ac000
+    vfmaddpd ymm0, ymm0, ymm0, ymm0         ;c4e37d69c000
+    vfmaddps ymm0, ymm0, ymm0, ymm0         ;c4e37d68c000
+    vfmsubpd ymm0, ymm0, ymm0, ymm0         ;c4e37d6dc000
+    vfmsubps ymm0, ymm0, ymm0, ymm0         ;c4e37d6cc000
+
 _
     vfmaddsubpd xmm0, xmm0, xmm0, xmm0      ;c4e3795dc000
     vfmaddsubps xmm0, xmm0, xmm0, xmm0      ;c4e3795cc000
-_
     vfmsubaddpd xmm0, xmm0, xmm0, xmm0      ;c4e3795fc000
     vfmsubaddps xmm0, xmm0, xmm0, xmm0      ;c4e3795ec000
+    vfmaddsubpd ymm0, ymm0, ymm0, ymm0      ;c4e37d5dc000
+    vfmaddsubps ymm0, ymm0, ymm0, ymm0      ;c4e37d5cc000
+    vfmsubaddps ymm0, ymm0, ymm0, ymm0      ;c4e37d5ec000
+    vfmsubaddpd ymm0, ymm0, ymm0, ymm0      ;c4e37d5fc000
 _
-    vfmsubpd    xmm0, xmm0, xmm0, xmm0      ;c4e3796dc000
-    vfmsubps    xmm0, xmm0, xmm0, xmm0      ;c4e3796cc000
-    vfmsubsd    xmm0, xmm0, xmm0, xmm0      ;c4e3796fc000
-    vfmsubss    xmm0, xmm0, xmm0, xmm0      ;c4e3796ec000
+    vfmsubpd xmm0, xmm0, xmm0, xmm0         ;c4e3796dc000
+    vfmsubps xmm0, xmm0, xmm0, xmm0         ;c4e3796cc000
+    vfmsubsd xmm0, xmm0, xmm0, xmm0         ;c4e3796fc000
+    vfmsubss xmm0, xmm0, xmm0, xmm0         ;c4e3796ec000
 _
-    vfnmaddpd   xmm0, xmm0, xmm0, xmm0      ;c4e37979c000
-    vfnmaddps   xmm0, xmm0, xmm0, xmm0      ;c4e37978c000
-    vfnmaddsd   xmm0, xmm0, xmm0, xmm0      ;c4e3797bc000
-    vfnmaddss   xmm0, xmm0, xmm0, xmm0      ;c4e3797ac000
+    vfnmaddpd xmm0, xmm0, xmm0, xmm0        ;c4e37979c000
+    vfnmaddps xmm0, xmm0, xmm0, xmm0        ;c4e37978c000
+    vfnmaddsd xmm0, xmm0, xmm0, xmm0        ;c4e3797bc000
+    vfnmaddss xmm0, xmm0, xmm0, xmm0        ;c4e3797ac000
+    vfnmaddpd ymm0, ymm0, ymm0, ymm0        ;c4e37d79c000
+    vfnmaddps ymm0, ymm0, ymm0, ymm0        ;c4e37d78c000
 _
-    vfnmsubpd   xmm0, xmm0, xmm0, xmm0      ;c4e3797dc000
-    vfnmsubps   xmm0, xmm0, xmm0, xmm0      ;c4e3797cc000
-    vfnmsubsd   xmm0, xmm0, xmm0, xmm0      ;c4e3797fc000
-    vfnmsubss   xmm0, xmm0, xmm0, xmm0      ;c4e3797ec000
+    vfnmsubpd xmm0, xmm0, xmm0, xmm0        ;c4e3797dc000
+    vfnmsubps xmm0, xmm0, xmm0, xmm0        ;c4e3797cc000
+    vfnmsubsd xmm0, xmm0, xmm0, xmm0        ;c4e3797fc000
+    vfnmsubss xmm0, xmm0, xmm0, xmm0        ;c4e3797ec000
+    vfnmsubpd ymm0, ymm0, ymm0, ymm0        ;c4e37d7dc000
+    vfnmsubps ymm0, ymm0, ymm0, ymm0        ;c4e37d7cc000
+    vfnmsubss xmm0, xmm0, xmm0, xmm0        ;c4e3797ec000
+    vfnmsubsd xmm0, xmm0, xmm0, xmm0        ;c4e3797fc000
 _
     vfrczpd     xmm0, xmm0                  ;8fe97881c0
     vfrczps     xmm0, xmm0                  ;8fe97880c0
@@ -1507,7 +1394,6 @@ _
     db 0fh, 1fh, 01 ;nop [ecx]              ;0f1f01
 _
 ;AVX
-    addpd xmm0, dqword [eax]                ;660f5800
     vaddpd xmm0, dqword [eax]               ;660f5800
     vaddpd ymm0, ymm0, ymm0                 ;c5fd58c0
 _
@@ -1533,26 +1419,6 @@ _
 _
     vbroadcastsd ymm0, [0]                  ;c4e27d190500000000
     vbroadcastss ymm0, [eax]                ;c4e27d1800
-_
-    vfmaddpd ymm0, ymm0, ymm0, ymm0         ;c4e37d69c000
-    vfmaddps ymm0, ymm0, ymm0, ymm0         ;c4e37d68c000
-    vfmsubpd ymm0, ymm0, ymm0, ymm0         ;c4e37d6dc000
-    vfmsubps ymm0, ymm0, ymm0, ymm0         ;c4e37d6cc000
-_
-    vfmaddsubpd ymm0, ymm0, ymm0, ymm0      ;c4e37d5dc000
-    vfmaddsubps ymm0, ymm0, ymm0, ymm0      ;c4e37d5cc000
-    vfmsubaddps ymm0, ymm0, ymm0, ymm0      ;c4e37d5ec000
-    vfmsubaddpd ymm0, ymm0, ymm0, ymm0      ;c4e37d5fc000
-_
-    vfnmaddpd ymm0, ymm0, ymm0, ymm0        ;c4e37d79c000
-    vfnmaddps ymm0, ymm0, ymm0, ymm0        ;c4e37d78c000
-    vfnmaddss xmm0, xmm0, xmm0, xmm0        ;c4e3797ac000
-    vfnmaddsd xmm0, xmm0, xmm0, xmm0        ;c4e3797bc000
-_
-    vfnmsubpd ymm0, ymm0, ymm0, ymm0        ;c4e37d7dc000
-    vfnmsubps ymm0, ymm0, ymm0, ymm0        ;c4e37d7cc000
-    vfnmsubss xmm0, xmm0, xmm0, xmm0        ;c4e3797ec000
-    vfnmsubsd xmm0, xmm0, xmm0, xmm0        ;c4e3797fc000
 _
     vinsertf128 ymm0, ymm0, xmm0, 0         ;c4e37d18c000
     vperm2f128 ymm0, ymm0, ymm0, 0          ;c4e37d06c000
@@ -1640,21 +1506,15 @@ _
     pmaxuw xmm0, xmm0                       ;660f383ec0
     pmaxud xmm0, xmm0                       ;660f383fc0
 _
-    pextrb eax, xmm0, 0                     ;660f3a14c000
-    pextrw eax, xmm0, 0                     ;660fc5c000
-    pextrd eax, xmm0, 0                     ;660f3a16c000
-_
     extractps eax, xmm0, 0                  ;660f3a17c000
 _
     pinsrb xmm0, eax, 0                     ;660f3a20c000
     insertps xmm0, xmm0, 0                  ;660f3a21c000 not eax ?
-    pinsrw xmm0, eax, 0                     ;660fc4c000
 _
     dpps xmm0, xmm0, 0                      ;660f3a40c000
     dppd xmm0, xmm0, 0                      ;660f3a41c000
 _
     mpsadbw xmm0, xmm0, 0                   ;660f3a42c000
-    pclmulqdq xmm0, xmm0, 0                 ;660f3a44c000
 _
     pcmpestrm xmm0, xmm0, 0                 ;660f3a60c000
     pcmpestri xmm0, xmm0, 0                 ;660f3a61c000
