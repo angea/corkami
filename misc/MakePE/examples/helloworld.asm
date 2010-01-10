@@ -1,7 +1,7 @@
 ;simple helloworld example
 ;compile with: makepe.py helloworld.asm
 
-%include 'onesec.hdr'
+%include '../onesec.hdr'
 
 MB_ICONINFORMATION equ 040h
 EntryPoint:
