@@ -1536,6 +1536,24 @@ _
     PREFIX_ADDRESSSIZE
     ret                                     ;66e3
 _
+;LWP AMD LightWeight Profiling
+db 8fh, 0e9h, 7ch, 12h, 0c0h                ;8fe97c12c0      llwpcb eax          Load LWPCB address
+db 8fh, 0e9h, 7ch, 12h, 0c8h                ;8fe97c12c8      slwpcb eax          Store LWPCB address
+db 8fh, 0eah, 78h, 12h, 0c8h, 0, 0          ;8fea7812c80000  lwpval ax, eax, 0x0 Insert Value Sample in LWP Ring Buffer
+db 8fh, 0eah, 78h, 12h, 0c0h, 0, 0          ;8fea7812c00000  lwpins ax, eax, 0x0 Insert User Event Record in LWP Ring Buffer
+_
+; VIA Padlock
+xstore                                      ;0fa7c0   store random bytes  = xstoreng
+rep xstore                                  ;f30fa7c0 store rep count random bytes
+rep xcryptecb                               ;f30fa7c8 encrypt/decrypt REP count 16-byte blocks using electronic code book
+rep xcryptcbc                               ;f30fa7d0 encrypt/decrypt REP count 16-byte blocks using cipher block chaining
+rep xcryptctr                               ;f30fa7d8 encrypt/decrypt REP count 16-byte blocks using counter mode
+rep xcryptcfb                               ;f30fa7e0 encrypt/decrypt REP count 16-byte blocks using cipher feedback
+rep xcryptofb                               ;f30fa7e8 encrypt/decrypt REP count 16-byte blocks using output feedback
+rep xsha1                                   ;f30fa6c8 calculate SHA1 as specified by FIPS 180-2
+rep xsha256                                 ;f30fa6d0 calculate SHA256 as specified by FIPS 180-2
+rep montmul                                 ;f30fa6c0 montgomery multiplier
+_
 ; just to make the opcodes present, to be moved...
 bits 64
     pextrq [eax], xmm0, 0                   ;660f3a16 64b only (for yasm)
