@@ -19,7 +19,6 @@
 EntryPoint:
 
 before
-MB_ICONINFORMATION equ 040h
     push MB_ICONINFORMATION ; UINT uType
     push tada               ; LPCTSTR lpCaption
 after

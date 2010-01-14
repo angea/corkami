@@ -250,7 +250,6 @@ _oldsegment:
     jmp good
 
 bad:
-MB_ICONERROR equ 10h
     push MB_ICONERROR   ; UINT uType
     push error          ; LPCTSTR lpCaption
     push errormsg       ; LPCTSTR lpText
@@ -259,7 +258,6 @@ MB_ICONERROR equ 10h
     push 042h
     call ExitProcess    ; UINT uExitCode
 good:
-MB_ICONINFORMATION equ 040h
     push MB_ICONINFORMATION ; UINT uType
     push success            ; LPCTSTR lpCaption
     push successmsg         ; LPCTSTR lpText

@@ -137,8 +137,6 @@ handlers dd push_handler, call_handler
 push_ equ 0
 call_ equ 1
 
-MB_ICONINFORMATION equ 040h
-
 virtual_start:
     db push_
         dd MB_ICONINFORMATION

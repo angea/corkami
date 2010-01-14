@@ -42,7 +42,6 @@ next:
     jmp Buffer
 
 proc1:
-MB_ICONINFORMATION equ 040h
     push MB_ICONINFORMATION ; UINT uType
     push tada               ; LPCTSTR lpCaption
     push helloworld         ; LPCTSTR lpText
