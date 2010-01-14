@@ -3,7 +3,6 @@
 
 %include '../onesec.hdr'
 
-MB_ICONINFORMATION equ 040h
 EntryPoint:
     push MB_ICONINFORMATION ; UINT uType
     push tada               ; LPCTSTR lpCaption
