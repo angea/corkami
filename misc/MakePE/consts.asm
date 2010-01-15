@@ -87,6 +87,34 @@ struc IMAGE_DATA_DIRECTORY2
   ImportsSize resd 1
 endstruc
 
+struc IMAGE_DATA_DIRECTORY_16
+    .ExportsVA        resd 1
+    .ExportsSize      resd 1
+    .ImportsVA        resd 1
+    .ImportsSize      resd 1
+    .ResourceVA       resd 1
+    .ResourceSize     resd 1
+    .Exception        resd 2
+    .Security         resd 2
+    .FixupsVA         resd 1
+    .FixupsSize       resd 1
+    .DebugVA          resd 1
+    .DebugSize        resd 1
+    .Description      resd 2
+    .MIPS             resd 2
+    .TLSVA            resd 1
+    .TLSSize          resd 1
+    .Load             resd 2
+    .BoundImportsVA   resd 1
+    .BoundImportsSize resd 1
+    .IATVA            resd 1
+    .IATSize          resd 1
+    .DelayImportsVA   resd 1
+    .DelayImportsSize resd 1
+    .COM              resd 2
+    .reserved         resd 2
+endstruc
+
 IMAGE_SIZEOF_SHORT_NAME equ 8
 
 struc IMAGE_SECTION_HEADER
