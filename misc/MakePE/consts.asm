@@ -174,12 +174,12 @@ endstruc
 ;endstruc
 
 struc IMAGE_TLS_DIRECTORY32
-    StartAddressOfRawData   resd 1
-    EndAddressOfRawData     resd 1
-    AddressOfIndex          resd 1
-    AddressOfCallBacks      resd 1
-    SizeOfZeroFill          resd 1
-    Characteristics         resd 1
+    .StartAddressOfRawData   resd 1
+    .EndAddressOfRawData     resd 1
+    .AddressOfIndex          resd 1
+    .AddressOfCallBacks      resd 1
+    .SizeOfZeroFill          resd 1
+    .Characteristics         resd 1
 endstruc
 
 ;Section characteristics
@@ -246,5 +246,12 @@ IMAGE_NT_OPTIONAL_HDR32_MAGIC equ 010bh
 
 MB_ICONINFORMATION equ 040h
 MB_ICONERROR equ 10h
+
+;relocations types
+IMAGE_REL_BASED_ABSOLUTE equ 0
+IMAGE_REL_BASED_HIGHLOW equ 3
+
+DLL_PROCESS_DETACH equ 0
+DLL_PROCESS_ATTACH equ 1
 
 ;Ange Albertini 2009-2010

@@ -173,3 +173,5 @@ align FILEALIGN,db 0
 Section0Size EQU $ - Section0Start
 
 SIZEOFIMAGE EQU $ - IMAGEBASE
+
+; Ange Albertini 2009-2010
