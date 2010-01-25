@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2973"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="filters.svg">
+  <defs
+     id="defs2975">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective34" />
+    <filter
+       id="filter2829"
+       inkscape:label="trails0"
+       x="0"
+       y="-0.40000000000000002"
+       width="1.3999999999999999"
+       height="1.8">
+      <feOffset
+         id="feOffset2831"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feColorMatrix
+         id="feColorMatrix2833"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         result="result5"
+         type="matrix"
+         in="result3" />
+      <feOffset
+         id="feOffset2835"
+         dx="10"
+         dy="10"
+         result="result3"
+         in="result5" />
+      <feMerge
+         id="feMerge2837"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode2839"
+           inkscape:collect="always"
+           in="result3" />
+        <feMergeNode
+           id="feMergeNode2841"
+           inkscape:collect="always"
+           in="result5" />
+      </feMerge>
+      <feColorMatrix
+         id="feColorMatrix2852"
+         values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 " />
+      <feOffset
+         id="feOffset2843"
+         result="result3"
+         dy="10"
+         dx="10"
+         in="result3" />
+      <feMerge
+         id="feMerge2845">
+        <feMergeNode
+           id="feMergeNode2847"
+           inkscape:collect="always"
+           in="result3" />
+        <feMergeNode
+           id="feMergeNode2849"
+           inkscape:collect="always"
+           in="result7" />
+        <feMergeNode
+           id="feMergeNode2851"
+           inkscape:collect="always"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails"
+       id="filter2827">
+      <feOffset
+         result="result3"
+         dy="10"
+         dx="10"
+         id="feOffset2829" />
+      <feColorMatrix
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 "
+         id="feColorMatrix2831" />
+      <feOffset
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10"
+         id="feOffset2833" />
+      <feMerge
+         result="result7"
+         id="feMerge2835">
+        <feMergeNode
+           in="result3"
+           inkscape:collect="always"
+           id="feMergeNode2837" />
+        <feMergeNode
+           in="result5"
+           inkscape:collect="always"
+           id="feMergeNode2840" />
+      </feMerge>
+      <feOffset
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3"
+         id="feOffset2842" />
+      <feMerge
+         id="feMerge2844">
+        <feMergeNode
+           in="result3"
+           inkscape:collect="always"
+           id="feMergeNode2846" />
+        <feMergeNode
+           in="result7"
+           inkscape:collect="always"
+           id="feMergeNode2848" />
+        <feMergeNode
+           in="SourceGraphic"
+           inkscape:collect="always"
+           id="feMergeNode2850" />
+      </feMerge>
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-19.641549"
+     inkscape:cy="953.56692"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="1005"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata2978">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.50000000000000000;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;"
+       id="rect2983"
+       width="451.42856"
+       height="168.57143"
+       x="5.6631775"
+       y="264.11588"
+       transform="matrix(1.033936,0,0,0.71820518,3.4539448,-151.42856)" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter2829);font-family:Bitstream Vera Sans"
+       x="521.61426"
+       y="122.47363"
+       id="text2825"><tspan
+         sodipodi:role="line"
+         id="tspan2827"
+         x="521.61426"
+         y="122.47363">trails</tspan></text>
+  </g>
+</svg>

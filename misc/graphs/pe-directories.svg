@@ -1,0 +1,2398 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1488.189"
+   height="1052.3622"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="pe-directories.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0">
+  <title
+     id="title3277">PE Directories</title>
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1488.189 : 526.18109 : 1"
+       inkscape:persp3d-origin="744.09448 : 350.78739 : 1"
+       id="perspective146" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible">
+      <path
+         id="path3829"
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path3826"
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective3004"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter3046"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset3048"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix3050"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3052"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge3054"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode3056"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3058"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset3060"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge3062">
+        <feMergeNode
+           id="feMergeNode3064"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3066"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3068"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3070"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset3072"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix3074"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3076"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge3078"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode3080"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3082"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset3084"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge3086">
+        <feMergeNode
+           id="feMergeNode3088"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3090"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3092"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3094"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset3096"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix3098"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3100"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge3102"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode3104"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3106"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset3108"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge3110">
+        <feMergeNode
+           id="feMergeNode3112"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3114"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3116"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3118"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset3120"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix3122"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3124"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge3126"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode3128"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3130"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset3132"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge3134">
+        <feMergeNode
+           id="feMergeNode3136"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3138"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3140"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3142"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset3144"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix3146"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3148"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge3150"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode3152"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3154"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset3156"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge3158">
+        <feMergeNode
+           id="feMergeNode3160"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3162"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3164"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective4330"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter3070-7"
+       height="1.8"
+       width="1.4"
+       y="-0.40000001"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset3072-4"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix3074-0"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3076-9"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge3078-4"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode3080-8"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3082-8"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset3084-2"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge3086-4">
+        <feMergeNode
+           id="feMergeNode3088-5"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3090-5"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode3092-1"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective4415"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-3"
+       style="overflow:visible">
+      <path
+         id="path3829-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <filter
+       id="filter4437"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset4439"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix4441"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4443"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge4445"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode4447"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4449"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset4451"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge4453">
+        <feMergeNode
+           id="feMergeNode4455"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4457"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4459"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4461"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset4463"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix4465"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4467"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge4469"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode4471"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4473"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset4475"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge4477">
+        <feMergeNode
+           id="feMergeNode4479"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4481"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4483"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4538"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset4540"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix4542"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4544"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge4546"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode4548"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4550"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset4552"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge4554">
+        <feMergeNode
+           id="feMergeNode4556"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4558"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4560"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective4624"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter4538-1"
+       height="1.8"
+       width="1.4"
+       y="-0.40000001"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset4540-6"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix4542-8"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4544-5"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge4546-7"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode4548-6"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4550-1"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset4552-8"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge4554-9">
+        <feMergeNode
+           id="feMergeNode4556-2"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4558-7"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4560-9"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective4727"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter4538-1-5"
+       height="1.8"
+       width="1.4"
+       y="-0.40000001"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset4540-6-4"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix4542-8-3"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4544-5-1"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge4546-7-2"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode4548-6-3"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4550-1-3"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset4552-8-4"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge4554-9-1">
+        <feMergeNode
+           id="feMergeNode4556-2-1"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4558-7-3"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4560-9-8"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective4727-0"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter4538-1-2"
+       height="1.8"
+       width="1.4"
+       y="-0.40000001"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset4540-6-48"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix4542-8-6"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4544-5-5"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge4546-7-0"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode4548-6-9"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4550-1-0"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset4552-8-0"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge4554-9-6">
+        <feMergeNode
+           id="feMergeNode4556-2-13"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4558-7-8"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4560-9-9"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective4945"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5018"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter4538-1-5-9"
+       height="1.8"
+       width="1.4"
+       y="-0.40000001"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset4540-6-4-7"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix4542-8-3-3"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4544-5-1-7"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge4546-7-2-2"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode4548-6-3-6"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4550-1-3-0"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset4552-8-4-1"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge4554-9-1-6">
+        <feMergeNode
+           id="feMergeNode4556-2-1-5"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4558-7-3-7"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode4560-9-8-5"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective5124"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter5147"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset5149"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix5151"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset5153"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge5155"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode5157"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5159"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset5161"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge5163">
+        <feMergeNode
+           id="feMergeNode5165"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5167"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5169"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective5179"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter5147-9"
+       height="1.8"
+       width="1.4"
+       y="-0.40000001"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset5149-8"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix5151-1"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset5153-8"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge5155-2"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode5157-6"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5159-6"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset5161-0"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge5163-3">
+        <feMergeNode
+           id="feMergeNode5165-8"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5167-0"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5169-1"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective5179-9"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter5147-4"
+       height="1.8"
+       width="1.4"
+       y="-0.40000001"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset5149-7"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix5151-8"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset5153-3"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge5155-5"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode5157-1"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5159-2"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset5161-01"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge5163-6">
+        <feMergeNode
+           id="feMergeNode5165-4"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5167-06"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5169-18"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+    <inkscape:perspective
+       id="perspective5296"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       id="filter5339"
+       height="1.8"
+       width="1.3999999999999999"
+       y="-0.40000000000000002"
+       x="0"
+       inkscape:label="trails">
+      <feOffset
+         id="feOffset5341"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feColorMatrix
+         id="feColorMatrix5343"
+         in="result3"
+         type="matrix"
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset5345"
+         in="result5"
+         result="result3"
+         dy="10"
+         dx="10" />
+      <feMerge
+         id="feMerge5347"
+         result="result7">
+        <feMergeNode
+           id="feMergeNode5349"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5351"
+           in="result5"
+           inkscape:collect="always" />
+      </feMerge>
+      <feOffset
+         id="feOffset5353"
+         in="result3"
+         dx="10"
+         dy="10"
+         result="result3" />
+      <feMerge
+         id="feMerge5355">
+        <feMergeNode
+           id="feMergeNode5357"
+           in="result3"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5359"
+           in="result7"
+           inkscape:collect="always" />
+        <feMergeNode
+           id="feMergeNode5361"
+           in="SourceGraphic"
+           inkscape:collect="always" />
+      </feMerge>
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.42931364"
+     inkscape:cx="450.72064"
+     inkscape:cy="536.11159"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     showguides="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="1024"
+     inkscape:window-height="581"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     showborder="true"
+     inkscape:showpageshadow="false"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2383"
+       visible="true"
+       enabled="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
+        <dc:title>PE Directories</dc:title>
+        <dc:date>2009</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Ange Albertini</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter5339)"
+       id="rect5286"
+       width="170"
+       height="30"
+       x="470"
+       y="952.36218" />
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5284"
+       width="170"
+       height="50"
+       x="470"
+       y="892.36218" />
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.59160799;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter5147)"
+       id="rect5145"
+       width="140"
+       height="30"
+       x="580"
+       y="372.36218"
+       transform="matrix(0.71428571,0,0,1,45.9333,-359.85489)" />
+    <g
+       id="g5049"
+       transform="translate(5,710)">
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect5047"
+         width="230.302"
+         height="165.80826"
+         x="9.9645996"
+         y="7.3226852" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3465"
+         y="22.362183"
+         x="15"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           y="22.362183"
+           x="15"
+           id="tspan3467"
+           sodipodi:role="line">1 IMAGE_DIRECTORY_ENTRY_EXPORT</tspan><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3495"
+           y="37.362183"
+           x="15"
+           sodipodi:role="line">2 IMAGE_DIRECTORY_ENTRY_IMPORT</tspan><tspan
+           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3497"
+           y="48.703423"
+           x="15"
+           sodipodi:role="line">3 IMAGE_DIRECTORY_ENTRY_RESOURCE</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3469"
+           y="56.874043"
+           x="15"
+           sodipodi:role="line">4 IMAGE_DIRECTORY_ENTRY_SECURITY</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3471"
+           y="64.374046"
+           x="15"
+           sodipodi:role="line">5 IMAGE_DIRECTORY_ENTRY_EXCEPTION</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3473"
+           y="71.874046"
+           x="15"
+           sodipodi:role="line">6 IMAGE_DIRECTORY_ENTRY_BASERELOC</tspan><tspan
+           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3475"
+           y="81.203423"
+           x="15"
+           sodipodi:role="line">7 IMAGE_DIRECTORY_ENTRY_DEBUG</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3477"
+           y="89.374046"
+           x="15"
+           sodipodi:role="line">8 IMAGE_DIRECTORY_ENTRY_COPYRIGHT</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3479"
+           y="96.874046"
+           x="15"
+           sodipodi:role="line">9 IMAGE_DIRECTORY_ENTRY_GLOBALPTR</tspan><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3481"
+           y="109.86218"
+           x="15"
+           sodipodi:role="line">A IMAGE_DIRECTORY_ENTRY_TLS</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3483"
+           y="119.37405"
+           x="15"
+           sodipodi:role="line">B IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3485"
+           y="126.87405"
+           x="15"
+           sodipodi:role="line">C IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT</tspan><tspan
+           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3487"
+           y="136.20343"
+           x="15"
+           sodipodi:role="line">D IMAGE_DIRECTORY_ENTRY_IAT</tspan><tspan
+           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3489"
+           y="146.20343"
+           x="15"
+           sodipodi:role="line">E IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT</tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3491"
+           y="154.37404"
+           x="15"
+           sodipodi:role="line">F IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR</tspan><tspan
+           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3493"
+           y="161.87404"
+           x="15"
+           sodipodi:role="line" /></text>
+    </g>
+    <g
+       id="g5036"
+       transform="translate(80,272)">
+      <rect
+         y="506.55389"
+         x="229.69798"
+         height="65.506699"
+         width="340.3158"
+         id="rect4927"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3648"
+         y="520.36218"
+         x="240"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           y="520.36218"
+           x="240"
+           id="tspan3650"
+           sodipodi:role="line">_IMAGE_TLS_DIRECTORY</tspan><tspan
+           style="font-size:6px"
+           id="tspan3652"
+           y="528.53278"
+           x="240"
+           sodipodi:role="line">0x00 dd StartAddressOfRawData</tspan><tspan
+           style="font-size:6px"
+           id="tspan3654"
+           y="536.03278"
+           x="240"
+           sodipodi:role="line">0x04 dd EndAddressOfRawData</tspan><tspan
+           style="font-size:6px"
+           id="tspan3656"
+           y="543.53278"
+           x="240"
+           sodipodi:role="line">0x08 LPDWORD AddressOfIndex</tspan><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan3658"
+           y="556.52094"
+           x="240"
+           sodipodi:role="line">0x0c PIMAGE_TLS_CALLBACK *AddressOfCallBacks</tspan><tspan
+           style="font-size:6px"
+           id="tspan3660"
+           y="566.03278"
+           x="240"
+           sodipodi:role="line">0x10 dd SizeOfZeroFill</tspan><tspan
+           style="font-size:6px"
+           id="tspan3662"
+           y="573.53278"
+           x="240"
+           sodipodi:role="line">0x14 dd Characteristics</tspan></text>
+    </g>
+    <g
+       id="g4945"
+       transform="translate(-209.47897,-130)">
+      <rect
+         y="152.36218"
+         x="229.69798"
+         height="110.05109"
+         width="170.30238"
+         id="rect4921"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3664"
+         y="172.36218"
+         x="240"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           y="172.36218"
+           x="240"
+           id="tspan3666"
+           sodipodi:role="line">_IMAGE_DELAY_IMPORT_DESCRIPTOR </tspan><tspan
+           id="tspan3668"
+           y="182.36218"
+           x="240"
+           sodipodi:role="line">0x00 dd grAttrs</tspan><tspan
+           id="tspan3670"
+           y="192.36218"
+           x="240"
+           sodipodi:role="line">0x04 dd szName</tspan><tspan
+           id="tspan3672"
+           y="202.36218"
+           x="240"
+           sodipodi:role="line">0x08 dd phmod</tspan><tspan
+           id="tspan3674"
+           y="212.36218"
+           x="240"
+           sodipodi:role="line">0x0c dd pIAT</tspan><tspan
+           id="tspan3676"
+           y="222.36218"
+           x="240"
+           sodipodi:role="line">0x10 dd pINT</tspan><tspan
+           id="tspan3678"
+           y="232.36218"
+           x="240"
+           sodipodi:role="line">0x14 dd pBoundIAT</tspan><tspan
+           id="tspan3680"
+           y="242.36218"
+           x="240"
+           sodipodi:role="line">0x18 dd pUnloadIAT</tspan><tspan
+           id="tspan3682"
+           y="252.36218"
+           x="240"
+           sodipodi:role="line">0x1c dd dwTimeStamp</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="303.694"
+       y="346.14642"
+       id="text5124"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5126"
+         x="303.694"
+         y="346.14642" /></text>
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter3142)"
+       id="rect4931"
+       width="210.25859"
+       height="109.8317"
+       x="689.74139"
+       y="102.36218" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="700.0434"
+       y="122.36218"
+       id="text2533"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2535"
+         x="700.0434"
+         y="122.36218">struct _IMAGE_IMPORT_DESCRIPTOR</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="132.36218"
+         id="tspan2537">00 union {</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="142.36218"
+         id="tspan2541">00 dd Characteristics;</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="152.36218"
+         id="tspan2545">00 PIMAGE_THUNK_DATA OriginalFirstThunk</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="162.36218"
+         id="tspan2561">}</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="172.36218"
+         id="tspan2754">04 dd TimeDateStamp</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="182.36218"
+         id="tspan2563">08 dd ForwarderChain</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="192.36218"
+         id="tspan2565">0c dd Name</tspan><tspan
+         sodipodi:role="line"
+         x="700.0434"
+         y="202.36218"
+         id="tspan2573">10 PIMAGE_THUNK_DATA FirstThunk</tspan></text>
+    <g
+       id="g4999"
+       transform="translate(860.21712,360)">
+      <rect
+         y="372.36218"
+         x="229.698"
+         height="109.8317"
+         width="130.08488"
+         id="rect4925"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text2603"
+         y="388.36218"
+         x="240"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           y="388.36218"
+           x="240"
+           id="tspan2605"
+           sodipodi:role="line">_IMAGE_DEBUG_DIRECTORY</tspan><tspan
+           id="tspan2607"
+           y="398.36218"
+           x="240"
+           sodipodi:role="line">00 dd Characteristics</tspan><tspan
+           id="tspan2609"
+           y="408.36218"
+           x="240"
+           sodipodi:role="line">04 dd TimeDateStamp</tspan><tspan
+           id="tspan2611"
+           y="418.36218"
+           x="240"
+           sodipodi:role="line">08 dw MajorVersion</tspan><tspan
+           id="tspan2613"
+           y="428.36218"
+           x="240"
+           sodipodi:role="line">0a dw MinorVersion</tspan><tspan
+           id="tspan2615"
+           y="438.36218"
+           x="240"
+           sodipodi:role="line">0c dd Type</tspan><tspan
+           id="tspan2617"
+           y="448.36218"
+           x="240"
+           sodipodi:role="line">10 dd SizeOfData</tspan><tspan
+           id="tspan2619"
+           y="458.36218"
+           x="240"
+           sodipodi:role="line">14 dd AddressOfRawData</tspan><tspan
+           id="tspan2623"
+           y="468.36218"
+           x="240"
+           sodipodi:role="line">18 dd PointerToRawData</tspan><tspan
+           id="tspan2625"
+           y="478.36218"
+           x="240"
+           sodipodi:role="line" /></text>
+    </g>
+    <g
+       id="g4983"
+       transform="translate(-60,0)">
+      <rect
+         y="12.362183"
+         x="269.698"
+         height="160.11589"
+         width="230.52101"
+         id="rect4919"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text2647"
+         y="32.362183"
+         x="280"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           y="32.362183"
+           x="280"
+           id="tspan2649"
+           sodipodi:role="line">_IMAGE_EXPORT_DIRECTORY</tspan><tspan
+           style="font-size:6px"
+           id="tspan2651"
+           y="40.532803"
+           x="280"
+           sodipodi:role="line">0x00 dd Characteristics</tspan><tspan
+           style="font-size:6px"
+           id="tspan2653"
+           y="48.032803"
+           x="280"
+           sodipodi:role="line">0x04 dd TimeDateStamp</tspan><tspan
+           style="font-size:6px"
+           id="tspan2655"
+           y="55.532803"
+           x="280"
+           sodipodi:role="line">0x08 dw MajorVersion</tspan><tspan
+           style="font-size:6px"
+           id="tspan2657"
+           y="63.032803"
+           x="280"
+           sodipodi:role="line">0x0a dw MinorVersion</tspan><tspan
+           style="font-size:12px"
+           id="tspan2659"
+           y="76.020943"
+           x="280"
+           sodipodi:role="line">0x0c dd Name</tspan><tspan
+           style="font-size:8px"
+           id="tspan2661"
+           y="87.362183"
+           x="280"
+           sodipodi:role="line">0x10 dd Base</tspan><tspan
+           style="font-size:12px"
+           id="tspan2663"
+           y="101.02094"
+           x="280"
+           sodipodi:role="line">0x14 dd NumberOfFunctions</tspan><tspan
+           style="font-size:12px"
+           id="tspan2665"
+           y="116.02094"
+           x="280"
+           sodipodi:role="line">0x18 dd NumberOfNames</tspan><tspan
+           style="font-size:12px"
+           id="tspan2667"
+           y="131.02094"
+           x="280"
+           sodipodi:role="line">0x1c dd AddressOfFunctions</tspan><tspan
+           style="font-size:12px"
+           id="tspan2669"
+           y="146.02094"
+           x="280"
+           sodipodi:role="line">0x20 dd AddressOfNames</tspan><tspan
+           style="font-size:12px"
+           id="tspan2675"
+           y="161.02094"
+           x="280"
+           sodipodi:role="line">0x24 dd AddressOfNameOrdinals</tspan></text>
+    </g>
+    <g
+       id="g5069"
+       transform="translate(750.15198,320)">
+      <rect
+         y="592.36218"
+         x="229.698"
+         height="109.8317"
+         width="160.15002"
+         id="rect4929"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text2677"
+         y="612.36218"
+         x="240"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           y="612.36218"
+           x="240"
+           id="tspan2679"
+           sodipodi:role="line">_IMAGE_DELAY_IMPORT_DESCRIPTOR</tspan><tspan
+           id="tspan2681"
+           y="622.36218"
+           x="240"
+           sodipodi:role="line">00 dd grAttrs</tspan><tspan
+           id="tspan2683"
+           y="632.36218"
+           x="240"
+           sodipodi:role="line">04 dd szName</tspan><tspan
+           id="tspan2685"
+           y="642.36218"
+           x="240"
+           sodipodi:role="line">08 dd phmod</tspan><tspan
+           id="tspan2687"
+           y="652.36218"
+           x="240"
+           sodipodi:role="line">0c dd pIAT</tspan><tspan
+           id="tspan2689"
+           y="662.36218"
+           x="240"
+           sodipodi:role="line">10 dd pINT</tspan><tspan
+           id="tspan2691"
+           y="672.36218"
+           x="240"
+           sodipodi:role="line">14 dd pBoundIAT</tspan><tspan
+           id="tspan2693"
+           y="682.36218"
+           x="240"
+           sodipodi:role="line">18 dd pUnloadIAT</tspan><tspan
+           id="tspan2699"
+           y="692.36218"
+           x="240"
+           sodipodi:role="line">1c dd dwTimeStamp</tspan></text>
+    </g>
+    <g
+       id="g5024"
+       transform="translate(96,280)">
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999994;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect3294"
+         width="150.0354"
+         height="44.845943"
+         x="639"
+         y="527.36218" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect3290"
+         width="120"
+         height="20"
+         x="654"
+         y="542.36218" />
+      <rect
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect3292"
+         width="120"
+         height="20"
+         x="649"
+         y="537.36218" />
+      <rect
+         y="532.36218"
+         x="644"
+         height="20"
+         width="120"
+         id="rect2500"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         id="text2496"
+         y="547.36218"
+         x="649"
+         style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           id="tspan3296"
+           style="font-size:12px"
+           y="547.36218"
+           x="649"
+           sodipodi:role="line">0x00 dd Callback <tspan
+   id="tspan3300"
+   style="font-size:6px;fill:#4d4d4d">VA</tspan></tspan></text>
+      <path
+         id="path3318"
+         d="m 636,572.20836 0,-44.84616"
+         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.00000002, 1.00000002;stroke-dashoffset:0;marker-start:url(#Arrow1Lstart);marker-mid:none;marker-end:url(#Arrow1Lend)" />
+      <text
+         transform="translate(-2,-2)"
+         id="text4901"
+         style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><textPath
+           dy="-2.5350621"
+           style="font-size:6px"
+           id="textPath4905"
+           xlink:href="#path3318"> null-terminated</textPath></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 640,832.36218 80,0"
+       id="path5082" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 900.95549,143.5613 31.97092,-1.19912 0,-140 27.07358,0"
+       id="path2978" />
+    <path
+       sodipodi:nodetypes="cccc"
+       id="path4435"
+       d="M 898.0291,202.65705 930,202.36218 l 0,30 27.0736,0"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.6575346px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend);filter:url(#filter4437)"
+       d="m 1151.1536,138.78236 31.9709,-0.29487 0,30 27.0736,0"
+       id="path2978-1"
+       sodipodi:nodetypes="cccc"
+       transform="matrix(0.82728112,0,0,2.7958231,218.82596,-348.69903)" />
+    <rect
+       y="232.36218"
+       x="959.74139"
+       height="89.771393"
+       width="210.25859"
+       id="rect4915"
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter3070)" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="970.0434"
+       y="242.36218"
+       id="text2575"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2577"
+         x="970.0434"
+         y="242.36218">_IMAGE_THUNK_DATA</tspan><tspan
+         sodipodi:role="line"
+         x="970.0434"
+         y="252.36218"
+         id="tspan2770">union {</tspan><tspan
+         sodipodi:role="line"
+         x="970.0434"
+         y="262.36218"
+         id="tspan2772"> 00 LPBYTE ForwarderString;</tspan><tspan
+         sodipodi:role="line"
+         x="970.0434"
+         y="272.36218"
+         id="tspan2774"> 00 PDWORD Function;</tspan><tspan
+         sodipodi:role="line"
+         x="970.0434"
+         y="282.36218"
+         id="tspan2776"> 00 dd Ordinal;</tspan><tspan
+         sodipodi:role="line"
+         x="970.0434"
+         y="292.36218"
+         id="tspan2778"> 00 PIMAGE_IMPORT_BY_NAME AddressOfData;</tspan><tspan
+         sodipodi:role="line"
+         x="970.0434"
+         y="302.36218"
+         id="tspan2780">}</tspan><tspan
+         sodipodi:role="line"
+         x="970.0434"
+         y="312.36218"
+         id="tspan2601">} IMAGE_THUNK_DATA,*PIMAGE_THUNK_DATA</tspan></text>
+    <rect
+       y="2.3621826"
+       x="961.74139"
+       height="89.771393"
+       width="210.25859"
+       id="rect4915-7"
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter3070-7)" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="972.0434"
+       y="12.362183"
+       id="text2575-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2577-1"
+         x="972.0434"
+         y="12.362183">_IMAGE_THUNK_DATA</tspan><tspan
+         sodipodi:role="line"
+         x="972.0434"
+         y="22.362183"
+         id="tspan2770-5">union {</tspan><tspan
+         sodipodi:role="line"
+         x="972.0434"
+         y="32.362183"
+         id="tspan2772-2"> 00 LPBYTE ForwarderString;</tspan><tspan
+         sodipodi:role="line"
+         x="972.0434"
+         y="42.362183"
+         id="tspan2774-7"> 00 PDWORD Function;</tspan><tspan
+         sodipodi:role="line"
+         x="972.0434"
+         y="52.362183"
+         id="tspan2776-6"> 00 dd Ordinal;</tspan><tspan
+         sodipodi:role="line"
+         x="972.0434"
+         y="62.362183"
+         id="tspan2778-1"> 00 PIMAGE_IMPORT_BY_NAME AddressOfData;</tspan><tspan
+         sodipodi:role="line"
+         x="972.0434"
+         y="72.362183"
+         id="tspan2780-4">}</tspan><tspan
+         sodipodi:role="line"
+         x="972.0434"
+         y="82.362183"
+         id="tspan2601-2">} IMAGE_THUNK_DATA,*PIMAGE_THUNK_DATA</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend);filter:url(#filter4461)"
+       d="m 1158.0291,293.5613 31.9709,-1.19912 0,-140 27.0736,0"
+       id="path2978-2" />
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter3046)"
+       id="rect4917"
+       width="240.32372"
+       height="59.680923"
+       x="1219.698"
+       y="122.36218" />
+    <g
+       id="g2980"
+       transform="translate(510,110)">
+      <text
+         id="text4935"
+         y="32.362183"
+         x="720"
+         style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="32.362183"
+           x="720"
+           id="tspan4937"
+           sodipodi:role="line">typedef struct _IMAGE_IMPORT_BY_NAME {</tspan><tspan
+           id="tspan4939"
+           y="42.362183"
+           x="720"
+           sodipodi:role="line">0x00 dw Hint</tspan><tspan
+           id="tspan4941"
+           y="52.362183"
+           x="720"
+           sodipodi:role="line">0x02 db Name[1];</tspan><tspan
+           id="tspan4943"
+           y="62.362183"
+           x="720"
+           sodipodi:role="line">} IMAGE_IMPORT_BY_NAME,*PIMAGE_IMPORT_BY_NAME</tspan></text>
+    </g>
+    <g
+       id="g4514"
+       transform="translate(-110.00001,184)">
+      <rect
+         y="268.36218"
+         x="169.69801"
+         height="89.771393"
+         width="220.30199"
+         id="rect4923"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;font-family:Lucida Console;-inkscape-font-specification:Lucida Console" />
+      <g
+         id="g4504">
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           x="180"
+           y="288.36218"
+           id="text2627"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan2629"
+             x="180"
+             y="288.36218">_IMAGE_RESOURCE_DIRECTORY</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="297.87405"
+             id="tspan2631"
+             style="font-size:6px">0x00 dd Characteristics</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="305.37405"
+             id="tspan2633"
+             style="font-size:6px">0x04 dd TimeDateStamp</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="312.87405"
+             id="tspan2635"
+             style="font-size:6px">0x08 dw MajorVersion</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="320.37405"
+             id="tspan2637"
+             style="font-size:6px">0x0a dw MinorVersion</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="333.36218"
+             id="tspan2639">0x0c dw NumberOfNamedEntries</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="348.36218"
+             id="tspan2645">0x0e dw NumberOfIdEntries</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter4538-1)"
+       id="rect4493"
+       width="230"
+       height="50"
+       x="59.529961"
+       y="544.07294" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="61.999992"
+       y="554.36212"
+       id="text4485"><tspan
+         sodipodi:role="line"
+         id="tspan4487"
+         x="61.999992"
+         y="554.36212">IMAGE_RESOURCE_DIRECTORY_ENTRY</tspan><tspan
+         sodipodi:role="line"
+         x="61.999992"
+         y="569.36212"
+         id="tspan4489">0x00 dd Name</tspan><tspan
+         sodipodi:role="line"
+         x="61.999992"
+         y="584.36212"
+         id="tspan4491">0x04 dd OffsetToData</tspan></text>
+    <g
+       id="g4885"
+       transform="translate(-10,-340)">
+      <g
+         transform="translate(190,464)"
+         id="g4514-7">
+        <rect
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="rect4923-4"
+           width="220.30199"
+           height="89.771393"
+           x="169.69801"
+           y="268.36218" />
+        <g
+           id="g4504-2">
+          <text
+             sodipodi:linespacing="125%"
+             id="text2627-7"
+             y="288.36218"
+             x="180"
+             style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+             xml:space="preserve"><tspan
+               y="288.36218"
+               x="180"
+               id="tspan2629-7"
+               sodipodi:role="line">_IMAGE_RESOURCE_DIRECTORY</tspan><tspan
+               style="font-size:6px"
+               id="tspan2631-9"
+               y="297.87405"
+               x="180"
+               sodipodi:role="line">0x00 dd Characteristics</tspan><tspan
+               style="font-size:6px"
+               id="tspan2633-3"
+               y="305.37405"
+               x="180"
+               sodipodi:role="line">0x04 dd TimeDateStamp</tspan><tspan
+               style="font-size:6px"
+               id="tspan2635-1"
+               y="312.87405"
+               x="180"
+               sodipodi:role="line">0x08 dw MajorVersion</tspan><tspan
+               style="font-size:6px"
+               id="tspan2637-9"
+               y="320.37405"
+               x="180"
+               sodipodi:role="line">0x0a dw MinorVersion</tspan><tspan
+               id="tspan2639-8"
+               y="333.36218"
+               x="180"
+               sodipodi:role="line">0x0c dw NumberOfNamedEntries</tspan><tspan
+               id="tspan2645-6"
+               y="348.36218"
+               x="180"
+               sodipodi:role="line">0x0e dw NumberOfIdEntries</tspan></text>
+        </g>
+      </g>
+      <rect
+         y="824.07294"
+         x="359.52997"
+         height="50"
+         width="230"
+         id="rect4493-5"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter4538-1-5)" />
+      <text
+         id="text4485-0"
+         y="834.36218"
+         x="362"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           y="834.36218"
+           x="362"
+           id="tspan4487-2"
+           sodipodi:role="line">IMAGE_RESOURCE_DIRECTORY_ENTRY</tspan><tspan
+           id="tspan4489-8"
+           y="849.36218"
+           x="362"
+           sodipodi:role="line">0x00 dd Name</tspan><tspan
+           id="tspan4491-6"
+           y="864.36218"
+           x="362"
+           sodipodi:role="line">0x04 dd OffsetToData</tspan></text>
+    </g>
+    <g
+       id="g4514-3"
+       transform="translate(479.99999,124)">
+      <rect
+         y="268.36218"
+         x="169.69801"
+         height="89.771393"
+         width="220.30199"
+         id="rect4923-44"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;font-family:Lucida Console;-inkscape-font-specification:Lucida Console" />
+      <g
+         id="g4504-6">
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           x="180"
+           y="288.36218"
+           id="text2627-0"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan2629-6"
+             x="180"
+             y="288.36218">_IMAGE_RESOURCE_DIRECTORY</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="297.87405"
+             id="tspan2631-6"
+             style="font-size:6px">0x00 dd Characteristics</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="305.37405"
+             id="tspan2633-1"
+             style="font-size:6px">0x04 dd TimeDateStamp</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="312.87405"
+             id="tspan2635-8"
+             style="font-size:6px">0x08 dw MajorVersion</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="320.37405"
+             id="tspan2637-4"
+             style="font-size:6px">0x0a dw MinorVersion</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="333.36218"
+             id="tspan2639-9">0x0c dw NumberOfNamedEntries</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="348.36218"
+             id="tspan2645-63">0x0e dw NumberOfIdEntries</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4493-7"
+       width="230"
+       height="50"
+       x="649.52997"
+       y="484.07294" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="652"
+       y="494.36212"
+       id="text4485-8"><tspan
+         sodipodi:role="line"
+         id="tspan4487-8"
+         x="652"
+         y="494.36212">IMAGE_RESOURCE_DIRECTORY_ENTRY</tspan><tspan
+         sodipodi:role="line"
+         x="652"
+         y="509.36212"
+         id="tspan4489-2">0x00 dd Name</tspan><tspan
+         sodipodi:role="line"
+         x="652"
+         y="524.36212"
+         id="tspan4491-9">0x04 dd OffsetToData</tspan></text>
+    <g
+       id="g4514-3-1"
+       transform="translate(479.99999,274)">
+      <rect
+         y="268.36218"
+         x="169.69801"
+         height="89.771393"
+         width="220.30199"
+         id="rect4923-44-3"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;font-family:Lucida Console;-inkscape-font-specification:Lucida Console" />
+      <g
+         id="g4504-6-5">
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           x="180"
+           y="288.36218"
+           id="text2627-0-9"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan2629-6-8"
+             x="180"
+             y="288.36218">_IMAGE_RESOURCE_DIRECTORY</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="297.87405"
+             id="tspan2631-6-4"
+             style="font-size:6px">0x00 dd Characteristics</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="305.37405"
+             id="tspan2633-1-0"
+             style="font-size:6px">0x04 dd TimeDateStamp</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="312.87405"
+             id="tspan2635-8-7"
+             style="font-size:6px">0x08 dw MajorVersion</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="320.37405"
+             id="tspan2637-4-6"
+             style="font-size:6px">0x0a dw MinorVersion</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="333.36218"
+             id="tspan2639-9-3">0x0c dw NumberOfNamedEntries</tspan><tspan
+             sodipodi:role="line"
+             x="180"
+             y="348.36218"
+             id="tspan2645-63-6">0x0e dw NumberOfIdEntries</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4493-7-1"
+       width="230"
+       height="50"
+       x="649.52997"
+       y="634.07294" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="652"
+       y="644.36212"
+       id="text4485-8-5"><tspan
+         sodipodi:role="line"
+         id="tspan4487-8-4"
+         x="652"
+         y="644.36212">IMAGE_RESOURCE_DIRECTORY_ENTRY</tspan><tspan
+         sodipodi:role="line"
+         x="652"
+         y="659.36212"
+         id="tspan4489-2-2">0x00 dd Name</tspan><tspan
+         sodipodi:role="line"
+         x="652"
+         y="674.36212"
+         id="tspan4491-9-0">0x04 dd OffsetToData</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 245.96388,814.03221 310,812.36218"
+       id="path5004" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 579.99999,492.36215 30,0 0,-90 40,0"
+       id="path5006" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 590.95228,503.93495 29.04771,0 0,48.4272 30,0"
+       id="path5008" />
+    <g
+       id="g4885-4"
+       transform="translate(-10,-160)">
+      <g
+         transform="translate(190,464)"
+         id="g4514-7-1">
+        <rect
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="rect4923-4-2"
+           width="220.30199"
+           height="89.771393"
+           x="169.69801"
+           y="268.36218" />
+        <g
+           id="g4504-2-0">
+          <text
+             sodipodi:linespacing="125%"
+             id="text2627-7-0"
+             y="288.36218"
+             x="180"
+             style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+             xml:space="preserve"><tspan
+               y="288.36218"
+               x="180"
+               id="tspan2629-7-1"
+               sodipodi:role="line">_IMAGE_RESOURCE_DIRECTORY</tspan><tspan
+               style="font-size:6px"
+               id="tspan2631-9-4"
+               y="297.87405"
+               x="180"
+               sodipodi:role="line">0x00 dd Characteristics</tspan><tspan
+               style="font-size:6px"
+               id="tspan2633-3-6"
+               y="305.37405"
+               x="180"
+               sodipodi:role="line">0x04 dd TimeDateStamp</tspan><tspan
+               style="font-size:6px"
+               id="tspan2635-1-0"
+               y="312.87405"
+               x="180"
+               sodipodi:role="line">0x08 dw MajorVersion</tspan><tspan
+               style="font-size:6px"
+               id="tspan2637-9-7"
+               y="320.37405"
+               x="180"
+               sodipodi:role="line">0x0a dw MinorVersion</tspan><tspan
+               id="tspan2639-8-1"
+               y="333.36218"
+               x="180"
+               sodipodi:role="line">0x0c dw NumberOfNamedEntries</tspan><tspan
+               id="tspan2645-6-7"
+               y="348.36218"
+               x="180"
+               sodipodi:role="line">0x0e dw NumberOfIdEntries</tspan></text>
+        </g>
+      </g>
+      <rect
+         y="824.07294"
+         x="359.52997"
+         height="50"
+         width="230"
+         id="rect4493-5-7"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter4538-1-5-9)" />
+      <text
+         id="text4485-0-7"
+         y="834.36218"
+         x="362"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           y="834.36218"
+           x="362"
+           id="tspan4487-2-7"
+           sodipodi:role="line">IMAGE_RESOURCE_DIRECTORY_ENTRY</tspan><tspan
+           id="tspan4489-8-3"
+           y="849.36218"
+           x="362"
+           sodipodi:role="line">0x00 dd Name</tspan><tspan
+           id="tspan4491-6-3"
+           y="864.36218"
+           x="362"
+           sodipodi:role="line">0x04 dd OffsetToData</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 289.99999,552.36215 25.71429,0 0,-150 34.28571,0"
+       id="path5006-5" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 300.95228,563.93495 24.12835,0 0,18.4272 24.91936,0"
+       id="path5008-9" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="472.90305"
+       y="32.652405"
+       id="text5141"><tspan
+         sodipodi:role="line"
+         id="tspan5143"
+         x="472.90305"
+         y="32.652405">0x00 dd Function</tspan></text>
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5674808;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter5147-9)"
+       id="rect5145-2"
+       width="140"
+       height="30"
+       x="581.31598"
+       y="492.21707"
+       transform="matrix(0.77631444,0,0,1,10.251,-359.85489)" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="474.21902"
+       y="152.50729"
+       id="text5141-5"><tspan
+         sodipodi:role="line"
+         id="tspan5143-0"
+         x="474.21902"
+         y="152.50729">0x00 dd NameOrdinal</tspan></text>
+    <rect
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.59761429;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter5147-4)"
+       id="rect5145-9"
+       width="140"
+       height="30"
+       x="582"
+       y="432.36218"
+       transform="matrix(0.7,0,0,1,54.81901,-359.85489)" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="474.90305"
+       y="92.652397"
+       id="text5141-8"><tspan
+         sodipodi:role="line"
+         id="tspan5143-4"
+         x="474.90305"
+         y="92.652397">0x00 dd Name</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="479.20819"
+       y="905.70227"
+       id="text5272"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5274"
+         x="479.20819"
+         y="905.70227">IMAGE_BASE_RELOCATION</tspan><tspan
+         sodipodi:role="line"
+         x="479.20819"
+         y="920.70227"
+         id="tspan5276">0x00 dd VirtualAddress</tspan><tspan
+         sodipodi:role="line"
+         x="479.20819"
+         y="935.70227"
+         id="tspan5282">0x04 dd SizeOfBlock</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="480"
+       y="952.36218"
+       id="text5272-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="480"
+         y="952.36218"
+         id="tspan5280-8" /><tspan
+         sodipodi:role="line"
+         x="480"
+         y="967.36218"
+         id="tspan5282-8">0x00 dw TypeOffset</tspan></text>
+  </g>
+</svg>
