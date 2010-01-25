@@ -2,6 +2,100 @@
 ; not complete yet
 ; compile with Yasm
 
+;missing ops? invvpid
+;missing ops? ntaken
+;missing ops? scaled
+;missing ops? ud
+
+; missing sequences
+;0a
+;0d
+;1d
+;25
+;2d
+;2f
+;35
+;3d
+;3f
+;9c
+;9c
+;9d
+;9d
+;9e
+;9f
+;c2
+;c3
+;c8
+;c9
+;ca
+;cc
+;cd
+;ce
+;cf
+;cf
+;d40a
+;d50a
+;d6
+;d6
+;d7
+;d8d1
+;d8d9
+;d9c9
+;dde1
+;dde9
+;dec1
+;dec9
+;dee1
+;dee9
+;def1
+;def9
+;dfe0
+;e4
+;e5
+;e6
+;e7
+;f1
+;f1
+;f4
+;f5
+;f8
+;f9
+;fa
+;fb
+;fd
+;0f24
+;0f24
+;0f26
+;0f26
+;0f90
+;0f91
+;0f92
+;0f93
+;0f94
+;0f95
+;0f96
+;0f97
+;0f98
+;0f99
+;0f9a
+;0f9b
+;0f9c
+;0f9d
+;0f9e
+;0f9f
+;0fba
+;0fba
+;0fba
+;0fba
+;0fd4
+;660f3a15
+;660fd7
+;9bdbe0
+;9bdbe1
+;9bdbe4
+;9bdfe0
+;f30fb8
+
 bits 32
 
 %define int1 db 0f1h
@@ -17,7 +111,6 @@ bits 32
 %define PREFIX_BRANCH_NOT_TAKEN db 2eh
 
 jmp _start
-_start:
 
 ; one byte, no arguments
     cwde                                    ;98
@@ -43,9 +136,9 @@ _
 _
     leave                                   ;C9 high-level procedure exit
 _
-    int1                                    ;F1 ICE BreakPoint/INT01, undocumented = icebp
+    int1                                    ;F1 = icebp
     int 1                                   ;CD 01
-    int3                                    ;CC interruption 3 (not 'int 3')
+    int3                                    ;CC
     int 3                                   ;CD 03
 _
     into                                    ;CE interruption if overflow flag is set
@@ -96,26 +189,26 @@ _
 _
     pop eax                                 ;58
     pop ecx                                 ;59
-    pop edx                                 ;5A
-    pop ebx                                 ;5B
-    pop esp                                 ;5C
-    pop ebp                                 ;5D
-    pop esi                                 ;5E
-    pop edi                                 ;5F
+    pop edx                                 ;5a
+    pop ebx                                 ;5b
+    pop esp                                 ;5c
+    pop ebp                                 ;5d
+    pop esi                                 ;5e
+    pop edi                                 ;5f
 _
     push dword [eax]                        ;ff30
     pop dword [eax]                         ;8f00
 _
     ; standard segment order: es, cs, ss, ds
     push es                                 ;06
-    push cs                                 ;0E
+    push cs                                 ;0e
     push ss                                 ;16
-    push ds                                 ;1E
+    push ds                                 ;1e
 _
     pop es                                  ;07
     ; no pop cs
     pop ss                                  ;17
-    pop ds                                  ;1F
+    pop ds                                  ;1f
 _
     push 0                                  ;6a 00
     push 01234578h                          ;68 00000000
@@ -173,16 +266,9 @@ _
     loop   $ + 2                            ;e2 xx decrement ecx then jump if ecx is not null
     loope  $ + 2      ;=loopz               ;e1 xx decrement ecx then jump if ecx is not null and Z is set
     loopne $ + 2      ;=loopnz              ;e0 xx decrement ecx then jump if ecx is not null and Z is not set
-    ;same thing, on cx (loopw for some disassembler)
-    PREFIX_OPERANDSIZE
-    loop   $ + 2                            ;67e2 xx decrement ?ecx then jump if ?cx is not null
-    PREFIX_OPERANDSIZE
-    loope $ + 2                             ;67e0 xx decrement ?ecx then jump if ?cx is not null and Z is not set
-    PREFIX_OPERANDSIZE
-    loopne $ + 2                            ;67e0 xx decrement ?ecx then jump if ?cx is not null and Z is not set
 _
     jecxz  $ + 2                            ;e3 xx jump if ecx is null
-    jcxz  $ + 2                             ;e3 xx jump if cx is null
+    jcxz  $ + 2                             ;67e3 xx jump if cx is null
 _
     ; 2 arguments, one immediate word, one immediate byte, Iw/Ib in Intel docs
     enter 03141h,059h                       ;C8 dw0, db1
@@ -196,18 +282,21 @@ _
     adx                                     ;d4 TODO
     amx                                     ;d5 TODO
 _
-    adc [eax], al                           ;10 xx add + carry
-    adc [eax], eax                          ;11 xx add + carry
-    adc al, [eax]                           ;12 xx add + carry
-    adc eax, [eax]                          ;13 xx add + carry
-    adc eax, 012345678h                     ;13 xx add + carry
-    adc al, 0                               ;14 xx add + carry
-    add [eax], al                           ;00 xx add
-    add [eax], eax                          ;01 xx add
-    add al, [eax]                           ;02 xx add
-    add eax, [eax]                          ;03 xx add
-    add eax, 012345678h                     ;03 xx add
-    add al, 0                               ;04 xx add
+    ; add + carry
+    adc [eax], al                           ;10
+    adc [eax], eax                          ;11
+    adc al, [eax]                           ;12
+    adc eax, [eax]                          ;13
+    adc eax, 012345678h                     ;13
+    adc al, 0                               ;14
+    adc eax, 0                              ;15
+    add [eax], al                           ;00
+    add [eax], eax                          ;01
+    add al, [eax]                           ;02
+    add eax, [eax]                          ;03
+    add eax, 012345678h                     ;03
+    add al, 0                               ;04
+    add eax, 0                              ;05
     add byte [eax], 0x0                     ;8000 00
     add dword [eax], 0x0                    ;8100 00000000
     add byte [eax], 0x0                     ;8200 00    TODO enforce encoding
@@ -218,6 +307,7 @@ _
     and eax, [eax]                          ;23 xx logical and
     and eax, 012345678h                     ;23 xx logical and
     and al, 0                               ;24 xx logical and
+    and eax, 0                              ;25
     cmp [eax], al                           ;38 xx compare
     cmp [eax], eax                          ;39 xx compare
     cmp al, [eax]                           ;3a xx compare
@@ -281,7 +371,7 @@ _
 _
     ;Jz
     call 012345678h                         ;e8
-    call far 0x0:0x0                        ;9a 00000000 0000 = callf
+    call far 0x0:0x0    ;= callf            ;9a 00000000 0000
     call [eax]                              ;ff10
     call far [eax]                          ;ff18
     jmp short $ + 2                         ;eb
@@ -366,8 +456,8 @@ _
 _
     popcnt eax , [eax]                      ;0fb8
 _
-    crc32 eax, byte [eax]                   ;f20f 38 f0
-    crc32 eax, [eax]                        ;f20f 38 f1
+    crc32 eax, byte [eax]                   ;f20f38f0
+    crc32 eax, [eax]                        ;f20f38f1
 _
     syscall                                 ;0f05 64b only ?
     sysret                                  ;0f07 64b only ?
@@ -744,12 +834,6 @@ _
     imul eax, [eax], 0                      ;6b0000
     imul eax, [eax]                         ;0faf00
 _
-    insb                                    ;6c
-    insd                                    ;6d
-_
-    outsb                                   ;6e
-    outsd                                   ;6f
-_
 ; FLAGS
 ; b = c = nae
 ; nb = nc = ae
@@ -853,21 +937,39 @@ _
     xchg esi, eax                           ;96
     xchg edi, eax                           ;97
 _
+;   default : movs
     movsb                                   ;a4
     movsw                                   ;a5
     movsd                                   ;a5
+;   default : cmps
     cmpsb                                   ;a6
     cmpsw                                   ;a7
     cmpsd                                   ;a7
+;   default : stos
     stosb                                   ;aa
     stosw                                   ;ab
     stosd                                   ;ab
+;   default : lods
     lodsb                                   ;ac
     lodsw                                   ;ad
     lodsd                                   ;ad
+;   default : scas
     scasb                                   ;ae
     scasw                                   ;af
     scasd                                   ;af
+_
+    ; default: ins
+    insb                                    ;6c
+    PREFIX_OPERANDSIZE
+    insd                                    ;666d = insw
+    insd                                    ;6d
+_ 
+    ; default: outs
+    outsb                                   ;6e
+    PREFIX_OPERANDSIZE
+    outsd                                   ;666f = outsw
+    outsd                                   ;6f
+_
 _
     rol byte [eax], 0x0                     ;c000 00
     rol dword [eax], 0x0                    ;c100 00
@@ -1423,11 +1525,11 @@ _
     pmulld xmm0, xmm0                       ;660f3840c0
     phminposuw xmm0, xmm0                   ;660f3841c0
 _
-    invept ; TODO manually
-    invvpid
+    db 66h,0fh,38h,80h,0 ;invept eax, [eax] ;660f3880
+    db 66h,0fh,38h,81h,0 ;invvpid eax, [eax];660f3881
 _
-    movbe [eax], eax                        ;0f38f100
     movbe eax, [eax]                        ;0f38f000
+    movbe [eax], eax                        ;0f38f100
 _
     psignb xmm0, xmm0                       ;660f3808c0
     psignw xmm0, xmm0                       ;660f3809c0
@@ -1506,7 +1608,6 @@ _
     mov eax, [esp]                          ;8b0424
 _
     mov eax, [fs:ebp]                       ;648b4500 'undetermined' but works, fault under 64b
-
     PREFIX_FS
     movsd ;dword [es:edi], dword [fs:esi]   ;64a5 same trick with cmps*
 _
@@ -1518,7 +1619,7 @@ _
     mov [gs:eax], eax                       ;65 8900
 _
     movsb                                   ;a4
-    repz movsb                              ;f3a4 = repe
+    rep movsb                              ;f3a4 = repz = repe
     repnz movsb                             ;f2a4 = repne
 _
     mov [eax], eax                          ;8900
@@ -1527,14 +1628,21 @@ _
 _
     add [eax], al                           ;0000
     add [bx+si], al                         ;67 0000
-    PREFIX_ADDRESSSIZE
-    jmp $ + 2                               ;66 EB00 will jump to (word)<NEXT EIP>
-    PREFIX_ADDRESSSIZE
-    loop $ + 2                              ;66e200
-    PREFIX_ADDRESSSIZE
-    call $ + 5                              ;66e8000000
-    PREFIX_ADDRESSSIZE
+_
+    ; jump/loop/call/ret to IP, not EIP (higher bits zero-ed)
+    PREFIX_OPERANDSIZE
+    jmp $ + 2                               ;66 EB00
+    PREFIX_OPERANDSIZE
+    loop $ + 3                              ;66e200
+    call word $ + 4                         ;66e80000
+    PREFIX_OPERANDSIZE
     ret                                     ;66e3
+_
+    ; repeat on cx
+    PREFIX_ADDRESSSIZE
+    loop   $ + 2                            ;67e2 xx decrement ?ecx then jump if ?cx is not null
+    PREFIX_ADDRESSSIZE
+    rep movsb                               ;67f36a4 will use cx as a counter for repetition
 _
 ;LWP AMD LightWeight Profiling
 db 8fh, 0e9h, 7ch, 12h, 0c0h                ;8fe97c12c0      llwpcb eax          Load LWPCB address
@@ -1543,16 +1651,16 @@ db 8fh, 0eah, 78h, 12h, 0c8h, 0, 0          ;8fea7812c80000  lwpval ax, eax, 0x0
 db 8fh, 0eah, 78h, 12h, 0c0h, 0, 0          ;8fea7812c00000  lwpins ax, eax, 0x0 Insert User Event Record in LWP Ring Buffer
 _
 ; VIA Padlock
-xstore                                      ;0fa7c0   store random bytes  = xstoreng
-rep xstore                                  ;f30fa7c0 store rep count random bytes
-rep xcryptecb                               ;f30fa7c8 encrypt/decrypt REP count 16-byte blocks using electronic code book
-rep xcryptcbc                               ;f30fa7d0 encrypt/decrypt REP count 16-byte blocks using cipher block chaining
-rep xcryptctr                               ;f30fa7d8 encrypt/decrypt REP count 16-byte blocks using counter mode
-rep xcryptcfb                               ;f30fa7e0 encrypt/decrypt REP count 16-byte blocks using cipher feedback
-rep xcryptofb                               ;f30fa7e8 encrypt/decrypt REP count 16-byte blocks using output feedback
-rep xsha1                                   ;f30fa6c8 calculate SHA1 as specified by FIPS 180-2
-rep xsha256                                 ;f30fa6d0 calculate SHA256 as specified by FIPS 180-2
-rep montmul                                 ;f30fa6c0 montgomery multiplier
+    xstore                                  ;0fa7c0   store random bytes  = xstoreng
+    rep xstore                              ;f30fa7c0 store rep count random bytes
+    rep xcryptecb                           ;f30fa7c8 encrypt/decrypt REP count 16-byte blocks using electronic code book
+    rep xcryptcbc                           ;f30fa7d0 encrypt/decrypt REP count 16-byte blocks using cipher block chaining
+    rep xcryptctr                           ;f30fa7d8 encrypt/decrypt REP count 16-byte blocks using counter mode
+    rep xcryptcfb                           ;f30fa7e0 encrypt/decrypt REP count 16-byte blocks using cipher feedback
+    rep xcryptofb                           ;f30fa7e8 encrypt/decrypt REP count 16-byte blocks using output feedback
+    rep xsha1                               ;f30fa6c8 calculate SHA1 as specified by FIPS 180-2
+    rep xsha256                             ;f30fa6d0 calculate SHA256 as specified by FIPS 180-2
+    rep montmul                             ;f30fa6c0 montgomery multiplier
 _
 ; just to make the opcodes present, to be moved...
 bits 64
@@ -1563,5 +1671,7 @@ bits 64
     cdqe                                    ;98 64b only
     cmpxchg16b [eax]                        ;67480f0c7 64b mode
     db 0fh, 00, 78h,00  ; jmpe              ;0f007800
+    ; jmpe 0 ; 0fb8? TODO
 
+_start:
 ; Ange Albertini 2009-2010.
