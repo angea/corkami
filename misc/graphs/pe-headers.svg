@@ -187,23 +187,23 @@
        height="154.99991"
        width="259.00003"
        id="rect3936"
-       style="fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <rect
        y="56.582958"
        x="321.92328"
        height="155.06058"
        width="318.53497"
        id="rect3914"
-       style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.50000000000000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
-       style="opacity:0.98;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997000000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3355"
        width="166.03549"
        height="164.875"
        x="69.487793"
        y="57.659149" />
     <rect
-       style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997000000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3884"
        width="298.06613"
        height="379.35178"
@@ -321,7 +321,7 @@
        height="90.063866"
        width="273.5834"
        id="rect4002"
-       style="opacity:1;fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:0.49999997000000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="opacity:1;fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.04900002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -579,7 +579,7 @@
          id="tspan2567"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;stroke-width:1.04900002;stroke-miterlimit:4;stroke-dasharray:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x60 DataDirectory</tspan></text>
     <rect
-       style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.50000000000000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter2997)"
+       style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter2997)"
        id="rect3996"
        width="220.21471"
        height="110.14946"
@@ -654,7 +654,7 @@
        height="30.002766"
        width="192.81346"
        id="rect3984"
-       style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.50000005999999997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter2997)" />
+       style="opacity:1;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter2997)" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
@@ -688,7 +688,7 @@
          y="303.694" /></text>
     <path
        style="font-size:12px;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.86562878px;stroke-linecap:butt;stroke-linejoin:miter;marker-start:none;marker-end:url(#Arrow1Lend);stroke-opacity:1"
-       d="M 215.38387,214.81211 C 321.1217,214.81211 213.16195,56.659299 320.41033,56.659299"
+       d="m 215.38387,214.81211 c 58.50778,0 59.13071,-158.152811 105.02646,-158.152811"
        id="path5651"
        sodipodi:nodetypes="cc" />
     <path
@@ -821,15 +821,15 @@
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;stroke-width:1.04900002;stroke-miterlimit:4;stroke-dasharray:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x18 OptionalHeader</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       x="-146.65915"
-       y="266.48779"
+       style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="-51.123096"
+       y="300.146"
        id="text4159"
-       transform="matrix(0,-1,1,0,0,0)"><tspan
+       transform="matrix(0.32212032,-0.94669874,0.94669874,0.32212032,0,0)"><tspan
          sodipodi:role="line"
          id="tspan4161"
-         x="-146.65915"
-         y="266.48779">offset</tspan></text>
+         x="-51.123096"
+         y="300.146">offset</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
