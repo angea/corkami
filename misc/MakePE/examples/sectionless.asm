@@ -18,8 +18,8 @@ istruc IMAGE_NT_HEADERS
 iend
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
-;    at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS    ; we don't need you today
-    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
+;    at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS     ; we don't need you today
+;    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER ; you neither
     at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_RELOCS_STRIPPED | IMAGE_FILE_EXECUTABLE_IMAGE | \
         IMAGE_FILE_LINE_NUMS_STRIPPED | IMAGE_FILE_LOCAL_SYMS_STRIPPED | IMAGE_FILE_32BIT_MACHINE
 iend
