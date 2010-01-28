@@ -22,6 +22,19 @@
   <defs
      id="defs4">
     <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="StopL"
+       style="overflow:visible">
+      <path
+         id="path4231"
+         d="M 0.0,5.65 L 0.0,-5.65"
+         style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
        inkscape:stockid="DiamondMend"
        orient="auto"
        refY="0.0"
@@ -74,52 +87,6 @@
          transform="scale(0.4) translate(7.4, 1)" />
     </marker>
     <marker
-       style="overflow:visible"
-       id="DistanceEnd"
-       refX="0.0"
-       refY="0.0"
-       orient="auto"
-       inkscape:stockid="DistanceEnd">
-      <g
-         id="g4084">
-        <path
-           style="fill:none;stroke:#ffffff;stroke-width:1.15;stroke-linecap:square"
-           d="M 0,0 L -2,0"
-           id="path2316" />
-        <path
-           style="fill:#000000;fill-rule:evenodd;stroke:none"
-           d="M 0,0 L -13,4 L -9,0 -13,-4 L 0,0 z "
-           id="path2312" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square"
-           d="M 0,-4 L 0,40"
-           id="path2314" />
-      </g>
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="DistanceStart"
-       refX="0.0"
-       refY="0.0"
-       orient="auto"
-       inkscape:stockid="DistanceStart">
-      <g
-         id="g2300">
-        <path
-           style="fill:none;stroke:#ffffff;stroke-width:1.15;stroke-linecap:square"
-           d="M 0,0 L 2,0"
-           id="path2306" />
-        <path
-           style="fill:#000000;fill-rule:evenodd;stroke:none"
-           d="M 0,0 L 13,4 L 9,0 13,-4 L 0,0 z "
-           id="path2302" />
-        <path
-           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square"
-           d="M 0,-4 L 0,40"
-           id="path2304" />
-      </g>
-    </marker>
-    <marker
        inkscape:stockid="Arrow2Mend"
        orient="auto"
        refY="0.0"
@@ -132,19 +99,6 @@
          d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
          transform="scale(0.6) rotate(180) translate(0,0)" />
     </marker>
-    <marker
-       inkscape:stockid="DotL"
-       orient="auto"
-       refY="0.0"
-       refX="0.0"
-       id="DotL"
-       style="overflow:visible">
-      <path
-         id="path4090"
-         d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;marker-end:none"
-         transform="scale(0.8) translate(7.4, 1)" />
-    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -156,9 +110,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.36160078"
-     inkscape:cx="334.00885"
-     inkscape:cy="511.04247"
+     inkscape:zoom="5.0272569"
+     inkscape:cx="293.24121"
+     inkscape:cy="838.10986"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -704,7 +658,7 @@
          x="346.14642"
          y="303.694" /></text>
     <path
-       style="font-size:12px;fill:none;stroke:#000000;stroke-width:0.56887078;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.56887079, 0.56887079;stroke-dashoffset:0;marker-start:url(#DistanceStart);marker-end:url(#DistanceEnd)"
+       style="font-size:12px;fill:none;stroke:#000000;stroke-width:0.56899999999999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.56899999999999995, 0.56899999999999995;stroke-dashoffset:0;marker-start:url(#StopL);marker-end:url(#DotM)"
        d="m 364.91687,385.29096 0,380.50187"
        id="path8794" />
     <text
@@ -923,8 +877,8 @@
          x="-760.19073"
          y="616.04126">Data Directories</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#DotL)"
-       d="m 256.38979,203.80176 c 42.95775,0 47.33921,-0.0447 47.33921,13.45832 1.91815,13.64849 1.16006,13.45833 47.33921,13.45833"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#DiamondMend)"
+       d="m 256.38979,203.80176 c 44.5823,0 49.12945,-0.0447 49.12945,13.45832 0,13.45102 0.40786,13.45833 49.12945,13.45833"
        id="path3837"
        sodipodi:nodetypes="ccc" />
     <path
@@ -948,11 +902,11 @@
        d="m 475.71474,480.31431 13.32429,0"
        id="path4859-14" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
-       d="m 204.52887,592.51284 21.7521,0"
+       style="fill:none;stroke:#000000;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 204.52887,592.51328 23.35223,0"
        id="path4859-2" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotL)"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotM)"
        d="m 204.63228,572.34251 21.02012,0"
        id="path3837-8" />
     <path
@@ -969,10 +923,6 @@
        style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#DiamondMend)"
        d="m 556.10585,835.58028 13.32429,0"
        id="path4859-4" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#DiamondMend)"
-       d="m 563.29672,798.4183 13.32429,0"
-       id="path4859-4-1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#DiamondMend)"
        d="m 204.37915,582.43246 24.60812,0"
@@ -1089,5 +1039,9 @@
        height="38.912296"
        x="122.54147"
        y="561.33215" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotM)"
+       d="m 590.01773,328.65915 21.02012,0"
+       id="path3837-8-4" />
   </g>
 </svg>
