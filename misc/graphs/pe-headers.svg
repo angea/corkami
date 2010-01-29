@@ -111,9 +111,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.7456588"
-     inkscape:cx="590.94281"
-     inkscape:cy="781.38181"
+     inkscape:zoom="2.3164039"
+     inkscape:cx="632.06592"
+     inkscape:cy="821.73386"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -506,10 +506,10 @@
        id="text3916"
        style="font-size:8px;font-style:normal;font-weight:normal;fill:#808080;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"
-       x="590.8291"
+       x="586.8291"
        y="237.04248"><tspan
          style="fill:#4d4d4d"
-         id="tspan2554">IMAGE_NT_HEADER[32/64]</tspan></text>
+         id="tspan2554">IMAGE_NT_HEADERS[32/64]</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-weight:normal;fill:#808080;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
