@@ -1,3 +1,7 @@
+    cmpxchg486 [eax], eax                   ;67660fa700
+    cmpxchg486 [eax], ax                    ;7f0fa700
+    cmpxchg486 [eax], al                    ;670fa600
+    
 ; A file that contains most x86 opcodes, including AVX, SSE, FPU...
 ; not complete yet
 ; compile with Yasm
@@ -5,7 +9,9 @@
 ;missing ops? invvpid
 ;missing ops? ntaken
 ;missing ops? scaled
-;missing ops? ud
+;umov eax, eax
+;xbts [eax], eax
+;ibts eax, eax
 
 ; missing sequences
 ;0a
@@ -140,6 +146,8 @@ _
     int 1                                   ;CD 01
     int3                                    ;CC
     int 3                                   ;CD 03
+    smi                                     ;F1 (386)
+
 _
     into                                    ;CE interruption if overflow flag is set
 _
@@ -206,7 +214,8 @@ _
     push ds                                 ;1e
 _
     pop es                                  ;07
-    ; no pop cs
+    db 0fh ; originally pop cs in 16b       ;0f now used to escape
+    db 0b9h                                 ; turning previous 0f in ud1
     pop ss                                  ;17
     pop ds                                  ;1f
 _
@@ -382,7 +391,9 @@ _
 _
     clts                                    ;0f06
 _
-    loadall                                 ;0f07
+    loadall                                 ;0f07   loadall386
+    db 0fh, 05h     ; loadall286            ;0f05
+
 _
 ;   getsec                                  ;0f37 not in yasm
     db 0fh, 37h,
@@ -459,14 +470,13 @@ _
     crc32 eax, byte [eax]                   ;f20f38f0
     crc32 eax, [eax]                        ;f20f38f1
 _
-    syscall                                 ;0f05 64b only ?
-    sysret                                  ;0f07 64b only ?
-_
     clts                                    ;0f06
 _
     invd                                    ;0f08
     wbinvd                                  ;0f09
 _
+    db 0fh, 0ffh    ; ud0                   ;0fff
+    ud1                                     ;0fb9
     ud2                                     ;0f0b
 _
     prefetch [eax]                          ;0f0d00
@@ -1664,6 +1674,8 @@ _
 _
 ; just to make the opcodes present, to be moved...
 bits 64
+    syscall                                 ;0f05 64b only ?
+    sysret                                  ;0f07 64b only ?
     pextrq [eax], xmm0, 0                   ;660f3a16 64b only (for yasm)
     pinsrd xmm0, [eax], 0                   ;660f3a22 64b only (for yasm)
     pinsrq xmm0, [eax], 0                   ;660f3a22 64b only (for yasm)
