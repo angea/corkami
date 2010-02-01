@@ -1,3 +1,10 @@
+;0f24000000                     
+fmaddps     xmm0, xmm0, xmm0, [eax]
+
+ ;660f3a150000                   
+ pextrw      [eax], xmm0, 0x0
+;660fd7c0                       
+pmovmskb    eax, xmm0
     cmpxchg486 [eax], eax                   ;67660fa700
     cmpxchg486 [eax], ax                    ;7f0fa700
     cmpxchg486 [eax], al                    ;670fa600
@@ -14,88 +21,16 @@
 ;ibts eax, eax
 
 ; missing sequences
-;0a
-;0d
-;1d
-;25
-;2d
-;2f
-;35
-;3d
-;3f
-;9c
-;9c
-;9d
-;9d
-;9e
-;9f
-;c2
-;c3
-;c8
-;c9
-;ca
-;cc
-;cd
-;ce
-;cf
-;cf
-;d40a
-;d50a
-;d6
-;d6
-;d7
-;d8d1
-;d8d9
-;d9c9
-;dde1
-;dde9
-;dec1
-;dec9
-;dee1
-;dee9
-;def1
-;def9
 ;dfe0
-;e4
-;e5
-;e6
-;e7
-;f1
-;f1
-;f4
-;f5
-;f8
-;f9
-;fa
-;fb
-;fd
 ;0f24
 ;0f24
 ;0f26
 ;0f26
-;0f90
-;0f91
-;0f92
-;0f93
-;0f94
-;0f95
-;0f96
-;0f97
-;0f98
-;0f99
-;0f9a
-;0f9b
-;0f9c
-;0f9d
-;0f9e
-;0f9f
 ;0fba
 ;0fba
 ;0fba
 ;0fba
 ;0fd4
-;660f3a15
-;660fd7
 ;9bdbe0
 ;9bdbe1
 ;9bdbe4
@@ -124,52 +59,52 @@ jmp _start
     cdq                                     ;99
     cwd                                     ;6699
 _
-    cmc                                     ;F5 complement carry flag
-    stc                                     ;F9 set carry flag
-    clc                                     ;F8 clear carry flag
+    cmc                                     ;f5 complement carry flag
+    clc                                     ;f8 clear carry flag
+    stc                                     ;f9 set carry flag
 _
-    cli                                     ;FA clear interruption flag
-    sti                                     ;FB set interruption flag
+    cli                                     ;fa clear interruption flag
+    sti                                     ;fb set interruption flag
 _
-    cld                                     ;FC clear direction flag
-    std                                     ;FD set direction flag
+    cld                                     ;fc clear direction flag
+    std                                     ;fd set direction flag
 _
-    setalc                                  ;D6 setalc/salc, set al on carry, undocumented
+    setalc                                  ;d6 setalc/salc, set al on carry, undocumented
     salc
 _
-    xlat                                    ;D7 table lookup translation
+    xlat                                    ;d7 table lookup translation
     xlatb
 _
-    leave                                   ;C9 high-level procedure exit
+    leave                                   ;c9 high-level procedure exit
 _
-    int1                                    ;F1 = icebp
-    int 1                                   ;CD 01
-    int3                                    ;CC
-    int 3                                   ;CD 03
-    smi                                     ;F1 (386)
+    int1                                    ;f1 = icebp
+    int 1                                   ;cd 01
+    int3                                    ;cc
+    int 3                                   ;cd 03
+    smi                                     ;f1 (386)
 
 _
-    into                                    ;CE interruption if overflow flag is set
+    into                                    ;ce interruption if overflow flag is set
 _
-    iretd                                   ;CF interruption return
-    iretw                                   ;66CF
-    iret                                    ;66CF grammar stuff
+    iretd                                   ;cf interruption return
+    iretw                                   ;66cf
+    iret                                    ;66cf grammar stuff
 _
-    ret                                     ;C3 return
-    retn 01234h                             ;C2 xxxx return near
-    db 0c2h, 0,0                            ;C2 is synonym of C3 retn but usually simplified by assemblers
-    retf 01234h                             ;CA xxxx return far
+    ret                                     ;c3 return
+    retn 01234h                             ;c2 xxxx return near
+    db 0c2h, 0,0                            ;c2 is synonym of C3 retn but usually simplified by assemblers
+    retf 01234h                             ;ca xxxx return far
     retf                                    ;cb
 _
-    hlt                                     ;F4 halt
+    hlt                                     ;f4 halt
 _
-    lahf                                    ;9F Load Flags into AH Register, (C P A Z only)
-    sahf                                    ;9E Store AH into Flags
+    lahf                                    ;9f Load Flags into AH Register, (C P A Z only)
+    sahf                                    ;9e Store AH into Flags
 _
-    pushfd                                  ;9C push flags register
-    popfd                                   ;9D pop flags register
-    pushf                                   ;669C
-    popf                                    ;669D
+    pushfd                                  ;9c push flags register
+    popfd                                   ;9d pop flags register
+    pushf                                   ;669c
+    popf                                    ;669d
 _
     ; pusha is default mode pushaw/pushad. same for popa
     pushaw                                  ;6660 specificly word
@@ -181,8 +116,8 @@ _
 _
     daa                                     ;27 Decimal Adjust AL after Addition, BCD digits operation
     aaa                                     ;37 Adjust AL after Addition, BCD digits operation
-    das                                     ;2F Decimal Adjust AL after Substraction, BCD digits operation
-    aas                                     ;3F Adjust AL after Subtraction, BCD digits operation
+    das                                     ;2f Decimal Adjust AL after Substraction, BCD digits operation
+    aas                                     ;3f Adjust AL after Subtraction, BCD digits operation
 _
     ; mnemonic with an argument, but no separate byte in hex encoding
     ; standard register order : ax, cx, dx, bx, sp, bp, si, di
@@ -260,15 +195,15 @@ _
     mov bh, 0                               ;B7 xx mov
     test al, 0ffh                           ;A8 xx
 _
-    in al, 0ffh                             ;E4 xx
-    in eax, 0ffh                            ;E5 xx
+    in al, 0ffh                             ;e4 xx
+    in eax, 0ffh                            ;e5 xx
     in al, dx                               ;ec
     in eax, dx                              ;ed
 
 _
     ;for the out opcode, the literal is the 1st operand
-    out 0ffh, al                            ;E6 xx
-    out 0ffh, eax                           ;E7 xx
+    out 0ffh, al                            ;e6 xx
+    out 0ffh, eax                           ;e7 xx
     out dx, al                              ;ee
     out dx, eax                             ;ef
 _
@@ -280,14 +215,14 @@ _
     jcxz  $ + 2                             ;67e3 xx jump if cx is null
 _
     ; 2 arguments, one immediate word, one immediate byte, Iw/Ib in Intel docs
-    enter 03141h,059h                       ;C8 dw0, db1
+    enter 03141h,059h                       ;c8 dw0, db1
 _
     ; AAM/AAD are usually rendered differently, by default it's a 10 0xA division
     ; so some assemblers like MASM don't accept an argument
-    aam                                     ;d4 0a
-    aam 255                                 ;d4 xx
-    aad                                     ;d5 0a
-    aad 255                                 ;d5 xx
+    aam                                     ;d40a
+    aam 255                                 ;d4xx   ; undocumented
+    aad                                     ;d50a   ; undocumented
+    aad 255                                 ;d5xx
     adx                                     ;d4 TODO
     amx                                     ;d5 TODO
 _
@@ -314,15 +249,14 @@ _
     and [eax], eax                          ;21 xx logical and
     and al, [eax]                           ;22 xx logical and
     and eax, [eax]                          ;23 xx logical and
-    and eax, 012345678h                     ;23 xx logical and
     and al, 0                               ;24 xx logical and
-    and eax, 0                              ;25
+    and eax, 012345678h                     ;25 xx logical and
     cmp [eax], al                           ;38 xx compare
     cmp [eax], eax                          ;39 xx compare
     cmp al, [eax]                           ;3a xx compare
     cmp eax, [eax]                          ;3b xx compare
-    cmp eax, 012345678h                     ;3b xx compare
     cmp al, 0                               ;3c xx compare
+    cmp eax, 012345678h                     ;3d xx compare
     mov [eax], al                           ;8800
     mov [eax], eax                          ;8900
     mov al, [eax]                           ;8a00
@@ -348,21 +282,22 @@ _
     mov edi, 0x0                            ;bf 00000000
     or  [eax], al                           ;08 xx logical or
     or  [eax], eax                          ;09 xx logical or
-    or  eax, 012345678h                     ;0b xx logical or
+    or  al, [eax]                           ;0a xx logical or
     or  eax, [eax]                          ;0b xx logical or
     or  al, 0                               ;0c xx logical or
+    or  eax, 012345678h                     ;0d xx logical or
     sbb [eax], al                           ;18 xx substract - carry
     sbb [eax], eax                          ;19 xx substract - carry
     sbb al, [eax]                           ;1a xx substract - carry
-    sbb eax, 012345678h                     ;1b xx substract - carry
     sbb eax, [eax]                          ;1b xx substract - carry
     sbb al, 0                               ;1c xx substract - carry
+    sbb eax, 012345678h                     ;1d xx substract - carry
     sub [eax], al                           ;28 xx substract
     sub [eax], eax                          ;29 xx substract
     sub al, [eax]                           ;2a xx substract
     sub eax, [eax]                          ;2b xx substract
-    sub eax, 012345678h                     ;2b xx substract
     sub al, 0                               ;2c xx substract
+    sub eax, 012345678h                     ;2d xx substract
     test [eax], al                          ;8400
     test [eax], eax                         ;8500
     test al, 0x0                            ;a8 00
@@ -375,8 +310,8 @@ _
     xor [eax], eax                          ;31 xx logical xor
     xor al, [eax]                           ;32 xx logical xor
     xor eax, [eax]                          ;33 xx logical xor
-    xor eax, 012345678h                     ;33 xx logical xor
     xor al, 0                               ;34 xx logical xor
+    xor eax, 012345678h                     ;35 xx logical xor
 _
     ;Jz
     call 012345678h                         ;e8
@@ -465,7 +400,7 @@ _
 _
     pavgb mm0, [eax]                        ;0fe0
 _
-    popcnt eax , [eax]                      ;0fb8
+    popcnt eax , [eax]                      ;0fb8 ? TODO: f3
 _
     crc32 eax, byte [eax]                   ;f20f38f0
     crc32 eax, [eax]                        ;f20f38f1
@@ -892,22 +827,22 @@ _
     jle dword $ + 6                         ;0f8e 00000000
     jg  dword $ + 6                         ;0f8f 00000000
 _
-    seto [eax]                              ;660f9000
-    setno [eax]                             ;660f9100
-    setb [eax]                              ;660f9200
-    setae [eax]                             ;660f9300
-    setz [eax]                              ;660f9400
-    setnz [eax]                             ;660f9500
-    setbe [eax]                             ;660f9600
-    seta [eax]                              ;660f9700
-    sets [eax]                              ;660f9800
-    setns [eax]                             ;660f9900
-    setp [eax]                              ;660f9a00
-    setnp [eax]                             ;660f9b00
-    setl [eax]                              ;660f9c00
-    setge [eax]                             ;660f9d00
-    setle [eax]                             ;660f9e00
-    setg [eax]                              ;660f9f00
+    seto [eax]                              ;0f9000
+    setno [eax]                             ;0f9100
+    setb [eax]                              ;0f9200
+    setae [eax]                             ;0f9300
+    setz [eax]                              ;0f9400
+    setnz [eax]                             ;0f9500
+    setbe [eax]                             ;0f9600
+    seta [eax]                              ;0f9700
+    sets [eax]                              ;0f9800
+    setns [eax]                             ;0f9900
+    setp [eax]                              ;0f9a00
+    setnp [eax]                             ;0f9b00
+    setl [eax]                              ;0f9c00
+    setge [eax]                             ;0f9d00
+    setle [eax]                             ;0f9e00
+    setg [eax]                              ;0f9f00
 _
     cmovo eax, [eax]                        ;0f4000
     cmovno eax, [eax]                       ;0f4100
@@ -1682,8 +1617,9 @@ bits 64
     swapgs                                  ;0f1f f8  64b only
     cdqe                                    ;98 64b only
     cmpxchg16b [eax]                        ;67480f0c7 64b mode
-    db 0fh, 00, 78h,00  ; jmpe              ;0f007800
-    ; jmpe 0 ; 0fb8? TODO
+    db 0fh, 00, 78h,00  ; jmpe              ;0f007800 wrong
+    ; jmpe $ + 6                            ; 0fb8 00000000
+    ;0fb800000000                   jmpe        0x49
 
 _start:
 ; Ange Albertini 2009-2010.
