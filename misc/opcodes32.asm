@@ -1,43 +1,13 @@
-;0f24000000                     
-fmaddps     xmm0, xmm0, xmm0, [eax]
-
- ;660f3a150000                   
- pextrw      [eax], xmm0, 0x0
-;660fd7c0                       
-pmovmskb    eax, xmm0
-    cmpxchg486 [eax], eax                   ;67660fa700
-    cmpxchg486 [eax], ax                    ;7f0fa700
-    cmpxchg486 [eax], al                    ;670fa600
-    
 ; A file that contains most x86 opcodes, including AVX, SSE, FPU...
 ; not complete yet
 ; compile with Yasm
-
-;missing ops? invvpid
-;missing ops? ntaken
-;missing ops? scaled
-;umov eax, eax
-;xbts [eax], eax
-;ibts eax, eax
-
-; missing sequences
-;dfe0
-;0f24
-;0f24
-;0f26
-;0f26
-;0fba
-;0fba
-;0fba
-;0fba
-;0fd4
-;9bdbe0
-;9bdbe1
-;9bdbe4
-;9bdfe0
-;f30fb8
-
 bits 32
+
+; uncertainties (TODO)
+; fmaddps xmm0, xmm0, xmm0, [eax]         ;0f24000000
+; umov eax, eax
+; xbts [eax], eax
+; ibts eax, eax
 
 %define int1 db 0f1h
 
@@ -390,17 +360,21 @@ _
     movhps xmm0, [eax]                      ;0f16
     movhps [eax], xmm0                      ;0f17
 _
-    mov eax, cr0                            ;0f20 ??
-    mov eax, dr0                            ;0f21 ??
-    mov cr0, eax                            ;0f22 ??
+    mov eax, cr0                            ;0f20 control registers
+    mov eax, dr0                            ;0f21 debug registers
+    mov cr0, eax                            ;0f22
     mov dr0, eax                            ;0f23
+    db 0fh, 24h, 00 ; mov eax, tr0          ;0f24 test registers
+    align 16, db 90h
+    db 0fh, 26h, 00 ; mov tr0, eax          ;0f26
+    align 16, db 90h
 _
     movmskps eax, xmm0                      ;0f50c0
     movmskpd eax, xmm0                      ;660f50 c0
 _
     pavgb mm0, [eax]                        ;0fe0
 _
-    popcnt eax , [eax]                      ;0fb8 ? TODO: f3
+    popcnt eax , [eax]                      ;f30fb8
 _
     crc32 eax, byte [eax]                   ;f20f38f0
     crc32 eax, [eax]                        ;f20f38f1
@@ -539,9 +513,14 @@ _
     movq xmm0, qword [eax]                  ;f30f7e00
     movdqu dqword [eax], xmm0               ;f30f7f00
 _
-    bt [eax], eax                           ;0fa300
-    bts [eax], eax                          ;0fab00
-    btr [eax], eax                          ;0fb300
+    bt [eax], eax                           ;0fa300     bit test
+    bt eax, 0                               ;0fbae0
+    bts [eax], eax                          ;0fab00     bit test and set
+    bts eax, 0                              ;0fbae8
+    btr [eax], eax                          ;0fb300     bit test and reset
+    btr eax, 0                              ;0ff000
+    btc [eax], eax                          ;0fbb00     bit test and complement
+    btc eax, 0                              ;0ff800
 _
     shld [eax], eax, 0x0                    ;0fa400 00
     shld [eax], eax, cl                     ;0fa500
@@ -552,6 +531,8 @@ _
 _
     cmpxchg [eax], al                       ;0fb000
     cmpxchg [eax], eax                      ;0fb100
+    cmpxchg486 [eax], eax                   ;0fa700
+    cmpxchg486 [eax], al                    ;0fa600
     cmpxchg8b [eax]                         ;0fc7c0
     lock cmpxchg8b [eax]                    ;f00fc7c0 famous for crashing pentiums
 _
@@ -569,8 +550,6 @@ _
 _
     ud2                                     ;0fb9
 _
-    btc [eax], eax                          ;0fbb00
-_
     bsf eax, [eax]                          ;0fbc00
     bsr eax, [eax]                          ;0fbd00
 _
@@ -587,6 +566,7 @@ _
     pextrw eax, mm0, 0                      ;0fc5c000
     pextrw eax, xmm0, 0                     ;660fc5c000
     pextrb eax, xmm0, 0                     ;660f3a14c000
+    pextrw eax, xmm0, 0                     ;660f3a15c000
     pextrd eax, xmm0, 0                     ;660f3a16c000
 _
     shufps xmm0, dqword [eax], 0x0          ;0fc600 00
@@ -686,7 +666,8 @@ _
     maskmovq mm0, mm0                       ;0ff7
     maskmovdqu xmm0, xmm0                   ;660ff7
     pmovmskb eax, mm0                       ;0fd7
-_
+    pmovmskb eax, xmm0                      ;660fd7c0
+ _
     psubb mm0, qword [eax]                  ;0ff800
     psubw mm0, qword [eax]                  ;0ff900
     psubd mm0, qword [eax]                  ;0ffa00
@@ -731,6 +712,7 @@ _
 _
     addsubpd xmm0, dqword [eax]             ;660fd000
 _
+    paddq mm0, qword [eax]                  ;0fd400
     paddq xmm0, dqword [eax]                ;660fd400
 _
     movq qword [eax], xmm0                  ;660fd600
@@ -908,7 +890,7 @@ _
     PREFIX_OPERANDSIZE
     insd                                    ;666d = insw
     insd                                    ;6d
-_ 
+_
     ; default: outs
     outsb                                   ;6e
     PREFIX_OPERANDSIZE
@@ -1160,7 +1142,6 @@ _
     fbld tword [eax]                        ;df20
     fbstp tword [eax]                       ;df30
     fchs                                    ;d9e0
-    fclex                                   ;9b dbe2
     fcmovb st0,st0                          ;dac0
     fcmovbe st0,st0                         ;dad0
     fcmove st0,st0                          ;dac8
@@ -1191,7 +1172,6 @@ _
     fdivr st0,st0                           ;d8f8
     fdivr st0,st0                           ;dcf0
     fdivrp st0,st0                          ;def0
-    db 0dbh, 0e0h ;   feni                  ;dbe0
     ffree st0                               ;ddc0
     ffreep st0                              ;dfc0 undoc ?
     fiadd dword [eax]                       ;da00
@@ -1210,7 +1190,6 @@ _
     fimul dword [eax]                       ;da08
     fimul word [eax]                        ;de08
     fincstp                                 ;d9f7 increase stack pointer
-    finit                                   ;dbe3
     fist dword [eax]                        ;db10
     fist word [eax]                         ;df10
     fistp dword [eax]                       ;db18
@@ -1239,15 +1218,23 @@ _
     fmul st0,st0                            ;d8c8
     fmul st0,st0                            ;dcc8
     fmulp st0,st0                           ;dec8
-    fnclex                                  ;9bdbe2
-    fndisi                                  ;dbe2
-    fneni                                   ;dbe1
-    fninit                                  ;9bdbe3
     fnop                                    ;d9d0
-    fnsave [eax]                            ;9bdd30
-    fnstcw word [eax]                       ;9bd938
-    fnstenv [eax]                           ;9bd930
-    fnstsw word [eax]                       ;9bdd38
+    db 0dbh, 0e0h       ; fneni             ;9bdbe0
+    db 9bh, 0dbh, 0e0h  ; feni              ;dbe0
+    fnclex                                  ;dbe1
+    fclex                                   ;9bdbe1
+    db 0dbh, 0e1h       ; fndisi            ;dbe2
+    db 9bh, 0dbh, 0e1h  ; fdisi             ;9bdbe2
+    fninit                                  ;dbe3
+    finit                                   ;9bdbe3
+    fnsetpm                                 ;dbe4
+    db 9bh, 0dbh, 0e4h       ;fsetpm        ;9bdbe4
+    fnsave [eax]                            ;dd30
+    fsave [eax]                             ;9bdd30
+    fnstsw word [eax]                       ;dd38
+    fstsw word [eax]                        ;9bdd38
+    fstsw ax                                ;9bdfe0
+    fnstsw ax                               ;dfe0
     fpatan                                  ;d9f3 partial arctangent of the ratio st0(1)/st0(0)
     fprem                                   ;d9f8
     fprem1                                  ;d9f5 partial remainder 1
@@ -1255,10 +1242,7 @@ _
     frndint                                 ;d9fc round st0(0) to an integer
     frstor [eax]                            ;dd20
     frstpm                                  ; TODO replaced by fwait ?
-    fsave [eax]                             ;dd30
     fscale                                  ;d9fd scale st0(0) by st0(1)
-    fsetpm                                  ;dbe4
-    db 0dbh, 0e4h       ;fnsetpm            ;dbe4
     fsin                                    ;d9fe
     fsincos                                 ;d9fb sine and cosine of the angle value in st0(0)
     fsqrt                                   ;d9fa
@@ -1266,13 +1250,14 @@ _
     fst dword [eax]                         ;d910
     fst qword [eax]                         ;dd10
     fst st0                                 ;ddd0
-    fstcw word [eax]                        ;d938
+    fnstcw word [eax]                       ;d938
+    fstcw word [eax]                        ;9bd938
     fstenv [eax]                            ;d930
+    fnstenv [eax]                           ;9bd930
     fstp dword [eax]                        ;d918
     fstp qword [eax]                        ;dd18
     fstp st0                                ;ddd8
     fstp tword [eax]                        ;db38
-    fstsw word [eax]                        ;dd38
     fsub dword [eax]                        ;d820
     fsub qword [eax]                        ;dc20
     fsub st0,st0                            ;d8e0
@@ -1294,9 +1279,7 @@ _
     fxtract                                 ;d9f4 extract exponent and significand
     fyl2x                                   ;d9f1
     fyl2xp1                                 ;d9f9 y*log2(x+1)
-    fwait                                   ;9b
-    nop
-    wait                                    ;9b
+    fwait                                   ;9b = wait
     nop
 _
 ;fpu aliases
@@ -1330,8 +1313,8 @@ _
     lmsw [eax]                              ;0f0130
     invlpg [eax]                            ;0f0138
 _
-    smsw ax                                 ;660f01e0
-    smsw eax                                ;0f01e0 ;TODO undocumented?
+    smsw ax                                 ;660f01e0 Store Machine Status Words
+    smsw eax                                ;0f01e0 undocumented but gets all cr0 anyway
     lmsw ax                                 ;0f01f0
     fxsave [eax]                            ;0fae00
     fxrstor [eax]                           ;0fae08
@@ -1533,7 +1516,7 @@ _
 _
 ; branch hints
     jnz $ + 2                               ;7500
-    PREFIX_BRANCH_TAKEN
+    PREFIX_BRANCH_TAKEN ; = NTAKEN
     jnz $ + 2                               ;3e7500
     PREFIX_BRANCH_NOT_TAKEN
     jnz $ + 2                               ;2e7500
@@ -1617,7 +1600,7 @@ bits 64
     swapgs                                  ;0f1f f8  64b only
     cdqe                                    ;98 64b only
     cmpxchg16b [eax]                        ;67480f0c7 64b mode
-    db 0fh, 00, 78h,00  ; jmpe              ;0f007800 wrong
+    ;db 0fh, 00, 78h,00  ; jmpe              ;0f007800 wrong
     ; jmpe $ + 6                            ; 0fb8 00000000
     ;0fb800000000                   jmpe        0x49
 
