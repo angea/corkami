@@ -563,6 +563,7 @@ _
 _
     pinsrw mm0, word [eax], 0x0             ;0fc400 00
     pinsrw xmm0, word [eax], 0x0            ;660fc400 00
+    pinsrd xmm0, [eax], 0                   ;660f3a22 TODO check ?
     pextrw eax, mm0, 0                      ;0fc5c000
     pextrw eax, xmm0, 0                     ;660fc5c000
     pextrb eax, xmm0, 0                     ;660f3a14c000
@@ -1547,12 +1548,34 @@ _
     mov [gs:eax], eax                       ;65 8900
 _
     movsb                                   ;a4
-    rep movsb                              ;f3a4 = repz = repe
+    rep movsb                               ;f3a4 = repz = repe
     repnz movsb                             ;f2a4 = repne
+    rep cmpsb
+    rep lodsb
+    rep stosb
+    rep scasb
+    rep insb
+    rep outsb
 _
-    mov [eax], eax                          ;8900
-    lock mov [eax], eax                     ;f08900
-    lock mov eax, eax                       ;f089c0 incorrect, memory only
+    add [eax], al                           ;0000
+    lock add [eax], al                      ;f00000
+    lock xadd [eax], al                     ;f00fc000
+    lock adc [eax], al                      ;f01000
+    lock cmpxchg [eax], al                  ;f00fb000
+    lock cmpxchg8b [eax]                    ;f00fc708
+    lock or [eax], al                       ;f00800
+    lock and [eax], al                      ;f02000
+    lock sub [eax], al                      ;f02800
+    lock sbb [eax], al                      ;f01800
+    lock xchg [eax], al                     ;f08600
+    lock btr [eax], eax                     ;f00fb300
+    lock btc [eax], eax                     ;f00fbb00
+    lock bts [eax], eax                     ;f00fab00
+    lock dec byte [eax]                     ;f0fe08
+    lock inc byte [eax]                     ;f0fe00
+    lock not byte [eax]                     ;f0f610
+    lock neg byte [eax]                     ;f0f618
+    lock add eax, eax                       ;f000c0 incorrect, memory only
 _
     add [eax], al                           ;0000
     add [bx+si], al                         ;67 0000
@@ -1592,17 +1615,16 @@ _
 _
 ; just to make the opcodes present, to be moved...
 bits 64
-    syscall                                 ;0f05 64b only ?
-    sysret                                  ;0f07 64b only ?
-    pextrq [eax], xmm0, 0                   ;660f3a16 64b only (for yasm)
-    pinsrd xmm0, [eax], 0                   ;660f3a22 64b only (for yasm)
-    pinsrq xmm0, [eax], 0                   ;660f3a22 64b only (for yasm)
-    swapgs                                  ;0f1f f8  64b only
-    cdqe                                    ;98 64b only
-    cmpxchg16b [eax]                        ;67480f0c7 64b mode
-    ;db 0fh, 00, 78h,00  ; jmpe              ;0f007800 wrong
-    ; jmpe $ + 6                            ; 0fb8 00000000
-    ;0fb800000000                   jmpe        0x49
+    syscall                                 ;0f05
+    sysret                                  ;0f07
+    pextrq [rax], xmm0, 0                   ;66480f3a16
+    pinsrq xmm0, [rax], 0                   ;66480f3a22
+    swapgs                                  ;0f01 f8
+    cdqe                                    ;4898
+    cmpxchg16b [rax]                        ;480fc7 64b mode
+    lock cmpxchg16b [rax]                   ;f0480fc708 64b mode
+    ;db 0fh, 00, 78h,00  ; jmpe             ;0f007800 wrong
+;   jmpe $ + 6                              ;0fb8 00000000
 
 _start:
 ; Ange Albertini 2009-2010.
