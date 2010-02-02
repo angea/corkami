@@ -124,7 +124,7 @@
      inkscape:window-x="-4"
      inkscape:window-y="-4"
      inkscape:window-maximized="1"
-     inkscape:snap-bbox="true"
+     inkscape:snap-bbox="false"
      inkscape:bbox-nodes="true"
      inkscape:object-nodes="true"
      inkscape:snap-bbox-edge-midpoints="true"
@@ -136,7 +136,8 @@
      inkscape:snap-smooth-nodes="true"
      inkscape:snap-object-midpoints="true"
      inkscape:snap-center="true"
-     inkscape:guide-bbox="true">
+     inkscape:guide-bbox="true"
+     inkscape:snap-nodes="false">
     <inkscape:grid
        type="xygrid"
        id="grid2383"
@@ -387,70 +388,70 @@
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x04 FileHeader</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.99999988;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:7.99999999, 7.99999999;stroke-dashoffset:0"
-       d="m 360.83627,909.5508 c 74.73995,0 149.47988,0 224.21984,0 0,-48.66668 0,-97.33335 0,-146.00002 -74.73996,0 -149.47989,0 -224.21984,0 0,48.66667 0,97.33334 0,146.00002 z"
+       d="m 357.51142,903.5508 c 74.73995,0 149.47988,0 224.21984,0 0,-48.66668 0,-97.33335 0,-146.00002 -74.73996,0 -149.47989,0 -224.21984,0 0,48.66667 0,97.33334 0,146.00002 z"
        id="rect3996" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="370.82516"
-       y="763.55078"
+       x="367.50031"
+       y="757.55078"
        id="text2569"><tspan
          sodipodi:role="line"
          id="tspan2571"
-         x="370.82516"
-         y="763.55078"
+         x="367.50031"
+         y="757.55078"
          style="font-size:12px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console Italic"> </tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="774.89203"
+         x="367.50031"
+         y="768.89203"
          id="tspan2573"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x00 db Name[8]</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="784.89203"
+         x="367.50031"
+         y="778.89203"
          id="tspan2581"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x08 dd PhysicalAddress | VirtualSize</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="798.55078"
+         x="367.50031"
+         y="792.55078"
          id="tspan2583"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x0c dd VirtualAddress</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="809.89203"
+         x="367.50031"
+         y="803.89203"
          id="tspan2585"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x10 dd SizeOfRawData</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="823.55078"
+         x="367.50031"
+         y="817.55078"
          id="tspan2587"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x14 dd PointerToRawData</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="833.06262"
+         x="367.50031"
+         y="827.06262"
          id="tspan2589"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x18 dd PointerToRelocations</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="840.56262"
+         x="367.50031"
+         y="834.56262"
          id="tspan2591"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x1c dd PointerToLinenumbers</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="848.06262"
+         x="367.50031"
+         y="842.06262"
          id="tspan2593"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x20 dw NumberOfRelocations</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="855.56262"
+         x="367.50031"
+         y="849.56262"
          id="tspan2595"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x22 dw NumberOfLinenumbers</tspan><tspan
          sodipodi:role="line"
-         x="370.82516"
-         y="868.55078"
+         x="367.50031"
+         y="862.55078"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan3350">0x24 dd Characteristics <tspan
-   style="fill:#4d4d4d;font-size:6"
+   style="font-size:6px;fill:#4d4d4d"
    id="tspan3354">RWX</tspan></tspan></text>
     <text
        xml:space="preserve"
@@ -463,8 +464,8 @@
          x="346.14642"
          y="303.694" /></text>
     <path
-       style="font-size:12px;fill:none;stroke:#000000;stroke-width:0.56900001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.569, 0.569;stroke-dashoffset:0;marker-start:url(#StopL);marker-end:url(#DotM)"
-       d="m 681.82062,382.20975 0,360.71548"
+       style="font-size:12px;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1,3;stroke-dashoffset:0;marker-start:url(#StopL);marker-end:url(#DotM)"
+       d="m 681.82062,382.20975 0,374.71548"
        id="path8794"
        sodipodi:nodetypes="cc" />
     <text
@@ -484,7 +485,7 @@
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        xml:space="preserve"
        x="471.04224"
-       y="-682.77875"
+       y="-686.77875"
        transform="matrix(0,1,-1,0,0,0)">SizeofOptionalHeader</text>
     <text
        xml:space="preserve"
@@ -492,8 +493,8 @@
        id="text2620"
        sodipodi:linespacing="125%"
        transform="matrix(0,1,-1,0,0,0)"
-       x="774.82544"
-       y="-595.86395"><tspan
+       x="768.82544"
+       y="-592.53912"><tspan
          style="font-size:11.86668015px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan2622">NumberOfSections</tspan></text>
     <text
@@ -532,8 +533,8 @@
        id="text3938"
        style="font-size:8px;font-style:normal;font-weight:normal;fill:#808080;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"
-       x="498.539"
-       y="772.30273"><tspan
+       x="495.21414"
+       y="766.30273"><tspan
          style="font-size:6px;fill:#4d4d4d"
          id="tspan4625">IMAGE_SECTION_HEADER </tspan></text>
     <text
@@ -577,30 +578,30 @@
          style="fill:#4d4d4d">offset 0</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.99999997, 5.9999999;stroke-dashoffset:0"
-       d="m 464.82515,873.77152 0,35.77928"
+       d="m 461.5003,867.77152 0,35.77928"
        id="path5044"
        sodipodi:nodetypes="cc" />
     <text
        id="text3938-1"
        style="font-size:7.56703424px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#808080;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
        xml:space="preserve"
-       x="476.02728"
-       y="903.12555"
+       x="472.70242"
+       y="897.12555"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3016"
          style="font-size:15.13406849px;fill:#4d4d4d"
-         x="476.02728"
-         y="903.12555"
+         x="472.70242"
+         y="897.12555"
          transform="translate(8,0)">Section Table</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#DiamondMend);stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#DiamondMend);stroke-miterlimit:4;stroke-dasharray:none"
        d="m 250.93465,200.61747 c 47.05742,0 51.85702,-0.0419 51.85702,12.60473 0,12.59789 0.43051,12.60474 51.85703,12.60474"
        id="path3837"
        sodipodi:nodetypes="ccc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
-       d="m 539.78716,794.75353 13.32429,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 532.04452,788.75353 17.48466,0"
        id="path4859-5" />
     <text
        xml:space="preserve"
@@ -795,8 +796,8 @@
          id="tspan2567"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x60 DataDirectory</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
-       d="m 583.76201,445.55562 25.60046,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 583.76201,445.55562 15.43591,0"
        id="path4859" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none"
@@ -818,7 +819,7 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-mid:url(#DotM);marker-end:url(#Arrow1Mend)"
-       d="m 590.03605,759.28261 0,33.16142 0,33.16143 0,39.09096 0,45.24008"
+       d="m 586.7112,757.50024 0,28.94379 0,33.16143 0,39.09096 0,43.95967"
        id="path2999"
        sodipodi:nodetypes="ccccc" />
     <path
@@ -849,13 +850,13 @@
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x04 dd Size</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:5.46616793px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       style="font-size:5.76410341px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        id="text3468"
        sodipodi:linespacing="125%"
-       transform="matrix(0,1.1126157,-0.89878294,0,0,0)"
-       x="598.12817"
-       y="-662.9231"><tspan
-         style="font-size:6px;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="matrix(0,0.96360372,-1.037771,0,0,0)"
+       x="696.08014"
+       y="-574.15198"><tspan
+         style="font-size:6.32703209px;font-family:Arial;-inkscape-font-specification:Arial"
          id="tspan3051">NumberOfRvaAndSizes</tspan></text>
     <text
        xml:space="preserve"
@@ -885,17 +886,17 @@
          y="731.21796"
          style="fill:#4d4d4d">Data Directories</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
-       d="m 559.06408,683.35256 25.49145,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 559.06408,683.35256 15.98124,0"
        id="path4859-8" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-mid:url(#DotM);marker-end:url(#Arrow1Mend)"
        id="path2999-8"
        sodipodi:nodetypes="ccccc"
-       d="m 592.80826,666.94216 0,15.1844 0,15.1844 0,17.89949 0,20.71514" />
+       d="m 592.80826,672.09172 0,13.87392 0,13.87391 0,16.35469 0,18.92733" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#DiamondMend)"
-       d="m 546.10585,819.58028 13.32429,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#DiamondMend)"
+       d="m 542.78099,813.58028 18.69059,0"
        id="path4859-4" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#DiamondMend)"
@@ -1005,14 +1006,13 @@
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan3370-8" /></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotM)"
-       d="m 590.01773,328.65915 21.02012,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotM)"
+       d="m 590.01773,328.65915 15.05984,0"
        id="path3837-8-4" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 695.92796,222.0659 -349.26686,0 0,526.38037 20.48255,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 706.41575,226.36287 -349.26686,0 0,522.98767 20.48255,0"
        id="path3834"
-       transform="translate(10.487793,4.2969682)"
        sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
@@ -1038,10 +1038,9 @@
        id="path3874"
        sodipodi:nodetypes="cccc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 570.56319,759.25381 -220.21471,0 0,110.14946 16.79517,0"
-       id="path3940"
-       transform="translate(10.487793,4.2969682)" />
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 577.72614,757.55078 -220.21471,0 0,110.14946 16.79517,0"
+       id="path3940" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 395.35982,697.25658 -14.93737,0 0,-30.00277 196.79962,0"
@@ -1049,10 +1048,9 @@
        transform="translate(10.487793,4.2969682)"
        sodipodi:nodetypes="cccc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1,6;stroke-dashoffset:0"
-       d="m 671.33283,738.62826 -277.36338,0"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 6.00000002;stroke-dashoffset:0"
+       d="m 682.14288,756.92523 -98.59641,0"
        id="path3952"
-       transform="translate(10.487793,4.2969682)"
        sodipodi:nodetypes="cc" />
     <g
        id="g4293"
