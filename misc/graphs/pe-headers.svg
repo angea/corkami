@@ -111,24 +111,61 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.3164039"
-     inkscape:cx="632.06592"
-     inkscape:cy="821.73386"
+     inkscape:zoom="0.32415983"
+     inkscape:cx="354.81891"
+     inkscape:cy="519.04247"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     showguides="true"
+     showguides="false"
      inkscape:snap-global="true"
      inkscape:window-width="1024"
      inkscape:window-height="581"
      inkscape:window-x="-4"
      inkscape:window-y="-4"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
        id="grid2383"
        visible="true"
        enabled="true" />
+    <sodipodi:guide
+       position="367.14365,674.4494"
+       orientation="360.71548,0"
+       id="guide3846" />
+    <sodipodi:guide
+       position="665.20978,674.4494"
+       orientation="0,-298.06613"
+       id="guide3852" />
+    <sodipodi:guide
+       position="662.82209,674.90085"
+       orientation="0,-295.67844"
+       id="guide3898" />
+    <sodipodi:guide
+       position="367.14365,674.90085"
+       orientation="361.16693,0"
+       id="guide3900" />
+    <sodipodi:guide
+       position="367.14365,313.73392"
+       orientation="0,26.8258"
+       id="guide3902" />
+    <sodipodi:guide
+       position="346.6611,830.29628"
+       orientation="526.38037,0"
+       id="guide3928" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -174,27 +211,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-10.487793,-4.2969682)">
-    <rect
-       y="226.36287"
-       x="357.1489"
-       height="526.38037"
-       width="341.97226"
-       id="rect3914"
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="rect3355"
-       width="166.03549"
-       height="172.41879"
-       x="125.82515"
-       y="39.006992" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="rect3884"
-       width="298.06613"
-       height="360.71548"
-       x="377.63144"
-       y="382.20975" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -303,13 +319,6 @@
          y="204.05078"
          id="tspan2425"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x3c dd e_lfanew</tspan></text>
-    <rect
-       y="265.31268"
-       x="377.26065"
-       height="90.225769"
-       width="273.5834"
-       id="rect4002"
-       style="fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -377,8 +386,8 @@
          id="tspan2435"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x04 FileHeader</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:2.25344682;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:9.0137865, 9.0137865;stroke-dashoffset:0"
-       d="m 356.83736,909.5508 c 76.07292,0 152.14583,0 228.21875,0 0,-50.00002 0,-100.00002 0,-150.00002 -76.07292,0 -152.14583,0 -228.21875,0 0,50 0,100 0,150.00002 z"
+       style="fill:none;stroke:#000000;stroke-width:1.99999988;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:7.99999999, 7.99999999;stroke-dashoffset:0"
+       d="m 360.83627,909.5508 c 74.73995,0 149.47988,0 224.21984,0 0,-48.66668 0,-97.33335 0,-146.00002 -74.73996,0 -149.47989,0 -224.21984,0 0,48.66667 0,97.33334 0,146.00002 z"
        id="rect3996" />
     <text
        xml:space="preserve"
@@ -455,8 +464,9 @@
          y="303.694" /></text>
     <path
        style="font-size:12px;fill:none;stroke:#000000;stroke-width:0.56900001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.569, 0.569;stroke-dashoffset:0;marker-start:url(#StopL);marker-end:url(#DotM)"
-       d="m 681.82062,381.29096 0,359.72621"
-       id="path8794" />
+       d="m 681.82062,382.20975 0,360.71548"
+       id="path8794"
+       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -499,7 +509,7 @@
        style="font-size:8px;font-style:normal;font-weight:normal;fill:#808080;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        id="text4004"
        x="558.6181"
-       y="277.39453"><tspan
+       y="281.39453"><tspan
          style="fill:#4d4d4d"
          id="tspan2550">IMAGE_FILE_HEADER</tspan></text>
     <text
@@ -565,66 +575,26 @@
          x="124.40631"
          y="35.975189"
          style="fill:#4d4d4d">offset 0</tspan></text>
-    <rect
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3408"
-       width="158.88924"
-       height="145.97035"
-       x="115.20457"
-       y="507.95767" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2.72864008;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:10.91455988, 10.91455988;stroke-dashoffset:0"
-       d="m 214.90548,612.22015 c 0,11.6906 0,23.3811 0,35.0717 13.14254,0 26.28507,0 39.42761,0 0,-12.9544 0,-25.9088 0,-38.8632 -13.14254,0 -26.28507,0 -39.42761,0 l 0,1.8957 0,1.8958 z"
-       id="rect3021" />
-    <text
-       xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="223.80695"
-       y="620.95758"
-       id="text3023"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3025"
-         x="223.80695"
-         y="620.95758"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">list</tspan></text>
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3996-4"
-       width="220.21471"
-       height="110.14946"
-       x="360.83627"
-       y="763.55078" />
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3021-4"
-       width="35"
-       height="15"
-       x="217.12268"
-       y="610.81708" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 6;stroke-dashoffset:0"
-       d="m 464.82515,879.55078 0,30.00002"
-       id="path5044" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.63529038;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529043, 4.90587128;stroke-dashoffset:0"
-       d="m 236.87858,629.59215 0,20.0563"
-       id="path5042-8" />
+       style="fill:none;stroke:#000000;stroke-width:1.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.99999997, 5.9999999;stroke-dashoffset:0"
+       d="m 464.82515,873.77152 0,35.77928"
+       id="path5044"
+       sodipodi:nodetypes="cc" />
     <text
        id="text3938-1"
        style="font-size:7.56703424px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#808080;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
        xml:space="preserve"
-       x="486.02728"
+       x="476.02728"
        y="903.12555"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3016"
          style="font-size:15.13406849px;fill:#4d4d4d"
-         x="486.02728"
+         x="476.02728"
          y="903.12555"
          transform="translate(8,0)">Section Table</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#DiamondMend)"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#DiamondMend);stroke-miterlimit:4;stroke-dasharray:none"
        d="m 250.93465,200.61747 c 47.05742,0 51.85702,-0.0419 51.85702,12.60473 0,12.59789 0.43051,12.60474 51.85703,12.60474"
        id="path3837"
        sodipodi:nodetypes="ccc" />
@@ -632,231 +602,230 @@
        style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
        d="m 539.78716,794.75353 13.32429,0"
        id="path4859-5" />
-    <g
-       id="g3814"
-       transform="translate(-3.0962521,-12)">
-      <text
-         sodipodi:linespacing="110%"
-         id="text2503"
-         y="405.0806"
-         x="386.33737"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110.00000238%;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2507"
-           y="405.0806"
-           x="386.33737"
-           sodipodi:role="line">0x00 dw Magic<tspan
-   id="tspan3352"
-   style="font-size:6px;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"> 0x10b/0x20b [64b]</tspan></tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2509"
-           y="412.33917"
-           x="386.33737"
-           sodipodi:role="line">0x02 db MajorLinkerVersion</tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2511"
-           y="419.83917"
-           x="386.33737"
-           sodipodi:role="line">0x03 db MinorLinkerVersion</tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2513"
-           y="429.16855"
-           x="386.33737"
-           sodipodi:role="line">0x04 dd SizeOfCode</tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2515"
-           y="439.16855"
-           x="386.33737"
-           sodipodi:role="line">0x08 dd SizeOfInitializedData</tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2517"
-           y="449.16855"
-           x="386.33737"
-           sodipodi:role="line">0x0c dd SizeOfUninitializedData</tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2519"
-           y="461.51016"
-           x="386.33737"
-           sodipodi:role="line">0x10 dd AddressOfEntryPoint</tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2521"
-           y="472.36856"
-           x="386.33737"
-           sodipodi:role="line">0x14 dd BaseOfCode</tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2523"
-           y="482.36856"
-           x="386.33737"
-           sodipodi:role="line">0x18 dd BaseOfData     <tspan
-   style="letter-spacing:-0.16155700000000001;fill:#4d4d4d;font-size:6"
-   id="tspan3008">32b only</tspan></tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2525"
-           y="494.71017"
-           x="386.33737"
-           sodipodi:role="line">0x1c dd ImageBase <tspan
-   style="font-size:6;fill:#4d4d4d"
-   id="tspan3010">dq [64b]</tspan></tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2527"
-           y="507.91016"
-           x="386.33737"
-           sodipodi:role="line">0x20 dd SectionAlignment <tspan
-   id="tspan4930"
-   style="font-size:6px;fill:#4d4d4d">2^y, y &gt;=x</tspan></tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2529"
-           y="521.11017"
-           x="386.33737"
-           sodipodi:role="line">0x24 dd FileAlignment <tspan
-   id="tspan4928"
-   style="font-size:6px;fill:#4d4d4d">2^x</tspan></tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2531"
-           y="530.50507"
-           x="386.33737"
-           sodipodi:role="line">0x28 dw MajorOperatingSystemVersion<tspan
-   id="tspan2542"
-   style="font-size:6px;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"> =4</tspan></tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2533"
-           y="537.04156"
-           x="386.33737"
-           sodipodi:role="line">0x2a dw MinorOperatingSystemVersion</tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2535"
-           y="543.04156"
-           x="386.33737"
-           sodipodi:role="line">0x2c dw MajorImageVersion</tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2537"
-           y="549.04156"
-           x="386.33737"
-           sodipodi:role="line">0x2e dw MinorImageVersion</tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2539"
-           y="555.04156"
-           x="386.33737"
-           sodipodi:role="line">0x30 dw MajorSubsystemVersion</tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2541"
-           y="561.04156"
-           x="386.33737"
-           sodipodi:role="line">0x32 dw MinorSubsystemVersion</tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2543"
-           y="567.04156"
-           x="386.33737"
-           sodipodi:role="line">0x34 dd Win32VersionValue</tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2545"
-           y="578.31018"
-           x="386.33737"
-           sodipodi:role="line">0x38 dd SizeOfImage</tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2547"
-           y="587.70508"
-           x="386.33737"
-           sodipodi:role="line">0x3c dd SizeOfHeaders</tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2549"
-           y="595.70508"
-           x="386.33737"
-           sodipodi:role="line"><tspan
-             id="tspan2568"
-             style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x40 dd CheckSum</tspan><tspan
-             id="tspan2566"
-             style="font-size:6px;fill:#4d4d4d"> drivers only</tspan></tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2551"
-           y="607.51013"
-           x="386.33737"
-           sodipodi:role="line">0x44 dw Subsystem <tspan
-   id="tspan3434"
-   style="font-size:6px;fill:#4d4d4d">driver/gui/cli</tspan></tspan><tspan
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110.00000238%;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="383.24112"
+       y="393.0806"
+       id="text2503"
+       sodipodi:linespacing="110%"><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="393.0806"
+         id="tspan2507"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x00 dw Magic<tspan
+   style="font-size:6px;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"
+   id="tspan3352"> 0x10b/0x20b [64b]</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="400.33917"
+         id="tspan2509"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x02 db MajorLinkerVersion</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="407.83917"
+         id="tspan2511"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x03 db MinorLinkerVersion</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="417.16855"
+         id="tspan2513"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x04 dd SizeOfCode</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="427.16855"
+         id="tspan2515"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x08 dd SizeOfInitializedData</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="437.16855"
+         id="tspan2517"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x0c dd SizeOfUninitializedData</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="449.51016"
+         id="tspan2519"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x10 dd AddressOfEntryPoint</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="460.36856"
+         id="tspan2521"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x14 dd BaseOfCode</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="470.36856"
+         id="tspan2523"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x18 dd BaseOfData     <tspan
+   id="tspan3008"
+   style="font-size:6px;letter-spacing:-0.161557;fill:#4d4d4d">32b only</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="482.71017"
+         id="tspan2525"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x1c dd ImageBase <tspan
+   id="tspan3010"
+   style="font-size:6px;fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="495.91016"
+         id="tspan2527"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x20 dd SectionAlignment <tspan
+   style="font-size:6px;fill:#4d4d4d"
+   id="tspan4930">2^y, y &gt;=x</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="509.11017"
+         id="tspan2529"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x24 dd FileAlignment <tspan
+   style="font-size:6px;fill:#4d4d4d"
+   id="tspan4928">2^x</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="518.50507"
+         id="tspan2531"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x28 dw MajorOperatingSystemVersion<tspan
+   style="font-size:6px;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"
+   id="tspan2542"> =4</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="525.04156"
+         id="tspan2533"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x2a dw MinorOperatingSystemVersion</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="531.04156"
+         id="tspan2535"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x2c dw MajorImageVersion</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="537.04156"
+         id="tspan2537"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x2e dw MinorImageVersion</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="543.04156"
+         id="tspan2539"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x30 dw MajorSubsystemVersion</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="549.04156"
+         id="tspan2541"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x32 dw MinorSubsystemVersion</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="555.04156"
+         id="tspan2543"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x34 dd Win32VersionValue</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="566.31018"
+         id="tspan2545"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x38 dd SizeOfImage</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="575.70508"
+         id="tspan2547"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x3c dd SizeOfHeaders</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="583.70508"
+         id="tspan2549"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"><tspan
            style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2553"
-           y="616.90503"
-           x="386.33737"
-           sodipodi:role="line">0x46 dw DllCharacteristics</tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2555"
-           y="623.44153"
-           x="386.33737"
-           sodipodi:role="line">0x48 dd SizeOfStackReserve <tspan
-   style="fill:#4d4d4d"
-   id="tspan3020">dq [64b]</tspan></tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2557"
-           y="629.88062"
-           x="386.33737"
-           sodipodi:role="line">0x4c dd SizeOfStackCommit  <tspan
-   style="fill:#4d4d4d"
-   id="tspan3017">dq [64b]</tspan></tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2559"
-           y="636.48059"
-           x="386.33737"
-           sodipodi:role="line">0x50 dd SizeOfHeapReserve  <tspan
-   style="fill:#4d4d4d"
-   id="tspan3014">dq [64b]</tspan></tspan><tspan
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2561"
-           y="643.08063"
-           x="386.33737"
-           sodipodi:role="line">0x54 dd SizeOfHeapCommit   <tspan
-   style="fill:#4d4d4d"
-   id="tspan3012">dq [64b]</tspan></tspan><tspan
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2563"
-           y="651.29047"
-           x="386.33737"
-           sodipodi:role="line">0x58 dd LoaderFlags</tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ff0000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2565"
-           y="660.09045"
-           x="386.33737"
-           sodipodi:role="line"><tspan
-             id="tspan2570"
-             style="font-size:8px;fill:#000000">0x5c dd NumberOfRvaAndSizes </tspan><tspan
-             id="tspan2518"
-             style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">&lt;=16  </tspan></tspan><tspan
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2567"
-           y="672.11017"
-           x="386.33737"
-           sodipodi:role="line">0x60 DataDirectory</tspan></text>
-      <path
-         id="path4859"
-         d="m 586.85826,457.55562 13.32429,0"
-         style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)" />
-      <path
-         id="path4859-1"
-         d="m 476.3584,470.09826 13.32429,0"
-         style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)" />
-      <path
-         id="path4859-14"
-         d="m 475.71474,480.31431 13.32429,0"
-         style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)" />
-    </g>
+           id="tspan2568">0x40 dd CheckSum</tspan><tspan
+           style="font-size:6px;fill:#4d4d4d"
+           id="tspan2566"> drivers only</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="595.51013"
+         id="tspan2551"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x44 dw Subsystem <tspan
+   style="font-size:6px;fill:#4d4d4d"
+   id="tspan3434">driver/gui/cli</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="604.90503"
+         id="tspan2553"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x46 dw DllCharacteristics</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="611.44153"
+         id="tspan2555"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x48 dd SizeOfStackReserve <tspan
+   id="tspan3020"
+   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="617.88062"
+         id="tspan2557"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x4c dd SizeOfStackCommit  <tspan
+   id="tspan3017"
+   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="624.48059"
+         id="tspan2559"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x50 dd SizeOfHeapReserve  <tspan
+   id="tspan3014"
+   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="631.08063"
+         id="tspan2561"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x54 dd SizeOfHeapCommit   <tspan
+   id="tspan3012"
+   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="639.29047"
+         id="tspan2563"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x58 dd LoaderFlags</tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="648.09045"
+         id="tspan2565"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ff0000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"><tspan
+           style="font-size:8px;fill:#000000"
+           id="tspan2570">0x5c dd NumberOfRvaAndSizes </tspan><tspan
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           id="tspan2518">&lt;=16  </tspan></tspan><tspan
+         sodipodi:role="line"
+         x="383.24112"
+         y="660.11017"
+         id="tspan2567"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x60 DataDirectory</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
-       d="m 204.52887,592.51328 23.35223,0"
-       id="path4859-2" />
+       style="fill:none;stroke:#000000;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 583.76201,445.55562 25.60046,0"
+       id="path4859" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 473.26215,458.09826 13.32429,0"
+       id="path4859-1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 472.61849,468.31431 13.32429,0"
+       id="path4859-14" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 243.87915,604.51328 25.10812,0"
+       id="path4859-2"
+       sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotM)"
-       d="m 204.63228,572.34251 21.02012,0"
-       id="path3837-8" />
+       d="m 243.87915,574.34251 22.81202,0"
+       id="path3837-8"
+       sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-mid:url(#DotM);marker-end:url(#Arrow1Mend)"
        d="m 590.03605,759.28261 0,33.16142 0,33.16143 0,39.09096 0,45.24008"
        id="path2999"
        sodipodi:nodetypes="ccccc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2.67548132;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:10.70192512, 10.70192512;stroke-dashoffset:0"
-       d="m 386.89736,671.12698 c 0,21.4746 0,42.9492 0,64.4238 66.9375,0 133.875,0 200.8125,0 0,-22.66764 0,-45.33526 0,-68.0029 -66.9375,0 -133.875,0 -200.8125,0 l 0,1.78955 0,1.78955 z"
-       id="rect3984" />
+       style="fill:none;stroke:#000000;stroke-width:1.99999988;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.00000001, 8.00000001;stroke-dashoffset:0"
+       d="m 390.91024,735.55078 c 65.59988,0 131.19975,0 196.79962,0 0,-21.33334 0,-42.66666 0,-64 -65.59987,0 -131.19974,0 -196.79962,0 0,21.33333 0,42.66667 0,64 z"
+       id="rect3984"
+       sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -899,13 +868,6 @@
          x="503.5224"
          y="697.57184"
          style="font-size:6px;fill:#4d4d4d">IMAGE_DATA_DIRECTORY</tspan></text>
-    <rect
-       y="671.55078"
-       x="390.91025"
-       height="30.002766"
-       width="192.81346"
-       id="rect3984-0"
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 6;stroke-dashoffset:0"
        d="m 477.7289,705.55078 0,30"
@@ -914,17 +876,17 @@
        id="text3938-1-4"
        style="font-size:8.8335743px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#808080;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
        xml:space="preserve"
-       x="519.38586"
+       x="509.38586"
        y="731.21796"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3047"
-         x="519.38586"
+         x="509.38586"
          y="731.21796"
          style="fill:#4d4d4d">Data Directories</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.75984138px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
-       d="m 559.0641,683.35256 13.32429,0"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 559.06408,683.35256 25.49145,0"
        id="path4859-8" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-mid:url(#DotM);marker-end:url(#Arrow1Mend)"
@@ -937,8 +899,9 @@
        id="path4859-4" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#DiamondMend)"
-       d="m 204.37915,582.43246 24.60812,0"
-       id="path4859-4-15" />
+       d="m 243.87915,588.43246 25.10812,0"
+       id="path4859-4-15"
+       sodipodi:nodetypes="cc" />
     <a
        id="a3007"
        xlink:href="http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/pe-headers.svg">
@@ -998,66 +961,139 @@
          id="tspan6494" /><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="574.42712"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         y="578.08594"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan6419-2">relative offset</tspan><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="584.42712"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         y="593.08594"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan6415-1">offset</tspan><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="594.42712"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         y="608.08594"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan3019">RVA</tspan><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="604.42712"
+         y="623.08594"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan4955-8" /><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="618.08594"
+         y="638.08594"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan6421-5">Critical</tspan><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="629.42712"
+         y="649.42712"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan3376-7">standard</tspan><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="637.59778"
+         y="657.59778"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan3374-6">minor/ignored</tspan><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="645.09778"
+         y="665.09778"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan6413-1" /><tspan
          sodipodi:role="line"
          x="126.94834"
-         y="652.59778"
+         y="672.59778"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          id="tspan3370-8" /></text>
-    <rect
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3408-9"
-       width="64.719879"
-       height="39.634064"
-       x="122.54269"
-       y="604.11371" />
-    <rect
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect3408-9-2"
-       width="117.42046"
-       height="38.912296"
-       x="122.54147"
-       y="561.33215" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotM)"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DotM)"
        d="m 590.01773,328.65915 21.02012,0"
        id="path3837-8-4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 695.92796,222.0659 -349.26686,0 0,526.38037 20.48255,0"
+       id="path3834"
+       transform="translate(10.487793,4.2969682)"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 279.32138,34.726442 -163.98402,0 0,172.402368 26.29287,0"
+       id="path3844"
+       transform="translate(10.487793,4.2969682)"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 663.86418,377.91278 -296.72053,0 0,360.71548 26.8258,0"
+       id="path3854"
+       transform="translate(10.487793,4.2969682)"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 636.78552,264.71913 -269.64187,0 0,86.52235 24.804,0"
+       id="path3864"
+       transform="translate(10.487793,4.2969682)"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 270.37757,507.95767 -155.17301,0 0,205.73077 15.73475,0"
+       id="path3874"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 570.56319,759.25381 -220.21471,0 0,110.14946 16.79517,0"
+       id="path3940"
+       transform="translate(10.487793,4.2969682)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 395.35982,697.25658 -14.93737,0 0,-30.00277 196.79962,0"
+       id="path3950"
+       transform="translate(10.487793,4.2969682)"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1,6;stroke-dashoffset:0"
+       d="m 671.33283,738.62826 -277.36338,0"
+       id="path3952"
+       transform="translate(10.487793,4.2969682)"
+       sodipodi:nodetypes="cc" />
+    <g
+       id="g4293"
+       transform="translate(-94,58)">
+      <path
+         sodipodi:nodetypes="cccccc"
+         id="rect3021"
+         d="m 217.12268,614.37558 c 0,10.97213 0,21.94416 0,32.91629 11.66667,0 23.33333,0 35,0 0,-12.15826 0,-24.31652 0,-36.47477 -11.66667,0 -23.33333,0 -35,0 l 0,3.55848 z"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.00000014, 8.00000014;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3023"
+         y="620.95758"
+         x="223.80695"
+         style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+           y="620.95758"
+           x="223.80695"
+           id="tspan3025"
+           sodipodi:role="line">list</tspan></text>
+      <path
+         sodipodi:nodetypes="cc"
+         id="path5042-8"
+         d="m 236.87858,629.59214 0,17.69972"
+         style="fill:none;stroke:#000000;stroke-width:1.63529038;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529042, 4.90587124;stroke-dashoffset:0" />
+      <path
+         sodipodi:nodetypes="cccc"
+         transform="translate(10.487793,4.2969682)"
+         id="path3962"
+         d="m 241.63489,606.52013 -35,-2e-5 0,15 5.5501,0"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <path
+       style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 273.01978,561.33218 -150.47831,0 0,53.20407 10.96835,0"
+       id="path4289"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 187.26256,624.11371 -64.71988,0 0,39.63406 11.06479,0"
+       id="path4291" />
   </g>
 </svg>
