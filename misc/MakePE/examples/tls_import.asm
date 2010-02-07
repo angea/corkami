@@ -1,18 +1,9 @@
 ; TLS callbacks actually an import thunk
-; it makes the TLS less obvious, 
+; it makes the TLS less obvious, only valid after loading
 ; and since it calls the TLS with the IMAGEBASE as a parameter, 
 ; an API like WinExec would execute a file named MZ...
 
 ; original idea by Peter Ferrié
-
-; so
-;    AddressOfCallBacks    dd __imp__WinExec
-; will trigger this:
-;    push 0                     ; UINT uCmdShow
-;    push IMAGEBASE             ; LPCSTR lpCmdLine
-;    call WinExec
-
-; also entrypoint code clears the callbacks => only executed once.
 
 %include '..\consts.asm'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
@@ -24,7 +15,6 @@ FILEALIGN EQU 200h
 
 DOS_HEADER:
 .e_magic       dw 'MZ'
-db 'calc.exe',0
     times 29 * 2 + 2 - ($ - .e_magic) db (0) ; 58 bytes gap
 .e_lfanew      dd NT_SIGNATURE - IMAGEBASE ; CRITICAL
 
@@ -137,23 +127,19 @@ base_of_code:
 bits 32
 ;%DEFINE Image_Tls_Directory32
 
-already_executed db 0
-TLS:
-    retn
-
 EntryPoint:
     push MB_ICONINFORMATION     ; UINT uType
     push aEntryPoint            ; LPCTSTR lpCaption
     push helloworld             ; LPCTSTR lpText
     push 0                      ; HWND hWnd
     call MessageBoxA
+
     mov dword [AddressOfCallBacks], 0
+
     push 0                      ; UINT uExitCode
     call ExitProcess
     retn
 
-calc db 'calc.exe',0
-aTls db "TLS Callback", 0
 aEntryPoint db "Entry Point", 0
 helloworld db "Hello World!", 0
 
