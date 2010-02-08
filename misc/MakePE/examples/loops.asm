@@ -89,8 +89,52 @@ l1:
 
     pop ecx
     test cl, cl
-    jz good
-    jmp bad
+    jnz bad
+
+
+; lfsr loop, idea by Baboon
+; lfsr = (lfsr >> 1) ^ (-(lfsr & 1) & poly)
+%macro lfsr 3
+    mov %3, %1
+    and %3, 1
+    neg %3
+    and %3, %2
+    shr %1, 1
+    xor %1, %3
+%endmacro
+
+%macro lfsr16 2
+    lfsr %1, %2, ax
+%endmacro
+
+%macro lfsr32 2
+    lfsr %1, %2, eax
+%endmacro
+
+    mov cx, -1          ; lfsr 16
+    mov edx, 01020304h  ; lfsr 32
+    mov ebx, 0          ; our iteration counter, just for debugging purpose here
+
+loop_start:
+    ; do your loop stuff here
+
+    lfsr32 edx, 0d0000001h ; x^32 + x^31 + x^29 + x^11 + 1
+    xor dword [loop_exit], edx  ; exit address is updated blindly
+
+    inc bx
+;    cmp ebx, 35
+;    jnz loop_start
+
+    lfsr16 cx, 0b400h      ; x^16 + x^14 + x^13 + x^11 + 1
+    cmp cx, 0eaa2h          ; our loop termination condition
+    jnz loop_start
+
+    jmp dword [loop_exit]       ; exit address is jumped to blindly
+
+loop_end:
+    cmp bx, 35
+    jnz bad
+    jmp good
 
 bad:
     push MB_ICONERROR   ; UINT uType
@@ -115,6 +159,8 @@ error db "Bad", 0
 errormsg db "Something went wrong...", 0
 success db "Good", 0
 successmsg db "Expected behaviour occured...", 0
+
+loop_exit dd 4001bfh ^ 0ac5a1c44h; = loop_end ^ 0ac5a1c44h (= 35 iterations)
 
 ;%IMPORTS
 
