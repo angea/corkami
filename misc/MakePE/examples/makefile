@@ -3,20 +3,21 @@ masmdir = c:\masm32\bin
 makepe = $(python) ..\makepe.py
 
 examples = compiled.exe tls_import.exe mz.exe \
-undoc.exe helloworld-masm.exe gs.exe console.exe \
-driver.sys smsw.exe exehw.exe exetiny.exe tinype.exe \
-seh_dll.dll seh_loader.exe tls_standard.exe tls_fake.exe \
-tls_no_user32.exe tls_on_the_fly.exe block.exe \
-helloworld.exe sectionless.exe collapsed.exe \
-duplicate_section.exe whole_pe_section.exe jumps.exe \
-piotr.exe self_generating.exe opcodes32pe.exe loops.exe \
-opcodes32 no_relocs.dll no_relocs_loader.exe \
-no_relocs_tls_loader.exe stack.exe fibonacci.exe \
-subleq.exe tta.exe x86.exe com.com eicar.com \
-forwarder.dll forwarded.exe own_exports.exe \
-no_exports.dll no_exports_loader.exe
+	undoc.exe helloworld-masm.exe gs.exe console.exe \
+	driver.sys smsw.exe exehw.exe exetiny.exe tinype.exe \
+	seh_dll.dll seh_loader.exe tls_standard.exe tls_fake.exe \
+	tls_no_user32.exe tls_on_the_fly.exe block.exe \
+	helloworld.exe sectionless.exe collapsed.exe \
+	duplicate_section.exe whole_pe_section.exe jumps.exe \
+	piotr.exe self_generating.exe opcodes32pe.exe loops.exe \
+	opcodes32 no_relocs.dll no_relocs_loader.exe \
+	no_relocs_tls_loader.exe stack.exe fibonacci.exe \
+	subleq.exe tta.exe x86.exe com.com eicar.com \
+	forwarder.dll forwarded.exe own_exports.exe \
+	no_exports.dll no_exports_loader.exe
 
-objects = fibonacci.obj stack.obj subleq.obj tta.obj x86.obj helloworld-masm.obj
+objects = fibonacci.obj stack.obj subleq.obj tta.obj x86.obj \
+	helloworld-masm.obj
 
 all: $(examples)
 

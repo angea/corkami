@@ -527,8 +527,6 @@ _
     shrd [eax], eax, 0x0                    ;0fac00 00
     shrd [eax], eax, cl                     ;0fad00
 _
-    fxsave [eax]                            ;0fae00
-_
     cmpxchg [eax], al                       ;0fb000
     cmpxchg [eax], eax                      ;0fb100
     cmpxchg486 [eax], eax                   ;0fa700
@@ -1230,7 +1228,9 @@ _
     finit                                   ;9bdbe3
     fnsetpm                                 ;dbe4
     db 9bh, 0dbh, 0e4h       ;fsetpm        ;9bdbe4
-    fnsave [eax]                            ;dd30
+    db 66h
+    fnsave [eax]                            ;66dd30 94b
+    fnsave [eax]                            ;dd30 108b
     fsave [eax]                             ;9bdd30
     fnstsw word [eax]                       ;dd38
     fstsw word [eax]                        ;9bdd38
@@ -1241,7 +1241,9 @@ _
     fprem1                                  ;d9f5 partial remainder 1
     fptan                                   ;d9f2
     frndint                                 ;d9fc round st0(0) to an integer
-    frstor [eax]                            ;dd20
+    db 66h
+    frstor [eax]                            ;66dd20 94 bytes
+    frstor [eax]                            ;dd20 108 bytes
     frstpm                                  ; TODO replaced by fwait ?
     fscale                                  ;d9fd scale st0(0) by st0(1)
     fsin                                    ;d9fe
@@ -1317,8 +1319,8 @@ _
     smsw ax                                 ;660f01e0 Store Machine Status Words
     smsw eax                                ;0f01e0 undocumented but gets all cr0 anyway
     lmsw ax                                 ;0f01f0
-    fxsave [eax]                            ;0fae00
-    fxrstor [eax]                           ;0fae08
+    fxsave [eax]                            ;0fae00 512b
+    fxrstor [eax]                           ;0fae08 512b
     ldmxcsr [eax]                           ;0fae10
     stmxcsr [eax]                           ;0fae18
     xsave [eax]                             ;0fae20
