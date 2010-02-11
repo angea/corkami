@@ -5,8 +5,8 @@
 
 org IMAGEBASE
 
-SECTIONALIGN EQU 200h 
-FILEALIGN EQU SECTIONALIGN ; MakePE limitation
+SECTIONALIGN EQU 1000h
+FILEALIGN EQU 200h
 
 DOS_HEADER:
     .e_magic       dw 'MZ'
@@ -116,28 +116,31 @@ DATA_DIRECTORY:
 NUMBEROFRVAANDSIZES EQU ($ - DATA_DIRECTORY) / 8
 SIZEOFOPTIONALHEADER EQU $ - OPTIONAL_HEADER
 
+; DIRECTORY_ENTRY_DEBUG Size should be small, like 0x1000 or less
+; Independantly of NumberOfRvaAndSizes. thus, Dword at DATA_DIRECTORY + 34h
+
 SECTION_HEADER:
 SECTION_0:
     .Name                   db '.text'
         times 8 - ($ - .Name) db (0)
-    .VirtualSize            dd Section0Size
+    .VirtualSize            dd SECTION0VS; iround(SECTION0SIZE, SECTIONALIGN)
     .VirtualAddress         dd Section0Start - IMAGEBASE
-    .SizeOfRawData          dd iround(Section0Size, FILEALIGN)
-    .PointerToRawData       dd Section0Start - IMAGEBASE
+    .SizeOfRawData          dd SECTION0SIZE
+    .PointerToRawData       dd SECTION0OFFSET
     .PointerToRelocations   dd 0
     .PointerToLinenumbers   dd 0
     .NumberOfRelocations    dw 0
     .NumberOfLinenumbers    dw 0
-    .Characteristics        dd IMAGE_SCN_CNT_CODE | IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN_CNT_UNINITIALIZED_DATA | IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_READ
+    .Characteristics        dd IMAGE_SCN_CNT_CODE | IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_READ
 
 
 SECTION_1:
     .Name                   db '.rdata'
         times 8 - ($ - .Name) db (0)
-    .VirtualSize            dd Section1Size
+    .VirtualSize            dd SECTION1VS ; iround(SECTION1SIZE, SECTIONALIGN)
     .VirtualAddress         dd Section1Start - IMAGEBASE
-    .SizeOfRawData          dd iround(Section1Size, FILEALIGN)
-    .PointerToRawData       dd Section1Start - IMAGEBASE
+    .SizeOfRawData          dd SECTION1SIZE
+    .PointerToRawData       dd SECTION1OFFSET
     .PointerToRelocations   dd 0
     .PointerToLinenumbers   dd 0
     .NumberOfRelocations    dw 0
@@ -147,10 +150,10 @@ SECTION_1:
 SECTION_2:
     .Name                   db '.data'
         times 8 - ($ - .Name) db (0)
-    .VirtualSize            dd Section2Size
+    .VirtualSize            dd SECTION2VS ; iround(SECTION2SIZE, SECTIONALIGN)
     .VirtualAddress         dd Section2Start - IMAGEBASE
-    .SizeOfRawData          dd iround(Section2Size, FILEALIGN)
-    .PointerToRawData       dd Section2Start - IMAGEBASE
+    .SizeOfRawData          dd SECTION2SIZE
+    .PointerToRawData       dd SECTION2OFFSET
     .PointerToRelocations   dd 0
     .PointerToLinenumbers   dd 0
     .NumberOfRelocations    dw 0
@@ -159,15 +162,19 @@ SECTION_2:
 
 NUMBEROFSECTIONS EQU ($ - SECTION_HEADER) / 0x28
 
+
 ALIGN FILEALIGN, db 0
 SIZEOFHEADERS EQU $ - IMAGEBASE
 
+SECTION0OFFSET EQU $ - IMAGEBASE
+
+SECTION code valign = SECTIONALIGN
 Section0Start:
 
 bits 32
 base_of_code:
 
-EntryPoint
+EntryPoint:
     push MB_ICONINFORMATION ; UINT uType
     push tada               ; LPCTSTR lpCaption
     push helloworld         ; LPCTSTR lpText
@@ -178,27 +185,34 @@ EntryPoint
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
-
-Section0Size EQU $ - Section0Start
-
+SECTION0VS equ $ - Section0Start
 align FILEALIGN,db 0
+SECTION0SIZE EQU $ - Section0Start
 SIZEOFCODE equ $ - base_of_code
 
+SECTION1OFFSET equ $ - Section0Start + SECTION0OFFSET
+SECTION idata valign = SECTIONALIGN
 Section1Start:
 base_of_data:
-;%IMPORTS
 
-Section1Size EQU $ - Section1Start
+;%IMPORTS
+SECTION1VS equ $ - Section1Start
 
 align FILEALIGN,db 0
+
+SECTION1SIZE EQU $ - Section1Start
+SECTION2OFFSET equ $ - Section1Start + SECTION1OFFSET
+SECTION data valign = SECTIONALIGN
 
 Section2Start:
 tada db "Tada!", 0
 helloworld db "Hello World!", 0
-Section2Size EQU $ - Section2Start
+SECTION2VS equ $ - Section2Start
 
 ALIGN FILEALIGN,db 0
-SIZEOFINITIALIZEDDATA equ $ - base_of_data
+SECTION2SIZE EQU $ - Section2Start
+;SIZEOFINITIALIZEDDATA equ $ - base_of_data ; too complex
+SIZEOFINITIALIZEDDATA equ SECTION2SIZE + SECTION1SIZE
 uninit_data:
 SIZEOFUNINITIALIZEDDATA equ $ - uninit_data
 
