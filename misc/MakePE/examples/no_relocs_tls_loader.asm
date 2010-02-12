@@ -1,7 +1,6 @@
 ; Empty file with TLS in dll code.
 
 %include '..\standard_hdr.asm'
-;%DEFINE Image_Tls_Directory32 DIRECTORY_ENTRY_TLS_SIZE
 
 EntryPoint:
     retn

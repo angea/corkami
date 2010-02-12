@@ -3,7 +3,6 @@
 ; ex: set AddressOfCallBacks to 0, and set it to Callbacks during the EntryPoint code.
 
 %include '..\standard_hdr.asm'
-;%DEFINE Image_Tls_Directory32
 
 TLS0:
 ;    mov eax, [__imp__ExitProcess]  ; setting a TLS outside the PE

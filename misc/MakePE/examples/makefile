@@ -12,9 +12,11 @@ examples = compiled.exe tls_import.exe mz.exe \
 	piotr.exe self_generating.exe opcodes32pe.exe loops.exe \
 	opcodes32 no_relocs.dll no_relocs_loader.exe \
 	no_relocs_tls_loader.exe stack.exe fibonacci.exe \
-	subleq.exe tta.exe x86.exe com.com eicar.com \
+	subleq.exe tta.exe x86.exe com.com \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe
+
+# eicar.com # removed to prevent your AV from acting
 
 objects = fibonacci.obj stack.obj subleq.obj tta.obj x86.obj \
 	helloworld-masm.obj

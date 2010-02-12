@@ -91,8 +91,13 @@ if __name__ == "__main__":
     r = re.sub(r";%IMPORT ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
     r = r.replace(";%IMPORTS", MakeImports(imports))
 
-    find_define = re.findall(";%DEFINE ([A-Z_0-9 ]+)", r, re.I | re.M)
+    find_define = re.findall("([A-Z_0-9 ]+).*EQU", r, re.I | re.M)
     defines = []
+    if find_define:
+        for i in find_define:
+            defines += i.split()
+
+    find_define = re.findall("([A-Z_0-9 ]+).*:", r, re.I | re.M)
     if find_define:
         for i in find_define:
             defines += i.split()

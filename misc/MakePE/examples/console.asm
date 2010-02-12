@@ -1,6 +1,5 @@
 %include '../standard_hdr.asm'
 
-;%DEFINE SUBSYSTEM
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
 
 STD_OUTPUT_HANDLE equ -11

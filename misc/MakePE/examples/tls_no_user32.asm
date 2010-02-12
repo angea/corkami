@@ -4,8 +4,6 @@
 
 %include '..\standard_hdr.asm'
 
-;%DEFINE Image_Tls_Directory32
-
 TLS:
     push aMessageBoxA       ; LPCSTR lpProcName
     push dword [hUser32]    ; HMODULE hModule

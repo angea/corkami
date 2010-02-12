@@ -1,5 +1,4 @@
 %include '..\standard_hdr.asm'
-;%DEFINE Image_Tls_Directory32
 
 EntryPoint:
     push MB_ICONINFORMATION ; UINT uType

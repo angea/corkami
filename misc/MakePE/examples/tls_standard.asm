@@ -3,7 +3,6 @@
 ; looping infinitely if there is a software breakpoint found on the EP
 
 %include '..\standard_hdr.asm'
-;%DEFINE Image_Tls_Directory32
 
 already_executed db 0
 TLS:

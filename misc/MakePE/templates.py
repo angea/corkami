@@ -6,7 +6,7 @@ IMPORT_DESCRIPTOR: ; replace with imports:
 %(dll)s_DESCRIPTOR:
     dd %(dll)s_hintnames - IMAGEBASE    ; OriginalFirstThunk/Characteristics, IMAGE_IMPORT_BY_NAME array
     dd 0                                ; TimeDateStamp
-    dd -1                               ; ForwarderChain
+    dd 0                                ; ForwarderChain
     dd %(dll)s - IMAGEBASE              ; Name
     dd %(dll)s_iat - IMAGEBASE          ; FirstThunk
 

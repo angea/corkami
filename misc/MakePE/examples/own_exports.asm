@@ -1,7 +1,5 @@
 ; EXE with exports, calling itself.
 
-;%DEFINE Exports_Directory
-
 %include '..\standard_hdr.asm'
 
 EntryPoint:

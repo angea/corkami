@@ -1,8 +1,5 @@
 ; DLL with minimal export table, and relocations
 
-;%DEFINE DIRECTORY_ENTRY_BASERELOC_SIZE Directory_Entry_Basereloc
-;%DEFINE CHARACTERISTICS
-
 %include '..\standard_hdr.asm'
 
 ; same image_base as PE on purpose, to show relocations

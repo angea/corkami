@@ -125,7 +125,6 @@ Section0Start:
 
 base_of_code:
 bits 32
-;%DEFINE Image_Tls_Directory32
 
 EntryPoint:
     push MB_ICONINFORMATION     ; UINT uType
