@@ -24,4 +24,4 @@ DIRECTORY_ENTRY_TLS_SIZE EQU $ - Image_Tls_Directory32
 
 %include '..\standard_ftr.asm'
 
-; Ange Albertini 2009-2010
+; Ange Albertini, Creative Commons BY, 2009-2010

@@ -167,4 +167,4 @@ loop_exit dd 4001bfh ^ 0ac5a1c44h; = loop_end ^ 0ac5a1c44h (= 35 iterations)
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
 
-;Ange Albertini 2010
+;Ange Albertini, Creative Commons BY, 2010

@@ -1,3 +1,6 @@
+# parse all DLL from your system directory, extract export names, generate hashes list
+# in Hiew Names or IDC format
+
 import pefile
 templates = {'IDA':[
 """

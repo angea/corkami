@@ -47,4 +47,4 @@ times 4 db 0
 SIZEOFHEADER equ $ - IMAGEBASE ; rounding not working
 
 ;Original TinyPE @ http://www.phreedom.org/solar/code/tinype/
-;Ange Albertini 2010
+;Ange Albertini, Creative Commons BY, 2010

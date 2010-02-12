@@ -55,4 +55,4 @@ DIRECTORY_ENTRY_EXPORT_SIZE equ $ - Exports_Directory
 
 %include '..\standard_ftr.asm'
 
-; Ange Albertini 2009-2010
+; Ange Albertini, Creative Commons BY, 2009-2010

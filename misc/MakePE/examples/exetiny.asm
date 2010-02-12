@@ -19,4 +19,4 @@ iend
 
 PAGES equ $ >> 6
 
-; Ange Albertini 2010
+; Ange Albertini, Creative Commons BY, 2010

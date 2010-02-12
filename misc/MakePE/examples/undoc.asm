@@ -164,4 +164,4 @@ buffer dd 0
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
 
-; Ange Albertini 2010
+; Ange Albertini, Creative Commons BY, 2010

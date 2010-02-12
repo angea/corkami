@@ -32,4 +32,4 @@ iend
 PAGES equ $ >> 6
 LAST_BYTE equ $
 
-; Ange Albertini 2010
+; Ange Albertini, Creative Commons BY, 2010

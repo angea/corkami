@@ -10,4 +10,4 @@ EntryPoint:
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
 
-;Ange Albertini 2009-2010
+;Ange Albertini, Creative Commons BY, 2009-2010

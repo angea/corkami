@@ -44,4 +44,4 @@ DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
 
 %include '..\standard_ftr.asm'
 
-; Ange Albertini 2009-2010
+; Ange Albertini, Creative Commons BY, 2009-2010

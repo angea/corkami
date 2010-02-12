@@ -1,14 +1,12 @@
-; DLL with minimal export table, and relocations
+; DLL mimicking basic ntoskrnl functionalities for execution of drivers in user mode
 
 %include '..\standard_hdr.asm'
 
 EntryPoint:
     retn 3 * 4
 
-Export:
-    mov eax, [esp]
-    mov ebx, [esp+4]
-    push eax
+DbgPrint:
+    mov ebx, [esp+4]        ; DbgPrint doesn't clear arguments from the stack
     push MB_ICONINFORMATION ; UINT uType
 reloc1_1:
     push Driver             ; LPCTSTR lpCaption
@@ -18,7 +16,7 @@ reloc2_1:
     call MessageBoxA
     retn
 
-Driver db "Hello usermode driver!", 0
+Driver db "User mode Ntoskrnl", 0
 
 reloc3_2:
 ;%IMPORT user32.dll!MessageBoxA
@@ -38,17 +36,17 @@ Exports_Directory:
   AddressOfNameOrdinals dd address_of_name_ordinals - IMAGEBASE
 
 address_of_functions:
-    dd Export - IMAGEBASE
+    dd DbgPrint - IMAGEBASE
 
 address_of_names:
-    dd aExport - IMAGEBASE
+    dd aDbgPrint - IMAGEBASE
 
 address_of_name_ordinals:
     dw 0
 
 aDllName db 'ntoskrnl.exe', 0
 
-aExport db 'DbgPrint', 0
+aDbgPrint db 'DbgPrint', 0
 
 EXPORT_SIZE equ $ - Exports_Directory
 
@@ -68,3 +66,5 @@ block_start:
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - DIRECTORY_ENTRY_BASERELOC
 %include '..\standard_ftr.asm'
+
+;Ange Albertini, Creative Commons BY, 2010
