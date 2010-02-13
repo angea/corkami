@@ -8,9 +8,9 @@ EntryPoint:
 DbgPrint:
     mov ebx, [esp+4]        ; DbgPrint doesn't clear arguments from the stack
     push MB_ICONINFORMATION ; UINT uType
-reloc1_1:
+;%reloc 1
     push Driver             ; LPCTSTR lpCaption
-reloc2_1:
+;%reloc 1
     push ebx                ; LPCTSTR lpText
     push 0                  ; HWND hWnd
     call MessageBoxA
@@ -18,7 +18,7 @@ reloc2_1:
 
 Driver db "User mode Ntoskrnl", 0
 
-reloc3_2:
+;%reloc 2
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORTS
 
@@ -50,21 +50,8 @@ aDbgPrint db 'DbgPrint', 0
 
 EXPORT_SIZE equ $ - Exports_Directory
 
-;relocations start
-DIRECTORY_ENTRY_BASERELOC:
-block_start:
-; relocation block start
-    .VirtualAddress dd Section0Start - IMAGEBASE
-    .SizeOfBlock dd base_reloc_size_of_block
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc1_1 + 1 - Section0Start)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc2_1 + 1 - Section0Start)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc3_2 + 2 - Section0Start)
-    base_reloc_size_of_block equ $ - block_start
-;relocation block end
+;%relocs
 
-;relocations end
-
-DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - DIRECTORY_ENTRY_BASERELOC
 %include '..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010
