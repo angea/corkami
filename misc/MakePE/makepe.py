@@ -80,6 +80,23 @@ def MakeRelocs(relocs):
     source += templates.Relocations["END"]
     return source
 
+def MakeExports(exports, dll_name):
+    counter = len(exports)
+    ordinals = []
+    functions = []
+    names = []
+    strings = []
+    for export in exports:
+        ordinals += [templates.Exports["ORDINAL"]]
+        functions += [templates.Exports["FUNCTION"] % {"export": export}]
+        strings += [templates.Exports["STRING"] % {"export": export}]
+        names += [templates.Exports["NAME"] % {"export": export}]
+    ordinals = "\n".join(ordinals)
+    functions = "\n".join(functions)
+    strings = "\n".join(strings)
+    names = "\n".join(names)
+    return templates.Exports["BODY"] % locals()
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print "Missing argument: Makepe.py filename.asm"
@@ -101,7 +118,22 @@ if __name__ == "__main__":
     r = re.sub(r";%IMPORT ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
     r = r.replace(";%IMPORTS", MakeImports(imports))
 
+#parse exports tags
+    findexp = re.findall(";%EXPORT ([A-Za-z.0-9_]+)", r, re.I | re.M)
+    exports = []
+    if findexp:
+        for name in findexp:
+            exports += [name]
+
+    r = re.sub(r";%EXPORT ([A-Za-z.0-9_]+)", r"""__exp__\1:""", r)
+    findexp2 = re.findall(r";%EXPORTS ([A-Za-z.0-9_]+)", r, re.I | re.M)
+    dll_name = ""
+    if findexp2:
+        dll_name = findexp2[0]
+    r = re.sub(r";%EXPORTS ([A-Za-z\.0-9_]+)", MakeExports(exports, dll_name), r)
+
 #parse relocation tags
+    #add a counter for each of them
     for i in range(r.count(";%reloc ")):
         r = r.replace(";%reloc ", ";%%reloc%i " % i, 1)
 

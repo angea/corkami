@@ -22,6 +22,7 @@ scan_loop:
 ;%reloc 2
     mov dword [esi], runme
     pop esi
+;%EXPORT Export
 Export:
     retn
 
@@ -45,33 +46,7 @@ helloworld db "Hello World!", 0
 ;%IMPORT kernel32.dll!ExitProcess
 ;%IMPORTS
 
-Exports_Directory:
-  Characteristics       dd 0
-  TimeDateStamp         dd 0
-  MajorVersion          dw 0
-  MinorVersion          dw 0
-  Name                  dd aDllName - IMAGEBASE
-  Base                  dd 0
-  NumberOfFunctions     dd 1
-  NumberOfNames         dd 1
-  AddressOfFunctions    dd address_of_functions - IMAGEBASE
-  AddressOfNames        dd address_of_names - IMAGEBASE
-  AddressOfNameOrdinals dd address_of_name_ordinals - IMAGEBASE
-
-address_of_functions:
-    dd Export - IMAGEBASE
-
-address_of_names:
-    dd aExport - IMAGEBASE
-
-address_of_name_ordinals:
-    dw 0
-
-aDllName db 'seh_dll.dll', 0
-
-aExport db 'Export', 0
-
-EXPORT_SIZE equ $ - Exports_Directory
+;%EXPORTS seh_dll.dll
 
 ;%relocs
 %include '..\standard_ftr.asm'

@@ -67,3 +67,41 @@ DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
 """.lstrip().split("#")
 
 Relocations = dict([i, j.lstrip("\n")] for i, j in zip(Relocations[::+2], Relocations[1::+2]))
+
+
+Exports = """BODY|
+Exports_Directory:
+  Characteristics       dd 0
+  TimeDateStamp         dd 0
+  MajorVersion          dw 0
+  MinorVersion          dw 0
+  Name                  dd aDllName - IMAGEBASE
+  Base                  dd 0
+  NumberOfFunctions     dd %(counter)i
+  NumberOfNames         dd %(counter)i
+  AddressOfFunctions    dd address_of_functions - IMAGEBASE
+  AddressOfNames        dd address_of_names - IMAGEBASE
+  AddressOfNameOrdinals dd address_of_name_ordinals - IMAGEBASE
+
+aDllName db '%(dll_name)s', 0
+
+address_of_functions:
+%(functions)s
+address_of_names:
+%(names)s
+address_of_name_ordinals:
+%(ordinals)s
+%(strings)s
+
+EXPORT_SIZE equ $ - Exports_Directory
+|ORDINAL|
+    dw 0
+|FUNCTION|
+    dd __exp__%(export)s - IMAGEBASE
+|NAME|
+    dd a__exp__%(export)s - IMAGEBASE
+|STRING|
+a__exp__%(export)s db '%(export)s', 0
+""".lstrip().split("|")
+
+Exports = dict([i, j.lstrip("\n")] for i, j in zip(Exports[::+2], Exports[1::+2]))
