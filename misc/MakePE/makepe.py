@@ -72,6 +72,14 @@ def MakeImports(imports):
 
     return source
 
+def MakeRelocs(relocs):
+    source = str()
+    source += templates.Relocations["START"]
+    for i, off in enumerate(relocs):
+        source += templates.Relocations["ENTRY"] % {"label": str(i), "offset": off}
+    source += templates.Relocations["END"]
+    return source
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print "Missing argument: Makepe.py filename.asm"
@@ -80,6 +88,8 @@ if __name__ == "__main__":
     f = open(sys.argv[1], "rt")
     r = f.read()
     f.close()
+
+#parse imports tags
     findimp = re.findall(";%IMPORT ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
     imports = {}
     if findimp:
@@ -91,6 +101,20 @@ if __name__ == "__main__":
     r = re.sub(r";%IMPORT ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
     r = r.replace(";%IMPORTS", MakeImports(imports))
 
+#parse relocation tags
+    for i in range(r.count(";%reloc ")):
+        r = r.replace(";%reloc ", ";%%reloc%i " % i, 1)
+
+    findrel = re.findall(";%reloc[0-9]+ ([0-9])", r, re.I | re.M)
+    relocs = []
+    if findrel:
+        for off in findrel:
+            relocs += [off]
+
+    r = re.sub(r";%reloc([0-9]+) [0-9]", r"""reloc\1:""", r)
+    r = r.replace(";%relocs", MakeRelocs(relocs))
+
+# add default values for variables that are not defined
     find_define = re.findall("([A-Z_0-9 ]+).*EQU", r, re.I | re.M)
     defines = []
     if find_define:

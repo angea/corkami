@@ -47,3 +47,23 @@ DIRECTORY_ENTRY_IMPORT_SIZE EQU $ - IMPORT_DESCRIPTOR
 """.lstrip().split("|")
 
 Imports = dict([i, j.lstrip("\n")] for i, j in zip(Imports[::+2], Imports[1::+2]))
+
+Relocations = """START#
+;relocations start
+Directory_Entry_Basereloc:
+block_start:
+; relocation block start
+    .VirtualAddress dd reloc0 - IMAGEBASE
+    .SizeOfBlock dd base_reloc_size_of_block
+#ENTRY#
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc%(label)s + %(offset)s - reloc0)
+#END#
+    base_reloc_size_of_block equ $ - block_start
+;relocation block end
+
+;relocations end
+
+DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
+""".lstrip().split("#")
+
+Relocations = dict([i, j.lstrip("\n")] for i, j in zip(Relocations[::+2], Relocations[1::+2]))
