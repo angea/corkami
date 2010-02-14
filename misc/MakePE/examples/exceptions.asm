@@ -1,3 +1,5 @@
+; various ways of triggering exceptions, including all interrupts
+
 %include '../onesec.hdr'
 
 %macro SEH_before 0
@@ -82,7 +84,9 @@ MEM_COMMIT equ 1000h
     push dword [fs:0]
     mov [fs:0], esp
 
-    jmp after_ints                          ; you might want to skip that lengthy part
+    ; you might want to skip that lengthy part
+;   jmp after_ints
+
     call ints_start
     cmp dword [counter], INTS_COUNTER
     jnz bad
@@ -204,9 +208,6 @@ errormsg db "Something went wrong...", 0
 success db "Good", 0
 successmsg db "Expected behaviour occured...", 0
 
-_eax dd 12345678h
-buffer dd 0
-
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 
@@ -215,4 +216,4 @@ buffer dd 0
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
 
-; Ange Albertini, Creative Commons BY, 2010
+; Ange Albertini, Creative Commons BY, 2009-2010
