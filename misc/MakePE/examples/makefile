@@ -17,7 +17,8 @@ examples = compiled.exe tls_import.exe mz.exe \
 	subleq.exe tta.exe x86.exe com.com \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe \
-	driver.exe driver-noimports.exe ntoskrnl.exe
+	driver.exe driver-noimports.exe ntoskrnl.exe \
+	exceptions.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -176,6 +177,9 @@ driver-noimports.exe: driver.sys
 	$(python) sys2exe.py driver.sys
 ntoskrnl.exe: ntoskrnl.asm
 	$(makepe) ntoskrnl.asm
+
+exceptions.exe: exceptions.asm
+	$(makepe) exceptions.asm
 
 clean:
 	rm $(examples) $(objects)
