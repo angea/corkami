@@ -18,7 +18,7 @@ examples = compiled.exe tls_import.exe mz.exe \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe \
 	driver.exe driver-noimports.exe ntoskrnl.exe \
-	exceptions.exe
+	exceptions.exe tls_zeroes.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -180,6 +180,9 @@ ntoskrnl.exe: ntoskrnl.asm
 
 exceptions.exe: exceptions.asm
 	$(makepe) exceptions.asm
+
+tls_zeroes.exe: tls_zeroes.asm
+	$(makepe) tls_zeroes.asm
 
 clean:
 	rm $(examples) $(objects)
