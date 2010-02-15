@@ -44,6 +44,7 @@ SINGLE_STEP equ 80000004h ;;;;;;;;;;;;;;;;;;
 
     _before
     db 0f1h                                 ;ICEBP
+    jmp bad
     _after SINGLE_STEP
 
     _before
@@ -52,7 +53,7 @@ SINGLE_STEP equ 80000004h ;;;;;;;;;;;;;;;;;;
     or eax, 100h    ; set TF
     push eax
     popf
-    nop             ; will trigger here
+    jmp bad         ; will trigger AFTER stepping here
     _after SINGLE_STEP
 
 
@@ -61,6 +62,7 @@ ACCESS_VIOLATION equ 0c0000005h ;;;;;;;;;;;;
     _before
     xor eax, eax        ; not needed after initialization
     mov byte [eax], 0   ; the usual access violation trigger
+    jmp bad
     _after ACCESS_VIOLATION
 
 PAGE_READONLY             equ 2
@@ -75,6 +77,7 @@ MEM_COMMIT equ 1000h
     call VirtualAlloc
 
     call [eax]
+    jmp bad
     ;%IMPORT kernel32.dll!VirtualAlloc
     _after ACCESS_VIOLATION
 
@@ -84,7 +87,7 @@ MEM_COMMIT equ 1000h
     mov [fs:0], esp
 
     ; you might want to skip that lengthy part
-   jmp after_ints
+;   jmp after_ints
 
     call ints_start
     cmp dword [counter], INTS_COUNTER
@@ -143,12 +146,14 @@ PAGE_GUARD                equ 100h
     call VirtualAlloc
 
     call [eax]
+    jmp bad
     _after STATUS_GUARD_PAGE_VIOLATION   ; OllyDbg will think it's a memory breakpoin access
 
 INTEGER_DIVIDE_BY_ZERO equ 0C0000094h ;;;;;;
     _before
     xor eax, eax
     div eax
+    jmp bad
     _after INTEGER_DIVIDE_BY_ZERO
 
 
@@ -157,16 +162,19 @@ INTEGER_OVERFLOW equ 0C0000095h ;;;;;;;;;;;;
     _before
     mov eax, 0
     div ecx
+    jmp bad
     _after INTEGER_OVERFLOW
 
     _before
     int 4
+    jmp bad
     _after INTEGER_OVERFLOW
 
     _before
     mov cl, 07fh
     inc cl
     into        ; int 4 on OF
+    jmp bad
     _after INTEGER_OVERFLOW
 
 
@@ -174,10 +182,12 @@ BREAKPOINT equ 080000003h ;;;;;;;;;;;;;;;;;;
 
     _before
     int3    ; classic CC
+    jmp bad
     _after BREAKPOINT
 
     _before
     int 3   ; different encoding, CD 03
+    jmp bad
     _after BREAKPOINT
 
     _before
@@ -188,6 +198,7 @@ BREAKPOINT equ 080000003h ;;;;;;;;;;;;;;;;;;
 
     _before
     call DebugBreak ; system official int3 call
+    jmp bad
     ;%IMPORT kernel32.dll!DebugBreak
     _after BREAKPOINT
 
@@ -195,17 +206,21 @@ INVALID_LOCK_SEQUENCE equ 0C000001eh;;;;;;;;
 
     _before
     lock nop
+    jmp bad
     _after INVALID_LOCK_SEQUENCE
 
 INVALID_HANDLE equ 0C0000008h ;;;;;;;;;;;;;;
     _set bad
     push -1
     call CloseHandle    ; will trigger an exception only if a debugger is present
+    push -1
+    call RegCloseKey
     _clear
 
 PRIVILEGED_INSTRUCTION equ 0C0000096h;;;;;;;
     _before
     hlt
+    jmp bad
     _after PRIVILEGED_INSTRUCTION
 
 good:
@@ -233,6 +248,7 @@ successmsg db "Expected behaviour occured...", 0
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 ;%IMPORT kernel32.dll!CloseHandle
+;%IMPORT advapi32.dll!RegCloseKey
 
 ;%IMPORTS
 
