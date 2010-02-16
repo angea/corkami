@@ -113,6 +113,7 @@ align 100h, db 0
 EntryPoint:
     times 5h add [eax], al
     db 0
+;EntryPoint equ $ + 1
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE

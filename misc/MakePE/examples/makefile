@@ -18,7 +18,7 @@ examples = compiled.exe tls_import.exe mz.exe \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe \
 	driver.exe driver-noimports.exe ntoskrnl.exe \
-	exceptions.exe tls_zeroes.exe
+	exceptions.exe tls_zeroes.exe waitable.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -183,6 +183,9 @@ exceptions.exe: exceptions.asm
 
 tls_zeroes.exe: tls_zeroes.asm
 	$(makepe) tls_zeroes.asm
+
+waitable.exe: waitable.asm
+	$(makepe) waitable.asm
 
 clean:
 	rm $(examples) $(objects)
