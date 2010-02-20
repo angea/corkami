@@ -16,6 +16,16 @@ EntryPoint:
     call MessageBoxA
     retn                    ; doesn't pop out parameters
 
+;%EXPORT ExAllocatePool
+PAGE_READWRITE equ 4
+MEM_COMMIT equ 1000h
+    push PAGE_READWRITE     ; DWORD flProtect
+    push MEM_COMMIT         ; DWORD flAllocationType
+    push dword [esp + 8]    ; SIZE_T dwSize
+    push 0                  ; LPVOID lpAddress
+    call VirtualAlloc
+    retn 2 * 4
+
 ; not handling their parameters correctly yet
 ;%EXPORT IofCompleteRequest
 ;%EXPORT IoDeleteDevice
@@ -44,6 +54,7 @@ Driver db "User mode Ntoskrnl", 0
 
 ;%reloc 2
 ;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!VirtualAlloc
 ;%IMPORTS
 
 ;%EXPORTS ntoskrnl.exe
