@@ -18,7 +18,8 @@ examples = compiled.exe tls_import.exe mz.exe \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe \
 	driver.exe driver-noimports.exe ntoskrnl.exe \
-	exceptions.exe tls_zeroes.exe waitable.exe vmware.exe
+	exceptions.exe tls_zeroes.exe waitable.exe vmware.exe \
+	packed_driver.sys
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -190,6 +191,8 @@ waitable.exe: waitable.asm
 vmware.exe: vmware.asm
 	$(makepe) vmware.asm
 
+packed_driver.sys: packed_driver.asm
+	$(makepe) packed_driver.asm
 
 clean:
 	rm $(examples) $(objects)
