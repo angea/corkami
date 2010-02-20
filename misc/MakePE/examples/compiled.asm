@@ -217,3 +217,5 @@ uninit_data:
 SIZEOFUNINITIALIZEDDATA equ $ - uninit_data
 
 SIZEOFIMAGE EQU $ - IMAGEBASE
+
+;Ange Albertini, Creative Commons BY, 2010

@@ -19,3 +19,5 @@ start:
 ;   int 21h
 dos_msg:
     db 'Hello World!$'
+
+;Ange Albertini, Creative Commons BY, 2010

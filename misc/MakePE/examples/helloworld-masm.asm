@@ -25,3 +25,5 @@ Main proc
     call ExitProcess
 Main Endp
 End Main
+
+;Ange Albertini, Creative Commons BY, 2010

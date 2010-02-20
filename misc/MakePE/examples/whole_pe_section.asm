@@ -195,3 +195,5 @@ Section0Size EQU $ - Section0Start
 ; SIZEOFIMAGE will be wrong with the usual formula
 ; SIZEOFIMAGE EQU $ - IMAGEBASE 
 SIZEOFIMAGE EQU pe_size * 2 ; real section + header + virtual copy of both
+
+;Ange Albertini, Creative Commons BY, 2010

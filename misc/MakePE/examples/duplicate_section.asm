@@ -186,3 +186,5 @@ Section0Size EQU $ - Section0Start
 Section1Start:
 ; SIZEOFIMAGE will be wrong with the usual formula, it will fail to see the virtual copy of Section0, which is physically empty
 SIZEOFIMAGE EQU $ - IMAGEBASE + Section0Size
+
+;Ange Albertini, Creative Commons BY, 2010

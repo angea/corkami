@@ -69,3 +69,5 @@ ImportsAddressTable:
 IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 
 SIZEOFIMAGE equ $ - IMAGEBASE
+
+;Ange Albertini, Creative Commons BY, 2010

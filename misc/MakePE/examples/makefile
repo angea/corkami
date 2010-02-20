@@ -19,7 +19,10 @@ examples = compiled.exe tls_import.exe mz.exe \
 	no_exports.dll no_exports_loader.exe \
 	driver.exe driver-noimports.exe ntoskrnl.exe \
 	exceptions.exe tls_zeroes.exe waitable.exe vmware.exe \
-	packed_driver.sys
+	packed_driver.sys \
+	imports_manual.exe imports_custom.exe imports_fsg.exe \
+	imports_junk.exe imports_checksum.exe imports_stolen.exe \
+	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -193,6 +196,33 @@ vmware.exe: vmware.asm
 
 packed_driver.sys: packed_driver.asm
 	$(makepe) packed_driver.asm
+
+imports_checksum.exe: imports_checksum.asm
+	$(makepe) imports_checksum.asm
+
+imports_custom.exe: imports_custom.asm
+	$(makepe) imports_custom.asm
+
+imports_fsg.exe: imports_fsg.asm
+	$(makepe) imports_fsg.asm
+
+imports_hooks.exe: imports_hooks.asm
+	$(makepe) imports_hooks.asm
+
+imports_ipdp.exe: imports_ipdp.asm
+	$(makepe) imports_ipdp.asm
+
+imports_junk.exe: imports_junk.asm
+	$(makepe) imports_junk.asm
+
+imports_manual.exe: imports_manual.asm
+	$(makepe) imports_manual.asm
+
+imports_paramdp.exe: imports_paramdp.asm
+	$(makepe) imports_paramdp.asm
+
+imports_stolen.exe: imports_stolen.asm
+	$(makepe) imports_stolen.asm
 
 clean:
 	rm $(examples) $(objects)

@@ -21,3 +21,5 @@ helloworld db "Hello World!", 0
 ;%IMPORTS
 
 %include '..\standard_ftr.asm'
+
+;Ange Albertini, Creative Commons BY, 2010

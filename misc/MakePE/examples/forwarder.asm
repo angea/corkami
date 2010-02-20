@@ -48,3 +48,5 @@ aInitiateSystemShutdownA db 'InitiateSystemShutdownA', 0
 DIRECTORY_ENTRY_EXPORT_SIZE equ $ - Exports_Directory
 
 %include '..\standard_ftr.asm'
+
+;Ange Albertini, Creative Commons BY, 2010
