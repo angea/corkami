@@ -14,7 +14,31 @@ EntryPoint:
     push ebx                ; LPCTSTR lpText
     push 0                  ; HWND hWnd
     call MessageBoxA
+    retn                    ; doesn't pop out parameters
+
+; not handling their parameters correctly yet
+;%EXPORT IofCompleteRequest
+;%EXPORT IoDeleteDevice
+;%EXPORT IoDeleteSymbolicLink
     retn
+;   retn 0 * 4
+
+;%EXPORT KeCancelTimer
+    retn 1 * 4
+
+;%EXPORT KeInitializeTimerEx
+;%EXPORT RtlInitUnicodeString
+;%EXPORT MmPageEntireDriver
+    retn 2 * 4
+
+;%EXPORT KeInitializeDpc
+    retn 3 * 4
+
+;%EXPORT KeSetTimerEx
+    retn 4 * 4
+
+;%EXPORT IoCreateDevice
+    retn 7 * 4
 
 Driver db "User mode Ntoskrnl", 0
 

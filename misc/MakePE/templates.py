@@ -95,7 +95,7 @@ address_of_name_ordinals:
 
 EXPORT_SIZE equ $ - Exports_Directory
 |ORDINAL|
-    dw 0
+    dw %(i)i
 |FUNCTION|
     dd __exp__%(export)s - IMAGEBASE
 |NAME|

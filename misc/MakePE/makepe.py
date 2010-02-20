@@ -86,11 +86,11 @@ def MakeExports(exports, dll_name):
     functions = []
     names = []
     strings = []
-    for export in exports:
-        ordinals += [templates.Exports["ORDINAL"]]
-        functions += [templates.Exports["FUNCTION"] % {"export": export}]
-        strings += [templates.Exports["STRING"] % {"export": export}]
-        names += [templates.Exports["NAME"] % {"export": export}]
+    for i, export in enumerate(sorted(exports)):
+        ordinals += [templates.Exports["ORDINAL"] % locals()]
+        functions += [templates.Exports["FUNCTION"] % locals()]
+        strings += [templates.Exports["STRING"] % locals()]
+        names += [templates.Exports["NAME"] % locals()]
     ordinals = "\n".join(ordinals)
     functions = "\n".join(functions)
     strings = "\n".join(strings)
