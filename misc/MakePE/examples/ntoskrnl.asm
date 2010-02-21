@@ -17,8 +17,6 @@ EntryPoint:
     retn                    ; doesn't pop out parameters
 
 ;%EXPORT ExAllocatePool
-PAGE_READWRITE equ 4
-MEM_COMMIT equ 1000h
     push PAGE_READWRITE     ; DWORD flProtect
     push MEM_COMMIT         ; DWORD flAllocationType
     push dword [esp + 8]    ; SIZE_T dwSize

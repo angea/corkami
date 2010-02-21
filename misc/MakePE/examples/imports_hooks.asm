@@ -22,7 +22,6 @@ hook:
     push dword [__imp__MessageBoxA]
     pop dword [__imp__InitiateSystemShutdownA]
 nop
-PAGE_EXECUTE_READWRITE    equ 40h
     ; code hook
     ; make code writeable
     push lpflOldProtect             ; PDWORD lpflOldProtect

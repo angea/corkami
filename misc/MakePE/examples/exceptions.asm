@@ -2,20 +2,9 @@
 
 %include '../onesec.hdr'
 
-%macro _set 1
-    push  %1
-    push dword [fs:0]
-    mov [fs:0], esp
-%endmacro
-
 %macro _before 0
     %push SEH
-    _set %$handler
-%endmacro
-
-%macro _clear 0
-    pop dword [fs:0]
-    add esp, 4
+    setSEH %$handler
 %endmacro
 
 %macro _after 1
@@ -30,14 +19,11 @@
     xor eax, eax
     retn
 %$next:
-    _clear
+    clearSEH
     nop
     nop
     %pop
 %endmacro
-
-%define PREFIX_OPERANDSIZE db 66h
-%define PREFIX_ADDRESSSIZE db 67h
 
 EntryPoint:
 ; SINGLE_STEP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -64,9 +50,6 @@ EntryPoint:
     mov byte [eax], 0   ; the usual access violation trigger
     jmp bad
     _after ACCESS_VIOLATION
-
-PAGE_READONLY             equ 2
-MEM_COMMIT equ 1000h
 
     _before
     ; create a non executable page
@@ -209,12 +192,12 @@ after_ints:
     _after INVALID_LOCK_SEQUENCE
 
 ; INVALID_HANDLE ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    _set bad
+    setSEH bad
     push -1
     call CloseHandle    ; will trigger an exception only if a debugger is present
     push -1
     call RegCloseKey
-    _clear
+    clearSEH
 
 ; PRIVILEGED_INSTRUCTION ;;;;;;;;;;;;;;;;;;;
     _before

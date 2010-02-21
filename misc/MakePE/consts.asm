@@ -272,10 +272,26 @@ INTEGER_DIVIDE_BY_ZERO equ 0C0000094h
 INTEGER_OVERFLOW equ 0C0000095h
 PRIVILEGED_INSTRUCTION equ 0C0000096h
 
+MEM_COMMIT equ 1000h
+
+PAGE_READONLY equ 2
+PAGE_READWRITE equ 4
+PAGE_EXECUTE_READWRITE    equ 40h
 PAGE_GUARD equ 100h
 
 %define PREFIX_FS db 64h
 %define PREFIX_OPERANDSIZE db 66h
 %define PREFIX_ADDRESSSIZE db 67h
+
+%macro setSEH 1
+    push  %1
+    push dword [fs:0]
+    mov [fs:0], esp
+%endmacro
+
+%macro clearSEH 0
+    pop dword [fs:0]
+    add esp, 4
+%endmacro
 
 ;Ange Albertini 2009-2010
