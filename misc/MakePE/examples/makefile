@@ -22,7 +22,8 @@ examples = compiled.exe tls_import.exe mz.exe \
 	packed_driver.sys \
 	imports_manual.exe imports_custom.exe imports_fsg.exe \
 	imports_junk.exe imports_checksum.exe imports_stolen.exe \
-	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe
+	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe \
+	bundled_before.exe bundled_after.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -146,7 +147,7 @@ tls_import.exe: tls_import.asm
 mz.exe: compiled.exe
 	copy compiled.exe mz.exe
 
-;Happa ichimai areba ii
+#Happa ichimai areba ii
 driver.exe: driver.sys
 	$(python) sys2exe.py driver.sys
 driver-noimports.exe: driver.sys
@@ -216,6 +217,11 @@ imports_paramdp.exe: imports_paramdp.asm
 	$(makepe) imports_paramdp.asm
 imports_stolen.exe: imports_stolen.asm
 	$(makepe) imports_stolen.asm
+
+bundled_before.exe: bundled_before.asm
+	$(makepe) bundled_before.asm
+bundled_after.exe: bundled_after.asm
+	$(makepe) bundled_after.asm
 
 clean:
 	rm $(examples) $(objects)
