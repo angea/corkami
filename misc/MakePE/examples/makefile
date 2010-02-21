@@ -146,6 +146,14 @@ tls_import.exe: tls_import.asm
 mz.exe: compiled.exe
 	copy compiled.exe mz.exe
 
+;Happa ichimai areba ii
+driver.exe: driver.sys
+	$(python) sys2exe.py driver.sys
+driver-noimports.exe: driver.sys
+	$(python) sys2exe.py driver.sys
+ntoskrnl.exe: ntoskrnl.asm
+	$(makepe) ntoskrnl.asm
+
 seh_dll.dll: seh_dll.asm
 	$(makepe) seh_dll.asm
 seh_loader.exe: seh_loader.asm
@@ -175,13 +183,6 @@ no_exports.dll: no_exports.asm
 no_exports_loader.exe: no_exports_loader.asm
 	$(makepe) no_exports_loader.asm
 
-driver.exe: driver.sys
-	$(python) sys2exe.py driver.sys
-driver-noimports.exe: driver.sys
-	$(python) sys2exe.py driver.sys
-ntoskrnl.exe: ntoskrnl.asm
-	$(makepe) ntoskrnl.asm
-
 exceptions.exe: exceptions.asm
 	$(makepe) exceptions.asm
 
@@ -199,28 +200,20 @@ packed_driver.sys: packed_driver.asm
 
 imports_checksum.exe: imports_checksum.asm
 	$(makepe) imports_checksum.asm
-
 imports_custom.exe: imports_custom.asm
 	$(makepe) imports_custom.asm
-
 imports_fsg.exe: imports_fsg.asm
 	$(makepe) imports_fsg.asm
-
 imports_hooks.exe: imports_hooks.asm
 	$(makepe) imports_hooks.asm
-
 imports_ipdp.exe: imports_ipdp.asm
 	$(makepe) imports_ipdp.asm
-
 imports_junk.exe: imports_junk.asm
 	$(makepe) imports_junk.asm
-
 imports_manual.exe: imports_manual.asm
 	$(makepe) imports_manual.asm
-
 imports_paramdp.exe: imports_paramdp.asm
 	$(makepe) imports_paramdp.asm
-
 imports_stolen.exe: imports_stolen.asm
 	$(makepe) imports_stolen.asm
 
