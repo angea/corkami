@@ -40,7 +40,7 @@
 %define PREFIX_ADDRESSSIZE db 67h
 
 EntryPoint:
-SINGLE_STEP equ 80000004h ;;;;;;;;;;;;;;;;;;
+; SINGLE_STEP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     _before
     db 0f1h                                 ;ICEBP
@@ -57,7 +57,7 @@ SINGLE_STEP equ 80000004h ;;;;;;;;;;;;;;;;;;
     _after SINGLE_STEP
 
 
-ACCESS_VIOLATION equ 0c0000005h ;;;;;;;;;;;;
+; ACCESS_VIOLATION ;;;;;;;;;;;;;;;;;;;;;;;;;
 
     _before
     xor eax, eax        ; not needed after initialization
@@ -134,8 +134,7 @@ counter dd 0
 
 after_ints:
 
-STATUS_GUARD_PAGE_VIOLATION equ 080000001h ;
-PAGE_GUARD                equ 100h
+; STATUS_GUARD_PAGE_VIOLATION ;;;;;;;;;;;;;;
 
     _before
     ; create a page with PAGE_GUARD attribute
@@ -149,7 +148,7 @@ PAGE_GUARD                equ 100h
     jmp bad
     _after STATUS_GUARD_PAGE_VIOLATION   ; OllyDbg will think it's a memory breakpoin access
 
-INTEGER_DIVIDE_BY_ZERO equ 0C0000094h ;;;;;;
+; INTEGER_DIVIDE_BY_ZERO ;;;;;;;;;;;;;;;;;;;
     _before
     xor eax, eax
     div eax
@@ -157,7 +156,7 @@ INTEGER_DIVIDE_BY_ZERO equ 0C0000094h ;;;;;;
     _after INTEGER_DIVIDE_BY_ZERO
 
 
-INTEGER_OVERFLOW equ 0C0000095h ;;;;;;;;;;;;
+; INTEGER_OVERFLOW ;;;;;;;;;;;;;;;;;;;;;;;;;
 
     _before
     mov eax, 0
@@ -178,7 +177,7 @@ INTEGER_OVERFLOW equ 0C0000095h ;;;;;;;;;;;;
     _after INTEGER_OVERFLOW
 
 
-BREAKPOINT equ 080000003h ;;;;;;;;;;;;;;;;;;
+; BREAKPOINT ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     _before
     int3    ; classic CC
@@ -202,14 +201,14 @@ BREAKPOINT equ 080000003h ;;;;;;;;;;;;;;;;;;
     ;%IMPORT kernel32.dll!DebugBreak
     _after BREAKPOINT
 
-INVALID_LOCK_SEQUENCE equ 0C000001eh;;;;;;;;
+; INVALID_LOCK_SEQUENCE ;;;;;;;;;;;;;;;;;;;;
 
     _before
     lock nop
     jmp bad
     _after INVALID_LOCK_SEQUENCE
 
-INVALID_HANDLE equ 0C0000008h ;;;;;;;;;;;;;;
+; INVALID_HANDLE ;;;;;;;;;;;;;;;;;;;;;;;;;;;
     _set bad
     push -1
     call CloseHandle    ; will trigger an exception only if a debugger is present
@@ -217,7 +216,7 @@ INVALID_HANDLE equ 0C0000008h ;;;;;;;;;;;;;;
     call RegCloseKey
     _clear
 
-PRIVILEGED_INSTRUCTION equ 0C0000096h;;;;;;;
+; PRIVILEGED_INSTRUCTION ;;;;;;;;;;;;;;;;;;;
     _before
     hlt
     jmp bad

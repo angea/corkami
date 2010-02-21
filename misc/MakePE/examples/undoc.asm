@@ -4,12 +4,6 @@
 
 %define _ align 16, db 90h
 
-SINGLE_STEP equ 80000004h
-ACCESS_VIOLATION equ 0c0000005h
-%define PREFIX_FS db 64h
-%define PREFIX_OPERANDSIZE db 66h
-%define PREFIX_ADDRESSSIZE db 67h
-
 %macro SEH_before 0
     %push SEH
     push  %$handler
