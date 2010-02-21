@@ -223,30 +223,13 @@ PRIVILEGED_INSTRUCTION equ 0C0000096h;;;;;;;
     jmp bad
     _after PRIVILEGED_INSTRUCTION
 
-good:
-    push MB_ICONINFORMATION ; UINT uType
-    push success            ; LPCTSTR lpCaption
-    push successmsg         ; LPCTSTR lpText
-    push 0                  ; HWND hWnd
-    call MessageBoxA
-    push 0
-    call ExitProcess        ; UINT uExitCode
-bad:
-    push MB_ICONERROR   ; UINT uType
-    push error          ; LPCTSTR lpCaption
-    push errormsg       ; LPCTSTR lpText
-    push 0              ; HWND hWnd
-    call MessageBoxA
-    push 042h
-    call ExitProcess    ; UINT uExitCode
+    jmp good
 
-error db "Bad", 0
-errormsg db "Something went wrong...", 0
-success db "Good", 0
-successmsg db "Expected behaviour occured...", 0
+%include 'goodbad.inc'
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
+
 ;%IMPORT kernel32.dll!CloseHandle
 ;%IMPORT advapi32.dll!RegCloseKey
 
