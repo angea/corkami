@@ -23,7 +23,8 @@ examples = compiled.exe tls_import.exe mz.exe \
 	imports_manual.exe imports_custom.exe imports_fsg.exe \
 	imports_junk.exe imports_checksum.exe imports_stolen.exe \
 	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe \
-	bundled_before.exe bundled_after.exe
+	bundled_before.exe bundled_after.exe \
+	thread_host.exe remote_thread.exe 
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -222,6 +223,12 @@ bundled_before.exe: bundled_before.asm
 	$(makepe) bundled_before.asm
 bundled_after.exe: bundled_after.asm
 	$(makepe) bundled_after.asm
+
+remote_thread.exe: remote_thread.asm
+	$(makepe) remote_thread.asm
+thread_host.exe: thread_host.asm
+	$(makepe) thread_host.asm
+
 
 clean:
 	rm $(examples) $(objects)

@@ -182,6 +182,34 @@ struc IMAGE_TLS_DIRECTORY32
     .Characteristics         resd 1
 endstruc
 
+struc PROCESS_INFORMATION
+    .hProcess      resd 1
+    .hThread       resd 1
+    .dwProcessId   resd 1
+    .dwThreadId    resd 1
+endstruc
+
+struc STARTUPINFO
+    .cb              resd 1
+    .lpReserved      resd 1
+    .lpDesktop       resd 1
+    .lpTitle         resd 1
+    .dwX             resd 1
+    .dwY             resd 1
+    .dwXSize         resd 1
+    .dwYSize         resd 1
+    .dwXCountChars   resd 1
+    .dwYCountChars   resd 1
+    .dwFillAttribute resd 1
+    .dwFlags         resd 1
+    .wShowWindow     resw 1
+    .cbReserved2     resw 1
+    .lpReserved2     resd 1
+    .hStdInput       resd 1
+    .hStdOutput      resd 1
+    .hStdError       resd 1
+endstruc
+
 ;Section characteristics
 IMAGE_SCN_CNT_CODE               equ 000000020h
 IMAGE_SCN_CNT_INITIALIZED_DATA   equ 000000040h
@@ -279,6 +307,12 @@ PAGE_READWRITE equ 4
 PAGE_EXECUTE_READWRITE    equ 40h
 PAGE_GUARD equ 100h
 
+PROCESS_CREATE_THREAD equ 2
+PROCESS_QUERY_INFORMATION equ 0400h
+PROCESS_VM_OPERATION equ 08h
+PROCESS_VM_READ equ 010h
+PROCESS_VM_WRITE equ 020h
+
 %define PREFIX_FS db 64h
 %define PREFIX_OPERANDSIZE db 66h
 %define PREFIX_ADDRESSSIZE db 67h
@@ -294,4 +328,5 @@ PAGE_GUARD equ 100h
     add esp, 4
 %endmacro
 
-;Ange Albertini 2009-2010
+
+; Ange Albertini, Creative Commons BY, 2009-2010
