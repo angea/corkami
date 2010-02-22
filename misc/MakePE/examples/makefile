@@ -24,7 +24,8 @@ examples = compiled.exe tls_import.exe mz.exe \
 	imports_junk.exe imports_checksum.exe imports_stolen.exe \
 	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe \
 	bundled_before.exe bundled_after.exe \
-	thread_host.exe remote_thread.exe
+	thread_host.exe remote_thread.exe \
+	funnyseh.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -230,6 +231,8 @@ remote_thread.exe: remote_thread.asm
 thread_host.exe: thread_host.asm
 	$(makepe) thread_host.asm
 
+funnyseh.exe: funnyseh.asm
+	$(makepe) funnyseh.asm
 
 clean:
 	rm $(examples) $(objects)
