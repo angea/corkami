@@ -24,7 +24,7 @@ examples = compiled.exe tls_import.exe mz.exe \
 	imports_junk.exe imports_checksum.exe imports_stolen.exe \
 	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe \
 	bundled_before.exe bundled_after.exe \
-	thread_host.exe remote_thread.exe 
+	thread_host.exe remote_thread.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -155,6 +155,7 @@ driver-noimports.exe: driver.sys
 	$(python) sys2exe.py driver.sys
 ntoskrnl.exe: ntoskrnl.asm
 	$(makepe) ntoskrnl.asm
+	ren ntoskrnl.dll ntoskrnl.exe
 
 seh_dll.dll: seh_dll.asm
 	$(makepe) seh_dll.asm
