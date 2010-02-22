@@ -25,7 +25,8 @@ examples = compiled.exe tls_import.exe mz.exe \
 	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe \
 	bundled_before.exe bundled_after.exe \
 	thread_host.exe remote_thread.exe \
-	funnyseh.exe getip.exe
+	funnyseh.exe getip.exe \
+	prng.exe xor.exe rc4.exe
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -236,6 +237,13 @@ funnyseh.exe: funnyseh.asm
 
 getip.exe: getip.asm
 	$(makepe) getip.asm
+
+prng.exe: prng.asm
+	$(makepe) prng.asm
+rc4.exe: rc4.asm
+	$(makepe) rc4.asm
+xor.exe: xor.asm
+	$(makepe) xor.asm
 
 clean:
 	rm $(examples) $(objects)
