@@ -32,15 +32,9 @@ sleeploop:
 
     cmp dword [counter], 1
     jnz bad
+    jmp good
 
-    push MB_ICONINFORMATION ; UINT uType
-    push tada               ; LPCTSTR lpCaption
-    push helloworld         ; LPCTSTR lpText
-    push 0                  ; HWND hWnd
-    call MessageBoxA
-bad:
-    push 0                  ; UINT uExitCode
-    call ExitProcess
+%include 'goodbad.inc'
 
 myret:
     inc dword [counter]
