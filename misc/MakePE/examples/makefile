@@ -14,7 +14,7 @@ examples = compiled.exe tls_import.exe mz.exe \
 	piotr.exe self_generating.exe opcodes32pe.exe loops.exe \
 	opcodes32 no_relocs.dll no_relocs_loader.exe \
 	no_relocs_tls_loader.exe \
-	fibo\stack.exe fibo\standard.exe fibo\subleq.exe fibo\tta.exe fibo\x86.exe \
+	VMs\stack.exe VMs\standard.exe VMs\subleq.exe VMs\tta.exe VMs\x86.exe \
 	com.com \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe \
@@ -45,16 +45,16 @@ eicar.com: ../../eicar.asm
 	yasm -o eicar.com ../../eicar.asm
 
 #when VMs have only one opcode...
-fibo\standard.exe: fibo\standard.asm
-	$(makepe) fibo\standard.asm
-fibo\x86.exe: fibo\x86.asm
-	$(makepe) fibo\x86.asm
-fibo\stack.exe: fibo\stack.asm
-	$(makepe) fibo\stack.asm
-fibo\tta.exe: fibo\tta.asm
-	$(makepe) fibo\tta.asm
-fibo\subleq.exe: fibo\subleq.asm
-	$(makepe) fibo\subleq.asm
+VMs\standard.exe: VMs\standard.asm
+	$(makepe) VMs\standard.asm
+VMs\x86.exe: VMs\x86.asm
+	$(makepe) VMs\x86.asm
+VMs\stack.exe: VMs\stack.asm
+	$(makepe) VMs\stack.asm
+VMs\tta.exe: VMs\tta.asm
+	$(makepe) VMs\tta.asm
+VMs\subleq.exe: VMs\subleq.asm
+	$(makepe) VMs\subleq.asm
 
 #when CPUs have too many opcodes...
 opcodes32: ../../opcodes32.asm
