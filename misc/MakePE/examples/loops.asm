@@ -136,31 +136,13 @@ loop_end:
     jnz bad
     jmp good
 
-bad:
-    push MB_ICONERROR   ; UINT uType
-    push error          ; LPCTSTR lpCaption
-    push errormsg       ; LPCTSTR lpText
-    push 0              ; HWND hWnd
-    call MessageBoxA
-    push 042h
-    call ExitProcess    ; UINT uExitCode
-good:
-    push MB_ICONINFORMATION ; UINT uType
-    push success            ; LPCTSTR lpCaption
-    push successmsg         ; LPCTSTR lpText
-    push 0                  ; HWND hWnd
-    call MessageBoxA
-    push 0
-    call ExitProcess        ; UINT uExitCode
+%include 'goodbad.inc'
+
 ;%IMPORT kernel32.dll!ExitProcess
 ;%IMPORT user32.dll!MessageBoxA
 
-error db "Bad", 0
-errormsg db "Something went wrong...", 0
-success db "Good", 0
-successmsg db "Expected behaviour occured...", 0
-
-loop_exit dd 4001bfh ^ 0ac5a1c44h; = loop_end ^ 0ac5a1c44h (= 35 iterations)
+; WARNING - HARDCODED
+loop_exit dd 40022fh ^ 0ac5a1c44h; = loop_end ^ 0ac5a1c44h (= 35 iterations) 
 
 ;%IMPORTS
 
