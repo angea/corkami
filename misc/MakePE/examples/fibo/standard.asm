@@ -1,15 +1,8 @@
 ; simple fibonacci number calculator, used as base for various virtualization exercices
 
-.386
-.model flat, stdcall
-option casemap :none
+%include '../../onesec.hdr'
 
-include c:\masm32\include\kernel32.inc
-includelib c:\masm32\lib\kernel32.lib
-
-.code smc   ;  /SECTION:smc,erw
-
-Main proc
+EntryPoint:
     ; start of code to virtualize
     mov ecx, 046
 
@@ -26,17 +19,17 @@ _loop:
 ; end of code to virtualize
     cmp ecx, 2971215073 ; 46th fibonacci number
     jnz bad
-nop
-good:
-    push 0
-    Call ExitProcess
-nop
-bad:
-    push 42
-    Call ExitProcess
 
-Main Endp
+    jmp good
 
-End Main
+%include '..\goodbad.inc'
 
-; Ange Albertini, 2009
+;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!ExitProcess
+
+;%IMPORTS
+
+SECTION0SIZE equ $ - Section0Start
+SIZEOFIMAGE equ $ - IMAGEBASE
+
+; Ange Albertini, Creative Commons BY, 2009-2010

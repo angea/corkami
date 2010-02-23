@@ -1,11 +1,6 @@
 ; simple fibonacci number calculator, virtualized into a stack machine architecture
 
-.386
-.model flat, stdcall
-option casemap :none
-
-include c:\masm32\include\kernel32.inc
-includelib c:\masm32\lib\kernel32.lib
+%include '../../onesec.hdr'
 
 _PUSH equ 0
 _PUSHr equ 1
@@ -14,17 +9,13 @@ _POPr equ 3
 _JNZ equ 4
 _EXIT equ 5
 
-.code smc ; /SECTION:smc,erw
-
-Main proc
-
-vm_start:
+EntryPoint:
     mov esi, virtual_code ; esi is our virtual EIP
 nop
 vm_fetch:
     lodsd
     lea edi , [handlers + eax * 4]
-    jmp dword ptr [edi]
+    jmp dword [edi]
 nop
 PUSH_handler:
     lodsd
@@ -61,20 +52,15 @@ JNZ_handler:
     jmp vm_fetch
 nop
 EXIT_handler:
-    mov eax, dword ptr [regs]
+    mov eax, dword [regs]
     jmp vm_exit
 nop
 vm_exit:
     cmp eax, 2971215073 ; 46th fibonacci number
     jnz bad
-nop
-good:
-    push 0
-    Call ExitProcess
-nop
-bad:
-    push 42
-    Call ExitProcess
+    jmp good
+
+%include '..\goodbad.inc'
 
 align 4
 handlers dd PUSH_handler, PUSHr_handler, ADD_handler, POPr_handler, JNZ_handler, EXIT_handler
@@ -118,8 +104,12 @@ dd _EXIT        ; (exit)
 regs dd 0, 0, 0, 0
 ZF dd 0
 
-Main Endp
+;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!ExitProcess
 
-End Main
+;%IMPORTS
 
-; Ange Albertini, 2009
+SECTION0SIZE equ $ - Section0Start
+SIZEOFIMAGE equ $ - IMAGEBASE
+
+; Ange Albertini, Creative Commons BY, 2009-2010

@@ -13,8 +13,9 @@ examples = compiled.exe tls_import.exe mz.exe \
 	duplicate_section.exe whole_pe_section.exe jumps.exe \
 	piotr.exe self_generating.exe opcodes32pe.exe loops.exe \
 	opcodes32 no_relocs.dll no_relocs_loader.exe \
-	no_relocs_tls_loader.exe stack.exe fibonacci.exe \
-	subleq.exe tta.exe x86.exe com.com \
+	no_relocs_tls_loader.exe \
+	fibo\stack.exe fibo\standard.exe fibo\subleq.exe fibo\tta.exe fibo\x86.exe \
+	com.com \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe \
 	driver.exe driver-noimports.exe ntoskrnl.exe \
@@ -42,21 +43,16 @@ eicar.com: ../../eicar.asm
 	yasm -o eicar.com ../../eicar.asm
 
 #when VMs have only one opcode...
-fibonacci.exe: ..\..\fibo\fibonacci.asm
-	$(ml) ..\..\fibo\fibonacci.asm
-	$(mlink) fibonacci.obj /SECTION:smc,ERW
-x86.exe: ..\..\fibo\x86.asm
-	$(ml) ..\..\fibo\x86.asm
-	$(mlink) x86.obj /SECTION:smc,ERW
-stack.exe: ..\..\fibo\stack.asm
-	$(ml) ..\..\fibo\stack.asm
-	$(mlink) stack.obj /SECTION:smc,ERW
-tta.exe: ..\..\fibo\tta.asm
-	$(ml) ..\..\fibo\tta.asm
-	$(mlink) tta.obj /SECTION:smc,ERW
-subleq.exe: ..\..\fibo\subleq.asm
-	$(ml) ..\..\fibo\subleq.asm
-	$(mlink) subleq.obj /SECTION:smc,ERW
+fibo\standard.exe: fibo\standard.asm
+	$(makepe) fibo\standard.asm
+fibo\x86.exe: fibo\x86.asm
+	$(makepe) fibo\x86.asm
+fibo\stack.exe: fibo\stack.asm
+	$(makepe) fibo\stack.asm
+fibo\tta.exe: fibo\tta.asm
+	$(makepe) fibo\tta.asm
+fibo\subleq.exe: fibo\subleq.asm
+	$(makepe) fibo\subleq.asm
 
 #when CPUs have too many opcodes...
 opcodes32: ../../opcodes32.asm

@@ -8,49 +8,42 @@
 ; conditional operations are done by setting conditional to true and 
 ; a guard determining if the data transport is squashed or done correctly
 
-.386
-.model flat, stdcall
-option casemap :none
+; simple fibonacci number calculator, virtualized into a similar architecture like x86
 
-include c:\masm32\include\kernel32.inc
-includelib c:\masm32\lib\kernel32.lib
+%include '../../onesec.hdr'
 
-.code smc   ;  /SECTION:smc,erw
+%macro _ADD 2
+    dd operand, %2        ; add edx, eax
+    dd add_trigger, %1
+    dd %1, result
+%endmacro
 
-_ADD macro a, b
-    dd operand, b        ; add edx, eax
-    dd add_trigger, a
-    dd a, result
-endm
-
-Main proc
-
-vm_start:
-    mov [_ip], 0
+EntryPoint:
+    mov dword [_ip], 0
 nop
 refresh_ip:
     mov esi, [_ip]
     lea esi, [esi + virtual_code]
 nop
 vm_fetch:
-    mov ebx, dword ptr [esi]
-    mov eax, dword ptr [esi + 4]
+    mov ebx, dword [esi]
+    mov eax, dword [esi + 4]
     add esi, 8
 nop
-    mov eax, dword ptr [eax]
-    cmp [conditional], 0
+    mov eax, dword [eax]
+    cmp dword [conditional], 0
     jz data_transport
-    mov [conditional], 0
-    cmp [guard], 0  ; if guard not set then data transport is squashed
+    mov dword [conditional], 0
+    cmp dword [guard], 0  ; if guard not set then data transport is squashed
     jz vm_fetch     ; data transport squashed
 nop
 data_transport:
     mov [ebx],eax
-    cmp ebx, offset add_trigger
+    cmp ebx, add_trigger
     jz add_triggered
-    cmp ebx, offset _ip
+    cmp ebx, _ip
     jz refresh_ip
-    cmp ebx, offset exit
+    cmp ebx, exit
     jz exit_triggered
     jmp vm_fetch
 nop
@@ -62,20 +55,15 @@ add_triggered:
     jmp vm_fetch
 nop
 exit_triggered:
-    mov eax, reg0
+    mov eax, dword [reg0]
     ; jmp exit_vm
 nop
 exit_vm:
     cmp eax, 2971215073 ; 46th fibonacci number
     jnz bad
-nop
-good:
-    push 0
-    Call ExitProcess
-nop
-bad:
-    push 42
-    Call ExitProcess
+    jmp good
+
+%include '..\goodbad.inc'
 
 align 4
 virtual_code:
@@ -116,8 +104,13 @@ rom:
     rom3 dd 1
     rom4 dd -1
     rom5 dd LOOP_
-Main Endp
 
-End Main
+;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!ExitProcess
 
-; Ange Albertini, 2009
+;%IMPORTS
+
+SECTION0SIZE equ $ - Section0Start
+SIZEOFIMAGE equ $ - IMAGEBASE
+
+; Ange Albertini, Creative Commons BY, 2009-2010

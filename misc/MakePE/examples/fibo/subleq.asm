@@ -10,94 +10,78 @@
 
 ; NOTE: Target operand = 2nd.
 
-.386
-.model flat, stdcall
-option casemap :none
-
-include c:\masm32\include\kernel32.inc
-includelib c:\masm32\lib\kernel32.lib
-
-.code smc   ; /SECTION:smc,erw
-
-Main proc
+%include '../../onesec.hdr'
 
 ; standard opcode
-_OP macro a, b, c
-    dd a - virtual_code, b - virtual_code, c - virtual_code
-endm
+%macro _OP 3
+    dd %1 - virtual_code, %2 - virtual_code, %3 - virtual_code
+%endmacro
 
 ; opcode with no branch => c = @next_line
-_NB macro a, b
-    local _1
-    dd a - virtual_code, b - virtual_code, _1 - virtual_code
-_1:
-endm
+%macro _NB 2
+    dd %1 - virtual_code, %2 - virtual_code, %%1 - virtual_code
+%%1:
+%endmacro
 
-_CLR macro a
-    _NB a, a
-endm
+%macro _CLR 1
+    _NB %1, %1
+%endmacro
 
-_CLZ macro
+%macro _CLZ 0
     _NB Z, Z
-endm
+%endmacro
 
-_JMP macro label    ; clears Z too
-    _OP Z, Z, label
-endm
+%macro _JMP 1  ; clears Z too
+    _OP Z, Z, %1
+%endmacro
 
-_ADD macro a, b
-    _NB a, Z
-    _NB Z, b
+%macro _ADD 2
+    _NB %1, Z
+    _NB Z, %2
     _CLZ
-endm
+%endmacro
 
-_MOV macro a, b
-    _CLR b
-    _ADD a, b
-endm
+%macro _MOV 2
+    _CLR %2
+    _ADD %1, %2
+%endmacro
 
-_JNZ macro b, label
-    local _PZ, _Z   ; Positive or Zero, Zero
-    _OP b, Z, _PZ    ; branch if b >= 0
-    _JMP label
-_PZ:
+%macro _JNZ 2
+    _OP %1, Z, %%PZ     ; branch if b >= 0
+    _JMP %2
+%%PZ:                   ; positive or zero
     _CLZ
-    _OP Z, b, _Z     ; branch if b <= 0 => with previous if b = 0
-    _JMP label
-_Z:
-endm
+    _OP Z, %1, %%Z      ; branch if b <= 0 => with previous if b = 0
+    _JMP %2
+%%Z:                    ; zero
+%endmacro
 
-vm_start:
+EntryPoint:
     mov esi, virtual_code
 nop
 vm_fetch:
-    cmp esi, offset _end
+    cmp esi, _end
     jz vm_end
 nop
-    mov eax, dword ptr [esi + 0 * 4]
-    mov ebx, dword ptr [esi + 1 * 4]
-    mov ecx, dword ptr [esi + 2 * 4]
+    mov eax, dword [esi + 0 * 4]
+    mov ebx, dword [esi + 1 * 4]
+    mov ecx, dword [esi + 2 * 4]
     add esi, 3 * 4
 
-    mov eax, dword ptr [eax + virtual_code]
+    mov eax, dword [eax + virtual_code]
     sub [ebx + virtual_code],eax
-    cmp dword ptr [ebx + virtual_code], 0
+    cmp dword [ebx + virtual_code], 0
     jg vm_fetch
     lea esi, [ecx + virtual_code]
     jmp vm_fetch
 nop
 vm_end:
-    mov eax, reg0
+    mov eax, [reg0]
     cmp eax, 2971215073 ; 46th fibonacci number
     jnz bad
-nop
-good:
-    push 0
-    Call ExitProcess
-nop
-bad:
-    push 42
-    Call ExitProcess
+    jmp good
+
+%include '..\goodbad.inc'
 
 align 4
 virtual_code:
@@ -130,8 +114,12 @@ rom:
     rom2 dd 1
     rom3 dd -1
 
-Main Endp
+;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!ExitProcess
 
-End Main
+;%IMPORTS
 
-; Ange Albertini, 2009
+SECTION0SIZE equ $ - Section0Start
+SIZEOFIMAGE equ $ - IMAGEBASE
+
+; Ange Albertini, Creative Commons BY, 2009-2010
