@@ -28,7 +28,10 @@ examples = compiled.exe tls_import.exe mz.exe \
 	thread_host.exe remote_thread.exe \
 	funnyseh.exe getip.exe \
 	prng.exe xor.exe rc4.exe \
-	dll.dll loader.exe manual_loader.exe packed_loader.exe packed_dll.dll
+	dll.dll loader.exe manual_loader.exe packed_loader.exe packed_dll.dll \
+	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe
+
+; packer\compressed.exe needs Kabopan
 
 # eicar.com # removed to prevent your AV from acting
 
@@ -255,6 +258,19 @@ packed_loader.exe: packed_loader.asm
 	$(makepe) packed_loader.asm
 manual_loader.exe: manual_loader.asm
 	$(makepe) manual_loader.asm
+
+packer\eppatched.exe: compiled.exe packer\eppatcher.py
+	cd packer & $(python) eppatcher.py
+packer\crypted.exe: compiled.exe packer\crypter.py
+	cd packer & $(python) crypter.py
+packer\compressed.exe: compiled.exe packer\compressed.py
+	cd packer & $(python) compresser.py
+packer\protected.exe: compiled.exe packer\protecter.py
+	cd packer & $(python) protecter.py
+packer\mutated.exe: compiled.exe packer\mutater.py
+	cd packer & $(python) mutater.py
+packer\virtualized.exe: compiled.exe packer\virtualizer.py
+	cd packer & $(python) virtualizer.py
 
 clean:
 	rm $(examples) $(objects)
