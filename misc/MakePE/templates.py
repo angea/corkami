@@ -19,7 +19,7 @@ IMPORT_DESCRIPTOR: ; replace with imports:
 %(dll)s_hintnames:
 
 |HINT_NAME_thunk|
-    DD a%(api)s - IMAGEBASE         ; ForwarderString / Function / Ordinal / AddressOfData
+    DD hn%(api)s - IMAGEBASE         ; ForwarderString / Function / Ordinal / AddressOfData
 
 |IAT_start|
 ;align 2, db 0
@@ -27,7 +27,7 @@ IMPORT_DESCRIPTOR: ; replace with imports:
 
 |IAT_thunk|
 __imp__%(api)s:
-    DD a%(api)s - IMAGEBASE         ; ForwarderString / Function / Ordinal / AddressOfData
+    DD hn%(api)s - IMAGEBASE         ; ForwarderString / Function / Ordinal / AddressOfData
 |Thunk_end|
     DD 0
 
@@ -37,7 +37,7 @@ __imp__%(api)s:
 
 |IMAGE_IMPORT_BY_NAME|
 ;align 2, db 0
-a%(api)s:
+hn%(api)s:
     dw 0            ; Hint
     db '%(api)s',0  ; Name
 
