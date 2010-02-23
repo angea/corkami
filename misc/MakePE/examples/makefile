@@ -24,7 +24,7 @@ examples = compiled.exe tls_import.exe mz.exe \
 	imports_manual.exe imports_custom.exe imports_fsg.exe \
 	imports_junk.exe imports_checksum.exe imports_stolen.exe \
 	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe \
-	bundled_before.exe bundled_after.exe \
+	packer\bundled_before.exe packer\bundled_after.exe \
 	thread_host.exe remote_thread.exe \
 	funnyseh.exe getip.exe \
 	prng.exe xor.exe rc4.exe \
@@ -224,11 +224,6 @@ imports_paramdp.exe: imports_paramdp.asm
 imports_stolen.exe: imports_stolen.asm
 	$(makepe) imports_stolen.asm
 
-bundled_before.exe: bundled_before.asm
-	$(makepe) bundled_before.asm
-bundled_after.exe: bundled_after.asm
-	$(makepe) bundled_after.asm
-
 remote_thread.exe: remote_thread.asm
 	$(makepe) remote_thread.asm
 thread_host.exe: thread_host.asm
@@ -270,6 +265,11 @@ packer\mutated.exe: compiled.exe packer\mutater.py
 	cd packer & $(python) mutater.py
 packer\virtualized.exe: compiled.exe packer\virtualizer.py
 	cd packer & $(python) virtualizer.py
+
+packer\bundled_before.exe: packer\bundled_before.asm
+	$(makepe) packer\bundled_before.asm
+packer\bundled_after.exe: packer\bundled_after.asm
+	$(makepe) packer\bundled_after.asm
 
 clean:
 	rm $(examples) $(objects)

@@ -2,7 +2,7 @@
 ; the external data file has been bundled in the binary itself,
 ; so extra code before the OEP install hooks on file-handling apis
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     call hook
@@ -41,6 +41,6 @@ CloseHandle_hook:
 Bundled:
     incbin 'bundled.dat'
 
-%include '../standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

@@ -1,6 +1,6 @@
 ; open an external data file, and use the content to display a messagebox
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 times 5 db 0
 EntryPoint:
@@ -15,6 +15,6 @@ EntryPoint:
 
 ;%IMPORTS
 
-%include '../standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010
