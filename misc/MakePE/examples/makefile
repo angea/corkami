@@ -18,21 +18,21 @@ examples = compiled.exe tls_import.exe mz.exe \
 	com.com \
 	forwarder.dll forwarded.exe own_exports.exe \
 	no_exports.dll no_exports_loader.exe \
-	driver.exe driver-noimports.exe ntoskrnl.exe \
+	driver.exe driver-ni.ex ntoskrnl.exe \
 	exceptions.exe tls_zeroes.exe waitable.exe vmware.exe \
-	packed_driver.sys \
+	packed_driver.sys packed_driver.exe packed_driver-ni.ex \
 	imports_manual.exe imports_custom.exe imports_fsg.exe \
 	imports_junk.exe imports_checksum.exe imports_stolen.exe \
 	imports_hooks.exe imports_paramdp.exe imports_ipdp.exe \
 	bundled_before.exe bundled_after.exe \
 	thread_host.exe remote_thread.exe \
 	funnyseh.exe getip.exe \
-	prng.exe xor.exe rc4.exe
+	prng.exe xor.exe rc4.exe \
+	dll.dll loader.exe manual_loader.exe packed_loader.exe packed_dll.dll
 
 # eicar.com # removed to prevent your AV from acting
 
-objects = fibonacci.obj stack.obj subleq.obj tta.obj x86.obj \
-	helloworld-masm.obj
+objects = helloworld-masm.obj
 
 all: $(examples)
 
@@ -149,7 +149,7 @@ mz.exe: compiled.exe
 #Happa ichimai areba ii
 driver.exe: driver.sys
 	$(python) sys2exe.py driver.sys
-driver-noimports.exe: driver.sys
+driver-ni.ex: driver.sys
 	$(python) sys2exe.py driver.sys
 ntoskrnl.exe: ntoskrnl.asm
 	$(makepe) ntoskrnl.asm
@@ -198,6 +198,10 @@ vmware.exe: vmware.asm
 
 packed_driver.sys: packed_driver.asm
 	$(makepe) packed_driver.asm
+packed_driver.exe: packed_driver.sys
+	$(python) sys2exe.py packed_driver.sys
+packed_driver-ni.ex: packed_driver.sys
+	$(python) sys2exe.py packed_driver.sys
 
 imports_checksum.exe: imports_checksum.asm
 	$(makepe) imports_checksum.asm
@@ -240,6 +244,17 @@ rc4.exe: rc4.asm
 	$(makepe) rc4.asm
 xor.exe: xor.asm
 	$(makepe) xor.asm
+
+dll.dll: dll.asm
+	$(makepe) dll.asm
+packed_dll.dll: packed_dll.asm
+	$(makepe) packed_dll.asm
+loader.exe: loader.asm
+	$(makepe) loader.asm
+packed_loader.exe: packed_loader.asm
+	$(makepe) packed_loader.asm
+manual_loader.exe: manual_loader.asm
+	$(makepe) manual_loader.asm
 
 clean:
 	rm $(examples) $(objects)

@@ -8,4 +8,4 @@ p.OPTIONAL_HEADER.Subsystem = 2 # pefile.SUBSYSTEM_TYPE['IMAGE_SUBSYSTEM_WINDOWS
 p.write(fn.replace(".sys",".exe"))
 
 p.OPTIONAL_HEADER.DATA_DIRECTORY[1].VirtualAddress = 0
-p.write(fn.replace(".sys","-noimports.exe"))
+p.write(fn.replace(".sys","-ni.ex"))
