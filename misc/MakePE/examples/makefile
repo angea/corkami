@@ -15,6 +15,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	asm\piotr.exe asm\self_generating.exe asm\loops.exe asm\jumps.exe asm\block.exe \
 	asm\opcodes32.bin asm\opcodes32pe.exe asm\undoc.exe \
 	asm\vmware.exe asm\exceptions.exe asm\getip.exe asm\memcopy.exe \
+	asm\inline_strings.exe asm\stack_strings.exe \
 	pe\no_relocs.dll pe\no_relocs_loader.exe \
 	pe\no_relocs_tls_loader.exe \
 	pe\forwarder.dll pe\forwarded.exe pe\own_exports.exe \
@@ -284,6 +285,11 @@ packer\resource_dropper.exe: packer\resource_dropper.asm
 
 asm\memcopy.exe: asm\memcopy.asm
 	$(makepe) asm\memcopy.asm
+
+asm\inline_strings.exe : asm\inline_strings.asm
+	$(makepe) asm\inline_strings.asm
+asm\stack_strings.exe : asm\stack_strings.asm
+	$(makepe) asm\stack_strings.asm
 
 clean:
 	rm $(examples) $(objects)
