@@ -105,3 +105,5 @@ a__exp__%(export)s db '%(export)s', 0
 """.lstrip().split("|")
 
 Exports = dict([i, j.lstrip("\n")] for i, j in zip(Exports[::+2], Exports[1::+2]))
+
+# Ange Albertini, Creative Commons BY, 2010

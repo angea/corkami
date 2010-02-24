@@ -186,4 +186,4 @@ if __name__ == "__main__":
         pe.OPTIONAL_HEADER.CheckSum = pe.generate_checksum()
         pe.write(target)
 
-#Ange Albertini 2009-2010
+# Ange Albertini 2009-2010
