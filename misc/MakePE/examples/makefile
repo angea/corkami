@@ -29,7 +29,8 @@ examples = compiled.exe tls_import.exe mz.exe \
 	funnyseh.exe getip.exe \
 	prng.exe xor.exe rc4.exe \
 	dll.dll loader.exe manual_loader.exe packed_loader.exe packed_dll.dll \
-	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe
+	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
+	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -270,6 +271,13 @@ packer\bundled_before.exe: packer\bundled_before.asm
 	$(makepe) packer\bundled_before.asm
 packer\bundled_after.exe: packer\bundled_after.asm
 	$(makepe) packer\bundled_after.asm
+
+packer\dropper.exe: packer\dropper.asm
+	$(makepe) packer\dropper.asm
+packer\suspended_process.exe: packer\suspended_process.asm
+	$(makepe) packer\suspended_process.asm
+packer\resource_dropper: packer\resource_dropper.asm
+	$(makepe) packer\resource_dropper.asm
 
 clean:
 	rm $(examples) $(objects)
