@@ -30,7 +30,7 @@ examples = compiled.exe tls_import.exe mz.exe \
 	prng.exe xor.exe rc4.exe \
 	dll.dll loader.exe manual_loader.exe packed_loader.exe packed_dll.dll \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
-	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper
+	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
