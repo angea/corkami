@@ -6,7 +6,7 @@ makepe = $(python) ..\makepe.py
 
 examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	pe\helloworld-masm.exe pe\console.exe \
-	anti\smsw.exe anti\gs.exe \
+	anti\smsw.exe anti\gs.exe anti\misc.exe \
 	pe\driver.sys pe\tinype.exe \
 	pe\seh_dll.dll pe\seh_loader.exe pe\tls_standard.exe pe\tls_fake.exe \
 	pe\tls_no_user32.exe pe\tls_on_the_fly.exe \
@@ -290,6 +290,9 @@ asm\inline_strings.exe : asm\inline_strings.asm
 	$(makepe) asm\inline_strings.asm
 asm\stack_strings.exe : asm\stack_strings.asm
 	$(makepe) asm\stack_strings.asm
+
+anti\misc.exe: anti\misc.asm
+	$(makepe) anti\misc.asm
 
 clean:
 	rm $(examples) $(objects)
