@@ -1,4 +1,6 @@
 ;vmware asm-based detections
+;WIP
+
 ;CPUID Time
 ;GDT
 ;LDTR
@@ -14,6 +16,7 @@ EntryPoint:
     call inVMX
     call _sldt
     call _str
+    call _sidt
     jmp good
 
 inVMX:
@@ -52,8 +55,18 @@ _str:
     retn
 strdd dd 0
 
-;    sidt [_sidt]
-_sidt dt 0
+_sidt:
+    sidt [__sidt]
+    mov al, [__sidt + 5]
+    cmp al, 0e8h
+    jz bad
+    cmp al, 0ffh
+    jz bad
+    retn
+
+__sidt:
+    dd 0
+    dw 0
 
 %include '..\goodbad.inc'
 
