@@ -1,6 +1,6 @@
 ; DLL with minimal export table, and relocations
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 IMAGEBASE EQU 330000h
 CHARACTERISTICS EQU IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
@@ -27,6 +27,6 @@ helloworld db "Hello World!", 0
 
 ;%EXPORTS no_relocs.dll
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

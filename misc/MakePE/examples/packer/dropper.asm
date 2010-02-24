@@ -139,7 +139,7 @@ SIZEOFIMAGE EQU $ - IMAGEBASE
 
 ; appended data from here
 embedded_file:
-incbin '..\compiled.exe'
+incbin '..\pe\compiled.exe'
 EMBEDDED_FILESIZE equ $ - embedded_file
 
 ;Ange Albertini, Creative Commons BY, 2010

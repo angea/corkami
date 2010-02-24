@@ -1,4 +1,4 @@
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 EntryPoint:
     push aDll           ; LPCTSTR lpFileName

@@ -1,6 +1,6 @@
 ; section-less PE file
 
-%include '..\consts.asm'
+%include '..\..\consts.asm'
 
 org IMAGEBASE
 

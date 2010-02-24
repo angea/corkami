@@ -161,7 +161,7 @@ IMAGE_RESOURCE_DATA_ENTRY_101:
 
 ;resname db 'EMBEDDED_PE', 0 ; can't get it working by name now :/
 resource_data:
-incbin '..\helloworld.exe'
+incbin '..\pe\helloworld.exe'
 RESOURCE_SIZE equ $ - resource_data
 
 DIRECTORY_ENTRY_RESOURCE_SIZE equ $ - Directory_Entry_Resource

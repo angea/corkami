@@ -1,6 +1,6 @@
 ; minimal hello world driver
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 IMAGEBASE EQU 10000H
 SUBSYSTEM EQU IMAGE_SUBSYSTEM_NATIVE
@@ -22,6 +22,6 @@ helloworld db "Hello World!", 0
 ;%IMPORTS
 
 ;%relocs
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

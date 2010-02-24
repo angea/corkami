@@ -1,6 +1,6 @@
 ;API calls are replaced by IP-based dispatcher
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     call LoadImports
@@ -35,6 +35,7 @@ nop
 ;%IMPORT kernel32.dll!LoadLibraryA
 nop
 ;%IMPORTS
-%include '..\standard_ftr.asm'
+
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

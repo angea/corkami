@@ -1,4 +1,4 @@
-%include '../standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
 
@@ -52,6 +52,6 @@ db 0
 ;%IMPORT kernel32.dll!ExitProcess
 ;%IMPORTS
 
-%include '../standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

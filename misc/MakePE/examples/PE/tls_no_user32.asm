@@ -2,7 +2,7 @@
 ; TLS is not executed.
 ; in this example, User32 is loaded manually, and that's why upon exit, TLS is executed.
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 TLS:
     push aMessageBoxA       ; LPCSTR lpProcName
@@ -50,6 +50,6 @@ Callbacks:
     dd TLS
     dd 0
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

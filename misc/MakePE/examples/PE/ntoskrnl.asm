@@ -2,7 +2,7 @@
 
 CHARACTERISTICS equ IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 EntryPoint:
     retn 3 * 4

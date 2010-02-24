@@ -1,6 +1,6 @@
 ; undocumented opcodes and undocumented opcodes behavior
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 %define _ align 16, db 90h
 
@@ -126,7 +126,7 @@ take_it:
 _
     jmp good
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
 
 _eax dd 12345678h
 buffer dd 0

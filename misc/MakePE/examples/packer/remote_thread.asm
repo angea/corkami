@@ -1,7 +1,7 @@
 ; minimalist thread injection binder, 
 ; with a specific thread-host to make the remote thread simpler
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     ; let's execute our thread host

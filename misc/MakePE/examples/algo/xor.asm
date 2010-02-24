@@ -1,6 +1,6 @@
 ; dword xor crypted helloworld
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 KEY equ 0cafebabeh
 
@@ -41,6 +41,6 @@ _loop:
     retn
 
 
-%include '../standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

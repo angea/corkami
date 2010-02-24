@@ -1,7 +1,7 @@
 ; TinyEXE
 ; simple EXE (non PE) with a minimal amount of information
 
-%include '..\consts.asm'
+%include '..\..\consts.asm'
 bits 16
 
 istruc IMAGE_DOS_HEADER

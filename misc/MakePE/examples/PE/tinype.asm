@@ -1,6 +1,6 @@
 ; a 97-byte TinyPE file, but less defined information (sections removed, and minor stuff)
 
-%include '../consts.asm'
+%include '..\..\consts.asm'
 %define round(n, r) (((n+(r-1))/r)*r)   ; can't get that working under yasm, have to hardcode values :(
 
 bits 32

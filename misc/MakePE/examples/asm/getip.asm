@@ -1,6 +1,6 @@
 ; how to get EIP
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 EntryPoint:
     call _call
@@ -80,7 +80,7 @@ nop
     _after bad
     retn
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess

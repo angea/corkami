@@ -29,7 +29,7 @@ def getEPsection(pe):
     else: return -1
     return i
 
-def load(name = "..\compiled.exe"):
+def load(name = "..\PE\compiled.exe"):
     """load PE, return pe object, it's entry point, imagebase, VA of the section of the entry point, its physical size"""
     pe = pefile.PE(name)
     oep = pe.OPTIONAL_HEADER.AddressOfEntryPoint

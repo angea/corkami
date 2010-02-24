@@ -1,6 +1,6 @@
 ; unusual forms of looping
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 EntryPoint:
     ; a loop you want to skip or fast forward
@@ -136,7 +136,7 @@ loop_end:
     jnz bad
     jmp good
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
 
 ;%IMPORT kernel32.dll!ExitProcess
 ;%IMPORT user32.dll!MessageBoxA

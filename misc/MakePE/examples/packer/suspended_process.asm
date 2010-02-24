@@ -62,7 +62,7 @@ SIZEOFUNINITIALIZEDDATA equ 0
 
 embedded_file:
 ; we need one with the OEP at the same address otherwise we need to change the context
-incbin '..\imports_manual.exe'
+incbin '..\imports\imports_manual.exe'
 EMBEDDED_FILESIZE equ $ - embedded_file
 
 Section0Size EQU $ - Section0Start

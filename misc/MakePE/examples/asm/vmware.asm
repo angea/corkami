@@ -8,7 +8,7 @@
 ;ldtentries machin
 ;http://www.trapkit.de/research/vmm/scoopyng/ScoopyNG.zip
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 EntryPoint:
     call inVMX
@@ -55,7 +55,8 @@ strdd dd 0
 ;    sidt [_sidt]
 _sidt dt 0
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
+
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 

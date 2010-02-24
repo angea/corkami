@@ -1,4 +1,4 @@
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     push dll.dll
@@ -19,7 +19,7 @@ EntryPoint:
     call Export
 ;   jmp good
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
 
 aExport db 'Export' , 0
 hDLL dd 0
@@ -35,4 +35,6 @@ hDLL dd 0
 ;%IMPORT kernel32.dll!FreeLibrary
 ;%IMPORTS
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
+
+;Ange Albertini, Creative Commons BY, 2010

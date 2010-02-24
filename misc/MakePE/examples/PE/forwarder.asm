@@ -1,6 +1,6 @@
 ; DLL with minimal export table, and relocations
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 CHARACTERISTICS equ IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
 
@@ -47,6 +47,6 @@ aInitiateSystemShutdownA db 'InitiateSystemShutdownA', 0
 
 DIRECTORY_ENTRY_EXPORT_SIZE equ $ - Exports_Directory
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

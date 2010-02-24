@@ -2,7 +2,7 @@
 
 KEY equ 042h
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 ;%DEFINE IMAGEBASE SUBSYSTEM CHARACTERISTICS
 
@@ -60,6 +60,6 @@ nop
 ;%IMPORT ntoskrnl.exe!DbgPrint
 ;%IMPORTS
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

@@ -2,7 +2,7 @@
 ; the TLS info is actually reloaded each time it's needed, instead of loaded once for all from the pe header
 ; ex: set AddressOfCallBacks to 0, and set it to Callbacks during the EntryPoint code.
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 TLS0:
 ;    mov eax, [__imp__ExitProcess]  ; setting a TLS outside the PE
@@ -47,6 +47,6 @@ Callbacks:
     dd 0294334
     dd 0
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

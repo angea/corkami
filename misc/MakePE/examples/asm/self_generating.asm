@@ -5,7 +5,7 @@
 
 ; compile with makepe
 
-%include '../onesec.hdr'
+%include '../../onesec.hdr'
 
 %macro random 2
     xor eax, eax

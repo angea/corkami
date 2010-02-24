@@ -1,7 +1,7 @@
 ;manually loaded imports but the trampolines have junk inserted
 ;to remove references to API in the code during debugging
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 %include 'entrypoint.inc'
 
@@ -18,6 +18,7 @@ nop
 ;%IMPORT kernel32.dll!LoadLibraryA
 nop
 ;%IMPORTS
-%include '..\standard_ftr.asm'
+
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

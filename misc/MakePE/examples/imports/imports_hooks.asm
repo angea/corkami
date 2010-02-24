@@ -1,6 +1,6 @@
 ;IAT based and API based imports hooks
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     call hook
@@ -53,6 +53,6 @@ align 16, db 0
 ;%IMPORT kernel32.dll!ExitProcess
 ;%IMPORTS
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

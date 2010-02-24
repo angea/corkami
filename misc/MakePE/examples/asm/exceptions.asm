@@ -1,6 +1,6 @@
 ; various ways of triggering exceptions, including all interrupts
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 %macro _before 0
     %push SEH
@@ -207,7 +207,7 @@ after_ints:
 
     jmp good
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess

@@ -2,7 +2,7 @@
 ; of unused data of the PE format, similar to the flexible header example
 ; some space is still left unused, filled with stupid strings
 
-%include '..\consts.asm'
+%include '..\..\consts.asm'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 org IMAGEBASE

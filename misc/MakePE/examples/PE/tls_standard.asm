@@ -2,7 +2,7 @@
 ; using a byte flag to avoid executing twice (just for cosmetic reason)
 ; looping infinitely if there is a software breakpoint found on the EP
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 already_executed db 0
 TLS:
@@ -54,6 +54,7 @@ Image_Tls_Directory32:
 Callbacks:
     dd TLS
     dd 0
-%include '..\standard_ftr.asm'
+
+%include '..\..\standard_ftr.asm'
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

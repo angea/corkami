@@ -1,6 +1,6 @@
 ; tricks based on GS thread switch
 
-%include '../onesec.hdr'
+%include '../../onesec.hdr'
 
 %macro mov_gs 1
     mov ax, %1
@@ -39,7 +39,7 @@ gsloop
     jae good
     jmp bad
 
-%include 'goodbad.inc'
+%include '../goodbad.inc'
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess

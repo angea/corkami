@@ -1,4 +1,4 @@
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     push aDll           ; LPCTSTR lpFileName
@@ -26,7 +26,7 @@ EntryPoint:
     ;jmp good
 
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 
@@ -42,4 +42,6 @@ hDLL dd 0
 
 ;%IMPORTS
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
+
+;Ange Albertini, Creative Commons BY, 2010

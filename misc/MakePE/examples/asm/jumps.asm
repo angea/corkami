@@ -2,9 +2,7 @@
 
 ; may not run under any other os but XP (value of CS) or with DEP enabled (call on stack)
 
-; compile with makepe
-
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 %macro _ 0  ; remove them to make the file shorter
     nop
@@ -249,7 +247,7 @@ _
 _oldsegment:
     jmp good
 
-%include 'goodbad.inc'
+%include '..\goodbad.inc'
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess

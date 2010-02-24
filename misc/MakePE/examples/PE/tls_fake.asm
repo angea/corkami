@@ -1,4 +1,4 @@
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     push MB_ICONINFORMATION ; UINT uType
@@ -30,6 +30,6 @@ Callbacks:
 db 'lets fill the Callbacks with some poetry and random blabberring'
 ;    dd 0
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

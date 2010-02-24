@@ -1,7 +1,7 @@
 ; extreme case of overlapping instructions junk code.
 ; makes a funny block of IMUL instructions
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 %macro before 0
     %push junk

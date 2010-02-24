@@ -1,6 +1,6 @@
 ; complete Hello World PE example, as if compiled via MASM, including RichHeader, dos stubs, alignments...
 
-%include '..\consts.asm'
+%include '..\..\consts.asm'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 org IMAGEBASE

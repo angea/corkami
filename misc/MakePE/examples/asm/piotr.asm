@@ -6,7 +6,7 @@
 
 ; compile with makepe
 
-%include '../onesec.hdr'
+%include '../../onesec.hdr'
 
 %macro callr 2
     db 0e8h,

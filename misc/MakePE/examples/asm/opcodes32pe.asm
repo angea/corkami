@@ -2,10 +2,10 @@
 ;compile with makePE
 IMPORT_DESCRIPTOR equ IMAGEBASE
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 EntryPoint:
-%include '../../opcodes32.asm'
+%include 'opcodes32.asm'
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE

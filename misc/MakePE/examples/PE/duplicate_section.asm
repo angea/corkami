@@ -3,7 +3,7 @@
 
 ; standard header, until section table
 
-%include '..\consts.asm'
+%include '..\..\consts.asm'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 org IMAGEBASE

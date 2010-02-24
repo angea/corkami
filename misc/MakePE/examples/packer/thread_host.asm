@@ -1,6 +1,6 @@
 ; minimalist thread host, 'waiting' for thread injection
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess

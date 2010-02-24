@@ -5,7 +5,7 @@
 
 ; original idea by Peter Ferrié
 
-%include '../onesec.hdr'
+%include '..\..\onesec.hdr'
 
 EntryPoint:
     push MB_ICONINFORMATION     ; UINT uType

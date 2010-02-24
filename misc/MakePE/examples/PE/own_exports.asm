@@ -1,6 +1,6 @@
 ; EXE with exports, calling itself.
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 EntryPoint:
     call MyExport
@@ -24,6 +24,6 @@ helloworld db "Hello World!", 0
 
 ;%EXPORTS own_exports.exe
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

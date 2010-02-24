@@ -1,6 +1,6 @@
 ; DLL with minimal export table, and relocations
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 ; same image_base as PE on purpose, to show relocations
 
@@ -97,4 +97,7 @@ block_start:
 ;relocations end
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
-%include '..\standard_ftr.asm'
+
+%include '..\..\standard_ftr.asm'
+
+;Ange Albertini, Creative Commons BY, 2010

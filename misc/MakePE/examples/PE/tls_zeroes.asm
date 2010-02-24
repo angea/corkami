@@ -1,7 +1,8 @@
 ; empty entry point file, looks buggy as much as possible but TLS is setting things correctly
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; this is onesec.hdr
-%include '..\consts.asm'
+
+%include '..\..\consts.asm'
 
 FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE

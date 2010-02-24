@@ -1,7 +1,7 @@
 ; the 2nd section maps the whole PE, including the header
 ; the header is standard until section table
 
-%include '..\consts.asm'
+%include '..\..\consts.asm'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 org IMAGEBASE

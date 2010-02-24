@@ -1,7 +1,7 @@
 ; import-less file, with imports loading by checksum
 ; some versions of windows might refuse an import-less file to load
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 %include 'entrypoint.inc'
 
@@ -132,6 +132,7 @@ ExportDirectory dd 0
 
 IMPORT_DESCRIPTOR equ IMAGEBASE
 DIRECTORY_ENTRY_IMPORT_SIZE equ 0
-%include '..\standard_ftr.asm'
+
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

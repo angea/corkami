@@ -1,5 +1,6 @@
 ;imports loading, with a parameter-based dispatcher instead of direct calls to API
-%include '..\standard_hdr.asm'
+
+%include '..\..\standard_hdr.asm'
 
 %include 'entrypoint.inc'
 
@@ -26,6 +27,6 @@ nop
 
 ;%IMPORTS
 
-%include '..\standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010

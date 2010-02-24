@@ -1,6 +1,6 @@
 ; rc4-encrypted helloworld
 
-%include '..\standard_hdr.asm'
+%include '..\..\standard_hdr.asm'
 
 %macro swap 3
     mov al, byte [%2 + %1]
@@ -112,6 +112,6 @@ align 16, db 0
     ; %assign i i+1
     ; %endrep
 
-%include '../standard_ftr.asm'
+%include '..\..\standard_ftr.asm'
 
 ;Ange Albertini, Creative Commons BY, 2010
