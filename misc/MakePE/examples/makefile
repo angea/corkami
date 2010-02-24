@@ -5,30 +5,34 @@ mlink = $(masmdir)\Link /SUBSYSTEM:WINDOWS
 makepe = $(python) ..\makepe.py
 
 examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
-	asm\undoc.exe pe\helloworld-masm.exe anti\gs.exe pe\console.exe \
-	pe\driver.sys anti\smsw.exe format\exehw.exe format\exetiny.exe pe\tinype.exe \
+	pe\helloworld-masm.exe pe\console.exe \
+	anti\smsw.exe anti\gs.exe \
+	pe\driver.sys pe\tinype.exe \
 	pe\seh_dll.dll pe\seh_loader.exe pe\tls_standard.exe pe\tls_fake.exe \
-	pe\tls_no_user32.exe pe\tls_on_the_fly.exe asm\block.exe \
+	pe\tls_no_user32.exe pe\tls_on_the_fly.exe \
 	pe\helloworld.exe pe\sectionless.exe pe\collapsed.exe \
-	pe\duplicate_section.exe pe\whole_pe_section.exe asm\jumps.exe \
-	asm\piotr.exe asm\self_generating.exe asm\opcodes32pe.exe asm\loops.exe \
-	asm\opcodes32.bin pe\no_relocs.dll pe\no_relocs_loader.exe \
+	pe\duplicate_section.exe pe\whole_pe_section.exe \
+	asm\piotr.exe asm\self_generating.exe asm\loops.exe asm\jumps.exe asm\block.exe \
+	asm\opcodes32.bin asm\opcodes32pe.exe asm\undoc.exe \
+	asm\vmware.exe asm\exceptions.exe asm\getip.exe asm\memcopy.exe \
+	pe\no_relocs.dll pe\no_relocs_loader.exe \
 	pe\no_relocs_tls_loader.exe \
-	VMs\stack.exe VMs\standard.exe VMs\subleq.exe VMs\tta.exe VMs\x86.exe \
-	format\com.com \
 	pe\forwarder.dll pe\forwarded.exe pe\own_exports.exe \
 	pe\no_exports.dll pe\no_exports_loader.exe \
 	pe\driver.exe pe\driver-ni.ex pe\ntoskrnl.exe \
-	asm\exceptions.exe pe\tls_zeroes.exe waitable.exe asm\vmware.exe \
-	packer\packed_driver.sys packer\packed_driver.exe packer\packed_driver-ni.ex \
+	pe\tls_zeroes.exe \
+	pe\dll.dll pe\loader.exe pe\manual_loader.exe \
+	VMs\stack.exe VMs\standard.exe VMs\subleq.exe VMs\tta.exe VMs\x86.exe \
+	format\com.com format\exehw.exe format\exetiny.exe \
 	imports\imports_manual.exe imports\imports_custom.exe imports\imports_fsg.exe \
 	imports\imports_junk.exe imports\imports_checksum.exe imports\imports_stolen.exe \
 	imports\imports_hooks.exe imports\imports_paramdp.exe imports\imports_ipdp.exe \
+	algo\prng.exe algo\xor.exe algo\rc4.exe \
+	funnyseh.exe waitable.exe \
+	packer\packed_loader.exe packer\packed_dll.dll \
+	packer\packed_driver.sys packer\packed_driver.exe packer\packed_driver-ni.ex \
 	packer\bundled_before.exe packer\bundled_after.exe \
 	packer\thread_host.exe packer\remote_thread.exe \
-	funnyseh.exe asm\getip.exe \
-	algo\prng.exe algo\xor.exe algo\rc4.exe \
-	pe\dll.dll pe\loader.exe pe\manual_loader.exe packer\packed_loader.exe packer\packed_dll.dll \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe
 
@@ -277,6 +281,9 @@ packer\suspended_process.exe: packer\suspended_process.asm
 	$(makepe) packer\suspended_process.asm
 packer\resource_dropper.exe: packer\resource_dropper.asm
 	$(makepe) packer\resource_dropper.asm
+
+asm\memcopy.exe: asm\memcopy.asm
+	$(makepe) asm\memcopy.asm
 
 clean:
 	rm $(examples) $(objects)
