@@ -11,6 +11,7 @@
 %$after:
     jmp %$next
 %$handler:
+    inc dword [lpcounter]
     mov edx, [esp + 4]
     cmp dword [edx], %1
     jnz bad
@@ -26,8 +27,21 @@
 %endmacro
 
 EntryPoint:
+    call access_violations
+    call breakpoints
+    call single_steps
+    call page_guard
+    call divides
+    call overflows
+    call locks
+    call handles
+    call privileged
+;    cmp dword [lpcounter], 258
+    jmp good
+
 ; SINGLE_STEP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+single_steps:
     _before
     db 0f1h                                 ;ICEBP
     jmp bad
@@ -41,10 +55,11 @@ EntryPoint:
     popf
     jmp bad         ; will trigger AFTER stepping here
     _after SINGLE_STEP
-
+    retn
 
 ; ACCESS_VIOLATION ;;;;;;;;;;;;;;;;;;;;;;;;;
 
+access_violations:
     _before
     xor eax, eax        ; not needed after initialization
     mov byte [eax], 0   ; the usual access violation trigger
@@ -59,25 +74,22 @@ EntryPoint:
     push 0              ; LPVOID lpAddress
     call VirtualAlloc
 
-    call [eax]
+    jmp eax
     jmp bad
     ;%IMPORT kernel32.dll!VirtualAlloc
     _after ACCESS_VIOLATION
 
 
-    push ints_handler
-    push dword [fs:0]
-    mov [fs:0], esp
-
     ; you might want to skip that lengthy part
-;   jmp after_ints
+    jmp after_ints
 
+    setSEH ints_handler
     call ints_start
-    cmp dword [counter], INTS_COUNTER
-    jnz bad
+    clearSEH
     jmp after_ints
 
 ints_handler:
+    inc dword [lpcounter]
     ; let's get the exception error
     mov edx, [esp + 4]
     cmp dword [edx], ACCESS_VIOLATION
@@ -113,12 +125,19 @@ ints_start:
     ints 02fh, 0ffh - 02fh + 1
 INTS_COUNTER equ ($ - ints_start) >> 1
     retn
-counter dd 0
 
 after_ints:
 
+
+    setSEH bad
+    push -1
+    call FreeLibrary
+    clearSEH
+    retn
+
 ; STATUS_GUARD_PAGE_VIOLATION ;;;;;;;;;;;;;;
 
+page_guard:
     _before
     ; create a page with PAGE_GUARD attribute
     push PAGE_READONLY | PAGE_GUARD     ; DWORD flProtect
@@ -127,20 +146,25 @@ after_ints:
     push 0                              ; LPVOID lpAddress
     call VirtualAlloc
 
-    call [eax]
+    jmp eax
     jmp bad
     _after STATUS_GUARD_PAGE_VIOLATION   ; OllyDbg will think it's a memory breakpoin access
+    retn
 
 ; INTEGER_DIVIDE_BY_ZERO ;;;;;;;;;;;;;;;;;;;
+
+divides:
     _before
-    xor eax, eax
+    mov edx, -1
+    mov eax, 0
     div eax
     jmp bad
     _after INTEGER_DIVIDE_BY_ZERO
-
+    retn
 
 ; INTEGER_OVERFLOW ;;;;;;;;;;;;;;;;;;;;;;;;;
 
+overflows:
     _before
     mov eax, 0
     div ecx
@@ -159,9 +183,11 @@ after_ints:
     jmp bad
     _after INTEGER_OVERFLOW
 
+    retn
 
 ; BREAKPOINT ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+breakpoints:
     _before
     int3    ; classic CC
     jmp bad
@@ -183,15 +209,23 @@ after_ints:
     jmp bad
     ;%IMPORT kernel32.dll!DebugBreak
     _after BREAKPOINT
+    add esp, 4
+
+    retn
 
 ; INVALID_LOCK_SEQUENCE ;;;;;;;;;;;;;;;;;;;;
 
+locks:
     _before
     lock nop
     jmp bad
     _after INVALID_LOCK_SEQUENCE
 
+    retn
+
 ; INVALID_HANDLE ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+handles:
     setSEH bad
     push -1
     call CloseHandle    ; will trigger an exception only if a debugger is present
@@ -199,21 +233,28 @@ after_ints:
     call RegCloseKey
     clearSEH
 
+    retn
+
 ; PRIVILEGED_INSTRUCTION ;;;;;;;;;;;;;;;;;;;
+
+privileged:
     _before
     hlt
     jmp bad
     _after PRIVILEGED_INSTRUCTION
 
-    jmp good
+    retn
 
 %include '..\goodbad.inc'
 
+counter dd 0
+lpcounter dd counter
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 
 ;%IMPORT kernel32.dll!CloseHandle
 ;%IMPORT advapi32.dll!RegCloseKey
+;%IMPORT kernel32.dll!FreeLibrary
 
 ;%IMPORTS
 
