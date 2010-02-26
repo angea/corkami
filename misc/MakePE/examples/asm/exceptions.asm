@@ -11,7 +11,7 @@
 %$after:
     jmp %$next
 %$handler:
-    inc dword [lpcounter]
+    inc dword [counter]
     mov edx, [esp + 4]
     cmp dword [edx], %1
     jnz bad
@@ -27,16 +27,17 @@
 %endmacro
 
 EntryPoint:
-    call access_violations
-    call breakpoints
     call single_steps
+    call access_violations
     call page_guard
     call divides
     call overflows
+    call breakpoints
     call locks
     call handles
     call privileged
-;    cmp dword [lpcounter], 258
+    cmp dword [counter], 201h
+    jnz bad
     jmp good
 
 ; SINGLE_STEP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -81,15 +82,16 @@ access_violations:
 
 
     ; you might want to skip that lengthy part
-    jmp after_ints
+;    jmp after_ints
 
     setSEH ints_handler
     call ints_start
     clearSEH
+
     jmp after_ints
 
 ints_handler:
-    inc dword [lpcounter]
+    inc dword [counter]
     ; let's get the exception error
     mov edx, [esp + 4]
     cmp dword [edx], ACCESS_VIOLATION
@@ -227,7 +229,7 @@ locks:
 
 handles:
     setSEH bad
-    push -1
+    push 12345678h
     call CloseHandle    ; will trigger an exception only if a debugger is present
     push -1
     call RegCloseKey
@@ -248,7 +250,6 @@ privileged:
 %include '..\goodbad.inc'
 
 counter dd 0
-lpcounter dd counter
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 
