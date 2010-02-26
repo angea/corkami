@@ -539,10 +539,6 @@ _
     vmxon [eax]                             ;f30fc730
     vmptrst [eax]                           ;0fc738
 _
-    lss eax, dword [eax]                    ;0fb200
-    lfs eax, dword [eax]                    ;0fb400
-    lgs eax, dword [eax]                    ;0fb500
-_
     movzx eax, byte [eax]                   ;0fb600
     movzx eax, word [eax]                   ;0fb700
 _
@@ -896,12 +892,14 @@ _
     outsd                                   ;666f = outsw
     outsd                                   ;6f
 _
-_
     rol byte [eax], 0x0                     ;c000 00
     rol dword [eax], 0x0                    ;c100 00
 _
     les eax, dword [eax]                    ;c400
     lds eax, dword [eax]                    ;c500
+    lss eax, dword [eax]                    ;0fb200
+    lfs eax, dword [eax]                    ;0fb400
+    lgs eax, dword [eax]                    ;0fb500
 _
     mov byte [eax], 0x0                     ;c600 00
     mov dword [eax], 0x0                    ;c700 00000000

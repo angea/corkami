@@ -14,7 +14,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	pe\duplicate_section.exe pe\whole_pe_section.exe \
 	asm\piotr.exe asm\self_generating.exe asm\loops.exe asm\jumps.exe asm\block.exe \
 	asm\opcodes32.bin asm\opcodes32pe.exe asm\undoc.exe \
-	asm\vmware.exe asm\exceptions.exe asm\getip.exe asm\memcopy.exe \
+	asm\exceptions.exe asm\getip.exe \
 	asm\inline_strings.exe asm\stack_strings.exe \
 	pe\no_relocs.dll pe\no_relocs_loader.exe \
 	pe\no_relocs_tls_loader.exe \
@@ -29,7 +29,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\imports_junk.exe imports\imports_checksum.exe imports\imports_stolen.exe \
 	imports\imports_hooks.exe imports\imports_paramdp.exe imports\imports_ipdp.exe \
 	algo\prng.exe algo\xor.exe algo\rc4.exe \
-	funnyseh.exe waitable.exe \
+	funnyseh.exe \
 	packer\packed_loader.exe packer\packed_dll.dll \
 	packer\packed_driver.sys packer\packed_driver.exe packer\packed_driver-ni.ex \
 	packer\bundled_before.exe packer\bundled_after.exe \
@@ -37,12 +37,16 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe
 
+beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe
+
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
 
 objects = helloworld-masm.obj
 
 all: $(examples)
+
+allp: $(examples) $(beta)
 
 #This is not a pipe
 eicar.com: ../../eicar.asm
@@ -294,5 +298,8 @@ asm\stack_strings.exe : asm\stack_strings.asm
 anti\misc.exe: anti\misc.asm
 	$(makepe) anti\misc.asm
 
+test.exe: test.asm
+	$(makepe) test.asm
+
 clean:
-	rm $(examples) $(objects)
+	rm $(examples) $(objects) $(beta)
