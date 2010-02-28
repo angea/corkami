@@ -531,8 +531,9 @@ _
     cmpxchg [eax], eax                      ;0fb100
     cmpxchg486 [eax], eax                   ;0fa700
     cmpxchg486 [eax], al                    ;0fa600
-    cmpxchg8b [eax]                         ;0fc7c0
-    lock cmpxchg8b [eax]                    ;f00fc7c0 famous for crashing pentiums
+    cmpxchg8b [eax]                         ;0fc708
+    db 0f0h, 0fh, 0c7h, 0c8h 
+    ; lock cmpxchg8b eax                    ;f00fc7c8 famous for crashing pentiums
 _
     vmptrld [eax]                           ;0fc730
     vmclear [eax]                           ;660fc730

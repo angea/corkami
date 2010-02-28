@@ -14,7 +14,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	pe\duplicate_section.exe pe\whole_pe_section.exe \
 	asm\piotr.exe asm\self_generating.exe asm\loops.exe asm\jumps.exe asm\block.exe \
 	asm\opcodes32.bin asm\opcodes32pe.exe asm\undoc.exe \
-	asm\exceptions.exe asm\getip.exe \
+	asm\seh_triggers.exe asm\getip.exe \
 	asm\inline_strings.exe asm\stack_strings.exe \
 	pe\no_relocs.dll pe\no_relocs_loader.exe \
 	pe\no_relocs_tls_loader.exe \
@@ -195,8 +195,8 @@ pe\no_exports.dll: pe\no_exports.asm
 pe\no_exports_loader.exe: pe\no_exports_loader.asm
 	$(makepe) pe\no_exports_loader.asm
 
-asm\exceptions.exe: asm\exceptions.asm
-	$(makepe) asm\exceptions.asm
+asm\seh_triggers.exe: asm\seh_triggers.asm
+	$(makepe) asm\seh_triggers.asm
 
 pe\tls_zeroes.exe: pe\tls_zeroes.asm
 	$(makepe) pe\tls_zeroes.asm
