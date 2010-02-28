@@ -194,7 +194,7 @@
        sodipodi:cy="962.36218"
        sodipodi:rx="50"
        sodipodi:ry="45"
-       d="m 145,962.36218 a 50,45 0 1 1 -100,0 50,45 0 1 1 100,0 z"
+       d="m 145,962.36218 c 0,24.85282 -22.38576,45.00002 -50,45.00002 -27.614237,0 -50,-20.1472 -50,-45.00002 0,-24.85281 22.385763,-45 50,-45 27.61424,0 50,20.14719 50,45 z"
        transform="matrix(3.4811106,3.1404374,-2.4541041,2.7203241,2288.3867,-2526.8144)" />
     <path
        sodipodi:type="arc"
@@ -2258,7 +2258,7 @@
        sodipodi:nodetypes="cccc" />
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191000001000%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial;filter:url(#filter3968)"
        x="328.2059"
        y="540.12622"
        id="text3564-4"
@@ -2269,7 +2269,7 @@
          y="540.12622">UPX</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191000001000%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial;filter:url(#filter3968)"
        x="335.56586"
        y="550.9884"
        id="text3580-9"
@@ -2280,7 +2280,7 @@
          y="550.9884">Upack</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191000001000%;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial;filter:url(#filter3968)"
        x="307.10013"
        y="542.24194"
        id="text3580-9-8"
