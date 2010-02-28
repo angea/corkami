@@ -36,7 +36,7 @@ EntryPoint:
     call locks
     call handles
     call privileged
-    cmp dword [counter], 201h
+    cmp dword [counter], 108h
     jnz bad
     jmp good
 
@@ -97,7 +97,6 @@ ints_handler:
     cmp dword [edx], ACCESS_VIOLATION
     jnz bad
 
-    inc dword [counter]
     mov edx, [esp + 0ch]
     add dword [edx + 0b8h], 2               ; skipping CD ??
 
