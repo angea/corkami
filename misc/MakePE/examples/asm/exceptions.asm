@@ -219,7 +219,11 @@ breakpoints:
 
 locks:
     _before
+    db 0f0h, 0fh, 0c7h, 0c8h                ; lock cmpxchg8b eax
     lock nop
+    lock mov [eax], eax
+    lock add eax, eax
+    
     jmp bad
     _after INVALID_LOCK_SEQUENCE
 
@@ -242,6 +246,8 @@ handles:
 privileged:
     _before
     hlt
+    mov eax, cr0
+    in eax, dx
     jmp bad
     _after PRIVILEGED_INSTRUCTION
 
