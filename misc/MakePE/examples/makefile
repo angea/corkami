@@ -37,7 +37,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe
 
-beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe
+beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -166,6 +166,10 @@ pe\ntoskrnl.exe: pe\ntoskrnl.asm
 	$(makepe) pe\ntoskrnl.asm
 	mv pe\ntoskrnl.dll pe\ntoskrnl.exe
 
+#and when i start to come undone stitch me together
+asm\seh_triggers.exe: asm\seh_triggers.asm
+	$(makepe) asm\seh_triggers.asm
+
 pe\seh_dll.dll: pe\seh_dll.asm
 	$(makepe) pe\seh_dll.asm
 pe\seh_loader.exe: pe\seh_loader.asm
@@ -194,9 +198,6 @@ pe\no_exports.dll: pe\no_exports.asm
 	$(makepe) pe\no_exports.asm
 pe\no_exports_loader.exe: pe\no_exports_loader.asm
 	$(makepe) pe\no_exports_loader.asm
-
-asm\seh_triggers.exe: asm\seh_triggers.asm
-	$(makepe) asm\seh_triggers.asm
 
 pe\tls_zeroes.exe: pe\tls_zeroes.asm
 	$(makepe) pe\tls_zeroes.asm
@@ -297,6 +298,8 @@ asm\stack_strings.exe : asm\stack_strings.asm
 
 anti\misc.exe: anti\misc.asm
 	$(makepe) anti\misc.asm
+anti\ollydbg.exe: anti\ollydbg.asm
+	$(makepe) anti\ollydbg.asm
 
 test.exe: test.asm
 	$(makepe) test.asm
