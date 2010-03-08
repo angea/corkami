@@ -182,6 +182,88 @@ struc IMAGE_TLS_DIRECTORY32
     .Characteristics         resd 1
 endstruc
 
+struc exceptionHandler
+    .pException resd 1          ; EXCEPTION_RECORD
+    .pRegistrationRecord resd 1 ; EXCEPTION_REGISTRATION_RECORD
+    .pContext resd 1            ; CONTEXT
+endstruc
+
+EXCEPTION_MAXIMUM_PARAMETERS equ 15
+
+struc EXCEPTION_RECORD
+    ExceptionCode         resd 1
+    ExceptionFlags        resd 1
+    pExceptionRecord      resd 1
+    ExceptionAddress      resd 1
+    NumberParameters      resd 1
+    ExceptionInformation  resd EXCEPTION_MAXIMUM_PARAMETERS
+endstruc
+
+struc EXCEPTION_REGISTRATION_RECORD
+    .Next resd 1    ; PEXCEPTION_REGISTRATION_RECORD
+    .Handler resd 1 ; PEXCEPTION_DISPOSITION
+endstruc
+
+CONTEXT_i386                 equ 00010000h
+CONTEXT_CONTROL              equ CONTEXT_i386 | 00000001h
+CONTEXT_INTEGER              equ CONTEXT_i386 | 00000002h
+CONTEXT_SEGMENTS             equ CONTEXT_i386 | 00000004h
+CONTEXT_FLOATING_POINT       equ CONTEXT_i386 | 00000008h
+CONTEXT_DEBUG_REGISTERS      equ CONTEXT_i386 | 00000010h
+CONTEXT_EXTENDED_REGISTERS   equ CONTEXT_i386 | 00000020h
+CONTEXT_FULL equ CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS
+CONTEXT_ALL  equ CONTEXT_FULL | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS | CONTEXT_EXTENDED_REGISTERS
+
+SIZE_OF_80387_REGISTERS equ 80
+MAXIMUM_SUPPORTED_EXTENSION equ 512
+
+struc CONTEXT
+.ContextFlags  resd 1
+;CONTEXT_DEBUG_REGISTERS
+.iDr0          resd 1
+.iDr1          resd 1
+.iDr2          resd 1
+.iDr3          resd 1
+.iDr6          resd 1
+.iDr7          resd 1
+;CONTEXT_FLOATING_POINT
+.ControlWord   resd 1
+.StatusWord    resd 1
+.TagWord       resd 1
+.ErrorOffset   resd 1
+.ErrorSelector resd 1
+.DataOffset    resd 1
+.DataSelector  resd 1
+.RegisterArea  resb SIZE_OF_80387_REGISTERS
+.Cr0NpxState   resd 1
+;CONTEXT_SEGMENTS
+.regGs   resd 1
+.regFs   resd 1
+.regEs   resd 1
+.regDs   resd 1
+;CONTEXT_INTEGER
+.regEdi  resd 1
+.regEsi  resd 1
+.regEbx  resd 1
+.regEdx  resd 1
+.regEcx  resd 1
+.regEax  resd 1
+;CONTEXT_CONTROL
+.regEbp  resd 1
+.regEip  resd 1
+.regCs   resd 1
+.regFlag resd 1
+.regEsp  resd 1
+.regSs   resd 1
+;CONTEXT_EXTENDED_REGISTERS
+.ExtendedRegisters resb MAXIMUM_SUPPORTED_EXTENSION
+endstruc
+
+ExceptionContinueExecution equ 0
+;ExceptionContinueSearch equ 1
+;ExceptionNestedException equ 2
+;ExceptionCollidedUnwind equ 3
+
 struc PROCESS_INFORMATION
     .hProcess      resd 1
     .hThread       resd 1

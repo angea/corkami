@@ -12,12 +12,14 @@
     jmp %$next
 %$handler:
     inc dword [counter]
-    mov edx, [esp + 4]
+    mov edx, [esp + exceptionHandler.pException + 4]
     cmp dword [edx], %1
     jnz bad
-    mov eax, [esp + 0ch]
-    mov dword [eax + 0b8h], %$after
-    xor eax, eax
+
+    mov eax, [esp + exceptionHandler.pContext + 4]
+    mov dword [eax + CONTEXT.regEip], %$after
+
+    mov eax, ExceptionContinueExecution
     retn
 %$next:
     clearSEH
@@ -93,14 +95,14 @@ access_violations:
 ints_handler:
     inc dword [counter]
     ; let's get the exception error
-    mov edx, [esp + 4]
+    mov edx, [esp + exceptionHandler.pException + 4]
     cmp dword [edx], ACCESS_VIOLATION
     jnz bad
 
-    mov edx, [esp + 0ch]
-    add dword [edx + 0b8h], 2               ; skipping CD ??
+    mov edx, [esp + exceptionHandler.pContext + 4]
+    add dword [edx + CONTEXT.regEip], 2     ; skipping CD ??
 
-    xor eax, eax
+    mov eax, ExceptionContinueExecution
     retn
 
 %macro ints 2
@@ -222,7 +224,7 @@ locks:
     lock nop
     lock mov [eax], eax
     lock add eax, eax
-    
+
     jmp bad
     _after INVALID_LOCK_SEQUENCE
 

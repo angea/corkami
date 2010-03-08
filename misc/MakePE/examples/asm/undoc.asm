@@ -15,12 +15,14 @@
 %$after:
     jmp %$next
 %$handler:
-    mov edx, [esp + 4]
+    mov edx, [esp + exceptionHandler.pException + 4]
     cmp dword [edx], %1
     jnz bad
-    mov eax, [esp + 0ch]
-    mov dword [eax + 0b8h], %$after
-    xor eax, eax
+
+    mov eax, [esp + exceptionHandler.pContext + 4]
+    mov dword [eax + CONTEXT.regEip], %$after
+
+    mov eax, ExceptionContinueExecution
     retn
 %$next:
     pop dword [fs:0]

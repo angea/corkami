@@ -209,9 +209,10 @@ _sehjump:
 _
 
 _sehcontextchange_handler:
-    mov eax, [esp + 0ch]
-    mov dword [eax + 0b8h], _sehcontextchange_end
-    xor eax, eax
+    mov eax, [esp + exceptionHandler.pContext + 4]
+    mov dword [eax + CONTEXT.regEip], _sehcontextchange_end
+
+    mov eax, ExceptionContinueExecution
     retn
 _
 

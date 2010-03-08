@@ -48,11 +48,12 @@ fpuenv:
 
 %macro _after 1
 %$handler:
-    mov eax, [esp + 0ch]
-    cmp dword [eax + 0b8h], %1
+    mov eax, [esp + exceptionHandler.pContext + 4]
+    cmp dword [eax + CONTEXT.regEip], %1
     jnz bad
-    mov dword [eax + 0b8h], %$next
-    xor eax, eax
+    mov dword [eax + CONTEXT.regEip], %$next
+
+    mov eax, ExceptionContinueExecution
     retn
 %$next:
     clearSEH
