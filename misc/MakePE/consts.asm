@@ -425,5 +425,74 @@ IMAGE_RESOURCE_DATA_IS_DIRECTORY equ 80000000h
     add esp, 4
 %endmacro
 
+%macro getPEB 1
+    mov %1, [fs:30h]
+%endmacro
+
+%macro getTEB 1
+    mov %1, [fs:30h]
+%endmacro
+
+struc PEB
+    .InheritedAddressSpace resb 1
+    .ReadImageFileExecOptions resb 1
+    .BeingDebugged resb 1
+    .Spare resb 1
+    .Mutant resd 1
+    .ImageBaseAddress resd 1
+    .LoaderData resd 1                      ; PPEB_LDR_DATA
+    .ProcessParameters resd 1               ; PRTL_USER_PROCESS_PARAMETERS
+    .SubSystemData resd 1
+    .ProcessHeap resd 1
+    .FastPebLock resd 1
+    .FastPebLockRoutine resd 1              ; PPEBLOCKROUTINE
+    .FastPebUnlockRoutine resd 1            ; PPEBLOCKROUTINE
+    .EnvironmentUpdateCount resd 1
+    .KernelCallbackTable resd 1
+    .EventLogSection resd 1
+    .EventLog resd 1
+    .FreeList resd 1                        ; PPEB_FREE_BLOCK
+    .TlsExpansionCounter resd 1
+    .TlsBitmap resd 1
+    .TlsBitmapBits resd 2
+    .ReadOnlySharedMemoryBase resd 1
+    .ReadOnlySharedMemoryHeap resd 1
+    .ReadOnlyStaticServerData resd 1
+    .AnsiCodePageData resd 1
+    .OemCodePageData resd 1
+    .UnicodeCaseTableData resd 1
+    .NumberOfProcessors resd 1
+    .NtGlobalFlag resd 1
+    .Spare2 resb 4
+    .CriticalSectionTimeout resd 2          ; LARGE_INTEGER
+    .HeapSegmentReserve resd 1
+    .HeapSegmentCommit resd 1
+    .HeapDeCommitTotalFreeThreshold resd 1
+    .HeapDeCommitFreeBlockThreshold resd 1
+    .NumberOfHeaps resd 1
+    .MaximumNumberOfHeaps resd 1
+    .ProcessHeaps resd 1
+    .GdiSharedHandleTable resd 1
+    .ProcessStarterHelper resd 1
+    .GdiDCAttributeList resd 1
+    .LoaderLock resd 1
+    .OSMajorVersion resd 1
+    .OSMinorVersion resd 1
+    .OSBuildNumber resd 1
+    .OSPlatformId resd 1
+    .ImageSubSystem resd 1
+    .ImageSubSystemMajorVersion resd 1
+    .ImageSubSystemMinorVersion resd 1
+    .ImageProcessAffinityMask resd 1        ; some docs don't mention that field
+    .GdiHandleBuffer resd 022h
+    .PostProcessInitRoutine resd 1
+    .TlsExpansionBitmap resd 1
+    .TlsExpansionBitmapBits resd 32
+    .SessionId resd 1
+endstruc
+
+FLG_HEAP_ENABLE_FREE_CHECK equ 010h
+FLG_HEAP_ENABLE_TAIL_CHECK equ 020h
+FLG_HEAP_VALIDATE_PARAMETERS equ 040h
 
 ; Ange Albertini, Creative Commons BY, 2009-2010

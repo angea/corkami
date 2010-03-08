@@ -6,6 +6,9 @@
 EntryPoint:
     call deletefib
     call trig
+    call beingdebugged
+    call ntglobalflag
+
     jmp good
 
 ; DeleteFiber
@@ -33,6 +36,21 @@ trig:
     jnz bad
     retn
 ;%IMPORT msvcrt.dll!_CIasin
+
+beingdebugged:
+    getPEB eax
+    movzx eax, byte [eax + PEB.BeingDebugged]
+    test eax, eax
+    jnz bad
+    retn
+
+ntglobalflag:
+    getPEB eax
+    mov eax, [eax + PEB.NtGlobalFlag]
+    and eax, FLG_HEAP_ENABLE_TAIL_CHECK | FLG_HEAP_ENABLE_FREE_CHECK | FLG_HEAP_VALIDATE_PARAMETERS
+    test eax, eax
+    jnz bad
+    retn
 
 %include '..\goodbad.inc'
 
