@@ -491,6 +491,18 @@ struc PEB
     .SessionId resd 1
 endstruc
 
+struc _HEAP ; only the start
+    .Entry                  resd 2
+    .Signature              resd 1
+    .Flags                  resd 1
+    .ForceFlags             resd 1
+    .VirtualMemoryThreshold resd 1
+    .SegmentReserve         resd 1
+    .SegmentCommit          resd 1
+endstruc
+
+HEAP_GROWABLE equ 2
+
 FLG_HEAP_ENABLE_FREE_CHECK equ 010h
 FLG_HEAP_ENABLE_TAIL_CHECK equ 020h
 FLG_HEAP_VALIDATE_PARAMETERS equ 040h

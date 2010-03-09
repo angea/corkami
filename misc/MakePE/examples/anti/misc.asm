@@ -8,13 +8,14 @@ EntryPoint:
 
     call beingdebugged
     call ntglobalflag
+    call heapflags
     call forceflag
     call deletefib
 
     call popss
     call outputdbg
 ;    call ntqueryinfo
-;    call checkremote
+    call checkremote
 
     jmp good
 
@@ -71,13 +72,55 @@ ntglobalflag:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
+
 forceflag:
-    mov eax, [fs:30h]
-    mov eax, [eax+18h] ;process heap
-    mov eax, [eax+10h] ;heap.forceflags flags
+    getPEB eax
+    mov eax, [eax + PEB.ProcessHeap]
+    mov eax, [eax + _HEAP.ForceFlags]
     test eax, eax
     jnz bad
     retn
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+
+heapflags:
+    getPEB eax
+    mov eax, [eax + PEB.ProcessHeap]
+    mov eax, [eax + _HEAP.Flags]
+    cmp eax, HEAP_GROWABLE
+    jnz bad
+    retn
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+    ;call CsrGetProcessId
+    ;push eax
+    ;push FALSE
+    ;push PROCESS_QUERY_INFORMATION
+    ;call OpenProcess
+    ;cmp eax, STATUS_ACCESS_DENIED ; equ 0C0000022h
+    ;test eax, eax
+    ;jnz bad
+    ;retn
+
+;push 0
+;push -1
+;push ThreadHideFromDebugger ; equ 11h
+; push -2
+;call NtSetInformationThread
+
+;kernel32.dll!SetUnhandledExceptionFilter
+
+;kernel32.dll!_BasepCurrentTopLevelFilter
+
+;Exceptionfilter:
+; eax = ExceptionInfo.ContextRecord
+;mov eax, [esp + 4]
+;mov eax, [eax + 4]
+; mov [eax + CONTEXT.regEIP], ...
+;mov eax, -1 ; EXCEPTION_CONTINUE_EXECUTION
+;retn
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -132,16 +175,16 @@ ntqueryinfo:
 
 ;%IMPORT ntdll.dll!NtQueryInformationProcess
 
-isdebugged dd 0
+isdebugged dd 312452
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 
-checkremote:
+checkremote:    
     push isdebugged
-    push -1
+    push -1 ; GetCurrentProcess
     call CheckRemoteDebuggerPresent
-    test eax, eax
+    cmp dword [isdebugged], 0
     jnz bad
     retn
 
