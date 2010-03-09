@@ -170,6 +170,10 @@ pe\ntoskrnl.exe: pe\ntoskrnl.asm
 asm\seh_triggers.exe: asm\seh_triggers.asm
 	$(makepe) asm\seh_triggers.asm
 
+#si c'est ton corps qui bouge c'est ton coeur qui fait tout
+asm\getip.exe: asm\getip.asm
+	$(makepe) asm\getip.asm
+
 pe\seh_dll.dll: pe\seh_dll.asm
 	$(makepe) pe\seh_dll.asm
 pe\seh_loader.exe: pe\seh_loader.asm
@@ -241,9 +245,6 @@ packer\thread_host.exe: packer\thread_host.asm
 
 funnyseh.exe: funnyseh.asm
 	$(makepe) funnyseh.asm
-
-asm\getip.exe: asm\getip.asm
-	$(makepe) asm\getip.asm
 
 algo\prng.exe: algo\prng.asm
 	$(makepe) algo\prng.asm
