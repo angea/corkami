@@ -32,14 +32,14 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.31263001"
+     inkscape:zoom="0.66231951"
      inkscape:cx="372.04724"
      inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1024"
-     inkscape:window-height="581"
+     inkscape:window-width="1280"
+     inkscape:window-height="927"
      inkscape:window-x="-4"
      inkscape:window-y="-4"
      showborder="true"
@@ -2224,8 +2224,8 @@
          x="121.69394"
          y="446.58716">Alex Protector</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 332.62251,89.49282 -83.89917,-0.15966 0,48.80187 13.6936,0"
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 262.41694,138.13503 -13.6936,0 0,-48.80187 83.89917,0.15966 0,4.480683"
        id="path3999"
        sodipodi:nodetypes="cccc" />
     <text
@@ -2272,5 +2272,10 @@
          id="tspan3470-7"
          x="365.72119"
          y="280.47742">RLP</tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 23.696193,886.30541 -7.642977,0 0,25.7689 318.343884,0 0,-9.923"
+       id="path3838"
+       sodipodi:nodetypes="ccccc" />
   </g>
 </svg>
