@@ -32,14 +32,14 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.66231951"
+     inkscape:zoom="0.31263001"
      inkscape:cx="372.04724"
      inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="927"
+     inkscape:window-width="1024"
+     inkscape:window-height="581"
      inkscape:window-x="-4"
      inkscape:window-y="-4"
      showborder="true"
@@ -2225,9 +2225,9 @@
          y="446.58716">Alex Protector</tspan></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 262.41694,138.13503 -13.6936,0 0,-48.80187 83.89917,0.15966 0,4.480683"
+       d="m 262.41694,138.13503 -13.6936,0 0,-92.80187 83.89917,0.15966 0,8.480683"
        id="path3999"
-       sodipodi:nodetypes="cccc" />
+       sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191%;writing-mode:lr-tb;text-anchor:start;fill:none;stroke:#000080;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;font-family:Arial;-inkscape-font-specification:Arial"
@@ -2277,5 +2277,22 @@
        d="m 23.696193,886.30541 -7.642977,0 0,25.7689 318.343884,0 0,-9.923"
        id="path3838"
        sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="251.06996"
+       y="60.880394"
+       id="text3364"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="251.06996"
+         y="60.880394"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan3370">Packers</tspan><tspan
+         sodipodi:role="line"
+         x="251.06996"
+         y="80.880394"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan6518">Landscape</tspan></text>
   </g>
 </svg>

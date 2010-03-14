@@ -1145,6 +1145,20 @@
            inkscape:collect="always" />
       </feMerge>
     </filter>
+    <inkscape:perspective
+       id="perspective3154"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3170"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1156,9 +1170,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.42931364"
-     inkscape:cx="450.72064"
-     inkscape:cy="536.11159"
+     inkscape:zoom="2.920872"
+     inkscape:cx="131.83781"
+     inkscape:cy="17.229733"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -2394,5 +2408,58 @@
          x="480"
          y="967.36218"
          id="tspan5282-8">0x00 dw TypeOffset</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="979.42603"
+       y="604.07507"
+       id="text3364"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="979.42603"
+         y="604.07507"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan3370">the PE Format</tspan><tspan
+         sodipodi:role="line"
+         x="979.42603"
+         y="624.07507"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+         id="tspan6518">Data directories</tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none"
+       d="m 992.08181,587.1483 -17.18178,0 0,44.39849 123.44337,0 0,-15.59492"
+       id="path3874"
+       sodipodi:nodetypes="ccccc" />
+    <a
+       transform="translate(-13.14402,-1.521799)"
+       id="a3007"
+       xlink:href="http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/packers-features.svg">
+      <text
+         id="text6335"
+         y="1028.8519"
+         x="23.162506"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           id="tspan6341"
+           style="font-size:6px"
+           y="1028.8519"
+           x="23.162506"
+           sodipodi:role="line">Ange Albertini 2010</tspan><tspan
+           id="tspan6345"
+           style="font-size:6px"
+           y="1036.3519"
+           x="23.162506"
+           sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
+           style="font-size:6px"
+           id="tspan6339"
+           y="1043.8519"
+           x="23.162506"
+           sodipodi:role="line">http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/packers-features.svg</tspan></text>
+    </a>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 14.30884,1020.248 -7.64298,0 0,25.7689 314.34389,0 0,-9.923"
+       id="path3838"
+       sodipodi:nodetypes="ccccc" />
   </g>
 </svg>
