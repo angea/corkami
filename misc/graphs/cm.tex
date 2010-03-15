@@ -1,0 +1,81 @@
+\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0}\end{flushright}}
+\documentclass{report}
+\usepackage{hyperref}
+\usepackage[hmargin=1cm,vmargin=1cm]{geometry}
+\usepackage{booktabs}	% better looking tables
+\begin{document}
+\begin{center} DRAFT Counter-measures cheat sheet \end{center}
+
+\begin{tabular}{lllll}
+\toprule
+name 			&  flags & description \\
+\midrule
+IsDebuggerPresent	& {\tt D....} & $ PEB.BeingDebugged $ db {\tt [fs:[30] + 2]} == 1\\
+NtGlobalFlag			& {\tt D....} & $ PEB.NtGlobalFlag $ dd {\tt [fs:[30] + 68]} has 70 set \\
+HeapFlags			& {\tt D....} & $Heap.Flags$ dd {\tt [[fs:[30] + 18] + C] == 2} \\
+ForceFlags			& {\tt D....} & $Heap.ForceFlags$ dd {\tt  [[fs:[30] + 18] + 10]} is not null \\
+msvcrt!trigo			& {\tt D....} & $msvcrt!\_CIasin(invalid) \rightarrow$ {\tt al = NtGlobalFlag ?\ a8 :\ 98} \\
+deletefiber			& {\tt D....} & $DeleteFiber(invalid)$ $\rightarrow$ {\tt LastError = ForceFlags ?\ 80000003 :\ 57}\\
+\href{http://corkami.blogspot.com/2010/01/hen-never-laid-and-corn-never-growed.html}
+{gs} 				& {\tt DSE..} & {\tt GS} is eventually reset, on {\bf thread switch}, but stepping will clear it \\
+pop ss			& {\tt .S...} & debuggers can't step right after {\tt pop SS} $\rightarrow$ {\tt TF} is visible via {\tt pushf} if stepping \\
+\href{http://corkami.blogspot.com/2010/01/policeman-got-no-gun-u-dont-have-2-run.html}
+{smsw} 			& {\tt .SE..} & $operand$ = just after FPU {\tt ?\ 80010031 :\ 8001003b} \\
+% disabled - can't reproduce
+%\href{http://corkami.blogspot.com/2010/03/si-cest-ton-corps-qui-bouge-cest-ton.html}
+%{f(n)stenv} 			& {\tt .S.I} & gets {\tt EIP} of last FPU instruction + stepping can loose the value\\
+\href{http://corkami.blogspot.com/2010/03/si-cest-ton-corps-qui-bouge-cest-ton.html}
+{int2c/2e} 			& {\tt .SEI.} & slides over next instruction + sets {\tt EDX} to next {\tt EIP}, but incorrect if stepped\\
+\href{http://corkami.blogspot.com/2010/02/and-when-i-start-to-come-undone-stitch.html}
+{int2d}			& {\tt D...X} & trigger $BREAKPOINT$ exception if not under a debugger\\
+\href{http://corkami.blogspot.com/2010/02/and-when-i-start-to-come-undone-stitch.html}
+{InvalidHandle}		& {\tt D...X} & $CloseHandle(invalid) \rightarrow INVALID HANDLE$ exception if debugger is present\\
+\midrule
+Ollydbg (1.1) specific \\
+\midrule
+FPU				& {\tt D....} & Display {\tt FFFFFFFF FFFFFFFF C0/40 3D } as float $\rightarrow$ crash \\
+OdbgStr			& {\tt D....} & $OutputDebugStringA("\%s\%s") \rightarrow$ crash \\ 
+\midrule
+VmWare specific \\
+\midrule
+backdoor			& {\tt D....} & {\tt in 'VMXh', 'VX'} $\rightarrow$ no exception if vmware, else modified {\tt eax} and {\tt ebx} \\
+sidt				& {\tt D....} & {\tt [operand + 5] == e8} or {\tt ff} if present \\
+sldt				& {\tt D....} & {\tt result != 0} if present \\
+str				& {\tt D....} & {\tt result == 4000h} if present \\
+\bottomrule
+\end{tabular}
+
+\sig
+
+\newpage
+
+Flags:
+
+\begin{description}
+\item[anti $D$ebugger]
+detects if debugger is attached, or if specific tool is used
+\item[anti $S$tepping]
+detects the program is not running (ex, not at full speed)
+\item[anti $E$mulator]
+detects the program is running under an emulator
+\item[get e$I$p]
+provides a way to retrieve current EIP
+\item[e$X$ception based]
+relies on exceptions (Structured, Vectored, Unhandled filter)
+\end{description}
+
+reminders
+\begin{itemize}
+\item
+TF is used by a debugger for stepping: set TF, an exception will be triggered after next execution is stepped
+\item
+TEB is at {\tt fs:[18]}
+\item
+the PEB is accessible directly ({\tt fs:[30]}) or via $TEB.EnvironmentPointer$ ({\tt [fs:[18] + 30]})
+\item
+$LastError$ is accessible via $TEB.LastErrorValue$ ({\tt [fs:[18] + 34]}) $\rightarrow GetLastError$ is inlinable
+\end{itemize}
+
+\sig
+%\footnotetext{D = anti-debugger, S = anti-stepping, E = anti-emulator }
+\end{document}
