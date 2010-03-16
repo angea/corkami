@@ -17,8 +17,8 @@ ForceFlags			& {\tt D....} & $Heap.ForceFlags$ dd {\tt  [[fs:[30] + 18] + 10]} i
 msvcrt!trigo			& {\tt D....} & $msvcrt!\_CIasin(invalid) \rightarrow$ {\tt al = NtGlobalFlag ?\ a8 :\ 98} \\
 deletefiber			& {\tt D....} & $DeleteFiber(invalid)$ $\rightarrow$ {\tt LastError = ForceFlags ?\ 80000003 :\ 57}\\
 \href{http://corkami.blogspot.com/2010/01/hen-never-laid-and-corn-never-growed.html}
-{gs} 				& {\tt DSE..} & {\tt GS} is eventually reset, on {\bf thread switch}, but stepping will clear it \\
-pop ss			& {\tt .S...} & debuggers can't step right after {\tt pop SS} $\rightarrow$ {\tt TF} is visible via {\tt pushf} if stepping \\
+{gs} 				& {\tt DSE..} & {\tt GS} is eventually reset, on {\bf thread switch} \\
+pop ss			& {\tt .S...} & debuggers can't step right after {\tt pop SS} $\rightarrow$ {\tt TF} is visible via {\tt pushf} \\
 \href{http://corkami.blogspot.com/2010/01/policeman-got-no-gun-u-dont-have-2-run.html}
 {smsw} 			& {\tt .SE..} & $operand$ = just after FPU {\tt ?\ 80010031 :\ 8001003b} \\
 % disabled - can't reproduce
@@ -29,16 +29,16 @@ pop ss			& {\tt .S...} & debuggers can't step right after {\tt pop SS} $\rightar
 \href{http://corkami.blogspot.com/2010/02/and-when-i-start-to-come-undone-stitch.html}
 {int2d}			& {\tt D...X} & trigger $BREAKPOINT$ exception if not under a debugger\\
 \href{http://corkami.blogspot.com/2010/02/and-when-i-start-to-come-undone-stitch.html}
-{InvalidHandle}		& {\tt D...X} & $CloseHandle(invalid) \rightarrow INVALID HANDLE$ exception if debugger is present\\
+{InvalidHandle}		& {\tt D...X} & $CloseHandle(invalid) \rightarrow$ {\tt INVALID HANDLE} exception if debugger is present\\
 \midrule
 Ollydbg (1.1) specific \\
 \midrule
-FPU				& {\tt D....} & Display {\tt FFFFFFFF FFFFFFFF C0/40 3D } as float $\rightarrow$ crash \\
+FPU				& {\tt D....} & Display {\tt FFFFFFFF FFFFFFFF C0/40 3D} as float $\rightarrow$ crash \\
 OdbgStr			& {\tt D....} & $OutputDebugStringA("\%s\%s") \rightarrow$ crash \\ 
 \midrule
 VmWare specific \\
 \midrule
-backdoor			& {\tt D....} & {\tt in 'VMXh', 'VX'} $\rightarrow$ no exception if vmware, else modified {\tt eax} and {\tt ebx} \\
+backdoor			& {\tt D....} & {\tt in 'VMXh', 'VX'} $\rightarrow$ exception if not present, else modified {\tt eax} and {\tt ebx} \\
 sidt				& {\tt D....} & {\tt [operand + 5] == e8} or {\tt ff} if present \\
 sldt				& {\tt D....} & {\tt result != 0} if present \\
 str				& {\tt D....} & {\tt result == 4000h} if present \\
@@ -49,8 +49,7 @@ str				& {\tt D....} & {\tt result == 4000h} if present \\
 
 \newpage
 
-Flags:
-
+Flags
 \begin{description}
 \item[anti $D$ebugger]
 detects if debugger is attached, or if specific tool is used
@@ -64,7 +63,8 @@ provides a way to retrieve current EIP
 relies on exceptions (Structured, Vectored, Unhandled filter)
 \end{description}
 
-reminders
+
+Reminders
 \begin{itemize}
 \item
 TF is used by a debugger for stepping: set TF, an exception will be triggered after next execution is stepped
