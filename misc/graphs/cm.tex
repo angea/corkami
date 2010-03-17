@@ -12,7 +12,7 @@ name 			&  flags & description \\
 \midrule
 IsDbgPresent		& {\tt D.....} & $ PEB.BeingDebugged $ db {\tt [fs:[30] + 2]} == 1\\
 IsDbgPresent2		& {\tt D....A} & $BeingDebugged$ check, via $IsDebuggerPresent$ \\
-NtGlobalFlag			& {\tt D.....} & $ PEB.NtGlobalFlag $ dd {\tt [fs:[30] + 68]} has 70 set \\
+NtGlobalFlag			& {\tt D.....} & $ PEB.NtGlobalFlag $ dd {\tt [fs:[30] + 68]} has 70\footnotemark set \\
 HeapFlags			& {\tt D.....} & $Heap.Flags$ dd {\tt [[fs:[30] + 18] + C] == 2} \\
 ForceFlags			& {\tt D.....} & $Heap.ForceFlags$ dd {\tt  [[fs:[30] + 18] + 10]} is not null \\
 msvcrt!trigo			& {\tt D....A} & $msvcrt!\_CIasin(invalid) \rightarrow$ {\tt al = NtGlobalFlag ?\ a8 :\ 98} \\
@@ -33,7 +33,7 @@ pop ss			& {\tt .S....} & debuggers can't step right after {\tt pop SS} $\righta
 {InvalidHandle}		& {\tt D...XA} & $CloseHandle(invalid) \rightarrow$ {\tt INVALID HANDLE} exception if debugger is present\\
 ChkRemoteDbg		& {\tt D....A} & $CheckRemoteDebuggerPresent(CurrentProcess, \&result)$ = 1 :\ 0\\
 NtQueryInfo			& {\tt D....A} & $NtQueryInformationProcess(..., ProcessDebugPort = 7, .....)$ \\
-Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$, \ldots\\
+Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$\footnotemark, \ldots\\
 Timing API			& {\tt .S...A} & comparison of two $GetTickCount$, $GetSystemTime$, $QueryPerformanceCounter$, \ldots \\
 \midrule
 \multicolumn{3}{l}{Ollydbg (1.1) specific} \\
@@ -60,7 +60,7 @@ hwbp				& {\tt ....X.} & set or detects hardware breakpoint via $Context.dr0-4/6
 
 \newpage
 
-Flags
+{\large Flags}
 \begin{description}
 \item[anti $D$ebugger]
 detects if debugger is attached, or if specific tool is used
@@ -77,7 +77,7 @@ relies on an API call
 \end{description}
 
 
-Reminders
+{\large Reminders}
 \begin{itemize}
 \item
 TF is used by a debugger for stepping: set TF, an exception will be triggered after next execution is stepped
@@ -88,7 +88,7 @@ the PEB is accessible directly ({\tt fs:[30]}) or via $TEB.EnvironmentPointer$ (
 \item
 $LastError$ is accessible via $TEB.LastErrorValue$ ({\tt [fs:[18] + 34]}) $\rightarrow GetLastError$ is inlinable
 \end{itemize}
-
+\footnotetext{$70 = FLG\_HEAP\_ENABLE\_TAIL\_CHECK or FLG\_HEAP\_ENABLE\_FREE\_CHECK or FLG\_HEAP\_VALIDATE\_PARAMETERS$}
+\footnotetext{$dword [7FFE0000] * dword[7FFE0004]) >> 24$}
 \sig
-%\footnotetext{D = anti-debugger, S = anti-stepping, E = anti-emulator }
 \end{document}

@@ -111,7 +111,7 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.1813021"
+     inkscape:zoom="3.1391852"
      inkscape:cx="155.49404"
      inkscape:cy="22.004901"
      inkscape:document-units="px"
@@ -119,8 +119,8 @@
      showgrid="false"
      showguides="false"
      inkscape:snap-global="true"
-     inkscape:window-width="1280"
-     inkscape:window-height="927"
+     inkscape:window-width="1024"
+     inkscape:window-height="581"
      inkscape:window-x="-4"
      inkscape:window-y="-4"
      inkscape:window-maximized="1"
@@ -905,7 +905,7 @@
        sodipodi:nodetypes="cc" />
     <a
        id="a3007"
-       xlink:href="http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/pe-headers.svg">
+       xlink:href="http://corkami.googlecode.com/files/pe-headers.pdf">
       <text
          id="text6335"
          y="1028.8519"
@@ -926,7 +926,7 @@
            id="tspan6339"
            y="1043.8519"
            x="23.162506"
-           sodipodi:role="line">http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/pe-headers.svg</tspan></text>
+           sodipodi:role="line">http://corkami.googlecode.com/files/pe-headers.pdf</tspan></text>
     </a>
     <text
        xml:space="preserve"
@@ -1090,7 +1090,7 @@
        id="path4291" />
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 27.452863,1021.7698 -7.642977,0 0,25.7689 292.343894,0 0,-9.923"
+       d="m 27.452863,1021.7698 -7.642977,0 0,25.7689 187.388234,0 0,-9.923"
        id="path3838"
        sodipodi:nodetypes="ccccc" />
   </g>
