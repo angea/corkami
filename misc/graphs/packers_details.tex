@@ -1,0 +1,96 @@
+\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0}\\ 
+\url{http://corkami.googlecode.com/files/packers_details.pdf}\ 
+\href{https://corkami.googlecode.com/svn/trunk/misc/graphs/packers_details.tex}{source}\end{flushright}}
+\newcommand{\ra}{$\rightarrow$\ }
+
+\documentclass{report}
+\usepackage[hmargin=1cm,vmargin=1cm]{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}	% better looking tables
+
+\begin{document}
+\begin{center}
+DRAFT detailed packers' features DRAFT 
+\end{center}
+
+\begin{tabular}{ll}
+
+\midrule
+{\bf compression} \\
+\midrule
+section merging 	& merge all sections (just one entry in the section table) \\
+imports 		& imports are stored and loaded with a more compact import table format \\
+imports by hash 	& exports are parsed until it matches a specific hash, instead of a $GetProcAddress$ call \\
+call optimisation 	& turn relative operands of jumps and calls into absolute \ra better compression \\
+resources		& compresses resources, except the main icon \\
+
+\midrule
+{\bf protection} \\
+\midrule
+token check          & presence check to allow the program to run: {\tt dongle, CD/DVD, key, file, network\ldots} \\
+fingerprinting	& token is specific to a hardware element: {\tt disk/OS/CPU/MAC/\ldots} \\
+demo mode          & inclusion of a demo binary/mode that is executed when token is absent or not enough privileged \\
+integrity		& check the contents are unmodified with checksum or hash \\
+
+\toprule
+{\bf anti-analysis} \\
+\midrule
+junk			& insertion of dummy code between relevant opcodes \\
+jumps			& insertion of jumps to makes analysis visually harder\\
+polymorphism	& different but equivalent code \ra 2 packed files of the same source are different \\
+self generation	& packer stub generates polymorphic code on the fly \ra same file executes differently \\
+virtualization	& virtualizes (part of) packer stub code \ra harder analysis \\
+stack			& strings are pushed (and decrypted) on the stack before use to avoid obvious references \\
+faking			& add fake code similar to known packers to fool identifcation \\
+thread		& use several parallel threads to make analysis harder \\
+
+\midrule
+{\bf anti-debugging} \\
+\midrule
+detect 		& detect the presence of an attached debugger: {\tt IsDebuggerPresent} \\
+prevent		& prevent a debugger to attach to the target itself or stay attached \\
+thread		& spawn a monitoring thread to detect tampering, breakpoints, \ldots\\
+artifacts		& detects a debugger by its artifact: {\tt window title, device driver, exports, \ldots} \\
+limitation		& prevent the use of a tool via a specific limitation \\
+exploit		& prevent the use of a tool via a specific vulnerability \\
+backdoor		& detect or crash a debugger via a specific backdoor \\
+self-debugging	& debug itself to prevent another debugger to be attached \\
+int1			& hook interruption 1 \ra debuggers stop working \\
+
+\midrule
+{\bf anti-dumping} \\
+\midrule
+tampering		& eras or corrupt specific file parts to prevent rebuilding (header, packer stub,\ldots) \\
+imports 		& add obfuscation between imports calls and APIs (obfuscation, virtualization, stealing, \ldots)\\
+on the fly		& API address is resolved before each use to prevent complete dumping \\
+API hooking		& alter API behavior: {\tt redirect benign API to a critical one} \ra dump not working \\
+inlining		& copy locally the whole content of API code \ra no more 'import calls'\\
+relocate		& relocate API code in separate buffer \ra calls don't lead to imported DLLs\\
+byte stealing	& move the first bytes of the original code elsewhere \ra harder rebuilding and bypasses breakpoints\\
+code splicing 	& blocks of code are encrypted individually, and decrypted temporarily only upon execution \\
+nanomites		& specific flow opcodes are encrypted individually and decrypted only after use \ra incorrect dump\\
+virtualization	& virtualizes (part of) original codes, API start\ldots \ra dump not working \\
+
+\midrule
+{\bf anti-emulation} \\
+\midrule
+undoc			& use of rare or undocumented opcodes to block non-exhaustive emulators \\
+API			& unusual APIs are called to block non-exhaustive emulators (anti-virus)\\
+loop			& extra loops are added to make time-constraint emulators give up \\
+\midrule
+{\bf bundlers} \\
+\midrule
+drop			& original file is written to disk then executed \\
+injection		& original file is injected in existing process \ra no new file on disk + higher privileges \\
+hooking		& file handling APIs are modified to make embedded files usable like external ones\\
+
+\bottomrule
+
+\end{tabular}
+
+
+%;    metamorphism        replacing opcodes with equivalent ones (real polymorphism) inc al <> add al, 1
+%;    endomorphism       replacing operands, like swapping registers. Ex: replacing eax with another reg in mov eax, [mem] cmp eax, value  jnz exit
+%;    oligomorphism
+\sig
+\end{document}
