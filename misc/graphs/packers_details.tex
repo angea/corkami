@@ -4,7 +4,7 @@
 \newcommand{\ra}{$\rightarrow$\ }
 
 \documentclass{report}
-\usepackage[hmargin=1cm,vmargin=1cm]{geometry}
+\usepackage[hmargin=1cm,vmargin=.5cm]{geometry}
 \usepackage{hyperref}
 \usepackage{booktabs}	% better looking tables
 
@@ -22,7 +22,7 @@ section merging 	& merge all sections (just one entry in the section table) \\
 imports 		& imports are stored and loaded with a more compact import table format \\
 imports by hash 	& exports are parsed until it matches a specific hash, instead of a $GetProcAddress$ call \\
 call optimisation 	& turn relative operands of jumps and calls into absolute \ra better compression \\
-resources		& compresses resources, except the main icon \\
+resources		& compresses resources, avoiding critical ones (main icon, manifest,\ldots) \\
 
 \midrule
 {\bf protection} \\
@@ -35,20 +35,22 @@ integrity		& check the contents are unmodified with checksum or hash \\
 \toprule
 {\bf anti-analysis} \\
 \midrule
+overlap		& jumping after the first byte of an instruction \\
 junk			& insertion of dummy code between relevant opcodes \\
 jumps			& insertion of jumps to makes analysis visually harder\\
 polymorphism	& different but equivalent code \ra 2 packed files of the same source are different \\
 self generation	& packer stub generates polymorphic code on the fly \ra same file executes differently \\
 virtualization	& virtualizes (part of) packer stub code \ra harder analysis \\
-stack			& strings are pushed (and decrypted) on the stack before use to avoid obvious references \\
+stack			& strings are built and decrypted before use, then discarded \ra no avoid obvious references\\
 faking			& add fake code similar to known packers to fool identifcation \\
 thread		& use several parallel threads to make analysis harder \\
-
+timing			& comparing time between two points to detect unusual execution \\
 \midrule
-{\bf anti-debugging} \\
+{\bf anti-debugging} & anti-tools, by extension \\
 \midrule
 detect 		& detect the presence of an attached debugger: {\tt IsDebuggerPresent} \\
 prevent		& prevent a debugger to attach to the target itself or stay attached \\
+nuisance		& make debugger session difficult: {\tt BlockInput, slow down\ldots}\\
 thread		& spawn a monitoring thread to detect tampering, breakpoints, \ldots\\
 artifacts		& detects a debugger by its artifact: {\tt window title, device driver, exports, \ldots} \\
 limitation		& prevent the use of a tool via a specific limitation \\
@@ -56,7 +58,7 @@ exploit		& prevent the use of a tool via a specific vulnerability \\
 backdoor		& detect or crash a debugger via a specific backdoor \\
 self-debugging	& debug itself to prevent another debugger to be attached \\
 int1			& hook interruption 1 \ra debuggers stop working \\
-
+fake			& add code of known packer to fool identification \\
 \midrule
 {\bf anti-dumping} \\
 \midrule
@@ -74,6 +76,7 @@ virtualization	& virtualizes (part of) original codes, API start\ldots \ra dump 
 \midrule
 {\bf anti-emulation} \\
 \midrule
+opcodes		& using different opcodes sets (FPU, MMX, SSE) to block emulators\\
 undoc			& use of rare or undocumented opcodes to block non-exhaustive emulators \\
 API			& unusual APIs are called to block non-exhaustive emulators (anti-virus)\\
 loop			& extra loops are added to make time-constraint emulators give up \\
