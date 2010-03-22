@@ -2,7 +2,6 @@
 
 %include '..\..\standard_hdr.asm'
 
-
 EntryPoint:
     call trig
 
@@ -14,8 +13,10 @@ EntryPoint:
 
     call popss
     call outputdbg
-;    call ntqueryinfo
+    call ntqueryinfo
     call checkremote
+    call hidefromdbg
+    ; call opencsr ; not working ?
 
     jmp good
 
@@ -94,21 +95,34 @@ heapflags:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
-    ;call CsrGetProcessId
-    ;push eax
-    ;push FALSE
-    ;push PROCESS_QUERY_INFORMATION
-    ;call OpenProcess
-    ;cmp eax, STATUS_ACCESS_DENIED ; equ 0C0000022h
-    ;test eax, eax
-    ;jnz bad
-    ;retn
+STATUS_ACCESS_DENIED equ 0C0000022h
 
-;push 0
-;push -1
-;push ThreadHideFromDebugger ; equ 11h
-; push -2
-;call NtSetInformationThread
+opencsr:
+    ; not working correctly
+    call CsrGetProcessId
+    push eax
+    push 0;FALSE
+    push PROCESS_QUERY_INFORMATION
+    call OpenProcess
+    cmp eax, STATUS_ACCESS_DENIED ; equ 0C0000022h
+    jnz bad
+    retn
+    jmp good
+;%IMPORT ntdll.dll!CsrGetProcessId
+;%IMPORT kernel32.dll!OpenProcess
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+
+ThreadhideFromDebugger equ 11h
+hidefromdbg:
+    push 0
+    push -1
+    push ThreadhideFromDebugger
+    push -2
+    call NtSetInformationThread
+    retn
+;%IMPORT ntdll.dll!NtSetInformationThread
 
 ;kernel32.dll!SetUnhandledExceptionFilter
 
@@ -161,18 +175,19 @@ _ErrorCheck equ 123456h
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 
+ProcessDebugPort equ 7
 ntqueryinfo:
     push 0
     push 4
     push isdebugged
-    push 7 ;ProcessDebugPort
+    push ProcessDebugPort
     push -1
     call NtQueryInformationProcess
     test eax, eax
     jnz bad
     cmp dword [isdebugged], 0
     jnz bad
-
+    retn
 ;%IMPORT ntdll.dll!NtQueryInformationProcess
 
 isdebugged dd 312452
@@ -180,7 +195,7 @@ isdebugged dd 312452
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 
-checkremote:    
+checkremote:
     push isdebugged
     push -1 ; GetCurrentProcess
     call CheckRemoteDebuggerPresent
