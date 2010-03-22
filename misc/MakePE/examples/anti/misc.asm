@@ -17,6 +17,7 @@ EntryPoint:
     call checkremote
     call hidefromdbg
     ; call opencsr ; not working ?
+;    call unhandled ; buggy
 
     jmp good
 
@@ -206,6 +207,26 @@ checkremote:
 ;%IMPORT kernel32.dll!CheckRemoteDebuggerPresent
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+unhandled:
+    push filter
+    call SetUnhandledExceptionFilter
+    xor eax, eax
+    mov eax, dword [eax] ; trigger exception
+
+    jmp bad
+
+filter:
+    jmp good
+    ; incorrect
+    mov eax, [esp + exceptionHandler.pContext + 4]
+    mov dword [eax + CONTEXT.regEip], next
+    mov eax, ExceptionContinueExecution
+    retn
+
+next:
+    retn
+;%IMPORT kernel32.dll!SetUnhandledExceptionFilter
 
 %include '..\goodbad.inc'
 
