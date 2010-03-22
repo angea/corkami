@@ -1,4 +1,6 @@
 \newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0}\\ \url{http://corkami.googlecode.com/files/cm.pdf}\ \href{https://corkami.googlecode.com/svn/trunk/misc/graphs/cm.tex}{source}\end{flushright}}
+\newcommand{\ra}{$\rightarrow$\ }
+
 \documentclass{report}
 \usepackage{hyperref}
 \usepackage[hmargin=1cm,vmargin=1cm]{geometry}
@@ -31,10 +33,11 @@ pop ss			& {\tt .S....} & debuggers can't step right after {\tt pop SS} $\righta
 {int 2d}			& {\tt D...X.} & triggers $BREAKPOINT$ exception if not under a debugger\\
 \href{http://corkami.blogspot.com/2010/02/and-when-i-start-to-come-undone-stitch.html}
 {InvalidHandle}		& {\tt D...XA} & $CloseHandle(invalid) \rightarrow$ {\tt INVALID HANDLE} exception if debugger is present\\
-ChkRemoteDbg		& {\tt D....A} & $CheckRemoteDebuggerPresent(CurrentProcess, \&result)$ = 1 :\ 0\\
-NtQueryInfo			& {\tt D....A} & $NtQueryInformationProcess(..., ProcessDebugPort = 7, .....)$ \\
+ChkRemoteDbg		& {\tt D....A} & {\small $CheckRemoteDebuggerPresent$}$(CurrentProcess, \&result)$ = 1 :\ 0\\
+NtQueryInfo			& {\tt D....A} & {\small $NtQueryInformationProcess$}$(-1, ProcessDebugPort = 7, var, .....)$ \ra $[var] = present ? -1:0$ \\
+HideThread			& {\tt D....A} & {\small $NtSetInformationThread$}$(-2, ThreadhideFromDebugger = 11, -1, 0)$ \ra not responding \\
 Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$\footnotemark, \ldots\\
-Timing API			& {\tt .S...A} & comparison of two $GetTickCount$, $GetSystemTime$, $QueryPerformanceCounter$, \ldots \\
+Timing API			& {\tt .S...A} & comparison of two {\small $GetTickCount, GetSystemTime, QueryPerformanceCounter$}, \ldots \\
 \midrule
 \multicolumn{3}{l}{Ollydbg (1.1) specific} \\
 \midrule

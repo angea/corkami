@@ -41,7 +41,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.44214815"
+     inkscape:zoom="0.49456085"
      inkscape:cx="526.18109"
      inkscape:cy="372.04724"
      inkscape:document-units="px"
@@ -60,7 +60,7 @@
      inkscape:snap-bbox-edge-midpoints="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:snap-global="true"
+     inkscape:snap-global="false"
      inkscape:snap-nodes="true"
      inkscape:snap-center="true"
      inkscape:window-width="1024"
@@ -177,16 +177,16 @@
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        x="165.72162"
-       y="703.56604"
+       y="707.56604"
        id="text2824-1-0-1"><tspan
          sodipodi:role="line"
          x="165.72162"
-         y="703.56604"
+         y="707.56604"
          id="tspan4959-2"
-         style="font-size:10px">original entry point</tspan><tspan
+         style="font-size:10px">jump to entry point</tspan><tspan
          sodipodi:role="line"
          x="165.72162"
-         y="716.06604"
+         y="720.06604"
          id="tspan2828-4-4-7" /></text>
     <path
        style="fill:#808080;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
@@ -267,13 +267,13 @@
        y="407.56604"
        id="text2824-6"><tspan
          sodipodi:role="line"
-         id="tspan2826-1"
          x="505.72162"
-         y="407.56604">decryption (of next stage)</tspan><tspan
+         y="407.56604"
+         id="tspan2828-8">decryption of main body</tspan><tspan
          sodipodi:role="line"
          x="505.72162"
-         y="420.06604"
-         id="tspan2828-8">(MANY layers,add/rol/xor)</tspan></text>
+         y="407.56604"
+         id="tspan3942">MANY layers,add/rol/xor)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -285,25 +285,6 @@
          y="467.56604"
          style="font-size:10px"
          id="tspan2888-9">decompression</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="505.72162"
-       y="527.56604"
-       id="text2824-1-0-5"><tspan
-         sodipodi:role="line"
-         id="tspan2826-7-9-4"
-         x="505.72162"
-         y="527.56604">2nd stageimports loading</tspan><tspan
-         sodipodi:role="line"
-         x="505.72162"
-         y="536.40729"
-         id="tspan4959-3"
-         style="font-size:6px">obfuscation</tspan><tspan
-         sodipodi:role="line"
-         x="505.72162"
-         y="543.90729"
-         id="tspan2828-4-4-1" /></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
        d="m 505.54967,452.52289 0,-28.79239"
@@ -311,7 +292,7 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:#808080;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
-       d="m 505.54967,516.52289 0,-29.14866"
+       d="m 505.54967,506.52289 0,-29.14866"
        id="path2894-4-3"
        sodipodi:nodetypes="cc" />
     <path
@@ -716,7 +697,7 @@
          sodipodi:role="line"
          id="tspan2826-7-9-4-8"
          x="505.72162"
-         y="527.56604">2nd stageimports loading</tspan><tspan
+         y="527.56604">2imports loading</tspan><tspan
          sodipodi:role="line"
          x="505.72162"
          y="536.40729"
@@ -728,8 +709,9 @@
          id="tspan2828-4-4-1-2" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 386.44407,376.52236 0,116.40124 11.44998,0"
-       id="path3079" />
+       d="m 397.89405,492.9236 -11.44998,0 0,-116.40124 12.01829,0"
+       id="path3079"
+       sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 397.89405,502.52236 -11.44998,0 0,116.40124 11.49732,0"
@@ -740,12 +722,9 @@
        id="path3079-7-9" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 77.89405,520.89365 -11.44998,0 0,154.06237 11.49732,0"
-       id="path3079-7-4" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 66.44407,828.92363 0,-132.93539 11.44998,0"
-       id="path3079-7-9-3" />
+       d="m 77.89405,465.62067 -11.44998,0 0,249.33536 11.49732,0"
+       id="path3079-7-4"
+       sodipodi:nodetypes="cccc" />
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -764,15 +743,15 @@
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        x="33.38282"
-       y="737.99316"
+       y="697.99316"
        id="text3178"><tspan
          sodipodi:role="line"
          id="tspan3180"
          x="33.38282"
-         y="737.99316">original</tspan><tspan
+         y="697.99316">original</tspan><tspan
          sodipodi:role="line"
          x="33.38282"
-         y="750.49316"
+         y="710.49316"
          id="tspan3182">code</tspan></text>
     <text
        xml:space="preserve"
@@ -782,31 +761,41 @@
        id="text3200"
        transform="translate(0,308.2677)"><tspan
          sodipodi:role="line"
-         id="tspan3202"
          x="346.87558"
-         y="252.77219">restoration</tspan></text>
+         y="252.77219"
+         id="tspan3934">main</tspan><tspan
+         sodipodi:role="line"
+         x="346.87558"
+         y="252.77219"
+         id="tspan3938">body</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="332.63434"
-       y="125.61838"
-       id="text3204"
-       transform="translate(0,308.2677)"><tspan
+       x="352.63434"
+       y="433.88608"
+       id="text3204"><tspan
          sodipodi:role="line"
          id="tspan3206"
-         x="332.63434"
-         y="125.61838">entry</tspan></text>
+         x="352.63434"
+         y="433.88608">trapped</tspan><tspan
+         sodipodi:role="line"
+         x="352.63434"
+         y="446.38608"
+         id="tspan3065">entrance</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="329.58267"
-       y="391.11551"
-       id="text3208"
-       transform="translate(0,308.2677)"><tspan
+       x="353.58267"
+       y="675.38318"
+       id="text3208"><tspan
          sodipodi:role="line"
          id="tspan3210"
-         x="329.58267"
-         y="391.11551">original code</tspan></text>
+         x="353.58267"
+         y="675.38318">original</tspan><tspan
+         sodipodi:role="line"
+         x="353.58267"
+         y="687.88318"
+         id="tspan3063">code</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -847,5 +836,96 @@
        d="m 25.47137,1014.9544 -7.64298,0 0,25.7689 208.34389,0 0,-9.923"
        id="path3838"
        sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="825.72162"
+       y="467.56604"
+       id="text2824-6-2-4"><tspan
+         sodipodi:role="line"
+         id="tspan2826-1-8-0"
+         x="825.72162"
+         y="467.56604">decryption</tspan><tspan
+         sodipodi:role="line"
+         x="825.72162"
+         y="480.06604"
+         id="tspan2828-8-6-9">(one layer,add/rol/xor)</tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
+       d="m 825.54967,512.52289 0,-28.79239"
+       id="path2894-2-0-4"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="825.72162"
+       y="407.56604"
+       id="text2824-6-2-4-2"><tspan
+         sodipodi:role="line"
+         id="tspan2826-1-8-0-4"
+         x="825.72162"
+         y="407.56604">decryption</tspan><tspan
+         sodipodi:role="line"
+         x="825.72162"
+         y="420.06604"
+         id="tspan2828-8-6-9-5">(one layer,add/rol/xor)</tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
+       d="m 825.54967,452.52289 0,-28.79239"
+       id="path2894-2-0-4-5"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="825.72162"
+       y="347.56604"
+       id="text2824-6-2-4-2-1"><tspan
+         sodipodi:role="line"
+         id="tspan2826-1-8-0-4-5"
+         x="825.72162"
+         y="347.56604">decryption</tspan><tspan
+         sodipodi:role="line"
+         x="825.72162"
+         y="360.06604"
+         id="tspan2828-8-6-9-5-2">(one layer,add/rol/xor)</tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
+       d="m 825.54967,392.52289 0,-28.79239"
+       id="path2894-2-0-4-5-7"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="165.72162"
+       y="473.56604"
+       id="text2824-2"><tspan
+         sodipodi:role="line"
+         x="165.72162"
+         y="473.56604"
+         id="tspan2828-2">allocation</tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
+       d="m 165.54967,512.52289 0,-28.79239"
+       id="path2894-21"
+       sodipodi:nodetypes="cc" />
+    <g
+       id="g3972"
+       transform="translate(0,40)">
+      <path
+         sodipodi:nodetypes="ccc"
+         id="path3079-7-9-3"
+         d="m 66.44407,724.08266 0,-42.04163 11.44998,0"
+         style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         id="path3079-7-9-3-6"
+         d="m 66.44407,761.62852 0,-37.00126"
+         style="fill:none;stroke:#000000;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.99999999, 5.99999999;stroke-dashoffset:0" />
+    </g>
+    <path
+       style="fill:#808080;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Sstart)"
+       d="m 165.54967,752.52289 0,-29.14866"
+       id="path2894-4-6-1"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
