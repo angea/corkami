@@ -34,10 +34,18 @@ pop ss			& {\tt .S....} & debuggers can't step right after {\tt pop SS} $\righta
 \href{http://corkami.blogspot.com/2010/02/and-when-i-start-to-come-undone-stitch.html}
 {InvalidHandle}		& {\tt D...XA} & $CloseHandle(invalid) \rightarrow$ {\tt INVALID HANDLE} exception if debugger is present\\
 ChkRemoteDbg		& {\tt D....A} & {\small $CheckRemoteDebuggerPresent$}$(CurrentProcess, \&result)$ = 1 :\ 0\\
-NtQueryInfo			& {\tt D....A} & {\small $NtQueryInformationProcess$}$(-1, ProcessDebugPort = 7, var, .....)$ \ra $[var] = present ? -1:0$ \\
-HideThread			& {\tt D....A} & {\small $NtSetInformationThread$}$(-2, ThreadhideFromDebugger = 11, -1, 0)$ \ra not responding \\
+NtQueryInfo			& {\tt D....A} & {\small $NtQueryInformationProcess$}$(-1,$ {\small $ProcessDebugPort =$}$ 7, var, .....)$ \ra $[var] = present ? -1:0$ \\
+HideThread			& {\tt D....A} & {\small $NtSetInformationThread$}$(-2, ${\small $ThreadhideFromDebugger$}$ = 11, -1, 0)$ \ra not responding \\
 Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$\footnotemark, \ldots\\
 Timing API			& {\tt .S...A} & comparison of two {\small $GetTickCount, GetSystemTime, QueryPerformanceCounter$}, \ldots \\
+\midrule
+\multicolumn{3}{l}{Exceptions tricks (in the exception handler)} \\
+\midrule
+jmp				& {\tt ....X.} & change resume address via $Context.regEIP$ (Context{\tt +B8})\\
+step				& {\tt ....X.} & step next instruction and re-trigger via setting $TF$ in $Context.EFlags$ (Context{\tt +C0})\\
+hwbp				& {\tt ....X.} & set or detects hardware breakpoint via $Context.dr*$ ({\tt [+04;+18]} in Context )\\
+higher			& {\tt ....X.} & overwrite higher handler and trigger exception ({\tt [esp+18]})\\
+return				& {\tt ....X.} & overwrite return address in stack \ra context re-loading is skipped ({\tt [esp+24]})\\
 \midrule
 \multicolumn{3}{l}{Ollydbg (1.1) specific} \\
 \midrule
@@ -50,12 +58,6 @@ backdoor			& {\tt D.....} & {\tt in 'VMXh', 'VX'} $\rightarrow$ exception if not
 sidt				& {\tt D.....} & {\tt [operand + 5] == e8} or {\tt ff} if present \\
 sldt				& {\tt D.....} & {\tt result != 0} if present \\
 str				& {\tt D.....} & {\tt result == 4000h} if present \\
-\midrule
-\multicolumn{3}{l}{Exceptions tricks (in the exception handler)} \\
-\midrule
-jmp				& {\tt ....X.} & change resume address via $Context.regEIP$ (off. {\tt B8})\\
-step				& {\tt ....X.} & step next instruction and re-trigger via setting $TF$ in $Context.EFlags$ (off. {\tt C0})\\
-hwbp				& {\tt ....X.} & set or detects hardware breakpoint via $Context.dr0-4/6-7$ (off. {\tt 04-18})\\
 \bottomrule
 \end{tabular}
 
@@ -91,7 +93,12 @@ the PEB is accessible directly ({\tt fs:[30]}) or via $TEB.EnvironmentPointer$ (
 \item
 $LastError$ is accessible via $TEB.LastErrorValue$ ({\tt [fs:[18] + 34]}) $\rightarrow GetLastError$ is inlinable
 \end{itemize}
-\footnotetext{$70 = FLG\_HEAP\_ENABLE\_TAIL\_CHECK or FLG\_HEAP\_ENABLE\_FREE\_CHECK or FLG\_HEAP\_VALIDATE\_PARAMETERS$}
-\footnotetext{$dword [7FFE0000] * dword[7FFE0004]) >> 24$}
+{\large Notes}
+\begin{enumerate}
+\item
+$70 = ${\footnotesize $FLG\_HEAP\_ENABLE\_TAIL\_CHECK$} $|$ {\footnotesize $FLG\_HEAP\_ENABLE\_FREE\_CHECK$} $|$ {\footnotesize  $FLG\_HEAP\_VALIDATE\_PARAMETERS$}
+\item
+$dword [$7FFE0000$] * dword[$7FFE0004$]) >> 24$
+\end{enumerate}
 \sig
 \end{document}
