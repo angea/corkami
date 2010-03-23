@@ -16,7 +16,7 @@ EntryPoint:
     call ntqueryinfo
     call checkremote
     call hidefromdbg
-    ; call opencsr ; not working ?
+    call opencsr
 ;    call unhandled ; buggy
 
     jmp good
@@ -96,19 +96,25 @@ heapflags:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
-STATUS_ACCESS_DENIED equ 0C0000022h
+
+ERROR_ACCESS_DENIED equ 000000005h
+FALSE equ 0
+PROCESS_ALL_ACCESS equ 1f0fffh
 
 opencsr:
-    ; not working correctly
+    ; not working all the time, the detected priviledge might not be acquired if execution just started
     call CsrGetProcessId
     push eax
-    push 0;FALSE
-    push PROCESS_QUERY_INFORMATION
+    push FALSE
+    push PROCESS_ALL_ACCESS
     call OpenProcess
-    cmp eax, STATUS_ACCESS_DENIED ; equ 0C0000022h
+    test eax, eax          ; eax will be null if can't open, which means no SeDebugPrivilege
+    jnz bad
+    call GetLastError
+    cmp eax, ERROR_ACCESS_DENIED
     jnz bad
     retn
-    jmp good
+
 ;%IMPORT ntdll.dll!CsrGetProcessId
 ;%IMPORT kernel32.dll!OpenProcess
 

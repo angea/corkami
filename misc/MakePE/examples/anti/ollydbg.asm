@@ -3,11 +3,18 @@
 %include '..\..\onesec.hdr'
 
 EntryPoint:
+    call checkesi
+
     call fpucrash
     call delayed_fpucrash
     call DbgString
     jmp good
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+checkesi:
+    cmp esi, -1
+    jz bad
+    retn
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 times 100 db 90h
