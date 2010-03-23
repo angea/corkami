@@ -37,7 +37,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe
 
-beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe
+beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
+    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -301,6 +302,14 @@ anti\misc.exe: anti\misc.asm
 	$(makepe) anti\misc.asm
 anti\ollydbg.exe: anti\ollydbg.asm
 	$(makepe) anti\ollydbg.asm
+anti\exception_skip.exe: anti\exception_skip.asm
+	$(makepe) anti\exception_skip.asm
+anti\exception_overwrite.exe: anti\exception_overwrite.asm
+	$(makepe) anti\exception_overwrite.asm
+anti\hwbp.exe: anti\hwbp.asm
+	$(makepe) anti\hwbp.asm
+anti\tf_step.exe: anti\tf_step.asm
+	$(makepe) anti\tf_step.asm
 
 asm\apiloop.exe: asm\apiloop.asm
 	$(makepe) asm\apiloop.asm
