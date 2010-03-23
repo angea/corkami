@@ -50,6 +50,7 @@ return				& {\tt ....X.} & overwrite return address in stack \ra context re-load
 \midrule
 \multicolumn{3}{l}{Ollydbg (1.1) specific} \\
 \midrule
+esi				& {\tt D.....} & esi = -1 on startup under ollydbg, not in standard) \\
 FPU				& {\tt D.....} & Display {\tt FFFFFFFF FFFFFFFF C0/40 3D} as float $\rightarrow$ crash \\
 OdbgStr			& {\tt D....A} & $OutputDebugStringA("\%s\%s") \rightarrow$ crash \\ 
 \midrule
