@@ -26,7 +26,8 @@ first_time:
     mov dword [edx + CONTEXT.iDr7], 000000001h ; DR7 to 1 to activate the execution breakpoint
     ; skip the int3 and return correctly
     add dword [edx + CONTEXT.regEip], _resume - trigger
-    xor eax, eax
+
+    mov eax, ExceptionContinueExecution
     retn
 
 counter db 0
