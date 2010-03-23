@@ -36,6 +36,7 @@ pop ss			& {\tt .S....} & debuggers can't step right after {\tt pop SS} $\righta
 ChkRemoteDbg		& {\tt D....A} & {\small $CheckRemoteDebuggerPresent$}$(CurrentProcess, \&result)$ = 1 :\ 0\\
 NtQueryInfo			& {\tt D....A} & {\small $NtQueryInformationProcess$}$(-1,$ {\small $ProcessDebugPort =$}$ 7, var, .....)$ \ra $[var] = present ? -1:0$ \\
 HideThread			& {\tt D....A} & {\small $NtSetInformationThread$}$(-2, ${\small $ThreadhideFromDebugger$}$ = 11, -1, 0)$ \ra not responding \\
+csr				& {\tt D....A} & {\small $OpenProcess$}$(\ldots, 0, ${\small $CsrGetProcessId$\footnotemark}$())$ \ra no error if {\small SeDebugPrivilege} acquired \\
 Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$\footnotemark, \ldots\\
 Timing API			& {\tt .S...A} & comparison of two {\small $GetTickCount, GetSystemTime, QueryPerformanceCounter$}, \ldots \\
 \midrule
@@ -98,7 +99,9 @@ $LastError$ is accessible via $TEB.LastErrorValue$ ({\tt [fs:[18] + 34]}) $\righ
 \item
 $70 = ${\footnotesize $FLG\_HEAP\_ENABLE\_TAIL\_CHECK$} $|$ {\footnotesize $FLG\_HEAP\_ENABLE\_FREE\_CHECK$} $|$ {\footnotesize  $FLG\_HEAP\_VALIDATE\_PARAMETERS$}
 \item
-$dword [$7FFE0000$] * dword[$7FFE0004$]) >> 24$
+$dword[$7C980380$]$ (inlineable)
+\item
+$dword [$7FFE0000$] * dword[$7FFE0004$]) >> 24$ (inlineable)
 \end{enumerate}
 \sig
 \end{document}
