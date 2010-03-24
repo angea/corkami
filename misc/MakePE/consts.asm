@@ -191,12 +191,12 @@ endstruc
 EXCEPTION_MAXIMUM_PARAMETERS equ 15
 
 struc EXCEPTION_RECORD
-    ExceptionCode         resd 1
-    ExceptionFlags        resd 1
-    pExceptionRecord      resd 1
-    ExceptionAddress      resd 1
-    NumberParameters      resd 1
-    ExceptionInformation  resd EXCEPTION_MAXIMUM_PARAMETERS
+    .ExceptionCode         resd 1
+    .ExceptionFlags        resd 1
+    .pExceptionRecord      resd 1
+    .ExceptionAddress      resd 1
+    .NumberParameters      resd 1
+    .ExceptionInformation  resd EXCEPTION_MAXIMUM_PARAMETERS
 endstruc
 
 struc EXCEPTION_REGISTRATION_RECORD
@@ -507,4 +507,40 @@ FLG_HEAP_ENABLE_FREE_CHECK equ 010h
 FLG_HEAP_ENABLE_TAIL_CHECK equ 020h
 FLG_HEAP_VALIDATE_PARAMETERS equ 040h
 
+struc PEB_LDR_DATA
+     .Length                            resd 1
+     .Initialized                       resd 1
+     .SsHandle                          resd 1
+     .InLoadOrderModuleList             resd 2
+     .InMemoryOrderModuleList           resd 2
+     .InInitializationOrderModuleList   resd 2
+     .EntryInProgress                   resd 1
+endstruc
+
+struc LDR_MODULE
+    .InLoadOrderModuleList               resd 2
+    .InMemoryOrderModuleList             resd 2
+    .InInitializationOrderModuleList     resd 2
+    .BaseAddress                         resd 1
+    .EntryPoint                          resd 1
+    .SizeOfImage                         resd 1
+    .FullDllName                         resd 1
+    .BaseDllName                         resd 1
+    .Flags                               resd 1
+    .LoadCount                           resd 1
+    .TlsIndex                            resd 1
+    .HashTableEntry                      resd 1
+    .TimeDateStamp                       resd 1
+endstruc
+
+%macro IceBP 0
+    db 0f1h
+%endmacro
+
 ; Ange Albertini, Creative Commons BY, 2009-2010
+
+
+
+
+
+
