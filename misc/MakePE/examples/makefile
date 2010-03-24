@@ -38,7 +38,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
-    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe
+    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -310,6 +310,8 @@ anti\hwbp.exe: anti\hwbp.asm
 	$(makepe) anti\hwbp.asm
 anti\tf_step.exe: anti\tf_step.asm
 	$(makepe) anti\tf_step.asm
+anti\dump.exe: anti\dump.asm
+	$(makepe) anti\dump.asm
 
 asm\apiloop.exe: asm\apiloop.asm
 	$(makepe) asm\apiloop.asm
