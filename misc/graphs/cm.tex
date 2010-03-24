@@ -12,8 +12,8 @@
 \toprule
 name 			&  flags & description \\
 \midrule
-IsDbgPresent		& {\tt D.....} & $ PEB.BeingDebugged $ db {\tt [fs:[30] + 2]} == 1\\
-IsDbgPresent2		& {\tt D....A} & $BeingDebugged$ check, via $IsDebuggerPresent$ \\
+BeingDebugged		& {\tt D.....} & $ PEB.BeingDebugged $ db {\tt [fs:[30] + 2]} == 1\\
+IsDbgPresent		& {\tt D....A} & $BeingDebugged$ check, via $IsDebuggerPresent$ \\
 NtGlobalFlag			& {\tt D.....} & $ PEB.NtGlobalFlag $ dd {\tt [fs:[30] + 68]} has 70\footnotemark set \\
 HeapFlags			& {\tt D.....} & $Heap.Flags$ dd {\tt [[fs:[30] + 18] + C] == 2} \\
 ForceFlags			& {\tt D.....} & $Heap.ForceFlags$ dd {\tt  [[fs:[30] + 18] + 10]} is not null \\
@@ -21,7 +21,7 @@ msvcrt!trigo			& {\tt D....A} & $msvcrt!\_CIasin(invalid) \rightarrow$ {\tt al =
 deletefiber			& {\tt D....A} & $DeleteFiber(invalid)$ $\rightarrow$ {\tt LastError = ForceFlags ?\ 80000003 :\ 57}\\
 \href{http://corkami.blogspot.com/2010/01/hen-never-laid-and-corn-never-growed.html}
 {gs} 				& {\tt .SE...} & {\tt GS} is reset, on thread switch \\
-pop ss			& {\tt .S....} & debuggers can't step right after {\tt pop SS} $\rightarrow$ {\tt TF} is visible via {\tt pushf} \\
+pop ss			& {\tt .S....} & debuggers can't step right after {\tt pop SS} $\rightarrow$ {\tt TF} set in {\tt EFlags}, {\tt 100} via {\tt pushf} \\
 \href{http://corkami.blogspot.com/2010/01/policeman-got-no-gun-u-dont-have-2-run.html}
 {smsw} 			& {\tt .SE...} & $operand$ = just after FPU {\tt ?\ 80010031 :\ 8001003b} \\
 % disabled - can't reproduce
@@ -33,24 +33,24 @@ pop ss			& {\tt .S....} & debuggers can't step right after {\tt pop SS} $\righta
 {int 2d}			& {\tt D...X.} & triggers $BREAKPOINT$ exception if not under a debugger\\
 \href{http://corkami.blogspot.com/2010/02/and-when-i-start-to-come-undone-stitch.html}
 {InvalidHandle}		& {\tt D...XA} & $CloseHandle(invalid) \rightarrow$ {\tt INVALID HANDLE} exception if debugger is present\\
-ChkRemoteDbg		& {\tt D....A} & {\small $CheckRemoteDebuggerPresent$}$(CurrentProcess, \&result)$ = 1 :\ 0\\
+ChkRemoteDbg		& {\tt D....A} & {\small $CheckRemoteDebuggerPresent$}$(${\small $GetCurrentProcess()\footnotemark$}$, \&result)$ = 1 :\ 0\\
 NtQueryInfo			& {\tt D....A} & {\small $NtQueryInformationProcess$}$(-1,$ {\small $ProcessDebugPort =$}$ 7, var, .....)$ \ra $[var] = present ? -1:0$ \\
 HideThread			& {\tt D....A} & {\small $NtSetInformationThread$}$(-2, ${\small $ThreadhideFromDebugger$}$ = 11, -1, 0)$ \ra not responding \\
 csr				& {\tt D....A} & {\small $OpenProcess$}$(\ldots, 0, ${\small $CsrGetProcessId$\footnotemark}$())$ \ra no error if {\small SeDebugPrivilege} acquired \\
-Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$\footnotemark, \ldots\\
-Timing API			& {\tt .S...A} & comparison of two {\small $GetTickCount, GetSystemTime, QueryPerformanceCounter$}, \ldots \\
+Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$\footnotemark, {\tt GS} resets, \ldots\\
+Timing API			& {\tt .S...A} & comparison of two APIs like {\small $GetTickCount, GetSystemTime, QueryPerformanceCounter$}, \ldots \\
 \midrule
 \multicolumn{3}{l}{Exceptions tricks (in the exception handler)} \\
 \midrule
 jmp				& {\tt ....X.} & change resume address via $Context.regEIP$ (Context{\tt +B8})\\
 step				& {\tt ....X.} & step next instruction and re-trigger via setting $TF$ in $Context.EFlags$ (Context{\tt +C0})\\
-hwbp				& {\tt ....X.} & set or detects hardware breakpoint via $Context.dr*$ ({\tt [+04;+18]} in Context )\\
+hwbp				& {\tt ....X.} & set or detects hardware breakpoint via $Context.dr*$ (Context{\tt +04/+18})\\
 higher			& {\tt ....X.} & overwrite higher handler and trigger exception ({\tt [esp+18]})\\
 return				& {\tt ....X.} & overwrite return address in stack \ra context re-loading is skipped ({\tt [esp+24]})\\
 \midrule
 \multicolumn{3}{l}{Ollydbg (1.1) specific} \\
 \midrule
-esi				& {\tt D.....} & esi = -1 on startup under ollydbg, not in standard) \\
+esi				& {\tt D.....} & esi = -1 on startup under ollydbg, not in general \\
 FPU				& {\tt D.....} & Display {\tt FFFFFFFF FFFFFFFF C0/40 3D} as float $\rightarrow$ crash \\
 OdbgStr			& {\tt D....A} & $OutputDebugStringA("\%s\%s") \rightarrow$ crash \\ 
 \midrule
@@ -95,10 +95,13 @@ the PEB is accessible directly ({\tt fs:[30]}) or via $TEB.EnvironmentPointer$ (
 \item
 $LastError$ is accessible via $TEB.LastErrorValue$ ({\tt [fs:[18] + 34]}) $\rightarrow GetLastError$ is inlinable
 \end{itemize}
+
 {\large Notes}
 \begin{enumerate}
 \item
 $70 = ${\footnotesize $FLG\_HEAP\_ENABLE\_TAIL\_CHECK$} $|$ {\footnotesize $FLG\_HEAP\_ENABLE\_FREE\_CHECK$} $|$ {\footnotesize  $FLG\_HEAP\_VALIDATE\_PARAMETERS$}
+\item
+FFFFFFFF (constant value)
 \item
 $dword[$7C980380$]$ (inlineable)
 \item
