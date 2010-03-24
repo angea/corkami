@@ -28,6 +28,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\imports_manual.exe imports\imports_custom.exe imports\imports_fsg.exe \
 	imports\imports_junk.exe imports\imports_checksum.exe imports\imports_stolen.exe \
 	imports\imports_hooks.exe imports\imports_paramdp.exe imports\imports_ipdp.exe \
+	imports\imports_buffer.exe \
 	algo\prng.exe algo\xor.exe algo\rc4.exe \
 	funnyseh.exe \
 	packer\packed_loader.exe packer\packed_dll.dll \
@@ -220,6 +221,8 @@ packer\packed_driver.exe: packer\packed_driver.sys
 packer\packed_driver-ni.ex: packer\packed_driver.sys
 	$(python) pe\sys2exe.py packer\packed_driver.sys
 
+imports\imports_buffer.exe: imports\imports_buffer.asm
+	$(makepe) imports\imports_buffer.asm
 imports\imports_checksum.exe: imports\imports_checksum.asm
 	$(makepe) imports\imports_checksum.asm
 imports\imports_custom.exe: imports\imports_custom.asm
