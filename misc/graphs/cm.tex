@@ -76,20 +76,20 @@ str				& {\tt D.....} & {\tt result == 4000h} if present \rowcolors{0}{white}{li
 \newpage
 
 {\large Flags}
-\begin{description}
-\item[anti $D$ebugger]
+\begin{itemize}
+\item {\bf anti $D$ebugger}
 detects if debugger is attached, or if specific tool is used
-\item[anti $S$tepping]
+\item {\bf anti $S$tepping}
 detects the program is not running (ex, not at full speed)
-\item[anti $E$mulator]
+\item {\bf anti $E$mulator}
 detects the program is running under an emulator - via a non documented or complex behavior
-\item[get e$I$p]
+\item {\bf get e$I$p}
 provides a way to retrieve current EIP
-\item[e$X$ception based]
-relies on exceptions (Structured, Vectored, Unhandled filter)
-\item[$A$pi-based]
+\item {\bf e$X$ception based}
+relies on exceptions (Vectored, Structured, Unhandled filter)
+\item {\bf $A$pi-based}
 relies on an API call
-\end{description}
+\end{itemize}
 
 
 {\large Reminders}
