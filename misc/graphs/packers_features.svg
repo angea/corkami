@@ -41,9 +41,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49787591"
-     inkscape:cx="509.62115"
-     inkscape:cy="308.17589"
+     inkscape:zoom="0.49456085"
+     inkscape:cx="526.18109"
+     inkscape:cy="372.04724"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -77,7 +77,7 @@
      id="layer1"
      transform="translate(0,-308.2677)">
     <a
-       transform="translate(-5.144024,-9.521792)"
+       transform="translate(4.855976,-9.521792)"
        id="a3007"
        xlink:href="http://corkami.googlecode.com/files/packers_features.pdf">
       <text
@@ -104,7 +104,7 @@
     </a>
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 22.308839,1012.248 -7.642977,0 0,25.7689 208.343888,0 0,-9.923"
+       d="m 32.308839,1012.248 -7.642977,0 0,25.7689 208.343888,0 0,-9.923"
        id="path3838"
        sodipodi:nodetypes="ccccc" />
     <path
@@ -120,7 +120,7 @@
        sodipodi:cy="378.88815"
        sodipodi:rx="41.766331"
        sodipodi:ry="25.813013"
-       d="m 727.24521,378.88815 a 41.766331,25.813013 0 1 1 -83.53266,0 41.766331,25.813013 0 1 1 83.53266,0 z"
+       d="m 727.24521,378.88815 c 0,14.25614 -18.69942,25.81302 -41.76633,25.81302 -23.06691,0 -41.76633,-11.55688 -41.76633,-25.81302 0,-14.25613 18.69942,-25.81301 41.76633,-25.81301 23.06691,0 41.76633,11.55688 41.76633,25.81301 z"
        transform="matrix(0.90313339,0,0,0.83054108,66.400001,372.47366)" />
     <text
        xml:space="preserve"
@@ -586,10 +586,8 @@
          sodipodi:role="line"
          x="211.02728"
          y="692.47095"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Courier New;-inkscape-font-specification:Courier New"
-         id="tspan2960"><tspan
-   id="tspan4394"
-   style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Courier New;-inkscape-font-specification:Courier New">ROL+XOR</tspan></tspan><tspan
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Courier New;-inkscape-font-specification:Courier New"
+         id="tspan2960">ROL+XOR</tspan><tspan
          sodipodi:role="line"
          x="211.02728"
          y="713.651"
@@ -598,12 +596,12 @@
          sodipodi:role="line"
          x="211.02728"
          y="733.651"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Courier New;-inkscape-font-specification:Courier New"
+         style="font-size:12;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Courier New;-inkscape-font-specification:Courier New"
          id="tspan3008">md5</tspan><tspan
          sodipodi:role="line"
          x="211.02728"
          y="753.651"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Courier New;-inkscape-font-specification:Courier New"
+         style="font-size:12;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Courier New;-inkscape-font-specification:Courier New"
          id="tspan3010">sha1</tspan><tspan
          sodipodi:role="line"
          x="211.02728"
@@ -657,7 +655,7 @@
        sodipodi:nodetypes="ccccc" />
     <path
        style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 213.26254,794.95708 -7.64298,0 0,-133.18629 116.34389,0 0,9.923"
+       d="m 213.26254,786.95708 -7.64298,0 0,-125.18629 116.34389,0 0,9.923"
        id="path3838-1-7-1-1"
        sodipodi:nodetypes="ccccc" />
     <text
