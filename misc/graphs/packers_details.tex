@@ -1,5 +1,4 @@
-\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0}\\ 
-\url{http://corkami.googlecode.com/files/packers_details.pdf}\ 
+\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0} \url{http://corkami.googlecode.com/files/packers_details.pdf}\ 
 \href{https://corkami.googlecode.com/svn/trunk/misc/graphs/packers_details.tex}{source}\end{flushright}}
 \newcommand{\ra}{$\rightarrow$\ }
 
@@ -7,35 +6,35 @@
 \usepackage[hmargin=1cm,vmargin=.5cm]{geometry}
 \usepackage{hyperref}
 \usepackage{booktabs}	% better looking tables
+\usepackage[table]{xcolor}
+\rowcolors{0}{white}{lightgray}
 
 \begin{document}
 \begin{center}
-DRAFT detailed packers' features DRAFT 
+detailed packers' features 
 \end{center}
 
 \begin{tabular}{ll}
-
-\midrule
-{\bf compression} \\
+\toprule
+{\bf compression} & (used on top of compression algorithms)\\
 \midrule
 section merging 	& merge all sections (just one entry in the section table) \\
 imports 		& imports are stored and loaded with a more compact import table format \\
 imports by hash 	& exports are parsed until it matches a specific hash, instead of a $GetProcAddress$ call \\
 call optimisation 	& turn relative operands of jumps and calls into absolute \ra better compression \\
-resources		& compresses resources, avoiding critical ones (main icon, manifest,\ldots) \\
-
+resources		& compresses resources, avoiding critical ones (main icon, manifest,\ldots)\rowcolors{0}{white}{lightgray} \\
 \midrule
-{\bf protection} \\
+{\bf protection} & \\
 \midrule
 token check          & presence check to allow the program to run: {\tt dongle, CD/DVD, key, file, network\ldots} \\
 fingerprinting	& token is specific to a hardware element: {\tt disk/OS/CPU/MAC/\ldots} \\
 demo mode          & inclusion of a demo binary/mode that is executed when token is absent or not enough privileged \\
-integrity		& check the contents are unmodified with checksum or hash \\
-
-\toprule
-{\bf anti-analysis} \\
+integrity		& check the contents are unmodified with checksum or hash \rowcolors{0}{white}{lightgray}\\
+\midrule
+{\bf anti-analysis} & \\
 \midrule
 overlap		& jumping after the first byte of an instruction \\
+illusion		& makes the analyst the something incorrect happened \\
 junk			& insertion of dummy code between relevant opcodes \\
 jumps			& insertion of jumps to makes analysis visually harder\\
 polymorphism	& different but equivalent code \ra 2 packed files of the same source are different \\
@@ -44,9 +43,9 @@ virtualization	& virtualizes (part of) packer stub code \ra harder analysis \\
 stack			& strings are built and decrypted before use, then discarded \ra to avoid obvious references\\
 faking			& add fake code similar to known packers to fool identifcation \\
 thread		& use several parallel threads to make analysis harder \\
-timing			& comparing time between two points to detect unusual execution \\
-\midrule
-{\bf anti-debugging} & anti-tools, by extension \\
+timing			& comparing time between two points to detect unusual execution \rowcolors{0}{white}{lightgray}\\
+\toprule
+{\bf anti-debugging} & (and anti-tools, by extension) \\
 \midrule
 detect 		& detect the presence of an attached debugger: {\tt IsDebuggerPresent} \\
 prevent		& prevent a debugger to attach to the target itself or stay attached \\
@@ -57,10 +56,10 @@ limitation		& prevent the use of a tool via a specific limitation \\
 exploit		& prevent the use of a tool via a specific vulnerability \\
 backdoor		& detect or crash a debugger via a specific backdoor \\
 self-debugging	& debug itself to prevent another debugger to be attached \\
-int1			& hook interruption 1 \ra debuggers stop working \\
-fake			& add code of known packer to fool identification \\
+int1			& block interruption 1 \ra debuggers stop working \\
+fake			& add code of known packer to fool identification \rowcolors{0}{white}{lightgray}\\
 \midrule
-{\bf anti-dumping} \\
+{\bf anti-dumping} & (prevent making a working executable from a memory image)\\
 \midrule
 tampering		& erase or corrupt specific file parts to prevent rebuilding (header, packer stub,\ldots) \\
 imports 		& add obfuscation between imports calls and APIs (obfuscation, virtualization, stealing, \ldots)\\
@@ -69,23 +68,23 @@ API hooking		& alter API behavior: {\tt redirect benign API to a critical one} \
 inlining		& copy locally the whole content of API code \ra no more 'import calls'\\
 relocate		& relocate API code in separate buffer \ra calls don't lead to imported DLLs\\
 byte stealing	& move the first bytes of the original code elsewhere \ra harder rebuilding and bypasses breakpoints\\
-code splicing 	& blocks of code are encrypted individually, and decrypted temporarily only upon execution \\
-nanomites		& specific flow opcodes are encrypted individually and decrypted only after use \ra incorrect dump\\
-virtualization	& virtualizes (part of) original codes, API start\ldots \ra dump not working \\
+page guard	 	& blocks of code are encrypted individually, and decrypted temporarily only upon execution \\
+flow			& flow opcodes are removed and emulated (or decrypted) by the packer during execution \ra incorrect dump\\
+virtualization	& virtualizes (part of) original code, API start\ldots \ra dump not working without VM code \rowcolors{0}{white}{lightgray}\\
 
 \midrule
-{\bf anti-emulation} \\
+{\bf anti-emulation} & \\
 \midrule
 opcodes		& using different opcodes sets (FPU, MMX, SSE) to block emulators\\
 undoc			& use of rare or undocumented opcodes to block non-exhaustive emulators \\
 API			& unusual APIs are called to block non-exhaustive emulators (anti-virus)\\
-loop			& extra loops are added to make time-constraint emulators give up \\
+loop			& extra loops are added to make time-constraint emulators give up \rowcolors{0}{white}{lightgray}\\
 \midrule
-{\bf bundlers} \\
+{\bf bundlers} & \\
 \midrule
 drop			& original file is written to disk then executed \\
 injection		& original file is injected in existing process \ra no new file on disk + higher privileges \\
-hooking		& file handling APIs are modified to make embedded files usable like external ones\\
+hooking		& file handling APIs are modified to make embedded files usable like external ones \rowcolors{0}{white}{lightgray}\\
 
 \bottomrule
 

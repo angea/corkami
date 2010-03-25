@@ -1,12 +1,16 @@
-\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0}\\ \url{http://corkami.googlecode.com/files/cm.pdf}\ \href{https://corkami.googlecode.com/svn/trunk/misc/graphs/cm.tex}{source}\end{flushright}}
+\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0}
+ \url{http://corkami.googlecode.com/files/cm.pdf}\
+ \href{https://corkami.googlecode.com/svn/trunk/misc/graphs/cm.tex}{source}\end{flushright}}
 \newcommand{\ra}{$\rightarrow$\ }
 
 \documentclass{report}
 \usepackage{hyperref}
 \usepackage[hmargin=1cm,vmargin=1cm]{geometry}
 \usepackage{booktabs}	% better looking tables
+\usepackage[table]{xcolor}
+\rowcolors{0}{white}{lightgray}
 \begin{document}
-\begin{center} DRAFT Counter-measures cheat sheet \end{center}
+\begin{center} DRAFT Counter-measures (anti-debugs, \ldots) cheat sheet \end{center}
 
 \begin{tabular}{lllll}
 \toprule
@@ -38,7 +42,8 @@ NtQueryInfo			& {\tt D....A} & {\small $NtQueryInformationProcess$}$(-1,$ {\smal
 HideThread			& {\tt D....A} & {\small $NtSetInformationThread$}$(-2, ${\small $ThreadhideFromDebugger$}$ = 11, -1, 0)$ \ra not responding \\
 csr				& {\tt D....A} & {\small $OpenProcess$}$(\ldots, 0, ${\small $CsrGetProcessId$\footnotemark}$())$ \ra no error if {\small SeDebugPrivilege} acquired \\
 Timing			& {\tt .S....} & comparison of two $RDTSC$, inlined $GetTickCount$\footnotemark, {\tt GS} resets, \ldots\\
-Timing API			& {\tt .S...A} & comparison of two APIs like {\small $GetTickCount, GetSystemTime, QueryPerformanceCounter$}, \ldots \\
+Timing API			& {\tt .S...A} & comparison of two APIs like {\small $GetTickCount, GetSystemTime, QueryPerformanceCounter$}, \ldots \rowcolors{0}{white}{lightgray}
+\\
 \midrule
 \multicolumn{3}{l}{Exceptions tricks (in the exception handler)} \\
 \midrule
@@ -46,20 +51,23 @@ jmp				& {\tt ....X.} & change resume address via $Context.regEIP$ (Context{\tt 
 step				& {\tt ....X.} & step next instruction and re-trigger via setting $TF$ in $Context.EFlags$ (Context{\tt +C0})\\
 hwbp				& {\tt ....X.} & set or detects hardware breakpoint via $Context.dr*$ (Context{\tt +04/+18})\\
 higher			& {\tt ....X.} & overwrite higher handler and trigger exception ({\tt [esp+18]})\\
-return				& {\tt ....X.} & overwrite return address in stack \ra context re-loading is skipped ({\tt [esp+24]})\\
+return				& {\tt ....X.} & overwrite return address in stack \ra context re-loading is skipped ({\tt [esp+24]}) \rowcolors{0}{white}{lightgray}
+\\
 \midrule
 \multicolumn{3}{l}{Ollydbg (1.1) specific} \\
 \midrule
 esi				& {\tt D.....} & esi = -1 on startup under ollydbg, not in general \\
 FPU				& {\tt D.....} & Display {\tt FFFFFFFF FFFFFFFF C0/40 3D} as float $\rightarrow$ crash \\
-OdbgStr			& {\tt D....A} & $OutputDebugStringA("\%s\%s") \rightarrow$ crash \\ 
+OdbgStr			& {\tt D....A} & $OutputDebugStringA("\%s\%s") \rightarrow$ crash \rowcolors{0}{white}{lightgray}
+\\ 
 \midrule
 VmWare specific \\
 \midrule
 backdoor			& {\tt D.....} & {\tt in 'VMXh', 'VX'} $\rightarrow$ exception if not present, else modified {\tt eax} and {\tt ebx} \\
 sidt				& {\tt D.....} & {\tt [operand + 5] == e8} or {\tt ff} if present \\
 sldt				& {\tt D.....} & {\tt result != 0} if present \\
-str				& {\tt D.....} & {\tt result == 4000h} if present \\
+str				& {\tt D.....} & {\tt result == 4000h} if present \rowcolors{0}{white}{lightgray}
+\\
 \bottomrule
 \end{tabular}
 
