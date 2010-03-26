@@ -5,6 +5,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg2"
@@ -12,7 +13,9 @@
    inkscape:version="0.47 r22583"
    width="100%"
    height="100%"
-   sodipodi:docname="coin.svg">
+   sodipodi:docname="packers_starts.svg">
+  <title
+     id="title4537">Packers' Entrypoints</title>
   <metadata
      id="metadata1036">
     <rdf:RDF>
@@ -21,7 +24,24 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Packers' Entrypoints</dc:title>
+        <dc:date>2010</dc:date>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
   <defs
@@ -39,10 +59,23 @@
      inkscape:window-height="480"
      id="namedview1032"
      showgrid="false"
-     inkscape:zoom="0.34968949"
+     inkscape:zoom="0.34935751"
      inkscape:cx="372.04724"
      inkscape:cy="526.18109"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-page="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true" />
   <text
      style="font-size:10;font-family:monospace"
      id="text14"
@@ -61,18 +94,6 @@
      xml:space="preserve"
      y="318"
      x="0" />
-  <text
-     style="font-size:10px;font-family:monospace"
-     id="text6"
-     xml:space="preserve"
-     y="414"
-     x="460"><tspan
-       style="font-size:10px;fill:#0000ff"
-       id="tspan8">Aspack</tspan><tspan
-       style="font-size:10px;fill:#666666"
-       id="tspan10">/</tspan><tspan
-       style="font-size:10px;fill:#19177c"
-       id="tspan12">Asprotect</tspan></text>
   <g
      id="g6882"
      transform="translate(-20,40)">
@@ -247,14 +268,6 @@
      xml:space="preserve"
      y="831"
      x="0" />
-  <text
-     style="font-size:10px;font-family:monospace"
-     id="text104"
-     xml:space="preserve"
-     y="70"
-     x="30"><tspan
-       style="font-size:10px;fill:#0000ff"
-       id="tspan106">PECompact</tspan></text>
   <g
      id="g7463"
      transform="translate(10,0)">
@@ -587,14 +600,6 @@
      xml:space="preserve"
      y="945"
      x="0" />
-  <text
-     style="font-size:10px;font-family:monospace"
-     id="text338"
-     xml:space="preserve"
-     y="44"
-     x="240"><tspan
-       style="font-size:10px;fill:#0000ff"
-       id="tspan340">FSG</tspan></text>
   <g
      id="g7082"
      transform="translate(20,0)">
@@ -731,45 +736,34 @@
      xml:space="preserve"
      y="1553"
      x="0" />
-  <text
-     style="font-size:10px;font-family:monospace"
-     id="text416"
-     xml:space="preserve"
-     y="50"
-     x="460"><tspan
-       style="font-size:10px;fill:#0000ff"
-       id="tspan418">UPX</tspan></text>
   <g
-     id="g6982"
-     transform="translate(-20,40)">
+     id="g4400">
     <text
-       x="480"
-       y="29"
+       x="460"
+       y="69"
        xml:space="preserve"
        id="text420"
        style="font-size:10px;font-family:monospace"><tspan
          id="tspan422"
          style="font-size:10px;fill:#a0a000">EntryPoint:</tspan></text>
     <text
-       x="480"
-       y="48"
+       x="460"
+       y="88"
        xml:space="preserve"
        id="text424"
        style="font-size:10px;font-family:monospace">    <tspan
    id="tspan426"
    style="font-size:10px;fill:#0000ff">pushad</tspan></text>
     <text
-       x="480"
-       y="67"
+       x="460"
+       y="107"
        xml:space="preserve"
        id="text428"
-       style="font-size:10px;font-family:monospace">    <tspan
+       style="font-size:10px;font-family:monospace"><tspan
    id="tspan430"
-   style="font-size:10px;fill:#0000ff">mov</tspan>    <tspan
+   style="font-size:10px;fill:#0000ff">    mov</tspan><tspan
    id="tspan432"
-   style="font-size:10px;fill:#008000">esi</tspan>, <tspan
-   id="tspan434"
-   style="font-size:10px;fill:#19177c">upx.</tspan><tspan
+   style="font-size:10px;fill:#008000">    esi</tspan>, <tspan
    id="tspan436"
    style="font-size:10px;fill:#666666">&lt;</tspan><tspan
    id="tspan438"
@@ -777,8 +771,8 @@
    id="tspan440"
    style="font-size:10px;fill:#666666">&gt;</tspan></text>
     <text
-       x="480"
-       y="86"
+       x="460"
+       y="126"
        xml:space="preserve"
        id="text442"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -797,8 +791,8 @@
    id="tspan456"
    style="font-size:10px;fill:#666666">&gt;</tspan>]</text>
     <text
-       x="480"
-       y="105"
+       x="460"
+       y="145"
        xml:space="preserve"
        id="text458"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -807,8 +801,8 @@
    id="tspan462"
    style="font-size:10px;fill:#008000">edi</tspan></text>
     <text
-       x="480"
-       y="124"
+       x="460"
+       y="164"
        xml:space="preserve"
        id="text464"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -822,8 +816,8 @@
    id="tspan472"
    style="font-size:10px;font-style:italic;fill:#408080">; * Not in UPX &gt;3</tspan></text>
     <text
-       x="480"
-       y="143"
+       x="460"
+       y="183"
        xml:space="preserve"
        id="text474"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -837,16 +831,16 @@
    id="tspan482"
    style="font-size:10px;fill:#666666">12</tspan></text>
     <text
-       x="480"
-       y="162"
+       x="460"
+       y="202"
        xml:space="preserve"
        id="text484"
        style="font-size:10px;font-family:monospace">    <tspan
    id="tspan486"
    style="font-size:10px;fill:#0000ff">nop</tspan></text>
     <text
-       x="480"
-       y="181"
+       x="460"
+       y="221"
        xml:space="preserve"
        id="text488"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -856,8 +850,8 @@
    id="tspan492"
    style="font-size:10px;font-style:italic;fill:#408080">; *</tspan></text>
     <text
-       x="480"
-       y="200"
+       x="460"
+       y="240"
        xml:space="preserve"
        id="text494"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -867,8 +861,8 @@
    id="tspan498"
    style="font-size:10px;font-style:italic;fill:#408080">; *</tspan></text>
     <text
-       x="480"
-       y="219"
+       x="460"
+       y="259"
        xml:space="preserve"
        id="text500"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -878,8 +872,8 @@
    id="tspan504"
    style="font-size:10px;font-style:italic;fill:#408080">; *</tspan></text>
     <text
-       x="480"
-       y="238"
+       x="460"
+       y="278"
        xml:space="preserve"
        id="text506"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -889,8 +883,8 @@
    id="tspan510"
    style="font-size:10px;font-style:italic;fill:#408080">; *</tspan></text>
     <text
-       x="480"
-       y="257"
+       x="460"
+       y="297"
        xml:space="preserve"
        id="text512"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -900,8 +894,8 @@
    id="tspan516"
    style="font-size:10px;font-style:italic;fill:#408080">; *</tspan></text>
     <text
-       x="480"
-       y="276"
+       x="460"
+       y="316"
        xml:space="preserve"
        id="text518"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -912,8 +906,8 @@
    id="tspan524"
    style="font-size:10px;fill:#008000">esi</tspan>]</text>
     <text
-       x="480"
-       y="295"
+       x="460"
+       y="335"
        xml:space="preserve"
        id="text526"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -922,8 +916,8 @@
    id="tspan530"
    style="font-size:10px;fill:#008000">esi</tspan></text>
     <text
-       x="480"
-       y="314"
+       x="460"
+       y="354"
        xml:space="preserve"
        id="text532"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -952,19 +946,11 @@
      xml:space="preserve"
      y="1933"
      x="0" />
-  <text
-     style="font-size:10px;font-family:monospace"
-     id="text550"
-     xml:space="preserve"
-     y="649"
-     x="60"><tspan
-       style="font-size:10px;fill:#a0a000"
-       id="tspan552">MEW:</tspan></text>
   <g
-     id="g7888"
-     transform="translate(20,0)">
+     id="g4288"
+     transform="translate(-20,0)">
     <text
-       x="40"
+       x="60"
        y="668"
        xml:space="preserve"
        id="text554"
@@ -972,7 +958,7 @@
          id="tspan556"
          style="font-size:10px;fill:#a0a000">_1:</tspan></text>
     <text
-       x="40"
+       x="60"
        y="687"
        xml:space="preserve"
        id="text558"
@@ -988,7 +974,7 @@
    id="tspan568"
    style="font-size:10px;fill:#666666">&gt;</tspan></text>
     <text
-       x="40"
+       x="60"
        y="706"
        xml:space="preserve"
        id="text570"
@@ -1000,7 +986,7 @@
    id="tspan576"
    style="font-size:10px;fill:#008000">esi</tspan></text>
     <text
-       x="40"
+       x="60"
        y="725"
        xml:space="preserve"
        id="text578"
@@ -1008,7 +994,7 @@
    id="tspan580"
    style="font-size:10px;fill:#0000ff">lodsd</tspan></text>
     <text
-       x="40"
+       x="60"
        y="744"
        xml:space="preserve"
        id="text582"
@@ -1016,7 +1002,7 @@
    id="tspan584"
    style="font-size:10px;fill:#0000ff">lodsd</tspan></text>
     <text
-       x="40"
+       x="60"
        y="763"
        xml:space="preserve"
        id="text586"
@@ -1026,7 +1012,7 @@
    id="tspan590"
    style="font-size:10px;fill:#008000">eax</tspan></text>
     <text
-       x="40"
+       x="60"
        y="782"
        xml:space="preserve"
        id="text592"
@@ -1034,7 +1020,7 @@
    id="tspan594"
    style="font-size:10px;fill:#0000ff">lodsd</tspan></text>
     <text
-       x="40"
+       x="60"
        y="801"
        xml:space="preserve"
        id="text596"
@@ -1046,7 +1032,7 @@
    id="tspan602"
    style="font-size:10px;fill:#008000">edi</tspan></text>
     <text
-       x="40"
+       x="60"
        y="820"
        xml:space="preserve"
        id="text604"
@@ -1058,7 +1044,7 @@
    id="tspan610"
    style="font-size:10px;fill:#666666">80</tspan></text>
     <text
-       x="40"
+       x="60"
        y="839"
        xml:space="preserve"
        id="text612"
@@ -1066,7 +1052,7 @@
          id="tspan614"
          style="font-size:10px;fill:#a0a000">_2:</tspan></text>
     <text
-       x="40"
+       x="60"
        y="858"
        xml:space="preserve"
        id="text616"
@@ -1074,7 +1060,7 @@
    id="tspan618"
    style="font-size:10px;fill:#0000ff">movsb</tspan></text>
     <text
-       x="40"
+       x="60"
        y="877"
        xml:space="preserve"
        id="text620"
@@ -1086,7 +1072,7 @@
    id="tspan626"
    style="font-size:10px;fill:#666666">80</tspan></text>
     <text
-       x="40"
+       x="60"
        y="896"
        xml:space="preserve"
        id="text628"
@@ -1096,7 +1082,7 @@
    id="tspan632"
    style="font-size:10px;fill:#008000">ebx</tspan>]</text>
     <text
-       x="40"
+       x="60"
        y="915"
        xml:space="preserve"
        id="text634"
@@ -1106,7 +1092,7 @@
    id="tspan638"
    style="font-size:10px;fill:#19177c">_2</tspan></text>
     <text
-       x="40"
+       x="60"
        y="934"
        xml:space="preserve"
        id="text640"
@@ -1114,16 +1100,16 @@
    id="tspan642"
    style="font-size:10px;fill:#0000ff">...</tspan>]</text>
     <text
-       x="40"
-       y="972"
+       x="60"
+       y="952"
        xml:space="preserve"
        id="text646"
        style="font-size:10px;font-family:monospace"><tspan
          id="tspan648"
          style="font-size:10px;fill:#a0a000">EntryPoint:</tspan></text>
     <text
-       x="40"
-       y="991"
+       x="60"
+       y="971"
        xml:space="preserve"
        id="text650"
        style="font-size:10px;font-family:monospace">    <tspan
@@ -1144,14 +1130,6 @@
      xml:space="preserve"
      y="2161"
      x="0" />
-  <text
-     style="font-size:10px;font-family:monospace"
-     id="text658"
-     xml:space="preserve"
-     y="769"
-     x="460"><tspan
-       style="font-size:10px;fill:#a0a000"
-       id="tspan660">Upack:</tspan></text>
   <g
      id="g6830"
      transform="translate(-20,40)">
@@ -1320,21 +1298,9 @@
      xml:space="preserve"
      y="2313"
      x="0" />
-  <text
-     style="font-size:10px;font-family:monospace"
-     id="text768"
-     xml:space="preserve"
-     y="332"
-     x="240"><tspan
-   style="font-size:10px;fill:#0000ff"
-   id="tspan770">UPX</tspan> <tspan
-   style="font-size:10px;fill:#19177c"
-   id="tspan772">with</tspan> <tspan
-   style="font-size:10px;fill:#19177c"
-   id="tspan774">LZMA</tspan></text>
   <g
      id="g7707"
-     transform="translate(20,0)">
+     transform="translate(18,0)">
     <text
        x="220"
        y="351"
@@ -1740,4 +1706,157 @@
      xml:space="preserve"
      y="3035"
      x="0" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="68.632317"
+     y="68.316147"
+     id="text3330"><tspan
+       sodipodi:role="line"
+       id="tspan3332"
+       x="68.632317"
+       y="68.316147">PECOMPACT</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="303.10831"
+     y="34.316143"
+     id="text3334"><tspan
+       sodipodi:role="line"
+       id="tspan3336"
+       x="303.10831"
+       y="34.316143">FSG</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="523.32141"
+     y="38.614544"
+     id="text3338"><tspan
+       sodipodi:role="line"
+       id="tspan3340"
+       x="523.32141"
+       y="38.614544">UPX</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="283.95303"
+     y="321.08798"
+     id="text3334-1"><tspan
+       sodipodi:role="line"
+       id="tspan3336-7"
+       x="283.95303"
+       y="321.08798">UPX (LZMA)</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="551.59106"
+     y="431.57779"
+     id="text4143"><tspan
+       sodipodi:role="line"
+       id="tspan4145"
+       x="551.59106"
+       y="431.57779">AsPack</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="99.151947"
+     y="645.63489"
+     id="text3334-0"><tspan
+       sodipodi:role="line"
+       id="tspan3336-9"
+       x="99.151947"
+       y="645.63489">MEW</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="522.71259"
+     y="769.26831"
+     id="text4158"><tspan
+       sodipodi:role="line"
+       id="tspan4160"
+       x="522.71259"
+       y="769.26831">Upack</tspan></text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 225.33567,1052.3622 225.33567,1.1862994e-8"
+     id="path4206"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 225.33567,606.25213 0,606.25213"
+     id="path4208"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 437.33567,1052.3622 0,-1052.362217382813"
+     id="path4206-8"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 436.1812,400.35518 307.91328,0"
+     id="path4232"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 437.24201,749.23612 306.85247,0"
+     id="path4234"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 225.33567,294.54702 209.33567,0"
+     id="path4236"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 622.72546,609.31188 -13.6936,0 0,-40.80187 83.89917,0.15966 0,8.48068"
+     id="path3999"
+     sodipodi:nodetypes="ccccc" />
+  <text
+     xml:space="preserve"
+     style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="611.37854"
+     y="584.05725"
+     id="text3364"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       x="611.37854"
+       y="584.05725"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+       id="tspan3370">Packers</tspan><tspan
+       sodipodi:role="line"
+       x="611.37854"
+       y="604.05725"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+       id="tspan6518">EntryPoints</tspan></text>
+  <a
+     transform="translate(-7.534686,-3.13598)"
+     id="a3007-4"
+     xlink:href="http://corkami.googlecode.com/files/packers_starts.pdf">
+    <text
+       id="text6335-5"
+       y="1028.8519"
+       x="23.162506"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         id="tspan6341-5"
+         style="font-size:6px"
+         y="1028.8519"
+         x="23.162506"
+         sodipodi:role="line">Ange Albertini 2010</tspan><tspan
+         id="tspan6345-1"
+         style="font-size:6px"
+         y="1036.3519"
+         x="23.162506"
+         sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
+         style="font-size:6px"
+         id="tspan6339-7"
+         y="1043.8519"
+         x="23.162506"
+         sodipodi:role="line">http://corkami.googlecode.com/files/packers_starts.pdf</tspan></text>
+  </a>
+  <path
+     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 19.918184,1018.6338 -7.64298,0 0,25.7689 208.343886,0 0,-9.923"
+     id="path3838-1"
+     sodipodi:nodetypes="ccccc" />
 </svg>
