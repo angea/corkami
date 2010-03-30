@@ -16,21 +16,24 @@
 \toprule
 name & description \\
 \midrule
-mov 	& move: {\tt mov eax, 3 \ra eax = 3} \\
-movsd & mov DS:[EDI], ES:[ESI]\\
-lea 	& load effective address: {\tt eax = 3; lea eax, [eax * 4 + 203A] \ra eax = 2046}\\
+mov 	& move: {\tt $mov$ eax, 3 \ra eax = 3} \\
+movs? & mov DS:[EDI], ES:[ESI] (byte/word/dword)\\
+lea 	& lea x, [y] = mov x,y: {\tt eax = 3; $lea$ eax, [eax * 4 + 203A] \ra eax = 2046}\\
+lods & mov EAX, [ESI]\\
+stos & mov [EDI], EAX\\
 \midrule
-add 	& addition: {\tt eax = 3 ; add eax, 3 \ra eax = 6}\\
-adc 	& add with carry {\tt CF = 1; eax = 3; add eax, 3 \ra eax = 7, CF = 0}\\
-sub 	& substraction: {\tt eax = 6 ; sub eax, 3 \ra eax = 3}\\
-sbb & & sub with borrow {\tt eax = 6; CF = 1 ; sub eax, 3 \ra eax = 2}\\
-inc 	& increase (=add 1) {\tt eax = 0; inc eax \ra eax = 1} \\
-dec 	& decrease (=sub 1) {\tt eax = 7; dec eax \ra eax = 6} \\
-neg & \\
-div & \\
-idiv & \\
-mul & \\
-imul & \\
+add 	& addition: {\tt eax = 3 ; $add$ eax, 3 \ra eax = 6}\\
+adc 	& add, with carry: {\tt CF = 1; eax = 3; $adc$ eax, 3 \ra eax = 7, CF = 0}\\
+sub 	& substraction: {\tt eax = 6 ; $sub$ eax, 3 \ra eax = 3}\\
+sbb   & sub, with carry: {\tt eax = 6; CF = 1 ; $sbb$ eax, 3 \ra eax = 2}\\
+inc 	& =add 1: {\tt eax = 0; $inc$ eax \ra eax = 1} \\
+dec 	& =sub 1: {\tt eax = 7; $dec$ eax \ra eax = 6} \\
+neg & negative {\tt al = 1; $neg$ al \ra al = -1}\\
+div & divide ax/dx:ax/edx:eax by operand. Quo/Rem are in al:ah/ax:dx/eax:edx\\
+& {\tt ax = 35; bl = 11; $div$ bl \ra al = 3; ah = 2}\\
+idiv & same, with sign\\
+mul & multiply. same registers as div: {\tt al = 11;bl =  3; $mul$ bl \ra ax = 33}\\
+imul & signed mul. has a 3 operands version: {\tt eax = 11; $imul$ eax, eax, 3 \ra eax = 33}\\
 \midrule
 enter & \\
 leave & \\
@@ -39,40 +42,38 @@ cmp & \\
 cmpsd & cmp ES:[ESI], DS:[EDI] \\
 test & \\
 \midrule
-or 	& or: {\tt eax = 1010b; or eax, 0110b \ra eax = 1110b} \\ 
-and 	& and: {\tt eax = 1010b; and eax, 0110b \ra eax = 0010b} \\ 
-xor 	& exclusive or: {\tt eax = 1010b; xor eax, 0110b \ra eax = 1100b} \\ 
-not	& logical not: {\tt al = 1010b; not al \ra al = 11110101b}\\
-rol	 & left rotation: {\tt eax = 1010b; rol eax, 3 \ra eax = 1010000b}\\
-ror	 & right rotation: {\tt al= 1010b;ror al, 3 \ ra al = 1000001b}\\
-rcl	 & rotate left over carry {\tt CF = 1, eax = 1010b; rol eax, 3 \ra eax = 1010100b}\\
-rcr	 & rotate right over carry {\tt al = 1010b; CF = 1; rcr al, 3 \ra al = 10100001b} \\
-shl	 & shift left {\tt al = 1010b; shl al, 2 \ra al = 101000b} \\
-shr	 & shift right {\tt al = 1010b; shr al, 2 \ra al = 10b}\\
+or 	& or: {\tt eax = 1010b; $or$ eax, 0110b \ra eax = 1110b} \\ 
+and 	& and: {\tt eax = 1010b; $and$ eax, 0110b \ra eax = 0010b} \\ 
+xor 	& exclusive or: {\tt eax = 1010b; $xor$ eax, 0110b \ra eax = 1100b} \\ 
+not	& logical not: {\tt al = 1010b; $not$ al \ra al = 11110101b}\\
+rol	 & left rotation: {\tt eax = 1010b; $rol$ eax, 3 \ra eax = 1010000b}\\
+ror	 & right rotation: {\tt al= 1010b;$ror$ al, 3 \ ra al = 1000001b}\\
+rcl	 & rol over carry: {\tt CF = 1, eax = 1010b; $rol$ eax, 3 \ra eax = 1010100b}\\
+rcr	 & ror over carry: {\tt al = 1010b; CF = 1; $rcr$ al, 3 \ra al = 10100001b} \\
+shl	 & shift left: {\tt al = 1010b; $shl$ al, 2 \ra al = 101000b} \\
+shr	 & shift right: {\tt al = 1010b; $shr$ al, 2 \ra al = 10b}\\
 sal 	& = shl\\
-sar	 & arithmetic shr (propagates sign): {\tt al = -8; sar al, 2 \ra al = -2} \\
-shld	 & \\
-shrd 	& \\
+sar	 & arithmetic shr (propagates sign): {\tt al = -8; $sar$ al, 2 \ra al = -2} \\
+shld	 & shift and concatenate: {\tt ax = 1111b; bx = 010...0b; $shld$ ax, bx, 3 \ra ax = 1111010b}\\
+shrd 	& {\tt ax = 1101001b; bx = 101b; $shrd$ ax, bx, 3 \ra ax  = 10100...001101b}\\
 \midrule
-insd & ins EDI, DX \\
-outsd & out [ESI], DX\\
-lodsd & mov EAX, [ESI]\\
-stosd & mov [EDI], EAX\\
-les lds lfs lss lgs & loads segment \\
-loop & \\
-rep: & \\
+lds 	&loads register and segment: {\tt [ebx] = 12345678, 0; $lds$ eax, [ebx] \ra ds = 0; eax = 12345678}\\%ds x, [y] \ra ds = [y+4] and x = [y] \\
+& same with lss/les/lfs/lgs\\
+loop 	& \\
+rep: 	& \\
 jecxz & \\
-jmp & \\
+jmp & eip = operand\\
+jmpf & cs:eip = operands\\
 jxx & conditional jump\\
-setxx & \\
-cmovxx & conditional mov\\
+setxx & operand = condition ? 1 : 0 {\tt CF = 1; $setc$ al \ra al = 1}\\
+cmovxx & conditional mov \\
 \midrule
-push & push on stack: {\tt push 123456 \ra esp = esp - 4 ; [esp] = 12345678}\\
+push & push on stack: {\tt $push$ 12345678 \ra esp -= 4 ; [esp] = 12345678}\\
 pushf	& push EFLAGS on stack\\
-pusha & push EAX, ECX, EDX, EBX, (original) ESP, EBP, ESI, EDI \\
-pop 	& pop from stack: {\tt [esp] = 12345678 ; pop eax \ra esp = esp + 4 ; eax = 12345678}\\
+pusha & push eax/ecx/edx/ebx/(original) esp/ebp/esi/edi\\
+pop 	& pop from stack: {\tt [esp] = 12345678 ; $pop$ eax \ra esp += 4 ; eax = 12345678}\\
 popf	& pop EFLAGS from stack\\
-popa & pop EDI ESI EBP <discarded> EBX EDX ECX EAX\\
+popa & pop edi/esi/ebp/.../ebx/edx/ecx/eax\\
 \bottomrule
 \end{tabular}
 \rowcolors{0}{white}{lightgray}
@@ -86,10 +87,12 @@ lahf & load FLAG in AH \\
 sahf & save FLAG in AH \\
 \midrule
 hlt & \\
-IceBp & \\
+IceBp & triggers SINGLE\_STEP exception\\
 \midrule
-in & \\
-out & \\
+in & read port - privileged\\
+ins & in es:[edi], dx; inc/decrement EDI \\
+out & write port - privileged\\
+outsd & out dx, [esi]; inc/decrement ESI\\
 \midrule
 call & push next instruction and jmp to target\\
 callf & far call \\
@@ -116,7 +119,7 @@ bts & bit test and set\\
 \midrule
 stc & set CF\\
 clc & clear CF\\
-cmc & complement CF: {\tt \ra CF = !CF}\\
+cmc & complement CF: {\tt CF = !CF}\\
 sti & set IF\\
 cli & set IF\\
 std & set DF\\
@@ -127,7 +130,7 @@ into & trigger interrupt 4 if OF is set\\
 int3 & trigger interrupt 3\\
 \midrule
 xlat & \\
-bound & int5 if op1 <[op2] || op1 > [op2 + op2size / 8]\\
+bound & int5 if op1 $<$[op2] || op1 $>$ [op2 + op2size / 8]\\
 arpl & \\
 \bottomrule
 \end{tabular}
