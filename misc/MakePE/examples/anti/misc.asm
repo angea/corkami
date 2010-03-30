@@ -2,7 +2,21 @@
 
 %include '..\..\standard_hdr.asm'
 
+    ;%IMPORT kernel32.dll!GetProcessHeap
 EntryPoint:
+    ; call GetProcessHeap
+    ; 
+    ; ;mov eax, <heap ptr>
+    ; ;get unused_bytes
+    ; movzx ecx, byte [eax-2]
+    ; movzx edx, word [eax-8] ;size
+    ; sub eax, ecx
+    ; lea edi, [edx*8+eax]
+    ; mov al, 0abh
+    ; mov cl, 8
+    ; repe scasb
+    ; je bad
+
     call trig
 
     call beingdebugged
