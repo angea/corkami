@@ -100,8 +100,9 @@ ret & pop EIP and jump to it\\
 retf & pop EIP, then CS and jump to it\\
 iret & pop EIP, CS, EFLAGS, sets EFLAGS and jumps to CS:EIP\\
 \midrule
-cbw & \\
-cwd & \\
+cbw & extend signed value from al to ax: {\tt al=3; $cbw$ \ra ax=3}\\
+cwd & extend signed value from ax to dx:ax: {\tt ax = 3; $cwd$ \ra dx = 0} \\
+cwde & extend signed value from ax to eax: {\tt ax = 3; $ cwde$ \ra eax = 3}\\
 \midrule
 aaa & ascii adjust after addition \\
 aas & ascii adjust after substraction \\
@@ -110,12 +111,11 @@ aad & ascii adjust before division \\
 daa & decimal adjust after addition \\
 das & decimal adjust after substraction \\
 \midrule
-bsf & bit scan forward \\
+
+bsf & scan for the first bit set:{\tt eax=0010100b; $bsf$ ebx, eax \ra ebx, 2} \\
 bsr & bit scan reverse \\
-bt & bit test\\
-btc & bit test and complement \\
-btr & bit test and reset\\
-bts & bit test and set\\
+bt & copy a specific bit to CF:{\tt ax=00100b;bx=2;$bt$ ax,bx \ra CF is set}\\
+& bts/btr/btc the same + set/reset/complement that bit \\
 \midrule
 stc & set CF\\
 clc & clear CF\\

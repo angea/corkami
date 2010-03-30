@@ -1,3 +1,5 @@
+;small code using each opcode
+
 %include '..\..\onesec.hdr'
 
 %macro expect 2
@@ -16,6 +18,11 @@ ValueEAX dd 0EA1h
 val dd ValueEDI
 
 EntryPoint:
+    mov eax, 3
+    expect eax, 3
+
+    lea eax, [eax * 4 + 203Ah]
+    expect eax, 203ah + 4 * 3
 
     xchg [val] , esp    ; makes a backup of ESP and temporarily change ESP to the start of the data
     popad               ; read all the data into registers
@@ -39,15 +46,11 @@ EntryPoint:
     aas
 ;    expect ax, 0307h wrong
 
-mov eax, 01771h         ; let's store a constant as BCD
-mov ebx, 01234h
-sub eax, ebx            ; we got the result wrong, so we'll use AAA
-das                     ; now eax has the right result
-expect eax, 537h
-
-    mov eax, 3
-    lea eax, [eax * 4 + 203Ah]
-    expect eax, 203ah + 4 * 3
+    mov eax, 01771h         ; let's store a constant as BCD
+    mov ebx, 01234h
+    sub eax, ebx            ; we got the result wrong, so we'll use AAA
+    das                     ; now eax has the right result
+    expect eax, 537h
 
     mov eax, 3
     add eax, 3
@@ -167,9 +170,38 @@ expect eax, 537h
     cmovc eax, ebx
     expect eax, 0
 
+    mov eax, 0010100b
+    bsf ebx, eax
+    expect ebx, 2
+
+    mov ax, 00100b
+    mov bx, 2
+    bt ax,bx
+    jnc bad
+
+    mov eax, 12345678h
+    bswap eax
+    expect eax, 78563412h
+
+    mov eax, -1
+    mov al, 3
+    cbw
+    expect ax, 3
+    cwde
+    expect eax, 3
+    cwd
+    expect dx, 0
+
+    mov eax, 136
+    mov ebx, boundslimit
+    bound eax, [ebx]
+
     jmp good
 
 align 4, db 0
+boundslimit:
+    dd 135
+    dd 143
 addseg:
     dd 12345678h
     dw 00h         ; standard value for DS
