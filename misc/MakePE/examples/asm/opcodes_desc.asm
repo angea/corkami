@@ -24,6 +24,12 @@ EntryPoint:
     lea eax, [eax * 4 + 203Ah]
     expect eax, 203ah + 4 * 3
 
+    mov al, 1
+    mov bl, 2
+    xchg al, bl
+    expect al, 2
+    expect bl, 1
+
     xchg [val] , esp    ; makes a backup of ESP and temporarily change ESP to the start of the data
     popad               ; read all the data into registers
     mov esp, [val]       ; restore ESP and EAX
@@ -196,9 +202,42 @@ EntryPoint:
     mov ebx, boundslimit
     bound eax, [ebx]
 
+    stc
+    salc
+    expect al, -1
+
+    ; compares lower 2 bits and copy if inferior
+    CONST equ 1111111111111100b
+    mov ax, CONST + 00b
+    mov bx, CONST + 11b
+    arpl ax, bx
+    jnz bad             ; ZF should be set too
+    expect ax, CONST + 11b
+
+    mov ecx, -1
+    db 66h      ; just increasing cx instead of ecx
+    inc ecx
+    expect ecx, 0ffff0000h
+
+    db 67h      ; just checking cx instead of ecx
+    jecxz _cx0
+    jmp bad
+_cx0:
+
+    mov al, 35
+    mov ebx, xlattable
+    xlatb
+    expect al, 75
+
     jmp good
 
 align 4, db 0
+
+xlattable:
+times 35 db 0
+db 75
+
+    dd 1
 boundslimit:
     dd 135
     dd 143
