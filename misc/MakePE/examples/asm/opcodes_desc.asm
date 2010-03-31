@@ -21,6 +21,15 @@ EntryPoint:
     mov eax, 3
     expect eax, 3
 
+    mov al, -1
+    movzx ecx, al
+    expect ecx, 0ffh
+
+    mov al, -3
+    movsx ecx, al
+    expect ecx, -3
+
+    mov eax, 3
     lea eax, [eax * 4 + 203Ah]
     expect eax, 203ah + 4 * 3
 
@@ -228,6 +237,16 @@ _cx0:
     mov ebx, xlattable
     xlatb
     expect al, 75
+
+    push cs
+    pop ecx
+    lar eax, ecx
+    expect eax, 0cffb00h
+
+    push cs
+    pop ecx
+    verr cx
+    jnz bad
 
     jmp good
 

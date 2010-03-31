@@ -20,8 +20,11 @@ nop	& does nothing. or maybe exchange *ax with *ax :) \\
 wait	& waits for fpu stuff to be finished. junk nop usually \\
 \midrule
 mov 	& move: {\tt $mov$ eax, 3 \ra eax = 3} \\
+cmovxx & mov on condition: {\tt CF = 0; eax = 0; ebx = 3; $cmovc$ eax, ebx \ra eax = 0}\\
 movs 	& mov ds:[edi], es:[esi] , and inc or dec esi and edi\\
 lea 	& lea x, [y] = mov x,y: {\tt eax = 3; $lea$ eax, [eax * 4 + 203A] \ra eax = 2046}\\
+movzx & mov and extend with zeroes: {\tt al = -1; $movzx$ ecx, al \ra ecx = ff}\\
+movsx & mov and extend with the sign: {\tt al = -3; $movsx$ ecx, al \ra ecx = -3}\\
 lods 	& mov *ax, es:[esi], and inc or dec esi\\
 stos 	& mov ds:[edi], *ax and inc or dec edi\\
 xchg	& swap contents: {\tt al = 1; bl = 2; $xchg$ al, bl \ra al = 2; bl = 1}\\
@@ -52,7 +55,7 @@ and 	& and: {\tt eax = 1010b; $and$ eax, 0110b \ra eax = 0010b} \\
 xor 	& exclusive or: {\tt eax = 1010b; $xor$ eax, 0110b \ra eax = 1100b} \\ 
 not	& logical not: {\tt al = 1010b; $not$ al \ra al = 11110101b}\\
 rol	& left rotation: {\tt eax = 1010b; $rol$ eax, 3 \ra eax = 1010000b}\\
-ror	& right rotation: {\tt al= 1010b;$ror$ al, 3 \ ra al = 1000001b}\\
+ror	& right rotation: {\tt al= 1010b; $ror$ al, 3 \ ra al = 1000001b}\\
 rcl	& rol over carry: {\tt CF = 1, eax = 1010b; $rol$ eax, 3 \ra eax = 1010100b}\\
 rcr	& ror over carry: {\tt al = 1010b; CF = 1; $rcr$ al, 3 \ra al = 10100001b} \\
 shl	& shift left: {\tt al = 1010b; $shl$ al, 2 \ra al = 101000b} \\
@@ -67,11 +70,10 @@ lds 	&loads register and segment: {\tt [ebx] = 12345678, 0; $lds$ eax, [ebx] \ra
 loop 	& dec ecx. jump if ecx is 0 and extra condition\\
 rep: 	& repeat operation, decrease counter. stop if condition met or counter is 0\\
 jecxz 	& \\
-jmp 	& eip = operand\\
-jmpf 	& cs:eip = operands\\
-jxx 	& conditional jump\\
+jmp 	& eip = operand \\
+jmpf 	& cs:eip = operands \\
+jxx 	& jump on condition \\
 setxx 	& operand = condition ? 1 : 0 {\tt CF = 1; $setc$ al \ra al = 1}\\
-cmovxx & conditional mov \\
 \bottomrule
 \end{tabular}
 \rowcolors{0}{white}{lightgray}
@@ -130,19 +132,33 @@ cli & clear IF (privileged)\\
 std & set DF (used in rep prefix)\\
 cld & clear DF\\
 \midrule
-int & trigger interrupt\\
+int & trigger interrupt $<$operand$>$\\
 into & trigger interrupt 4 if OF is set\\
 int3 & trigger interrupt 3\\
 \midrule
 xlat & al=[ebx+al]: {\tt al = 35; [ebx + 35] = 75; $xlatb$ \ra al = 75}\\
-bound & int5 if op1 $<$[op2] \&\& op1 $>$ [op2 + op2size / 8]: {\tt [ebx] = 135, 143; eax = 136; $bound$ eax, ebx \ra nothing}\\
+bound & int5 if op1 $<$[op2] \&\& op1 $>$ [op2 + size]: {\tt [ebx] = 135, 143; eax = 136; $bound$ eax, ebx \ra nothing}\\
 arpl & compares lower 2 bits and copy if inferior:{\tt ax=1100b; bx=11b;$arpl$ ax,bx \ra ax = 1111b}\\
+lar & check descriptor and get some parameter if existing: {\tt cx = cs; $lar$ eax, ecx \ra eax = cff300}\\
+ver* & check segment accessibility (and readability or writability): {\tt cx = cs; $verr$ cx \ra cf = 1}\\
 setalc & al = cf ? -1 : 0: {\tt cf = 1; $setalc$ \ra al = ff}\\
 \midrule
 lock: & preserve memory content. picky prefix mostly used to trigger exceptions\\
 opsize: & turns dword operand into word: {\tt ecx = -1; $66:$ inc ecx (=inc cx) \ra ecx = ffff0000}\\
 addsize: & use 16b addressing mode: 0100 = add [eax], eax; 67:0100 = add [bx + si], eax\\
-
+bswap    & endian swapping {\tt eax = 12345678h; $bswap$ eax \ra eax = 78563412}\\
+\bottomrule
+\end{tabular}
+\rowcolors{0}{white}{lightgray}
+\newpage
+\begin{tabular}{lllll}
+\toprule
+name & description \\
+\midrule
+sgdt & \\
+sldt & \\
+sidt & \\
+rdtsc & \\
 \bottomrule
 \end{tabular}
 
