@@ -10,7 +10,7 @@
 ValueEDI dd 0ED0h
 ValueESI dd 0E01h
 ValueEBP dd 0EEBE3141h     ; E B PI ;)
-ValueESP dd 0               ; unused
+ValueESP dd 0              ; unused
 ValueEBX dd 0EB1h
 ValueEDX dd 0ED1h
 ValueECX dd 0EC1h
@@ -248,10 +248,72 @@ _cx0:
     verr cx
     jnz bad
 
+    mov al, 3
+    mov bl, 6
+    mov cl, 7
+    cmpxchg bl, cl
+    expect al, bl
+
+    mov al, 3
+    mov bl, 3
+    mov cl, 7
+    cmpxchg bl, cl
+    expect bl, cl
+
+    rdtsc
+    mov ebx, eax
+    mov ecx, edx
+    rdtsc
+    cmp eax, ebx
+    jle bad
+    expect edx, ecx
+
+    sldt eax
+    expect eax, 0
+
+    mov eax, dummy
+    sidt [eax]
+    expect word [eax],  007ffh
+
+    mov eax, dummy
+    sgdt [eax]
+    expect word [eax],  003ffh
+
+    mov eax, 0
+    cpuid
+    test eax, eax
+    jz bad
+
+    ; nops
+    sfence
+    mfence
+    prefetchnta [eax]   ; no matter the eax value
+
+    push cs
+    pop ecx
+    lsl eax, ecx
+    jnz bad
+    expect eax, -1
+
+    str ax
+    expect ax, 28h
+
+    mov eax, 0
+    push _aftersys
+    mov edx, esp
+    sysenter
+_aftersys:
+    expect eax, 0c0000005h ; depends on initial EAXreplace with error
+    lea eax, [esp - 4]
+    expect ecx, eax                             ; 1 if stepping
+    mov al, [edx]
+    expect al, 0c3h
+    expect edx, [__imp__KiFastSystemCallRet]    ; -1 if stepping
+
     jmp good
 
 align 4, db 0
-
+;%IMPORT ntdll.dll!KiFastSystemCallRet
 xlattable:
 times 35 db 0
 db 75
@@ -270,6 +332,8 @@ align 4, db 0
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
+
+dummy dd 0,0
 
 tada db "Tada!", 0
 helloworld db "Hello World!", 0
