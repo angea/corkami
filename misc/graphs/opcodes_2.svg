@@ -17,7 +17,7 @@
    inkscape:version="0.47 r22583"
    sodipodi:docname="opcodes_2.svg">
   <title
-     id="title4688">Overview of two-byte opcodes</title>
+     id="title4688">A perspective of two-byte opcodes</title>
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -56,7 +56,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>Overview of two-byte opcodes</dc:title>
+        <dc:title>A perspective of two-byte opcodes</dc:title>
         <dc:creator>
           <cc:Agent>
             <dc:title>Ange Albertini</dc:title>
@@ -2604,10 +2604,10 @@
          x="273.96686"
          y="78.243698"
          style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan4638">Overview of two-byte opcodes</tspan></text>
+         id="tspan4638">a perspective of two-byte opcodes</tspan></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none;display:inline"
-       d="m 283.52303,41.087508 -15.26422,0 0,44.3985 226.77386,0 0,-15.595"
+       d="m 283.52303,41.087508 -15.26422,0 0,44.3985 252.77386,0 0,-15.595"
        id="path3874"
        sodipodi:nodetypes="ccccc" />
     <a
@@ -3270,5 +3270,40 @@
          id="tspan3479-4"
          x="217.11765"
          y="190.09023">LSL</tspan></text>
+    <rect
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3374-17"
+       width="145.18913"
+       height="39.499992"
+       x="90.311523"
+       y="246.20787"
+       ry="13.306315"
+       rx="13.30631" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="162.68051"
+       y="269.71664"
+       id="text3239"><tspan
+         sodipodi:role="line"
+         id="tspan3241"
+         x="162.68051"
+         y="269.71664">MOV</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="392.70413"
+       y="97.135902"
+       id="text3243"><tspan
+         sodipodi:role="line"
+         id="tspan3245"
+         x="392.70413"
+         y="97.135902"
+         style="font-size:6">most privileged and MMX/SSE opcodes </tspan><tspan
+         sodipodi:role="line"
+         x="392.70413"
+         y="97.135902"
+         id="tspan3247"
+         style="font-size:6">are intentionally missing</tspan></text>
   </g>
 </svg>
