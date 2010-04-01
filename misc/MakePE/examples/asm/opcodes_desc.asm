@@ -16,7 +16,10 @@ ValueEDX dd 0ED1h
 ValueECX dd 0EC1h
 ValueEAX dd 0EA1h
 val dd ValueEDI
-
+ud1
+ud2
+hlt
+db 0f1h
 EntryPoint:
     mov eax, 3
     expect eax, 3
@@ -55,17 +58,25 @@ EntryPoint:
     daa
     expect ax, 1771h ; 1234 + 537 = 1771
 
-    mov ax, 0701h
-    mov bx, 0304h
-    sub ax, bx
+    mov al, 01h
+    mov bl, 04h
+    sub al, bl
     aas
-;    expect ax, 0307h wrong
+    expect al, 11 - 4
 
-    mov eax, 01771h         ; let's store a constant as BCD
+    mov eax, 01771h
     mov ebx, 01234h
-    sub eax, ebx            ; we got the result wrong, so we'll use AAA
-    das                     ; now eax has the right result
+    sub eax, ebx
+    das
     expect eax, 537h
+
+    mov ax, 305h
+    aad
+    expect ax, 35
+
+    mov ax, 35
+    aam
+    expect ax, 305h
 
     mov eax, 3
     add eax, 3
@@ -250,13 +261,11 @@ _cx0:
 
     mov al, 3
     mov bl, 6
-    mov cl, 7
     cmpxchg bl, cl
     expect al, bl
 
     mov al, 3
-    mov bl, 3
-    mov cl, 7
+    mov bl, al
     cmpxchg bl, cl
     expect bl, cl
 
@@ -287,7 +296,10 @@ _cx0:
     ; nops
     sfence
     mfence
+    lfence
     prefetchnta [eax]   ; no matter the eax value
+    db 0fh, 019h, 00    ; hint nop [eax]
+    db 0fh, 01fh, 00    ; nop [eax]
 
     push cs
     pop ecx
@@ -299,11 +311,11 @@ _cx0:
     expect ax, 28h
 
     mov eax, 0
-    push _aftersys
+    push _return
     mov edx, esp
     sysenter
-_aftersys:
-    expect eax, 0c0000005h ; depends on initial EAXreplace with error
+_return:
+    expect eax, ACCESS_VIOLATION            ; depends on initial EAX
     lea eax, [esp - 4]
     expect ecx, eax                             ; 1 if stepping
     mov al, [edx]
