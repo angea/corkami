@@ -82,6 +82,12 @@ EntryPoint:
     add eax, 3
     expect eax, 6
 
+    mov al, 1
+    mov bl, 2
+    xadd al, bl
+    expect al, 1 + 2
+    expect bl, 1
+
     stc
     mov eax, 3
     adc eax, 3
@@ -186,9 +192,21 @@ EntryPoint:
 
     pop ds
 
+    push 3
+    enter 8, 0
+    enter 4, 1
+    leave
+    leave
+    pop eax
+    expect eax, 3
+
     stc
     setc al
     expect al, 1
+
+    stc
+    salc
+    expect al, -1
 
     clc
     mov eax, 0
@@ -222,14 +240,10 @@ EntryPoint:
     mov ebx, boundslimit
     bound eax, [ebx]
 
-    stc
-    salc
-    expect al, -1
-
     ; compares lower 2 bits and copy if inferior
     CONST equ 1111111111111100b
-    mov ax, CONST + 00b
-    mov bx, CONST + 11b
+    mov ax, CONST
+    mov bx, 1010100111b
     arpl ax, bx
     jnz bad             ; ZF should be set too
     expect ax, CONST + 11b
