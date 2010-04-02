@@ -19,6 +19,8 @@ name & description \\
 nop	& does nothing. or maybe exchange *ax with *ax :) \\
 wait	& waits for fpu stuff to be finished. junk nop usually \\
 sfence & serializing stuff. used as nops (same for mfence, lfence) \\
+prefetchnta & used as nops \\
+hint nop & nop with operand - doesn't trigger exceptions \\
 \midrule
 mov 	& move (privileged with dr* and cr*): {\tt $mov$ eax, 3 \ra eax = 3} \\
 cmov$cc$ & mov on condition: {\tt CF = 0; eax = 0; ebx = 3; $cmovc$ eax, ebx \ra eax = 0}\\
@@ -32,6 +34,7 @@ stos 	& mov ds:[edi], *ax and inc (or dec) edi\\
 \midrule
 add 	& addition: {\tt eax = 3 ; $add$ eax, 3 \ra eax = 6}\\
 adc 	& add, with carry: {\tt CF = 1; eax = 3; $adc$ eax, 3 \ra eax = 7, CF = 0}\\
+xadd & add and exchange: {\tt al, bl = 1, 2; $xadd$ al, bl \ra al, bl = 3, 1}\\
 sub 	& substraction: {\tt eax = 6 ; $sub$ eax, 3 \ra eax = 3}\\
 sbb   	& sub, with carry: {\tt eax = 6; CF = 1 ; $sbb$ eax, 3 \ra eax = 2}\\
 inc 	& =add 1: {\tt eax = 0; $inc$ eax \ra eax = 1} \\
@@ -84,8 +87,10 @@ setalc & al = cf ? -1 : 0: {\tt cf = 1; $setalc$ \ra al = ff}\\
 \toprule
 name & description \\
 \midrule
-enter & push ebp/mov ebp, esp/\ldots\\
-leave & mov esp, ebp/pop ebp\\
+enter & = (push ebp/mov ebp, esp) op2+1 times, then esp -= op1: 
+\\
+ & $enter$ 4,1 = push ebp/mov ebp, esp/ push ebp/ mov ebp, esp/ esp -= 4 \\
+leave & = mov esp, ebp/pop ebp\\
 \midrule
 cmp 	& comparison by $sub$, discard result\\
 cmps & cmp es:[esi], ds:[edi] and inc (or dec) esi and edi \\
