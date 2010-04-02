@@ -31,7 +31,7 @@
      inkscape:cx="357.70965"
      inkscape:cy="526.09228"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:snap-bbox="true"
      inkscape:bbox-nodes="false"
@@ -3305,5 +3305,25 @@
          y="97.135902"
          id="tspan3247"
          style="font-size:6">are intentionally missing</tspan></text>
+    <rect
+       rx="13.306312"
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3390-1"
+       width="72.594604"
+       height="39.499992"
+       x="90.311523"
+       y="641.20776"
+       ry="13.30631" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="126.77484"
+       y="664.09009"
+       id="text3453-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3455-4"
+         x="126.77484"
+         y="664.09009">XADD</tspan></text>
   </g>
 </svg>
