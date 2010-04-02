@@ -10,48 +10,51 @@
 \usepackage[table]{xcolor}
 \rowcolors{0}{white}{lightgray}
 \begin{document}
+
+\pagestyle{empty}
 \begin{center}Common opcodes description\end{center}
+\begin{center}\tiny most privileged and FPU/MMX/SSE opcodes are intentionally missing\end{center}
 
 \begin{tabular}{lllll}
 \toprule
 name & description \\
 \midrule
 nop	& does nothing. or maybe exchange *ax with *ax :) \\
-wait	& waits for fpu stuff to be finished. junk nop usually \\
-sfence & serializing stuff. used as nops (same for mfence, lfence) \\
-prefetchnta & used as nops \\
-hint nop & nop with operand - doesn't trigger exceptions \\
+fwait	& waits for fpu stuff to be finished. junk nop usually \\
+sfence & serializing stuff. used as nop (same for mfence, lfence) \\
+prefetchnta & cpu hint - used as nop \\
+hint nop & cpu hint, nop with operand - never triggers exceptions \\
 \midrule
-mov 	& move (privileged with dr* and cr*): {\tt $mov$ eax, 3 \ra eax = 3} \\
-cmov$cc$ & mov on condition: {\tt CF = 0; eax = 0; ebx = 3; $cmovc$ eax, ebx \ra eax = 0}\\
+mov 	& move (privileged when with dr* and cr*): {\tt $mov$ eax, 3 \ra eax = 3} \\
+cmov$cc$ & mov on condition: {\tt CF, eax, ebx = 0, 0, 3; $cmovc$ eax, ebx \ra eax = 0}\\
 lea 	& lea x, [y] = mov x,y: {\tt eax = 3; $lea$ eax, [eax * 4 + 203A] \ra eax = 2046}\\
 movzx & mov and extend with zeroes: {\tt al = -1; $movzx$ ecx, al \ra ecx = ff}\\
 movsx & mov and extend with the sign: {\tt al = -3; $movsx$ ecx, al \ra ecx = -3}\\
-xchg	& swap contents: {\tt al = 1; bl = 2; $xchg$ al, bl \ra al = 2; bl = 1}\\
+xchg	& swap contents: {\tt al, bl = 1, 2; $xchg$ al, bl \ra al, bl = 2, 1}\\
 movs 	& mov ds:[edi], es:[esi] , and inc (or dec) esi and edi\\
 lods 	& mov *ax, es:[esi], and inc (or dec) esi\\
 stos 	& mov ds:[edi], *ax and inc (or dec) edi\\
 \midrule
-add 	& addition: {\tt eax = 3 ; $add$ eax, 3 \ra eax = 6}\\
-adc 	& add, with carry: {\tt CF = 1; eax = 3; $adc$ eax, 3 \ra eax = 7, CF = 0}\\
+add 	& addition: {\tt eax = 3; $add$ eax, 3 \ra eax = 6}\\
+adc 	& add, with carry: {\tt CF, eax = 1, 3; $adc$ eax, 3 \ra CF, eax = 0, 7}\\
 xadd & add and exchange: {\tt al, bl = 1, 2; $xadd$ al, bl \ra al, bl = 3, 1}\\
 sub 	& substraction: {\tt eax = 6 ; $sub$ eax, 3 \ra eax = 3}\\
-sbb   	& sub, with carry: {\tt eax = 6; CF = 1 ; $sbb$ eax, 3 \ra eax = 2}\\
+sbb   	& sub, with carry: {\tt CF, eax = 1, 6 ; $sbb$ eax, 3 \ra eax = 2}\\
 inc 	& =add 1: {\tt eax = 0; $inc$ eax \ra eax = 1} \\
 dec 	& =sub 1: {\tt eax = 7; $dec$ eax \ra eax = 6} \\
 neg	& negative {\tt al = 1; $neg$ al \ra al = -1}\\
 div 	& divide ax/dx:ax/edx:eax by operand. Quo/Rem are in al:ah/ax:dx/eax:edx\\
-	& {\tt ax = 35; bl = 11; $div$ bl \ra al = 3; ah = 2}\\
+	& {\tt ax, bl = 35, 11; $div$ bl \ra ax = 0203}\\
 idiv 	& same, with sign\\
-mul 	& multiply. same registers as div: {\tt al = 11;bl =  3; $mul$ bl \ra ax = 33}\\
+mul 	& multiply. same registers as div: {\tt al, bl = 11, 3; $mul$ bl \ra ax = 33}\\
 imul 	& signed mul. has a 3 operands version: {\tt eax = 11; $imul$ eax, eax, 3 \ra eax = 33}\\
 \midrule
-aaa & ascii adjust after BCD addition: {\tt ax = 304; bx = 307; add ax, bx; $aaa$ \ra ax = 701} \\
-aas & ascii adjust after substraction: {\tt ax = 1; bx = 4; sub al, bl; $aas$ \ra ax = 7}\\
+aaa & ascii adjust after BCD addition: {\tt ax, bx = 304, 307; add ax, bx; $aaa$ \ra ax = 701} \\
+aas & ascii adjust after substraction: {\tt ax, bx = 1, 4; sub al, bl; $aas$ \ra ax = 7}\\
 aam & decimal to BCD: {\tt ax = 35; $aam$ \ra ax = 305}\\
 aad & BCD to decimal: {\tt ax = 305; $aad$ \ra ax = 35}\\
-daa & decimal adjust after addition: {\tt ax = 1234; bx = 537; add ax, bx; $daa$ \ra ax = 1771} \\
-das & decimal adjust after substraction {\tt ax = 1771; bx = 1234; sub ax, bx; $das$ \ra ax = 537} \\
+daa & decimal adjust after addition: {\tt ax, bx = 1234, 537; add ax, bx; $daa$ \ra ax = 1771} \\
+das & decimal adjust after substraction {\tt ax, bx = 1771, 1234; sub ax, bx; $das$ \ra ax = 537} \\
 \midrule
 or 	& or: {\tt eax = 1010b; $or$ eax, 0110b \ra eax = 1110b} \\ 
 and 	& and: {\tt eax = 1010b; $and$ eax, 0110b \ra eax = 0010b} \\ 
@@ -59,13 +62,13 @@ xor 	& exclusive or: {\tt eax = 1010b; $xor$ eax, 0110b \ra eax = 1100b} \\
 not	& logical not: {\tt al = 1010b; $not$ al \ra al = 11110101b}\\
 rol	& left rotation: {\tt eax = 1010b; $rol$ eax, 3 \ra eax = 1010000b}\\
 ror	& right rotation: {\tt al= 1010b; $ror$ al, 3 \ ra al = 1000001b}\\
-rcl	& rol over carry: {\tt CF = 1, eax = 1010b; $rol$ eax, 3 \ra eax = 1010100b}\\
-rcr	& ror over carry: {\tt al = 1010b; CF = 1; $rcr$ al, 3 \ra al = 10100001b} \\
+rcl	& rol over carry: {\tt CF, al = 1, 1010b; $rol$ al, 3 \ra al = 1010100b}\\
+rcr	& ror over carry: {\tt CF, al = 1, 1010b, 1; $rcr$ al, 3 \ra al = 10100001b} \\
 shl	& shift left (=sal): {\tt al = 1010b; $shl$ al, 2 \ra al = 101000b} \\
 shr	& shift right: {\tt al = 1010b; $shr$ al, 2 \ra al = 10b}\\
 sar	 & arithmetic shr (propagates sign): {\tt al = -8; $sar$ al, 2 \ra al = -2} \\
-shld	& shift and concatenate: {\tt ax = 1111b; bx = 010...0b; $shld$ ax, bx, 3 \ra ax = 1111010b}\\
-shrd 	& {\tt ax = 1101001b; bx = 101b; $shrd$ ax, bx, 3 \ra ax  = 10100...001101b}\\
+shld	& shift and concatenate: {\tt ax, bx = 1111b, 010...0b; $shld$ ax, bx, 3 \ra ax = 1111010b}\\
+shrd 	& {\tt ax, bx = 1101001b, 101b; $shrd$ ax, bx, 3 \ra ax = 10100...001101b}\\
 \midrule
 lds 	&loads register and segment: {\tt [ebx] = 12345678, 0; $lds$ eax, [ebx] \ra ds = 0; eax = 12345678}\\%ds x, [y] \ra ds = [y+4] and x = [y] \\
 & same with lss/les/lfs/lgs and the other segments\\
@@ -75,8 +78,6 @@ jecxz 	& jump if *cx is null\\
 jmp 	& eip = operand \\
 jmpf 	& cs:eip = operands \\
 j$cc$ 	& jump on condition \\
-set$cc$ 	& operand = condition ? 1 : 0 {\tt CF = 1; $setc$ al \ra al = 1}\\
-setalc & al = cf ? -1 : 0: {\tt cf = 1; $setalc$ \ra al = ff}\\
 \bottomrule
 \end{tabular}
 
@@ -89,7 +90,7 @@ name & description \\
 \midrule
 enter & = (push ebp/mov ebp, esp) op2+1 times, then esp -= op1: 
 \\
- & $enter$ 4,1 = push ebp/mov ebp, esp/ push ebp/ mov ebp, esp/ esp -= 4 \\
+ & {\tt $enter$ 4,1 = push ebp/mov ebp, esp/ push ebp/ mov ebp, esp/ esp -= 4} \\
 leave & = mov esp, ebp/pop ebp\\
 \midrule
 cmp 	& comparison by $sub$, discard result\\
@@ -126,7 +127,7 @@ cwde & extend signed value from ax to eax: {\tt ax = 3; $ cwde$ \ra eax = 3}\\
 
 bsf & scan for the first bit set: {\tt eax = 0010100b; $bsf$ ebx, eax \ra ebx = 2} \\
 bsr & same but from highest bit to lowest bit \\
-bt & copy a specific bit to CF: {\tt ax = 00100b;bx = 2;$bt$ ax,bx \ra CF is set}\\
+bt & copy a specific bit to CF: {\tt ax, bx = 00100b, 2; $bt$ ax,bx \ra CF = 1}\\
 & bts/btr/btc the same + set/reset/complement that bit \\
 \midrule
 stc/d/i & set CF/DF (rep prefix)/IF (privileged)\\
@@ -137,8 +138,8 @@ int & trigger interrupt $<$operand$>$\\
 into & trigger interrupt 4 if OF is set\\
 int3 & trigger interrupt 3\\
 \midrule
-xlat & al = [ebx + al]: {\tt al = 35; [ebx + 35] = 75; $xlatb$ \ra al = 75}\\
-bound & int5 if op1 $<$[op2] \&\& op1 $>$ [op2 + size]: {\tt [ebx] = 135, 143; eax = 136; $bound$ eax, ebx \ra nothing}\\
+xlat & al = [ebx + al]: {\tt al, [ebx + 35] = 35, 75; $xlatb$ \ra al = 75}\\
+bound & int5 if op1 $<$[op2] \&\& op1 $>$ [op2 + size]: {\tt eax, [ebx] = 136, [135, 143]; $bound$ eax, ebx \ra nothing}\\
 \midrule
 opsize: & turns dword operand into word: {\tt ecx = -1; $66:$ inc ecx (=inc cx) \ra ecx = ffff0000}\\
 addsize: & use 16b addressing mode: {\tt $67$:add [eax], eax \ra add [bx + si], eax}\\
@@ -152,10 +153,10 @@ sldt & store ldt (always 0?): {\tt $sldt$ eax \ra eax = 0}\\
 cpuid & get cpu info (brand, features, \ldots)\\
 lsl & get segment limit: {\tt cx = cs;$lsl$ eax, ecx \ra eax= -1}\\
 str & store task register: {\tt $str$ ax \ra ax = 28 (XP) / 4000 (vmware)}\\
-arpl & compares lower 2 bits and copy if inferior: {\tt ax = 1100b; bx = 11b;$arpl$ ax,bx \ra ax = 1111b}\\
+arpl & compares lower 2 bits and copy if inferior: {\tt ax, bx = 1100b, 11b;$arpl$ ax,bx \ra ax = 1111b}\\
 lar & check descriptor and get some parameter if existing: {\tt cx = cs; $lar$ eax, ecx \ra eax = cff300}\\
 ver* & check segment accessibility (and readability or writability): {\tt cx = cs; $verr$ cx \ra cf = 1}\\
-sysenter & gateway to kernel: {\tt eax = 0,  [esp] = return, edx = esp; $sysenter$ \ra eip = return;\ldots} \\
+sysenter & gateway to kernel: {\tt eax, [esp], edx = 0, @return, esp; $sysenter$ \ra eip = return;\ldots} \\
 \bottomrule
 \end{tabular}
 \rowcolors{0}{white}{lightgray}
@@ -163,6 +164,9 @@ sysenter & gateway to kernel: {\tt eax = 0,  [esp] = return, edx = esp; $sysente
 \begin{tabular}{lllll}
 \toprule
 name & description \\
+\midrule
+set$cc$ 	& operand = condition ? 1 : 0 {\tt CF = 1; $setc$ al \ra al = 1}\\
+setalc & al = cf ? -1 : 0: {\tt cf = 1; $setalc$ \ra al = ff}\\
 \midrule
 hlt & stops cpu. usually used to trigger PRIVILEGED\_INSTRUCTION\\
 IceBp & triggers SINGLE\_STEP exception\\
