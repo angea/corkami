@@ -45,13 +45,13 @@
      inkscape:cx="371.65926"
      inkscape:cy="526.09228"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:snap-bbox="false"
-     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="false"
      inkscape:snap-bbox-midpoints="true"
-     inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:bbox-paths="true"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:bbox-paths="false"
      inkscape:snap-center="true"
      inkscape:snap-object-midpoints="true"
      inkscape:snap-midpoints="true"
@@ -2792,7 +2792,7 @@
     <rect
        style="color:#000000;fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3458"
-       width="145.18915"
+       width="108.8919"
        height="39.500023"
        x="90.311523"
        y="720.20776"
@@ -3008,7 +3008,7 @@
          id="tspan4985"
          x="378.71692"
          y="467.92407"
-         style="font-size:20px">Jxx</tspan></text>
+         style="font-size:20px">Jcc</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -3181,14 +3181,14 @@
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="159.98718"
-       y="745.76184"
+       x="144.45328"
+       y="744.34302"
        id="text5059"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5061"
-         x="159.98718"
-         y="745.76184">LOOPS</tspan></text>
+         x="144.45328"
+         y="744.34302">LOOPcc</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3458-5"
@@ -3219,7 +3219,7 @@
          sodipodi:role="line"
          id="tspan5921"
          x="201.35205"
-         y="784.19427">REPx:</tspan></text>
+         y="784.19427">REPcc:</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -4196,5 +4196,25 @@
          x="435.271"
          y="675.96094"
          id="tspan6072-9">LEAVE</tspan></text>
+    <rect
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3502-1"
+       width="36.297314"
+       height="39.50013"
+       x="199.20337"
+       y="720.2077"
+       ry="13.879085"
+       rx="13.879085" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="217.11765"
+       y="743.09009"
+       id="text6052-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan6054-4"
+         x="217.11765"
+         y="743.09009">JECXZ</tspan></text>
   </g>
 </svg>
