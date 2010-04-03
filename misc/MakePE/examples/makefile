@@ -36,12 +36,12 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\bundled_before.exe packer\bundled_after.exe \
 	packer\thread_host.exe packer\remote_thread.exe \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
-	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe
+	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe \
+	asm\opcodes_desc.exe
+
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
-    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe \
-    asm\opcodes_desc.exe
-
+    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -174,9 +174,17 @@ pe\ntoskrnl.exe: pe\ntoskrnl.asm
 asm\seh_triggers.exe: asm\seh_triggers.asm
 	$(makepe) asm\seh_triggers.asm
 
-#si c'est ton corps qui bouge c'est ton coeur qui fait tout
+#si c'est ton corps qui bouge, c'est ton coeur qui fait tout
 asm\getip.exe: asm\getip.asm
 	$(makepe) asm\getip.asm
+
+#You can't hide nowhere, with the torchlight on
+pe\tinype.exe: pe\tinype.asm
+	yasm -o pe\tinype.exe pe\tinype.asm
+
+#Lutte contre les mots faciles, lutte contre la haine des ... 
+asm\opcodes_desc.exe: asm\opcodes_desc.asm
+	$(makepe) asm\opcodes_desc.asm
 
 pe\seh_dll.dll: pe\seh_dll.asm
 	$(makepe) pe\seh_dll.asm
@@ -190,9 +198,6 @@ format\exehw.exe: format\exehw.asm
 	yasm -o format\exehw.exe format\exehw.asm
 format\exetiny.exe: format\exetiny.asm
 	yasm -o format\exetiny.exe format\exetiny.asm
-
-pe\tinype.exe: pe\tinype.asm
-	yasm -o pe\tinype.exe pe\tinype.asm
 
 pe\forwarder.dll: pe\forwarder.asm
 	$(makepe) pe\forwarder.asm
@@ -317,9 +322,6 @@ anti\tf_step.exe: anti\tf_step.asm
 	$(makepe) anti\tf_step.asm
 anti\dump.exe: anti\dump.asm
 	$(makepe) anti\dump.asm
-asm\opcodes_desc.exe: asm\opcodes_desc.asm
-	$(makepe) asm\opcodes_desc.asm
-
 
 asm\apiloop.exe: asm\apiloop.asm
 	$(makepe) asm\apiloop.asm
