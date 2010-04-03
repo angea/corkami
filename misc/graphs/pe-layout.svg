@@ -119,9 +119,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49456085"
-     inkscape:cx="526.18109"
-     inkscape:cy="372.04724"
+     inkscape:zoom="1.5572077"
+     inkscape:cx="121.88086"
+     inkscape:cy="418.56512"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -140,7 +140,9 @@
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:bbox-nodes="true"
      inkscape:bbox-paths="true"
-     inkscape:snap-midpoints="true" />
+     inkscape:snap-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true" />
   <metadata
      id="metadata3019">
     <rdf:RDF>
@@ -397,7 +399,7 @@
          sodipodi:role="line"
          id="tspan4717"
          x="173.10645"
-         y="528.03473">Section[0].offset</tspan></text>
+         y="528.03473">Section[0].Offset</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -407,7 +409,7 @@
          sodipodi:role="line"
          id="tspan4717-9"
          x="173.10645"
-         y="636.99042">Section[1].offset</tspan></text>
+         y="636.99042">Section[1].Offset</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -418,7 +420,7 @@
          id="tspan4717-4"
          x="173.10645"
          y="738.45569"
-         style="font-size:10px">Section[2].offset</tspan></text>
+         style="font-size:10px">Section[2].Offset</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 375.38785,431.77759 -170.14715,0"
@@ -519,22 +521,22 @@
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="368.45801"
+       x="370.45801"
        y="673.22333"
        id="text4715-1-2"><tspan
          sodipodi:role="line"
          id="tspan4717-7-7"
-         x="368.45801"
+         x="370.45801"
          y="673.22333">Section[1].PSize</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="362.45801"
+       x="370.45801"
        y="780.8938"
        id="text4715-1-3"><tspan
          sodipodi:role="line"
          id="tspan4717-7-1"
-         x="362.45801"
+         x="370.45801"
          y="780.8938">Section[2].PSize</tspan></text>
     <text
        xml:space="preserve"
@@ -908,7 +910,7 @@
          id="tspan6226-1">imports</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.99999996, 1.99999998;stroke-dashoffset:0;marker-start:url(#StopL);marker-end:url(#Arrow1Lend-8);display:inline"
-       d="m 708.8973,372.45822 0,638.46308"
+       d="m 708.8973,373.64549 0,636.68221"
        id="path3023-6"
        sodipodi:nodetypes="cc" />
     <text
@@ -924,22 +926,22 @@
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="868.45801"
+       x="870.45801"
        y="713.22333"
        id="text4715-1-2-8"><tspan
          sodipodi:role="line"
          id="tspan4717-7-7-6"
-         x="868.45801"
+         x="870.45801"
          y="713.22333">Section[1].VSize</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="862.45801"
+       x="870.45801"
        y="840.8938"
        id="text4715-1-3-0"><tspan
          sodipodi:role="line"
          id="tspan4717-7-1-2"
-         x="862.45801"
+         x="870.45801"
          y="840.8938">Section[2].VSize</tspan></text>
     <flowRoot
        xml:space="preserve"
@@ -952,29 +954,28 @@
            x="1414.8081"
            y="260.17529" /></flowRegion><flowPara
          id="flowPara4316" /></flowRoot>    <path
-       style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1, 4;stroke-dashoffset:0"
-       d="m 375.38785,143.50989 349.85285,0"
+       style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 4;stroke-dashoffset:0"
+       d="m 375.38785,431.77759 349.85285,0"
        id="path4318"
-       transform="translate(0,308.2677)"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 4;stroke-dashoffset:0;display:inline"
-       d="m 375.38785,544.73375 349.85285,20"
+       d="m 375.38785,524.73375 349.85285,20"
        id="path4318-4"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 4;stroke-dashoffset:0;display:inline"
-       d="m 375.38785,653.7776 349.85285,40"
+       d="m 375.38785,633.7776 349.85285,40"
        id="path4318-6"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 4;stroke-dashoffset:0;display:inline"
-       d="m 375.38785,753.7776 349.85285,60"
+       d="m 375.38785,733.7776 349.85285,60"
        id="path4318-0"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 4;stroke-dashoffset:0;display:inline"
-       d="m 375.38785,867.7776 349.85285,80"
+       d="m 375.38785,847.7776 349.85285,80"
        id="path4318-00"
        sodipodi:nodetypes="cc" />
     <text
@@ -1003,22 +1004,22 @@
          id="tspan2998"
          x="356.92007"
          y="963.07147"
-         style="font-size:10px">offset=PointerToRawData</tspan><tspan
+         style="font-size:10px;font-family:Courier New;-inkscape-font-specification:Courier New">offset  PointerToRawData</tspan><tspan
          sodipodi:role="line"
          x="356.92007"
          y="975.57147"
          id="tspan3002"
-         style="font-size:10px">PSize =SizeOfRawData</tspan><tspan
+         style="font-size:10px;font-family:Courier New;-inkscape-font-specification:Courier New">PSize   SizeOfRawData</tspan><tspan
          sodipodi:role="line"
          x="356.92007"
          y="988.07147"
-         style="font-size:10px"
-         id="tspan4884">address=VirtualAddress</tspan><tspan
+         style="font-size:10px;font-family:Courier New;-inkscape-font-specification:Courier New"
+         id="tspan4884">address VirtualAddress</tspan><tspan
          sodipodi:role="line"
          x="356.92007"
          y="1000.5715"
-         style="font-size:10px"
-         id="tspan4886">VSize =VirtualSize</tspan></text>
+         style="font-size:10px;font-family:Courier New;-inkscape-font-specification:Courier New"
+         id="tspan4886">VSize   VirtualSize</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -1098,32 +1099,32 @@
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        x="713.30762"
-       y="808.88049"
+       y="806.88049"
        id="text4715-6-6-9-8-4-3"><tspan
          sodipodi:role="line"
          id="tspan4717-5-1-4-8-2-2"
          x="713.30762"
-         y="808.88049"
+         y="806.88049"
          style="font-size:10px;text-align:start;text-anchor:start">Import table</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        x="713.30762"
-       y="864.88049"
+       y="858.88049"
        id="text4715-6-6-9-8-4-3-2"><tspan
          sodipodi:role="line"
          id="tspan4717-5-1-4-8-2-2-1"
          x="713.30762"
-         y="864.88049"
+         y="858.88049"
          style="font-size:10px;text-align:start;text-anchor:start">Imports</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 48;stroke-dashoffset:0;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend-1)"
-       d="m 708.4339,793.33161 0,24.91258"
+       d="m 708.8973,793.43696 0,23.09701"
        id="path4454"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 48;stroke-dashoffset:0;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend-1);display:inline"
-       d="m 708.4339,819.33161 0,76.91258"
+       d="m 708.8973,819.9864 3e-5,76.25779"
        id="path4454-6"
        sodipodi:nodetypes="cc" />
   </g>
