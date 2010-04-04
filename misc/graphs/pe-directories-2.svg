@@ -15,7 +15,7 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="pe-directories_minor.svg"
+   sodipodi:docname="pe-directories-2.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0">
   <title
@@ -172,7 +172,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.79016912"
      inkscape:cx="519.23321"
-     inkscape:cy="357.28837"
+     inkscape:cy="136.70036"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -757,130 +757,7 @@
            height="226.74675"
            x="216.01318"
            y="9.1929445" /></flowRegion><flowPara
-         id="flowPara6259" /></flowRoot>    <g
-       id="g8697"
-       transform="translate(-123.553,558.07086)">
-      <text
-         sodipodi:linespacing="125%"
-         id="text2533"
-         y="126.48512"
-         x="1064.3782"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan2573"
-           y="126.48512"
-           x="1064.3782"
-           sodipodi:role="line">IMAGE_IMPORT_DESCRIPTOR</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="text2575-1"
-         y="216.48511"
-         x="1120.7638"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           y="216.48511"
-           x="1120.7638"
-           id="tspan2577-1"
-           sodipodi:role="line">IMAGE_THUNK_DATA</tspan><tspan
-           id="tspan2601-2"
-           y="226.48511"
-           x="1120.7638"
-           sodipodi:role="line" /></text>
-      <g
-         style="fill:#4d4d4d"
-         transform="translate(175.978,235.12293)"
-         id="g2980">
-        <text
-           xml:space="preserve"
-           style="font-size:8px;font-style:normal;font-weight:normal;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-           x="720"
-           y="32.362183"
-           id="text4935"><tspan
-             style="font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-             sodipodi:role="line"
-             x="720"
-             y="32.362183"
-             id="tspan4943">IMAGE_IMPORT_BY_NAME</tspan></text>
-      </g>
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="path4289-0-9-1-7-1-1"
-         d="m 890.9683,184.36218 -10.9683,0 0,-67.20407 192.4783,0 0,9.21498"
-         style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="path4289-0-9-1-7-1-1-5"
-         d="m 890.9683,234.36218 -10.9683,0 0,-29.20407 246.4783,0 0,9.21498"
-         style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="path4289-0-9-1-7-1-1-5-1"
-         d="m 892,292.36218 -10.9683,0 0,-37.20407 116.4783,0 0,9.21498"
-         style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <g
-         transform="translate(165.978,235.12292)"
-         id="g2980-1">
-        <text
-           xml:space="preserve"
-           style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-           x="720"
-           y="32.362183"
-           id="text4935-2"><tspan
-             sodipodi:role="line"
-             x="720"
-             y="32.362183"
-             id="tspan4939-3" /><tspan
-             style="font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-             id="tspan3432"
-             sodipodi:role="line"
-             x="720"
-             y="42.995113">00 dw Hint</tspan><tspan
-             style="font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-             sodipodi:role="line"
-             x="720"
-             y="52.995113"
-             id="tspan4943-4">02 db Name[1]</tspan></text>
-      </g>
-      <text
-         sodipodi:linespacing="125%"
-         id="text2533-7"
-         y="138.48512"
-         x="883.98969"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan2561-9"
-           y="138.48512"
-           x="883.98969"
-           sodipodi:role="line">00 Characteristics/OriginalFirstThunk</tspan><tspan
-           id="tspan2754-8"
-           y="148.48512"
-           x="883.98969"
-           sodipodi:role="line">04 dd TimeDateStamp</tspan><tspan
-           id="tspan2563-1"
-           y="158.48512"
-           x="883.98969"
-           sodipodi:role="line">08 dd ForwarderChain</tspan><tspan
-           id="tspan2565-8"
-           y="168.48512"
-           x="883.98969"
-           sodipodi:role="line">0c dd Name</tspan><tspan
-           id="tspan2573-2"
-           y="178.48512"
-           x="883.98969"
-           sodipodi:role="line">10 PIMAGE_THUNK_DATA FirstThunk</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="text2575-1-6"
-         y="226.48511"
-         x="883.98969"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan2601-2-5"
-           y="226.48511"
-           x="883.98969"
-           sodipodi:role="line">00 ForwarderString/Function/Ordinal/AddressOfData</tspan></text>
-    </g>
-    <flowRoot
+         id="flowPara6259" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot6643"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"><flowRegion
