@@ -5,6 +5,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg2"
@@ -79,11 +80,13 @@
      inkscape:window-height="480"
      id="namedview612"
      showgrid="false"
-     inkscape:zoom="0.34968949"
-     inkscape:cx="372.04724"
-     inkscape:cy="526.18109"
+     inkscape:zoom="0.46524815"
+     inkscape:cx="84.423293"
+     inkscape:cy="668.34921"
      inkscape:current-layer="svg2"
-     inkscape:snap-bbox="true" />
+     inkscape:snap-bbox="true"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <text
      style="font-size:14px;font-family:monospace"
      id="text46"
@@ -205,127 +208,123 @@
      y="1895"
      x="0" />
   <g
-     id="g5791"
-     transform="translate(-80,-4)">
-    <g
-       transform="translate(0,-20)"
-       id="g6481">
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text6"
-         xml:space="preserve"
-         y="834"
-         x="380"><tspan
-           style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan8">crcloop:</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text10"
-         xml:space="preserve"
-         y="853"
-         x="380">    <tspan
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan12">test</tspan> <tspan
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan14">eax</tspan>, <tspan
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan16">1</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text18"
-         xml:space="preserve"
-         y="872"
-         x="380">    <tspan
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan20">jz</tspan>   <tspan
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan22">no_xor</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text24"
-         xml:space="preserve"
-         y="891"
-         x="380">    <tspan
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan26">shr</tspan>  <tspan
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan28">eax</tspan>, <tspan
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan30">1</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text32"
-         xml:space="preserve"
-         y="910"
-         x="380"><tspan
-           style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan34">   xor </tspan><tspan
-           style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan36">eax</tspan><tspan
-           id="tspan3264"
-           style="font-size:20px">, </tspan><tspan
-           style="font-size:20px;font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan38">0EDB88320h</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text40"
-         xml:space="preserve"
-         y="929"
-         x="380">    <tspan
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan42">jmp</tspan>  <tspan
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan44">loop</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text48"
-         xml:space="preserve"
-         y="967"
-         x="380"><tspan
-           style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan50">no_xor:</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text52"
-         xml:space="preserve"
-         y="986"
-         x="380">    <tspan
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan54">shr</tspan> <tspan
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan56">eax</tspan>, <tspan
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan58">1</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text62"
-         xml:space="preserve"
-         y="1004"
-         x="380"><tspan
-           style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
-           id="tspan64">loop:</tspan></text>
-      <text
-         style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
-         id="text66"
-         xml:space="preserve"
-         y="1023"
-         x="380">    <tspan
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan68">loop</tspan> <tspan
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
-   id="tspan70">crcloop</tspan></text>
-    </g>
+     id="g6481"
+     transform="translate(-80,-24)">
     <text
-       id="text3949"
-       y="789.00696"
-       x="484.51935"
-       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       xml:space="preserve"><tspan
-         y="789.00696"
-         x="484.51935"
-         id="tspan3951"
-         sodipodi:role="line">CRC32</tspan></text>
+       x="380"
+       y="834"
+       xml:space="preserve"
+       id="text6"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+         id="tspan8"
+         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">crcloop:</tspan></text>
+    <text
+       x="380"
+       y="853"
+       xml:space="preserve"
+       id="text10"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
+   id="tspan12"
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">test</tspan> <tspan
+   id="tspan14"
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">eax</tspan>, <tspan
+   id="tspan16"
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">1</tspan></text>
+    <text
+       x="380"
+       y="872"
+       xml:space="preserve"
+       id="text18"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
+   id="tspan20"
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">jz</tspan>   <tspan
+   id="tspan22"
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">no_xor</tspan></text>
+    <text
+       x="380"
+       y="891"
+       xml:space="preserve"
+       id="text24"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
+   id="tspan26"
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">shr</tspan>  <tspan
+   id="tspan28"
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">eax</tspan>, <tspan
+   id="tspan30"
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">1</tspan></text>
+    <text
+       x="380"
+       y="910"
+       xml:space="preserve"
+       id="text32"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+         id="tspan34"
+         style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">   xor </tspan><tspan
+         id="tspan36"
+         style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">eax</tspan><tspan
+         style="font-size:20px"
+         id="tspan3264">, </tspan><tspan
+         id="tspan38"
+         style="font-size:20px;font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">0EDB88320h</tspan></text>
+    <text
+       x="380"
+       y="929"
+       xml:space="preserve"
+       id="text40"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
+   id="tspan42"
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">jmp</tspan>  <tspan
+   id="tspan44"
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">loop</tspan></text>
+    <text
+       x="380"
+       y="967"
+       xml:space="preserve"
+       id="text48"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+         id="tspan50"
+         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">no_xor:</tspan></text>
+    <text
+       x="380"
+       y="986"
+       xml:space="preserve"
+       id="text52"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
+   id="tspan54"
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">shr</tspan> <tspan
+   id="tspan56"
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">eax</tspan>, <tspan
+   id="tspan58"
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">1</tspan></text>
+    <text
+       x="380"
+       y="1004"
+       xml:space="preserve"
+       id="text62"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+         id="tspan64"
+         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">loop:</tspan></text>
+    <text
+       x="380"
+       y="1023"
+       xml:space="preserve"
+       id="text66"
+       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
+   id="tspan68"
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">loop</tspan> <tspan
+   id="tspan70"
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">crcloop</tspan></text>
   </g>
+  <text
+     xml:space="preserve"
+     style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="394.51935"
+     y="785.00696"
+     id="text3949"><tspan
+       sodipodi:role="line"
+       id="tspan3951"
+       x="394.51935"
+       y="785.00696">CRC32</tspan></text>
   <g
      id="g5456"
      transform="translate(90,44)">
@@ -748,416 +747,463 @@
          id="tspan3955"
          sodipodi:role="line">LZMA</tspan></text>
   </g>
-  <g
-     id="g5630"
-     transform="translate(20,0)">
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text366"
+     xml:space="preserve"
+     y="97"
+     x="80"><tspan
+       style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan368">start:</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text370"
+     xml:space="preserve"
+     y="116"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan372">pushad</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text374"
+     xml:space="preserve"
+     y="135"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan376">mov</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan378">esi</tspan>, [<tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan380">esp</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan382">+</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan384">24</tspan>]</text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text386"
+     xml:space="preserve"
+     y="154"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan388">mov</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan390">edi</tspan>, [<tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan392">esp</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan394">+</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan396">28</tspan>]</text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text398"
+     xml:space="preserve"
+     y="173"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan400">cld</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text402"
+     xml:space="preserve"
+     y="192"
+     x="80"><tspan
+       style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan404">   mov </tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan406">dl</tspan><tspan
+       id="tspan3268"
+       style="font-size:20px">, </tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan408">80</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text410"
+     xml:space="preserve"
+     y="211"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan412">xor</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan414">ebx</tspan>, <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan416">ebx</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text420"
+     xml:space="preserve"
+     y="233"
+     x="80"><tspan
+       style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan422">copy_literal:</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text424"
+     xml:space="preserve"
+     y="252"
+     x="80"><tspan
+       style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan426">   movsb</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text428"
+     xml:space="preserve"
+     y="271"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan430">mov</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan432">bl</tspan>, <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan434">2</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text436"
+     xml:space="preserve"
+     y="290"
+     x="80"><tspan
+       style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan438">next:</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text440"
+     xml:space="preserve"
+     y="309"
+     x="80"><tspan
+       style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan442">    call</tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan444"> getbit</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text448"
+     xml:space="preserve"
+     y="363"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan450">jnb</tspan> <tspan
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan452">short</tspan> <tspan
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan454">copy_literal</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text458"
+     xml:space="preserve"
+     y="385"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan460">xor</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan462">ecx</tspan>, <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan464">ecx</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text466"
+     xml:space="preserve"
+     y="404"
+     x="80"><tspan
+       style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan468">    call</tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan470"> getbit</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text474"
+     xml:space="preserve"
+     y="434"
+     x="80"><tspan
+       style="font-style:italic;font-weight:bold;fill:#408080;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan476"
+       font-style="italic">[...]</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text480"
+     xml:space="preserve"
+     y="460"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan482">sub</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan484">esi</tspan>, <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan486">eax</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text488"
+     xml:space="preserve"
+     y="479"
+     x="76"><tspan
+       style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan490">   rep </tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan492">movsb </tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text494"
+     xml:space="preserve"
+     y="498"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan496">pop</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan498">esi</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text500"
+     xml:space="preserve"
+     y="517"
+     x="76"><tspan
+       style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan502">   jmp </tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan504">next </tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text510"
+     xml:space="preserve"
+     y="555"
+     x="80"><tspan
+       style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan512"><tspan
+   id="tspan3276"
+   style="font-size:20px">getbit</tspan>:</tspan><tspan
+       style="font-style:italic;font-weight:bold;fill:#408080;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan514"
+       font-style="italic" /></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text516"
+     xml:space="preserve"
+     y="574"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan518">add</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan520">dl</tspan>, <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan522">dl</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text524"
+     xml:space="preserve"
+     y="593"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan526">jnz</tspan> <tspan
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan528">skip</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text530"
+     xml:space="preserve"
+     y="612"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan532">mov</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan534">dl</tspan>, [<tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan536">esi</tspan>]</text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text538"
+     xml:space="preserve"
+     y="631"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan540">inc</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan542">esi</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text544"
+     xml:space="preserve"
+     y="650"
+     x="80"><tspan
+       style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan546">   adc </tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan548">dl</tspan><tspan
+       id="tspan3260"
+       style="font-size:20px">, </tspan><tspan
+       style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan550">dl</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text552"
+     xml:space="preserve"
+     y="669"
+     x="80"><tspan
+       style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan554">skip:</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text556"
+     xml:space="preserve"
+     y="688"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan558">retn</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text562"
+     xml:space="preserve"
+     y="714"
+     x="80"><tspan
+       style="font-style:italic;font-weight:bold;fill:#408080;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan564"
+       font-style="italic">[...]</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text568"
+     xml:space="preserve"
+     y="744"
+     x="80"><tspan
+       style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       id="tspan570">end:</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text572"
+     xml:space="preserve"
+     y="763"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan574">sub</tspan> <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan576">edi</tspan>, [<tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan578">esp</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan580">+</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan582">28</tspan>]</text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text584"
+     xml:space="preserve"
+     y="782"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan586">mov</tspan> [<tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan588">esp</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan590">+</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan592">1</tspan><tspan
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan594">c</tspan>], <tspan
+   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan596">edi</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text598"
+     xml:space="preserve"
+     y="801"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan600">popad</tspan></text>
+  <text
+     style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"
+     id="text602"
+     xml:space="preserve"
+     y="820"
+     x="80">    <tspan
+   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan604">retn</tspan> <tspan
+   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan606">0</tspan><tspan
+   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"
+   id="tspan608">c</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+     x="156.91586"
+     y="66.847031"
+     id="text3945"><tspan
+       sodipodi:role="line"
+       id="tspan3947"
+       x="156.91586"
+       y="66.847031">APLIB</tspan></text>
+  <path
+     style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     d="m 110.62024,306.01702 -44.737239,0 0,244.18377 10.089126,0"
+     id="path4729"
+     sodipodi:nodetypes="cccc" />
+  <path
+     style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 109.62987,400.00542 -44.081281,0"
+     id="path5179"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 6;stroke-dashoffset:0;marker-end:url(#Arrow1Send)"
+     d="m 102.23471,513.80891 -50.237183,0 0,-227.5875 25.136893,-0.33965"
+     id="path5181"
+     sodipodi:nodetypes="cccc" />
+  <path
+     style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     d="m 108.44718,589.87109 -40.101711,0 0,76.28949 10.011434,0"
+     id="path5185"
+     sodipodi:nodetypes="cccc" />
+  <path
+     style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 6;stroke-dashoffset:0;marker-end:url(#Arrow1Send)"
+     d="m 110.23471,342.82118 -50.237183,0 0,-114.28292 17.293586,-0.17056"
+     id="path5181-8"
+     sodipodi:nodetypes="cccc" />
+  <path
+     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 106.14897,932.62105 -13.693602,0 0,-40.80187 77.899172,0.15966 0,8.48068"
+     id="path3999"
+     sodipodi:nodetypes="ccccc" />
+  <text
+     xml:space="preserve"
+     style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="94.802048"
+     y="907.36639"
+     id="text3364"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       x="94.802048"
+       y="907.36639"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+       id="tspan3370">Packers</tspan><tspan
+       sodipodi:role="line"
+       x="94.802048"
+       y="927.36639"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
+       id="tspan6518">Algorithms</tspan></text>
+  <a
+     transform="translate(20.66824,-34.363103)"
+     id="a3007-4"
+     xlink:href="http://corkami.googlecode.com/files/packers_algos.pdf">
     <text
-       x="60"
-       y="97"
-       xml:space="preserve"
-       id="text366"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan368"
-         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">start:</tspan></text>
-    <text
-       x="60"
-       y="116"
-       xml:space="preserve"
-       id="text370"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan372"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">pushad</tspan></text>
-    <text
-       x="60"
-       y="135"
-       xml:space="preserve"
-       id="text374"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan376"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">mov</tspan> <tspan
-   id="tspan378"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esi</tspan>, [<tspan
-   id="tspan380"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esp</tspan> <tspan
-   id="tspan382"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">+</tspan> <tspan
-   id="tspan384"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">24</tspan>]</text>
-    <text
-       x="60"
-       y="154"
-       xml:space="preserve"
-       id="text386"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan388"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">mov</tspan> <tspan
-   id="tspan390"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">edi</tspan>, [<tspan
-   id="tspan392"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esp</tspan> <tspan
-   id="tspan394"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">+</tspan> <tspan
-   id="tspan396"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">28</tspan>]</text>
-    <text
-       x="60"
-       y="173"
-       xml:space="preserve"
-       id="text398"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan400"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">cld</tspan></text>
-    <text
-       x="60"
-       y="192"
-       xml:space="preserve"
-       id="text402"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan404"
-         style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">   mov </tspan><tspan
-         id="tspan406"
-         style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">dl</tspan><tspan
-         style="font-size:20px"
-         id="tspan3268">, </tspan><tspan
-         id="tspan408"
-         style="font-size:20px;font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">80</tspan></text>
-    <text
-       x="60"
-       y="211"
-       xml:space="preserve"
-       id="text410"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan412"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">xor</tspan> <tspan
-   id="tspan414"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">ebx</tspan>, <tspan
-   id="tspan416"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">ebx</tspan></text>
-    <text
-       x="60"
-       y="249"
-       xml:space="preserve"
-       id="text420"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan422"
-         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">copy_literal:</tspan></text>
-    <text
-       x="60"
-       y="268"
-       xml:space="preserve"
-       id="text424"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan426"
-         style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">   movsb</tspan></text>
-    <text
-       x="60"
-       y="287"
-       xml:space="preserve"
-       id="text428"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan430"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">mov</tspan> <tspan
-   id="tspan432"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">bl</tspan>, <tspan
-   id="tspan434"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">2</tspan></text>
-    <text
-       x="60"
-       y="306"
-       xml:space="preserve"
-       id="text436"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan438"
-         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">next:</tspan></text>
-    <text
-       x="60"
-       y="325"
-       xml:space="preserve"
-       id="text440"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan442"
-         style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">    call</tspan><tspan
-         id="tspan444"
-         style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"> getbit</tspan></text>
-    <text
-       x="60"
-       y="363"
-       xml:space="preserve"
-       id="text448"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan450"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">jnb</tspan> <tspan
-   id="tspan452"
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">short</tspan> <tspan
-   id="tspan454"
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">copy_literal</tspan></text>
-    <text
-       x="60"
-       y="401"
-       xml:space="preserve"
-       id="text458"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan460"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">xor</tspan> <tspan
-   id="tspan462"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">ecx</tspan>, <tspan
-   id="tspan464"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">ecx</tspan></text>
-    <text
-       x="60"
-       y="420"
-       xml:space="preserve"
-       id="text466"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan468"
-         style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">    call</tspan><tspan
-         id="tspan470"
-         style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold"> getbit</tspan></text>
-    <text
-       x="60"
-       y="450"
-       xml:space="preserve"
-       id="text474"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         font-style="italic"
-         id="tspan476"
-         style="font-style:italic;font-weight:bold;fill:#408080;-inkscape-font-specification:Bitstream Vera Sans Bold">[...]</tspan></text>
-    <text
-       x="60"
-       y="476"
-       xml:space="preserve"
-       id="text480"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan482"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">sub</tspan> <tspan
-   id="tspan484"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esi</tspan>, <tspan
-   id="tspan486"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">eax</tspan></text>
-    <text
-       x="56"
-       y="495"
-       xml:space="preserve"
-       id="text488"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan490"
-         style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">   rep </tspan><tspan
-         id="tspan492"
-         style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">movsb </tspan></text>
-    <text
-       x="60"
-       y="514"
-       xml:space="preserve"
-       id="text494"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan496"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">pop</tspan> <tspan
-   id="tspan498"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esi</tspan></text>
-    <text
-       x="56"
-       y="533"
-       xml:space="preserve"
-       id="text500"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan502"
-         style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">   jmp </tspan><tspan
-         id="tspan504"
-         style="font-size:20px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">next</tspan><tspan
-         font-style="italic"
-         id="tspan506"
-         style="font-style:italic;font-weight:bold;fill:#408080;-inkscape-font-specification:Bitstream Vera Sans Bold">  ; main loop</tspan></text>
-    <text
-       x="60"
-       y="571"
-       xml:space="preserve"
-       id="text510"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan512"
-         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-   style="font-size:20px"
-   id="tspan3276">getbit</tspan>:</tspan><tspan
-         font-style="italic"
-         id="tspan514"
-         style="font-style:italic;font-weight:bold;fill:#408080;-inkscape-font-specification:Bitstream Vera Sans Bold" /></text>
-    <text
-       x="60"
-       y="590"
-       xml:space="preserve"
-       id="text516"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan518"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">add</tspan> <tspan
-   id="tspan520"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">dl</tspan>, <tspan
-   id="tspan522"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">dl</tspan></text>
-    <text
-       x="60"
-       y="609"
-       xml:space="preserve"
-       id="text524"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan526"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">jnz</tspan> <tspan
-   id="tspan528"
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">skip</tspan></text>
-    <text
-       x="60"
-       y="628"
-       xml:space="preserve"
-       id="text530"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan532"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">mov</tspan> <tspan
-   id="tspan534"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">dl</tspan>, [<tspan
-   id="tspan536"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esi</tspan>]</text>
-    <text
-       x="60"
-       y="647"
-       xml:space="preserve"
-       id="text538"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan540"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">inc</tspan> <tspan
-   id="tspan542"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esi</tspan></text>
-    <text
-       x="60"
-       y="666"
-       xml:space="preserve"
-       id="text544"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan546"
-         style="font-size:20px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">   adc </tspan><tspan
-         id="tspan548"
-         style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">dl</tspan><tspan
-         style="font-size:20px"
-         id="tspan3260">, </tspan><tspan
-         id="tspan550"
-         style="font-size:20px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">dl</tspan></text>
-    <text
-       x="60"
-       y="685"
-       xml:space="preserve"
-       id="text552"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan554"
-         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">skip:</tspan></text>
-    <text
-       x="60"
-       y="704"
-       xml:space="preserve"
-       id="text556"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan558"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">retn</tspan></text>
-    <text
-       x="60"
-       y="730"
-       xml:space="preserve"
-       id="text562"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         font-style="italic"
-         id="tspan564"
-         style="font-style:italic;font-weight:bold;fill:#408080;-inkscape-font-specification:Bitstream Vera Sans Bold">[...]</tspan></text>
-    <text
-       x="60"
-       y="760"
-       xml:space="preserve"
-       id="text568"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
-         id="tspan570"
-         style="font-weight:bold;fill:#a0a000;-inkscape-font-specification:Bitstream Vera Sans Bold">end:</tspan></text>
-    <text
-       x="60"
-       y="779"
-       xml:space="preserve"
-       id="text572"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan574"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">sub</tspan> <tspan
-   id="tspan576"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">edi</tspan>, [<tspan
-   id="tspan578"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esp</tspan> <tspan
-   id="tspan580"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">+</tspan> <tspan
-   id="tspan582"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">28</tspan>]</text>
-    <text
-       x="60"
-       y="798"
-       xml:space="preserve"
-       id="text584"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan586"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">mov</tspan> [<tspan
-   id="tspan588"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esp</tspan> <tspan
-   id="tspan590"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">+</tspan> <tspan
-   id="tspan592"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">1</tspan><tspan
-   id="tspan594"
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">c</tspan>], <tspan
-   id="tspan596"
-   style="font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">edi</tspan></text>
-    <text
-       x="60"
-       y="817"
-       xml:space="preserve"
-       id="text598"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan600"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">popad</tspan></text>
-    <text
-       x="60"
-       y="836"
-       xml:space="preserve"
-       id="text602"
-       style="font-size:14px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan604"
-   style="font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">retn</tspan> <tspan
-   id="tspan606"
-   style="font-weight:bold;fill:#666666;-inkscape-font-specification:Bitstream Vera Sans Bold">0</tspan><tspan
-   id="tspan608"
-   style="font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">c</tspan></text>
-    <text
-       id="text3945"
-       y="56.847027"
-       x="150.91586"
-       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       id="text6335-5"
+       y="1028.8519"
+       x="23.162506"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        xml:space="preserve"><tspan
-         y="56.847027"
-         x="150.91586"
-         id="tspan3947"
-         sodipodi:role="line">APLIB</tspan></text>
-    <path
-       sodipodi:nodetypes="cccc"
-       id="path4729"
-       d="m 90.620241,322.01702 -68.73724,0 0,246.18377 30.089126,0"
-       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
-       sodipodi:nodetypes="cc"
-       id="path5179"
-       d="m 89.629871,416.00542 -68.081282,0"
-       style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    <path
-       sodipodi:nodetypes="cccc"
-       id="path5181"
-       d="m 82.234715,529.80891 -50.237188,0 0,-227.5875 25.136893,-0.33965"
-       style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 3;stroke-dashoffset:0" />
-    <path
-       id="path5185"
-       d="m 88.447181,605.87109 -54.101712,0 0,76.28949 24.011434,0"
-       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
-       sodipodi:nodetypes="cccc"
-       id="path5181-8"
-       d="m 90.234715,358.82118 -50.237188,0 0,-114.28292 17.293586,-0.17056"
-       style="fill:none;stroke:#4d4d4d;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 3;stroke-dashoffset:0" />
-  </g>
+         id="tspan6341-5"
+         style="font-size:6px"
+         y="1028.8519"
+         x="23.162506"
+         sodipodi:role="line">Ange Albertini 2010</tspan><tspan
+         id="tspan6345-1"
+         style="font-size:6px"
+         y="1036.3519"
+         x="23.162506"
+         sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
+         style="font-size:6px"
+         id="tspan6339-7"
+         y="1043.8519"
+         x="23.162506"
+         sodipodi:role="line">http://corkami.googlecode.com/files/packers_algos.pdf</tspan></text>
+  </a>
+  <path
+     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 48.12111,987.4067 -7.64298,0 0,25.7689 198.34389,0 0,-9.923"
+     id="path3838-1"
+     sodipodi:nodetypes="ccccc" />
 </svg>
