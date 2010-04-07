@@ -22,26 +22,6 @@
      id="title3277">PE Directories</title>
   <defs
      id="defs4">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 372.04724 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="1052.3622 : 372.04724 : 1"
-       inkscape:persp3d-origin="526.18109 : 248.03149 : 1"
-       id="perspective283" />
-    <marker
-       inkscape:stockid="StopL"
-       orient="auto"
-       refY="0.0"
-       refX="0.0"
-       id="StopL"
-       style="overflow:visible">
-      <path
-         id="path5390"
-         d="M 0.0,5.65 L 0.0,-5.65"
-         style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
-         transform="scale(0.8)" />
-    </marker>
     <marker
        inkscape:stockid="Arrow1Send"
        orient="auto"
@@ -67,32 +47,6 @@
          d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
          transform="matrix(0.2,0,0,0.2,1.2,0)" />
-    </marker>
-    <marker
-       inkscape:stockid="Arrow1Lend"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lend"
-       style="overflow:visible">
-      <path
-         id="path3829"
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
-    </marker>
-    <marker
-       inkscape:stockid="Arrow1Lstart"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lstart"
-       style="overflow:visible">
-      <path
-         id="path3826"
-         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
-         transform="matrix(0.8,0,0,0.8,10,0)" />
     </marker>
     <marker
        inkscape:stockid="DiamondMend"
@@ -159,20 +113,6 @@
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
          transform="matrix(-0.8,0,0,-0.8,-10,0)" />
     </marker>
-    <inkscape:perspective
-       id="perspective5019"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
-       sodipodi:type="inkscape:persp3d" />
-    <inkscape:perspective
-       id="perspective3189"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
-       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -364,7 +304,7 @@
          x="43.833324"
          y="754.97906"
          style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
-         id="tspan6518">Data Directories</tspan></text>
+         id="tspan6518">Data Directories 1/2</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
        d="m 163.98193,812.6079 25.1081,0"
@@ -516,52 +456,52 @@
          id="flowPara6259" /></flowRoot>    <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="542.67401"
-       y="555.46967"
+       x="522.67401"
+       y="655.46967"
        id="text2533"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="542.67401"
-         y="555.46967"
+         x="522.67401"
+         y="655.46967"
          id="tspan2573">IMAGE_IMPORT_DESCRIPTOR</tspan></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 369.26412,619.34675 -10.9683,0 0,-73.20407 192.4783,0 0,9.21498"
+       d="m 349.26412,719.34675 -10.9683,0 0,-73.20407 192.4783,0 0,9.21498"
        id="path4289-0-9-1-7-1-1"
        sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="362.28549"
-       y="567.46967"
+       x="342.28549"
+       y="667.46967"
        id="text2533-7"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="362.28549"
-         y="567.46967"
+         x="342.28549"
+         y="667.46967"
          id="tspan2561-9"
          style="font-size:10px">00 OriginalFirstThunk<tspan
    style="font-size:6px"
    id="tspan4044">/Characteristics</tspan></tspan><tspan
          sodipodi:role="line"
-         x="362.28549"
-         y="576.31091"
+         x="342.28549"
+         y="676.31091"
          id="tspan2754-8"
          style="font-size:6px">04 dd TimeDateStamp</tspan><tspan
          sodipodi:role="line"
-         x="362.28549"
-         y="585.64026"
+         x="342.28549"
+         y="685.64026"
          id="tspan2563-1">08 dd ForwarderChain</tspan><tspan
          sodipodi:role="line"
-         x="362.28549"
-         y="599.29907"
+         x="342.28549"
+         y="699.29907"
          id="tspan2565-8"
          style="font-size:12px">0c dd Name      <tspan
-   style="fill:#4d4d4d"
-   id="tspan4048">MyLib.dll</tspan></tspan><tspan
+   style="font-size:8px;fill:#4d4d4d"
+   id="tspan4048">Kernel32.dll</tspan></tspan><tspan
          sodipodi:role="line"
-         x="362.28549"
-         y="614.29907"
+         x="342.28549"
+         y="714.29907"
          id="tspan2573-2"
          style="font-size:12px">10 FirstThunk</tspan></text>
     <flowRoot
@@ -575,7 +515,8 @@
            x="970.62964"
            y="94.555145" /></flowRegion><flowPara
          id="flowPara6649" /></flowRoot>    <g
-       id="g3927">
+       id="g3927"
+       transform="translate(-60,40)">
       <text
          sodipodi:linespacing="125%"
          id="text2647"
@@ -786,7 +727,7 @@
          sodipodi:nodetypes="cccc"
          id="path3853"
          d="m 627.21785,442.58223 30.42639,0 0,-56.71046 31.43275,0"
-         style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+         style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend);color:#000000;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <path
          sodipodi:nodetypes="cc"
          id="path3855"
@@ -846,221 +787,34 @@
            x="1008.4373"
            sodipodi:role="line">Export Table</tspan></text>
     </g>
-    <g
-       id="g8925"
-       transform="translate(-220,100)">
-      <text
-         sodipodi:linespacing="125%"
-         id="text5272"
-         y="724.85809"
-         x="796.45618"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           style="font-size:10px;text-align:end;text-anchor:end"
-           id="tspan5282"
-           y="724.85809"
-           x="796.45618"
-           sodipodi:role="line">IMAGE_BASE_RELOCATION</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="text5272-1"
-         y="765.51801"
-         x="645.24799"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan5280-8"
-           y="765.51801"
-           x="645.24799"
-           sodipodi:role="line" /><tspan
-           id="tspan5282-8"
-           y="780.51801"
-           x="645.24799"
-           sodipodi:role="line"> dw TypeOffset</tspan></text>
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="path4289-0-9-1"
-         d="m 651.26998,760.39514 -10.9683,0 0,-47.20407 162.4783,0 0,9.21498"
-         style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text5272-17"
-         y="724.85809"
-         x="644.45618"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan3041"
-           y="724.85809"
-           x="644.45618"
-           sodipodi:role="line" /><tspan
-           id="tspan3045"
-           y="739.85809"
-           x="644.45618"
-           sodipodi:role="line">00 dd VirtualAddress</tspan><tspan
-           id="tspan5282-9"
-           y="754.85809"
-           x="644.45618"
-           sodipodi:role="line">04 dd SizeOfBlock</tspan></text>
-      <path
-         sodipodi:nodetypes="cccccc"
-         id="rect3021-8-7"
-         d="m 641.16098,764.7493 c 0,16.67733 0,33.35448 0,50.03181 18.93056,0 141.70839,0 160.63897,0 0,-18.4802 0,-30.96041 0,-49.44061 -18.93058,0 -141.70841,0 -160.63897,0 l 0,-0.5912 z"
-         style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.00000017, 8.00000017;stroke-dashoffset:0" />
-      <path
-         sodipodi:nodetypes="cc"
-         id="path3318-2"
-         d="m 634.47493,815.76218 0,-51.09521"
-         style="fill:none;stroke:#000000;stroke-width:0.49999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.00000001, 1.00000001;stroke-dashoffset:0;marker-start:url(#Arrow1Lstart);marker-mid:none;marker-end:url(#Arrow1Lend)" />
-      <path
-         sodipodi:nodetypes="cc"
-         id="path5042-8-8-0"
-         d="m 713.41741,778.69248 0,34.41075"
-         style="fill:none;stroke:#000000;stroke-width:1.6352905;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529039, 4.90587112;stroke-dashoffset:0" />
-      <text
-         transform="matrix(0,-1,1,0,0,0)"
-         id="text6763"
-         y="627.95618"
-         x="-815.07263"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           style="font-size:8px"
-           y="627.95618"
-           x="-815.07263"
-           id="tspan6765"
-           sodipodi:role="line">SizeOfBlock</tspan></text>
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="path4289-0-9-1-1"
-         d="m 628.66702,820.89326 -13.12876,0 0,-117.2666 194.48217,0 0,22.89228"
-         style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         sodipodi:nodetypes="cccccc"
-         id="rect3021-8-7-6"
-         d="m 614.72217,723.42724 c 0,60.91051 0,121.82032 0,182.73082 22.95691,0 171.84833,0 194.80526,0 0,-67.4951 0,-134.99024 0,-202.48534 -22.95693,0 -171.84835,0 -194.80526,0 l 0,19.75452 z"
-         style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.00000021, 8.00000021;stroke-dashoffset:0" />
-      <path
-         sodipodi:nodetypes="cc"
-         id="path5042-8-8-0-4"
-         d="m 704.12383,824.67556 0,79.4129"
-         style="fill:none;stroke:#000000;stroke-width:1.63529062;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529038, 4.9058711;stroke-dashoffset:0" />
-      <text
-         transform="matrix(0,-1,1,0,0,0)"
-         id="text6833"
-         y="603.13855"
-         x="-894.84918"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           style="font-size:10px"
-           y="603.13855"
-           x="-894.84918"
-           id="tspan6835"
-           sodipodi:role="line">DIRECTORY_ENTRY_BASERELOC.SIZE</tspan></text>
-      <path
-         sodipodi:nodetypes="cc"
-         id="path3318-2-9"
-         d="m 607.67976,906.58026 0,-204.62721"
-         style="fill:none;stroke:#000000;stroke-width:0.49999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.00000001, 1.00000001;stroke-dashoffset:0;marker-start:url(#Arrow1Lstart);marker-mid:none;marker-end:url(#Arrow1Lend)" />
-      <text
-         id="text6871"
-         y="714.09363"
-         x="872.25458"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           y="714.09363"
-           x="872.25458"
-           id="tspan6873"
-           sodipodi:role="line"
-           style="font-size:10px">PUSH EBP</tspan><tspan
-           id="tspan6875"
-           y="726.59363"
-           x="872.25458"
-           sodipodi:role="line" /><tspan
-           id="tspan6877"
-           y="739.09363"
-           x="872.25458"
-           sodipodi:role="line" /><tspan
-           id="tspan6879"
-           y="751.59363"
-           x="872.25458"
-           sodipodi:role="line" /><tspan
-           id="tspan6881"
-           y="764.09363"
-           x="872.25458"
-           sodipodi:role="line" /><tspan
-           id="tspan6883"
-           y="776.59363"
-           x="872.25458"
-           sodipodi:role="line"
-           style="font-size:10px">PUSH szMyString</tspan></text>
-      <path
-         sodipodi:nodetypes="cccc"
-         id="path6887"
-         d="m 795.3781,736.15034 29.40621,0 0,-25.94908 24.98115,0"
-         style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-1)" />
-      <path
-         id="path6889"
-         d="m 862.25271,710.41654 0,64.4787"
-         style="fill:none;stroke:#000000;stroke-width:0.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 3;stroke-dashoffset:0;marker-start:url(#StopL);marker-end:url(#Arrow1Lend-1)" />
-      <path
-         sodipodi:nodetypes="cc"
-         id="path7535"
-         d="M 751.15895,776.74911 861.82023,735.71786"
-         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 3;stroke-dashoffset:0" />
-      <path
-         sodipodi:nodetypes="cc"
-         id="path5042-8-8-0-8"
-         d="m 901.44735,716.42766 0,52.44424"
-         style="fill:none;stroke:#000000;stroke-width:1.6352905;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529038, 4.90587108;stroke-dashoffset:0" />
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="rect3021-2-8-9-1-6-1"
-         d="m 852.34643,792.51882 129.13737,0 0,-91.30905 -129.13737,0 0,91.30905 z"
-         style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.0000003, 8.0000003;stroke-dashoffset:0" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text2647-1-0-0"
-         y="696.05878"
-         x="981.7149"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           style="font-size:10px;text-align:end;text-anchor:end;fill:#4d4d4d"
-           id="tspan2675-6-4-9"
-           y="696.05878"
-           x="981.7149"
-           sodipodi:role="line">block of code</tspan></text>
-    </g>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Lend-1);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 306.26355,59.430923 64.54315,0 0,16.452174 65.80869,0"
+       style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 306.26355,59.430923 36.54315,0 0,16.452174 37.80869,0"
        id="path8880"
-       transform="translate(0,308.26769)" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-1)"
-       d="m 246.78262,425.91399 47.26368,0 0,435.37824 76.56811,0"
-       id="path8888"
-       sodipodi:nodetypes="cccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Lend-1);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 306.1379,76.436957 14.61254,0 0,189.990103 32.30601,0"
-       id="path9203"
        transform="translate(0,308.26769)"
        sodipodi:nodetypes="cccc" />
     <path
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 296.1379,384.70465 16.61254,0 0,283.41652 24.30601,0"
+       id="path9203"
+       sodipodi:nodetypes="cccc" />
+    <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:7.9999998, 7.9999998;stroke-dashoffset:0"
-       d="m 358.0575,644.18658 193.13747,0 0,-97.22062 -193.13747,0 0,97.22062 z"
+       d="m 338.0575,744.18658 193.13747,0 0,-97.22062 -193.13747,0 0,97.22062 z"
        id="rect3021-1"
        sodipodi:nodetypes="ccccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.63529038;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529041, 4.90587121;stroke-dashoffset:0"
-       d="m 442.53632,618.80583 0,25.04163"
+       d="m 422.53632,718.80583 0,25.04163"
        id="path5042-8-7"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Send-1)"
-       d="m 444.02037,595.79549 26.0611,0"
+       d="m 424.02037,696.60185 26.0611,0"
        id="path4050" />
     <g
        id="g4969"
-       transform="translate(100,84)">
+       transform="translate(132,284)">
       <g
          style="fill:#4d4d4d"
          transform="translate(-65.72618,524.1075)"
@@ -1106,171 +860,49 @@
              y="52.995113"
              id="tspan4943-4">02 db Name[1]   <tspan
    id="tspan4658"
-   style="fill:#4d4d4d">MyFunc</tspan></tspan></text>
+   style="fill:#4d4d4d" /></tspan></text>
       </g>
-      <path
-         id="path4660"
-         d="m 708.51558,574.84382 10.02529,0"
-         style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Send-1)" />
     </g>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="441.95859"
-       y="642.37866"
+       x="421.95859"
+       y="742.37866"
        id="text4864"><tspan
          sodipodi:role="line"
          id="tspan4866"
-         x="441.95859"
-         y="642.37866"
+         x="421.95859"
+         y="742.37866"
          style="fill:#4d4d4d">dd 0,0,0,0,0</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="719.05963"
-       y="683.46967"
-       id="text2575-1"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2577-1"
-         x="719.05963"
-         y="683.46967">IMAGE_THUNK_DATA</tspan><tspan
-         sodipodi:role="line"
-         x="719.05963"
-         y="693.46967"
-         id="tspan2601-2" /></text>
-    <path
-       style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 549.26412,703.34675 -10.9683,0 0,-29.20407 184.4783,0 0,9.21498"
-       id="path4289-0-9-1-7-1-1-5"
-       sodipodi:nodetypes="ccccc" />
-    <text
-       xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="542.28552"
-       y="695.46967"
-       id="text2575-1-6"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="542.28552"
-         y="695.46967"
-         id="tspan2601-2-5"><tspan
-   style="font-size:12px"
-   id="tspan4868">00 dd AddressOfData</tspan></tspan><tspan
-         id="tspan3163"
-         sodipodi:role="line"
-         x="542.28552"
-         y="706.81091">         /<tspan
-   style="font-size:8px"
-   id="tspan4870">Ordinal/<tspan
-   style="font-size:6px"
-   id="tspan4872">ForwarderString/Function</tspan></tspan></tspan></text>
-    <path
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.0000002, 8.0000002;stroke-dashoffset:0"
-       d="m 539.01662,732.80132 183.14288,0 0,-57.9808 -183.14288,0 0,57.9808 z"
-       id="rect3021-0"
-       sodipodi:nodetypes="ccccc" />
-    <path
-       style="fill:none;stroke:#4d4d4d;stroke-width:1.63529027;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529041, 4.90587122;stroke-dashoffset:0"
-       d="m 625.63544,711.27005 0,21.09344"
-       id="path5042-8-9"
-       sodipodi:nodetypes="cc" />
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="645.75031"
-       y="729.46967"
-       id="text4874"><tspan
-         sodipodi:role="line"
-         id="tspan4876"
-         x="645.75031"
-         y="729.46967"
-         style="fill:#4d4d4d">dd 0</tspan></text>
-    <path
-       style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Send-1);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 552.89829,566.54627 43.77563,0"
-       id="path4878"
-       sodipodi:nodetypes="cc" />
+    <rect
+       style="color:#000000;fill:none;stroke:#999999;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect7841"
+       width="75.824844"
+       height="82.115768"
+       x="537.85089"
+       y="886.55853" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="937.72247"
-       y="760.95807"
+       x="689.72247"
+       y="916.95807"
        id="text4982"><tspan
          sodipodi:role="line"
-         id="tspan4984"
-         x="937.72247"
-         y="760.95807">MyLibd.dll!MyFunction dd 0</tspan></text>
+         x="689.72247"
+         y="916.95807"
+         id="tspan3135">7C81127A Kernel32.dll!GetVersion<tspan
+   style="font-size:8px"
+   id="tspan3180"> (hint:4)</tspan></tspan></text>
     <path
-       style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;marker-end:url(#Arrow1Send-1)"
-       d="m 545.91841,286.39649 30.57143,0 0,23.07755 54.15511,0 0,10.98775"
-       id="path4986"
-       transform="translate(0,308.26769)"
-       sodipodi:nodetypes="ccccc" />
-    <path
-       style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;marker-end:url(#Arrow1Send-1)"
-       d="m 990.51437,277.5475 0,28.93878 -274.26941,0 0,9.60817"
-       id="path4988"
-       sodipodi:nodetypes="cccc"
-       transform="translate(0,308.26769)" />
-    <path
-       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Send-1);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 946.6613,682.88459 0,-19.21633 -127.52654,0 0,-16.59592"
-       id="path4990" />
-    <text
-       xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="887.56531"
-       y="703.81555"
-       id="text2496-5"><tspan
-         sodipodi:role="line"
-         x="887.56531"
-         y="703.81555"
-         style="font-size:12px"
-         id="tspan3296-7">00 dd Address?<tspan
-   style="font-size:6px;fill:#4d4d4d"
-   id="tspan3300-6" /></tspan></text>
-    <path
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.00000014, 8.00000014;stroke-dashoffset:0"
-       d="m 882.20018,692.53196 c 0,10.97213 0,21.94416 0,32.91629 11.6667,0 87.3333,0 99,0 0,-12.15826 0,-24.31652 0,-36.47477 -11.6667,0 -87.3333,0 -99,0 l 0,3.55848 z"
-       id="rect3021-8-1"
-       sodipodi:nodetypes="cccccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.63529038;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529042, 4.90587124;stroke-dashoffset:0"
-       d="m 933.95609,707.74852 0,17.69972"
-       id="path5042-8-8-8"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 887.75028,707.97346 -5.5501,0 0,-19 99,2e-5 0,5.39182"
-       id="path3962-2-9"
-       sodipodi:nodetypes="ccccc" />
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="931.34247"
-       y="722.30133"
-       id="text3729-2"><tspan
-         sodipodi:role="line"
-         id="tspan3731-7"
-         x="931.34247"
-         y="722.30133"
-         style="font-size:8px;text-align:center;text-anchor:middle;fill:#808080">dd 0</tspan></text>
-    <path
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.00000017, 8.00000017;stroke-dashoffset:0"
-       d="m 840.1254,752.23797 c 0,8.41473 0,16.82939 0,25.24412 22.84144,0 170.984,0 193.8254,0 0,-9.3244 0,-18.64879 0,-27.97318 -22.8414,0 -170.98396,0 -193.8254,0 l 0,2.72906 z"
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:7.99999995, 7.99999995;stroke-dashoffset:0"
+       d="m 548.35575,911.2098 c 0,17.57808 0,35.15601 0,52.73408 33.31294,0 249.37044,0 282.68333,0 0,-19.47835 0,-38.95667 0,-58.43499 -33.31289,0 -249.37039,0 -282.68333,0 l 0,5.70091 z"
        id="rect3021-8-1-9"
        sodipodi:nodetypes="cccccc" />
     <path
-       style="fill:none;stroke:#4d4d4d;stroke-width:1.63529015;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529042, 4.90587121;stroke-dashoffset:0"
-       d="m 928.68126,765.18565 0,9.55128"
+       style="fill:none;stroke:#4d4d4d;stroke-width:1.63529027;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529046, 4.90587131;stroke-dashoffset:0"
+       d="m 680.30766,922.84719 0,35.94789"
        id="path5042-8-9-5-5"
        sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#4d4d4d;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Send-1);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 458.35466,301.82244 49.75561,0 0,79.40793 26.63684,0"
-       id="path5632"
-       transform="translate(0,308.26769)" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:end;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -1315,79 +947,199 @@
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="780.9635"
-       y="554.12659"
+       x="949.43542"
+       y="761.07208"
        id="text2575-1-8"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan2577-1-8"
-         x="780.9635"
-         y="554.12659">IMAGE_THUNK_DATA</tspan><tspan
+         x="949.43542"
+         y="761.07208">IMAGE_THUNK_DATA</tspan><tspan
          sodipodi:role="line"
-         x="780.9635"
-         y="564.12659"
+         x="949.43542"
+         y="771.07208"
          id="tspan2601-2-2" /></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 611.16797,574.00366 -10.9683,0 0,-29.20407 184.4783,0 0,9.21498"
+       d="m 779.63992,780.94913 -10.9683,0 0,-29.20407 184.47828,0 0,9.21498"
        id="path4289-0-9-1-7-1-1-5-4"
        sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="604.18939"
-       y="566.12659"
+       x="772.66132"
+       y="773.07208"
        id="text2575-1-6-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="604.18939"
-         y="566.12659"
+         x="772.66132"
+         y="773.07208"
          id="tspan2601-2-5-5"><tspan
            style="font-size:12px"
            id="tspan4868-1">00 dd AddressOfData</tspan></tspan><tspan
          id="tspan3163-7"
          sodipodi:role="line"
-         x="604.18939"
-         y="577.46783">         /<tspan
+         x="772.66132"
+         y="784.41333">         /<tspan
    style="font-size:8px"
    id="tspan4870-1">Ordinal/<tspan
    style="font-size:6px"
    id="tspan4872-1">ForwarderString/Function</tspan></tspan></tspan></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.0000002, 8.0000002;stroke-dashoffset:0"
-       d="m 600.92047,603.45823 183.14288,0 0,-57.9808 -183.14288,0 0,57.9808 z"
+       d="m 769.39242,810.4037 183.14288,0 0,-57.9808 -183.14288,0 0,57.9808 z"
        id="rect3021-0-5"
        sodipodi:nodetypes="ccccc" />
     <path
        style="fill:none;stroke:#4d4d4d;stroke-width:1.63529027;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529041, 4.90587122;stroke-dashoffset:0"
-       d="m 687.53929,581.92696 0,21.09344"
+       d="m 856.01124,788.87243 0,21.09344"
        id="path5042-8-9-2"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-       x="707.65417"
-       y="600.12659"
+       x="876.1261"
+       y="807.07208"
        id="text4874-7"><tspan
          sodipodi:role="line"
          id="tspan4876-6"
-         x="707.65417"
-         y="600.12659"
+         x="876.1261"
+         y="807.07208"
+         style="fill:#4d4d4d">dd 0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="603.43542"
+       y="761.07208"
+       id="text2575-1-8-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2577-1-8-7"
+         x="603.43542"
+         y="761.07208">IMAGE_THUNK_DATA</tspan><tspan
+         sodipodi:role="line"
+         x="603.43542"
+         y="771.07208"
+         id="tspan2601-2-2-4" /></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 433.63992,780.94913 -10.9683,0 0,-29.20407 184.47828,0 0,9.21498"
+       id="path4289-0-9-1-7-1-1-5-4-0"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="426.66132"
+       y="773.07208"
+       id="text2575-1-6-5-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="426.66132"
+         y="773.07208"
+         id="tspan2601-2-5-5-4"><tspan
+           style="font-size:12px"
+           id="tspan4868-1-8">00 dd AddressOfData</tspan></tspan><tspan
+         id="tspan3163-7-8"
+         sodipodi:role="line"
+         x="426.66132"
+         y="784.41333">         /<tspan
+   style="font-size:8px"
+   id="tspan4870-1-2">Ordinal/<tspan
+   style="font-size:6px"
+   id="tspan4872-1-4">ForwarderString/Function</tspan></tspan></tspan></text>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.0000002, 8.0000002;stroke-dashoffset:0"
+       d="m 423.39242,810.4037 183.14288,0 0,-57.9808 -183.14288,0 0,57.9808 z"
+       id="rect3021-0-5-5"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:none;stroke:#4d4d4d;stroke-width:1.63529027;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.63529041, 4.90587122;stroke-dashoffset:0"
+       d="m 510.01124,788.87243 0,21.09344"
+       id="path5042-8-9-2-5"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="530.1261"
+       y="807.07208"
+       id="text4874-7-1"><tspan
+         sodipodi:role="line"
+         id="tspan4876-6-7"
+         x="530.1261"
+         y="807.07208"
          style="fill:#4d4d4d">dd 0</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 748.44329,254.79329 50.29402,0 0,63.08064"
-       id="path3242"
-       transform="translate(0,308.26769)" />
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 534.54336,664.3249 324.70616,0 0,85.42879"
+       id="path3142"
+       sodipodi:nodetypes="ccc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 736.50911,336.62764 -1.70488,0 0,48.58914 -51.99891,0 127.86617,0 0,8.52441 64.78552,0"
-       id="path3244"
-       transform="translate(0,308.26769)" />
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 806.09574,863.20524 0,18.58258 -57.00079,0 0,21.51668"
+       id="path3150"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="598.39026"
+       y="897.50226"
+       id="text3152"><tspan
+         sodipodi:role="line"
+         id="tspan3154"
+         x="598.39026"
+         y="897.50226">IAT</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 982.86459,384.36434 34.95011,0 0,-37.50741"
-       id="path3246"
-       transform="translate(0,308.26769)" />
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 829.63387,849.19413 14.54994,0 0,39.00085 -31.7369,0 0,14.55697"
+       id="path3184"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 451.89511,780.38069 0,68.65977 127.0332,0 0,52.85756"
+       id="path3223"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 802.71056,776.77626 0,47.75867"
+       id="path3225" />
+    <path
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 441.01506,709.32512 74.81385,0 0,39.42892"
+       id="path3314" />
+    <path
+       style="color:#000000;fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 520.8839,696.37539 123.34175,0 0,206.05033"
+       id="path3332"
+       sodipodi:nodetypes="ccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="516.8399"
+       y="845.80981"
+       id="text3346"><tspan
+         sodipodi:role="line"
+         id="tspan3348"
+         x="516.8399"
+         y="845.80981">(after loading)</tspan></text>
+    <path
+       style="color:#000000;fill:none;stroke:#808080;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Lend-1);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 572.44479,768.97399 96.04481,0 0,74.81385 100.08879,0"
+       id="path3352" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#808080;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="713.9845"
+       y="837.72186"
+       id="text3379"><tspan
+         sodipodi:role="line"
+         id="tspan3381"
+         x="713.9845"
+         y="837.72186">(on file)</tspan></text>
+    <path
+       style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 181.97963,184.00162 95.03381,0 0,422.70712 258.90345,0"
+       id="path3527"
+       transform="translate(0,308.26769)"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>
