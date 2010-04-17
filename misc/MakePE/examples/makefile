@@ -41,7 +41,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
-    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe
+    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe \
+    pe\sect_phys_order.exe pe\imagebase_null.exe
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -325,6 +326,12 @@ anti\dump.exe: anti\dump.asm
 
 asm\apiloop.exe: asm\apiloop.asm
 	$(makepe) asm\apiloop.asm
+
+pe\sect_phys_order.exe: pe\sect_phys_order.asm
+	$(makepe) pe\sect_phys_order.asm
+pe\imagebase_null.exe: pe\imagebase_null.asm
+	$(makepe) pe\imagebase_null.asm
+
 
 test.exe: test.asm
 	$(makepe) test.asm
