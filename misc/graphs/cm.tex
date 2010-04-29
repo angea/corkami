@@ -1,6 +1,5 @@
-\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, cc by 3.0}
- \url{http://corkami.googlecode.com/files/cm.pdf}\
- \href{https://corkami.googlecode.com/svn/trunk/misc/graphs/cm.tex}{source}\end{flushright}}
+\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, Creative Commons Attribution 3.0}
+ \url{http://corkami.blogspot.com}\end{flushright}}
 \newcommand{\ra}{$\rightarrow$\ }
 
 \documentclass{report}
@@ -10,6 +9,19 @@
 \usepackage[table]{xcolor}
 \rowcolors{0}{white}{lightgray}
 \begin{document}
+\vspace*{10cm}
+\begin{center}
+{\huge Counter-measures (anti-debugs, \ldots) cheat sheet}\\ \vspace*{1cm}
+{\LARGE Version: 29th April 2010}\\ \vspace*{.75cm}
+{\large Ange Albertini, 2010\\\url{http://corkami.blogspot.com}\\Creative Commons Attribution 3.0}
+\end{center}
+\newpage
+{\LARGE Table of contents}
+\begin{description}
+\item[3] Countermeasures cheat sheet
+\item[4] Acronyms, Flags, Reminders, Notes
+\end{description}
+\newpage
 \begin{center}Counter-measures (anti-debugs, \ldots) cheat sheet \end{center}
 
 \begin{tabular}{lllll}
@@ -74,6 +86,17 @@ str				& {\tt D.....} & {\tt result == 4000h} if present \rowcolors{0}{white}{li
 \sig
 
 \newpage
+{\large Acronyms}
+\begin{itemize}
+\item {\bf TEB}
+Threat Environment Block
+\item {\bf PEB}
+Process Environment Block
+\item {\bf TF}
+Trap Flag
+\item {\bf FPU}
+Floating Point (number processing) Unit
+\end{itemize}
 
 {\large Flags}
 \begin{itemize}
