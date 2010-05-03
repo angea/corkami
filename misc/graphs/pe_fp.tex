@@ -1,0 +1,34 @@
+\newcommand{\sig}{\begin{flushright}\tiny{Ange Albertini, 2010, Creative Commons Attribution 3.0}
+ \url{http://corkami.blogspot.com}\end{flushright}}
+\newcommand{\ra}{$\rightarrow$\ }
+\documentclass{report}
+\usepackage{hyperref}
+\usepackage[hmargin=1cm,vmargin=1cm]{geometry}
+\usepackage{booktabs}	% better looking tables
+\usepackage[table]{xcolor}
+
+\begin{document}
+\pagestyle{empty}
+\rowcolors{0}{white}{lightgray}
+\vspace*{10cm}
+\begin{center}
+{\huge the PE format}\\ \vspace*{1cm}
+{\LARGE Version: 7th April 2010}\\ \vspace*{.75cm}
+{\large Ange Albertini\\\url{http://corkami.blogspot.com}\\Creative Commons Attribution 3.0}
+\end{center}
+\newpage
+{\LARGE Table of contents}
+\begin{description}
+\item[3] Standard File \& Memory layouts
+\item[4] the PE Headers
+\item[5] Data Directories 1/2: Exports, Imports,  Import table
+\item[6] Data Directories 2/2: Resources, Relocations, Debug, TLS, Delay imports
+\end{description}
+
+{\LARGE Changelog}
+\begin{description}
+\item[2010/04/07] +data directories
+\item[2010/04/03] +layouts
+\item[2010/01/28] +headers
+\end{description}
+\end{document}
