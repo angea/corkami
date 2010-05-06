@@ -41,11 +41,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.37845879"
-     inkscape:cx="371.65926"
-     inkscape:cy="526.09228"
+     inkscape:zoom="5.0766355"
+     inkscape:cx="137.02301"
+     inkscape:cy="53.794353"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-bbox="true"
      inkscape:bbox-nodes="false"
@@ -3752,7 +3752,7 @@
          id="tspan7888"
          x="651.94098"
          y="663.60132"
-         style="font-size:8">IRET</tspan></text>
+         style="font-size:8px">IRET</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7893"
@@ -4145,45 +4145,13 @@
          id="tspan6518">Opcodes</tspan><tspan
          sodipodi:role="line"
          x="273.96686"
-         y="78.24369"
+         y="78.243698"
          style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
          id="tspan4638">Overview of one-byte opcodes</tspan></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none;display:inline"
        d="m 283.52303,41.087508 -15.26422,0 0,44.3985 226.77386,0 0,-15.595"
        id="path3874"
-       sodipodi:nodetypes="ccccc" />
-    <a
-       style="display:inline"
-       transform="translate(25.04118,-36.08644)"
-       id="a3007"
-       xlink:href="http://corkami.googlecode.com/files/opcodes_1.pdf">
-      <text
-         id="text6335"
-         y="1028.8519"
-         x="23.162506"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan6341"
-           style="font-size:6px"
-           y="1028.8519"
-           x="23.162506"
-           sodipodi:role="line">Ange Albertini 2010</tspan><tspan
-           id="tspan6345"
-           style="font-size:6px"
-           y="1036.3519"
-           x="23.162506"
-           sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
-           style="font-size:6px"
-           id="tspan6339"
-           y="1043.8519"
-           x="23.162506"
-           sodipodi:role="line">http://corkami.googlecode.com/files/opcodes_1.pdf</tspan></text>
-    </a>
-    <path
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-       d="m 52.49404,985.68336 -7.64297,0 0,25.76894 184.34389,0 0,-9.923"
-       id="path3838"
        sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
@@ -4194,7 +4162,7 @@
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          x="435.271"
-         y="675.96094"
+         y="663.46094"
          id="tspan6072-9">LEAVE</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -4216,5 +4184,37 @@
          id="tspan6054-4"
          x="217.11765"
          y="743.09009">JECXZ</tspan></text>
+    <a
+       style="display:inline"
+       transform="translate(24.888932,-37.18789)"
+       id="a3007-1"
+       xlink:href="http://corkami.blogspot.com">
+      <text
+         id="text6335-7"
+         y="1028.8519"
+         x="23.162506"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           id="tspan6341-4"
+           style="font-size:6px"
+           y="1028.8519"
+           x="23.162506"
+           sodipodi:role="line">Ange Albertini 2010</tspan><tspan
+           id="tspan6345-0"
+           style="font-size:6px"
+           y="1036.3519"
+           x="23.162506"
+           sodipodi:role="line">Creative Commons Attribution</tspan><tspan
+           style="font-size:6px"
+           id="tspan6339-9"
+           y="1043.8519"
+           x="23.162506"
+           sodipodi:role="line">http://corkami.blogspot.com</tspan></text>
+    </a>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+       d="m 52.341792,984.5819 -7.64297,0 0,25.7689 106.343888,0 0,-9.923"
+       id="path3838-4"
+       sodipodi:nodetypes="ccccc" />
   </g>
 </svg>

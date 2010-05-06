@@ -32,7 +32,7 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49456085"
+     inkscape:zoom="0.52412699"
      inkscape:cx="526.18109"
      inkscape:cy="372.04724"
      inkscape:document-units="px"
@@ -81,7 +81,7 @@
         </dc:creator>
         <dc:rights>
           <cc:Agent>
-            <dc:title></dc:title>
+            <dc:title />
           </cc:Agent>
         </dc:rights>
         <cc:license
@@ -156,7 +156,7 @@
        sodipodi:cy="-11.641327"
        sodipodi:rx="95"
        sodipodi:ry="62.5"
-       d="m 250,-11.641327 a 95,62.5 0 1 1 -190,0 95,62.5 0 1 1 190,0 z"
+       d="m 250,-11.641327 c 0,34.517797 -42.53295,62.5 -95,62.5 -52.46705,0 -95,-27.982203 -95,-62.5 0,-34.517797 42.53295,-62.5 95,-62.5 52.46705,0 95,27.982203 95,62.5 z"
        transform="matrix(1.8039398,0.269204,-0.5459791,3.0502652,402.51076,544.60964)" />
     <text
        xml:space="preserve"
@@ -177,7 +177,7 @@
        sodipodi:cy="962.36218"
        sodipodi:rx="50"
        sodipodi:ry="45"
-       d="m 145,962.36218 a 50,45 0 1 1 -100,0 50,45 0 1 1 100,0 z"
+       d="m 145,962.36218 c 0,24.85282 -22.38576,45.00002 -50,45.00002 -27.614237,0 -50,-20.1472 -50,-45.00002 0,-24.85281 22.385763,-45 50,-45 27.61424,0 50,20.14719 50,45 z"
        transform="matrix(3.4811106,3.1404374,-2.4541041,2.7203241,2450.3554,-2305.948)" />
     <path
        sodipodi:type="arc"
@@ -187,7 +187,7 @@
        sodipodi:cy="929.86218"
        sodipodi:rx="77.5"
        sodipodi:ry="62.5"
-       d="m 260,929.86218 a 77.5,62.5 0 1 1 -155,0 77.5,62.5 0 1 1 155,0 z"
+       d="m 260,929.86218 c 0,34.5178 -34.69793,62.5 -77.5,62.5 -42.80207,0 -77.5,-27.9822 -77.5,-62.5 0,-34.51779 34.69793,-62.5 77.5,-62.5 42.80207,0 77.5,27.98221 77.5,62.5 z"
        transform="matrix(0.5371386,0,0,0.2523207,401.73078,529.52247)" />
     <text
        xml:space="preserve"
@@ -346,7 +346,7 @@
          y="602.89355">Bitsum</tspan></text>
     <path
        transform="matrix(0.3305314,0.5920651,-2.0746309,0.8388696,608.96225,613.70037)"
-       d="m 250,-11.641327 a 95,62.5 0 1 1 -190,0 95,62.5 0 1 1 190,0 z"
+       d="m 250,-11.641327 c 0,34.517797 -42.53295,62.5 -95,62.5 -52.46705,0 -95,-27.982203 -95,-62.5 0,-34.517797 42.53295,-62.5 95,-62.5 52.46705,0 95,27.982203 95,62.5 z"
        sodipodi:ry="62.5"
        sodipodi:rx="95"
        sodipodi:cy="-11.641327"
@@ -462,7 +462,7 @@
          y="595.91595">PECompact</tspan></text>
     <path
        transform="matrix(1.0726324,0,0,1.6616967,301.71706,703.60578)"
-       d="m 465,-69.274277 a 32.5,10 0 1 1 -65,0 32.5,10 0 1 1 65,0 z"
+       d="m 465,-69.274277 c 0,5.522848 -14.55075,10 -32.5,10 -17.94925,0 -32.5,-4.477152 -32.5,-10 0,-5.522847 14.55075,-10 32.5,-10 17.94925,0 32.5,4.477153 32.5,10 z"
        sodipodi:ry="10"
        sodipodi:rx="32.5"
        sodipodi:cy="-69.274277"
@@ -500,7 +500,7 @@
        sodipodi:cy="-69.274277"
        sodipodi:rx="32.5"
        sodipodi:ry="10"
-       d="m 465,-69.274277 a 32.5,10 0 1 1 -65,0 32.5,10 0 1 1 65,0 z"
+       d="m 465,-69.274277 c 0,5.522848 -14.55075,10 -32.5,10 -17.94925,0 -32.5,-4.477152 -32.5,-10 0,-5.522847 14.55075,-10 32.5,-10 17.94925,0 32.5,4.477153 32.5,10 z"
        transform="matrix(1.4407706,0,0,1.6192564,31.028309,558.28134)" />
     <text
        xml:space="preserve"
@@ -554,7 +554,7 @@
        sodipodi:cy="83.225723"
        sodipodi:rx="47.5"
        sodipodi:ry="17.5"
-       d="m 170,83.225723 a 47.5,17.5 0 1 1 -95,0 47.5,17.5 0 1 1 95,0 z"
+       d="m 170,83.225723 c 0,9.664983 -21.26647,17.499997 -47.5,17.499997 -26.233526,0 -47.5,-7.835014 -47.5,-17.499997 0,-9.664983 21.266474,-17.5 47.5,-17.5 26.23353,0 47.5,7.835017 47.5,17.5 z"
        transform="matrix(0.9099065,-0.2681823,0.286431,0.971822,450.38927,521.36433)" />
     <text
        xml:space="preserve"
@@ -690,7 +690,7 @@
        sodipodi:cy="84.225723"
        sodipodi:rx="33.5"
        sodipodi:ry="13.5"
-       d="m 157,84.225723 a 33.5,13.5 0 1 1 -67,0 33.5,13.5 0 1 1 67,0 z"
+       d="m 157,84.225723 c 0,7.455844 -14.99846,13.5 -33.5,13.5 -18.50154,0 -33.5,-6.044156 -33.5,-13.5 0,-7.455844 14.99846,-13.5 33.5,-13.5 18.50154,0 33.5,6.044156 33.5,13.5 z"
        transform="matrix(1.6545322,-0.3795978,0.4458866,1.499797,329.74438,538.97356)" />
     <text
        xml:space="preserve"
@@ -789,7 +789,7 @@
        sodipodi:cy="165.72572"
        sodipodi:rx="52.5"
        sodipodi:ry="30"
-       d="m 155,165.72572 a 52.5,30 0 1 1 -105,0 52.5,30 0 1 1 105,0 z"
+       d="m 155,165.72572 c 0,16.56855 -23.50505,30 -52.5,30 -28.994949,0 -52.5,-13.43145 -52.5,-30 0,-16.56854 23.505051,-30 52.5,-30 28.99495,0 52.5,13.43146 52.5,30 z"
        transform="matrix(1.1581527,0.3589915,-0.3839325,1.0829168,272.37683,370.94094)" />
     <text
        xml:space="preserve"
@@ -1076,7 +1076,7 @@
        sodipodi:cy="-94.274277"
        sodipodi:rx="57.5"
        sodipodi:ry="20"
-       d="m 425,-94.274277 a 57.5,20 0 1 1 -115,0 57.5,20 0 1 1 115,0 z"
+       d="m 425,-94.274277 c 0,11.045695 -25.74363,20 -57.5,20 -31.75637,0 -57.5,-8.954305 -57.5,-20 0,-11.045693 25.74363,-20.000003 57.5,-20.000003 31.75637,0 57.5,8.95431 57.5,20.000003 z"
        transform="matrix(1.0468597,0,0,1.0803105,342.69978,512.55909)" />
     <text
        xml:space="preserve"
@@ -1398,7 +1398,7 @@
        sodipodi:cy="163.22572"
        sodipodi:rx="40"
        sodipodi:ry="17.5"
-       d="m 140,163.22572 a 40,17.5 0 1 1 -80,0 40,17.5 0 1 1 80,0 z"
+       d="m 140,163.22572 c 0,9.66499 -17.90861,17.5 -40,17.5 -22.09139,0 -40,-7.83501 -40,-17.5 0,-9.66498 17.90861,-17.5 40,-17.5 22.09139,0 40,7.83502 40,17.5 z"
        transform="translate(457.47069,363.90552)" />
     <text
        sodipodi:linespacing="123%"
@@ -1430,7 +1430,7 @@
        sodipodi:cy="-209.27428"
        sodipodi:rx="40"
        sodipodi:ry="15"
-       d="m 290,-209.27428 a 40,15 0 1 1 -80,0 40,15 0 1 1 80,0 z"
+       d="m 290,-209.27428 c 0,8.28427 -17.90861,15 -40,15 -22.09139,0 -40,-6.71573 -40,-15 0,-8.28427 17.90861,-15 40,-15 22.09139,0 40,6.71573 40,15 z"
        transform="translate(17.470679,721.40552)" />
     <text
        sodipodi:linespacing="123%"
@@ -1532,7 +1532,7 @@
        sodipodi:cy="-41.774277"
        sodipodi:rx="25"
        sodipodi:ry="17.5"
-       d="m 335,-41.774277 a 25,17.5 0 1 1 -50,0 25,17.5 0 1 1 50,0 z"
+       d="m 335,-41.774277 c 0,9.664983 -11.19288,17.5 -25,17.5 -13.80712,0 -25,-7.835017 -25,-17.5 0,-9.664983 11.19288,-17.5 25,-17.5 13.80712,0 25,7.835017 25,17.5 z"
        transform="matrix(1.8168909,0,0,2.1409042,202.6756,565.36668)" />
     <text
        sodipodi:linespacing="123%"
@@ -1602,7 +1602,7 @@
        sodipodi:cy="401.88116"
        sodipodi:rx="32.5"
        sodipodi:ry="17.5"
-       d="m 505,401.88116 a 32.5,17.5 0 1 1 -65,0 32.5,17.5 0 1 1 65,0 z"
+       d="m 505,401.88116 c 0,9.66499 -14.55075,17.5 -32.5,17.5 -17.94925,0 -32.5,-7.83501 -32.5,-17.5 0,-9.66498 14.55075,-17.5 32.5,-17.5 17.94925,0 32.5,7.83502 32.5,17.5 z"
        transform="matrix(0.843787,0,0,0.764898,189.00049,407.10975)" />
     <path
        sodipodi:type="arc"
@@ -1612,7 +1612,7 @@
        sodipodi:cy="351.88116"
        sodipodi:rx="80"
        sodipodi:ry="22.5"
-       d="m 560,351.88116 a 80,22.5 0 1 1 -160,0 80,22.5 0 1 1 160,0 z"
+       d="m 560,351.88116 c 0,12.42641 -35.81722,22.5 -80,22.5 -44.18278,0 -80,-10.07359 -80,-22.5 0,-12.4264 35.81722,-22.5 80,-22.5 44.18278,0 80,10.0736 80,22.5 z"
        transform="matrix(1.0308747,0.115247,-0.3877746,0.8594539,294.93695,299.4817)" />
     <text
        xml:space="preserve"
@@ -2186,32 +2186,6 @@
          id="tspan3537"
          x="776.68988"
          y="638.34381">?</tspan></text>
-    <a
-       transform="translate(-5.178938,-135.97568)"
-       id="a3007"
-       xlink:href="http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/packers_landscape.svg">
-      <text
-         id="text6335"
-         y="1028.8519"
-         x="23.162506"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan6341"
-           style="font-size:6px"
-           y="1028.8519"
-           x="23.162506"
-           sodipodi:role="line">Ange Albertini 2009-2010</tspan><tspan
-           id="tspan6345"
-           style="font-size:6px"
-           y="1036.3519"
-           x="23.162506"
-           sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
-           style="font-size:6px"
-           id="tspan6339"
-           y="1043.8519"
-           x="23.162506"
-           sodipodi:role="line">http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/packers_landscape.svg</tspan></text>
-    </a>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:123.00000191%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
@@ -2272,11 +2246,6 @@
          id="tspan3470-7"
          x="527.68988"
          y="501.34381">RLP</tspan></text>
-    <path
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 23.696193,886.30541 -7.642977,0 0,25.7689 318.343884,0 0,-9.923"
-       id="path3838"
-       sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -2294,5 +2263,37 @@
          y="340.63214"
          style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
          id="tspan6518">Landscape</tspan></text>
+    <a
+       style="display:inline"
+       transform="translate(-5.64921,-135.77997)"
+       id="a3007-1"
+       xlink:href="http://corkami.blogspot.com">
+      <text
+         id="text6335-7"
+         y="1028.8519"
+         x="23.162506"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           id="tspan6341-4"
+           style="font-size:6px"
+           y="1028.8519"
+           x="23.162506"
+           sodipodi:role="line">Ange Albertini 2009-2010</tspan><tspan
+           id="tspan6345-0"
+           style="font-size:6px"
+           y="1036.3519"
+           x="23.162506"
+           sodipodi:role="line">Creative Commons Attribution</tspan><tspan
+           style="font-size:6px"
+           id="tspan6339-9"
+           y="1043.8519"
+           x="23.162506"
+           sodipodi:role="line">http://corkami.blogspot.com</tspan></text>
+    </a>
+    <path
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+       d="m 21.80365,885.98983 -7.64297,0 0,25.769 106.34389,0 0,-9.923"
+       id="path3838-4"
+       sodipodi:nodetypes="ccccc" />
   </g>
 </svg>

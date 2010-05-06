@@ -111,9 +111,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.1391852"
-     inkscape:cx="155.49404"
-     inkscape:cy="22.004901"
+     inkscape:zoom="6.1563231"
+     inkscape:cx="62.751742"
+     inkscape:cy="23.254451"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -185,7 +185,7 @@
             <dc:title>Ange Albertini</dc:title>
           </cc:Agent>
         </dc:creator>
-        <dc:source>http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/pe-headers.svg</dc:source>
+        <dc:source></dc:source>
         <dc:rights>
           <cc:Agent>
             <dc:title>Creative Common Attribution</dc:title>
@@ -903,31 +903,6 @@
        d="m 243.87915,588.43246 25.10812,0"
        id="path4859-4-15"
        sodipodi:nodetypes="cc" />
-    <a
-       id="a3007"
-       xlink:href="http://corkami.googlecode.com/files/pe-headers.pdf">
-      <text
-         id="text6335"
-         y="1028.8519"
-         x="23.162506"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan6341"
-           style="font-size:6px"
-           y="1028.8519"
-           x="23.162506"
-           sodipodi:role="line">Ange Albertini 2010</tspan><tspan
-           id="tspan6345"
-           style="font-size:6px"
-           y="1036.3519"
-           x="23.162506"
-           sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
-           style="font-size:6px"
-           id="tspan6339"
-           y="1043.8519"
-           x="23.162506"
-           sodipodi:role="line">http://corkami.googlecode.com/files/pe-headers.pdf</tspan></text>
-    </a>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1088,10 +1063,37 @@
        style="fill:none;stroke:#808080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 133.60747,663.74777 -11.06479,0 0,-39.63406 64.71988,0 0,6.7649"
        id="path4291" />
+    <a
+       style="display:inline"
+       transform="translate(0.257699,-1.2495292)"
+       id="a3007-1"
+       xlink:href="http://corkami.blogspot.com">
+      <text
+         id="text6335-7"
+         y="1028.8519"
+         x="23.162506"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+         xml:space="preserve"><tspan
+           id="tspan6341-4"
+           style="font-size:6px"
+           y="1028.8519"
+           x="23.162506"
+           sodipodi:role="line">Ange Albertini 2009-2010</tspan><tspan
+           id="tspan6345-0"
+           style="font-size:6px"
+           y="1036.3519"
+           x="23.162506"
+           sodipodi:role="line">Creative Commons Attribution</tspan><tspan
+           style="font-size:6px"
+           id="tspan6339-9"
+           y="1043.8519"
+           x="23.162506"
+           sodipodi:role="line">http://corkami.blogspot.com</tspan></text>
+    </a>
     <path
-       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 27.452863,1021.7698 -7.642977,0 0,25.7689 187.388234,0 0,-9.923"
-       id="path3838"
+       style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+       d="m 27.710559,1020.5202 -7.64297,0 0,25.769 106.343891,0 0,-9.923"
+       id="path3838-4"
        sodipodi:nodetypes="ccccc" />
   </g>
 </svg>

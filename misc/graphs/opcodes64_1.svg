@@ -41,9 +41,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.38579874"
-     inkscape:cx="372.04724"
-     inkscape:cy="526.18109"
+     inkscape:zoom="5.0766355"
+     inkscape:cx="137.02301"
+     inkscape:cy="53.794353"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3905,7 +3905,7 @@
        style="display:inline"
        transform="translate(25.04118,-36.08644)"
        id="a3007"
-       xlink:href="http://corkami.googlecode.com/files/opcodes_1.pdf">
+       xlink:href="http://corkami.blogspot.com">
       <text
          id="text6335"
          y="1028.8519"
@@ -3921,16 +3921,16 @@
            style="font-size:6px"
            y="1036.3519"
            x="23.162506"
-           sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
+           sodipodi:role="line">Creative Commons Attribution</tspan><tspan
            style="font-size:6px"
            id="tspan6339"
            y="1043.8519"
            x="23.162506"
-           sodipodi:role="line">http://corkami.googlecode.com/files/opcodes_1.pdf</tspan></text>
+           sodipodi:role="line">http://corkami.blogspot.com</tspan></text>
     </a>
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-       d="m 52.49404,985.68336 -7.64297,0 0,25.76894 184.34389,0 0,-9.923"
+       d="m 52.49404,985.68336 -7.64297,0 0,25.76894 106.34389,0 0,-9.923"
        id="path3838"
        sodipodi:nodetypes="ccccc" />
     <text

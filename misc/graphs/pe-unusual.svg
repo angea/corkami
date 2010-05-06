@@ -15,24 +15,9 @@
    id="svg4888"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="New document 16">
+   sodipodi:docname="pe-unusual.svg">
   <defs
-     id="defs4890">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 526.18109 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="744.09448 : 526.18109 : 1"
-       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
-       id="perspective4896" />
-    <inkscape:perspective
-       id="perspective5054"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
-       sodipodi:type="inkscape:persp3d" />
-  </defs>
+     id="defs4890" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -40,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.0720262"
-     inkscape:cx="147.86905"
-     inkscape:cy="59.003406"
+     inkscape:zoom="0.52412699"
+     inkscape:cx="526.18109"
+     inkscape:cy="372.04724"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false" />
@@ -54,7 +39,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -231,7 +216,7 @@
          sodipodi:role="line"
          id="tspan4972"
          x="690.7699"
-         y="606.11859"></tspan><tspan
+         y="606.11859" /><tspan
          sodipodi:role="line"
          id="tspan4974"
          x="690.7699"
@@ -414,35 +399,35 @@
        sodipodi:nodetypes="ccccc" />
     <a
        style="display:inline"
-       transform="translate(8.26012,-22.014403)"
-       id="a3007"
-       xlink:href="http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/pe-layout.svg">
+       transform="translate(7.44958,-22.014528)"
+       id="a3007-1"
+       xlink:href="http://corkami.blogspot.com">
       <text
-         id="text6335"
+         id="text6335-7"
          y="1028.8519"
          x="23.162506"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
          xml:space="preserve"><tspan
-           id="tspan6341"
+           id="tspan6341-4"
            style="font-size:6px"
            y="1028.8519"
            x="23.162506"
            sodipodi:role="line">Ange Albertini 2010</tspan><tspan
-           id="tspan6345"
+           id="tspan6345-0"
            style="font-size:6px"
            y="1036.3519"
            x="23.162506"
-           sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
+           sodipodi:role="line">Creative Commons Attribution</tspan><tspan
            style="font-size:6px"
-           id="tspan6339"
+           id="tspan6339-9"
            y="1043.8519"
            x="23.162506"
-           sodipodi:role="line">http://code.google.com/p/corkami/source/browse/trunk/misc/graphs/pe-layout.svg</tspan></text>
+           sodipodi:role="line">http://corkami.blogspot.com</tspan></text>
     </a>
     <path
        style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-       d="m 35.71299,999.75543 -7.64298,0 0,25.76887 288.34389,0 0,-9.923"
-       id="path3838"
+       d="m 34.90244,999.75527 -7.64297,0 0,25.76903 106.34389,0 0,-9.923"
+       id="path3838-4"
        sodipodi:nodetypes="ccccc" />
   </g>
 </svg>

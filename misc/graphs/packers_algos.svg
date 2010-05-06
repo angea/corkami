@@ -80,9 +80,9 @@
      inkscape:window-height="480"
      id="namedview612"
      showgrid="false"
-     inkscape:zoom="0.46524815"
-     inkscape:cx="84.423293"
-     inkscape:cy="668.34921"
+     inkscape:zoom="4.721881"
+     inkscape:cx="139.65007"
+     inkscape:cy="52.071033"
      inkscape:current-layer="svg2"
      inkscape:snap-bbox="true"
      showguides="true"
@@ -1176,34 +1176,35 @@
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
        id="tspan6518">Algorithms</tspan></text>
   <a
-     transform="translate(20.66824,-34.363103)"
-     id="a3007-4"
-     xlink:href="http://corkami.googlecode.com/files/packers_algos.pdf">
+     style="display:inline"
+     transform="translate(20.79037,-34.46013)"
+     id="a3007"
+     xlink:href="http://corkami.blogspot.com">
     <text
-       id="text6335-5"
+       id="text6335"
        y="1028.8519"
        x="23.162506"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        xml:space="preserve"><tspan
-         id="tspan6341-5"
+         id="tspan6341"
          style="font-size:6px"
          y="1028.8519"
          x="23.162506"
          sodipodi:role="line">Ange Albertini 2010</tspan><tspan
-         id="tspan6345-1"
+         id="tspan6345"
          style="font-size:6px"
          y="1036.3519"
          x="23.162506"
-         sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
+         sodipodi:role="line">Creative Commons Attribution</tspan><tspan
          style="font-size:6px"
-         id="tspan6339-7"
+         id="tspan6339"
          y="1043.8519"
          x="23.162506"
-         sodipodi:role="line">http://corkami.googlecode.com/files/packers_algos.pdf</tspan></text>
+         sodipodi:role="line">http://corkami.blogspot.com</tspan></text>
   </a>
   <path
-     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-     d="m 48.12111,987.4067 -7.64298,0 0,25.7689 198.34389,0 0,-9.923"
-     id="path3838-1"
+     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+     d="m 48.24323,987.30967 -7.64297,0 0,25.76893 106.34389,0 0,-9.923"
+     id="path3838"
      sodipodi:nodetypes="ccccc" />
 </svg>

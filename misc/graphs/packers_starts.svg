@@ -59,9 +59,9 @@
      inkscape:window-height="480"
      id="namedview1032"
      showgrid="false"
-     inkscape:zoom="0.66231951"
-     inkscape:cx="372.04724"
-     inkscape:cy="526.18109"
+     inkscape:zoom="4.4973972"
+     inkscape:cx="116.44715"
+     inkscape:cy="20.843933"
      inkscape:current-layer="svg2"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
@@ -1823,34 +1823,35 @@
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"
        id="tspan6518">EntryPoints</tspan></text>
   <a
-     transform="translate(-7.534686,-3.13598)"
-     id="a3007-4"
-     xlink:href="http://corkami.googlecode.com/files/packers_starts.pdf">
+     style="display:inline"
+     transform="translate(-7.150942,-3.168758)"
+     id="a3007"
+     xlink:href="http://corkami.blogspot.com">
     <text
-       id="text6335-5"
+       id="text6335"
        y="1028.8519"
        x="23.162506"
        style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        xml:space="preserve"><tspan
-         id="tspan6341-5"
+         id="tspan6341"
          style="font-size:6px"
          y="1028.8519"
          x="23.162506"
          sodipodi:role="line">Ange Albertini 2010</tspan><tspan
-         id="tspan6345-1"
+         id="tspan6345"
          style="font-size:6px"
          y="1036.3519"
          x="23.162506"
-         sodipodi:role="line">Creative Commons Attribution - cc by</tspan><tspan
+         sodipodi:role="line">Creative Commons Attribution</tspan><tspan
          style="font-size:6px"
-         id="tspan6339-7"
+         id="tspan6339"
          y="1043.8519"
          x="23.162506"
-         sodipodi:role="line">http://corkami.googlecode.com/files/packers_starts.pdf</tspan></text>
+         sodipodi:role="line">http://corkami.blogspot.com</tspan></text>
   </a>
   <path
-     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-     d="m 19.918184,1018.6338 -7.64298,0 0,25.7689 208.343886,0 0,-9.923"
-     id="path3838-1"
+     style="fill:none;stroke:#808080;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+     d="m 20.301918,1018.601 -7.64297,0 0,25.769 106.343892,0 0,-9.923"
+     id="path3838"
      sodipodi:nodetypes="ccccc" />
 </svg>
