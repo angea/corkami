@@ -37,7 +37,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\thread_host.exe packer\remote_thread.exe \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe \
-	asm\opcodes_desc.exe
+	asm\opcodes_desc.exe \
+	asm\crypted_strings.exe
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -331,6 +332,9 @@ pe\sect_phys_order.exe: pe\sect_phys_order.asm
 	$(makepe) pe\sect_phys_order.asm
 pe\imagebase_null.exe: pe\imagebase_null.asm
 	$(makepe) pe\imagebase_null.asm
+
+asm\crypted_strings.exe: asm\crypted_strings.asm
+	$(makepe) asm\crypted_strings.asm
 
 
 test.exe: test.asm
