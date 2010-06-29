@@ -1,7 +1,9 @@
 # importing labels and comments from CSV file
 # to an UDD file
 
-import udd, sys
+import sys
+
+import udd
 
 csvfile, uddfile = sys.argv[1], sys.argv[2]
 
