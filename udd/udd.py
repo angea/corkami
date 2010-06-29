@@ -120,7 +120,7 @@ class Udd():
         self.__data = {}
         self.__chunks = []
         if filename is not None:
-            self.load(filename)
+            self.Load(filename)
         return
 
     def Load(self, filename):
@@ -128,58 +128,13 @@ class Udd():
             f = open(filename, "rb")
             ct, cd =  ReadNextChunk(f)
 
-#            if (ct,cd) != (CHUNK_TYPES["HEADER"],  "Module info file v1.1\x00"):
-#                raise Exception("Invalid Mod chunk")
+            if not (ct == CHUNK_TYPES["HEADER"] and
+                cd in ["Module info file v1.1\x00", "Module info file v2.0\x00"]):
+                raise Exception("Invalid Mod chunk")
             self.__chunks.append([ct, cd])
             while (True):
                 ct, cd = ReadNextChunk(f)
                 if ct not in CHUNK_TYPES:
-#                if (ct, cd) == (CHUNK_TYPES["END"] , ""):
-#                    self.__chunks.append([ct, cd])
-#                    break
-#
-#                elif ct == CHUNK_TYPES["FILENAME"]:
-#                    self.__data["FileName"] = cd
-#
-#                elif ct == CHUNK_TYPES["VERSION"]:
-#                    if len(cd) != 4 * 4:
-#                        raise Exception("Invalid Version chunk length - expected 16")
-#                    # repr = "%i.%i.%i.%i" % struct.unpack("<4I", cd)
-#                    self.__data["version"] = cd
-#
-#                elif ct == CHUNK_TYPES["SIZE"]:
-#                    if len(cd) != 4:
-#                        raise Exception("Invalid filesize chunk length - expected 4")
-#                    # repr = struct.unpack("<I", cd)[0]
-#                    self.__data["filesize"] = cd
-#
-#                elif ct == CHUNK_TYPES["CRC"]:
-#                    if len(cd) != 4:
-#                        raise Exception("Invalid Ccr chunk length - expected 4")
-#                    # repr = struct.unpack("<I", cd)[0]
-#                    self.__data["crc"] = cd
-#
-#                elif ct == CHUNK_TYPES["TIMESTAMP"]:
-#                    if len(cd) != 8:
-#                        raise Exception("Invalid Timestamp chunk length - expected 8")
-#
-#                    self.__data["timestamp"] = cd
-#
-#                elif ct == "\nUs6":   # comment
-#                    pass
-#
-#                elif ct == "\nUs1":   # label
-#                    pass
-#
-#                elif ct.startswith("\nUs"): # other user stuff
-#                    pass
-#
-#                elif ct in [
-#                    "\nAnc", "\nCfa", "\nCfm", "\nJdt",
-#                    "\nPat", "\nCml", "\nSwi", "\nCfi",
-#                    "\nPrc", "\nHbr", "\nBpc", "\nSva"]:
-#                    pass
-#                else:
                     raise Exception("Unknown chunk name: %s" % ct)
 
                 self.__chunks.append([ct, cd])
@@ -254,21 +209,3 @@ class Udd():
                 result += type, data
 
         return result
-
-
-# Examples
-#
-
-#def ExportLabelsComments(udd):
-#    import sys
-#
-#    found = self.FindByTypes(RVAINFO_TYPES)
-
-if __name__ == "__main__":
-    import sys, glob
-    u = Udd()
-    for fn in glob.glob(sys.argv[1]):
-        u.Load(fn)
-        print u.FindByRVA(0x162)
-        u.AppendChunk(MakeLabelChunk(0x162, "label"))
-        u.Save(fn)
