@@ -1,4 +1,4 @@
-# a python script to manage OllyDbg .UDD files
+# a python library to manage OllyDbg .UDD files
 #
 # Ange Albertini 2010
 # Public domain
@@ -6,61 +6,60 @@
 import struct
 
 chunk_types = [
-        ("HEADER",      "Mod\x00"),
-        ("END",         "\nEnd"),
-        ("FILENAME",    "\nFil"),
-        ("VERSION",     "\nVer"),
-        ("SIZE",        "\nSiz"),
-        ("TIMESTAMP",   "\nTst"),
-        ("CRC",         "\nCcr"),
-        ("PATCH",       "\nPat"),
-        ("BP",          "\nBpc"),
-        ("HWBP",        "\nHbr"),
-        ("SAVE",        "\nSva"),
+    ("HEADER",      "Mod\x00"),
+    ("END",         "\nEnd"),
+    ("FILENAME",    "\nFil"),
+    ("VERSION",     "\nVer"),
+    ("SIZE",        "\nSiz"),
+    ("TIMESTAMP",   "\nTst"),
+    ("CRC",         "\nCcr"),
+    ("PATCH",       "\nPat"),
+    ("BP",          "\nBpc"),
+    ("HWBP",        "\nHbr"),
+    ("SAVE",        "\nSva"),
 
 
-        ("LABEL",       "\nUs1"),
-        ("EXPORT",      "\nUs2"),
-        ("IMPORT",      "\nUs3"),
-        ("LIBRARY",     "\nUs4"),
-        ("USERCOMMENT", "\nUs6"),
-        ("ARG",         "\nUs9"),
-        ("INSPECT",     "\nUs@"),
-        ("WATCH",       "\nUsA"),
-        ("ASM",         "\nUsB"),
-        ("FIND",        "\nUsC"),
+    ("LABEL",       "\nUs1"),
+    ("EXPORT",      "\nUs2"),
+    ("IMPORT",      "\nUs3"),
+    ("LIBRARY",     "\nUs4"),
+    ("USERCOMMENT", "\nUs6"),
+    ("ARG",         "\nUs9"),
+    ("INSPECT",     "\nUs@"),
+    ("WATCH",       "\nUsA"),
+    ("ASM",         "\nUsB"),
+    ("FIND",        "\nUsC"),
 
 
-        ("USh",         "\nUsH"), #?
-        ("US;",         "\nUs;"), #?
-        ("USq",         "\nUsq"), #?
-        ("USv",         "\nUsv"), #?
-        ("US=",         "\nUs="), #?
-        ("ANC",         "\nAnc"), #?
+    ("USh",         "\nUsH"), #?
+    ("US;",         "\nUs;"), #?
+    ("USq",         "\nUsq"), #?
+    ("USv",         "\nUsv"), #?
+    ("US=",         "\nUs="), #?
+    ("ANC",         "\nAnc"), #?
 
-        ("CFA",         "\nCfa"), #?
-        ("CFM",         "\nCfm"), #?
-        ("CFI",         "\nCfi"), #?
-        ("CML",         "\nCml"), #?
-        ("JDT",         "\nJdt"), #?
-        ("SWI",         "\nSwi"), #?
-        ("PRC",         "\nPrc"), #?
+    ("CFA",         "\nCfa"), #?
+    ("CFM",         "\nCfm"), #?
+    ("CFI",         "\nCfi"), #?
+    ("CML",         "\nCml"), #?
+    ("JDT",         "\nJdt"), #?
+    ("SWI",         "\nSwi"), #?
+    ("PRC",         "\nPrc"), #?
 
-        #OllyDbg 2
-        ("FCR",         "\nFcr"), #?
-        ("NAME",        "\nNam"), #?
-        ("DATA",        "\nDat"), #?
-        ("CBR",         "\nCbr"), #?
-        ("LBR",         "\nLbr"), #?
-        ("ANA",         "\nAna"), #?
-        ("CAS",         "\nCas"), #?
-        ("MBA",         "\nMba"), #?
-        ("PRD",         "\nPrd"), #?
-        ("SAV",         "\nSav"), #?
-        ("RTC",         "\nRtc"), #?
-        ("RTP",         "\nRtp"), #?
-
-       ]
+    #OllyDbg 2
+    ("FCR",         "\nFcr"), #?
+    ("NAME",        "\nNam"), #?
+    ("DATA",        "\nDat"), #?
+    ("CBR",         "\nCbr"), #?
+    ("LBR",         "\nLbr"), #?
+    ("ANA",         "\nAna"), #?
+    ("CAS",         "\nCas"), #?
+    ("MBA",         "\nMba"), #?
+    ("PRD",         "\nPrd"), #?
+    ("SAV",         "\nSav"), #?
+    ("RTC",         "\nRtc"), #?
+    ("RTP",         "\nRtp"), #?
+    ]
 
 CHUNK_TYPES = dict([(e[1], e[0]) for e in chunk_types] + chunk_types)
 
@@ -76,8 +75,9 @@ def ReadNextChunk(f):
 
 
 def WriteChunk(f, ct, cd):
-    f.write(ct + struct.pack("<I", len(cd)) + cd)
-
+    f.write(ct)
+    f.write(struct.pack("<I", len(cd)))
+    f.write(cd)
     return
 
 
@@ -91,11 +91,12 @@ def MakeChunk(ct, cd):
 
 
 def MakeRVAInfo(RVA, comment):
-    return struct.pack("<I", RVA) + comment + "\x00"
+    return "%s%s\x00" % (struct.pack("<I", RVA), comment)
 
 
 def ReadRVAInfo(data):
-    return struct.unpack("<I", data[:4])[0], data[4:].strip("\x00")
+    RVA, text = struct.unpack("<I", data[:4])[0], data[4:].strip("\x00")
+    return RVA, text
 
 
 def MakeCommentChunk(RVA, comment):
@@ -114,9 +115,9 @@ def ReadDDInfo(data):
     return struct.unpack("<I", data)[0]
 
 
-class Udd():
+class Udd(object):
 
-    def __init__(self, filename = None):
+    def __init__(self, filename=None):
         self.__data = {}
         self.__chunks = []
         if filename is not None:
@@ -129,9 +130,12 @@ class Udd():
             ct, cd =  ReadNextChunk(f)
 
             if not (ct == CHUNK_TYPES["HEADER"] and
-                cd in ["Module info file v1.1\x00", "Module info file v2.0\x00"]):
-                raise Exception("Invalid Mod chunk")
+                cd in [
+                    "Module info file v1.1\x00",
+                    "Module info file v2.0\x00"]):
+                raise Exception("Invalid HEADER chunk")
             self.__chunks.append([ct, cd])
+
             while (True):
                 ct, cd = ReadNextChunk(f)
                 if ct not in CHUNK_TYPES:
@@ -144,6 +148,7 @@ class Udd():
         finally:
             f.close()
         return
+
 
     def Save(self, filename):
         f = open(filename, "wb")
