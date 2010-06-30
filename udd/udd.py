@@ -1,7 +1,12 @@
-# a python library to manage OllyDbg .UDD files
+# a python module to manage OllyDbg .UDD files
 #
 # Ange Albertini 2010
 # Public domain
+
+__author__ = 'Ange Albertini'
+__revision__ = "$LastChangedRevision$"
+__version__ = '1.0 r%d' % int(__revision__[21:-2])
+__contact__ = 'ange@corkami.com' 
 
 import struct
 
@@ -120,6 +125,7 @@ class Udd(object):
     def __init__(self, filename=None):
         self.__data = {}
         self.__chunks = []
+        self.__format = None
         if filename is not None:
             self.Load(filename)
         return
@@ -135,7 +141,7 @@ class Udd(object):
                     "Module info file v2.0\x00"]):
                 raise Exception("Invalid HEADER chunk")
             self.__chunks.append([ct, cd])
-
+            self.__format = 1 if cd == "Module info file v1.1\x00" else 2
             while (True):
                 ct, cd = ReadNextChunk(f)
                 if ct not in CHUNK_TYPES:

@@ -3,7 +3,12 @@
 
 import sys
 
-import udd
+try:
+    import udd
+except ImportError:
+    import os
+    sys.path.append(os.path.join(os.getcwd(), '..'))
+    import udd
 
 csvfile, uddfile = sys.argv[1], sys.argv[2]
 
