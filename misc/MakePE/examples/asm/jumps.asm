@@ -246,7 +246,17 @@ _newsegment:
 _
 ;   db 69h ; just for obfuscation
 _oldsegment:
-    jmp good
+
+_RtlCopy:
+    mov eax, esp
+    sub eax, 10h
+    push good
+    push esp
+    push eax
+    call RtlCopyLuid
+
+    jmp bad
+;%IMPORT ntdll.dll!RtlCopyLuid
 
 %include '..\goodbad.inc'
 
