@@ -282,7 +282,7 @@ packer\eppatched.exe: pe\compiled.exe packer\eppatcher.py
 	cd packer & $(python) eppatcher.py
 packer\crypted.exe: pe\compiled.exe packer\crypter.py
 	cd packer & $(python) crypter.py
-packer\compressed.exe: pe\compiled.exe packer\compressed.py
+packer\compressed.exe: pe\compiled.exe packer\compresser.py
 	cd packer & $(python) compresser.py
 packer\protected.exe: pe\compiled.exe packer\protecter.py
 	cd packer & $(python) protecter.py
