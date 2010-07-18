@@ -1,0 +1,21 @@
+The DECODEME fashion test
+
+Solve the cryptogram below. (Hint: it's marketing waffle proclaiming the alleged environmental friendliness of a particular technology.) Work out which Australian company it refers to, and find the first two digits of that company's ABN. Add the digits together to get a number. Write down the letter at that position in the alphabet.
+
+Wear your DecoDeme shirt, bring evidence that you have solved the puzzle – in the form of the abovementioned letter – and attend my talk. Prince Room, closing session, final day – Friday 09 July 2010.
+
+You will be in line to win the 1/16th-scale remote controlled tank!
+
+      WKBA LJLW DITR OIAF OBDW BVBQ 
+      ROPR XVRM MROW XQLW LBVW ROBA 
+      XFBR XOFD OERQ CRRW MOLQ WEZB 
+      QDEI LQJS LDEI BQDW LRQD IBVB 
+      OSLF BVWB IBTR OHLQ JALV WDQF 
+      BBAX FDWL RQDQ AKBD IWKF DOBD 
+      VTBI IDVE BWWB OPDQ DJBP BQWR 
+      CRXO OBVR XOFB VWRQ DPBG XVWD 
+      CBTM RVVL ELIL WLBV
+
+Don't forget to watch Paul Ducklin's blog for hints. You can also follow Duck and the puzzle on Twitter. Look for the hashtag #decodeme. The puzzle is similar to the one we ran at AusCERT 2010, so you may pick up some hints from last time.
+
+Of course, you can also stop by the Sophos QUESTnet stand whenever you like to ask for advice. You never know – you might catch one of us in an unguarded moment.

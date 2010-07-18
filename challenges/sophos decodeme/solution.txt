@@ -1,0 +1,26 @@
+Sophos decodeme challenge 2010
+
+start = decodeme.txt
+run step1
+
+read url.gif
+
+content => sofarsogood.txt
+cryptogram => extracted as .txt
+
+see step2.py
+
+THE DIGITAL WORLD CREATES ENORMOUS OPPORTUNITIES TO REDUCE OUR CARBON FOOTPRINT BY ENABLING
+VIABLE NATIONALE SERVICES
+TELEWORKING DISTANCE EDUCATION AND HEALTHCARE AS WELL AS BETTER MANAGEMENT OF OUR RESOURCES TO NAME JUST A FEW POSSIBILITIES
+
+refers to NBN Co
+
+via ABN Lookup:
+86 136 533 741
+Active 	NBN CO LIMITED 	Entity Name 	2060 NSW
+68 000 232 486
+Active 	NBN LTD
+
+in both cases, 6+8 = 14
+=> letter N
