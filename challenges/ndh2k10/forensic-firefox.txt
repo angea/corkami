@@ -1,5 +1,5 @@
-ndh 2010 forensic challenge ?? (firefox)
-(website is currently down, number of challenge unknown)
+ndh 2010 forensic challenge
+http://wargame.nuitduhack.com/epreuves/forensic/235RQSDFvd/
 
 purpose
 =======
