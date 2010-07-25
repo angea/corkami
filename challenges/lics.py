@@ -1,3 +1,5 @@
+# -*- coding: Latin-1 -*-
+
 """Little Interactive Cryptogram Solving tool
 
 Ange Albertini, 2010, public domain"""
@@ -62,6 +64,7 @@ def main():
     srcs = []
     tgts = []
     en_frqs = "etaoinshrdlcumwfgypbvkjxqz"
+    fr_frqs = "esaitnrulodcpmévqfbghjàxyèêzwçùkîœïë"
 
     cryptogram = getCryptogram()
     cryptogram = cryptogram.replace(" ", "").replace("\n", "")
