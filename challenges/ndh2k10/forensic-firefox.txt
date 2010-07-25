@@ -1,0 +1,63 @@
+ndh 2010 forensic challenge ?? (firefox)
+(website is currently down, number of challenge unknown)
+
+purpose
+=======
+
+firefox relies on sqlite to store password information.
+when you delete a password, it deletes it from the DB structure but it might stay
+in the file itself, thus it can be recoverable
+
+in short, your password stored in firefox might be still present even though it's not shown anymore.
+
+tools used
+==========
+firefox
+firemaster
+firepassword
+sqlite
+
+files
+=====
+erratum.txt
+    Cette épreuve était malheureusement infaisable pendant la nuit du hack.
+    Veuillez nous en excuser, les fichiers online ont été modifiés.
+
+and 2 firefox profile files
+file1.txt
+file2.txt
+
+
+file1 contains global-salt => key3.db
+file2 contains exmoz_logins_host => signons.sqlite
+
+create a profile (firefox -ProfileManager), add these files
+=> the profile has a masterpassword.
+
+use firemaster + dictionary or short bruteforce
+-> password = ndh
+
+the address http://88.191.223.19:1337 is on saved passwords exceptions
+not sure why, removing 88.191 from exceptions, no result whatsoever
+
+http://iamfreakinsecure.com present in DB but not in db dump
+no tool to recover deleted records, let's do it manually.
+
+from sqlite .dump information, a l/p entry is made this way:
+INSERT INTO "moz_logins" VALUES(<rank>,'<url>',NULL,<sameURL>,'email','password','<base64string1>', 'base64string2',<CLSID>,1);
+
+from the data blob in the file:
+\x01http://iamfreakinsecure.comhttp://iamfreakinsecure.comloginpasswordMDoEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECNabRlKSfnHPBBAwxO3P6NdZXWe4O8bmktYyMFIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECFmO1P7dWTnXBCitOYOyNMMMKo9Q/CQ8DZVVBw+ksVWTF4x1v61K4lp2OVmwJxFoq9Yn{0acae7f3-1612-4587-b66a-66eac37682a3}
+type in SQLite
+INSERT INTO "moz_logins" VALUES(1,'http://iamfreakinsecure.com', NULL, 'http://iamfreakinsecure.com','login',',password','MDoEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECNabRlKSfnHPBBAwxO3P6NdZXWe4O8bmktYy', 'MFIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECFmO1P7dWTnXBCitOYOyNMMMKo9Q/CQ8DZVVBw+ksVWTF4x1v61K4lp2OVmwJxFoq9Yn','{0acae7f3-1612-4587-b66a-66eac37682a3}', 1);
+
+
+FirePassword -m ndh test
+ ******** Saved Host list with username/password ********
+
+ Host: http://iamfreakinsecure.com
+ login       : validation
+ ,password   : dc32738be42c384583c00a3461b864d4
+
+
+Ange Albertini, 2010
