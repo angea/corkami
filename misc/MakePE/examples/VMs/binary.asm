@@ -1,4 +1,4 @@
-; simple fibonacci number calculator, virtualized into a similar architecture like x86
+; simple fibonacci number calculator, virtualized into a bit-level virtual machine
 
 %include '../../onesec.hdr'
 

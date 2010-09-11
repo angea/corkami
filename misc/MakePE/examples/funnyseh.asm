@@ -4,6 +4,10 @@
 EXCEPTION_ILLEGAL_INSTRUCTION equ 0c000001dh
 
 EntryPoint:
+; part 1 ActxSEH is disabled because it doesn't work on every computer
+
+jmp part2
+ActxSEH:
     sub esp, 38h
     mov eax, 0
     call _next
@@ -13,9 +17,9 @@ _next:
     mov ecx, [eax]
     push ecx
     mov [eax], esp
-    mov eax, [eax + 4]  ; => "Actx" which is read only
+    mov eax, [eax + 4]                      ; => "Actx", which is read only
 trigger:
-    not dword [eax]     ; should trigger exception
+    not dword [eax]                         ; should trigger exception
 
 handler:
     pop eax
@@ -27,7 +31,7 @@ handler:
     mov eax, [ecx + CONTEXT.regEax]         ; context check again
     imul eax, eax
     popad
-    jnz bad                                 ; might fail
+    jnz bad                                 ; might fail on some computer
 
     push edi
 
@@ -35,7 +39,7 @@ handler:
 
     lea edi, [ecx + edi * 2 + CONTEXT.regEip]
     mov edi, [edi]                          ; => edi - trigger
-    lea edi, [edi + part2 - trigger]         ; => edi = good
+    lea edi, [edi + part1clean - trigger]   ; => edi = good
 
     push edi
     pop dword [ecx + CONTEXT.regEip]
@@ -55,12 +59,14 @@ handler:
 not_ret:
     jmp [7ffe0304h]                         ;hardcoded IMPORT ntdll.dll!KiFastSystemCallRet
 
-part2:
-clearSEH
-nop
-nop
-nop
+part1clean:                                 ; cleaning, if part 1 was executed
+    clearSEH
+    add esp, 38h
+    nop
+    nop
+    nop
 
+part2:
     sub eax, eax                            ; mov eax, 0
     push dword [esp + eax]                  ; push ImageBase
     push ebp
@@ -104,7 +110,7 @@ not_good:
     retn                                    ; we should go to bad instead :)
 
 not_in_handler:
-    vmcall
+    vmcall                                  ; ollydbg can't skip it
 trigger2:
     add esp, 8
     mov [edx + 4], ebx

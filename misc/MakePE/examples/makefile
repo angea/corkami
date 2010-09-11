@@ -44,7 +44,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
     anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe \
-    pe\sect_phys_order.exe pe\imagebase_null.exe
+    pe\sect_phys_order.exe pe\imagebase_null.exe vms\binary.exe
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -339,6 +339,9 @@ asm\crypted_strings.exe: asm\crypted_strings.asm
 
 anti\int2a_loop.exe: anti\int2a_loop.asm
 	$(makepe) anti\int2a_loop.asm
+
+VMs\binary.exe: VMs\binary.asm
+	$(makepe) VMs\binary.asm
 
 test.exe: test.asm
 	$(makepe) test.asm
