@@ -39,7 +39,9 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe \
 	asm\opcodes_desc.exe \
 	asm\crypted_strings.exe \
-	anti\int2a_loop.exe
+	anti\int2a_loop.exe \
+	pe\hal.dll \
+	pe\classpnp.sys
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -345,6 +347,13 @@ VMs\binary.exe: VMs\binary.asm
 
 test.exe: test.asm
 	$(makepe) test.asm
+
+pe\hal.dll: pe\hal.asm
+	$(makepe) pe\hal.asm
+pe\classpnp.sys: pe\classpnp.asm
+	$(makepe) pe\classpnp.asm
+	mv pe\classpnp.dll pe\classpnp.sys
+
 
 clean:
 	rm $(examples) $(objects) $(beta)
