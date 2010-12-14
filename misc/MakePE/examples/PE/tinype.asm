@@ -41,7 +41,7 @@ times 8 db 0
 .MajorSubsystemVersion  dw 4
 times 6 db 0
 .SizeOfImage            dd 100 + 4  ;rounding not working
-.SizeOfHeaders          dd 100      ;rounding not working
+.SizeOfHeaders          dd 100      ;rounding not working - not necessary on all XP versions
 times 4 db 0
 .Subsystem              db IMAGE_SUBSYSTEM_WINDOWS_GUI ; shortened on a byte
 SIZEOFHEADER equ $ - IMAGEBASE ; rounding not working

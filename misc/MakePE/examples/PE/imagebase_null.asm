@@ -1,5 +1,5 @@
 ; PE PoC
-; file with null imagebase - and reloacted by the OS
+; file with null imagebase - and relocated by the OS
 
 %include '..\..\onesec.hdr'
 

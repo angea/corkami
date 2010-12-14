@@ -128,7 +128,8 @@ ret
 
 ;%EXPORT RtlImageNtHeader
     jmp RtlImageNtHeader
-;%IMPORT ntdll.dll!RtlImageNtHeader    
+;%reloc 2
+;%IMPORT ntdll.dll!RtlImageNtHeader
 
 ; not handling their parameters correctly yet
 ;%EXPORT CcCanIWrite
