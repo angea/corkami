@@ -56,10 +56,12 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualAddress, dd Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData, dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
+    at IMAGE_SECTION_HEADER.Characteristics, dd IMAGE_SCN_MEM_EXECUTE ; necessary under Win7 (with DEP?)
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 align FILEALIGN, db 0
+align 1000h, db 0           ; necessary under Win7 x64
 SIZEOFHEADERS equ $ - IMAGEBASE
 
 bits 32
