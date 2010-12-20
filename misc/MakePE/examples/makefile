@@ -41,7 +41,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	asm\crypted_strings.exe \
 	anti\int2a_loop.exe \
 	pe\hal.dll \
-	pe\classpnp.sys
+	pe\classpnp.sys \
+	pe\resource_loop.exe
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -353,6 +354,9 @@ pe\hal.dll: pe\hal.asm
 pe\classpnp.sys: pe\classpnp.asm
 	$(makepe) pe\classpnp.asm
 	mv pe\classpnp.dll pe\classpnp.sys
+
+pe\resource_loop.exe: pe\resource_loop.asm
+	$(makepe) pe\resource_loop.asm
 
 
 clean:
