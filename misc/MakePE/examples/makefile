@@ -43,7 +43,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	pe\hal.dll \
 	pe\classpnp.sys \
 	pe\resource_loop.exe \
-	pe\resource_fail7.exe
+	pe\resource_fail7.exe \
+	pe\resource_shuffled.exe \
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -360,6 +361,8 @@ pe\resource_loop.exe: pe\resource_loop.asm
 	$(makepe) pe\resource_loop.asm
 pe\resource_fail7.exe: pe\resource_fail7.asm
 	$(makepe) pe\resource_fail7.asm
+pe\resource_shuffled.exe: pe\resource_shuffled.asm
+	$(makepe) pe\resource_shuffled.asm
 
 
 clean:
