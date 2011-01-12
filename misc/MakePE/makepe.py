@@ -75,8 +75,17 @@ def MakeImports(imports):
 def MakeRelocs(relocs):
     source = str()
     source += templates.Relocations["START"]
+    block = 0
+    base = 0
     for i, off in enumerate(relocs):
-        source += templates.Relocations["ENTRY"] % {"label": str(i), "offset": off}
+        if (i % 512) == 0:
+            base = i
+            if i > 0:
+                source += templates.Relocations["BLOCKEND"] % {"block": block}
+                block += 1
+            source += templates.Relocations["BLOCKSTART"] % {"block": block, "base": base}
+        source += templates.Relocations["ENTRY"] % {"label": str(i), "offset": off, "base": base}
+    source += templates.Relocations["BLOCKEND"] % {"block": block}
     source += templates.Relocations["END"]
     return source
 

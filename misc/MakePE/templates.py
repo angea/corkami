@@ -51,14 +51,16 @@ Imports = dict([i, j.lstrip("\n")] for i, j in zip(Imports[::+2], Imports[1::+2]
 Relocations = """START#
 ;relocations start
 Directory_Entry_Basereloc:
-block_start:
+#BLOCKSTART#
+block_start%(block)i:
 ; relocation block start
-    .VirtualAddress dd reloc0 - IMAGEBASE
-    .SizeOfBlock dd base_reloc_size_of_block
+    .VirtualAddress dd reloc%(base)i - IMAGEBASE
+    .SizeOfBlock dd base_reloc_size_of_block%(block)i
 #ENTRY#
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc%(label)s + %(offset)s - reloc0)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc%(label)s + %(offset)s - reloc%(base)i)
+#BLOCKEND#
+    base_reloc_size_of_block%(block)i equ $ - block_start%(block)i
 #END#
-    base_reloc_size_of_block equ $ - block_start
 ;relocation block end
 
 ;relocations end

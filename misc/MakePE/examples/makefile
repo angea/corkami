@@ -45,7 +45,10 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	pe\resource_loop.exe \
 	pe\resource_fail7.exe \
 	pe\resource_shuffled.exe \
-	anti\flow.exe
+	anti\flow.exe \
+	imports\kernel31.dll \
+	imports\kernel31.asm \
+	imports\kernel31_test.exe \
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -368,6 +371,12 @@ pe\resource_shuffled.exe: pe\resource_shuffled.asm
 anti\flow.exe: anti\flow.asm
 	$(makepe) anti\flow.asm
 
+imports\kernel31.asm: imports\kernel31.py
+	cd imports & $(python) kernel31.py & cd ..\..
+imports\kernel31.dll: imports\kernel31.asm
+	$(makepe) imports\kernel31.asm
+imports\kernel31_test.exe: imports\kernel31_test.asm
+	$(makepe) imports\kernel31_test.asm
 
 clean:
 	rm $(examples) $(objects) $(beta)
