@@ -1,9 +1,12 @@
 # this program generates a DLL to bring backward compatibility to executables compiled under SP3
 
-# roughly speaking, those executables will expect new functions from kernel32
+# those executables will expect new functions from kernel32.
 # this dll creates dummies for these functions leaving the other untouched.
 # this lower the security provided by these new functions, but make it possible to run new executable on older systems
 # with minimum binary modification
+
+# so patch the DLL name in the imports of your program, and maybe as well MSC100*.dll.
+# also lower the Major version for windows 2000 compatibility.
 
 import pefile
 
@@ -14,12 +17,12 @@ template = """;%%EXPORT %(api)s
 
 EXCLUDE = "EncodePointer DecodePointer".split()
 
-enums = []
-pe = pefile.PE(r"c:\windows\system32\kernel32.dll")
-for sym in pe.DIRECTORY_ENTRY_EXPORT.symbols:
-    if sym.name in EXCLUDE:
+tramps = []
+import exports
+for export in exports.XP:
+    if export in EXCLUDE:
         continue
-    enums.append(template % {"api":sym.name})
+    tramps.append(template % {"api":export})
 
 
 f = open("kernel31.asm", "wt")
@@ -43,7 +46,8 @@ _
 
 """)
 
-f.write("\n".join(enums))
+f.write("\n".join(tramps))
+
 f.write("""
 ;%IMPORTS
 
