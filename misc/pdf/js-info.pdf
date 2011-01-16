@@ -1,0 +1,20 @@
+%PDF-1.4
+1 0 obj
+<<
+/Kids[<</Parent 1 0 R>>]
+>>
+endobj
+
+trailer
+<<
+/Info <</Author(Hello) /Title( World) /Producer( !)>>
+/Root
+    <<
+    /Pages 1 0 R
+    /OpenAction<<
+        /S/JavaScript
+        /JS(
+            app.alert(info.author + info.title + info.producer);
+        )>>
+    >>
+>>

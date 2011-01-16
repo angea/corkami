@@ -1,0 +1,22 @@
+%PDF-1.4
+1 0 obj
+<<
+/Kids[<</Parent 1 0 R>>]
+>>
+endobj
+
+trailer
+<<
+/Root
+    <</Pages 1 0 R
+    /OpenAction
+        <<
+        /S/JavaScript
+        /JS(
+    app.alert(
+        ("zHzzezzlzlzozzzzz zWozrzldz!").replace(/z/g,"")
+        );
+        )
+        >>
+    >>
+>>

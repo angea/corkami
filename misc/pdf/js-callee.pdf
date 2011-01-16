@@ -1,0 +1,31 @@
+%PDF-1.4
+1 0 obj
+<<
+/Kids[<</Parent 1 0 R>>]
+>>
+endobj
+
+trailer
+<<
+/Root
+    <</Pages 1 0 R
+    /OpenAction
+        <<
+        /S/JavaScript
+        /JS(
+function decrypt(text)
+{
+    var key;
+    var i;
+    key = arguments.callee.toString();
+    decrypt = "";
+    for (i=0; i < text.length; i++)
+        decrypt = decrypt + String.fromCharCode(key.charCodeAt(i) ^ text.charCodeAt(i));
+    app.alert(decrypt);
+}
+
+decrypt(unescape(".%10%02%0F%1BI8%01R%08%01B"));
+)
+        >>
+    >>
+>>
