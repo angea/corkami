@@ -14,7 +14,7 @@
    height="1052.3622"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.0 r9654"
    sodipodi:docname="pe-headers.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0">
@@ -111,18 +111,11 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.1563231"
-     inkscape:cx="62.751742"
-     inkscape:cy="23.254451"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="false"
      inkscape:snap-global="true"
-     inkscape:window-width="1024"
-     inkscape:window-height="581"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:bbox-nodes="true"
@@ -179,13 +172,13 @@
         <dc:title>the PE Format - PE Header</dc:title>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
-        <dc:date>2009-2010</dc:date>
+        <dc:date>2009-2011</dc:date>
         <dc:creator>
           <cc:Agent>
             <dc:title>Ange Albertini</dc:title>
           </cc:Agent>
         </dc:creator>
-        <dc:source></dc:source>
+        <dc:source />
         <dc:rights>
           <cc:Agent>
             <dc:title>Creative Common Attribution</dc:title>
@@ -332,10 +325,10 @@
          y="281.55078"
          id="tspan3451"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x00 dw Machine <tspan
-   style="font-size:6;fill:#4d4d4d"
+   style="font-size:6px;fill:#4d4d4d"
    id="tspan3392">0x</tspan><tspan
-   style="font-size:6;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"
-   id="tspan3458">014c/0x8664 [64b]</tspan></tspan><tspan
+   style="font-size:6px;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"
+   id="tspan3458">014c [32b]/0x8664 [64b]</tspan></tspan><tspan
          sodipodi:role="line"
          x="382.82516"
          y="295.20953"
@@ -380,7 +373,7 @@
          id="tspan2431"
          style="font-size:12px;font-style:normal;writing-mode:lr-tb;fill:#000000;-inkscape-font-specification:Lucida Console">0x00 dd Signature<tspan
    style="font-size:12px;font-style:normal;writing-mode:lr-tb;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"
-   id="tspan3454"> PE,0,0</tspan></tspan><tspan
+   id="tspan3454"> PE\0\0</tspan></tspan><tspan
          sodipodi:role="line"
          x="366.33737"
          y="255.98611"
@@ -616,7 +609,7 @@
          id="tspan2507"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x00 dw Magic<tspan
    style="font-size:6px;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"
-   id="tspan3352"> 0x10b/0x20b [64b]</tspan></tspan><tspan
+   id="tspan3352"> 0x10b [32b]/0x20b [64b]</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="400.33917"
@@ -651,42 +644,44 @@
          x="383.24112"
          y="460.36856"
          id="tspan2521"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x14 dd BaseOfCode</tspan><tspan
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x14 dd BaseOfCode <tspan
+   style="font-size:6px;fill:#4d4d4d"
+   id="tspan3192">dq in 64b</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="470.36856"
          id="tspan2523"
-         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x18 dd BaseOfData     <tspan
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x18 dd BaseOfData <tspan
    id="tspan3008"
-   style="font-size:6px;letter-spacing:-0.161557;fill:#4d4d4d">32b only</tspan></tspan><tspan
+   style="font-size:6px;letter-spacing:-0.161557;fill:#4d4d4d">only in 32b</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="482.71017"
          id="tspan2525"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x1c dd ImageBase <tspan
    id="tspan3010"
-   style="font-size:6px;fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+   style="font-size:6px;fill:#4d4d4d">dq in 64b</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="495.91016"
          id="tspan2527"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x20 dd SectionAlignment <tspan
    style="font-size:6px;fill:#4d4d4d"
-   id="tspan4930">2^y, y &gt;=x</tspan></tspan><tspan
+   id="tspan4930">=2^y, with y≥x</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="509.11017"
          id="tspan2529"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x24 dd FileAlignment <tspan
    style="font-size:6px;fill:#4d4d4d"
-   id="tspan4928">2^x</tspan></tspan><tspan
+   id="tspan4928">=2^x</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="518.50507"
          id="tspan2531"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x28 dw MajorOperatingSystemVersion<tspan
    style="font-size:6px;font-style:normal;fill:#4d4d4d;-inkscape-font-specification:Lucida Console"
-   id="tspan2542"> =4</tspan></tspan><tspan
+   id="tspan2542"> 4/5</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="525.04156"
@@ -735,14 +730,14 @@
            style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
            id="tspan2568">0x40 dd CheckSum</tspan><tspan
            style="font-size:6px;fill:#4d4d4d"
-           id="tspan2566"> drivers only</tspan></tspan><tspan
+           id="tspan2566"> [drivers]</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="595.51013"
          id="tspan2551"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x44 dw Subsystem <tspan
    style="font-size:6px;fill:#4d4d4d"
-   id="tspan3434">driver/gui/cli</tspan></tspan><tspan
+   id="tspan3434">1 driver/2 gui/3 cli</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="604.90503"
@@ -754,28 +749,28 @@
          id="tspan2555"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x48 dd SizeOfStackReserve <tspan
    id="tspan3020"
-   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+   style="fill:#4d4d4d">dq in 64b</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="617.88062"
          id="tspan2557"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x4c dd SizeOfStackCommit  <tspan
    id="tspan3017"
-   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+   style="fill:#4d4d4d">dq in 64b</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="624.48059"
          id="tspan2559"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x50 dd SizeOfHeapReserve  <tspan
    id="tspan3014"
-   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+   style="fill:#4d4d4d">dq in 64b</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="631.08063"
          id="tspan2561"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lucida Console;-inkscape-font-specification:Lucida Console">0x54 dd SizeOfHeapCommit   <tspan
    id="tspan3012"
-   style="fill:#4d4d4d">dq [64b]</tspan></tspan><tspan
+   style="fill:#4d4d4d">dq in 64b</tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="639.29047"
@@ -789,7 +784,7 @@
            style="font-size:8px;fill:#000000"
            id="tspan2570">0x5c dd NumberOfRvaAndSizes </tspan><tspan
            style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#4d4d4d;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-           id="tspan2518">&lt;=16  </tspan></tspan><tspan
+           id="tspan2518">≤16  </tspan></tspan><tspan
          sodipodi:role="line"
          x="383.24112"
          y="660.11017"
@@ -800,13 +795,15 @@
        d="m 583.76201,445.55562 15.43591,0"
        id="path4859" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 473.26215,458.09826 13.32429,0"
-       id="path4859-1" />
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 518.55877,458.09826 13.32429,0"
+       id="path4859-1"
+       inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 472.61849,468.31431 13.32429,0"
-       id="path4859-14" />
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
+       d="m 518.61849,468.31431 13.32429,0"
+       id="path4859-14"
+       inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)"
        d="m 243.87915,604.51328 25.10812,0"
@@ -1078,7 +1075,7 @@
            style="font-size:6px"
            y="1028.8519"
            x="23.162506"
-           sodipodi:role="line">Ange Albertini 2009-2010</tspan><tspan
+           sodipodi:role="line">Ange Albertini 2009-2011</tspan><tspan
            id="tspan6345-0"
            style="font-size:6px"
            y="1036.3519"
