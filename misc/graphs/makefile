@@ -1,9 +1,10 @@
 inkpath = c:/Program Files/Inkscape
+texify = c:/Program Files/MiKTeX 2.8/miktex/bin/texify.exe  --pdf
 
 all: pe.pdf packers.pdf opcodes.pdf
 
 clean:
-	del opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes_desc.pdf opcodes.pdf pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf pe.pdf packers_fp.pdf packers_models.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_algos.pdf packers.pdf
+	del opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes_desc.pdf opcodes.pdf pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf pe.pdf packers_fp.pdf packers_models.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_algos.pdf packers.pdf *.out *.aux *.gz *.log opcodes.pdf cm.pdf
 
 packers_starts.pdf : packers_starts.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
@@ -15,6 +16,11 @@ packers_algos.pdf: packers_algos.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
 packers_landscape.pdf: packers_landscape.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
+packers_details.pdf: packers_details.tex
+	$(texify) $<
+packers_fp.pdf: packers_fp.tex
+	$(texify) $<
+
 
 opcodes_1.pdf: opcodes_1.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
@@ -22,6 +28,12 @@ opcodes_2.pdf: opcodes_2.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
 opcodes64_1.pdf: opcodes64_1.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
+opcodes_desc.pdf: opcodes_desc.tex
+	$(texify) $<
+opcodes_fp.pdf: opcodes_fp.tex
+	$(texify) $<
+opcodes1.pdf: opcodes1.tex
+	$(texify) $<
 
 pe-headers.pdf: pe-headers.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
@@ -35,7 +47,11 @@ pe-directories.pdf: pe-directories.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
 pe-directories-2.pdf: pe-directories-2.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
- 
+pe_fp.pdf: pe_fp.tex
+	$(texify) $<
+
+cm.pdf: cm.tex
+	$(texify) $<
 
 pe.pdf: pe_fp.pdf pe-headers.pdf pe-layout.pdf pe-directories.pdf pe-directories-2.pdf
 	pdftk pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf output pe.pdf dontask
