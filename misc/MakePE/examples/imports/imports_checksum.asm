@@ -15,8 +15,16 @@ MESSAGEBOXA equ 021CB7926h
 LoadImports:
 
 ; Locate Kernel32.dll imagebase
-    mov eax, [esp + 4]
-    and eax, 0fff00000h
+    mov eax,[fs:030h]   ; _TIB.PebPtr
+    mov eax,[eax + 0ch] ; _PEB.Ldr
+    mov eax,[eax + 0ch] ; _PEB_LDR_DATA.InLoadOrderModuleList.Flink
+    mov eax,[eax]       ; _LDR_MODULE.InLoadOrderModuleList.Flink
+    mov eax,[eax]       ; _LDR_MODULE.InLoadOrderModuleList.Flink
+    mov eax,[eax + 18h] ; _LDR_MODULE.BaseAddress
+
+;   brutal way, not as much compatible
+;   mov eax, [esp + 4]
+;   and eax, 0fff00000h
 
     mov [hKernel32], eax
 
