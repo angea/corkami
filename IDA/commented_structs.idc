@@ -1,7 +1,7 @@
 // this IDC script contains 'standard' (including 'undocumented' structure such as TIB and PEB)
 // with repeatable comments for their members, so that it's easier to know structure members are pointing to
 
-//example, knowing that fs:0 is the _TIB:
+// example of code
 // mov eax, large fs:30h
 // mov eax, [eax+0Ch]
 // mov eax, [eax+0Ch]
@@ -9,6 +9,7 @@
 // mov eax, [eax]
 // mov eax, [eax+18h]
 
+// by just knowing that fs:0 is the _TIB, you can easily get to this, step by step:
 // mov eax, large fs:_TIB.PebPtr ; _PEB
 // mov eax, [eax+_PEB.Ldr] ; _PEB_LDR_DATA
 // mov eax, [eax+_PEB_LDR_DATA.InLoadOrderModuleList.Flink] ; _LDR_MODULE
@@ -16,7 +17,9 @@
 // mov eax, [eax+_LDR_MODULE.InLoadOrderModuleList.Flink] ; _LDR_MODULE
 // mov eax, [eax+_LDR_MODULE.BaseAddress]
 
-// Ange Albertini 2011
+// next step: automate it, and make it portable
+
+// Ange Albertini 19th January 2011
 // BSD Licence
 // Thanks to Elias Bachaalany for his help
 
