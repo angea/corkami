@@ -8,18 +8,18 @@ EntryPoint:
     call decrypt
     nop
 buffer:
-incbin 'xor.enc'
-;    push MB_ICONINFORMATION ; UINT uType
-;    push tada               ; LPCTSTR lpCaption
-;    push helloworld         ; LPCTSTR lpText
-;    push 0                  ; HWND hWnd
-;    call MessageBoxA
-;_
-;    push 0                  ; UINT uExitCode
-;    call ExitProcess
-;_
-;tada db "Tada!", 0
-;helloworld db "Hello World!", 0
+    push MB_ICONINFORMATION ; UINT uType
+    push tada               ; LPCTSTR lpCaption
+    push helloworld         ; LPCTSTR lpText
+    push 0                  ; HWND hWnd
+    call MessageBoxA
+nop
+    push 0                  ; UINT uExitCode
+    call ExitProcess
+nop
+
+tada db "Tada!", 0
+helloworld db "Hello World!", 0
 
 BUFFLEN equ $ - buffer
 align 16, db 0
@@ -31,7 +31,7 @@ align 16, db 0
 decrypt:
     mov esi, buffer
     mov edi, esi
-    mov ecx, BUFFLEN / 4
+    mov ecx, BUFFLEN / 4 + 1
     mov ebx, KEY
 _loop:
     lodsd

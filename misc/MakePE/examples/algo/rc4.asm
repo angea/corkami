@@ -12,18 +12,17 @@ EntryPoint:
     call decrypt
     nop
 buffer:
-incbin 'rc4.enc'
-;    push MB_ICONINFORMATION ; UINT uType
-;    push tada               ; LPCTSTR lpCaption
-;    push helloworld         ; LPCTSTR lpText
-;    push 0                  ; HWND hWnd
-;    call MessageBoxA
-;_
-;    push 0                  ; UINT uExitCode
-;    call ExitProcess
-;_
-;tada db "Tada!", 0
-;helloworld db "Hello World!", 0
+    push MB_ICONINFORMATION ; UINT uType
+    push tada               ; LPCTSTR lpCaption
+    push helloworld         ; LPCTSTR lpText
+    push 0                  ; HWND hWnd
+    call MessageBoxA
+nop
+    push 0                  ; UINT uExitCode
+    call ExitProcess
+nop
+tada db "Tada!", 0
+helloworld db "Hello World!", 0
 
 BUFFLEN equ $ - buffer
 align 16, db 0
