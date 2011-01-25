@@ -49,6 +49,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\kernel31.dll \
 	imports\kernel31.asm \
 	imports\kernel31_test.exe \
+	asm\rel_ip.exe 
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -270,11 +271,11 @@ funnyseh.exe: funnyseh.asm
 	$(makepe) funnyseh.asm
 
 algo\prng.exe: algo\prng.asm
-	$(makepe) algo\prng.asm
+	$(makepe) algo\prng.asm & cd algo & crypt.py prng.exe & cd ..
 algo\rc4.exe: algo\rc4.asm
-	$(makepe) algo\rc4.asm
+	$(makepe) algo\rc4.asm & cd algo & crypt.py rc4.exe & cd ..
 algo\xor.exe: algo\xor.asm
-	$(makepe) algo\xor.asm
+	$(makepe) algo\xor.asm & cd algo & crypt.py xor.exe & cd ..
 
 pe\dll.dll: pe\dll.asm
 	$(makepe) pe\dll.asm
@@ -378,5 +379,7 @@ imports\kernel31.dll: imports\kernel31.asm
 imports\kernel31_test.exe: imports\kernel31_test.asm
 	$(makepe) imports\kernel31_test.asm
 
+asm\rel_ip.exe: asm\rel_ip.asm
+	$(makepe) $<
 clean:
 	rm $(examples) $(objects) $(beta)

@@ -6,10 +6,10 @@
 ;set 'Base Address'
 ;select 'Treat the base address as a plain number'
 ;click 'Ok'
-;select 'All operands'
+;optionally select 'All operands'
 ;click 'Ok'
 
-%include '..\onesec.hdr'
+%include '..\..\onesec.hdr'
 
 DELTA equ IMAGEBASE
 
