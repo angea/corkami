@@ -49,7 +49,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\kernel31.dll \
 	imports\kernel31.asm \
 	imports\kernel31_test.exe \
-	asm\rel_ip.exe 
+	asm\rel_ip.exe \
+	imports\imports_doublesum.exe 
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -381,5 +382,9 @@ imports\kernel31_test.exe: imports\kernel31_test.asm
 
 asm\rel_ip.exe: asm\rel_ip.asm
 	$(makepe) $<
+
+imports\imports_doublesum.exe: imports\imports_doublesum.asm
+	$(makepe) $<
+
 clean:
 	rm $(examples) $(objects) $(beta)
