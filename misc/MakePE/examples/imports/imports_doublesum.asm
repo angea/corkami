@@ -26,7 +26,7 @@ MessageBoxA:
     push USER32_DLL
     push _MESSAGEBOXA
     jmp ImportAndCall
-
+nop
 ExitProcess:
     push KERNEL32_DLL
     push _EXITPROCESS
@@ -39,7 +39,7 @@ _FINDFIRSTFILEA equ 0DF6DC586h
 _FINDNEXTFILEA equ 03A290BE0h
 
 MAX_PATH equ 260
-
+nop
 ImportAndCall:
     pusha
 
@@ -106,7 +106,6 @@ case_loop:
     cmp edx, [filesum]
     jz found
 
-
     push WIN32_FIND_DATA
     push dword [hFind]
         mov eax, [hKernel32]
@@ -142,7 +141,40 @@ dll_loaded:
     call [dApi]
     jmp [dReturn]
 
+filesum dd 0
+hKernel32 dd 0
+dApi dd 0
+dReturn dd 0
 
+Mask db "\*.dll", 0
+hFind dd 0
+
+
+Buffer times MAX_PATH db 0
+
+WIN32_FIND_DATA:
+  .dwFileAttributes      dd 0
+  .ftCreationTime        dd 0,0
+  .ftLastAccessTime      dd 0,0
+  .ftLastWriteTime       dd 0,0
+  .nFileSizeHigh         dd 0
+  .nFileSizeLow          dd 0
+  .dwReserved0           dd 0
+  .dwReserved1           dd 0
+  .cFileName             times MAX_PATH db 0
+  .cAlternate            times 14 db 0
+
+
+DOS_HEADER__e_lfanew equ 03ch
+
+NT_SIGNATURE__IMAGE_DIRECTORY_ENTRY_EXPORT__RVA equ 78h
+
+Exports__NumberOfNames      EQU 018h
+Exports__AddressOfFunctions EQU 01ch
+Exports__AddressOfNames     EQU 020h
+Exports__AddressOfNamesOrdinal EQU 024h
+
+nop
 GetProcAddress_Hash:
     mov [ImageBase], eax
     mov [checksum], ebx
@@ -162,7 +194,7 @@ GetProcAddress_Hash:
 
     mov ebx, [edx + Exports__AddressOfNames] ; AddressOfNames
     add ebx, [ImageBase]    ; RVA to VA
-
+nop
 next_name:
     test ecx, ecx
     jz no_more_exports
@@ -172,7 +204,7 @@ next_name:
     add esi, [ImageBase] ; RVA to VA
 
     mov edi, 0
-
+nop
 checksum_loop:
     xor eax, eax
     lodsb
@@ -197,44 +229,16 @@ checksum_loop:
     add ebx, [ImageBase]
 
     jmp _end
+nop
 no_more_exports:
-    xor ebx, ebx
+    xor ebx, ebx ; doomed to crash :p
+nop
 _end:
     retn
 
-hKernel32 dd 0
-dApi dd 0
-dReturn dd 0
-
-Mask db "\*.dll", 0
-hFind dd 0
-
-Buffer times MAX_PATH db 0
-
-WIN32_FIND_DATA:
-  .dwFileAttributes      dd 0
-  .ftCreationTime        dd 0,0
-  .ftLastAccessTime      dd 0,0
-  .ftLastWriteTime       dd 0,0
-  .nFileSizeHigh         dd 0
-  .nFileSizeLow          dd 0
-  .dwReserved0           dd 0
-  .dwReserved1           dd 0
-  .cFileName             times MAX_PATH db 0
-  .cAlternate            times 14 db 0
-
-DOS_HEADER__e_lfanew equ 03ch
-
-NT_SIGNATURE__IMAGE_DIRECTORY_ENTRY_EXPORT__RVA equ 78h
-
-Exports__NumberOfNames      EQU 018h
-Exports__AddressOfFunctions EQU 01ch
-Exports__AddressOfNames     EQU 020h
-Exports__AddressOfNamesOrdinal EQU 024h
 
 
 checksum dd 0
-filesum dd 0
 ImageBase dd 0
 ExportDirectory dd 0
 
