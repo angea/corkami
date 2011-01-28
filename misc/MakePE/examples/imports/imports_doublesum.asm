@@ -69,7 +69,7 @@ nop
     mov edi, Buffer
     add edi, eax
     mov esi, Mask
-    mov cl, 7
+    mov ecx, 7
     rep movsb
 
 nop
