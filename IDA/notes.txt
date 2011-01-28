@@ -1,0 +1,48 @@
+IDA Python quick reference:
+
+current address:
+ea = ScreenEA()
+
+byte/dword/name at address: 
+dw = idc.Byte(ea) / Dword/Name
+
+Go to next line of code:
+ea = idc.NextHead(ea, BADADDR)
+
+Get address of variable:
+address = idc.LocByName(<name>)
+
+Get information about current line:
+idc.GetDisasm(ea) / idc.GetMnem(ea), idc.GetOpnd(ea, nb)
+
+Modify callee:
+idaapi.netnode("$ vmm functions").altset(<source>, <target> + 1)
+
+(re)Analyze code:
+idaapi.analyze_area(<start>, <end>)
+
+Get null-terminated string at <address>:
+parse manually, with idc.Byte....
+
+Enumerate calling references:
+for xref in XrefsTo(<target>, 0):
+    if idaapi.is_call_insn(xref.frm):
+        ...
+
+Make an alignment:
+idc.MakeAlign(ea, count, nb) # 2^nb byte alignment
+
+find a renamed register (canonical name = original name, user = renamed name):
+idaapi.find_regvar(func, startEA, endEA, canon, comment) => returns a regvar (.startEA .endEA .canon .user .cmt)
+
+rename a register:
+idaapi.add_regvar(func, startEA, endEA, canon, user, comment)
+
+delete a register renaming:
+idaapi.del_regvar(func, startEA, endEA, canon)
+
+modify anterior/posterior line:
+idc.ExtLineA(ea, nb, string)  / ExtLineB
+
+ask a string dialog:
+value = AskStr(defaultvalue, text)
