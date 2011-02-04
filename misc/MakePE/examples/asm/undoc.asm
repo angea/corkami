@@ -65,7 +65,8 @@ _
     jnz bad
 
     smsw eax
-    cmp eax, 08001003bh
+;    cmp eax, 080050031h  ; Win7 x64
+    cmp eax, 08001003bh  ; XP
     jnz bad
 
     ; FPU JUNK - just ignored here

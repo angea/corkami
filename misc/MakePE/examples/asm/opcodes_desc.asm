@@ -294,14 +294,6 @@ _cx0:
     sldt eax
     expect eax, 0
 
-    mov eax, dummy
-    sidt [eax]
-    expect word [eax],  007ffh
-
-    mov eax, dummy
-    sgdt [eax]
-    expect word [eax],  003ffh
-
     mov eax, 0
     cpuid
     test eax, eax
@@ -321,13 +313,23 @@ _cx0:
     jnz bad
     expect eax, -1
 
+    jmp good            ; the remaining tests are XP specific
+
+    mov eax, dummy
+    sidt [eax]
+;    expect word [eax],  007ffh ; 0fffh under win7 x64
+
+    mov eax, dummy
+    sgdt [eax]
+;    expect word [eax],  003ffh ; 07fh under win7 x64
+
     str ax
-    expect ax, 28h
+;    expect ax, 28h ; 40h under win7 x64
 
     mov eax, 0
     push _return
     mov edx, esp
-    sysenter
+    sysenter        ; not under win7 x64
 _return:
     expect eax, ACCESS_VIOLATION            ; depends on initial EAX
     lea eax, [esp - 4]
