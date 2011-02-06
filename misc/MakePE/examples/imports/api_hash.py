@@ -16,3 +16,13 @@ for s in sys.argv[1:]:
         cs = rol(cs,7) + ord(c)
         cs %= 2**32
     print "%s equ 0%08Xh" % (s.upper(), cs)
+
+#alternatives:
+# \00 terminator included or not
+# case conversion: nothing/lower/upper
+# initial value
+# rol/ror
+# rotation amount
+# merge : add/xor/sub/or/and
+# size: 1 / 2 / 4
+
