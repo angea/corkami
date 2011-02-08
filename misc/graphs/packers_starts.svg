@@ -59,9 +59,9 @@
      inkscape:window-height="480"
      id="namedview1032"
      showgrid="false"
-     inkscape:zoom="4.4973972"
-     inkscape:cx="116.44715"
-     inkscape:cy="20.843933"
+     inkscape:zoom="1.3653264"
+     inkscape:cx="317.81494"
+     inkscape:cy="503.73139"
      inkscape:current-layer="svg2"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
@@ -613,13 +613,13 @@
        y="82"
        xml:space="preserve"
        id="text346"
-       style="font-size:10px;font-family:monospace;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
+       style="font-size:10px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
    id="tspan348"
-   style="font-size:10px;fill:#0000ff;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">xchg</tspan>  [<tspan
+   style="font-size:10px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">    xchg</tspan>  [<tspan
    id="tspan350"
-   style="font-size:10px;fill:#19177c;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">_1</tspan>], <tspan
+   style="font-size:10px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">&lt;address&gt;</tspan>], <tspan
    id="tspan352"
-   style="font-size:10px;fill:#008000;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">esp</tspan></text>
+   style="font-size:10px;font-weight:bold;fill:#008000;-inkscape-font-specification:Bitstream Vera Sans Bold">esp</tspan></text>
     <text
        x="240"
        y="101"
@@ -1474,13 +1474,11 @@
        y="636"
        xml:space="preserve"
        id="text890"
-       style="font-size:10px;font-family:monospace;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan892"
-   style="font-size:10px;fill:#0000ff;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">push</tspan>  <tspan
-   id="tspan894"
-   style="font-size:10px;fill:#666666;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">0</tspan><tspan
-   id="tspan896"
-   style="font-size:10px;fill:#19177c;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">C478</tspan></text>
+       style="font-size:10px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+         id="tspan892"
+         style="font-size:10px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">    push  </tspan><tspan
+         id="tspan896"
+         style="font-size:10px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">&lt;random1&gt;  </tspan></text>
     <text
        x="238"
        y="655"
@@ -1518,13 +1516,11 @@
        y="712"
        xml:space="preserve"
        id="text918"
-       style="font-size:10px;font-family:monospace;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">    <tspan
-   id="tspan920"
-   style="font-size:10px;fill:#0000ff;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">push</tspan>  <tspan
-   id="tspan922"
-   style="font-size:10px;fill:#666666;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">534</tspan><tspan
-   id="tspan924"
-   style="font-size:10px;fill:#19177c;font-weight:bold;-inkscape-font-specification:Bitstream Vera Sans Bold">E</tspan></text>
+       style="font-size:10px;font-weight:bold;font-family:monospace;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+         id="tspan920"
+         style="font-size:10px;font-weight:bold;fill:#0000ff;-inkscape-font-specification:Bitstream Vera Sans Bold">    push  </tspan><tspan
+         id="tspan924"
+         style="font-size:10px;font-weight:bold;fill:#19177c;-inkscape-font-specification:Bitstream Vera Sans Bold">&lt;random2&gt;</tspan></text>
     <text
        x="238"
        y="731"
