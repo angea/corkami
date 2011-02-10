@@ -50,7 +50,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\kernel31.asm \
 	imports\kernel31_test.exe \
 	asm\rel_ip.exe \
-	imports\imports_doublesum.exe 
+	imports\imports_doublesum.exe \
+	pe\helloworld64.exe
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -385,6 +386,9 @@ asm\rel_ip.exe: asm\rel_ip.asm
 
 imports\imports_doublesum.exe: imports\imports_doublesum.asm
 	$(makepe) $<
+
+pe\helloworld64.exe: pe\helloworld64.asm
+	$(makepe) pe\helloworld64.asm
 
 clean:
 	rm $(examples) $(objects) $(beta)

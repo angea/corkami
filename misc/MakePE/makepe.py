@@ -72,6 +72,38 @@ def MakeImports(imports):
 
     return source
 
+def MakeImports64(imports):
+    HintNames = "HintNames:\n"
+    ImportAddressTable = "ImportAddressTable:\n"
+    descriptors = templates.Imports["DESCRIPTORS_START"]
+
+    jumps = str()
+    dll_names = str()
+    apis = str()
+
+    for dll in imports:
+        descriptors += templates.Imports["IMAGE_IMPORT_DESCRIPTOR"] % {"dll":dll}
+        HintNames += templates.Imports["HINT_NAME_start"] % {"dll":dll}
+        ImportAddressTable += templates.Imports["IAT_start"] % {"dll":dll}
+        dll_names += templates.Imports["DLL_NAME"] % {"dll":dll}
+
+        for api in imports[dll]:
+            HintNames += templates.Imports["HINT_NAME_thunk64"] % {"api":api}
+            ImportAddressTable += templates.Imports["IAT_thunk64"] % {"dll":dll, "api":api}
+            apis += templates.Imports["IMAGE_IMPORT_BY_NAME"] % {"api":api}
+
+        HintNames += templates.Imports["Thunk_end64"]
+        ImportAddressTable += templates.Imports["Thunk_end64"]
+
+    ImportAddressTable += "IAT_size equ $ - ImportAddressTable\n"
+    descriptors += templates.Imports["Descriptor_end"]
+
+    source = str()
+    source += ImportAddressTable + descriptors + HintNames + apis + dll_names
+    source += templates.Imports["IMPORTS_END"]
+
+    return source
+
 def MakeRelocs(relocs):
     source = str()
     source += templates.Relocations["START"]
@@ -116,6 +148,17 @@ if __name__ == "__main__":
     f.close()
 
 #parse imports tags
+    findimp = re.findall(";%IMPORT64 ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
+    imports = {}
+    if findimp:
+        for dll, api in findimp:
+            if dll not in imports:
+                imports[dll] = list()
+            imports[dll] += [api]
+
+    r = re.sub(r";%IMPORT64 ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
+    r = r.replace(";%IMPORTS64", MakeImports64(imports)) # this one first to prevent collision
+
     findimp = re.findall(";%IMPORT ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
     imports = {}
     if findimp:
@@ -126,6 +169,7 @@ if __name__ == "__main__":
 
     r = re.sub(r";%IMPORT ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
     r = r.replace(";%IMPORTS", MakeImports(imports))
+
 
 #parse exports tags
     findexp = re.findall(";%EXPORT ([A-Za-z.0-9_]+)", r, re.I | re.M)

@@ -37,10 +37,10 @@ struc IMAGE_FILE_HEADER
   .Characteristics      resw 1
 endstruc
 
-;IMAGE_OPTIONAL_HEADER  equ  <IMAGE_OPTIONAL_HEADER32>
 ;IMAGE_THUNK_DATA EQU <IMAGE_THUNK_DATA32>
 ;IMAGE_TLS_DIRECTORY EQU <IMAGE_TLS_DIRECTORY32>
 
+;IMAGE_OPTIONAL_HEADER  equ  <IMAGE_OPTIONAL_HEADER32>
 struc IMAGE_OPTIONAL_HEADER32
   .Magic                        resw 1
   .MajorLinkerVersion           resb 1
@@ -70,6 +70,39 @@ struc IMAGE_OPTIONAL_HEADER32
   .SizeOfStackCommit            resd 1
   .SizeOfHeapReserve            resd 1
   .SizeOfHeapCommit             resd 1
+  .LoaderFlags                  resd 1
+  .NumberOfRvaAndSizes          resd 1
+  .DataDirectory                resb 0
+endstruc
+
+struc IMAGE_OPTIONAL_HEADER64
+  .Magic                        resw 1
+  .MajorLinkerVersion           resb 1
+  .MinorLinkerVersion           resb 1
+  .SizeOfCode                   resd 1
+  .SizeOfInitializedData        resd 1
+  .SizeOfUninitializedData      resd 1
+  .AddressOfEntryPoint          resd 1
+  .BaseOfCode                   resd 1
+  .ImageBase                    resq 1
+  .SectionAlignment             resd 1
+  .FileAlignment                resd 1
+  .MajorOperatingSystemVersion  resw 1
+  .MinorOperatingSystemVersion  resw 1
+  .MajorImageVersion            resw 1
+  .MinorImageVersion            resw 1
+  .MajorSubsystemVersion        resw 1
+  .MinorSubsystemVersion        resw 1
+  .Win32VersionValue            resd 1
+  .SizeOfImage                  resd 1
+  .SizeOfHeaders                resd 1
+  .CheckSum                     resd 1
+  .Subsystem                    resw 1
+  .DllCharacteristics           resw 1
+  .SizeOfStackReserve           resq 1
+  .SizeOfStackCommit            resq 1
+  .SizeOfHeapReserve            resq 1
+  .SizeOfHeapCommit             resq 1
   .LoaderFlags                  resd 1
   .NumberOfRvaAndSizes          resd 1
   .DataDirectory                resb 0
@@ -330,6 +363,7 @@ IMAGE_SCN_MEM_READ               equ 040000000h
 IMAGE_SCN_MEM_WRITE              equ 080000000h
 
 IMAGE_FILE_MACHINE_I386         equ 014ch
+IMAGE_FILE_MACHINE_AMD64         equ 8664h
 
 IMAGE_FILE_RELOCS_STRIPPED         equ 00001h
 IMAGE_FILE_EXECUTABLE_IMAGE        equ 00002h
@@ -353,6 +387,7 @@ IMAGE_SUBSYSTEM_WINDOWS_GUI    equ 2
 IMAGE_SUBSYSTEM_WINDOWS_CUI    equ 3
 
 IMAGE_NT_OPTIONAL_HDR32_MAGIC equ 010bh
+IMAGE_NT_OPTIONAL_HDR64_MAGIC equ 020bh
 
 MB_ICONINFORMATION equ 040h
 MB_ICONERROR equ 10h
