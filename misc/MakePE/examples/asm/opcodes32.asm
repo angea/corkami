@@ -3,6 +3,14 @@
 ; compile with Yasm
 bits 32
 
+;to check:
+;vCOMPD
+;vCOMPS
+;vCOMSD
+;vCOMSS
+;vPERMPD
+;vPERMPS
+
 ; uncertainties (TODO)
 ; fmaddps xmm0, xmm0, xmm0, [eax]         ;0f24000000
 ; umov eax, eax
