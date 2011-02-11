@@ -3,7 +3,7 @@
 SEC_NUMB = 96  # XP
 
 SECTIONS_VSTART = 0x01400 # XP, 96 sections
-f = open("max_secXP96.asm", "wt")
+f = open("max_secXP.asm", "wt")
 
 f.write("""; PE file with a maximum of sections
 
@@ -92,83 +92,10 @@ Section0Start:
 tada db "Tada!", 0
 helloworld db "Hello World!", 0
 
-MessageBoxA:
-    jmp [__imp__MessageBoxA]
-VirtualAlloc:
-    jmp [__imp__VirtualAlloc]
-ExitProcess:
-    jmp [__imp__ExitProcess]
+;%%IMPORT user32.dll!MessageBoxA
+;%%IMPORT kernel32.dll!ExitProcess
 
-ImportAddressTable:
-;align 2, db 0
-kernel32.dll_iat:
-
-__imp__VirtualAlloc:
-    DD hnVirtualAlloc - IMAGEBASE
-__imp__ExitProcess:
-    DD hnExitProcess - IMAGEBASE
-    DD 0
-
-;align 2, db 0
-user32.dll_iat:
-
-__imp__MessageBoxA:
-    DD hnMessageBoxA - IMAGEBASE
-    DD 0
-
-IAT_size equ $ - ImportAddressTable
-IMPORT_DESCRIPTOR: ; replace with imports:
-kernel32.dll_DESCRIPTOR:
-    dd kernel32.dll_hintnames - IMAGEBASE
-    dd 0                                ; TimeDateStamp
-    dd 0                                ; ForwarderChain
-    dd kernel32.dll - IMAGEBASE              ; Name
-    dd kernel32.dll_iat - IMAGEBASE          ; FirstThunk
-
-
-user32.dll_DESCRIPTOR:
-    dd user32.dll_hintnames - IMAGEBASE
-    dd 0                                ; TimeDateStamp
-    dd 0                                ; ForwarderChain
-    dd user32.dll - IMAGEBASE              ; Name
-    dd user32.dll_iat - IMAGEBASE          ; FirstThunk
-
-    times 5 dd 0
-
-HintNames:
-;align 2, db 0
-kernel32.dll_hintnames:
-    DD hnVirtualAlloc - IMAGEBASE
-    DD hnExitProcess - IMAGEBASE
-    DD 0
-
-;align 2, db 0
-user32.dll_hintnames:
-    DD hnMessageBoxA - IMAGEBASE
-    DD 0
-
-;align 2, db 0
-hnVirtualAlloc:
-    dw 0            ; Hint
-    db 'VirtualAlloc',0  ; Name
-
-;align 2, db 0
-hnExitProcess:
-    dw 0            ; Hint
-    db 'ExitProcess',0  ; Name
-
-;align 2, db 0
-hnMessageBoxA:
-    dw 0            ; Hint
-    db 'MessageBoxA',0  ; Name
-
-;align 2, db 0
-kernel32.dll  DB 'kernel32.dll',0
-
-;align 2, db 0
-user32.dll  DB 'user32.dll',0
-
-DIRECTORY_ENTRY_IMPORT_SIZE EQU $ - IMPORT_DESCRIPTOR
+;%%IMPORTS
 
 SECTION0VSIZE equ $ - Section0Start
 
