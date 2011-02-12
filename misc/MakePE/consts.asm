@@ -183,11 +183,11 @@ endstruc
 ;struc IMAGE_RESOURCE_DIRECTORY_ENTRY
 ;    union
 ;        rName	RECORD NameIsString:1,NameOffset:31
-;        Name1 dd ?
-;        Id dw ?
+;        Name1 resd ?
+;        Id resw  ?
 ;    ends
 ;    union
-;        OffsetToData dd ?
+;        OffsetToData resd ?
 ;		  rDirectory	RECORD DataIsDirectory:1,OffsetToDirectory:31
 ;    ends
 ;endstruc
@@ -199,10 +199,10 @@ endstruc
 ;
 ;struc IMAGE_THUNK_DATA32
 ;    union u1
-;        ForwarderString dd  ?
-;        Function dd         ?
-;        Ordinal dd          ?
-;        AddressOfData dd    ?
+;        ForwarderString resd  ?
+;        Function resd         ?
+;        Ordinal resd          ?
+;        AddressOfData resd    ?
 ;    ends
 ;endstruc
 
@@ -581,6 +581,94 @@ struc _IMAGE_DELAY_IMPORT_DESCRIPTOR
     .rvaBoundIAT   resd 1  ; RVA of the optional bound IAT
     .rvaUnloadIAT  resd 1  ; RVA of optional copy of original IAT
     .dwTimeStamp   resd 1  ; 0 if not bound
+endstruc
+
+IMAGE_DEBUG_TYPE_COFF equ 1
+IMAGE_DEBUG_TYPE_CODEVIEW equ 2
+IMAGE_DEBUG_TYPE_BORLAND equ 9
+
+struc IMAGE_DEBUG_DIRECTORY
+    .Characteristics  resd 1 ;unused
+    .TimeDateStamp    resd 1 ;minor
+    .MajorVersion     resw 1 ;unused
+    .MinorVersion     resw 1 ;unused
+    .Type1            resd 1 ;1 Coff/2 CV-PDB/9 Borland
+    .SizeOfData       resd 1
+    .AddressOfRawData resd 1 ;rva
+    .PointerToRawData resd 1 ;offset
+endstruc
+
+struc IMAGE_COR20_HEADER
+    .cb                         resd 1 ;size of header
+    .MajorRuntimeVersion        resw 1
+    .MinorRuntimeVersion        resw 1
+    .MetaData                   resd 1 ;rva
+    .Flags                      resd 1
+    .EntryPointToken            resd 1
+    .Resources                  resd 1 ;rva
+    .StrongNameSignature        resd 1 ;rva
+    .CodeManagerTable           resd 1 ;rva
+    .VTableFixups               resd 1 ;rva
+    .ExportAddressTableJumps    resd 1 ;rva
+    .ManagedNativeHeader        resd 1 ;rva, set to 0 on binaries
+endstruc
+
+struc IMAGE_LOAD_CONFIG_DIRECTORY
+    .Characteristics                    resd 1 ; 64 for x86
+    .TimeDateStamp                      resd 1
+    .MajorVersion                       resw 1
+    .MinorVersion                       resw 1
+    .GlobalFlagsClear                   resd 1
+    .GlobalFlagsSet                     resd 1
+    .CriticalSectionDefaultTimeout      resd 1
+    .DeCommitFreeBlockThreshold         resd 1
+    .DeCommitTotalFreeThreshold         resd 1
+    .LockPrefixTable                    resd 1 ; VA
+    .MaximumAllocationSize              resd 1
+    .VirtualMemoryThreshold             resd 1
+    .ProcessHeapFlags                   resd 1
+    .ProcessAffinityMask                resd 1
+    .CSDVersion                         resw 1
+    .Reserved1                          resw 1
+    .EditList                           resd 1 ;VA
+    .Reserved                           resd 1 ;VA
+    .SecurityCookie                     resd 1 ;VA
+    .SEHandlerTable                     resd 1 ;VA
+    .SEHandlerCount                     resd 1 ;VA
+endstruc
+
+struc IMAGE_LOAD_CONFIG_DIRECTORY64
+    .Characteristics                    resd 1
+    .TimeDateStamp                      resd 1
+    .MajorVersion                       resw 1
+    .MinorVersion                       resw 1
+    .GlobalFlagsClear                   resd 1
+    .GlobalFlagsSet                     resd 1
+    .CriticalSectionDefaultTimeout      resd 1
+    .DeCommitFreeBlockThreshold         resq 1
+    .DeCommitTotalFreeThreshold         resq 1
+    .LockPrefixTable                    resq 1 ; VA
+    .MaximumAllocationSize              resq 1
+    .VirtualMemoryThreshold             resq 1
+    .ProcessAffinityMask                resq 1 ; swapped place
+    .ProcessHeapFlags                   resd 1 ; swapped place
+    .CSDVersion                         resw 1
+    .Reserved1                          resw 1
+    .EditList                           resq 1 ;VA
+    .SecurityCookie                     resq 1 ;VA
+    .SEHandlerTable                     resq 1 ;VA
+    .SEHandlerCount                     resq 1 ;VA
+endstruc
+
+struc IMAGE_COFF_SYMBOLS_HEADER
+    .NumberOfSymbols         resd 1
+    .LvaToFirstSymbol        resd 1 ; VA
+    .NumberOfLinenumbers     resd 1
+    .LvaToFirstLinenumber    resd 1 ; VA
+    .RvaToFirstByteOfCode    resd 1 ;RVA
+    .RvaToLastByteOfCode     resd 1 ;RVA
+    .RvaToFirstByteOfData    resd 1 ;RVA
+    .RvaToLastByteOfData     resd 1 ;RVA
 endstruc
 
 ; Ange Albertini, BSD Licence 2009-2011
