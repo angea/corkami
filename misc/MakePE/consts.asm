@@ -572,10 +572,15 @@ endstruc
     db 0f1h
 %endmacro
 
-; Ange Albertini, Creative Commons BY, 2009-2010
+struc _IMAGE_DELAY_IMPORT_DESCRIPTOR
+    .grAttrs       resd 1  ; attributes
+    .rvaDLLName    resd 1  ; RVA to dll name
+    .rvaHmod       resd 1  ; RVA of module handle
+    .rvaIAT        resd 1  ; RVA of the IAT
+    .rvaINT        resd 1  ; RVA of the INT
+    .rvaBoundIAT   resd 1  ; RVA of the optional bound IAT
+    .rvaUnloadIAT  resd 1  ; RVA of optional copy of original IAT
+    .dwTimeStamp   resd 1  ; 0 if not bound
+endstruc
 
-
-
-
-
-
+; Ange Albertini, BSD Licence 2009-2011

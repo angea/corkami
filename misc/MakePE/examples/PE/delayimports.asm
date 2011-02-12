@@ -1,10 +1,9 @@
-; delay imports experiments
-; TODO: correct delay imports structure
-; TODO: check if Attribute really matters for VA/RVA
+; PE with delay imports experiments
 
 %include '../../consts.asm'
+DOS_HEADER__e_lfanew equ 03ch
 
-IMAGEBASE equ 33330000h
+IMAGEBASE equ 400000h
 FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE
 org IMAGEBASE
@@ -52,14 +51,16 @@ SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-;    at IMAGE_SECTION_HEADER.VirtualSize, dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.VirtualAddress, dd Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData, dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
+    at IMAGE_SECTION_HEADER.Characteristics, dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
+; necessary under Win7 (with DEP?)
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 align FILEALIGN, db 0
+align 1000h, db 0 ; necessary only for Win7
 SIZEOFHEADERS equ $ - IMAGEBASE
 
 bits 32
@@ -70,74 +71,182 @@ EntryPoint:
     push tada               ; LPCTSTR lpCaption
     push helloworld         ; LPCTSTR lpText
     push 0                  ; HWND hWnd
-    call dword [imp__MessageBoxA]
+    call MessageBoxA
     push 0                  ; UINT uExitCode
-    call dword [imp__ExitProcess]
+    call ExitProcess
 
+align 10h, db 090h
+
+__delay__MessageBoxA:
+    mov eax, hnMessageBoxA + 2
+    jmp DelayImportLoad
+
+align 10h, db 090h
+
+DelayImportLoad:
+    push eax
+    mov eax,[fs:030h]   ; _TIB.PebPtr
+    mov eax,[eax + 0ch] ; _PEB.Ldr
+    mov eax,[eax + 0ch] ; _PEB_LDR_DATA.InLoadOrderModuleList.Flink
+    mov eax,[eax]       ; _LDR_MODULE.InLoadOrderModuleList.Flink
+    mov eax,[eax]       ; _LDR_MODULE.InLoadOrderModuleList.Flink
+    mov eax,[eax + 18h] ; _LDR_MODULE.BaseAddress
+
+    mov [hKernel32], eax
+
+    mov eax, [hKernel32]
+    mov ebx, LOADLIBRARYA
+    call GetProcAddress_Hash
+    mov [ddLoadLibrary], ebx
+
+    mov eax, [hKernel32]
+    mov ebx, GETPROCADDRESS
+    call GetProcAddress_Hash
+    mov [GetProcAddress], ebx
+
+    push szuser32
+    call [ddLoadLibrary]
+;    mov [hUser32], eax
+
+    push eax
+    call [GetProcAddress]
+    jmp eax
+align 10h, db 090h
+
+szuser32  Db 'user32.dll',0
+hKernel32 dd 0
+hUser32 dd 0
+ddLoadLibrary dd 0
+GetProcAddress dd 0
+
+align 10h, db 090h
+
+LOADLIBRARYA equ 06FFFE488h
+GETPROCADDRESS equ 03F8AAA7Eh
+
+NT_SIGNATURE__IMAGE_DIRECTORY_ENTRY_EXPORT__RVA equ 78h
+
+Exports__NumberOfNames      EQU 018h
+Exports__AddressOfFunctions EQU 01ch
+Exports__AddressOfNames     EQU 020h
+Exports__AddressOfNamesOrdinal EQU 024h
+
+GetProcAddress_Hash:
+    mov [ImageBase], eax
+    mov [checksum], ebx
+    mov ebp, [ImageBase]
+    ; ebp = PE start / ImageBase
+    mov edx, [ebp + DOS_HEADER__e_lfanew] ; e_lfanew = RVA of NT_SIGNATURE
+    add edx, [ImageBase]    ; RVA to VA
+        ; => eax = NT_SIGNATURE VA
+
+    mov edx, [edx + NT_SIGNATURE__IMAGE_DIRECTORY_ENTRY_EXPORT__RVA]  ; IMAGE_DIRECTORY_ENTRY_EXPORT (.RVA) - NT_SIGNATURE
+    add edx, [ImageBase]    ; RVA to VA
+        ; => edx = IMAGE_DIRECTORY_ENTRY_EXPORT VA
+    mov [ExportDirectory], edx
+
+    mov ecx, [edx + Exports__NumberOfNames] ; NumberOfNames
+
+    mov ebx, [edx + Exports__AddressOfNames] ; AddressOfNames
+    add ebx, [ImageBase]    ; RVA to VA
+
+next_name:
+    test ecx, ecx
+    jz no_more_exports
+    dec ecx
+
+    mov esi, [ebx + ecx * 4]
+    add esi, [ImageBase] ; RVA to VA
+
+    mov edi, 0
+
+checksum_loop:
+    xor eax, eax
+    lodsb
+
+    rol edi, 7
+    add edi, eax
+
+    test al, al
+    jnz checksum_loop
+
+    cmp edi, [checksum]
+    jnz next_name
+
+    mov ebx, [edx + Exports__AddressOfNamesOrdinal] ; AddressOfNamesOrdinal RVA
+    add ebx, [ImageBase]
+
+    mov cx, [ebx + ecx * 2]
+
+    mov ebx, [edx + Exports__AddressOfFunctions] ; AddressOfFunctions RVA
+    add ebx, [ImageBase]
+    mov ebx, [ebx + ecx * 4] ; Functions RVA
+    add ebx, [ImageBase]
+
+    jmp _end
+no_more_exports:
+    xor ebx, ebx
+_end:
     retn
+align 10h, db 0cch
+checksum dd 0
+ImageBase dd 0
+char db 0
+ExportDirectory dd 0
 
 SIZEOFCODE equ $ - base_of_code
+
+
 align FILEALIGN,db 0
 
 base_of_data:
 
-
 tada db "Tada!", 0
 helloworld db "Hello World!", 0
+align 10h, db 0
+
 delay_imports:
-    .Attributes dd 2
-    .Name dd diName - IMAGEBASE
-    .ModuleHandle dd diHandle - IMAGEBASE
-    .iat dd dIAT - IMAGEBASE
-    .int dd dINT - IMAGEBASE
-    .bdiat dd BDIAT - IMAGEBASE
-    .udiat dd 0 ; udiat - IMAGEBASE
-    .TimeStamp dd 0
-times 8 dd 0
+istruc _IMAGE_DELAY_IMPORT_DESCRIPTOR
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.grAttrs,      dd 1        ; if 0, VAs, if 1, RVAs
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaDLLName,   dd szuser32 - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaHmod,      dd diHandle - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaIAT,       dd user32IAT - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaINT,       dd user32INT - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaBoundIAT,  dd user32dbiat - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaUnloadIAT, dd user32duiat - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.dwTimeStamp,  dd 0 ; TimeStamp of a DLL bound the old way
+iend
+istruc _IMAGE_DELAY_IMPORT_DESCRIPTOR
+iend
+
+diHandle dd 0   ; not used here
+
+user32IAT:
+__imp__MessageBoxA:
+    DD __delay__MessageBoxA
+    DD 0
+
+user32INT:
+    DD hnMessageBoxA - IMAGEBASE
+    DD 0
+
+hnMessageBoxA:
+    dw 0
+    db 'MessageBoxA',0
+
+user32dbiat:
+    dd 0
+    dd 0
+
+user32duiat:
+    dd DelayImportLoad
+    dd 0
+
 DELAY_IMPORTS_SIZE equ $ - delay_imports
 
+MessageBoxA:
+    jmp [__imp__MessageBoxA]
 
-diName dd 0
-diHandle dd 0
-
-LOADLIBRARYA equ 06FFFE488h
-
-EXITPROCESS equ 031678333h
-MESSAGEBOXA equ 021CB7926h
-
-dIAT:
-imp__MessageBoxA:
-    dd _MessageBoxA
-imp__ExitProcess:
-    dd _ExitProcess
-    dd 0
-align 3333h
-
-dINT:
-    dd nMessageBoxA
-    dd nExitProcess
-    dd 0
-
-nMessageBoxA:
-    dw 0
-    db 'MessageBoxA', 0
-
-nExitProcess:
-    dw 0
-    db 'ExitProcess', 0
-
-_MessageBoxA:
-    push MessageBoxA
-    retn
-
-_ExitProcess:
-    push ExitProcess
-    retn
-
-BDIAT:
-    dd 0
-
-;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 ;%IMPORTS
 
@@ -149,3 +258,5 @@ SIZEOFUNINITIALIZEDDATA equ $ - uninit_data
 SECTION0SIZE EQU $ - Section0Start
 
 SIZEOFIMAGE EQU $ - IMAGEBASE
+
+; Ange Albertini, BSD Licence 2010-2011

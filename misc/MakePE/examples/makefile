@@ -51,7 +51,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\kernel31_test.exe \
 	asm\rel_ip.exe \
 	imports\imports_doublesum.exe \
-	pe\helloworld64.exe pe\max_sec.exe pe\max_secXP.exe 
+	pe\helloworld64.exe pe\max_sec.exe pe\max_secXP.exe \
+	pe\delayimports.exe
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -399,6 +400,9 @@ pe\max_secXP.exe: pe\max_secXP.asm
 	$(makepe) pe\max_secXP.asm
 pe\max_secXP.asm: pe\max_secXP.py
 	cd PE & $(python) max_secXP.py & cd ..
+
+pe\delayimports.exe: pe\delayimports.asm
+	$(makepe) pe\delayimports.asm
 
 clean:
 	rm $(examples) $(objects) $(beta)
