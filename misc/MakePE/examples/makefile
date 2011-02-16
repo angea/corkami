@@ -1,5 +1,5 @@
-python = c:\Python26\python.exe
-masmdir = c:\masm32\bin
+include paths.inc
+
 ml = $(masmdir)\ml /c /Zi /coff
 mlink = $(masmdir)\Link /SUBSYSTEM:WINDOWS
 makepe = $(python) ..\makepe.py
