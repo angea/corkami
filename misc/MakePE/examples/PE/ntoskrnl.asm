@@ -14,8 +14,6 @@ CHARACTERISTICS equ IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMA
 EntryPoint:
     retn 3 * 4
 
-
-
 ;%EXPORT DbgPrint
     mov ebx, [esp+4]        ; DbgPrint doesn't clear arguments from the stack
     push MB_ICONINFORMATION ; UINT uType
@@ -27,6 +25,7 @@ EntryPoint:
     retn                    ; doesn't pop out parameters
 ;%reloc 2
 ;%IMPORT user32.dll!MessageBoxA
+Driver db "User mode Ntoskrnl", 0
 
 ;%EXPORT ExAllocatePool
     push PAGE_READWRITE     ; DWORD flProtect
@@ -47,13 +46,14 @@ EntryPoint:
 ;%reloc 2
 ;%IMPORT kernel32.dll!VirtualAlloc
 
-;TODO
-
 ;%EXPORT ExFreePool
-;    push MEM_RELEASE        ; DWORD dwFreeType
-;    push 0                  ; SIZE_T dwSize
-;    push dword [lpBuffer]   ; LPVOID lpAddress
-;    call VirtualFree
+    mov ecx, dword [esp + 4]
+
+    push MEM_RELEASE        ; DWORD dwFreeType
+    push 0                  ; SIZE_T dwSize
+    push ecx                ; LPVOID lpAddress
+    call VirtualFree
+
     ret
 
 ;%EXPORT ExFreePoolWithTag
@@ -67,7 +67,7 @@ EntryPoint:
     _service 0adh, 010h
 
 ;%EXPORT toupper
-ret
+    ret
 
 ;%EXPORT ZwOpenFile
     _service 74h, 18h
@@ -79,43 +79,119 @@ ret
     _service 6ch, 28h
 
 ;%EXPORT RtlInitUnicodeString
-;    push    edi
-;    mov     edi, [esp+0Ch]
-;    mov     edx, [esp+8]
-;    mov     dword [edx], 0
-;    mov     [edx+4], edi
-;    or      edi, edi
-;    jz      loc_403481
-;
-;    or      ecx, -1
-;    xor     eax, eax
-;    repne scasw
-;    not     ecx
-;    shl     ecx, 1
-;    cmp     ecx, 0FFFEh
-;    jbe     loc_403478
-;
-;    mov     ecx, 0FFFEh
-;loc_403478:
-;    mov     [edx+2], cx
-;    dec     ecx
-;    dec     ecx
-;    mov     [edx], cx
-;loc_403481:
-;    pop     edi
+    push    edi
+    mov     edi, [esp+0Ch]
+    mov     edx, [esp+8]
+    mov     dword [edx], 0
+    mov     [edx+4], edi
+    or      edi, edi
+    jz      rtl_end
+
+    or      ecx, -1
+    xor     eax, eax
+    repne scasw
+    not     ecx
+    shl     ecx, 1
+    cmp     ecx, 0FFFEh
+    jbe     rtl_notinit
+
+    mov     ecx, 0FFFEh
+rtl_notinit:
+    mov     [edx+2], cx
+    dec     ecx
+    dec     ecx
+    mov     [edx], cx
+rtl_end:
+    pop     edi
     retn 2 * 4
 
 ;%EXPORT KeCancelTimer
     retn 1 * 4
 
+;%EXPORT KeInitializeTimer
+    push ebp
+    mov ebp, esp
+    push 0
+    push dword [ebp + 8]
+    call __exp__KeInitializeTimerEx
+    pop ebp
+    retn 4
+
 ;%EXPORT KeInitializeTimerEx
-ret
+    mov edi, edi
+    push ebp
+    mov ebp, esp
+    mov eax, [ebp + 8]
+    mov cl, [ebp + 0Ch]
+    add cl, 8
+    xor edx, edx
+    mov [eax], cl
+    lea ecx, [eax + 8]
+    mov [eax + 3], dl
+    mov byte [eax + 2], 0Ah
+    mov [eax + 4], edx
+    mov [ecx + 4], ecx
+    mov [ecx], ecx
+    mov [eax + 10h], edx
+    mov [eax + 14h], edx
+    mov [eax + 24h], edx
+    pop ebp
+    retn 8
+
+;%EXPORT KeInitializeEvent
+    mov edi, edi
+    push ebp
+    mov ebp, esp
+    mov eax, [ebp + 8]
+    mov cl, [ebp + 0Ch]
+    mov [eax], cl
+    movzx ecx, byte [ebp + 10h]
+    mov byte [eax + 2], 4
+    mov [eax + 4], ecx
+    add eax, 8
+    mov [eax + 4], eax
+    mov [eax], eax
+    pop ebp
+    retn 0Ch
+
+;%EXPORT KeInitializeSpinLock
+    mov eax, [esp + 4]
+    mov dword [eax], 0
+    retn 4
+
+;%EXPORT KeInitializeMutex
+    push ebp
+    mov ebp, esp
+    mov eax, [ebp + 8]
+    lea ecx, [eax + 8]
+    mov byte [eax], 2
+    mov byte [eax + 2], 8
+    mov dword [eax + 4], 1
+    mov [ecx + 4], ecx
+    mov [ecx], ecx
+    and dword [eax + 018h], 0
+    mov byte [eax + 01Ch], 0
+    mov byte [eax + 01Dh], 1
+    pop ebp
+    retn 8
+
+;%EXPORT PsGetCurrentProcess
+;%EXPORT PsGetCurrentProcessId
+;%EXPORT PsGetCurrentProcessSessionId
+;%EXPORT PsGetCurrentThread
+;%EXPORT PsGetCurrentThreadId
+;%EXPORT IoGetCurrentProcess
+    push edx
+    rdtsc
+    pop edx
+    and eax, 0000ffffh
+    ret
 
 ;%EXPORT MmPageEntireDriver
     retn 2 * 4
 
 ;%EXPORT KeDelayExecutionThread
-ret
+    ret
 
 ;%EXPORT KeInitializeDpc
     retn 3 * 4
@@ -127,11 +203,24 @@ ret
     retn 7 * 4
 
 ;%EXPORT RtlImageNtHeader
-    jmp RtlImageNtHeader
 ;%reloc 2
 ;%IMPORT ntdll.dll!RtlImageNtHeader
 
+;%EXPORT memcpy
+;%reloc 2
+;%IMPORT msvcrt.dll!memcpy
+
+;%EXPORT memmove
+;%reloc 2
+;%IMPORT msvcrt.dll!memmove
+
+;%EXPORT memset
+;%reloc 2
+;%IMPORT msvcrt.dll!memset
+
+
 ; not handling their parameters correctly yet
+;*************************************************************
 ;%EXPORT CcCanIWrite
 ret
 
@@ -1191,9 +1280,6 @@ ret
 ;%EXPORT IoGetConfigurationInformation
 ret
 
-;%EXPORT IoGetCurrentProcess
-ret
-
 ;%EXPORT IoGetDeviceAttachmentBaseRef
 ret
 
@@ -1704,8 +1790,6 @@ ret
 ;%EXPORT KeInitializeDeviceQueue
 ret
 
-;%EXPORT KeInitializeEvent
-ret
 
 ;%EXPORT KeInitializeInterrupt
 ret
@@ -1713,16 +1797,10 @@ ret
 ;%EXPORT KeInitializeMutant
 ret
 
-;%EXPORT KeInitializeMutex
-ret
-
 ;%EXPORT KeInitializeQueue
 ret
 
 ;%EXPORT KeInitializeSemaphore
-ret
-
-;%EXPORT KeInitializeSpinLock
 ret
 
 ;%EXPORT KeInsertByKeyDeviceQueue
@@ -2629,21 +2707,6 @@ ret
 ret
 
 ;%EXPORT PsGetContextThread
-ret
-
-;%EXPORT PsGetCurrentProcess
-ret
-
-;%EXPORT PsGetCurrentProcessId
-ret
-
-;%EXPORT PsGetCurrentProcessSessionId
-ret
-
-;%EXPORT PsGetCurrentThread
-ret
-
-;%EXPORT PsGetCurrentThreadId
 ret
 
 ;%EXPORT PsGetCurrentThreadPreviousMode
@@ -4405,15 +4468,6 @@ ret
 ;%EXPORT memchr
 ret
 
-;%EXPORT memcpy
-ret
-
-;%EXPORT memmove
-ret
-
-;%EXPORT memset
-ret
-
 ;%EXPORT qsort
 ret
 
@@ -4512,18 +4566,16 @@ ret
 ret
 
 ;%EXPORT wcsspn
-    ret
+ret
 
 ;%EXPORT wcsstr
-    ret
+ret
 
 ;%EXPORT wcstombs
-    ret
+ret
 
 ;%EXPORT wctomb
-    ret
-
-Driver db "User mode Ntoskrnl", 0
+ret
 
 ;%IMPORTS
 
