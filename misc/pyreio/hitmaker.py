@@ -2,21 +2,39 @@
 groups have their own marks
 some operands are also stored
 
-future?
-collect opcodes after prefix
-represent map for each prefix
+better prefix representation...
 """
+
+# PE specific code here... (init and check)
+import spec
 
 import pydasm
 import pefile
-import struct
 
+import struct
 import os
 import sys
 import pprint
 
 NUMBYTES = 4
 SHOW_NEW = False
+
+class List(list):
+    """a list class with Hex byte representation and hashes for dictionary storage"""
+    def __repr__(self):
+        return "[%s]" % " ".join("%02X" % _ for _ in self)
+
+    def __hash__(self):
+        return `self`.__hash__()
+
+def getMinMax(min_, max_, v):
+    if min_ is None:
+        min_ = v
+    if max_ is None:
+        max_ = v
+    min_ = min(min_, v)
+    max_ = max(max_, v)
+    return min_, max_
 
 GROUPS = set([
     0x80, 0x81, 0x82, 0x83,
@@ -44,35 +62,33 @@ PREFIX = set([
     0xf0,
     0xf2, 0xf3,
     ])
-
+#TODO: make sure lengths are correct even with prefixes
 operands = {
-    0xE9:[4,[]],
-    0xE8:[4,[]],
-    0xEB:[1,[]],
+    0xE9:[4,{}],
+    0xE8:[4,{}],
+    0xEB:[1,{}],
     }
 
 for i in xrange(16):
-    operands[0x70 + i] = [1, []]
+    operands[0x70 + i] = [1, {}]
 
 operands0F = dict()
 for i in xrange(16):
-    operands0F[0x80 + i] = [4, []]
+    operands0F[0x80 + i] = [4, {}]
 
-# for now, PREFIX are taken as a single byte opcode - big potential problem of wrong disasm length...
-#TODO: improve that logic, by writing down what might comes next...
-#it might be interesting if a specific opcode is always prefixed
-
-hitmap = dict([i, 0] for i in range(256) if i not in GROUPS) #GROUPS.union(PREFIX)
-hitmap0F = dict([i, 0] for i in range(256) if i not in GROUPS0F) #GROUPS.union(PREFIX)
+hitmap = dict([i, {List([]):0}] for i in range(256) if i not in GROUPS)
+hitmap0F = dict([i, {List([]):0}] for i in range(256) if i not in GROUPS0F)
 hitmap_groups = {}
 hitmap0F_groups = {}
 
 for i in GROUPS:
-    hitmap_groups[i] = [0] * 8
+    hitmap_groups[i] = [{List([]):0}] * 8
 for i in GROUPS0F:
-    hitmap0F_groups[i] = [0] * 8
+    hitmap0F_groups[i] = [{List([]):0}] * 8
+
 
 def mid(b):
+    """ModR/M or SIB ? opcode in the group"""
     return (b >> 3) & 7
 
 def print_operands(d):
@@ -80,95 +96,119 @@ def print_operands(d):
         if len(d[i][1]) == 0:
             continue
         if d[i][0] == 4:
-            print "%02X: %s" % (i, " ".join("%08X" % j for j in d[i][1]))
+            print "%02X: %s" % (i, " ".join("%08X:%i" % (j, d[i][1][j]) for j in d[i][1]))
         elif d[i][0] == 1:
-            print "%02X: %s" % (i, " ".join("%02X" % j for j in d[i][1]))
+            print "%02X: %s" % (i, " ".join("%02X:%i" % (j, d[i][1][j]) for j in d[i][1]))
 
 def print_group(d):
+    """prefixes are not displayed"""
+    groups = 0
     for i in d:
-        if max(d[i]) != 0:
+        if max(j[List([])] for j in d[i]) != 0:
+            groups += 1
             print " %02X:" % i,
-            if min(d[i]) == 0:
+            if min(j[List([])] for j in d[i]) == 0:
                 print " ".join("%02i" % j if j > 0 else "  "for j in d[i] )
             else:
                 print "(complete)"
+    if groups == 0:
+        print " <nothing>"
     return
 
 def print_hitmap(hitmap):
-    """collapsed vertically, 0 entries are hidden"""
+    """collapsed vertically, 0 entries are hidden, no displayed prefix"""
+    lines = 0
     for i in xrange(256):
       if (i % 16) == 0:
           line = ["%02X: "% (i)]
-      if i not in hitmap or hitmap[i] == 0:
+      if i not in hitmap or hitmap[i][List([])] == 0:
           line.append("   ")
       else:
-          line.append("%03i" % hitmap[i])
+          line.append("%03i" % hitmap[i][List([])])
 
       if (i % 16) == 15:
           line = " ".join(line)
           if len(line.strip()) > 3:
+              lines += 1
               print line
+    if lines == 0:
+        print " <nothing>"
     return
+
+def d_l(d, l):
+    """set as one or increment a value on the dictionary, based on a List hash"""
+    if s not in d:
+        d[s] = 1
+    else:
+        d[s] += 1
+    return d[s] - 1
 
 
 def getinfo(data, fn):
+    """parse data and collect information"""
     print fn
     offset = 0
 
-#target specific inits
-
-############################################
+    #target specific inits
+    spec.init()
 
     while offset < len(data) - 0x10:
-
-#target specific alerts, termination, data collection
-
-####################################
+        prefixes = []
+        opcode_off = offset
 
         byte = ord(data[offset])
         byte2 = ord(data[offset + 1])
         previous = -1
 
+        while byte in PREFIX:
+            prefixes.append(byte)
+            opcode_off += 1
+            byte = ord(data[opcode_off])
+            byte2 = ord(data[opcode_off + 1])
+
+        #target specific alerts, termination, data collection
+        if spec.check(data, opcode_off, fn) == -1:
+            instruction = pydasm.get_instruction(data[offset:], pydasm.MODE_32)
+            print "%08X: %s %s" % (
+                offset,
+                (" ".join(["%02X" % ord(i) for i in data[offset:offset + min(NUMBYTES, instruction.length)]])).ljust(NUMBYTES * 3),
+                pydasm.get_instruction_string(instruction, pydasm.FORMAT_INTEL, offset))
+            break
+
         #todo: merge double byte in a recursive way
         if byte == 0x0f:
-            byte = ord(data[offset + 1])
-            byte2 = ord(data[offset + 2])
+            opcode_off += 1
+            byte = ord(data[opcode_off])
+            byte2 = ord(data[opcode_off + 1])
             if byte in GROUPS0F:
-                previous = hitmap0F_groups[byte][mid(byte2)]
-                hitmap0F_groups[byte][mid(byte2)] += 1
+                previous = d_l(hitmap0F_groups[byte][mid(byte2)], prefixes)
             else:
-                previous = hitmap0F[byte]
-                hitmap0F[byte] += 1
+                previous = d_l(hitmap0F[byte], prefixes)
+
             if byte in operands0F:
-                size, l = operands0F[byte]
+                size, d = operands0F[byte]
                 if size == 4:
-                    op = struct.unpack("L", data[offset + 2:offset + 2 + 4])[0]
+                    op = struct.unpack("L", data[opcode_off + 1:opcode_off + 1 + 4])[0]
                 elif size == 1:
-                    op = ord(data[offset + 2])
-                l.append(op)
-
-
-        elif byte in PREFIX:
-            previous = hitmap[byte]
-            hitmap[byte] += 1
-
-            offset += 1
-            continue
+                    op = ord(data[opcode_off + 1])
+                if op not in d:
+                    d[op] = 0
+                d[op] += 1
 
         elif byte in GROUPS:
-            previous = hitmap_groups[byte][mid(byte2)]
-            hitmap_groups[byte][mid(byte2)] += 1
+            previous = d_l(hitmap_groups[byte][mid(byte2)], prefixes)
         else:
-            previous = hitmap[byte]
-            hitmap[byte] += 1
+            previous = d_l(hitmap[byte], prefixes)
 
         if byte in operands:
-            size, l = operands[byte]
+            size, d = operands[byte]
             if size == 4:
-                op = struct.unpack("L", data[offset + 1:offset + 1 + 4])[0]
+                op = struct.unpack("L", data[opcode_off + 1:opcode_off + 1 + 4])[0]
             elif size == 1:
-                op = ord(data[offset + 1])
-            l.append(op)
+                op = ord(data[opcode_off + 1])
+            if op not in d:
+                d[op] = 0
+            d[op] += 1
 
         instruction = pydasm.get_instruction(data[offset:], pydasm.MODE_32)
 
@@ -212,6 +252,9 @@ print
 print "groups"
 print_group(hitmap_groups)
 print
+print "operands"
+print_operands(operands)
+print
 print
 
 print "2 bytes:"
@@ -222,6 +265,19 @@ print "groups"
 print_group(hitmap0F_groups)
 
 print
-print_operands(operands)
-print
+print "operands"
 print_operands(operands0F)
+
+print
+print "prefixes"
+for i in hitmap:
+    c = 0
+    max_ = None
+    min_ = None
+    for j in hitmap[i]:
+        if j == List([]):
+            continue
+        c += 1
+        min_, max_ = getMinMax(min_, max_, hitmap[i][j])
+    if c > 0:
+        print "opcode %02X %i different prefix(es) found, %i min occurences, %i max occurences" % (i, c, min_, max_)
