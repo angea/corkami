@@ -97,3 +97,15 @@ LoopAgain: ; Kernel32.dll is memory 64 aligned
     jae LoopAgain
     cmp eax, [eax + edx + 34h]
     jnz LoopAgain
+
+
+    xor ebx,ebx
+    mov ebx, [fs:ebx]
+_1:
+    cmp [ebx],-1
+    jnz _2
+    mov ebx,[ebx + 4]
+    retn
+_2:
+    mov ebx,[ebx]
+    jmp _1
