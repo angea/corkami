@@ -52,7 +52,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	asm\rel_ip.exe \
 	imports\imports_doublesum.exe \
 	pe\helloworld64.exe pe\max_sec.exe pe\max_secXP.exe \
-	pe\delayimports.exe
+	pe\delayimports.exe pe\shelload.exe \
 
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
@@ -198,7 +198,7 @@ asm\getip.exe: asm\getip.asm
 pe\tinype.exe: pe\tinype.asm
 	yasm -o pe\tinype.exe pe\tinype.asm
 
-#Lutte contre les mots faciles, lutte contre la haine des ... 
+#Lutte contre les mots faciles, lutte contre la haine des ...
 asm\opcodes_desc.exe: asm\opcodes_desc.asm
 	$(makepe) asm\opcodes_desc.asm
 
@@ -403,6 +403,9 @@ pe\max_secXP.asm: pe\max_secXP.py
 
 pe\delayimports.exe: pe\delayimports.asm
 	$(makepe) pe\delayimports.asm
+
+pe\shelload.exe: pe\shelload.asm
+	$(makepe) pe\shelload.asm
 
 clean:
 	rm $(examples) $(objects) $(beta)
