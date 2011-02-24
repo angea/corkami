@@ -53,7 +53,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\imports_doublesum.exe \
 	pe\helloworld64.exe pe\max_sec.exe pe\max_secXP.exe \
 	pe\delayimports.exe pe\shelload.exe \
-	asm\mmx.exe asm\sse.exe 
+	asm\mmx.exe asm\sse.exe asm\fpu.exe
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
     anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe \
@@ -411,6 +411,8 @@ asm\mmx.exe: asm\mmx.asm
 	$(makepe) asm\mmx.asm
 asm\sse.exe: asm\sse.asm
 	$(makepe) asm\sse.asm
+asm\fpu.exe: asm\fpu.asm
+	$(makepe) asm\fpu.asm
 
 clean:
 	rm $(examples) $(objects) $(beta)
