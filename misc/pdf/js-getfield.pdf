@@ -1,0 +1,38 @@
+% a PDF file where information is hidden in a widget data
+% not working yet.
+
+% BSD Licence, Ange Albertini, 2011
+
+%PDF-1.4
+
+1 0 obj
+<<
+/Kids
+  [<<
+  /Annots
+    [<<
+    /DV (Hello World)
+    /Contents (goin)
+    /Subtype /Widget
+    /Type /Annot
+    /T (data)
+    /Rect [0 0 0 0]
+    >>]
+  /Parent 1 0 R
+  >>]
+>>
+
+trailer
+<<
+  /Root
+  <<
+  /Pages 1 0 R
+  /OpenAction
+      <<
+      /S /JavaScript
+      /JS(
+        app.alert(this.getField('data')); // .getField('data').value
+        )
+      >>
+    >>
+>>
