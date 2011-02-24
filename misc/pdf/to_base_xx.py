@@ -17,3 +17,4 @@ for i in s[::-1]:
 	index_ *= b
 
 print "the string %s in base %i gives %i" % (s,b,r)
+print "'%s' == (%i).toString(%i)" % (s, r, b)

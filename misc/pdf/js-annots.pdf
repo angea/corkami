@@ -1,28 +1,35 @@
-%PDF-1.4
-1 0 obj<<
-/Pages 2 0 R
-/OpenAction <<
-    /S/JavaScript/JS(
-        d = app.doc;
-        d.syncAnnotScan();
-        a = d.getAnnots({ nPage: 0 });
-        app.alert(a[0].subject);
-    )>>
->>
-endobj
+% a pdf file where some data is taken by the javascript from a page annotation
+% BSD Licence, Ange Albertini, 2011
 
-2 0 obj<<
-/Kids[<<
-    /Annots[<<
-        /Subtype /Text
-        /Rect[0 0 0 0]
-        /Subj (Hello World!)
-        >>]
-    /Parent 2 0 R
+%PDF-1.
+%4
+
+1 0 obj
+<<
+/Kids
+  [<<
+  /Annots
+    [<<
+    /Subtype /Text
+    /Rect[0 0 0 0]
+    /Subj (Hello World!)
     >>]
+  /Parent 1 0 R
+  >>]
 >>
-endobj
+%endobj
 
-trailer<<
-/Root 1 0 R
+trailer
+<<
+  /Root <<
+    /Pages 1 0 R
+    /OpenAction <<
+    /S/JavaScript
+    /JS(
+      d = app.doc;
+      d.syncAnnotScan();
+      a = d.getAnnots({ nPage: 0 });
+      app.alert(a[0].subject);
+      )>>
+  >>
 >>

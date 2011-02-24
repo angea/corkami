@@ -1,9 +1,13 @@
+% a pdf file showing that strings can be called via strings instead of functions
+% BSD Licence, Ange Albertini, 2011
+
 %PDF-1.4
+
 1 0 obj
 <<
-/Kids[<</Parent 1 0 R>>]
+  /Kids[<</Parent 1 0 R>>]
 >>
-endobj
+%endobj
 
 trailer
 <<
@@ -13,8 +17,8 @@ trailer
         <<
         /S/JavaScript
         /JS(
-    app["alert"]("Hello World!");
-        )
+            app["alert"]("Hello World!");
+          )
         >>
     >>
 >>

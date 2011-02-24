@@ -1,22 +1,26 @@
+% a pdf file where a string is made from different blocks then concatenated
+
+% BSD Licence, Ange Albertini, 2011
+
 %PDF-1.4
 1 0 obj
 <<
-/Kids[<</Parent 1 0 R>>]
+  /Kids[<</Parent 1 0 R>>]
 >>
-endobj
+%endobj
 
 trailer
 <<
 /Root
-    <</Pages 1 0 R
-    /OpenAction
-        <<
-        /S/JavaScript
-        /JS(
-    B="Hell";
-    on="o ";
-    jour="World!";
-    app.alert(B+on+jour);
-        )>>
-    >>
+  <</Pages 1 0 R
+  /OpenAction
+      <<
+      /S/JavaScript
+      /JS(
+           B="Hell";
+           on="o ";
+           jour="World!";
+           app.alert(B + on + jour);
+      )>>
+  >>
 >>

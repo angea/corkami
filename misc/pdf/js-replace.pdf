@@ -1,22 +1,26 @@
+% a pdf file where string is obfuscated by by junk characters
+% BSD Licence, Ange Albertini, 2011
+
 %PDF-1.4
+
 1 0 obj
 <<
-/Kids[<</Parent 1 0 R>>]
+  /Kids[<</Parent 1 0 R>>]
 >>
 endobj
 
 trailer
 <<
 /Root
-    <</Pages 1 0 R
-    /OpenAction
-        <<
-        /S/JavaScript
-        /JS(
-    app.alert(
-        ("zHzzezzlzlzozzzzz zWozrzldz!").replace(/z/g,"")
-        );
+  <</Pages 1 0 R
+  /OpenAction
+      <<
+      /S/JavaScript
+      /JS(
+        app.alert(
+            ("zHzzezzlzlzozzzzz zWozrzldz!").replace(/z/g,"")
+            );
         )
-        >>
-    >>
+      >>
+  >>
 >>
