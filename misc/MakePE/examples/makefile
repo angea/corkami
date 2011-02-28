@@ -53,7 +53,8 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	imports\imports_doublesum.exe \
 	pe\helloworld64.exe pe\max_sec.exe pe\max_secXP.exe \
 	pe\delayimports.exe pe\shelload.exe \
-	asm\mmx.exe asm\sse.exe asm\fpu.exe anti\fastpeblock.exe asm\small_sc.bin
+	asm\mmx.exe asm\sse.exe asm\fpu.exe anti\fastpeblock.exe asm\small_sc.bin \
+	asm\memscan.exe
 
 beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
     anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe \
@@ -413,9 +414,15 @@ asm\sse.exe: asm\sse.asm
 	$(makepe) asm\sse.asm
 asm\fpu.exe: asm\fpu.asm
 	$(makepe) asm\fpu.asm
+
 anti\fastpeblock.exe: anti\fastpeblock.asm
 	$(makepe) anti\fastpeblock.asm
+
 asm\small_sc.bin: asm\small_sc.asm
 	yasm -o asm\small_sc.bin asm\small_sc.asm
+
+asm\memscan.exe: asm\memscan.asm
+	$(makepe) asm\memscan.asm
+
 clean:
 	rm $(examples) $(objects) $(beta)
