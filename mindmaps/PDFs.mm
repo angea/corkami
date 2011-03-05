@@ -28,7 +28,7 @@
 </hook>
 </node>
 </node>
-<node CREATED="1294307858656" ID="Freemind_Link_278310758" MODIFIED="1294602407171" TEXT="discardable elements">
+<node CREATED="1294307858656" FOLDED="true" ID="Freemind_Link_278310758" MODIFIED="1294602407171" TEXT="discardable elements">
 <edge WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="12"/>
 <node CREATED="1294307885453" ID="Freemind_Link_1141969726" MODIFIED="1294602398796" TEXT="%%EOF">
@@ -82,7 +82,7 @@
 <edge WIDTH="thin"/>
 </node>
 </node>
-<node CREATED="1294308108984" ID="Freemind_Link_353722632" MODIFIED="1294602412781" TEXT="anti-debugs">
+<node CREATED="1294308108984" FOLDED="true" ID="Freemind_Link_353722632" MODIFIED="1294602412781" TEXT="anti-debugs">
 <edge WIDTH="thin"/>
 <node CREATED="1294308114000" ID="Freemind_Link_160368360" MODIFIED="1294602412750" TEXT="global variables">
 <edge WIDTH="thin"/>
@@ -122,14 +122,9 @@
 </node>
 <node CREATED="1294591046968" ID="Freemind_Link_880316926" MODIFIED="1294602385031" POSITION="left" TEXT="about">
 <font ITALIC="true" NAME="SansSerif" SIZE="12"/>
-<node CREATED="1294591148671" ID="Freemind_Link_1575762527" MODIFIED="1294605932562" TEXT="author">
-<hook NAME="accessories/plugins/NodeNote.properties">
-<text>Ange Albertini</text>
-</hook>
-</node>
-<node CREATED="1294591543781" ID="Freemind_Link_424563649" LINK="mailto:ange.albertini@gmail.com" MODIFIED="1294602460390" TEXT="e-mail"/>
-<node CREATED="1294591201046" ID="Freemind_Link_677907833" LINK="http://corkami.blogspot.com" MODIFIED="1294591519343" TEXT="URL"/>
-<node CREATED="1294591206203" ID="Freemind_Link_350717320" MODIFIED="1294591337593" TEXT="credits">
+<node CREATED="1294591543781" ID="Freemind_Link_424563649" LINK="mailto:ange.albertini@gm**l.com" MODIFIED="1299308222859" TEXT="Ange Albertini"/>
+<node CREATED="1294591201046" ID="Freemind_Link_677907833" LINK="http://corkami.blogspot.com" MODIFIED="1299308152046" TEXT="http://corkami.blogspot.com"/>
+<node CREATED="1294591206203" ID="Freemind_Link_350717320" MODIFIED="1299308240828" TEXT="References">
 <hook NAME="accessories/plugins/NodeNote.properties">
 <text>Didier Stevens&#xa;Kazumasa Itabashi&#xa;Marco Cova&#xa;Sebastian Porst&#xa;</text>
 </hook>
