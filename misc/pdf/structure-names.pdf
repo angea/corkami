@@ -5,19 +5,15 @@
 
 %PDF-1.
 
+% we need one object or the file won't load :(
 1 0 obj
-<<
-/Kids
-  [<<
-  /Parent 1 0 R
-  >>]
->>
+<<>>
 
 trailer
 <<
 /Root
   <<
-  /Pages 1 0 R
+  /Pages <<>>
   /Names
     <<
     /JavaScript

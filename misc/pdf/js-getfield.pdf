@@ -1,38 +1,35 @@
-% a PDF file where information is hidden in a widget data
-% not working yet.
+% a PDF file where information is stored in a widget data
 
 % BSD Licence, Ange Albertini, 2011
 
-%PDF-1.4
+%PDF-1.
 
+% we need one object or the file won't load :(
 1 0 obj
-<<
-/Kids
-  [<<
-  /Annots
-    [<<
-    /DV (Hello World)
-    /Contents (goin)
-    /Subtype /Widget
-    /Type /Annot
-    /T (data)
-    /Rect [0 0 0 0]
-    >>]
-  /Parent 1 0 R
-  >>]
->>
+<<>>
 
 trailer
 <<
-  /Root
+/Root
   <<
-  /Pages 1 0 R
+  /AcroForm
+  <<
+    /Fields
+      [<<
+        /Rect[0 0 0 0]
+        /Subtype/Widget
+        /T(mydata)            % this is the name
+        /V(Hello World!)    % this is the value
+        /FT/Tx
+      >>]
+  >>
+  /Pages <</Kids[]>>
   /OpenAction
-      <<
-      /S /JavaScript
-      /JS(
-        app.alert(this.getField('data')); // .getField('data').value
-        )
-      >>
+    <<
+    /S /JavaScript
+    /JS(
+      app.alert(this.getField('mydata').value);
+      )
     >>
+  >>
 >>
