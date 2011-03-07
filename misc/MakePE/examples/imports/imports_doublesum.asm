@@ -12,7 +12,7 @@ EntryPoint:
 
     push 0                  ; UINT uExitCode
     call ExitProcess
-
+_c
 tada db "Tada!", 0
 helloworld db "Hello World!", 0
 
@@ -22,15 +22,18 @@ USER32_DLL equ 0D280212Ch
 _EXITPROCESS equ 031678333h
 _MESSAGEBOXA equ 021CB7926h
 
+_d
+
 MessageBoxA:
     push USER32_DLL
     push _MESSAGEBOXA
     jmp ImportAndCall
-nop
+_c
 ExitProcess:
     push KERNEL32_DLL
     push _EXITPROCESS
     jmp ImportAndCall
+_c
 
 _LOADLIBRARYA equ 06FFFE488h
 _GETMODULEHANDLEA equ 0226F513Fh
@@ -39,7 +42,7 @@ _FINDFIRSTFILEA equ 0DF6DC586h
 _FINDNEXTFILEA equ 03A290BE0h
 
 MAX_PATH equ 260
-nop
+_c
 ImportAndCall:
     pusha
 
@@ -57,8 +60,7 @@ ImportAndCall:
     mov eax,[eax + 18h] ; _LDR_MODULE.BaseAddress
 
     mov [hKernel32], eax
-
-nop
+_
     push MAX_PATH
     push Buffer
         mov eax, [hKernel32]
@@ -72,7 +74,7 @@ nop
     mov ecx, 7
     rep movsb
 
-nop
+_
 already_ran:
     mov eax, dword [esp + 20h + 4]
     mov [filesum], eax
@@ -84,11 +86,11 @@ already_ran:
         call GetProcAddress_Hash
     call ebx
     mov [hFind], eax
-nop
+_
 filecheck:
     mov esi, WIN32_FIND_DATA.cFileName
     mov edx, 0
-nop
+_
 case_loop:
     xor eax, eax
     lodsb
@@ -113,7 +115,7 @@ case_loop:
         call GetProcAddress_Hash
     call ebx
     jmp filecheck
-nop
+_
 found:
 
     push WIN32_FIND_DATA.cFileName
@@ -123,13 +125,13 @@ found:
     call ebx
     test eax, eax
     jnz dll_loaded
-nop
+_
     push WIN32_FIND_DATA.cFileName
         mov eax, [hKernel32]
         mov ebx, _LOADLIBRARYA
         call GetProcAddress_Hash
     call ebx
-nop
+_
 dll_loaded:
     mov ebx, [esp + 20h]    ; +20h because of the PUSHA
     call GetProcAddress_Hash
@@ -140,7 +142,7 @@ dll_loaded:
     pop dword [dReturn]
     call [dApi]
     jmp [dReturn]
-
+_d
 filesum dd 0
 hKernel32 dd 0
 dApi dd 0
@@ -150,6 +152,7 @@ Mask db "\*.dll", 0
 hFind dd 0
 
 
+_d
 Buffer times MAX_PATH db 0
 
 WIN32_FIND_DATA:
@@ -164,6 +167,7 @@ WIN32_FIND_DATA:
   .cFileName             times MAX_PATH db 0
   .cAlternate            times 14 db 0
 
+_d
 
 DOS_HEADER__e_lfanew equ 03ch
 
@@ -174,7 +178,6 @@ Exports__AddressOfFunctions EQU 01ch
 Exports__AddressOfNames     EQU 020h
 Exports__AddressOfNamesOrdinal EQU 024h
 
-nop
 GetProcAddress_Hash:
     mov [ImageBase], eax
     mov [checksum], ebx
@@ -194,7 +197,7 @@ GetProcAddress_Hash:
 
     mov ebx, [edx + Exports__AddressOfNames] ; AddressOfNames
     add ebx, [ImageBase]    ; RVA to VA
-nop
+_
 next_name:
     test ecx, ecx
     jz no_more_exports
@@ -204,7 +207,7 @@ next_name:
     add esi, [ImageBase] ; RVA to VA
 
     mov edi, 0
-nop
+_
 checksum_loop:
     xor eax, eax
     lodsb
@@ -229,13 +232,13 @@ checksum_loop:
     add ebx, [ImageBase]
 
     jmp _end
-nop
+_
 no_more_exports:
     xor ebx, ebx ; doomed to crash :p
-nop
+_
 _end:
     retn
-
+_d
 
 
 checksum dd 0
@@ -247,4 +250,4 @@ DIRECTORY_ENTRY_IMPORT_SIZE equ 0
 
 %include '..\..\standard_ftr.asm'
 
-;Ange Albertini, Creative Commons BY, 2010
+;Ange Albertini, BSD Licence, 2010-2011

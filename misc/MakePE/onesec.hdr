@@ -56,7 +56,7 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualAddress, dd Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData, dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics, dd IMAGE_SCN_MEM_EXECUTE ; necessary under Win7 (with DEP?)
+    at IMAGE_SECTION_HEADER.Characteristics, dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE; necessary under Win7 (with DEP?)
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 

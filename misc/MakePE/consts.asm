@@ -671,4 +671,17 @@ struc IMAGE_COFF_SYMBOLS_HEADER
     .RvaToLastByteOfData     resd 1 ;RVA
 endstruc
 
+%macro _ 0
+    nop
+%endmacro
+
+%macro _c 0
+    align 16, int3
+%endmacro
+
+%macro _d 0
+    align 16, db 0
+%endmacro
+
+
 ; Ange Albertini, BSD Licence 2009-2011

@@ -11,13 +11,7 @@
 
 %include '..\..\standard_hdr.asm'
 
-EntryPoint:
-
-%ifdef on_stack
-    pusha
-%endif
-
-    call hook
+OEP:
     push MB_ICONINFORMATION ; UINT uType
     push tada               ; LPCTSTR lpCaption
     push helloworld         ; LPCTSTR lpText
@@ -26,12 +20,18 @@ EntryPoint:
 
     push 0                  ; UINT uExitCode
     call dword [trampExit]
-    ; popad
-
-hook:
+_c
+EntryPoint:
+    sub esp, 3 * 4
+    call PatchImports
+    jmp OEP
+_c
+PatchImports:
+    pusha
 %ifdef on_stack
+;    mov ebx, IMAGEBASE
     mov ebx, esp
-    add ebx, 8
+    add ebx, 24h
 %else
     push PAGE_EXECUTE_READWRITE  ; DWORD flProtect
     push MEM_COMMIT              ; DWORD flAllocationType
@@ -55,8 +55,9 @@ hook:
     mov ecx, DIRECTORY_ENTRY_IMPORT_SIZE
     mov al, 0
     rep stosb
+    popad
     retn
-
+_c
 patch_trampoline:
     mov eax, [esi]
     mov byte [ebx], 068h            ; 68 xxxxxxxx   push xxxxxxxx
@@ -65,18 +66,19 @@ patch_trampoline:
 
     mov [edi], ebx
     retn
-
+_c
+;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!ExitProcess
+;%IMPORT kernel32.dll!VirtualAlloc
+_d
 trampMsgBox dd 0
 trampExit dd 0
 
 tada db "Tada!", 0
 helloworld db "Hello World!",0
-
-;%IMPORT user32.dll!MessageBoxA
-;%IMPORT kernel32.dll!ExitProcess
-;%IMPORT kernel32.dll!VirtualAlloc
+_d
 ;%IMPORTS
 
 %include '..\..\standard_ftr.asm'
 
-;Ange Albertini, Creative Commons BY, 2010
+;Ange Albertini, BSD Licence, 2010-2011

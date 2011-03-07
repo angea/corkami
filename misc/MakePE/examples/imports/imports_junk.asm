@@ -3,22 +3,37 @@
 
 %include '..\..\standard_hdr.asm'
 
-%include 'entrypoint.inc'
-
+OEP:
+    push MB_ICONINFORMATION ; UINT uType
+    push tada               ; LPCTSTR lpCaption
+    push helloworld         ; LPCTSTR lpText
+    push 0                  ; HWND hWnd
+    call MessageBoxA
+    push 0                  ; UINT uExitCode
+    call ExitProcess
+_c
+tada db "Tada!", 0
+helloworld db "Hello World!", 0
+_d
+EntryPoint:
+    ; TODO: add patching
+    call LoadImports
+    jmp OEP
+_d
 MessageBoxA:
     nop
     jmp [iMessageBoxA]
 ExitProcess:
     nop
     jmp [iExitProcess]
-nop
+_c
 %include 'imports_loader.inc'
-nop
+_c
 ;%IMPORT kernel32.dll!GetProcAddress
 ;%IMPORT kernel32.dll!LoadLibraryA
-nop
+_d
 ;%IMPORTS
 
 %include '..\..\standard_ftr.asm'
 
-;Ange Albertini, Creative Commons BY, 2010
+;Ange Albertini, BSD Licence, 2010-2011

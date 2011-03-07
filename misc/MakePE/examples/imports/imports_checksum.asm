@@ -3,16 +3,32 @@
 
 %include '..\..\standard_hdr.asm'
 
-%include 'entrypoint.inc'
+OEP:
+    push MB_ICONINFORMATION ; UINT uType
+    push tada               ; LPCTSTR lpCaption
+    push helloworld         ; LPCTSTR lpText
+    push 0                  ; HWND hWnd
+    call MessageBoxA
+    push 0                  ; UINT uExitCode
+    call ExitProcess
+_c
+
+MessageBoxA:
+    jmp [ddMessageBoxA]
+ExitProcess:
+    jmp [ddExitProcess]
+_c
+
+tada db "Tada!", 0
+helloworld db "Hello World!", 0
+_d
 
 ;generated with api_hash.py
-
 LOADLIBRARYA equ 06FFFE488h
-
 EXITPROCESS equ 031678333h
 MESSAGEBOXA equ 021CB7926h
 
-LoadImports:
+EntryPoint:
 
 ; Locate Kernel32.dll imagebase
     mov eax,[fs:030h]   ; _TIB.PebPtr
@@ -47,15 +63,11 @@ LoadImports:
     call GetProcAddress_Hash
     mov [ddMessageBoxA], ebx
 
-    retn
-nop
-MessageBoxA:
-    jmp [ddMessageBoxA]
-ExitProcess:
-    jmp [ddExitProcess]
+    jmp OEP
+_c
 
-nop
 szuser32 db "user32.dll", 0
+_d
 
 ddMessageBoxA dd 0
 ddExitProcess dd 0
@@ -92,7 +104,7 @@ GetProcAddress_Hash:
 
     mov ebx, [edx + Exports__AddressOfNames] ; AddressOfNames
     add ebx, [ImageBase]    ; RVA to VA
-
+_
 next_name:
     test ecx, ecx
     jz no_more_exports
@@ -101,9 +113,8 @@ next_name:
     mov esi, [ebx + ecx * 4]
     add esi, [ImageBase] ; RVA to VA
 
-
     mov edi, 0
-
+_
 checksum_loop:
     xor eax, eax
     lodsb
@@ -128,10 +139,13 @@ checksum_loop:
     add ebx, [ImageBase]
 
     jmp _end
+_
 no_more_exports:
     xor ebx, ebx
+_
 _end:
     retn
+_c
 
 checksum dd 0
 ImageBase dd 0

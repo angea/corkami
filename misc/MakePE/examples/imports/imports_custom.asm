@@ -2,14 +2,24 @@
 
 %include '..\..\standard_hdr.asm'
 
-%include 'entrypoint.inc'
-
+OEP:
+    push MB_ICONINFORMATION ; UINT uType
+    push tada               ; LPCTSTR lpCaption
+    push helloworld         ; LPCTSTR lpText
+    push 0                  ; HWND hWnd
+    call MessageBoxA
+    push 0                  ; UINT uExitCode
+    call ExitProcess
+_c
+tada db "Tada!", 0
+helloworld db "Hello World!", 0
+_d
 MessageBoxA:
     jmp [iMessageBoxA]
 ExitProcess:
     jmp [iExitProcess]
-
-LoadImports:
+_c
+EntryPoint:
 ;small import resolving stub, only works for imports by names
     pushad
     mov esi, my_imports_data
@@ -32,8 +42,8 @@ api_loop:
     jmp api_loop
 imports_end:
     popad
-    retn
-nop
+    jmp OEP
+_d
 my_imports:
 iMessageBoxA:
     dd 0
@@ -50,16 +60,16 @@ my_imports_data:
     dd 0
 
     dd 0
-
+_d
 user32.dll db 'user32.dll', 0
 aMessageBoxA db 'MessageBoxA',0
 aExitProcess db 'ExitProcess', 0
-nop
+_d
 ;%IMPORT kernel32.dll!GetProcAddress
 ;%IMPORT kernel32.dll!LoadLibraryA
-nop
+_d
 ;%IMPORTS
 
 %include '..\..\standard_ftr.asm'
 
-;Ange Albertini, Creative Commons BY, 2010
+;Ange Albertini, BSD Licence, 2010-2011

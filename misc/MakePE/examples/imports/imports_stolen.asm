@@ -2,73 +2,72 @@
 
 %include '..\..\standard_hdr.asm'
 
-%include 'entrypoint.inc'
+EntryPoint:
+    call steal_imports
+    push MB_ICONINFORMATION ; UINT uType
+    push tada               ; LPCTSTR lpCaption
+    push helloworld         ; LPCTSTR lpText
+    push 0                  ; HWND hWnd
+    call MessageBoxA
+    push 0                  ; UINT uExitCode
+    call ExitProcess
+_c
 
-MessageBoxA:
-    mov edi,edi
-    push ebp
-    mov ebp,esp
-    jmp [iMessageBoxA]
-ExitProcess:
-    mov edi,edi
-    push ebp
-    mov ebp,esp
-    jmp [iExitProcess]
-nop
-LoadImports:
-;small import resolving stub, only works for imports by names
+;%IMPORT user32.dll!MessageBoxA
+;%IMPORT kernel32.dll!ExitProcess
+_c
+
+tada db "Tada!", 0
+helloworld db "Hello World!", 0
+_d
+
+steal_imports:
     pushad
-    mov esi, my_imports_data
-    mov edi, my_imports
-dll_loop:
-    lodsd
-    test eax, eax
-    jz imports_end
-    push eax            ; LPCTSTR lpFileName
-    call LoadLibraryA
-    mov ebx, eax
-api_loop:
-    lodsd
-    test eax, eax
-    jz dll_loop
-    push eax            ; LPCSTR lpProcName
-    push ebx            ; HMODULE hModule
-    call GetProcAddress
+    push dword [__imp__ExitProcess]
+    push dword [__imp__MessageBoxA]
 
-    add eax, 5          ; makes us skip 'mov edi,edi / push ebp / mov ebp,esp' of the API's start
+    mov al, 0
+    mov edi, ImportAddressTable
+    mov ecx, DIRECTORY_ENTRY_IMPORT_SIZE
+    rep stosb
 
-    stosd
-    jmp api_loop
-imports_end:
+    pop eax
+    add eax, 5
+    mov [_stolen_MessageBoxA], eax
+
+    mov dword [__imp__MessageBoxA], _MessageBoxA
+
+    pop eax
+    add eax, 5
+    mov [_stolen_ExitProcess], eax
+
+    mov dword [__imp__ExitProcess], _ExitProcess
+_
     popad
     retn
-nop
-my_imports:
-iMessageBoxA:
-    dd 0
-iExitProcess:
-    dd 0
+_c
 
-my_imports_data:
-    dd user32.dll
-    dd aMessageBoxA
-    dd 0
+_MessageBoxA:
+    mov edi,edi
+    push ebp
+    mov ebp,esp
+    jmp [_stolen_MessageBoxA]
+_c
 
-    dd kernel32.dll
-    dd aExitProcess
-    dd 0
+_ExitProcess:
+    mov edi,edi
+    push ebp
+    mov ebp,esp
+    jmp [_stolen_ExitProcess]
+_c
 
-    dd 0
-
-user32.dll db 'user32.dll', 0
-aMessageBoxA db 'MessageBoxA',0
-aExitProcess db 'ExitProcess', 0
-nop
-;%IMPORT kernel32.dll!GetProcAddress
-;%IMPORT kernel32.dll!LoadLibraryA
+_stolen_MessageBoxA dd 0
+_stolen_ExitProcess dd 0
+_d
 
 ;%IMPORTS
+_d
 
 %include '..\..\standard_ftr.asm'
 
-;Ange Albertini, Creative Commons BY, 2010
+;Ange Albertini, BSD Licence, 2010-2011
