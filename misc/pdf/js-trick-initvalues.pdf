@@ -1,13 +1,9 @@
 % a pdf file showing an anti-emulator trick, based on initial variable values
 % BSD Licence, Ange Albertini, 2011
 
-%PDF-1.4
+%PDF-1.
 
-1 0 obj
-<<
-  /Kids[<</Parent 1 0 R>>]
->>
-%endobj
+1 0 obj<</Kids[<</Parent 1 0 R>>]>>
 
 trailer
 <<
@@ -20,9 +16,9 @@ trailer
     /JS(
       if ((app)       // this function is adobe specific, typically the checks are more advanced
         && (event.target.zoomType.toString() == 'FitWidth'))
-          app.alert("nothing unusual detected!");
+          app.alert("nothing unusual detected.");
       else
-        app.alert("something wrong happened!");
+        app.alert("ERROR!");
       )
     >>
   >>

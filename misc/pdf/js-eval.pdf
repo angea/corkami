@@ -4,15 +4,13 @@
 
 %PDF-1.4
 1 0 obj
-<<
-  /Kids[<</Parent 1 0 R>>]
->>
+<<>>
 %endobj
 
 trailer
 <<
 /Root
-  <</Pages 1 0 R
+  <</Pages <<>>
   /OpenAction
       <<
       /S/JavaScript

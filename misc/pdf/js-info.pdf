@@ -2,19 +2,16 @@
 
 % BSD Licence, Ange Albertini, 2011
 
-%PDF-1.4
-1 0 obj
-<<
-  /Kids[<</Parent 1 0 R>>]
->>
-endobj
+%PDF-1.
+
+obj<<>>
 
 trailer
 <<
   /Info <</Author(Hello) /Title( World) /Producer( !)>>
   /Root
     <<
-    /Pages 1 0 R
+    /Pages <<>>
     /OpenAction<<
       /S/JavaScript
       /JS(
