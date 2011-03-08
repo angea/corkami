@@ -2,11 +2,12 @@
 
 % BSD Licence, Ange Albertini, 2011
 
-%PDF-1.
 
 % we need one object or the file won't load :(
-1 0 obj
-<<>>
+%PDF-1.
+
+%needed (for v8, at least)
+obj<<>>
 
 trailer
 <<
@@ -18,12 +19,12 @@ trailer
       [<<
         /Rect[0 0 0 0]
         /Subtype/Widget
-        /T(mydata)            % this is the name
-        /V(Hello World!)    % this is the value
+        /T(mydata)        % this is the name
+        /V(Hello World!)  % this is the value
         /FT/Tx
       >>]
   >>
-  /Pages <</Kids[]>>
+  /Pages <<>>
   /OpenAction
     <<
     /S /JavaScript
