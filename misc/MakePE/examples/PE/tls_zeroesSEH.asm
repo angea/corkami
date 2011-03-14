@@ -1,6 +1,6 @@
-; empty entry point file, looks buggy as much as possible but TLS is setting things correctly
+; empty entry point file, looks buggy as much as possible but TLS is setting a SEH and jumps to OEP
 
-;;;;;;;;;;;;;;;;;;;;;;;;; this is onesec.hdr
+;;;;;;;;;;;;;;;;;;;;;;;;; this is onesec.hdr ; to put code in the header...
 
 %include '..\..\consts.asm'
 

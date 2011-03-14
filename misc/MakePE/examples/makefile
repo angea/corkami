@@ -21,7 +21,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	pe\forwarder.dll pe\forwarded.exe pe\own_exports.exe \
 	pe\no_exports.dll pe\no_exports_loader.exe \
 	pe\driver.exe pe\driver-ni.ex pe\ntoskrnl.exe \
-	pe\tls_zeroes.exe \
+	pe\tls_zeroesSEH.exe pe\tls_zeroesmemnull.exe \
 	pe\dll.dll pe\loader.exe pe\manual_loader.exe \
 	VMs\stack.exe VMs\standard.exe VMs\subleq.exe VMs\tta.exe VMs\x86.exe \
 	format\com.com format\exehw.exe format\exetiny.exe \
@@ -229,8 +229,10 @@ pe\no_exports.dll: pe\no_exports.asm
 pe\no_exports_loader.exe: pe\no_exports_loader.asm
 	$(makepe) pe\no_exports_loader.asm
 
-pe\tls_zeroes.exe: pe\tls_zeroes.asm
-	$(makepe) pe\tls_zeroes.asm
+pe\tls_zeroesSEH.exe: pe\tls_zeroesSEH.asm
+	$(makepe) pe\tls_zeroesSEH.asm
+pe\tls_zeroesmemnull.exe: pe\tls_zeroesmemnull.asm
+	$(makepe) pe\tls_zeroesmemnull.asm
 
 waitable.exe: waitable.asm
 	$(makepe) waitable.asm
