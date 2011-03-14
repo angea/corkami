@@ -1,6 +1,7 @@
-;vmware asm-based detections
-;WIP
+; vmware asm-based detections
 
+
+; TODO better output
 ;CPUID Time
 ;GDT
 ;LDTR
@@ -9,6 +10,8 @@
 ;deroko
 ;ldtentries machin
 ;http://www.trapkit.de/research/vmm/scoopyng/ScoopyNG.zip
+
+;Ange Albertini, BSD Licence, 2009-2011
 
 %include '..\..\onesec.hdr'
 
@@ -77,5 +80,3 @@ __sidt:
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
-
-;Ange Albertini, Creative Commons BY, 2009-2010

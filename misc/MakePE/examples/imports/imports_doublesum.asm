@@ -1,6 +1,8 @@
 ; text-less imports, files and api are hashes-based.
 ; the right file is located by scanning the %SYSTEM% directory and matching each dll filename with a checksum
 
+; in this file, api and dll both take only one dword
+
 %include '..\..\standard_hdr.asm'
 
 EntryPoint:

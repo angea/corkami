@@ -1,3 +1,7 @@
+; an exception handler sets the Trap Flag, to manually step trough the original code
+
+;Ange Albertini, BSD Licence, 2009-2011
+
 %include '..\..\standard_hdr.asm'
 
 COUNT equ 4
@@ -38,5 +42,3 @@ counter db 0
 ;%IMPORTS
 
 %include '..\..\standard_ftr.asm'
-
-;Ange Albertini, Creative Commons BY, 2009-2010

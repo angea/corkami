@@ -1,3 +1,7 @@
+;the exception handler overwrites the top handler, then trigger another exception.
+
+;Ange Albertini, BSD Licence, 2009-2011
+
 %include '..\..\standard_hdr.asm'
 
 EntryPoint:
@@ -25,5 +29,3 @@ handler:
 ;%IMPORTS
 
 %include '..\..\standard_ftr.asm'
-
-;Ange Albertini, Creative Commons BY, 2009-2010

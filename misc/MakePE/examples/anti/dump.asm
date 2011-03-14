@@ -1,5 +1,7 @@
 ; anti-dumping techniques
 
+;Ange Albertini, BSD Licence, 2009-2011
+
 %include '..\..\onesec.hdr'
 
 EntryPoint:
@@ -55,5 +57,3 @@ helloworld db "Hello World!", 0
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
-
-;Ange Albertini, Creative Commons BY, 2009-2010

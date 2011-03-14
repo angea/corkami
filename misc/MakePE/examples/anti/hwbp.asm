@@ -1,3 +1,8 @@
+; trigger an exception, set hardware breakpoint
+; go on execution the 'wrong' way, which triggers an exception, and goes back the right way
+
+
+;Ange Albertini, BSD Licence, 2009-2011
 %include '..\..\standard_hdr.asm'
 
 EntryPoint:
@@ -41,4 +46,4 @@ counter db 0
 
 %include '..\..\standard_ftr.asm'
 
-;Ange Albertini, Creative Commons BY, 2009-2010
+

@@ -52,13 +52,13 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	asm\rel_ip.exe \
 	imports\imports_doublesum.exe \
 	pe\helloworld64.exe pe\max_sec.exe pe\max_secXP.exe \
-	pe\delayimports.exe pe\shelload.exe pe\multisub.exe \
+	pe\delayimports.exe pe\shelload.exe \
 	asm\mmx.exe asm\sse.exe asm\fpu.exe anti\fastpeblock.exe asm\small_sc.bin \
-	asm\memscan.exe asm\trampo1.exe anti\lowlevel.exe
+	asm\memscan.exe anti\lowlevel.exe anti\exception_skip.exe anti\exception_overwrite.exe \
+    anti\hwbp.exe anti\tf_step.exe asm\vmware.exe anti\ollydbg.exe \
+	pe\sect_phys_order.exe pe\imagebase_null.exe anti\dump.exe asm\apiloop.exe 
 
-beta = asm\vmware.exe asm\memcopy.exe waitable.exe test.exe anti\ollydbg.exe asm\apiloop.exe \
-    anti\exception_skip.exe anti\exception_overwrite.exe anti\hwbp.exe anti\tf_step.exe anti\dump.exe \
-    pe\sect_phys_order.exe pe\imagebase_null.exe vms\binary.exe
+notworking = asm\memcopy.exe waitable.exe test.exe vms\binary.exe pe\multisub.exe asm\trampo1.exe 
 
 # packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
@@ -67,7 +67,7 @@ objects = helloworld-masm.obj
 
 all: $(examples)
 
-allp: $(examples) $(beta)
+allp: $(examples) $(notworking)
 
 #This is not a pipe
 eicar.com: ../../eicar.asm
@@ -432,4 +432,4 @@ pe\multisub.exe: pe\multisub.asm
 	$(makepe) pe\multisub.asm
 
 clean:
-	rm $(examples) $(objects) $(beta)
+	rm $(examples) $(objects) $(notworking)

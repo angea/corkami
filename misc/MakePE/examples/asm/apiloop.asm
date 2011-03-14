@@ -1,6 +1,8 @@
 ; some api may return after each call a value that has been incremented
 ; in a predictable way, so it's usable as an anti-emulator
 
+;Ange Albertini, BSD Licence, 2009-2011
+
 %include '..\..\onesec.hdr'
 
 %macro myapi 0
@@ -55,5 +57,3 @@ limit dd 0
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
-
-;Ange Albertini, Creative Commons BY, 2010

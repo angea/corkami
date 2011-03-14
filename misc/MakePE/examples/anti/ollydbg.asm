@@ -1,4 +1,8 @@
-;TODO: nooby imports, numofrva, baseofcode
+; example of various anti-ollydbg (1.1)
+
+; TODO: nooby imports, numofrva, baseofcode
+
+;Ange Albertini, BSD Licence, 2010-2011
 
 %include '..\..\onesec.hdr'
 
@@ -83,5 +87,3 @@ helloworld db "Hello World!", 0
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
-
-;Ange Albertini, Creative Commons BY, 2010
