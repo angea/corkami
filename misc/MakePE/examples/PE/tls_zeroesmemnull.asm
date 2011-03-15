@@ -1,6 +1,8 @@
 ; empty entry point file, looks buggy as much as possible
 ; but TLS is allocating memory at offset 0, so ADD EAX, [AL] will be valid
 
+; on Win7, eax is not null so the TLS adds
+
 %include '../../onesec.hdr'
 
 stub:
@@ -22,7 +24,9 @@ _d
 
 MEM_RESERVE               equ 2000h
 MEM_TOP_DOWN              equ 100000h
+
 TLS:
+    pushad
     push PAGE_READWRITE     ; ULONG Protect
     push MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN     ; ULONG AllocationType
     push zwsize             ; PSIZE_T RegionSize
@@ -35,6 +39,21 @@ _
     mov byte [eax - 6], 068h
     mov dword [eax - 5], stub
     mov byte [eax - 1], 0c3h
+_
+    mov eax, [fs:18h]
+    mov ecx, [eax + 030h]
+    xor eax, eax
+    or eax, [ecx + 0a8h]
+    shl eax,8
+    or eax, [ecx + 0a4h]
+    cmp eax, 0106h               ; Win7 ?
+    jz W7
+_
+    popad
+    retn
+W7:
+    mov word [EntryPoint], 0c033h
+    popad
     retn
 _c
 
@@ -44,9 +63,9 @@ _c
 lpBuffer3 dd 1
 zwsize dd 1000h
 Image_Tls_Directory32:
-    StartAddressOfRawData dd Characteristics ; VA, should point to something null
-    EndAddressOfRawData   dd Characteristics ; VA, should point to something null
-    AddressOfIndex        dd Characteristics ; VA, should point to something null
+    StartAddressOfRawData dd Characteristics
+    EndAddressOfRawData   dd Characteristics
+    AddressOfIndex        dd Characteristics
     AddressOfCallBacks    dd SizeOfZeroFill
     SizeOfZeroFill        dd TLS
     Characteristics       dd 0
