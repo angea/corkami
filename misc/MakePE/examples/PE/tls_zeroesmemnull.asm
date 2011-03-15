@@ -3,7 +3,6 @@
 
 %include '../../onesec.hdr'
 
-
 stub:
     push MB_ICONINFORMATION     ; UINT uType
     push aEntryPoint            ; LPCTSTR lpCaption
@@ -31,6 +30,11 @@ TLS:
     push lpBuffer3          ; PVOID *BaseAddress
     push -1                 ; HANDLE ProcessHandle
     call ZwAllocateVirtualMemory
+_
+    mov eax, [zwsize]
+    mov byte [eax - 6], 068h
+    mov dword [eax - 5], stub
+    mov byte [eax - 1], 0c3h
     retn
 _c
 
@@ -53,8 +57,8 @@ _d
 _d
 
 EntryPoint:
-    times 100h add [eax], al
-    jmp stub
+    times 20h add [eax], al
+    jmp eax
 _c
 
 SECTION0SIZE equ $ - Section0Start
