@@ -31,8 +31,8 @@ class struc():
         for i in l:
             self.handle(i)
 
-    def setoffset(self, v):
-        self.__f.seek(v)
+    def seek(self, v):
+        return self.__f.seek(v)
 
     def levelup(self):
         self.__level += 1
