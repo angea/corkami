@@ -90,7 +90,7 @@ class hexdword(el):
     def __repr__(self):
         return "0x%08x" % self.__value
 
-class datafile():
+class data():
     """a class that make a string being used like a file"""
     def __init__(self, d):
         self.__data = d
@@ -101,9 +101,17 @@ class datafile():
 
     def seek(self, offset):
         # todo: add position parameter
-        self.offset = offset
+        self.__offset = offset
 
-    def read(self, nb):
-        d = self.__data[offset: offset + nb + 1]
-        self.__offset += nb
+    def read(self, nb=None):
+        d = ""
+        if nb is None:
+            d = self.__data[self.__offset:]
+            self.__offset = len(self.__data)
+        else:
+            d = self.__data[self.__offset: self.__offset + nb]
+            self.__offset += nb
         return d
+
+#    def __getitem__(self, args):
+#        return
