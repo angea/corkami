@@ -14,7 +14,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	pe\duplicate_section.exe pe\whole_pe_section.exe \
 	asm\piotr.exe asm\self_generating.exe asm\loops.exe asm\jumps.exe asm\block.exe \
 	asm\opcodes32.bin asm\opcodes32pe.exe asm\undoc.exe \
-	asm\seh_triggers.exe asm\getip.exe \
+	asm\seh_triggers.exe asm\getip.exe asm\nop.exe \
 	asm\inline_strings.exe asm\stack_strings.exe \
 	pe\no_relocs.dll pe\no_relocs_loader.exe \
 	pe\no_relocs_tls_loader.exe \
@@ -432,6 +432,9 @@ asm\trampo1.exe: asm\trampo1.asm
 
 pe\multisub.exe: pe\multisub.asm
 	$(makepe) pe\multisub.asm
+
+asm\nop.exe: asm\nop.asm
+	$(makepe) asm\nop.asm
 
 clean:
 	rm $(examples) $(objects) $(notworking)
