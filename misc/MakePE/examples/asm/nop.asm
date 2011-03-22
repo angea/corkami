@@ -33,9 +33,12 @@ _
     pause
 _
     mov eax, eax
-    and eax, eax                            ; should clear Z
     or eax, eax
     xor eax, 0
+    sub eax, 0
+    cmp eax, 0
+    test eax, 0
+    and eax, eax                            ; should clear Z
 _
     cmc
     stc
