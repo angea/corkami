@@ -1,5 +1,7 @@
 ;header for a one-section PE, with minimal amount of information
 
+;Ange Albertini, BSD Licence, 2009-2011
+
 %include 'consts.asm'
 
 FILEALIGN equ 4h
@@ -66,5 +68,3 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 
 bits 32
 Section0Start:
-
-;Ange Albertini, Creative Commons BY, 2009-2010

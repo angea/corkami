@@ -8,6 +8,8 @@ bad:
     call MessageBoxA
     push 042h
     call ExitProcess    ; UINT uExitCode
+_c
+
 good:
     push MB_ICONINFORMATION ; UINT uType
     push success            ; LPCTSTR lpCaption
@@ -16,12 +18,10 @@ good:
     call MessageBoxA
     push 0
     call ExitProcess        ; UINT uExitCode
-
-align 16, db 0
+_c
 
 error db "Bad", 0
 errormsg db "Something went wrong...", 0
 success db "Good", 0
 successmsg db "Expected behaviour occured...", 0
-
-align 16, db 0
+_d
