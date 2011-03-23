@@ -37,7 +37,7 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\thread_host.exe packer\remote_thread.exe \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe \
-	asm\opcodes_desc.exe \
+	asm\usermode_test.exe \
 	asm\crypted_strings.exe \
 	anti\int2a_loop.exe \
 	pe\hal.dll \
@@ -200,8 +200,8 @@ pe\tinype.exe: pe\tinype.asm
 	yasm -o pe\tinype.exe pe\tinype.asm
 
 #Lutte contre les mots faciles, lutte contre la haine des ...
-asm\opcodes_desc.exe: asm\opcodes_desc.asm
-	$(makepe) asm\opcodes_desc.asm
+asm\usermode_test.exe: asm\usermode_test.asm
+	$(makepe) asm\usermode_test.asm
 
 pe\seh_dll.dll: pe\seh_dll.asm
 	$(makepe) pe\seh_dll.asm
