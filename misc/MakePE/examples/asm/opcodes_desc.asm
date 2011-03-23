@@ -1,14 +1,19 @@
-;a file making use of each user mode opcodes 
+;a file making use of each user mode opcode (at least, one of each family)
 
 ; FPU/SSE+ are not included
 ; Jumps specific opcodes are in Jumps.
 ; opcodes doing 'nothing visible are in Nops.asm
+; opcodes triggering exceptions are in seh_triggers.asm
 
 ; the classic: mov movzx movsx lea xchg inc dec or and xor not rol ror rcl rcr shl shr add adc sub sbb div mul imul
-; the not so classic: aaa daa aas das aad aam xadd sar enter leave bsf btX bswap cbw cwde cwd rdtsc setXX salc cmovXX shld shrd 
+; the not so classic: aaa daa aas das aad aam xadd sar enter leave bsf btX bswap cbw cwde cwd rdtsc setXX salc cmovXX shld shrd
 ; the rares: lds bound xlatb cmpxchg cmpxchg8b cpuid lsl popcnt movbe crc32 arpl lar verr sldt sidt sgdt str
 
-;Ange Albertini, BSD Licence, 2009-2011
+; the OS dependant checks will fail under a VmWare
+
+; removeKiFastSystemCallRet reference under XP SP<3
+
+; Ange Albertini, BSD Licence, 2009-2011
 
 %include '..\..\onesec.hdr'
 
@@ -17,19 +22,6 @@
     jnz bad
 %endmacro
 
-ValueEDI dd 0ED0h
-ValueESI dd 0E01h
-ValueEBP dd 0EEBE3141h     ; E B PI ;)
-ValueESP dd 0              ; unused
-ValueEBX dd 0EB1h
-ValueEDX dd 0ED1h
-ValueECX dd 0EC1h
-ValueEAX dd 0EA1h
-val dd ValueEDI
-ud1
-ud2
-hlt
-db 0f1h
 EntryPoint:
     mov eax, 3
     expect eax, 3
@@ -52,21 +44,21 @@ _
     expect al, 2
     expect bl, 1
 _
-    xchg [val] , esp    ; makes a backup of ESP and temporarily change ESP to the start of the data
-    popad               ; read all the data into registers
-    mov esp, [val]       ; restore ESP and EAX
+    xchg [xchgpopad] , esp                  ; makes a backup of ESP and temporarily change ESP to the start of the data
+    popad                                   ; read all the data into registers
+    mov esp, [xchgpopad]                    ; restore ESP and EAX
 _
-    mov ax, 0304h ; 34
-    mov bx, 0307h ; 37
+    mov ax, 0304h                           ; 34
+    mov bx, 0307h                           ; 37
     add ax, bx
     aaa
-    expect ax, 0701h ;34 + 37 = 71
+    expect ax, 0701h                        ;34 + 37 = 71
 _
-    mov ax, 01234h ; 1234
-    mov bx, 0537h  ; 537
+    mov ax, 01234h                          ; 1234
+    mov bx, 0537h                           ; 537
     add ax, bx
     daa
-    expect ax, 1771h ; 1234 + 537 = 1771
+    expect ax, 1771h                        ; 1234 + 537 = 1771
 _
     mov al, 01h
     mov bl, 04h
@@ -78,7 +70,7 @@ _
     mov ebx, 01234h
     sub eax, ebx
     das
-    expect eax, 537h ; 1771 - 1234 = 537
+    expect eax, 537h                        ; 1771 - 1234 = 537
 _
     mov ax, 305h
     aad
@@ -178,9 +170,9 @@ _
 _
     mov ax, 35
     mov bl, 11
-    div bl          ; 35 = 3 * 11 + 2
-    expect al, 3    ; quo
-    expect ah, 2    ; rem
+    div bl                                  ; 35 = 3 * 11 + 2
+    expect al, 3                            ; quo
+    expect ah, 2                            ; rem
 _
     mov al, 11
     mov bl, 3
@@ -306,9 +298,9 @@ _
     mov edx, 0d0d0d0d0h
     mov ecx, 99aabbcch
     mov ebx, 0ddeeff00h
-    cmpxchg8b [cmpxchg8bme]                 ; [cmpxchg8bme] = 0d0d0d0d0:00a0a0a0a
-    expect [cmpxchg8bme], ebx
-    expect [cmpxchg8bme + 4], ecx
+    cmpxchg8b [_cmpxchg8b]                 ; [_cmpxchg8b] = 0d0d0d0d0:00a0a0a0a
+    expect [_cmpxchg8b], ebx
+    expect [_cmpxchg8b + 4], ecx
 _
     rdtsc
     mov ebx, eax
@@ -332,14 +324,17 @@ _
     jnz bad
     expect eax, -1
 _
+    mov eax, 1
     cpuid
     and ecx, 1 << 23
     jz no_popcnt
+
     mov ebx, 0100101010010b
     popcnt eax, ebx
     expect eax, 5
 no_popcnt:
 _
+    mov eax, 1
     cpuid
     and ecx, 1 << 22
     jz no_movbe
@@ -349,13 +344,15 @@ _
     expect eax, 44332211h
 no_movbe:
 _
+    mov eax, 1
     cpuid
     and ecx, 1 << 20
     jz no_crc32
+
     mov eax, 0
     mov ebx, crc32_
     crc32 eax, [ebx]
-    ; expect eax, 5
+    expect eax, 0fa745634h
 no_crc32:
 _
     jmp [os]
@@ -377,6 +374,8 @@ _
     push _return
     mov edx, esp
     sysenter
+_c
+
 _return:
     expect eax, ACCESS_VIOLATION            ; depends on initial EAX
     lea eax, [esp - 4]
@@ -386,8 +385,10 @@ _return:
     expect edx, [__imp__KiFastSystemCallRet]; -1 if stepping
     jmp good
 _c
+
 ;%IMPORT ntdll.dll!KiFastSystemCallRet
 _c
+
 W7_tests:
     mov eax, dummy
     sidt [eax]
@@ -413,7 +414,7 @@ _d
 crc32_:
     dd 12345678h
 _d
-cmpxchg8bme:
+_cmpxchg8b:
     dd 00a0a0a0ah
     dd 0d0d0d0d0h
 _d
@@ -456,12 +457,19 @@ Image_Tls_Directory32:
     Characteristics       dd 0
 _d
 
-dummy dd 0,0
-os dd XP_tests
+ValueEDI dd 0ED0h
+ValueESI dd 0E01h
+ValueEBP dd 0EEBE3141h                      ; E B PI ;)
+ValueESP dd 0                               ; unused
+ValueEBX dd 0EB1h
+ValueEDX dd 0ED1h
+ValueECX dd 0EC1h
+ValueEAX dd 0EA1h
+xchgpopad dd ValueEDI
 _d
 
-tada db "Tada!", 0
-helloworld db "Hello World!", 0
+dummy dd 0,0
+os dd XP_tests
 _d
 
 ;%IMPORTS
