@@ -1,17 +1,17 @@
-;a file making use of each user mode opcode (at least, one of each family)
+; this a file making use of each usermode opcode (at least, one of each family)
 
 ; FPU/SSE+ are not included
-; Jumps specific opcodes are in Jumps.
-; opcodes doing 'nothing visible are in Nops.asm
-; opcodes triggering exceptions are in seh_triggers.asm
+; Jumps specific opcodes are in Jumps.asm
+; opcodes doing nothing visible are in Nops.asm
+; opcodes triggering exceptions are in Seh_triggers.asm
 
-; the classic: mov movzx movsx lea xchg inc dec or and xor not rol ror rcl rcr shl shr add adc sub sbb div mul imul
-; the not so classic: aaa daa aas das aad aam xadd sar enter leave bsf btX bswap cbw cwde cwd rdtsc setXX salc cmovXX shld shrd
-; the rares: lds bound xlatb cmpxchg cmpxchg8b cpuid lsl popcnt movbe crc32 arpl lar verr sldt sidt sgdt str
+; the classic ones: mov movzx movsx lea xchg inc dec or and xor not rol ror rcl rcr shl shr add adc sub sbb div mul imul
+; the not so classic ones: aaa daa aas das aad aam xadd sar enter leave bsf btX bswap cpuid cbw cwde cwd rdtsc setXX salc cmovXX shld shrd
+; the rare ones: lds bound xlatb cmpxchg cmpxchg8b lsl popcnt movbe crc32 arpl lar verr sldt sidt sgdt str
 
-; the OS dependant checks will fail under a VmWare
+; the OS dependent checks will fail under a VmWare
 
-; removeKiFastSystemCallRet reference under XP SP<3
+; remove KiFastSystemCallRet references to run under XP SP<3
 
 ; Ange Albertini, BSD Licence, 2009-2011
 
