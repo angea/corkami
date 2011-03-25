@@ -311,7 +311,7 @@ _
     expect edx, ecx
 _
     sldt eax
-    expect eax, 0
+    expect eax, 0                           ; 4060 under VmWare
 _
     mov eax, 0
     cpuid
@@ -322,7 +322,7 @@ _
     pop ecx
     lsl eax, ecx
     jnz bad
-    expect eax, -1
+    expect eax, -1                          ; 0ffbfffffh under vmware
 _
     mov eax, 1
     cpuid
@@ -349,10 +349,10 @@ _
     and ecx, 1 << 20
     jz no_crc32
 
-    mov eax, 0
-    mov ebx, crc32_
-    crc32 eax, [ebx]
-    expect eax, 0fa745634h
+    mov eax, 0abcdef9h
+    mov ebx, 12345678h
+    crc32 eax, ebx
+    expect eax, 0c0c38ce0h
 no_crc32:
 _
     jmp [os]
@@ -365,10 +365,10 @@ XP_tests:
 _
     mov eax, dummy
     sgdt [eax]
-    expect word [eax], 003ffh
+    expect word [eax], 003ffh               ; 0412fh under vmware
 _
     str ax
-    expect ax, 28h
+    expect ax, 28h                          ; 4000h under vmware
 _
     mov eax, 0
     push _return
@@ -411,9 +411,6 @@ boundslimit:
     dd 143
 _d
 
-crc32_:
-    dd 12345678h
-_d
 _cmpxchg8b:
     dd 00a0a0a0ah
     dd 0d0d0d0d0h
@@ -433,6 +430,7 @@ _c
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 _c
+
 TLS:
     mov eax, [fs:18h]
     mov ecx, [eax + 030h]
@@ -443,6 +441,8 @@ TLS:
     cmp eax, 0106h
     jz W7
     retn
+_c
+
 W7:
     mov dword [os], W7_tests
     retn
