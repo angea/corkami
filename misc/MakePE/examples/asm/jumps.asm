@@ -4,7 +4,7 @@
 
 %include '..\..\onesec.hdr'
 
-%macro _ 0  ; remove them to make the file shorter
+%macro __ 0  ; remove them to make the file shorter
     nop
     jmp bad
     nop
@@ -13,135 +13,83 @@
 _CS equ 01bh ; cs is 01bh on Windows XP usermode, will fail if different
 
 EntryPoint:
-    jmp short _jmp1     ; short jump, relative, EB
-_
-
-_jmp1:
-    jmp near _jmp2      ; jump, relative, E9
-_
-
-_jmp2:                  ; jump via register
-    mov edi, _jmp3
-    jmp edi
-_
-
-_jmp3:
-    jmp dword [buffer1]
-    buffer1 dd _jmp4
-_
-
-    ; far jump, absolute
-_jmp4:
-                        ; jmp far is encoded as EA <ddOffset> <dwSegment>
-;    mov [_patchCS + 5], cs
-_patchCS:
-    jmp _CS:_jmp5
-_
-
-_jmp5:
-    ; mov [buffer3 + 4], cs
-    jmp far [buffer3]
-buffer3:
-    dd _startflag
-    dw _CS
-_
-
                 ; flags have the same starting values
 _startflag:
                 ; so this jump will always be taken
     je _startvals
-_
+__
 
 _startvals:             ; conditional jump, assuming start values
     cmp eax, 0          ; eax is 0 on start of execution
     jz _jmpmid
-_
+__
 
 _jmpmid:
     jmp $ + 3           ; jump in the middle of next instruction
     db 09ah
     jmp _jmpmidself
-_
+__
 
 _jmpmidself:            ; jump in the middle of current instruction
     jmp $ + 1           ; jmp $+1 encodes as EB FF
     db 0c0h             ; FF C0 is decoded as inc eax
     dec eax             ; revert the changes of the inc eax
     jmp _setflag
-_
+__
                 ; set a flag via an opcode, then take inconditionally a conditional jump
 _setflag:
     stc         ; set carry flag
                 ; jump if below is synonym of jump if carry is set (jb = jc)
     jb _setflag2
-_
+__
                 ; set a flag manually, then take inconditionally a conditional jump
 _setflag2:
     pushfd
     or dword [esp], 0800h   ; set Overflow flag
     popfd
     jo _oppjxx
-_
+__
 
 _oppjxx:
     jz _opploop         ; two opposite conditional jumps after each other
     jnz _opploop
-_
+__
 
 _opploop:               ; two opposite loop instructions after each other
     loope _jecx
     loopne _jecx
-_
+__
 
 _jecx:                  ; the only conditional jxx on register content
     db 66h              ; YASM doesn't recognize bswap cx
     bswap ecx
                         ;    xor ecx, ecx
     jcxz _loop
-_
+__
 
 _loop:
     bswap ecx
     db 66h              ; YASM doesn't recognize bswap cx
     bswap ecx
     loop _loopword
-_
+__
 
 _loopword:
     mov ecx, 0ffff0001h
     db 67h
     loop badloop        ; if your emulator actually checks ecx, it will be wrong
-    loop _pushret
+    loop _callstack
 badloop:
-_
-
-_pushret:               ; push an address then return to it
-    push _pushretf
-    ret                 ; it's also a way to make an absolute jump without changing a register or flag.
-_
-
-_pushretf:
-    push cs
-    push _pushiret
-    retf
-_
-
-_pushiret:
-    pushfd
-    push cs
-    push _callstack
-    iretd
-_
-
+__
 _callstack:
     push _noreturn
     push 0c308c483h     ; decodes as add esp,8 / retn
     call esp            ; won't work with DEP enabled
-_
+__
     ; call an address but never return
 _noreturn:
     call _noreturn2
-_
+__
 
 _noreturn2:
     add esp, 4
@@ -149,18 +97,18 @@ _noreturn2:
     ; call but return address is changed
 _callchange:
     call _callchange2
-_
+__
 
 _callchange2:
     mov dword [esp], _pushcallret
     ret
-_
+__
 
 _pushcallret:           ; combination of push, ret and call
     push _callback
     call $ + 5
     ret
-_
+__
 
     ; using a CALLBACK based API
 _callback:
@@ -169,7 +117,7 @@ _callback:
                         ;                       (can trigger 0x3ec ERROR_INVALID_FLAGS if wrong)
     push _scanandjump   ; UILanguageEnumProc    our callback function
     call EnumUILanguagesA
-_
+__
 ;%IMPORT kernel32.dll!EnumUILanguagesA
 
     ; look for some specific hex sequence in a loaded code range, and jump to it
@@ -183,7 +131,7 @@ _scanloop:
 
     push _spawnthread   ; and use it ourselves
     jmp esi
-_
+__
     ; create another thread in current process
 _spawnthread:
     push 0              ; LPDWORD lpThreadId
@@ -194,7 +142,7 @@ _spawnthread:
     push 0              ; LPSECURITY_ATTRIBUTES lpThreadAttributes
     call CreateThread
     call ExitThread     ; other options: Sleep(dwMilliseconds), WaitForSingleObject, infinite loop (jmp $), or actually doing something meaningful
-_
+__
 
 ;%IMPORT kernel32.dll!CreateThread
 ;%IMPORT kernel32.dll!ExitThread
@@ -206,7 +154,7 @@ _sehjump:
     mov [fs:0], esp                 ; no cleaning here, but it's quite common in packers
     db 66h
     jmp $ + 2
-_
+__
 
 _sehcontextchange_handler:
     mov eax, [esp + exceptionHandler.pContext + 4]
@@ -214,13 +162,13 @@ _sehcontextchange_handler:
 
     mov eax, ExceptionContinueExecution
     retn
-_
+__
 
 _sehcontextchange_end:          ; cleaning - not strictly required :p
     pop dword [fs:0]
     add esp, 4                  ; + 2 because call word pushed a word
     jmp _setldt
-_
+__
 
     ;set a new local descriptor, and jump to it
 _setldt:
@@ -236,14 +184,14 @@ _setldt:
     push selector
     call NtSetLdtEntries
     jmp selector:(_newsegment - base)
-_
+__
 ;%IMPORT ntdll.dll!NtSetLdtEntries
 
 ;   db 69h ; just for obfuscation
 _newsegment:
     nop
     jmp _CS:_oldsegment
-_
+__
 ;   db 69h ; just for obfuscation
 _oldsegment:
 

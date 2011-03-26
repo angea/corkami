@@ -1,6 +1,6 @@
 ; this a file making use of each usermode opcode (at least, one of each family)
 
-; FPU/SSE+ are not included
+; FPU/SSE+ are not included, unless special cases like fstenv
 ; Jumps specific opcodes are in Jumps.asm
 ; opcodes doing nothing visible are in Nops.asm
 ; opcodes triggering exceptions are in Seh_triggers.asm
@@ -17,12 +17,66 @@
 
 %include '..\..\onesec.hdr'
 
+_CS equ 01bh ; cs is 01bh on Windows XP usermode, will fail if different
+
 %macro expect 2
     cmp %1, %2
     jnz bad
 %endmacro
 
 EntryPoint:
+    jmp short _jmp1     ; short jump, relative, EB
+_c
+
+_jmp1:
+    jmp near _jmp2      ; jump, relative, E9
+_c
+
+_jmp2:                  ; jump via register
+    mov edi, _jmp3
+    jmp edi
+_c
+
+_jmp3:
+    jmp dword [buffer1]
+    buffer1 dd _jmp4
+_c
+
+    ; far jump, absolute
+_jmp4:
+                        ; jmp far is encoded as EA <ddOffset> <dwSegment>
+;    mov [_patchCS + 5], cs
+_patchCS:
+    jmp _CS:_jmp5
+_c
+
+_jmp5:
+    ; mov [buffer3 + 4], cs
+    jmp far [buffer3]
+buffer3:
+    dd _pushret
+    dw _CS
+_c
+
+_pushret:               ; push an address then return to it
+    push _pushretf
+    ret                 ; it's also a way to make an absolute jump without changing a register or flag.
+_c
+
+_pushretf:
+    push cs
+    push _pushiret
+    retf
+_c
+
+_pushiret:
+    pushfd
+    push cs
+    push _mov
+    iretd
+_c
+
+_mov:
     mov eax, 3
     expect eax, 3
 _
@@ -343,6 +397,18 @@ _
     jle bad
     expect edx, ecx
 _
+    call $ + 5
+after_call:
+    pop eax
+    expect eax, after_call
+_
+    call far 01bh: $ + 7
+after_far:
+    pop eax
+    expect eax, after_far
+    pop eax
+    expect eax, _CS
+_
     sldt eax
     expect eax, 0                           ; 4060 under VmWare
 _
@@ -388,6 +454,115 @@ _
     expect eax, 0c0c38ce0h
 no_crc32:
 _
+%macro rand 1
+    rdtsc
+    lea %1, [eax + edx * 8]
+%endmacro
+
+    rand ebx
+    rand ecx
+    rand esi
+    rand edi
+    rand ebp
+
+    pushad
+_
+    nop
+    xchg eax, eax
+    xchg al, al
+    pause
+_
+    mov eax, eax
+    or eax, eax
+    xor eax, 0
+    sub eax, 0
+    cmp eax, 0
+    test eax, 0
+    ; alternate encodings
+    db 0f7h, 0c8h                           ; test eax, 0
+        dd 0
+    db 0f7h, 0c0h                           ; test eax, 0
+        dd 0
+    and eax, eax                            ; should clear Z
+_
+    cmc
+    stc
+    clc
+    std
+    cld
+;loopz _afterloop
+;_afterloop:
+jnz _afterjnz
+_afterjnz:
+cmovz eax, ebx
+_
+    sfence
+    mfence
+    lfence
+    prefetchnta [eax]   ; no matter the eax value
+_
+    ; if OF is not set, this just does a nop - a risky nop then
+    into
+_
+    db 0fh, 1ch, 00                         ; nop [eax] ; doesn't trigger an exception
+    db 0fh, 019h, 084h, 0c0h
+        dd 080000000h                       ; hint_nop [eax + eax * 8 - 080000000h]
+_
+    push eax
+    pop eax
+_
+    call $ + 5
+    add esp, 4                              ; changes flags ! bad :p
+_
+    enter 0,0
+    leave
+_
+    pushad
+    popad
+    pushaw
+    popaw
+_
+    pushf
+    popf
+    pushfw
+    popfw
+_
+    push ds
+    pop ds
+_
+    inc eax
+    dec eax
+
+    add eax, 31415926h
+    sub eax, 31415926h
+
+    lea eax, [eax + 31415926h]
+    sub eax, 31415926h
+
+    rol eax, 35
+    ror eax, 35
+_
+;    fnop
+;    emms
+_
+    ;int 2dh
+_
+    cmp eax, [esp + 1ch]
+    jnz bad
+    cmp ecx, [esp + 18h]
+    jnz bad
+    cmp edx, [esp + 14h]
+    jnz bad
+    cmp ebx, [esp + 10h]
+    jnz bad
+    cmp ebp, [esp + 8]
+    jnz bad
+    cmp esi, [esp + 4]
+    jnz bad
+    cmp edi, [esp + 0]
+    jnz bad
+    popad
+
     jmp [os]
 _c
 
@@ -395,11 +570,11 @@ XP_tests:
     smsw eax
     expect eax, 08001003bh  ; XP
 _
-    mov eax, dummy
+    mov eax, sidt_
     sidt [eax]
     expect word [eax], 007ffh
 _
-    mov eax, dummy
+    mov eax, sgdt_
     sgdt [eax]
     expect word [eax], 003ffh               ; 0412fh under vmware
 _
@@ -419,6 +594,13 @@ _return:
     mov al, [edx]
     expect al, 0c3h
     expect edx, [__imp__KiFastSystemCallRet]; -1 if stepping
+_fpu:
+    fnop
+    fnstenv [fpuenv]              ; storing fpu environment
+    mov eax,[fpuenv.DataPointer]  ; getting the EIP of last fpu operation
+    expect eax, _fpu
+
+
     jmp good
 _c
 
@@ -429,11 +611,11 @@ W7_tests:
     smsw eax
     cmp eax, 080050031h  ; Win7 x64
 _
-    mov eax, dummy
+    mov eax, sidt_
     sidt [eax]
     expect word [eax], 0fffh
 _
-    mov eax, dummy
+    mov eax, sgdt_
     sgdt [eax]
     expect word [eax], 07fh
 _
@@ -508,7 +690,18 @@ ValueEAX dd 0EA1h
 xchgpopad dd ValueEDI
 _d
 
-dummy dd 0,0
+fpuenv:
+    .ControlWord           dd 0
+    .StatusWord            dd 0
+    .TagWord               dd 0
+    .DataPointer           dd 0
+    .InstructionPointer    dd 0
+    .LastInstructionOpcode dd 0
+    dd 0
+_d
+
+sgdt_ dd 0,0
+sidt_ dd 0,0
 os dd 0
 _d
 
