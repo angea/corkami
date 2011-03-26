@@ -34,40 +34,6 @@ EntryPoint:
 
     mov eax, 0ffffffffh
 
-;   clc                                     ; carry flag is cleared on startup
-    salc                                    ; setalc => will clear AL
-    cmp al, 0
-    jnz bad
-
-;   stc
-;   salc
-;   cmp al, 0ffh
-;   jnz bad
-_
-;    mov eax, 12345678h
-;    bswap eax
-;    cmp eax, 78563412h
-;    jnz bad
-
-    mov eax, 12345678h
-    PREFIX_OPERANDSIZE
-    bswap eax                               ; bswap ax = xor ax, ax
-    cmp eax, 12340000h
-    jnz bad
-_
-    mov ax, 0325h
-    aad 7                                   ; ah = 0, al = ah * 7 + al => al = 3Ah
-    cmp ax, 003Ah
-    jnz bad
-
-    aam 3                                   ; ah = al / 3, al = al % 3 => ah = 13h, al = 1
-    cmp ax, 1301h
-    jnz bad
-
-    smsw eax
-;    cmp eax, 080050031h  ; Win7 x64
-    cmp eax, 08001003bh  ; XP
-    jnz bad
 
     ; FPU JUNK - just ignored here
     ffreep st0
@@ -89,10 +55,6 @@ _
 _
     jnp bad
 
-    db 0c1h, 30h, 8                         ; sal [ebx], 8
-_
-    cmp dword [eax], 34567800h
-    jnz bad
 
     mov eax, 0
     db 0fh, 1fh, 00                         ; nop [eax] ; doesn't trigger an exception

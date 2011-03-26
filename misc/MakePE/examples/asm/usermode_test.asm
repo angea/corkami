@@ -72,13 +72,26 @@ _
     das
     expect eax, 537h                        ; 1771 - 1234 = 537
 _
-    mov ax, 305h
+    mov ax, 0305h
     aad
-    expect ax, 35
+    expect ax, 35                           ; 03 05 becomes 35
 _
+    ; undocumented: aad with an immediate operand that is not 10
+    rdtsc
+    mov ax, 0325h
+    aad 7                                   ; ah = 0, al = ah * 7 + al => al = 3Ah
+    expect ax, 003Ah
+_
+    rdtsc
     mov ax, 35
     aam
     expect ax, 305h
+_
+    ; undocumented behavior with an immediate operand different from 10
+    rdtsc
+    mov al, 3ah
+    aam 3                                   ; ah = al / 3, al = al % 3 => ah = 13h, al = 1
+    expect ax, 1301h
 _
     mov eax, 3
     add eax, 3
@@ -150,6 +163,16 @@ _
     shl al, 2
     expect al, 101000b
 _
+    ; undocumented. SAL is the same as SHL, but different encoding
+    mov al, 1010b
+    db 0c0h, 0f0h, 2                        ; sal al, 2
+    expect al, 101000b
+_
+    ; now on eax
+    mov al, 1010b
+    db 0c1h, 0f0h, 3                        ; sal eax, 2
+    expect al, 1010000b
+_
     mov al, 1010b
     shr al, 2
     expect al, 10b
@@ -189,7 +212,7 @@ _
     expect eax , 12345678h
     push ds
     pop eax
-    expect eax, 0
+    expect ax, 0
     pop ds
 _
     push 3
@@ -207,9 +230,11 @@ _
     setc al
     expect al, 0
 _
+    ; 'undocumented' opcode
     stc
     salc
     expect al, -1
+_
     clc
     salc
     expect al, 0
@@ -236,6 +261,13 @@ _
     mov eax, 12345678h
     bswap eax
     expect eax, 78563412h
+_
+    ; undocumented bswap behavior on 16bit
+    mov eax, 12345678h
+    PREFIX_OPERANDSIZE
+    bswap eax                               ; bswap ax = xor ax, ax
+    cmp eax, 12340000h
+    jnz bad
 _
     mov eax, -1
     mov al, 3
@@ -298,7 +330,8 @@ _
     mov edx, 0d0d0d0d0h
     mov ecx, 99aabbcch
     mov ebx, 0ddeeff00h
-    cmpxchg8b [_cmpxchg8b]                 ; [_cmpxchg8b] = 0d0d0d0d0:00a0a0a0a
+    mov esi, _cmpxchg8b                     ; [_cmpxchg8b] = 0d0d0d0d0:00a0a0a0a
+    lock cmpxchg8b [esi]                    ; lock, for the pentium bug fun :)
     expect [_cmpxchg8b], ebx
     expect [_cmpxchg8b + 4], ecx
 _
@@ -359,6 +392,9 @@ _
 _c
 
 XP_tests:
+    smsw eax
+    expect eax, 08001003bh  ; XP
+_
     mov eax, dummy
     sidt [eax]
     expect word [eax], 007ffh
@@ -390,6 +426,9 @@ _c
 _c
 
 W7_tests:
+    smsw eax
+    cmp eax, 080050031h  ; Win7 x64
+_
     mov eax, dummy
     sidt [eax]
     expect word [eax], 0fffh
@@ -440,6 +479,7 @@ TLS:
     or eax, [ecx + 0a4h]
     cmp eax, 0106h
     jz W7
+    mov dword [os], XP_tests
     retn
 _c
 
@@ -469,7 +509,7 @@ xchgpopad dd ValueEDI
 _d
 
 dummy dd 0,0
-os dd XP_tests
+os dd 0
 _d
 
 ;%IMPORTS
