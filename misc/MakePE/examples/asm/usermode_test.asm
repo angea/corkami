@@ -1,16 +1,13 @@
-;TODO: gather code and data together, FS: MOVS, LOCKS, ud1, ud2, BTxx
 
 ; this a file making use of each usermode opcode (at least, one of each family)
 
 ; general FPU/SSE+ opcodes are not included
 
-
-; anti-debug: rdtsc,
-; get ip:
-
 ; the OS dependent checks will fail under a VmWare
 
 ; remove KiFastSystemCallRet references to run under XP SP<3
+
+;TODO: gather code and data together, console and better output
 
 ; Ange Albertini, BSD Licence, 2009-2011
 
@@ -23,6 +20,35 @@ _CS equ 01bh ; cs is 01bh on Windows XP usermode, will fail if different
     jnz bad
 %endmacro
 
+rand:
+    push edx
+    rdtsc
+    push eax
+    rdtsc
+    bswap eax
+    pop edx
+    xor eax, edx
+    pop edx
+    retn
+
+randreg:
+    call rand
+        mov ebx, eax
+    call rand
+        mov ecx, eax
+    call rand
+        mov esi, eax
+    call rand
+        mov edi, eax
+    call rand
+        mov ebp, eax
+    call rand
+        mov esi, eax
+    call rand
+        mov edx, eax
+    call rand
+    retn
+
 EntryPoint:
     ; jump short, near, far, ret near, ret far, interrupt ret
     call jumps
@@ -33,9 +59,8 @@ EntryPoint:
     call classics
 
     ; xadd aaa daa aas das aad aam lds bound arpl jcxz xlatb lar
-    ; verr cmpxchg cmpxchg8b sldt lsl                           
-    call rares    
-                  
+    ; verr cmpxchg cmpxchg8b sldt lsl
+    call rares
 
     call undocumented ; aam xx, salc, aad xx, bswap reg16, smsw reg32
 
@@ -61,16 +86,48 @@ EntryPoint:
 _c
 
 jumps:
+_retword:
+    mov ecx, bad
+    and ecx, 0ffffh
+    ; mov word [ecx - 2], 9090h          ; a little pre-padding for the call word trick ; not needed as 0000 is a nop here...
+    mov byte [ecx], 68h
+    mov dword [ecx + 1], _callword
+    mov byte [ecx + 5], 0c3h
+    push bad
+    db 66h
+        retn
+_c
+
+_callword:
+    sub esp, 2
+    mov dword [ecx + 1], _jumpword
+    db 66h
+    call bad
+_c
+
+_jumpword:
+    add esp, 2 + 4
+    mov dword [ecx + 1], _jumps
+    db 66h
+    jmp bad
+_c
+
+_jumps:
     jmp short _jmp1     ; short jump, relative, EB
 _c
 
 _jmp1:
-    jmp near _jmp2      ; jump, relative, E9
+    jmp near _jmpreg32  ; jump, relative, E9
 _c
 
-_jmp2:                  ; jump via register
-    mov eax, _jmp3
+_jmpreg32:                ; jump via register
+    mov eax, _jmpreg16
     jmp eax
+
+_jmpreg16:
+    mov dword [ecx + 1], _jmp3
+    db 67h
+        jmp ecx
 _c
 
 _jmp3:
@@ -217,7 +274,7 @@ _
     shr al, 2
     expect al, 10b
 _
-    mov al, -8
+    mov al, -8                              ; shift arithmetic right (shift and propagates the sign)
     sar al, 2
     expect al, -2
 _
@@ -279,10 +336,23 @@ _
     bsr ebx, eax                            ; bit scan reverse
     expect ebx, 4
 _
-    mov ax, 00100b
+    mov ax, 01100b
     mov bx, 2
-    bt ax,bx                                ; bit test
+    bt ax, bx                               ; bit test
     jnc bad
+    expect ax, 01100b                       ; unchanged
+_
+    mov ax, 01101b
+    mov bx, 2
+    btr ax, bx                              ; bit test and reset
+    jnc bad
+    expect ax, 1001b
+_
+    mov ax, 01101b
+    mov bx, 2
+    btc ax, bx                              ; bit test and complement
+    jnc bad
+    expect ax, 1001b
 _
     mov eax, 12345678h
     bswap eax
@@ -371,11 +441,21 @@ _
     jecxz _cx0
     jmp bad
 _cx0:
-
+_
     mov al, 35
     mov ebx, xlattable                      ; xlattable[35] = 75
     xlatb
     expect al, 75
+_
+delta8 equ 20
+xlat8b equ 68
+xlatval equ 78
+    mov byte [xlat8b], xlatval
+    mov al, xlat8b - delta8
+    mov bx, delta8                              ; xlattable[] = 75
+    db 67h     ; reads from [BX + AL]
+        xlatb
+    expect al, xlatval
 _
     push cs
     pop ecx
@@ -499,18 +579,41 @@ _c
 
 
 nops:
-%macro rand 1
-    rdtsc
-    lea %1, [eax + edx * 8]
-%endmacro
-
-    rand ebx
-    rand ecx
-    rand esi
-    rand edi
-    rand ebp
-
+    call randreg
     pushad
+
+    ; these ones should do nothing (and not trigger any LOCK exception)
+    push eax
+    xor eax, eax
+    add [eax], al
+
+    lock adc [eax], eax
+    lock add [eax], eax
+    lock and [eax], eax
+    lock or [eax], eax
+    lock sbb [eax], eax
+    lock sub [eax], eax
+    lock xor [eax], eax
+    lock cmpxchg [eax], eax
+    push edx
+    lock cmpxchg8b [eax]
+    pop edx
+_
+    ; lock bt [eax], eax                    ; this one is not valid, and will trigger an exception
+    lock btc [eax], eax
+    lock btr [eax], eax
+    lock bts [eax], eax
+
+    lock dec dword [eax]
+    lock inc dword [eax]
+    lock neg dword [eax]
+    lock not dword [eax]
+
+    lock xadd [eax], eax                    ; atomic, superfluous prefix, but no exception
+    lock xchg [eax], eax                    ; atomic, superfluous prefix, but no exception
+
+    mov dword [0], 0
+    pop eax
 _
     nop
     xchg eax, eax
@@ -539,7 +642,11 @@ _
     sfence
     mfence
     lfence
-    prefetchnta [eax]   ; no matter the eax value
+    prefetch [eax]                          ;0f0d00
+    prefetchnta [eax]                       ;0f1800
+    prefetcht0 [eax]                        ;0f18 08
+    prefetcht1 [eax]                        ;0f18 10
+    prefetcht2 [eax]                        ;0f18 18
 _
     ; if OF is not set, this just does a nop - a tricky nop then
     into
@@ -556,6 +663,11 @@ _
 _
     enter 0,0
     leave
+_
+    push eax
+    push eax
+    call _retn4
+    pop eax
 _
     pushad
     popad
@@ -618,6 +730,9 @@ _
 _
     retn
 _c
+_retn4:
+    retn 4
+
 
 XP_tests:
     smsw ax
@@ -639,14 +754,14 @@ _
     str eax
     expect eax, 28h                          ; 4000h under vmware
 _
-    mov eax, 0
+    mov eax, 10001h
     push _return
     mov edx, esp
     sysenter
 _c
 
 _return:
-    expect eax, ACCESS_VIOLATION            ; depends on initial EAX
+    expect eax, ACCESS_VIOLATION            ; depends if [EAX] was a valid address or not
     lea eax, [esp - 4]
     expect ecx, eax                         ; 1 if stepping
     mov al, [edx]
@@ -678,9 +793,10 @@ _
 _c
 
 smswtrick:
+waitfor3b:
     smsw ax
     cmp ax, 03bh
-    jnz bad
+    jnz waitfor3b
 
     fnop
     smsw ax
@@ -726,7 +842,7 @@ gstrick:
 gsloop
     rdtsc
     sub eax, ebx
-    cmp eax, 1000h     ; 2 consecutives rdtsc take less than 70 ticks, we expect a much bigger value here.
+    cmp eax, 3000h     ; 2 consecutives rdtsc take less than 70 ticks, we expect a much bigger value here.
     jae GSgood
     jmp bad
 _c
@@ -831,6 +947,14 @@ PREFIX_BRANCH_NOT_TAKEN
         bswap eax
     bswap eax
     db 0f1h
+    db 64h
+    movsd
+    xlatb      ; reads from [EBX + AL]
+    db 67h     ; reads from [BX + AL]
+        xlatb
+    db 0fh, 0ffh    ; ud0                   ;0fff
+    ud1                                     ;0fb9
+    ud2                                     ;0f0b
 _c
 
 xlattable:
@@ -861,8 +985,18 @@ _c
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 _c
+MEM_RESERVE               equ 2000h
+MEM_TOP_DOWN              equ 100000h
 
 TLS:
+    push PAGE_READWRITE     ; ULONG Protect
+    push MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN     ; ULONG AllocationType
+    push zwsize             ; PSIZE_T RegionSize
+    push 0                  ; ULONG_PTR ZeroBits
+    push lpBuffer3          ; PVOID *BaseAddress
+    push -1                 ; HANDLE ProcessHandle
+    call ZwAllocateVirtualMemory
+_
     mov eax, [fs:18h]
     mov ecx, [eax + 030h]
     xor eax, eax
@@ -874,6 +1008,13 @@ TLS:
     mov dword [os], XP_tests
     retn
 _c
+
+;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
+_c
+
+zwsize dd 0ffffh
+lpBuffer3 dd 1
+_d
 
 W7:
     mov dword [os], W7_tests
