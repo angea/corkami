@@ -54,17 +54,33 @@ _c
 lpNumbersOfCharsWritten dd 0
 _d
 
+LINELEN equ 78
+
 %macro print_ 1+
     call %%next
+%%start:
     db %1
+    times LINELEN - ($ - %%start) db 20h
     db 0dh, 0ah, 0
+%%next:
+    call print
+%endmacro
+
+%macro status_ 1+
+    call %%next
+%%start:
+    db %1
+    times LINELEN - ($ - %%start) db 20h
+    db 0dh, 0
 %%next:
     call print
 %endmacro
 
 %macro setmsg_ 1+
     call %%next
+%%start:
     db %1
+    times LINELEN - ($ - %%start) db 20h
     db 0dh, 0ah, 0
 %%next:
     pop dword [ErrorMsg]
@@ -97,34 +113,44 @@ _d
 EntryPoint:
     call start
     call TLS    ; only Kernel32 is imported, so we have to call our TLS manually
-
+    print_ ""
     ; jump short, near, far, ret near, ret far, interrupt ret
+    status_ "testing jumps opcodes...", 0dh, 0ah
     call jumps
 
     ; mov movzx movsx lea xchg add sub sbb adc inc dec or and xor
     ; not neg rol ror rcl rcr shl shr sal shld shrd div mul imul enter leave
     ; setXX cmovXX bsf bsr bt bswap cbw cwde cwd
+    status_ "testing classic opcodes...", 0dh, 0ah
     call classics
 
+    status_ "testing rare opcodes...", 0dh, 0ah
     ; xadd aaa daa aas das aad aam lds bound arpl jcxz xlatb lar
     ; verr cmpxchg cmpxchg8b sldt lsl
     call rares
 
+    status_ "testing undocumented opcodes...", 0dh, 0ah
     call undocumented ; aam xx, salc, aad xx, bswap reg16, smsw reg32
 
+    status_ "testing cpu-specific opcodes...", 0dh, 0ah
     call cpu_specifics  ; popcnt movbe crc32
 
+    status_ "testing undocumented encodings...", 0dh, 0ah
     call encodings      ; test, 'sal'
 
     ; os should be before any fpu use
+    status_ "testing os-dependant opcodes...", 0dh, 0ah
     call [os]
 
     ; nop pause sfence mfence lfence prefetchnta 'hint nop', into
+    status_ "testing 'nop' opcodes...", 0dh, 0ah
     call nops
 
     ; gs, smsw, rdtsc, pushf, pop ss
+    status_ "testing opcode-based anti-debuggers...", 0dh, 0ah
     call antis
 
+    status_ "testing opcode-based GetIPs...", 0dh, 0ah
     call get_ips ; call, call far, fstenv
 
     ; documented but frequent disassembly mistakes
@@ -141,6 +167,7 @@ _retword:
     mov byte [ecx], 68h
     mov dword [ecx + 1], _callword
     mov byte [ecx + 5], 0c3h
+    status_ "Testing now: RETN WORD"
     push bad
     db 66h
         retn
@@ -149,6 +176,7 @@ _c
 _callword:
     sub esp, 2
     mov dword [ecx + 1], _jumpword
+    status_ "Testing now: CALL WORD"
     db 66h
     call bad
 _c
@@ -156,29 +184,35 @@ _c
 _jumpword:
     add esp, 2 + 4
     mov dword [ecx + 1], _jumps
+    status_ "Testing now: JMP WORD"    
     db 66h
     jmp bad
 _c
 
 _jumps:
+    status_ "Testing now: SHORT JUMP"
     jmp short _jmp1     ; short jump, relative, EB
 _c
 
 _jmp1:
+    status_ "Testing now: NEAR JUMP"
     jmp near _jmpreg32  ; jump, relative, E9
 _c
 
 _jmpreg32:                ; jump via register
+    status_ "Testing now: JUMP reg32"
     mov eax, _jmpreg16
     jmp eax
 
 _jmpreg16:
+    status_ "Testing now: JUMP reg16"
     mov dword [ecx + 1], _jmp3
     db 67h
         jmp ecx
 _c
 
 _jmp3:
+    status_ "Testing now: JMP [mem]"
     jmp dword [buffer1]
     buffer1 dd _jmp4
 _c
@@ -187,12 +221,14 @@ _c
 _jmp4:
                         ; jmp far is encoded as EA <ddOffset> <dwSegment>
 ;    mov [_patchCS + 5], cs
+    status_ "Testing now: JUMP FAR IMMEDIATE"
 _patchCS:
     jmp _CS:_jmp5
 _c
 
 _jmp5:
     ; mov [buffer3 + 4], cs
+    status_ "Testing now: JUMP FAR [MEM]"
     jmp far [buffer3]
 buffer3:
     dd _pushret
@@ -200,17 +236,20 @@ buffer3:
 _c
 
 _pushret:               ; push an address then return to it
+    status_ "Testing now: RET"
     push _pushretf
     ret                 ; it's also a way to make an absolute jump without changing a register or flag.
 _c
 
 _pushretf:
+    status_ "Testing now: RET FAR"
     push cs
     push _pushiret
     retf
 _c
 
 _pushiret:
+    status_ "Testing now: INTERRUPT RET"
     pushfd
     push cs
     push _ret
@@ -552,6 +591,7 @@ _
 delta8 equ 20
 xlat8b equ 68
 xlatval equ 78
+    status_ "Testing now: XLATB (on BX)"        ; will crash is 000000 not allocated
     setmsg_ "ERROR: XLATB (on BX)"
     mov byte [xlat8b], xlatval
     mov al, xlat8b - delta8
@@ -664,6 +704,7 @@ _
     jz no_popcnt
 _
     setmsg_ "ERROR: POPCNT"
+    rdtsc
     mov ebx, 0100101010010b
     popcnt eax, ebx
     expect eax, 5
@@ -679,6 +720,7 @@ _
 _
     setmsg_ "ERROR: MOVBE"
     mov ebx, _movbe                         ; [_movbe] = 11223344h
+    rdtsc
     movbe eax, [ebx]
     expect eax, 44332211h
     jmp movbe_end
@@ -1047,10 +1089,13 @@ GSgood:
 _c
 
 antis:
+    status_ "Testing now: GS anti-debug"
     call gstrick
+    status_ "Testing now: SMSW anti-debug"
     call smswtrick
 _
 TF equ 0100h
+    status_ "Testing now: Trap flag"
     ; checking if the Trap Flag is set via pushf (sahf doesn't save TF)
     pushf
     pop eax
@@ -1059,6 +1104,7 @@ TF equ 0100h
     expect eax, 0
 _
     ; the same, but 'pop ss' prevents the debugger to step on pushf
+    status_ "Testing now: Trap flag after pop ss"
     setmsg_ "ANTI-DEBUG: TF is set (after pop ss)"
     push ss
     pop ss
@@ -1068,6 +1114,7 @@ _
     jnz bad
 _
     ; anti-debug: rdtsc as a timer check
+    status_ "Testing now: RDTSC timer"
     rdtsc
     mov ebx, eax
     mov ecx, edx
@@ -1087,6 +1134,7 @@ _
 _c
 
 get_ips:
+    status_ "Testing now: GetIP via Call/Pop"
     setmsg_ "ERROR: Wrong EIP via Call/pop"
     ; get ip call
     call $ + 5
@@ -1095,6 +1143,7 @@ after_call:
     expect eax, after_call
 _
     ; get ip far call
+    status_ "Testing now: GetIP via Call FAR/Pop"
     setmsg_ "ERROR: Wrong EIP via Call FAR/pop"
     call far 01bh: $ + 7
 after_far:
@@ -1104,6 +1153,7 @@ after_far:
     expect eax, _CS
 _
     ; get ip f?stenv
+    status_ "Testing now: GetIP via FSTENV"
     setmsg_ "ERROR: Wrong EIP via FPU"
 _fpu:
     fnop
@@ -1170,6 +1220,8 @@ _movbe dd 11223344h
 _d
 
 good:
+    status_ ''
+    print_ 0dh, 0ah,"...completed!"
     push 0
     call ExitProcess
 _c
@@ -1186,6 +1238,7 @@ MEM_RESERVE               equ 2000h
 MEM_TOP_DOWN              equ 100000h
 
 TLS:
+    status_ "allocating buffer [00000000;0000ffff]"
     push PAGE_READWRITE     ; ULONG Protect
     push MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN     ; ULONG AllocationType
     push zwsize             ; PSIZE_T RegionSize
@@ -1194,6 +1247,7 @@ TLS:
     push -1                 ; HANDLE ProcessHandle
     call ZwAllocateVirtualMemory
 _
+    status_ "checking OS version"
     mov eax, [fs:18h]
     mov ecx, [eax + 030h]
     xor eax, eax
