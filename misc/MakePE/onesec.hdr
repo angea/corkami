@@ -34,7 +34,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion    , dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage              , dd SIZEOFIMAGE
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders            , dd SIZEOFHEADERS  ; can be 0 in some circumstances
-    at IMAGE_OPTIONAL_HEADER32.Subsystem                , dw IMAGE_SUBSYSTEM_WINDOWS_GUI
+    at IMAGE_OPTIONAL_HEADER32.Subsystem                , dw SUBSYSTEM
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes      , dd NUMBEROFRVAANDSIZES
 iend
 
