@@ -5,18 +5,26 @@
 
 ; the OS dependent checks will fail under a VmWare
 
-; remove KiFastSystemCallRet references to run under XP SP<3
+;TODO:
+; outline strings
 
-;TODO: gather code and data together, tests that are not just expects - add exception handler
+; add IP checking for exception triggers
+; checking that the exception DID trigger
+; int2e with wrong/right address
+
+; init values
+
+; remove KiFastSystemCallRet references to run under XP SP<3
 
 ; Ange Albertini, BSD Licence, 2009-2011
 
 %include '..\..\onesec.hdr'
 
-_CS equ 01bh ; cs is 01bh on Windows XP usermode, will fail if different
-SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
+_CS equ 0 ; patched on the fly
+; cs is 01bh on Windows XP usermode, will fail if different
+; 23 on W7
 
-STD_OUTPUT_HANDLE equ -11
+SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
 
 %macro expect 2
     cmp %1, %2
@@ -24,6 +32,8 @@ STD_OUTPUT_HANDLE equ -11
     call errormsg_
 %%good:
 %endmacro
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 print:
     pushad
@@ -40,8 +50,8 @@ print:
 
     push 0                          ; LPVOID lpReserved
     push lpNumbersOfCharsWritten    ; LPWORD lpNumbersOfCharsWritten
-    push ecx ; HELLOWORLD_LEN             ; DWORD nNumbersOfCharsToWrite
-    push edi ;helloworld                 ; VOID *lpBuffer
+    push ecx                        ; DWORD nNumbersOfCharsToWrite
+    push edi                        ; VOID *lpBuffer
     push dword [hConsoleOutput]     ; HANDLE hConsoleOutput
     call WriteConsoleA
     popad
@@ -96,6 +106,7 @@ _c
 ErrorMsg dd 0
 _d
 
+STD_OUTPUT_HANDLE equ -11
 start:
     push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
     call GetStdHandle
@@ -110,16 +121,71 @@ _c
 hConsoleOutput dd 0
 _d
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+MEM_RESERVE               equ 2000h
+MEM_TOP_DOWN              equ 100000h
+
+initmem:
+    status_ "allocating buffer [00000000;0000ffff]"
+    push PAGE_READWRITE     ; ULONG Protect
+    push MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN     ; ULONG AllocationType
+    push zwsize             ; PSIZE_T RegionSize
+    push 0                  ; ULONG_PTR ZeroBits
+    push lpBuffer3          ; PVOID *BaseAddress
+    push -1                 ; HANDLE ProcessHandle
+    call ZwAllocateVirtualMemory
+    retn
+_c
+
+checkOS:
+    status_ "checking OS version"
+    mov eax, [fs:18h]
+    mov ecx, [eax + 030h]
+    xor eax, eax
+    or eax, [ecx + 0a8h]
+    shl eax,8
+    or eax, [ecx + 0a4h]
+    cmp eax, 0106h
+    jz W7
+_
+XP:
+    mov dword [lock_exception], INVALID_LOCK_SEQUENCE
+    mov dword [prefix_exception], ILLEGAL_INSTRUCTION
+    print_ "Info: Windows XP found"
+    mov dword [os], XP_tests
+    retn
+_c
+
+W7:
+    mov dword [lock_exception], ILLEGAL_INSTRUCTION
+    mov dword [prefix_exception], ACCESS_VIOLATION
+    print_ "Info: Windows 7 found"
+    mov dword [os], W7_tests
+    retn
+_c
+
+;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
+_c
+
+zwsize dd 0ffffh
+lpBuffer3 dd 1
+_d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 EntryPoint:
     call start
-    call TLS    ; only Kernel32 is imported, so we have to call our TLS manually
+    call initmem
+    call checkOS
     print_ ""
+
     ; jump short, near, far, ret near, ret far, interrupt ret
     status_ "testing jumps opcodes...", 0dh, 0ah
     call jumps
 
     ; mov movzx movsx lea xchg add sub sbb adc inc dec or and xor
-    ; not neg rol ror rcl rcr shl shr sal shld shrd div mul imul enter leave
+    ; not neg rol ror rcl rcr shl shr shld shrd div mul imul enter leave
     ; setXX cmovXX bsf bsr bt bswap cbw cwde cwd
     status_ "testing classic opcodes...", 0dh, 0ah
     call classics
@@ -153,17 +219,23 @@ EntryPoint:
     status_ "testing opcode-based GetIPs...", 0dh, 0ah
     call get_ips ; call, call far, fstenv
 
+    status_ "testing opcode-based exception triggers...", 0dh, 0ah
+    call exceptions
+
     ; documented but frequent disassembly mistakes
     ; smsw str hints word calls/rets
     call disassembly
     jmp good
 _c
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 jumps:
 _retword:
     mov ecx, bad
     and ecx, 0ffffh
-    ; mov word [ecx - 2], 9090h          ; a little pre-padding for the call word trick ; not needed as 0000 is a nop here...
+    ; a little pre-padding for the call word trick (actually not needed as 0000 is a nop here...)
+    ; mov word [ecx - 2], 9090h
     mov byte [ecx], 68h
     mov dword [ecx + 1], _callword
     mov byte [ecx + 5], 0c3h
@@ -184,7 +256,7 @@ _c
 _jumpword:
     add esp, 2 + 4
     mov dword [ecx + 1], _jumps
-    status_ "Testing now: JMP WORD"    
+    status_ "Testing now: JMP WORD"
     db 66h
     jmp bad
 _c
@@ -220,14 +292,14 @@ _c
     ; far jump, absolute
 _jmp4:
                         ; jmp far is encoded as EA <ddOffset> <dwSegment>
-;    mov [_patchCS + 5], cs
+    mov [_patchCS + 5], cs
     status_ "Testing now: JUMP FAR IMMEDIATE"
 _patchCS:
     jmp _CS:_jmp5
 _c
 
 _jmp5:
-    ; mov [buffer3 + 4], cs
+    mov [buffer3 + 4], cs
     status_ "Testing now: JUMP FAR [MEM]"
     jmp far [buffer3]
 buffer3:
@@ -258,6 +330,9 @@ _c
 
 _ret:
     ret
+_c
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 classics:
     setmsg_ "ERROR: MOV reg32, imm32"
@@ -373,11 +448,6 @@ _
     mov al, 1010b
     shl al, 2
     expect al, 101000b
-_
-    setmsg_ "ERROR: SAL"                    ; this is actually SHL
-    mov eax, -1010b
-    sal eax, 3
-    expect eax, -1010000b
 _
     mov al, 1010b
     shr al, 2
@@ -496,6 +566,8 @@ _
 _
     retn
 _c
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 rares:
     setmsg_ "ERROR: XADD"
@@ -636,17 +708,37 @@ _
 _
     setmsg_ "ERROR: SLDT"
     sldt eax
-    expect eax, 0                           ; 4060 under VmWare
+    expect eax, 0                           ; TODO: 4060 under VmWare
 _
     setmsg_ "ERROR: LSL"
     push cs
     pop ecx
     lsl eax, ecx
     jnz bad
-    expect eax, -1                          ; 0ffbfffffh under vmware
+    expect eax, -1                          ; TODO: 0ffbfffffh under vmware
 _
     retn
 _c
+
+xlattable:
+times 35 db 0
+         db 75
+_d
+
+boundslimit:
+    dd 135
+    dd 143
+
+_cmpxchg8b:
+    dd 00a0a0a0ah
+    dd 0d0d0d0d0h
+
+addseg:
+    dd 12345678h
+    dw 00h
+_d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 undocumented:
     ; undocumented behavior with an immediate operand different from 10
@@ -681,11 +773,6 @@ _
     bswap eax                               ; bswap ax = xor ax, ax
     expect eax, 12340000h
 _
-    ; smsw on dword is officially undocumented, but it just fills the whole CR0 to the operand
-    setmsg_ "ERROR: SMSW reg32 [undocumented]"
-    smsw eax
-    expect eax, 08001003bh  ; XP
-
     retn
 _c
 
@@ -748,7 +835,10 @@ _
 _c
 
 cpuid_ecx dd 0
+_movbe dd 11223344h
 _d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 rand:
     push edx
@@ -855,6 +945,7 @@ _
     into
 _
     db 0fh, 1ch, 00                         ; nop [eax] ; doesn't trigger an exception
+    db 0fh, 1dh, 0c0h ; nop eax
     db 0fh, 019h, 084h, 0c0h
         dd 080000000h                       ; hint_nop [eax + eax * 8 - 080000000h]
 _
@@ -935,12 +1026,19 @@ _
 _c
 _retn4:
     retn 4
+_c
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 XP_tests:
     setmsg_ "ERROR: SMSW [XP]"
     smsw ax
     expect ax, 0003bh  ; XP
+_
+    ; smsw on dword is officially undocumented, but it just fills the whole CR0 to the operand
+    setmsg_ "ERROR: SMSW reg32 [undocumented, XP value]"
+    smsw eax
+    expect eax, 08001003bh  ; XP
 _
     setmsg_ "ERROR: SIDT [XP]"
     mov eax, sidt_
@@ -950,18 +1048,24 @@ _
     setmsg_ "ERROR: SGDT [XP]"
     mov eax, sgdt_
     sgdt [eax]
-    expect word [eax], 003ffh               ; 0412fh under vmware
+    expect word [eax], 003ffh               ; TODO: 0412fh under vmware
 _
     setmsg_ "ERROR: STR reg16 [XP]"
-    mov eax, -1
-    str ax
-    expect eax, 0ffff0028h                  ; 4000h under vmware
+    rdtsc
+    str ax  ; 660F00C8
+    expect ax, 00028h                  ; TODO: 04000h under vmware
 _
     setmsg_ "ERROR: STR reg32 [XP]"
-    mov eax, -1
-    str eax
-    expect eax, 28h                          ; 4000h under vmware
+    rdtsc
+    str eax ; 0F00C8
+    expect eax, 000000028h             ; TODO: 000004000h under vmware
 _
+    status_ "Testing now: GS anti-debug (XP only)"
+    call gstrick   ; xp only ?
+    status_ "Testing now: SMSW anti-debug (XP only)"
+    call smswtrick ; xp only ?
+_
+    status_ "Testing now: sysenter (XP only)"
     setmsg_ "ERROR: sysenter [XP]"
     mov eax, 10001h
     push _return
@@ -975,16 +1079,22 @@ _return:
     expect ecx, eax                         ; 1 if stepping
     mov al, [edx]
     expect al, 0c3h
-    expect edx, [__imp__KiFastSystemCallRet]; -1 if stepping
+;    expect edx, [__imp__KiFastSystemCallRet]; -1 if stepping
+    status_ ''
     retn
 _c
-;%IMPORT ntdll.dll!KiFastSystemCallRet
+;IMPORT ntdll.dll!KiFastSystemCallRet
 _c
 
 W7_tests:
     setmsg_ "ERROR: SMSW [W7]"
     smsw eax
     cmp eax, 080050031h  ; Win7 x64
+_
+    ; smsw on dword is officially undocumented, but it just fills the whole CR0 to the operand
+    setmsg_ "ERROR: SMSW reg32 [undocumented, W7 value]"
+    smsw eax
+    expect eax, 080050031h ; W7
 _
     setmsg_ "ERROR: SIDT [W7]"
     mov eax, sidt_
@@ -1007,6 +1117,8 @@ sidt_ dd 0,0
 os dd 0
 _d
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 CONST equ 035603h
 
 encodings: ; undocumented alternate encodings
@@ -1020,13 +1132,15 @@ _
     jz bad
 _
     ; 'SAL' is technically the same as SHL, but different encoding
-    setmsg_ "ERROR: Wrong EIP via Call/pop"
+    setmsg_ "ERROR: 'sal'"
     mov al, 1010b
     db 0c0h, 0f0h, 2                        ; sal al, 2
     expect al, 101000b
 _
     retn
 _c
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 smswtrick:
 waitfor3b:
@@ -1089,11 +1203,6 @@ GSgood:
 _c
 
 antis:
-    status_ "Testing now: GS anti-debug"
-    call gstrick
-    status_ "Testing now: SMSW anti-debug"
-    call smswtrick
-_
 TF equ 0100h
     status_ "Testing now: Trap flag"
     ; checking if the Trap Flag is set via pushf (sahf doesn't save TF)
@@ -1102,7 +1211,7 @@ TF equ 0100h
     and eax, TF
     setmsg_ "ANTI-DEBUG: TF is set"
     expect eax, 0
-_
+_                                                                                   
     ; the same, but 'pop ss' prevents the debugger to step on pushf
     status_ "Testing now: Trap flag after pop ss"
     setmsg_ "ANTI-DEBUG: TF is set (after pop ss)"
@@ -1124,7 +1233,7 @@ _
     print_ "ANTI-DEBUG: RDTSC timers identical..."
 different_timers:
     sub eax, ebx
-    cmp eax, 100h
+    cmp eax, 500h   ; taking a big limit for VMs, otherwise 100h sounds good enough.
     jle not_too_slow
     print_ "ANTI-DEBUG: RDTSC too far from each other"
 not_too_slow:
@@ -1132,6 +1241,8 @@ not_too_slow:
 _
     retn
 _c
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 get_ips:
     status_ "Testing now: GetIP via Call/Pop"
@@ -1145,12 +1256,16 @@ _
     ; get ip far call
     status_ "Testing now: GetIP via Call FAR/Pop"
     setmsg_ "ERROR: Wrong EIP via Call FAR/pop"
-    call far 01bh: $ + 7
+    mov word [callfarcs + 5], cs
+callfarcs:
+    call far _CS: $ + 7
 after_far:
     pop eax
     expect eax, after_far
     pop eax
-    expect eax, _CS
+    push cs
+    pop ecx
+    expect eax, ecx
 _
     ; get ip f?stenv
     status_ "Testing now: GetIP via FSTENV"
@@ -1164,6 +1279,18 @@ _fpu:
 _
     retn
 _c
+
+fpuenv:
+    .ControlWord           dd 0
+    .StatusWord            dd 0
+    .TagWord               dd 0
+    .DataPointer           dd 0
+    .InstructionPointer    dd 0
+    .LastInstructionOpcode dd 0
+    dd 0
+_d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %define PREFIX_BRANCH_TAKEN db 3eh
 %define PREFIX_BRANCH_NOT_TAKEN db 2eh
@@ -1188,7 +1315,7 @@ PREFIX_BRANCH_NOT_TAKEN
     bswap eax
     db 0f1h
     db 64h
-    movsd
+        movsd
     xlatb      ; reads from [EBX + AL]
     db 67h     ; reads from [BX + AL]
         xlatb
@@ -1197,83 +1324,220 @@ PREFIX_BRANCH_NOT_TAKEN
     ud2                                     ;0f0b
 _c
 
-xlattable:
-times 35 db 0
-         db 75
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-boundslimit:
-    dd 135
-    dd 143
+ARRAY_BOUNDS_EXCEEDED equ 0C000008Ch
+ILLEGAL_INSTRUCTION equ 0C000001Dh
+
+%macro ints 2
+%assign i %1
+%rep    %2
+;    _before
+        int i
+;    _after ACCESS_VIOLATION
+%assign i i+1
+%endrep
+%endmacro
+
+ints_handler:
+    inc dword [counter]
+    ; let's get the exception error
+    mov edx, [esp + exceptionHandler.pException + 4]
+    mov eax, [current_exception]
+    cmp dword [edx], eax
+    jnz bad
+
+    mov edx, [esp + exceptionHandler.pContext + 4]
+    movzx eax, byte [currentskip]
+    add dword [edx + CONTEXT.regEip], eax     ; skipping CD ??
+
+    mov eax, ExceptionContinueExecution
+    retn
+
+exceptions:
+    status_ "Setting Exception handler..."
+    setSEH ints_handler
+    status_ "Testing now: ACCESS VIOLATION exceptions triggers with Int 00-FF"
+
+    setmsg_ "ERROR: INT 00-FF - no exception"
+    mov dword [counter], 0
+    mov dword [current_exception], ACCESS_VIOLATION
+    mov dword [currentskip], 2
+
+    ints 000h, 3
+                ; int 003h = BREAKPOINT
+                ; int 004h = INTEGER_OVERFLOW
+    times 2*2 nop
+    ints 005h, 02ah - 5    ; int 20 = sometimes shown as VXDCALL but triggering the same thing
+        ; int 02ah ; edx = ????????, eax = edx << 8 + ?? [step into next instruction]
+        ; int 02bh ; eax = C0000258 , ecx = 00000000 [step into next instruction]
+        ; int 02ch ; eax = C000014F, ecx = esp , edx = IP (if ran, not stepped) [step into next instruction]
+        ; int 02dh = BREAKPOINT if no debugger
+        ; int 02eh ; eax = C0000xxx (depends on EAX before), ecx = esp , edx = IP (if ran, not stepped) [step into next instruction]
+    times 2*5 nop
+    ints 02fh, 0ffh - 02fh + 1
+
+    expect dword [counter], 256 - 2 - 5
+
+    setmsg_ "ERROR: >15 byte instruction - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: CPU-dependant exception triggers with too long instruction"
+    push dword [prefix_exception] ; ACCESS VIOLATION or ILLEGAL INSTRUCTION
+    pop dword [current_exception]
+    mov dword [currentskip], 17
+    times 16 db 066h
+        nop
+        ; => access violation for too many prefixes (old anti-VirtualPC)
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: INTO - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: INTEGER OVERFLOW with INTO"
+    mov dword [current_exception], INTEGER_OVERFLOW
+    mov dword [currentskip], 1
+    mov al, 1
+    ror al, 1
+    into
+    nop
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: INT4 - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: INTEGER OVERFLOW with INT 4"
+    mov dword [current_exception], INTEGER_OVERFLOW
+    mov dword [currentskip], 0 ; instruction is 2 bytes, but happens *AFTER*
+    int 4
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: INT3 - no exception"
+    mov dword [counter], 0
+
+    status_ "Testing now: BREAKPOINT with INT3"
+    mov dword [current_exception], BREAKPOINT
+    mov dword [currentskip], 1
+    int3
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: INT 3 - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: BREAKPOINT with INT 3"
+    mov dword [currentskip], BREAKPOINT
+    mov dword [currentskip], 2
+    int 3
+    nop
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: ICEBP - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: SINGLE_STEP with 'undocumented' IceBP"
+    mov dword [current_exception], SINGLE_STEP
+    mov dword [currentskip], 0
+    db 0f1h ; IceBP
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: Trap Flag - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: SINGLE_STEP with setting TF via popf"
+    mov dword [current_exception], SINGLE_STEP
+    mov dword [currentskip], 0
+    pushf
+    pop eax         ; EAX  = EFLAGS
+    or eax, 100h    ; set TF
+    push eax
+    popf
+    nop
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: Bound - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: ARRAY BOUNDS EXCEEDED with bounds"
+    mov dword [current_exception], ARRAY_BOUNDS_EXCEEDED
+    mov dword [currentskip], 2
+    mov ebx, $
+    mov eax, -1
+    bound eax, [ebx]
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: wrong opcode lock - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: CPU-dependant via incorrect bt"
+    push dword [lock_exception] ; INVALID LOCK SEQUENCE or ILLEGAL INSTRUCTION
+    pop dword [current_exception]
+    mov dword [currentskip], 4
+    lock bt [eax], eax
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: invalid mode Lock - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: INVALID LOCK SEQUENCE via incorrect mode access"
+    mov dword [currentskip], 3
+    lock add eax, eax
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: invalid opcode lock - no exception"
+    mov dword [counter], 0
+    setmsg_ "ERROR: >15 byte instruction - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: INVALID LOCK SEQUENCE via incorrect opcode"
+    mov dword [currentskip], 2
+    lock wait
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: privileged instruction - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: PRIVILEGED_INSTRUCTION via privileged opcode"
+    mov dword [current_exception], PRIVILEGED_INSTRUCTION
+    mov dword [currentskip], 1
+    hlt
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: privleged instruction (vmware) - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: PRIVILEGED_INSTRUCTION via VmWare Backdoor"
+    mov dword [current_exception], PRIVILEGED_INSTRUCTION
+    mov dword [currentskip], 1
+    mov eax, 'hXMV'
+    mov ecx, 10
+    mov dx, 'XV'
+    in eax, dx
+    expect dword [counter], 1
+_
+    setmsg_ "ERROR: privileged operand - no exception"
+    mov dword [counter], 0
+    status_ "Testing now: PRIVILEGED_INSTRUCTION via privileged operand"
+    mov dword [current_exception], PRIVILEGED_INSTRUCTION
+    mov dword [currentskip], 3
+    mov eax, cr0
+    expect dword [counter], 1
+_
+    clearSEH
+    retn
+_c
+
+lock_exception dd 0
+prefix_exception dd 0
+current_exception dd 0
+currentskip db 0
+counter dd 0
 _d
 
-_cmpxchg8b:
-    dd 00a0a0a0ah
-    dd 0d0d0d0d0h
-_d
-
-addseg:
-    dd 12345678h
-    dw 00h
-_d
-
-_movbe dd 11223344h
-_d
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 good:
     status_ ''
-    print_ 0dh, 0ah,"...completed!"
+    print_ 0dh, 0ah, "...completed!"
     push 0
     call ExitProcess
 _c
 
 bad:
-    print_ "Error"
-    push 0
+    print_ 0dh, 0ah, "Error"
+    push 42
     call ExitProcess
 _c
 
 ;%IMPORT kernel32.dll!ExitProcess
 _c
-MEM_RESERVE               equ 2000h
-MEM_TOP_DOWN              equ 100000h
-
-TLS:
-    status_ "allocating buffer [00000000;0000ffff]"
-    push PAGE_READWRITE     ; ULONG Protect
-    push MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN     ; ULONG AllocationType
-    push zwsize             ; PSIZE_T RegionSize
-    push 0                  ; ULONG_PTR ZeroBits
-    push lpBuffer3          ; PVOID *BaseAddress
-    push -1                 ; HANDLE ProcessHandle
-    call ZwAllocateVirtualMemory
-_
-    status_ "checking OS version"
-    mov eax, [fs:18h]
-    mov ecx, [eax + 030h]
-    xor eax, eax
-    or eax, [ecx + 0a8h]
-    shl eax,8
-    or eax, [ecx + 0a4h]
-    cmp eax, 0106h
-    jz W7
-_
-    print_ "Info: Windows XP found"
-    mov dword [os], XP_tests
-    retn
-_c
-
-W7:
-    print_ "Info: Windows 7 found"
-    mov dword [os], W7_tests
-    retn
-_c
-
-;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
-_c
-
-zwsize dd 0ffffh
-lpBuffer3 dd 1
-_d
 
 ValueEDI dd 0ED0h
 ValueESI dd 0E01h
@@ -1284,16 +1548,6 @@ ValueEDX dd 0ED1h
 ValueECX dd 0EC1h
 ValueEAX dd 0EA1h
 xchgpopad dd ValueEDI
-_d
-
-fpuenv:
-    .ControlWord           dd 0
-    .StatusWord            dd 0
-    .TagWord               dd 0
-    .DataPointer           dd 0
-    .InstructionPointer    dd 0
-    .LastInstructionOpcode dd 0
-    dd 0
 _d
 
 ;%IMPORTS
