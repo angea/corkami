@@ -178,7 +178,6 @@ EntryPoint:
     call start
     call initmem
     call checkOS
-    print_ ""
 
     ; jump short, near, far, ret near, ret far, interrupt ret
     status_ "testing jumps opcodes...", 0dh, 0ah
@@ -225,6 +224,11 @@ EntryPoint:
     ; documented but frequent disassembly mistakes
     ; smsw str hints word calls/rets
     call disassembly
+
+    status_ "testing 64 bits opcodes...", 0dh, 0ah
+    ; 64 bit opcodes - CWDE cmpxchg16
+    call sixtyfour
+
     jmp good
 _c
 
@@ -1211,7 +1215,7 @@ TF equ 0100h
     and eax, TF
     setmsg_ "ANTI-DEBUG: TF is set"
     expect eax, 0
-_                                                                                   
+_
     ; the same, but 'pop ss' prevents the debugger to step on pushf
     status_ "Testing now: Trap flag after pop ss"
     setmsg_ "ANTI-DEBUG: TF is set (after pop ss)"
@@ -1349,7 +1353,7 @@ ints_handler:
 
     mov edx, [esp + exceptionHandler.pContext + 4]
     movzx eax, byte [currentskip]
-    add dword [edx + CONTEXT.regEip], eax     ; skipping CD ??
+    add dword [edx + CONTEXT.regEip], eax
 
     mov eax, ExceptionContinueExecution
     retn
@@ -1511,6 +1515,7 @@ _
     expect dword [counter], 1
 _
     clearSEH
+    status_ ''
     retn
 _c
 
@@ -1519,6 +1524,85 @@ prefix_exception dd 0
 current_exception dd 0
 currentskip db 0
 counter dd 0
+_d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; roy g biv's Heaven's gate to jump to 64b code in a 32b PE
+; http://vxheavens.com/lib/vrg02.html
+%macro start64 0
+    %push _64
+	db	9ah ;call 33:in64
+	dd	%$in64
+	dw	33h
+	;32-bit code continues here
+   jmp %$next
+nop
+nop
+	bits 64
+%$in64:
+%endmacro
+
+%macro end64 0
+	bits 32
+	retf
+%$next:
+    %pop
+%endmacro
+
+
+sixtyfour:
+    setSEH no64b
+    status_ "Testing now: CDQE (64 bits only)"
+    setmsg_ "ERROR: CDQE"
+start64
+    mov rax, -1
+    mov eax, 012345678h
+    cdqe
+    mov qword [cdqe_], rax
+end64
+
+    expect dword [cdqe_], 012345678h
+    expect dword [cdqe_ + 4], 0
+_
+    status_ "Testing now: CMPXCHG16 (64 bits only)"
+    setmsg_ "ERROR: CMPXCHG16 (64 bits)"
+
+start64
+    mov rax, 00a0a0a0a0a0a0a0ah
+    mov rdx, 0d0d0d0d0d0d0d0d0h
+    mov rcx, 099aabbcc99aabbcch
+    mov rbx, 0ddeeff00ddeeff00h
+    mov rsi, _cmpxchg16b                     ; [_cmpxchg16b] = 0d0d0d0d0d0d0d0d0h:00a0a0a0a0a0a0a0ah
+    lock
+        cmpxchg16b [rsi]
+end64
+
+    mov ecx, 099aabbcch
+    mov ebx, 0ddeeff00h
+    expect [_cmpxchg16b + 0], ebx
+    expect [_cmpxchg16b + 4], ebx
+    expect [_cmpxchg16b + 4 * 2], ecx
+    expect [_cmpxchg16b + 4 * 3], ecx
+_
+    status_ ""
+sixtyfour_end:
+    clearSEH
+    retn
+_c
+
+no64b:
+    print_ "Info: no 64b support found"
+    mov edx, [esp + exceptionHandler.pContext + 4]
+    mov dword [edx + CONTEXT.regEip], sixtyfour_end
+    mov eax, ExceptionContinueExecution
+    retn
+_c
+
+cdqe_ dq 0
+_cmpxchg16b:
+    dq 00a0a0a0a0a0a0a0ah
+    dq 0d0d0d0d0d0d0d0d0h
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
