@@ -1528,28 +1528,24 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; roy g biv's Heaven's gate to jump to 64b code in a 32b PE
-; http://vxheavens.com/lib/vrg02.html
+; roy g biv's Heaven's gate @ http://vxheavens.com/lib/vrg02.html
+
 %macro start64 0
     %push _64
-	db	9ah ;call 33:in64
-	dd	%$in64
-	dw	33h
-	;32-bit code continues here
-   jmp %$next
-nop
-nop
-	bits 64
+    call far 33h:%$in64
+    jmp %$next
+_c
+    bits 64
 %$in64:
 %endmacro
 
 %macro end64 0
-	bits 32
-	retf
+    bits 32
+    retf
+_c
 %$next:
     %pop
 %endmacro
-
 
 sixtyfour:
     setSEH no64b
@@ -1592,7 +1588,7 @@ sixtyfour_end:
 _c
 
 no64b:
-    print_ "Info: no 64b support found"
+    print_ "Info: 64 bits not supported"
     mov edx, [esp + exceptionHandler.pContext + 4]
     mov dword [edx + CONTEXT.regEip], sixtyfour_end
     mov eax, ExceptionContinueExecution
