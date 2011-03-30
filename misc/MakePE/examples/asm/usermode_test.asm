@@ -9,10 +9,8 @@
 ; outline strings
 
 ; add IP checking for exception triggers
-; checking that the exception DID trigger
 ; int2e with wrong/right address
 
-; init values
 
 ; remove KiFastSystemCallRet references to run under XP SP<3
 
@@ -667,9 +665,9 @@ _
 delta8 equ 20
 xlat8b equ 68
 xlatval equ 78
-    status_ "Testing now: XLATB (on BX)"        ; will crash is 000000 not allocated
+    status_ "Testing now: XLATB (on BX)"
     setmsg_ "ERROR: XLATB (on BX)"
-    mov byte [xlat8b], xlatval
+    mov byte [xlat8b], xlatval              ; will crash is 000000 not allocated
     mov al, xlat8b - delta8
     mov bx, delta8                              ; xlattable[] = 75
     db 67h     ; reads from [BX + AL]
@@ -710,16 +708,16 @@ _
     expect [_cmpxchg8b], ebx
     expect [_cmpxchg8b + 4], ecx
 _
-    setmsg_ "ERROR: SLDT"
+    setmsg_ "ERROR: SLDT non null (VM ?)"
     sldt eax
-    expect eax, 0                           ; TODO: 4060 under VmWare
+    expect eax, 0                           ; 4060 under VmWare
 _
-    setmsg_ "ERROR: LSL"
+    setmsg_ "ERROR: LSL (VM?)"
     push cs
     pop ecx
     lsl eax, ecx
     jnz bad
-    expect eax, -1                          ; TODO: 0ffbfffffh under vmware
+    expect eax, -1                          ; 0ffbfffffh under vmware
 _
     retn
 _c
