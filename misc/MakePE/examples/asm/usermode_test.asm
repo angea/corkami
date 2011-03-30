@@ -1,26 +1,18 @@
-
 ; this a file making use of each usermode opcode (at least, one of each family)
-
 ; general FPU/SSE+ opcodes are not included
 
-; the OS dependent checks will fail under a VmWare
-
 ;TODO:
-; outline strings
-
 ; add IP checking for exception triggers
 ; int2e with wrong/right address
 
-
-; remove KiFastSystemCallRet references to run under XP SP<3
-
-; Ange Albertini, BSD Licence, 2009-2011
+;Ange Albertini, BSD Licence, 2009-2011
 
 %include '..\..\onesec.hdr'
 
-_CS equ 0 ; patched on the fly
-; cs is 01bh on Windows XP usermode, will fail if different
-; 23 on W7
+;cs is:
+; 01bh on Windows XP usermode
+; 23 on W7 32 bit
+; 33 in 64b
 
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
 
@@ -303,7 +295,7 @@ _jmp4:
     mov [_patchCS + 5], cs
     print_ _testingnowJUMPFARIMMEDIATE
 _patchCS:
-    jmp _CS:_jmp5
+    jmp 0:_jmp5
 _c
 
 _jmp5:
@@ -312,7 +304,7 @@ _jmp5:
     jmp far [buffer3]
 buffer3:
     dd _pushret
-    dw _CS
+    dw 0
 _c
 
 _pushret:               ; push an address then return to it
@@ -1390,7 +1382,7 @@ _
     setmsg_ _WrongEIPviaCallFARpop
     mov word [callfarcs + 5], cs
 callfarcs:
-    call far _CS: $ + 7
+    call far 0: $ + 7
 after_far:
     pop eax
     expect eax, after_far
