@@ -1530,8 +1530,8 @@ _d
 
 ; roy g biv's Heaven's gate @ http://vxheavens.com/lib/vrg02.html
 
-%macro start64 0
-    %push _64
+%macro start64b 0
+    %push _64b
     call far 33h:%$in64
     jmp %$next
 _c
@@ -1539,7 +1539,7 @@ _c
 %$in64:
 %endmacro
 
-%macro end64 0
+%macro end64b 0
     bits 32
     retf
 _c
@@ -1551,12 +1551,12 @@ sixtyfour:
     setSEH no64b
     status_ "Testing now: CDQE (64 bits only)"
     setmsg_ "ERROR: CDQE"
-start64
+start64b
     mov rax, -1
     mov eax, 012345678h
     cdqe
     mov qword [cdqe_], rax
-end64
+end64b
 
     expect dword [cdqe_], 012345678h
     expect dword [cdqe_ + 4], 0
@@ -1564,7 +1564,7 @@ _
     status_ "Testing now: CMPXCHG16 (64 bits only)"
     setmsg_ "ERROR: CMPXCHG16 (64 bits)"
 
-start64
+start64b
     mov rax, 00a0a0a0a0a0a0a0ah
     mov rdx, 0d0d0d0d0d0d0d0d0h
     mov rcx, 099aabbcc99aabbcch
@@ -1572,14 +1572,31 @@ start64
     mov rsi, _cmpxchg16b                     ; [_cmpxchg16b] = 0d0d0d0d0d0d0d0d0h:00a0a0a0a0a0a0a0ah
     lock
         cmpxchg16b [rsi]
-end64
-
-    mov ecx, 099aabbcch
-    mov ebx, 0ddeeff00h
-    expect [_cmpxchg16b + 0], ebx
-    expect [_cmpxchg16b + 4], ebx
-    expect [_cmpxchg16b + 4 * 2], ecx
-    expect [_cmpxchg16b + 4 * 3], ecx
+end64b
+_
+    status_ "Testing now: RIP-relative GetIP (64 bits only)"
+    setmsg_ "ERROR: RIP LEA (64 bits)"
+start64b
+    lea rax, [rip]
+rip_:
+    mov [rax_], rax
+end64b
+    expect dword [rax_], rip_
+_
+    status_ "Testing now: movsxd (64 bits)"
+    setmsg_ "ERROR: movsxd (64 bits)"
+start64b
+    mov bl, 80h
+    mov rax, -1
+    movsx eax, bl   ; al is copied to bl, eax is sign extended 32 bit, rax is zero extented to 64 bit => rax = 00000000ffffff80h
+    movsxd rcx, eax
+    mov qword [rax_], rax
+    mov qword [rcx_], rcx
+end64b
+    expect dword [rax_], 0ffffff80h
+    expect dword [rcx_], 0ffffff80h
+    expect dword [rax_ + 4], 0
+    expect dword [rcx_ + 4], -1
 _
     status_ ""
 sixtyfour_end:
@@ -1595,10 +1612,12 @@ no64b:
     retn
 _c
 
-cdqe_ dq 0
 _cmpxchg16b:
     dq 00a0a0a0a0a0a0a0ah
     dq 0d0d0d0d0d0d0d0d0h
+cdqe_ dq 0
+rax_ dq 0
+rcx_ dq 0
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
