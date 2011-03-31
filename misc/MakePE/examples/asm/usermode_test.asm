@@ -1,20 +1,96 @@
-; this a file making use of each usermode opcode (at least, one of each family)
+%include '..\..\onesec.hdr'
+
+progname db 'Tana v0.1 - an opcode tester - 2011/03/31', 0dh, 0ah, 0
+author db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
+_d
+
+;this is a file making use of each usermode opcode (at least, one of each family)
+; using Heaven's gate trick to use 64b opcodes in a 32b PE
+; using ZwAllocateVirtualMemory trick to allocate [0000-ffff], so small jumps and returns are working
+
+; tested under W7 64b, XP SP3, XPSP1 under VmWare
+
 ; general FPU/SSE+ opcodes are not included
 
 ;TODO:
 ; add IP checking for exception triggers
-; int2e with wrong/right address
-
-;Ange Albertini, BSD Licence, 2009-2011
-
-%include '..\..\onesec.hdr'
-
-;cs is:
-; 01bh on Windows XP usermode
-; 23 on W7 32 bit
-; 33 in 64b
+; int2a-2b os dependent
+; int2c-2e with wrong/right address
+; merge os checks, just see values
+; expand stub for tests on [0000-ffff]
+; XSAVE, XGETBV XRSTOR, fxsave, verrw, frsotr ?
 
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+%macro print_ 1+
+    push %1
+    call printnl
+%endmacro
+
+EntryPoint:
+    call start
+    print_ progname
+    print_ author
+
+    print_ allocatingbuffer
+    call initmem
+    print_ checkingOSversion
+    call checkOS
+_
+    ; jump short, near, far, ret near, ret far, interrupt ret
+    print_ _jumpsopcodes
+    call jumps
+_
+    ; mov movzx movsx lea xchg add sub sbb adc inc dec or and xor
+    ; not neg rol ror rcl rcr shl shr shld shrd div mul imul enter leave
+    ; setXX cmovXX bsf bsr bt bswap cbw cwde cwd
+    print_ _classicopcodes
+    call classics
+_
+    print_ _rareopcodes
+    ; xadd aaa daa aas das aad aam lds bound arpl jcxz xlatb lar
+    ; verr cmpxchg cmpxchg8b sldt lsl
+    call rares
+_
+    print_ _undocumentedopcodes
+    call undocumented ; aam xx, salc, aad xx, bswap reg16, smsw reg32
+_
+    print_ _cpuspecificopcodes
+    call cpu_specifics  ; popcnt movbe crc32
+_
+    print_ _undocumentedencodings
+    call encodings      ; test, 'sal'
+_
+    ; os should be before any fpu use
+    print_ _osdependantopcodes
+    call [os]
+_
+    ; nop pause sfence mfence lfence prefetchnta 'hint nop' into
+    print_ _nopopcodes
+    call nops
+_
+    ; gs, smsw, rdtsc, pushf, pop ss
+    print_ _opcodebasedantidebuggers
+    call antis
+_
+    print_ _opcodebasedGetIPs
+    call get_ips ; call, call far, fstenv
+_
+    print_ _opcodebasedexceptiontriggers
+    call exceptions
+_
+    ; documented but frequent disassembly mistakes
+    ; smsw str hints word calls/rets
+    call disassembly
+_
+    print_ _bitsopcodes
+    ; 64 bit opcodes - cwde cmpxchg16 lea movsxd
+    call sixtyfour
+_
+    jmp good
+_c
 
 %macro expect 2
     cmp %1, %2
@@ -22,6 +98,20 @@ SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
     call errormsg_
 %%good:
 %endmacro
+
+_jumpsopcodes db "testing jumps opcodes...", 0dh, 0ah, 0
+_classicopcodes db "testing classic opcodes...", 0dh, 0ah, 0
+_rareopcodes db "testing rare opcodes...", 0dh, 0ah, 0
+_undocumentedopcodes db "testing undocumented opcodes...", 0dh, 0ah, 0
+_cpuspecificopcodes db "testing cpu-specific opcodes...", 0dh, 0ah, 0
+_undocumentedencodings db "testing undocumented encodings...", 0dh, 0ah, 0
+_osdependantopcodes db "testing os-dependant opcodes...", 0dh, 0ah, 0
+_nopopcodes db "testing 'nop' opcodes...", 0dh, 0ah, 0
+_opcodebasedantidebuggers db "testing opcode-based anti-debuggers...", 0dh, 0ah, 0
+_opcodebasedGetIPs db "testing opcode-based GetIPs...", 0dh, 0ah, 0
+_opcodebasedexceptiontriggers db "testing opcode-based exception triggers...", 0dh, 0ah, 0
+_bitsopcodes db "testing 64 bits opcodes...", 0dh, 0ah, 0
+_d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -60,13 +150,8 @@ _c
 _c
 
 lpNumbersOfCharsWritten dd 0
-clearline db '                                                                                ', 0dh, 0
+clearline db '                                                                         ', 0dh, 0
 _d
-
-%macro print_ 1+
-    push %1
-    call printnl
-%endmacro
 
 %macro setmsg_ 1+
     push %1
@@ -87,17 +172,12 @@ start:
     push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
     call GetStdHandle
     mov [hConsoleOutput], eax
-
-    print_ progname
-    print_ author
     retn
 _c
 ;%IMPORT kernel32.dll!GetStdHandle
 _c
 
 hConsoleOutput dd 0
-progname db 'Opcode tester - 2011/03/30', 0dh, 0ah, 0
-author db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -106,7 +186,6 @@ MEM_RESERVE               equ 2000h
 MEM_TOP_DOWN              equ 100000h
 
 initmem:
-    print_ allocatingbuffer
     push PAGE_READWRITE     ; ULONG Protect
     push MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN     ; ULONG AllocationType
     push zwsize             ; PSIZE_T RegionSize
@@ -118,7 +197,6 @@ initmem:
 _c
 
 checkOS:
-    print_ checkingOSversion
     mov eax, [fs:18h]
     mov ecx, [eax + 030h]
     xor eax, eax
@@ -149,7 +227,7 @@ _c
 
 zwsize dd 0ffffh
 lpBuffer3 dd 1
-allocatingbuffer db "allocating buffer [00000000;0000ffff]", 0dh, 0
+allocatingbuffer db "allocating buffer [0000-ffff]", 0dh, 0
 checkingOSversion db "checking OS version", 0dh, 0
 InfoWindowsXPfound db "Info: Windows XP found", 0dh, 0ah, 0
 InfoWindows7found db "Info: Windows 7 found", 0dh, 0ah, 0
@@ -157,78 +235,10 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-EntryPoint:
-    call start
-    call initmem
-    call checkOS
-
-    ; jump short, near, far, ret near, ret far, interrupt ret
-    print_ _jumpsopcodes
-    call jumps
-
-    ; mov movzx movsx lea xchg add sub sbb adc inc dec or and xor
-    ; not neg rol ror rcl rcr shl shr shld shrd div mul imul enter leave
-    ; setXX cmovXX bsf bsr bt bswap cbw cwde cwd
-    print_ _classicopcodes
-    call classics
-
-    print_ _rareopcodes
-    ; xadd aaa daa aas das aad aam lds bound arpl jcxz xlatb lar
-    ; verr cmpxchg cmpxchg8b sldt lsl
-    call rares
-
-    print_ _undocumentedopcodes
-    call undocumented ; aam xx, salc, aad xx, bswap reg16, smsw reg32
-
-    print_ _cpuspecificopcodes
-    call cpu_specifics  ; popcnt movbe crc32
-
-    print_ _undocumentedencodings
-    call encodings      ; test, 'sal'
-
-    ; os should be before any fpu use
-    print_ _osdependantopcodes
-    call [os]
-
-    ; nop pause sfence mfence lfence prefetchnta 'hint nop', into
-    print_ _nopopcodes
-    call nops
-
-    ; gs, smsw, rdtsc, pushf, pop ss
-    print_ _opcodebasedantidebuggers
-    call antis
-
-    print_ _opcodebasedGetIPs
-    call get_ips ; call, call far, fstenv
-
-    print_ _opcodebasedexceptiontriggers
-    call exceptions
-
-    ; documented but frequent disassembly mistakes
-    ; smsw str hints word calls/rets
-    call disassembly
-
-    print_ _bitsopcodes
-    ; 64 bit opcodes - CWDE cmpxchg16
-    call sixtyfour
-
-    jmp good
-_c
-
-_jumpsopcodes db "testing jumps opcodes...", 0dh, 0ah, 0
-_classicopcodes db "testing classic opcodes...", 0dh, 0ah, 0
-_rareopcodes db "testing rare opcodes...", 0dh, 0ah, 0
-_undocumentedopcodes db "testing undocumented opcodes...", 0dh, 0ah, 0
-_cpuspecificopcodes db "testing cpu-specific opcodes...", 0dh, 0ah, 0
-_undocumentedencodings db "testing undocumented encodings...", 0dh, 0ah, 0
-_osdependantopcodes db "testing os-dependant opcodes...", 0dh, 0ah, 0
-_nopopcodes db "testing 'nop' opcodes...", 0dh, 0ah, 0
-_opcodebasedantidebuggers db "testing opcode-based anti-debuggers...", 0dh, 0ah, 0
-_opcodebasedGetIPs db "testing opcode-based GetIPs...", 0dh, 0ah, 0
-_opcodebasedexceptiontriggers db "testing opcode-based exception triggers...", 0dh, 0ah, 0
-_bitsopcodes db "testing 64 bits opcodes...", 0dh, 0ah, 0
-_d
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;cs is:
+; 01bh on Windows XP usermode
+; 23 on W7 in 32 bit
+; 33 in 64b
 
 jumps:
 _retword:
@@ -375,10 +385,6 @@ _
     xchg al, bl
     expect al, 2
     expect bl, 1
-;_
-;    xchg [xchgpopad] , esp                  ; makes a backup of ESP and temporarily change ESP to the start of the data
-;    popad                                   ; read all the data into registers
-;    mov esp, [xchgpopad]                    ; restore ESP and EAX
 _
     setmsg_ _ADD
     mov eax, 3
@@ -812,8 +818,8 @@ _LAR db "ERROR: LAR", 0dh, 0ah, 0
 _VERR db "ERROR: VERR", 0dh, 0ah, 0
 _CMPXCHG db "ERROR: CMPXCHG", 0dh, 0ah, 0
 _CMPXCHGB db "ERROR: CMPXCHG8B", 0dh, 0ah, 0
-_SLDTnonnullVM db "ERROR: SLDT non null (VM ?)", 0dh, 0ah, 0
-_LSLVM db "ERROR: LSL (VM?)", 0dh, 0ah, 0
+_SLDTnonnullVM db "ERROR: SLDT non null (vm present ?)", 0dh, 0ah, 0
+_LSLVM db "ERROR: LSL (vm present?)", 0dh, 0ah, 0
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1096,8 +1102,6 @@ _
     db 0dbh, 0e0h                           ; fneni
     db 0dbh, 0e1h                           ; fndisi
 _
-    ;int 2dh
-_
     ; we're checking nothing was modified during the nop pairs
     cmp eax, [esp + 1ch]
     jnz bad
@@ -1212,9 +1216,9 @@ os dd 0
 _SMSWXP db "ERROR: SMSW [XP]", 0dh, 0ah, 0
 _SMSWregundocumentedXPvalue db "ERROR: SMSW reg32 [undocumented, XP value]", 0dh, 0ah, 0
 _SIDTXP db "ERROR: SIDT [XP]", 0dh, 0ah, 0
-_SGDTXP db "ERROR: SGDT [XP]", 0dh, 0ah, 0
-_STRreg16XP db "ERROR: STR reg16 [XP]", 0dh, 0ah, 0
-_STRreg32XP db "ERROR: STR reg32 [XP]", 0dh, 0ah, 0
+_SGDTXP db "ERROR: SGDT (vm present?) [XP]", 0dh, 0ah, 0
+_STRreg16XP db "ERROR: STR reg16 (vm present?) [XP]", 0dh, 0ah, 0
+_STRreg32XP db "ERROR: STR reg32 (vm present?) [XP]", 0dh, 0ah, 0
 _testingnowGSantidebugXPonly db "Testing now: GS anti-debug (XP only)", 0dh, 0
 _testingnowSMSWantidebugXPonly db "Testing now: SMSW anti-debug (XP only)", 0dh, 0
 _testingnowsysenterXPonly db "Testing now: sysenter (XP only)", 0dh, 0
@@ -1229,6 +1233,7 @@ _d
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 CONST equ 035603h
+CONST8 equ 27h
 
 encodings: ; undocumented alternate encodings
     mov eax, CONST
@@ -1238,6 +1243,12 @@ encodings: ; undocumented alternate encodings
 _
     db 0f7h, 0c0h                           ; test eax, CONST
         dd CONST
+    jz bad
+_
+    rdtsc
+    mov al, CONST8
+    db 0f6h, 0c8h
+        db CONST8
     jz bad
 _
     ; 'SAL' is technically the same as SHL, but different encoding
@@ -1427,32 +1438,68 @@ _d
 %define PREFIX_BRANCH_NOT_TAKEN db 2eh
 
 disassembly:
-    ; the following lines are just to test common mistakes in output
-    retn
-PREFIX_BRANCH_TAKEN
-    jz $ + 2
-PREFIX_BRANCH_NOT_TAKEN
-    jnz $ + 2
-    call word disassembly
-    db 66h
-    retn
+    ; the following lines are just to test common mistakes in output gather together for easy visual testing
+
+    PREFIX_OPERANDSIZE
+        bswap eax
+    bswap eax
+
+; branch hints
+    PREFIX_BRANCH_TAKEN
+        jz $ + 2
+    PREFIX_BRANCH_NOT_TAKEN
+        jnz $ + 2
+
+; xor ecx, ecx
+    loopne $
+
+; str is only word in memory
     str eax
     str ax
     str [eax]
+
+; smsw is not defined 16 bit, but actually reliable
     smsw eax
     smsw ax
-    PREFIX_OPERANDSIZE                      ; YASM doesn't support bswap <reg16>
-        bswap eax
-    bswap eax
-    db 0f1h
-    db 64h
+    retn
+
+    call word $ + 3
+    db 66h
+        retn
+    db 66h
+        loopz  $ - 1 ; looping to IP
+    db 67h
+        loopz $ - 1 ; looping depending on CX
+    db 66h
+    db 67h
+        loopz $ - 2 ; looping depending on CX, to IP
+    jecxz $
+    jcxz $
+    db 66h
+        jecxz $ - 1
+    db 66h
+        jcxz $ - 1
+    db 66h
+        jmp $ + 2
+
+    db 0f7h, 0c8h ; test eax, xx
+        dd 0
+    db 0f6h, 0c8h ; test al, xx
+        db 0
+
+    db 0f1h ; IceBP
+    db 64h  ; mov edi, fs:esi
         movsd
     xlatb      ; reads from [EBX + AL]
     db 67h     ; reads from [BX + AL]
         xlatb
     db 0fh, 0ffh    ; ud0                   ;0fff
+
     ud1                                     ;0fb9
     ud2                                     ;0f0b
+    xgetbv
+    xrstor [eax]
+    xsave [eax]
 _c
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1488,31 +1535,41 @@ ints_handler:
 exceptions:
     print_ SettingExceptionhandler
     setSEH ints_handler
+_
     print_ _testingnowACCESSVIOLATIONexceptionstriggerswithIntFF
-
     setmsg_ _INTFFnoexception
     mov dword [counter], 0
     mov dword [current_exception], ACCESS_VIOLATION
     mov dword [currentskip], 2
-
     ints 000h, 3
                 ; int 003h = BREAKPOINT
                 ; int 004h = INTEGER_OVERFLOW
     times 2*2 nop
-    ints 005h, 02ah - 5    ; int 20 = sometimes shown as VXDCALL but triggering the same thing
-        ; int 02ah ; edx = ????????, eax = edx << 8 + ?? [step into next instruction]
-        ; int 02bh ; eax = C0000258 , ecx = 00000000 [step into next instruction]
-        ; int 02ch ; eax = C000014F, ecx = esp , edx = IP (if ran, not stepped) [step into next instruction]
-        ; int 02dh = BREAKPOINT if no debugger
-        ; int 02eh ; eax = C0000xxx (depends on EAX before), ecx = esp , edx = IP (if ran, not stepped) [step into next instruction]
+    ; int 20 = sometimes shown as VXDCALL but triggering the same thing
+    ; int 3b-3f = used by some emulators for FPU functions
+
+    ints 005h, 02ah - 5
+        ; int 02ah ; edx = ????????, eax = edx << 8 + ?? [step into next instruction]  / W7 : access violation
+        ; int 02bh ; eax = C0000258 , ecx = 00000000 [step into next instruction]  / W7 : access violation
+        ; int 02ch ; eax = C000014F, ecx = esp , edx = IP (if ran, not stepped) [step into next instruction] / W7: exception 0c0000420h
+        ; int 02dh = see below
+        ; int 02eh ; XP: eax = C0000xxx (depends on EAX before), ecx = esp , edx = IP (if ran, not stepped) [step into next instruction] / W7 : access violation
     times 2*5 nop
     ints 02fh, 0ffh - 02fh + 1
-
     expect dword [counter], 256 - 2 - 5
-
+_
+    ; int 2dh triggers a BREAKPOINT after if no debugger is present, under all OS
+    print_ _testingnowBREAKPOINTwithINT2D
+    setmsg_ _INT2Dnoexception
+    mov dword [counter], 0
+    mov dword [current_exception], BREAKPOINT
+    mov dword [currentskip], 0  ; the exception is triggered AFTER
+    int 02dh
+    expect dword [counter], 1
+_
+    print_ _testingnowCPUdependantexceptiontriggerswithtoolonginstruction
     setmsg_ _byteinstructionnoexception
     mov dword [counter], 0
-    print_ _testingnowCPUdependantexceptiontriggerswithtoolonginstruction
     push dword [prefix_exception] ; ACCESS VIOLATION or ILLEGAL INSTRUCTION
     pop dword [current_exception]
     mov dword [currentskip], 17
@@ -1521,29 +1578,27 @@ exceptions:
         ; => access violation for too many prefixes (old anti-VirtualPC)
     expect dword [counter], 1
 _
+    print_ _testingnowINTEGEROVERFLOWwithINTO
     setmsg_ _INTOnoexception
     mov dword [counter], 0
-    print_ _testingnowINTEGEROVERFLOWwithINTO
     mov dword [current_exception], INTEGER_OVERFLOW
-    mov dword [currentskip], 1
+    mov dword [currentskip], 0 ; exception happens after
     mov al, 1
     ror al, 1
     into
-    nop
     expect dword [counter], 1
 _
+    print_ _testingnowINTEGEROVERFLOWwithINT4
     setmsg_ _INT4noexception
     mov dword [counter], 0
-    print_ _testingnowINTEGEROVERFLOWwithINT
     mov dword [current_exception], INTEGER_OVERFLOW
     mov dword [currentskip], 0 ; instruction is 2 bytes, but happens *AFTER*
     int 4
     expect dword [counter], 1
 _
+    print_ _testingnowBREAKPOINTwithINT3
     setmsg_ _INT3noexception
     mov dword [counter], 0
-
-    print_ _testingnowBREAKPOINTwithINT3
     mov dword [current_exception], BREAKPOINT
     mov dword [currentskip], 1
     int3
@@ -1553,9 +1608,8 @@ _
     mov dword [counter], 0
     print_ _testingnowBREAKPOINTwithINT_3
     mov dword [currentskip], BREAKPOINT
-    mov dword [currentskip], 2
+    mov dword [currentskip], 1  ; instruction is 2 bytes, but it's reported as 'in the middle' of the opcode...
     int 3
-    nop
     expect dword [counter], 1
 _
     setmsg_ _ICEBPnoexception
@@ -1607,8 +1661,6 @@ _
 _
     setmsg_ _invalidopcodelocknoexception
     mov dword [counter], 0
-    setmsg_ _byteinstructionnoexception
-    mov dword [counter], 0
     print_ _testingnowINVALIDLOCKSEQUENCEviaincorrectopcode
     mov dword [currentskip], 2
     lock wait
@@ -1622,7 +1674,7 @@ _
     hlt
     expect dword [counter], 1
 _
-    setmsg_ _privlegedinstructionvmwarenoexception
+    setmsg_ _privilegedinstructionvmwarenoexception
     mov dword [counter], 0
     print_ _testingnowPRIVILEGED_INSTRUCTIONviaVmWareBackdoor
     mov dword [current_exception], PRIVILEGED_INSTRUCTION
@@ -1660,11 +1712,13 @@ _testingnowCPUdependantexceptiontriggerswithtoolonginstruction db "Testing now: 
 _INTOnoexception db "ERROR: INTO - no exception", 0dh, 0ah, 0
 _testingnowINTEGEROVERFLOWwithINTO db "Testing now: INTEGER OVERFLOW with INTO", 0dh, 0
 _INT4noexception db "ERROR: INT4 - no exception", 0dh, 0ah, 0
-_testingnowINTEGEROVERFLOWwithINT db "Testing now: INTEGER OVERFLOW with INT 4", 0dh, 0
+_testingnowINTEGEROVERFLOWwithINT4 db "Testing now: INTEGER OVERFLOW with INT 4", 0dh, 0
 _INT3noexception db "ERROR: INT3 - no exception", 0dh, 0ah, 0
 _testingnowBREAKPOINTwithINT3 db "Testing now: BREAKPOINT with INT3", 0dh, 0
 _INT_3noexception db "ERROR: INT 3 - no exception", 0dh, 0ah, 0
 _testingnowBREAKPOINTwithINT_3 db "Testing now: BREAKPOINT with INT 3", 0dh, 0
+_INT2Dnoexception db "ERROR: INT2D - no exception (debugger present ?)", 0dh, 0ah, 0
+_testingnowBREAKPOINTwithINT2D db "Testing now: BREAKPOINT with INT2D (no triggers if debugger present)", 0dh, 0
 _ICEBPnoexception db "ERROR: ICEBP - no exception", 0dh, 0ah, 0
 _testingnowSINGLE_STEPwithundocumentedIceBP db "Testing now: SINGLE_STEP with 'undocumented' IceBP", 0dh, 0
 _TrapFlagnoexception db "ERROR: Trap Flag - no exception", 0dh, 0ah, 0
@@ -1679,7 +1733,7 @@ _invalidopcodelocknoexception db "ERROR: invalid opcode lock - no exception", 0d
 _testingnowINVALIDLOCKSEQUENCEviaincorrectopcode db "Testing now: INVALID LOCK SEQUENCE via incorrect opcode", 0dh, 0
 _privilegedinstructionnoexception db "ERROR: privileged instruction - no exception", 0dh, 0ah, 0
 _testingnowPRIVILEGED_INSTRUCTIONviaprivilegedopcode db "Testing now: PRIVILEGED_INSTRUCTION via privileged opcode", 0dh, 0
-_privlegedinstructionvmwarenoexception db "ERROR: privleged instruction (vmware) - no exception", 0dh, 0ah, 0
+_privilegedinstructionvmwarenoexception db "ERROR: privileged instruction (vmware present?) - no exception", 0dh, 0ah, 0
 _testingnowPRIVILEGED_INSTRUCTIONviaVmWareBackdoor db "Testing now: PRIVILEGED_INSTRUCTION via VmWare Backdoor", 0dh, 0
 _privilegedoperandnoexception db "ERROR: privileged operand - no exception", 0dh, 0ah, 0
 _testingnowPRIVILEGED_INSTRUCTIONviaprivilegedoperand db "Testing now: PRIVILEGED_INSTRUCTION via privileged operand", 0dh, 0
@@ -1774,9 +1828,9 @@ _c
 _cmpxchg16b:
     dq 00a0a0a0a0a0a0a0ah
     dq 0d0d0d0d0d0d0d0d0h
-cdqe_ dq 0
-rax_ dq 0
-rcx_ dq 0
+cdqe_ dq -1
+rax_ dq -1
+rcx_ dq -1
 
 _testingnowCDQEbitsonly db "Testing now: CDQE (64 bits only)", 0dh, 0
 _CDQE db "ERROR: CDQE", 0dh, 0ah, 0
@@ -1799,24 +1853,16 @@ good:
 _c
 
 bad:
-    print_ Error
+    push Error
+    call print
+    retn
+    ; temporarily trying that error reporting tries to resume execution
     push 42
     call ExitProcess
 _c
 
 ;%IMPORT kernel32.dll!ExitProcess
 _c
-
-;ValueEDI dd 0ED0h
-;ValueESI dd 0E01h
-;ValueEBP dd 0EEBE3141h                      ; E B PI ;)
-;ValueESP dd 0                               ; unused
-;ValueEBX dd 0EB1h
-;ValueEDX dd 0ED1h
-;ValueECX dd 0EC1h
-;ValueEAX dd 0EA1h
-;xchgpopad dd ValueEDI
-;_d
 
 ;%IMPORTS
 _d
