@@ -1,12 +1,12 @@
 %include '..\..\onesec.hdr'
 
-progname db 'Tana v0.1 - an opcode tester - 2011/03/31', 0dh, 0ah, 0
+progname db 'User-mode opcodes tester v0.1, 2011/04/01', 0dh, 0ah, 0
 author db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
 _d
 
-;this is a file making use of each usermode opcode (at least, one of each family)
-; using Heaven's gate trick to use 64b opcodes in a 32b PE
-; using ZwAllocateVirtualMemory trick to allocate [0000-ffff], so small jumps and returns are working
+;this file tests each usermode opcode (at least, one of almost all families)
+; using segment 33h trick to test 64b opcodes
+; using ZwAllocateVirtualMemory trick to allocate [0000-ffff], so word jumps and returns are working
 
 ; tested under W7 64b, XP SP3, XPSP1 under VmWare
 
@@ -18,7 +18,6 @@ _d
 ; int2c-2e with wrong/right address
 ; merge os checks, just see values
 ; expand stub for tests on [0000-ffff]
-; XSAVE, XGETBV XRSTOR, fxsave, verrw, frsotr ?
 
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
 
@@ -39,18 +38,20 @@ EntryPoint:
     print_ checkingOSversion
     call checkOS
 _
-    ; jump short, near, far, ret near, ret far, interrupt ret
+    ; call to word
+    ; jump short, near, to word, to reg32, to reg16, far
+    ; return near, near word, far, interrupt
     print_ _jumpsopcodes
-    call jumps
+    call jumps_
 _
     ; mov movzx movsx lea xchg add sub sbb adc inc dec or and xor
     ; not neg rol ror rcl rcr shl shr shld shrd div mul imul enter leave
-    ; setXX cmovXX bsf bsr bt bswap cbw cwde cwd
+    ; setXX cmovXX bsf bsr bt btr btc bswap cbw cwde cwd
     print_ _classicopcodes
     call classics
 _
     print_ _rareopcodes
-    ; xadd aaa daa aas das aad aam lds bound arpl jcxz xlatb lar
+    ; xadd aaa daa aas das aad aam lds bound arpl inc jcxz xlatb (on ebx and bx) lar
     ; verr cmpxchg cmpxchg8b sldt lsl
     call rares
 _
@@ -63,11 +64,11 @@ _
     print_ _undocumentedencodings
     call encodings      ; test, 'sal'
 _
-    ; os should be before any fpu use
+    ; smsw sidt sgdt str sysenter
     print_ _osdependantopcodes
-    call [os]
+    call [os]   ; os should be before any fpu use
 _
-    ; nop pause sfence mfence lfence prefetchnta 'hint nop' into
+    ; nop pause sfence mfence lfence prefetchnta 'hint nop' into, fpu, lock + operators
     print_ _nopopcodes
     call nops
 _
@@ -78,15 +79,17 @@ _
     print_ _opcodebasedGetIPs
     call get_ips ; call, call far, fstenv
 _
+    ; generic int 00-FF , int 2d, illegal instruction,
+    ; into, int4, int3, int 3, IceBP, TF, bound, lock, in, hlt
     print_ _opcodebasedexceptiontriggers
     call exceptions
 _
     ; documented but frequent disassembly mistakes
-    ; smsw str hints word calls/rets
+    ; bswap, smsw, str, branch hints, word calls/rets/loops, FS:movsd, xlatb, ud*
     call disassembly
 _
-    print_ _bitsopcodes
-    ; 64 bit opcodes - cwde cmpxchg16 lea movsxd
+    print_ _64bitsopcodes
+    ; cwde cmpxchg16 lea movsxd
     call sixtyfour
 _
     jmp good
@@ -110,7 +113,7 @@ _nopopcodes db "testing 'nop' opcodes...", 0dh, 0ah, 0
 _opcodebasedantidebuggers db "testing opcode-based anti-debuggers...", 0dh, 0ah, 0
 _opcodebasedGetIPs db "testing opcode-based GetIPs...", 0dh, 0ah, 0
 _opcodebasedexceptiontriggers db "testing opcode-based exception triggers...", 0dh, 0ah, 0
-_bitsopcodes db "testing 64 bits opcodes...", 0dh, 0ah, 0
+_64bitsopcodes db "testing 64 bits opcodes...", 0dh, 0ah, 0
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -240,7 +243,7 @@ _d
 ; 23 on W7 in 32 bit
 ; 33 in 64b
 
-jumps:
+jumps_:
 _retword:
     mov ecx, bad
     and ecx, 0ffffh
@@ -869,6 +872,7 @@ _d
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 cpu_specifics:
+; XSAVE, XGETBV XRSTOR are missing, I don't have a CPU supporting them
     mov eax, 0
     cpuid
     cmp eax, 0ah
@@ -935,6 +939,144 @@ _MOVBE db "ERROR: MOVBE", 0dh, 0ah, 0
 InfoMOVBEnotsupported db "Info: MOVBE not supported", 0dh, 0ah, 0
 _CRC db "ERROR: CRC32", 0dh, 0ah, 0
 InfoCRCnotsupported db "Info: CRC32 not supported", 0dh, 0ah, 0
+_d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+CONST equ 035603h
+CONST8 equ 27h
+
+encodings: ; undocumented alternate encodings
+    mov eax, CONST
+    db 0f7h, 0c8h                           ; test eax, CONST
+        dd CONST
+    jz bad
+_
+    db 0f7h, 0c0h                           ; test eax, CONST
+        dd CONST
+    jz bad
+_
+    rdtsc
+    mov al, CONST8
+    db 0f6h, 0c8h
+        db CONST8
+    jz bad
+_
+    ; 'SAL' is technically the same as SHL, but different encoding
+    setmsg_ _sal
+    mov al, 1010b
+    db 0c0h, 0f0h, 2                        ; sal al, 2
+    expect al, 101000b
+_
+    retn
+_c
+
+_sal db "ERROR: 'sal'", 0dh, 0ah, 0
+_d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+XP_tests:
+    setmsg_ _SMSWXP
+    smsw ax
+    expect ax, 0003bh  ; XP
+_
+    ; smsw on dword is officially undocumented, but it just fills the whole CR0 to the operand
+    setmsg_ _SMSWregundocumentedXPvalue
+    smsw eax
+    expect eax, 08001003bh  ; XP
+_
+    setmsg_ _SIDTXP
+    mov eax, sidt_
+    sidt [eax]
+    expect word [eax], 007ffh
+_
+    setmsg_ _SGDTXP
+    mov eax, sgdt_
+    sgdt [eax]
+    expect word [eax], 003ffh               ; TODO: 0412fh under vmware
+_
+    setmsg_ _STRreg16XP
+    rdtsc
+    str ax  ; 660F00C8
+    expect ax, 00028h                  ; TODO: 04000h under vmware
+_
+    setmsg_ _STRreg32XP
+    rdtsc
+    str eax ; 0F00C8
+    expect eax, 000000028h             ; TODO: 000004000h under vmware
+_
+    print_ _testingnowGSantidebugXPonly
+    call gstrick   ; xp only ?
+    print_ _testingnowSMSWantidebugXPonly
+    call smswtrick ; xp only ?
+_
+    print_ _testingnowsysenterXPonly
+    setmsg_ _sysenterXP
+    mov eax, 10001h
+    push _return
+    mov edx, esp
+    sysenter
+_c
+
+_return:
+    expect eax, ACCESS_VIOLATION            ; depends if [EAX] was a valid address or not
+    lea eax, [esp - 4]
+    expect ecx, eax                         ; 1 if stepping
+    mov al, [edx]
+    expect al, 0c3h
+;    expect edx, [__imp__KiFastSystemCallRet]; -1 if stepping
+    print_ ''
+    retn
+_c
+; disabled, not <SP3 compatible IMPORT ntdll.dll!KiFastSystemCallRet
+_c
+
+W7_tests:
+    setmsg_ _SMSWW
+    smsw eax
+    cmp eax, 080050031h  ; Win7 x64
+_
+    ; smsw on dword is officially undocumented, but it just fills the whole CR0 to the operand
+    setmsg_ _SMSWregundocumentedWvalue
+    smsw eax
+    expect eax, 080050031h ; W7
+_
+    setmsg_ _SIDTW
+    mov eax, sidt_
+    sidt [eax]
+    expect word [eax], 0fffh
+_
+    setmsg_ _SGDTW
+    mov eax, sgdt_
+    sgdt [eax]
+    expect word [eax], 07fh
+_
+    setmsg_ _STRregW
+    str ax
+    expect ax, 40h
+    retn
+_c
+
+sgdt_ dd 0,0
+sidt_ dd 0,0
+os dd 0
+
+_SMSWXP db "ERROR: SMSW [XP]", 0dh, 0ah, 0
+_SMSWregundocumentedXPvalue db "ERROR: SMSW reg32 [undocumented, XP value]", 0dh, 0ah, 0
+_SIDTXP db "ERROR: SIDT [XP]", 0dh, 0ah, 0
+_SGDTXP db "ERROR: SGDT (vm present?) [XP]", 0dh, 0ah, 0
+_STRreg16XP db "ERROR: STR reg16 (vm present?) [XP]", 0dh, 0ah, 0
+_STRreg32XP db "ERROR: STR reg32 (vm present?) [XP]", 0dh, 0ah, 0
+_testingnowGSantidebugXPonly db "Testing now: GS anti-debug (XP only)", 0dh, 0
+_testingnowSMSWantidebugXPonly db "Testing now: SMSW anti-debug (XP only)", 0dh, 0
+_testingnowsysenterXPonly db "Testing now: sysenter (XP only)", 0dh, 0
+_sysenterXP db "ERROR: sysenter [XP]", 0dh, 0ah, 0
+_SMSWW db "ERROR: SMSW [W7]", 0dh, 0ah, 0
+_SMSWregundocumentedWvalue db "ERROR: SMSW reg32 [undocumented, W7 value]", 0dh, 0ah, 0
+_SIDTW db "ERROR: SIDT [W7]", 0dh, 0ah, 0
+_SGDTW db "ERROR: SGDT [W7]", 0dh, 0ah, 0
+_STRregW db "ERROR: STR reg16 [W7]", 0dh, 0ah, 0
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1127,144 +1269,6 @@ _c
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-XP_tests:
-    setmsg_ _SMSWXP
-    smsw ax
-    expect ax, 0003bh  ; XP
-_
-    ; smsw on dword is officially undocumented, but it just fills the whole CR0 to the operand
-    setmsg_ _SMSWregundocumentedXPvalue
-    smsw eax
-    expect eax, 08001003bh  ; XP
-_
-    setmsg_ _SIDTXP
-    mov eax, sidt_
-    sidt [eax]
-    expect word [eax], 007ffh
-_
-    setmsg_ _SGDTXP
-    mov eax, sgdt_
-    sgdt [eax]
-    expect word [eax], 003ffh               ; TODO: 0412fh under vmware
-_
-    setmsg_ _STRreg16XP
-    rdtsc
-    str ax  ; 660F00C8
-    expect ax, 00028h                  ; TODO: 04000h under vmware
-_
-    setmsg_ _STRreg32XP
-    rdtsc
-    str eax ; 0F00C8
-    expect eax, 000000028h             ; TODO: 000004000h under vmware
-_
-    print_ _testingnowGSantidebugXPonly
-    call gstrick   ; xp only ?
-    print_ _testingnowSMSWantidebugXPonly
-    call smswtrick ; xp only ?
-_
-    print_ _testingnowsysenterXPonly
-    setmsg_ _sysenterXP
-    mov eax, 10001h
-    push _return
-    mov edx, esp
-    sysenter
-_c
-
-_return:
-    expect eax, ACCESS_VIOLATION            ; depends if [EAX] was a valid address or not
-    lea eax, [esp - 4]
-    expect ecx, eax                         ; 1 if stepping
-    mov al, [edx]
-    expect al, 0c3h
-;    expect edx, [__imp__KiFastSystemCallRet]; -1 if stepping
-    print_ ''
-    retn
-_c
-; disabled, not <SP3 compatible IMPORT ntdll.dll!KiFastSystemCallRet
-_c
-
-W7_tests:
-    setmsg_ _SMSWW
-    smsw eax
-    cmp eax, 080050031h  ; Win7 x64
-_
-    ; smsw on dword is officially undocumented, but it just fills the whole CR0 to the operand
-    setmsg_ _SMSWregundocumentedWvalue
-    smsw eax
-    expect eax, 080050031h ; W7
-_
-    setmsg_ _SIDTW
-    mov eax, sidt_
-    sidt [eax]
-    expect word [eax], 0fffh
-_
-    setmsg_ _SGDTW
-    mov eax, sgdt_
-    sgdt [eax]
-    expect word [eax], 07fh
-_
-    setmsg_ _STRregW
-    str ax
-    expect ax, 40h
-    retn
-_c
-
-sgdt_ dd 0,0
-sidt_ dd 0,0
-os dd 0
-
-_SMSWXP db "ERROR: SMSW [XP]", 0dh, 0ah, 0
-_SMSWregundocumentedXPvalue db "ERROR: SMSW reg32 [undocumented, XP value]", 0dh, 0ah, 0
-_SIDTXP db "ERROR: SIDT [XP]", 0dh, 0ah, 0
-_SGDTXP db "ERROR: SGDT (vm present?) [XP]", 0dh, 0ah, 0
-_STRreg16XP db "ERROR: STR reg16 (vm present?) [XP]", 0dh, 0ah, 0
-_STRreg32XP db "ERROR: STR reg32 (vm present?) [XP]", 0dh, 0ah, 0
-_testingnowGSantidebugXPonly db "Testing now: GS anti-debug (XP only)", 0dh, 0
-_testingnowSMSWantidebugXPonly db "Testing now: SMSW anti-debug (XP only)", 0dh, 0
-_testingnowsysenterXPonly db "Testing now: sysenter (XP only)", 0dh, 0
-_sysenterXP db "ERROR: sysenter [XP]", 0dh, 0ah, 0
-_SMSWW db "ERROR: SMSW [W7]", 0dh, 0ah, 0
-_SMSWregundocumentedWvalue db "ERROR: SMSW reg32 [undocumented, W7 value]", 0dh, 0ah, 0
-_SIDTW db "ERROR: SIDT [W7]", 0dh, 0ah, 0
-_SGDTW db "ERROR: SGDT [W7]", 0dh, 0ah, 0
-_STRregW db "ERROR: STR reg16 [W7]", 0dh, 0ah, 0
-_d
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-CONST equ 035603h
-CONST8 equ 27h
-
-encodings: ; undocumented alternate encodings
-    mov eax, CONST
-    db 0f7h, 0c8h                           ; test eax, CONST
-        dd CONST
-    jz bad
-_
-    db 0f7h, 0c0h                           ; test eax, CONST
-        dd CONST
-    jz bad
-_
-    rdtsc
-    mov al, CONST8
-    db 0f6h, 0c8h
-        db CONST8
-    jz bad
-_
-    ; 'SAL' is technically the same as SHL, but different encoding
-    setmsg_ _sal
-    mov al, 1010b
-    db 0c0h, 0f0h, 2                        ; sal al, 2
-    expect al, 101000b
-_
-    retn
-_c
-
-_sal db "ERROR: 'sal'", 0dh, 0ah, 0
-_d
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 smswtrick:
 waitfor3b:
     setmsg_ ANTIDEBUGSMSWincorrectvalueafterFPU
@@ -1431,76 +1435,6 @@ _WrongEIPviaCallFARpop db "ERROR: Wrong EIP via Call FAR/pop", 0dh, 0ah, 0
 _testingnowGetIPviaFSTENV db "Testing now: GetIP via FSTENV", 0dh, 0
 _WrongEIPviaFPU db "ERROR: Wrong EIP via FPU", 0dh, 0ah, 0
 _d
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-%define PREFIX_BRANCH_TAKEN db 3eh
-%define PREFIX_BRANCH_NOT_TAKEN db 2eh
-
-disassembly:
-    ; the following lines are just to test common mistakes in output gather together for easy visual testing
-
-    PREFIX_OPERANDSIZE
-        bswap eax
-    bswap eax
-
-; branch hints
-    PREFIX_BRANCH_TAKEN
-        jz $ + 2
-    PREFIX_BRANCH_NOT_TAKEN
-        jnz $ + 2
-
-; xor ecx, ecx
-    loopne $
-
-; str is only word in memory
-    str eax
-    str ax
-    str [eax]
-
-; smsw is not defined 16 bit, but actually reliable
-    smsw eax
-    smsw ax
-    retn
-
-    call word $ + 3
-    db 66h
-        retn
-    db 66h
-        loopz  $ - 1 ; looping to IP
-    db 67h
-        loopz $ - 1 ; looping depending on CX
-    db 66h
-    db 67h
-        loopz $ - 2 ; looping depending on CX, to IP
-    jecxz $
-    jcxz $
-    db 66h
-        jecxz $ - 1
-    db 66h
-        jcxz $ - 1
-    db 66h
-        jmp $ + 2
-
-    db 0f7h, 0c8h ; test eax, xx
-        dd 0
-    db 0f6h, 0c8h ; test al, xx
-        db 0
-
-    db 0f1h ; IceBP
-    db 64h  ; mov edi, fs:esi
-        movsd
-    xlatb      ; reads from [EBX + AL]
-    db 67h     ; reads from [BX + AL]
-        xlatb
-    db 0fh, 0ffh    ; ud0                   ;0fff
-
-    ud1                                     ;0fb9
-    ud2                                     ;0f0b
-    xgetbv
-    xrstor [eax]
-    xsave [eax]
-_c
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1741,7 +1675,72 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; roy g biv's Heaven's gate @ http://vxheavens.com/lib/vrg02.html
+%define PREFIX_BRANCH_TAKEN db 3eh
+%define PREFIX_BRANCH_NOT_TAKEN db 2eh
+
+disassembly:
+    ; the following lines are just to test common mistakes in output gather together for easy visual testing
+
+    PREFIX_OPERANDSIZE
+        bswap eax
+    bswap eax
+
+; branch hints
+    PREFIX_BRANCH_TAKEN
+        jz $ + 2
+    PREFIX_BRANCH_NOT_TAKEN
+        jnz $ + 2
+
+; xor ecx, ecx
+    loopne $
+
+; str is only word in memory
+    str eax
+    str ax
+    str [eax]
+
+; smsw is not defined 16 bit, but actually reliable
+    smsw eax
+    smsw ax
+    retn
+
+    call word $ + 3
+    db 66h
+        retn
+    db 66h
+        loopz  $ - 1 ; looping to IP
+    db 67h
+        loopz $ - 1 ; looping depending on CX
+    db 66h
+    db 67h
+        loopz $ - 2 ; looping depending on CX, to IP
+    jecxz $
+    jcxz $
+    db 66h
+        jecxz $ - 1
+    db 66h
+        jcxz $ - 1
+    db 66h
+        jmp $ + 2
+
+    db 0f7h, 0c8h ; test eax, xx
+        dd 0
+    db 0f6h, 0c8h ; test al, xx
+        db 0
+
+    db 0f1h ; IceBP
+    db 64h  ; mov edi, fs:esi
+        movsd
+    xlatb      ; reads from [EBX + AL]
+    db 67h     ; reads from [BX + AL]
+        xlatb
+    db 0fh, 0ffh    ; ud0                   ;0fff
+
+    ud1                                     ;0fb9
+    ud2                                     ;0f0b
+_c
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %macro start64b 0
     %push _64b
