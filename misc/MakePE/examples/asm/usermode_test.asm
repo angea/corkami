@@ -17,7 +17,9 @@ _d
 ; int2a-2b os dependent
 ; int2c-2e with wrong/right address
 ; merge os checks, just see values
-; expand stub for tests on [0000-ffff]
+; merge 16b operations - expand stub for tests on [0000-ffff]
+; fsave, fxsave
+; setldtentries, xlat/movs* with selector
 
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
 
@@ -577,16 +579,23 @@ _
     expect eax, 78563412h
 _
     setmsg_ _CBW
-    mov eax, -1
-    mov al, 3
+    rdtsc
+    mov al, -3
     cbw
-    expect ax, 3
+    expect ax, -3
     setmsg_ _CWDE
     cwde
-    expect eax, 3
+    expect eax, -3
+    setmsg_ _CDQ
+    cdq
+    expect edx, -1
+    
     setmsg_ _CWD
+    mov ax, -15
+    mov ebx, eax
     cwd
-    expect dx, 0
+    expect eax, ebx
+    expect dx, -1
 _
     retn
 _c
@@ -629,6 +638,7 @@ _BTC db "ERROR: BTC", 0dh, 0ah, 0
 _BSWAP db "ERROR: BSWAP", 0dh, 0ah, 0
 _CBW db "ERROR: CBW", 0dh, 0ah, 0
 _CWDE db "ERROR: CWDE", 0dh, 0ah, 0
+_CDQ db "ERROR: CDQ", 0dh, 0ah, 0
 _CWD db "ERROR: CWD", 0dh, 0ah, 0
 _d
 
@@ -1181,11 +1191,27 @@ _
     prefetcht0 [eax]                        ;0f18 08
     prefetcht1 [eax]                        ;0f18 10
     prefetcht2 [eax]                        ;0f18 18
+
+    ; 0f 18 a0-b8 xxxxxxxx ; undocumented prefetch ?
+%assign i 0a0h
+%rep    4
+    db 0fh, 018h, i
+    dd 03141592h
+%assign i i+8
+%endrep
+
+    ; 0f 18 c0-f8 , undocumented prefetch encodings
+%assign i 0c0h
+%rep    8
+    db 0fh, 018h, i
+%assign i i+8
+%endrep
 _
     ; if OF is not set, this just does a nop - a tricky nop then
     into
 _
     db 0fh, 1ch, 00                         ; nop [eax] ; doesn't trigger an exception
+    db 0fh, 1fh, 00                         ; nop [eax] ; doesn't trigger an exception
     db 0fh, 1dh, 0c0h ; nop eax
     db 0fh, 019h, 084h, 0c0h
         dd 080000000h                       ; hint_nop [eax + eax * 8 - 080000000h]
