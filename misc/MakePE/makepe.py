@@ -3,6 +3,8 @@
 # pe structure code generator
 # imports structures, pe checksum, defaults values
 
+# Ange Albertini BSD Licence 2009-2011
+
 try:
     import sys, re, os, templates, pefile
 except:
@@ -199,6 +201,40 @@ if __name__ == "__main__":
     r = re.sub(r";%reloc([0-9]+) [0-9]", r"""reloc\1:""", r)
     r = r.replace(";%relocs", MakeRelocs(relocs))
 
+#parse string tags
+    #add a counter for each of them
+    strcnt = 0
+    strs = []
+    ind = r.find("%string:")
+    inds = r.find(";%strings")
+    while inds > -1 or ind > -1:
+        ind = r.find("%string:")
+        inds = r.find(";%strings")
+        if ind == -1 or inds < ind:
+            r = r.replace(";%strings", "\n".join(strs), 1)
+            strs = []
+
+            ind = r.find("%string:")
+            inds = r.find(";%strings")
+            continue
+        elif ind > -1:
+            strcnt += 1
+            name = "string_%03i" % strcnt
+            content = r[ind + 8:].splitlines()[0].strip()
+            r = r.replace("%string:" + content, name, 1)
+            #print name, content
+
+            strs.append("%s db %s" % (name, content))
+            ind = r.find("%string:")
+            inds = r.find(";%strings")
+            continue
+        else:
+            pass
+            #print ind, inds
+        ind = r.find("%string:")
+        inds = r.find(";%strings")
+
+
 # add default values for variables that are not defined
     find_define = re.findall("([A-Z_0-9 ]+).*EQU", r, re.I | re.M)
     defines = []
@@ -239,4 +275,3 @@ if __name__ == "__main__":
         pe.OPTIONAL_HEADER.CheckSum = pe.generate_checksum()
         pe.write(target)
 
-# Ange Albertini 2009-2010
