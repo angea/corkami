@@ -1,6 +1,6 @@
 %include '..\..\onesec.hdr'
 
-progname db 'User-mode opcodes tester v0.1, 2011/04/01', 0dh, 0ah, 0
+progname db 'User-mode opcodes tester v0.2b, 2011/??/??', 0dh, 0ah, 0
 author db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
 _d
 
