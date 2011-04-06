@@ -1638,6 +1638,19 @@ end64b
     expect dword [cdqe_], 012345678h
     expect dword [cdqe_ + 4], 0
 _
+
+    print_ %string:"Testing now: CQO (64 bits only)", 0dh, 0
+    setmsg_ %string:"ERROR: CQO", 0dh, 0ah, 0
+start64b
+    mov rdx, 0
+    mov rax, -35h
+    cqo
+    mov [cqo_], rdx
+end64b
+    expect dword [cqo_], -1
+    expect dword [cqo_ + 4], -1
+_
+
     print_ %string:"Testing now: CMPXCHG16 (64 bits only)", 0dh, 0
     setmsg_ %string:"ERROR: CMPXCHG16 (64 bits)", 0dh, 0ah, 0
 
@@ -1675,6 +1688,7 @@ end64b
     expect dword [rax_ + 4], 0
     expect dword [rcx_ + 4], -1
 _
+
     print_ %string:"Testing now: 15 bytes lock add (64 bits)", 0dh, 0
     setmsg_ %string:"ERROR: 15 bytes LOCK ADD (64 bits)", 0dh, 0
     mov eax , 314159h
@@ -1684,6 +1698,7 @@ end64b
     expect dword [lockadd], 0efcdab88h
     expect dword [lockadd + 4], -1
 _
+
     print_ ''
 sixtyfour_end:
     clearSEH
@@ -1702,6 +1717,7 @@ _cmpxchg16b:
     dq 00a0a0a0a0a0a0a0ah
     dq 0d0d0d0d0d0d0d0d0h
 cdqe_ dq -1
+cqo_ dq 0
 rax_ dq -1
 rcx_ dq -1
 lockadd dq -1
