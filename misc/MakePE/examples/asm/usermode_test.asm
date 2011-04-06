@@ -790,11 +790,16 @@ _d
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 cpu_specifics:
-; XSAVE, XGETBV XRSTOR are missing, I don't have a CPU supporting them
+; XSAVE, XGETBV XRSTOR, LZCNT are missing, I don't have a CPU supporting them
+    setmsg_ %string:"ERROR: CPUID", 0dh, 0ah, 0
     mov eax, 0
     cpuid
     cmp eax, 0ah
     jl bad
+    mov [cpuids + 0], ebx
+    mov [cpuids + 4], edx
+    mov [cpuids + 8], ecx
+    print_ cpuidstr
 _
     mov eax, 1
     cpuid
@@ -845,12 +850,40 @@ no_crc32:
     jmp crc32_end
 crc32_end:
 _
+    mov eax, 080000001h
+    cpuid
+    and edx, 1 << 27
+    jz no_rdtscp
+_
+    setmsg_ %string:"ERROR: RDTSCP", 0dh, 0ah, 0
+    rdtsc
+    mov ebx, edx
+    mov esi, eax
+    rdtscp
+    expect ebx, edx
+    sub eax, esi
+    cmp eax, 500h
+    jle not_too_slow2
+    print_ %string:"RDTSCP too far from RDTSC", 0dh, 0ah, 0
+not_too_slow2:
+    expect ecx, 0
+    jmp rdtscp_end
+no_rdtscp:
+    print_ %string:"Info: RDTSCP not supported", 0dh, 0ah, 0
+    jmp rdtscp_end
+rdtscp_end:
+_
+
     retn
 _c
 
 cpuid_ecx dd 0
 _movbe dd 11223344h
 
+cpuidstr db "Info: CPUID "
+cpuids:
+    dd 0, 0, 0
+    db 0dh, 0ah, 0
 ;%strings
 _d
 
