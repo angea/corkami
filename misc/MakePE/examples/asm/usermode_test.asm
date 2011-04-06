@@ -560,7 +560,7 @@ _
     setmsg_ %string:"ERROR: CDQ", 0dh, 0ah, 0
     cdq
     expect edx, -1
-    
+
     setmsg_ %string:"ERROR: CWD", 0dh, 0ah, 0
     mov ax, -15
     mov ebx, eax
@@ -1076,25 +1076,18 @@ _
     mfence
     lfence
     prefetch [eax]                          ;0f0d00
-    prefetchnta [eax]                       ;0f1800
-    prefetcht0 [eax]                        ;0f18 08
-    prefetcht1 [eax]                        ;0f18 10
-    prefetcht2 [eax]                        ;0f18 18
+    db 0fh, 0dh, 0c0h
 
-    ; 0f 18 a0-b8 xxxxxxxx ; undocumented prefetch ?
-%assign i 0a0h
-%rep    4
-    db 0fh, 018h, i
-    dd 03141592h
-%assign i i+8
-%endrep
+    ; 0f 18 is a group
+    prefetchnta [eax]                       ;0f18 00 000 000
+    prefetcht0 [eax]                        ;0f18 00 001 000 (08)
+    prefetcht1 [eax]                        ;0f18 00 010 000 (10)
+    prefetcht2 [eax]                        ;0f18 00 011 000 (18)
+    db 0fh, 018h, 100b << 3
+    db 0fh, 018h, 101b << 3
+    db 0fh, 018h, 110b << 3
+    db 0fh, 018h, 111b << 3
 
-    ; 0f 18 c0-f8 , undocumented prefetch encodings
-%assign i 0c0h
-%rep    8
-    db 0fh, 018h, i
-%assign i i+8
-%endrep
 _
     ; if OF is not set, this just does a nop - a tricky nop then
     into
@@ -1682,6 +1675,15 @@ end64b
     expect dword [rax_ + 4], 0
     expect dword [rcx_ + 4], -1
 _
+    print_ %string:"Testing now: 15 bytes lock add (64 bits)", 0dh, 0
+    setmsg_ %string:"ERROR: 15 bytes LOCK ADD (64 bits)", 0dh, 0
+    mov eax , 314159h
+start64b
+    lock add qword [cs:eax + eax*4 + lockadd - 314159h*5], 0efcdab89h ; F0:2E:67:4C:818480 01234567 89ABCDEF
+end64b
+    expect dword [lockadd], 0efcdab88h
+    expect dword [lockadd + 4], -1
+_
     print_ ''
 sixtyfour_end:
     clearSEH
@@ -1702,6 +1704,12 @@ _cmpxchg16b:
 cdqe_ dq -1
 rax_ dq -1
 rcx_ dq -1
+lockadd dq -1
+
+; just for reference, another 15 bytes operation, in 16 bits.
+bits 16
+lock add dword [cs: eax + ebx + 01234567h], 01234567h    ; 66:67:f0:2e:81 8418 67452301 efcdab89
+bits 32
 
 ;%strings
 _d
