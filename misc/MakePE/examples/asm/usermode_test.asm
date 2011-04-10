@@ -1,7 +1,8 @@
 %include '..\..\onesec.hdr'
 
-program db 'User-mode opcodes tester v0.2b, 2011/??/??', 0dh, 0ah, 0
-author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
+program db 'User-mode opcodes tester v0.2b 2011/??/??    ', 0dh, 0ah, 0
+author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0
+_d
 
 ;this file tests each usermode opcode (at least, one of almost all families)
 ; using segment 33h trick to test 64b opcodes
@@ -14,29 +15,41 @@ author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0
 ;TODO:
 ; add IP checking for exception triggers
 ; int2a-2b os dependent
+; test int2d under ollydbg 1/2
 ; int2c-2e with wrong/right address
 ; merge os checks, just see values
 ; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
 ; setldtentries, xlat/movs* with selector
+; test print watchdog with VEH
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %macro print_ 1+
     push %1
+;    mov dword [PRINTME] , %1
     call printnl
 %endmacro
-_d
+
 EntryPoint:
-    call start
+    call initconsole
+;    setSEH printer
     print_ program
     print_ author
+    call init
+    jmp main
+_c
 
+
+init:
     print_ %string:"allocating buffer [0000-ffff]", 0dh, 0
     call initmem
     print_ %string:"checking OS version", 0dh, 0
     call checkOS
-_
+    retn
+_c
+
+main:
     ; call to word
     ; jump short, near, to word, to reg32, to reg16, far
     ; return near, near word, far, interrupt
@@ -94,6 +107,22 @@ _
     jmp good
 _c
 
+good:
+    print_ ''
+    print_ %string:0dh, 0ah, "...completed!", 0dh, 0ah, 0
+    push 0
+    call ExitProcess
+_c
+
+bad:
+    print_ %string:0dh, 0ah, "Error", 0dh, 0ah, 0
+    call print
+    retn
+    ; temporarily trying that error reporting tries to resume execution
+    push 42
+    call ExitProcess
+_c
+
 %macro expect 2
     cmp %1, %2
     jz %%good
@@ -101,7 +130,11 @@ _c
 %%good:
 %endmacro
 
+;%IMPORT kernel32.dll!ExitProcess
+_c
+
 ;%strings
+newline db 0dh, 0ah, 0
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -144,8 +177,7 @@ lpNumbersOfCharsWritten dd 0
 _d
 
 %macro setmsg_ 1+
-    push %1
-    pop dword [ErrorMsg]
+    mov dword [ErrorMsg], %1
 %endmacro
 
 errormsg_:
@@ -158,7 +190,7 @@ ErrorMsg dd 0
 _d
 
 STD_OUTPUT_HANDLE equ -11
-start:
+initconsole:
     push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
     call GetStdHandle
     mov [hConsoleOutput], eax
@@ -1428,6 +1460,7 @@ _
     mov dword [current_exception], BREAKPOINT
     mov dword [currentskip], 0  ; the exception is triggered AFTER
     int 02dh
+    nop
     expect dword [counter], 1
 _
     print_ %string:"Testing now: CPU-dependant exception triggers with too long instruction", 0dh, 0
@@ -1760,37 +1793,38 @@ bits 16
 lock add dword [cs: eax + ebx + 01234567h], 01234567h    ; 66:67:f0:2e:81 8418 67452301 efcdab89
 bits 32
 
-;%strings
-_d
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-good:
-    print_ ''
-    print_ %string:0dh, 0ah, "...completed!", 0dh, 0ah, 0
-    push 0
-    call ExitProcess
-_c
-
-bad:
-    print_ %string:0dh, 0ah, "Error", 0dh, 0ah, 0
-    call print
-    retn
-    ; temporarily trying that error reporting tries to resume execution
-    push 42
-    call ExitProcess
-_c
-
-;%IMPORT kernel32.dll!ExitProcess
-_c
-
 ;%IMPORTS
 _d
 
 ;%strings
 _d
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
+
+;printing handler, for one opcode display operations - not perfect yet
+;PRINTME equ 0fabecafeh
+;
+;printer:
+;    mov edx, [esp + exceptionHandler.pContext + 4]
+;    mov eax, [edx + CONTEXT.regEip]
+;    cmp word [eax],  005c7h
+;    cmp dword [eax + 2],  PRINTME
+;    jnz not_print
+;_
+;    mov eax, [eax + 6]
+;    push eax
+;    call printnl
+;
+;    mov edx, [esp + exceptionHandler.pContext + 4]
+;    add dword [edx + CONTEXT.regEip], 10
+;
+;    mov eax, ExceptionContinueExecution
+;    retn
+;_c
+;not_print:
+;    mov eax, 0
+;    retn
