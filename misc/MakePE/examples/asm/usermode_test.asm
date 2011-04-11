@@ -1,7 +1,7 @@
 %include '..\..\onesec.hdr'
 
 program db 'User-mode opcodes tester v0.2b 2011/??/??    ', 0dh, 0ah, 0
-author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0
+author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
 _d
 
 ;this file tests each usermode opcode (at least, one of almost all families)
@@ -21,17 +21,19 @@ _d
 ; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
 ; setldtentries, xlat/movs* with selector
-; test print watchdog with VEH
+; fix VEH/SEH chaining
+; scasb
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %macro print_ 1+
     push %1
-;    mov dword [PRINTME] , %1
     call printnl
+;    mov dword [PRINTME] , %1 
 %endmacro
 
 EntryPoint:
+;    call setVEH
     call initconsole
 ;    setSEH printer
     print_ program
@@ -40,6 +42,40 @@ EntryPoint:
     jmp main
 _c
 
+;setVEH:
+;    push printer
+;    push -1
+;    call AddVectoredExceptionHandler
+;    retn
+;_c
+;;%IMPORT kernel32.dll!AddVectoredExceptionHandler
+;_c
+
+;;printing handler, for one opcode display operations - not perfect yet
+;PRINTME equ 0fabecafeh
+;
+;printer:
+;    mov edx, [esp + 4 * 6]
+;    mov eax, [edx + CONTEXT.regEip]
+;    cmp word [eax],  005c7h
+;    jnz not_print
+;    cmp dword [eax + 2],  PRINTME
+;    jnz not_print
+;_
+;    mov eax, [eax + 6]
+;    push eax
+;    call printnl
+;
+;    mov edx, [esp + 4 * 6]
+;    add dword [edx + CONTEXT.regEip], 2 + 4 + 4
+;
+;    mov eax, -1
+;    retn
+;_c
+;not_print:
+;    mov eax, 0
+;    retn
+;_c
 
 init:
     print_ %string:"allocating buffer [0000-ffff]", 0dh, 0
@@ -48,6 +84,7 @@ init:
     call checkOS
     retn
 _c
+
 
 main:
     ; call to word
@@ -1804,27 +1841,3 @@ _d
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
 SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
-
-;printing handler, for one opcode display operations - not perfect yet
-;PRINTME equ 0fabecafeh
-;
-;printer:
-;    mov edx, [esp + exceptionHandler.pContext + 4]
-;    mov eax, [edx + CONTEXT.regEip]
-;    cmp word [eax],  005c7h
-;    cmp dword [eax + 2],  PRINTME
-;    jnz not_print
-;_
-;    mov eax, [eax + 6]
-;    push eax
-;    call printnl
-;
-;    mov edx, [esp + exceptionHandler.pContext + 4]
-;    add dword [edx + CONTEXT.regEip], 10
-;
-;    mov eax, ExceptionContinueExecution
-;    retn
-;_c
-;not_print:
-;    mov eax, 0
-;    retn
