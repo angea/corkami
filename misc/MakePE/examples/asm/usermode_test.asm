@@ -21,61 +21,60 @@ _d
 ; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
 ; setldtentries, xlat/movs* with selector
-; fix VEH/SEH chaining
 ; scasb
+; sldt on 16b
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %macro print_ 1+
-    push %1
-    call printnl
-;    mov dword [PRINTME] , %1 
+;    push %1
+;    call printnl
+    mov dword [PRINTME] , %1 
 %endmacro
 
 EntryPoint:
-;    call setVEH
+    call setVEH
     call initconsole
-;    setSEH printer
     print_ program
     print_ author
     call init
     jmp main
 _c
 
-;setVEH:
-;    push printer
-;    push -1
-;    call AddVectoredExceptionHandler
-;    retn
-;_c
-;;%IMPORT kernel32.dll!AddVectoredExceptionHandler
-;_c
+setVEH:
+    push printer
+    push -1
+    call AddVectoredExceptionHandler
+    retn
+_c
+;%IMPORT kernel32.dll!AddVectoredExceptionHandler
+_c
 
-;;printing handler, for one opcode display operations - not perfect yet
-;PRINTME equ 0fabecafeh
-;
-;printer:
-;    mov edx, [esp + 4 * 6]
-;    mov eax, [edx + CONTEXT.regEip]
-;    cmp word [eax],  005c7h
-;    jnz not_print
-;    cmp dword [eax + 2],  PRINTME
-;    jnz not_print
-;_
-;    mov eax, [eax + 6]
-;    push eax
-;    call printnl
-;
-;    mov edx, [esp + 4 * 6]
-;    add dword [edx + CONTEXT.regEip], 2 + 4 + 4
-;
-;    mov eax, -1
-;    retn
-;_c
-;not_print:
-;    mov eax, 0
-;    retn
-;_c
+;printing handler, for one opcode display operations - not perfect yet
+PRINTME equ 0fabecafeh
+
+printer:
+    mov edx, [esp + 4 * 6]
+    mov eax, [edx + CONTEXT.regEip]
+    cmp word [eax],  005c7h
+    jnz not_print
+    cmp dword [eax + 2],  PRINTME
+    jnz not_print
+_
+    mov eax, [eax + 6]
+    push eax
+    call printnl
+
+    mov edx, [esp + 4 * 6]
+    add dword [edx + CONTEXT.regEip], 2 + 4 + 4
+
+    mov eax, -1
+    retn 4
+_c
+not_print:
+    mov eax, 0
+    retn 4
+_c
 
 init:
     print_ %string:"allocating buffer [0000-ffff]", 0dh, 0
