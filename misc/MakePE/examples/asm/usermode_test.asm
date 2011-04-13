@@ -15,14 +15,13 @@ _d
 ;TODO:
 ; add IP checking for exception triggers
 ; int2a-2b os dependent
-; test int2d under ollydbg 1/2
 ; int2c-2e with wrong/right address
+; finish int 2d slide detection
 ; merge os checks, just see values
 ; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
 ; setldtentries, xlat/movs* with selector
 ; scasb
-; sldt on 16b
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1495,9 +1494,12 @@ _
     mov dword [counter], 0
     mov dword [current_exception], BREAKPOINT
     mov dword [currentskip], 0  ; the exception is triggered AFTER
+;    mov eax, 0
     int 02dh
+;    inc eax
     nop
-    expect dword [counter], 1
+;    expect dword [counter], 1
+;    cmp eax, 0
 _
     print_ %string:"Testing now: CPU-dependant exception triggers with too long instruction", 0dh, 0
     setmsg_ %string:"ERROR: >15 byte instruction - no exception", 0dh, 0ah, 0
@@ -1663,6 +1665,10 @@ disassembly:
     str ax
     str [eax]
 
+    sldt eax
+    sldt ax
+    sldt [eax]
+    
 ; smsw is not defined 16 bit, but actually reliable
     smsw eax
     smsw ax
@@ -1698,6 +1704,8 @@ disassembly:
     xlatb      ; reads from [EBX + AL]
     db 67h     ; reads from [BX + AL]
         xlatb
+    db 64h
+        xlatb      ; reads from fs:[EBX + AL]
     db 0fh, 0ffh    ; ud0                   ;0fff
 
     ud1                                     ;0fb9
