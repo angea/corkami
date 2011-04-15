@@ -4,53 +4,60 @@ SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
 
 STD_OUTPUT_HANDLE equ -11
 
-EntryPoint:
+init:
     push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
     call GetStdHandle
     mov [hConsoleOutput], eax
+    retn
+_c
 
-;    call GetCommandLineA
-;    mov ebx, eax
-;    mov edi, eax
-;
-;    mov al, 0
-;    mov ecx, 0xffffffff
-;    cld
-;    repnz scasb
-;    neg ecx
-;    sub ecx, 2
-
-;    ; standard GUI calls still work
-;    push MB_ICONINFORMATION ; UINT uType
-;    push tada               ; LPCTSTR lpCaption
-;    push helloworld         ; LPCTSTR lpText
-;    push 0                  ; HWND hWnd
-;    call MessageBoxA
-;IMPORT user32.dll!MessageBoxA
-
+print:
+    pushad
+    mov edi, [esp + 24h]
+    mov esi, edi
+    xor al, al
+    cld
+    push -1
+    pop ecx
+    repnz scasb
+    not ecx
+    sub edi, ecx
+    dec ecx
+_
     push 0                          ; LPVOID lpReserved
     push lpNumbersOfCharsWritten    ; LPWORD lpNumbersOfCharsWritten
-    push HELLOWORLD_LEN             ; DWORD nNumbersOfCharsToWrite
-    push helloworld                 ; VOID *lpBuffer
+    push ecx                        ; DWORD nNumbersOfCharsToWrite
+    push edi                        ; VOID *lpBuffer
     push dword [hConsoleOutput]     ; HANDLE hConsoleOutput
     call WriteConsoleA
+    popad
+    retn 4
+_c
 
+EntryPoint:
+    call init
+_
+    push %string:"Hello world!", 0dh, 0ah, 0
+    call print
+_
     push 0                  ; UINT uExitCode
     call ExitProcess
-    retn
+_c
+
+;%IMPORT kernel32.dll!GetStdHandle
+;%IMPORT kernel32.dll!WriteConsoleA
+;%IMPORT kernel32.dll!ExitProcess
+_c
 
 lpNumbersOfCharsWritten dd 0
 hConsoleOutput dd 0
-;tada db "Tada!", 0
-helloworld db "Hello World!"
-    HELLOWORLD_LEN equ $ - helloworld
-db 0
+_d
 
-;%IMPORT kernel32.dll!GetStdHandle
-;IMPORT kernel32.dll!GetCommandLineA
-;%IMPORT kernel32.dll!WriteConsoleA
-;%IMPORT kernel32.dll!ExitProcess
+;%strings
+_d
+
 ;%IMPORTS
+_d
 
 %include '..\..\standard_ftr.asm'
 
