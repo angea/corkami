@@ -1,0 +1,25 @@
+Views
+	Artist
+		$if($strstr(%path%,_Singles),'_Singles'|%artist%| %date% %title%,%<artist>%|[%<date>% ]%album%|[[%discnumber%.]%tracknumber%. ][%track artist% - ]%title%)
+
+Custom columns
+	Date Album
+		$if($strstr(%path%,_Singles),%artist%[ '['%date%']'],[%date% ][%album%])
+	#
+		$if($strstr(%path%,_Singles),,[%disc%.]%tracknumber%)
+Custom grouping schemes
+	[album] artist
+		$if($strstr(%path%,_Singles),'Singles',$if2(%album artist%,%artist%))
+
+Window title
+	[%album artist% - ]['['%album%[ CD%discnumber%][ #%tracknumber%]']' ]%title%[ '//' %track artist%]
+Status bar
+	%codec% | %bitrate% kbps | %samplerate% Hz | %channels% | %playback_time%[ / %length%]
+Notification
+	[%artist% ]['('[%date% ][%album%]')' ]['['%tracknumber%']' ]%title%
+
+
+Used settings
+View: Artist
+Columns: Playing	Date Album	#	Title/track artist
+Groups: [album] artist
