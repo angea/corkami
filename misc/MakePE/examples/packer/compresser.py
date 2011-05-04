@@ -1,7 +1,7 @@
 # Minimalist compressor
 
 import mypacklib, pefile
-from kbp.comp.aplib import compress, decompress
+from aplib import compress, decompress
 
 pe, oep, ib, start, size = mypacklib.load()
 
