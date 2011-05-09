@@ -77,7 +77,6 @@ loc_7C59:
     sahf
     jmp loc_7C9B
 
-
 loc_7C87:
     mov ax, 201h
     mov bx, start
@@ -90,10 +89,11 @@ loc_7C87:
 loc_7C9B:
     popad
     jnb loc_7CBD
+
     dec byte [bp+11h]
     jnz near loc_7CB2
 
-    cmp byte [bp + 0], 80h
+    cmp byte [bp], 80h
     jz near loc_7D38
 
     mov dl, 80h
@@ -103,7 +103,7 @@ loc_7C9B:
 loc_7CB2:
     push bp
     xor ah, ah                              ;ORIGINAL 32 e4
-    mov dl, [bp + 0]
+    mov dl, [bp]
     int 13h    ; reset disk system
 
     pop bp
@@ -114,10 +114,11 @@ loc_7CBD:
     cmp word [marker], MARKER
     jnz noOS
 
-    push word [bp + 0]
+    push word [bp]
     call sub_7D55
 
     jnz near loc_7CE4
+
     mov al, 0D1h
     out 64h, al
     call sub_7D55
@@ -166,11 +167,9 @@ noOS:
     mov al, [lpnoos - start + NEWBASE]
     jmp print
 
-
 loc_7D38:
     mov al, [lperrorloading - start + NEWBASE]
     jmp print
-
 
 loc_7D3D:
     mov al, [lpinvalidpart - start + NEWBASE]
@@ -183,9 +182,10 @@ print:
 nextchar:
     lodsb
 
-skipnull:
+endloop:
     cmp al, 0
-    jz skipnull
+    jz endloop
+
     mov bx, 7
     mov ah, 0Eh
     int 10h

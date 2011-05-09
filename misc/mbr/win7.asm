@@ -1,15 +1,19 @@
+%include 'consts.inc'
+
 org 7c00h
-NEWBASE equ 600h
+bits 16
+
+STROFF equ NEWBASE + 100h
 
 start:
-    xor ax, ax
+    xor ax, ax                              ;ORIGINAL 33 c0
     mov ss, ax
-    mov sp,  start
+    mov sp, start
     mov es, ax
     mov ds, ax
-    mov si,  start
+    mov si, start
     mov di, NEWBASE
-    mov cx, 200h
+    mov cx, MBRLEN
     cld
     rep movsb
     push ax
@@ -19,183 +23,215 @@ start:
 next:
     sti
     mov cx, 4
-    mov bp, 7BEh
+    mov bp, bios - start + NEWBASE
 
 loc_7C23:
-    cmp byte [bp+0], 0
-    jl short loc_7C34
+    cmp byte [bp + 0], 0
+    jl loc_7C34
+
     jnz loc_7D3B
+
     add bp, 10h
     loop loc_7C23
+
     int 18h
 
 loc_7C34:
-    mov [bp+0], dl
+    mov [bp], dl
     push bp
-    mov byte [bp+11h], 5
-    mov byte [bp+10h], 0
-    mov ah, 41h ; 'A'
-    mov bx, 55AAh
-    int 13h    ; DISK -
+    mov byte [bp + 11h], 5
+    mov byte [bp + 10h], 0
+    mov ah, 41h
+    mov bx, sMARKER
+    int 13h
+
     pop bp
-    jb short loc_7C59
-    cmp bx, 0AA55h
-    jnz short loc_7C59
+    jb loc_7C59
+
+    cmp bx, MARKER
+    jnz loc_7C59
+
     test cx, 1
-    jz short loc_7C59
+    jz loc_7C59
+
     inc byte [bp+10h]
 
 loc_7C59:
     pushad
-    cmp byte [bp+10h], 0
-    jz short loc_7C87
-    push large 0
-    push large dword ptr [bp+8]
-    push 0
-    push  start
-    push 1
-    push 10h
-    mov ah, 42h ; 'B'
-    mov dl, [bp+0]
-    mov si, sp
-    int 13h    ; DISK -
+    cmp byte [bp + 10h], 0
+    jz loc_7C87
+
+    push 0                                  ;ORIGINAL 66 68 00 00 00 00
+    push dword [bp + 8]
+    push 0                                  ;ORIGINAL 68 00 00
+    push start
+    push 1                                  ;ORIGINAL 68 01 00
+    push 10h                                ;ORIGINAL 68 10 00
+    mov ah, 42h
+    mov dl, [bp + 0]
+    mov si, sp                              ;ORIGINAL 8B f4
+    int 13h
+
     lahf
     add sp, 10h
     sahf
-    jmp short loc_7C9B
-
+    jmp loc_7C9B
 
 loc_7C87:
     mov ax, 201h
     mov bx,  start
-    mov dl, [bp+0]
-    mov dh, [bp+1]
-    mov cl, [bp+2]
-    mov ch, [bp+3]
-    int 13h    ; read sectores
+    mov dl, [bp + 0]
+    mov dh, [bp + 1]
+    mov cl, [bp + 2]
+    mov ch, [bp + 3]
+    int 13h    ; read sectors
 
 loc_7C9B:
     popad
-    jnb short loc_7CBB
-    dec byte [bp+11h]
-    jnz short loc_7CB0
-    cmp byte [bp+0], 80h ; '€'
-    jz loc_7D36
-    mov dl, 80h ; '€'
-    jmp short loc_7C34
+    jnb loc_7CBB
+
+    dec byte [bp + 11h]
+    jnz loc_7CB0
+
+    cmp byte [bp], 80h
+    jz near loc_7D36
+
+    mov dl, 80h
+    jmp loc_7C34
 
 
 loc_7CB0:
     push bp
-    xor ah, ah
-    mov dl, [bp+0]
+    xor ah, ah                              ;ORIGINAL 32 e4
+    mov dl, [bp]
     int 13h    ; reset disk system
+
     pop bp
-    jmp short loc_7C59
+    jmp loc_7C59
 
 
 loc_7CBB:
-    cmp ds:word_7DFE, 0AA55h
-    jnz short loc_7D31
-    push word [bp+0]
+    cmp word [marker], MARKER
+    jnz noOS
+
+    push word [bp]
     call sub_7D56
-    jnz short loc_7CE2
+
+    jnz loc_7CE2
+
     cli
-    mov al, 0D1h ; 'Ñ'
-    out 64h, al    ; AT Keyboard controller 8042.
+    mov al, 0D1h
+    out 64h, al
     call sub_7D56
-    mov al, 0DFh ; 'ß'
-    out 60h, al    ; AT Keyboard controller 8042.
+
+    mov al, 0DFh
+    out 60h, al
     call sub_7D56
+
     mov al, 0FFh
-    out 64h, al    ; AT Keyboard controller 8042.
-         ; Reset the keyboard and start internal diagnostics
+    out 64h, al
+
     call sub_7D56
     sti
 
 loc_7CE2:
     mov ax, 0BB00h
     int 1Ah
-    and eax, eax
-    jnz short loc_7D27
-    cmp ebx, 'APCT'
-    jnz short loc_7D27
+    and eax, eax                            ;ORIGINAL 66 23 c0
+    jnz loc_7D27
+
+    cmp ebx, "TCPA"
+    jnz loc_7D27
+
     cmp cx, 102h
-    jb short loc_7D27
-    push large 0BB07h
-    push large 200h
-    push large 8
+    jb loc_7D27
+
+    push dword 0BB07h                       ;ORIGINAL 66 68 07 bb 00 00
+    push dword 200h                         ;ORIGINAL 66 68 00 02 00 00
+    push dword 8                            ;ORIGINAL 66 68 08 00 00 00
     push ebx
     push ebx
     push ebp
-    push large 0
-    push large  start
+    push dword 0                            ;ORIGINAL 66 68 00 00 00 00
+    push dword start                        ;ORIGINAL 66 68 00 7c 00 00
     popad
-    push 0
+    push word 0                             ;ORIGINAL 68 00 00
     pop es
     int 1Ah
 
 loc_7D27:
     pop dx
-    xor dh, dh
-    jmp far ptr start
+    xor dh, dh                              ;ORIGINAL 32 f6
+    jmp far 0:start
 
-    db 0CDh ; Í
-    db  18h
+    int 18h
 
-
-loc_7D31:
-    mov al, [ds:7B7h]
-    jmp errorprint
+noOS:
+    mov al, [lpnoos - start + NEWBASE]
+    jmp print
 
 loc_7D36:
-    mov al, [ds:7B6h]
-    jmp errorprint
-
+    mov al, [lperrorloading - start + NEWBASE]
+    jmp print
 
 loc_7D3B:
-    mov al, [ds:7B5h]
+    mov al, [lpinvalidpart - start + NEWBASE]
 
-errorprint:
-    xor ah, ah
-    add ax, 700h
-    mov si, ax
+print:
+    xor ah, ah                              ;ORIGINAL 32 e4
+    add ax, STROFF
+    mov si, ax                              ;ORIGINAL 8b f0
 
 nextchar:
     lodsb
     cmp al, 0
     jz short endloop
+
     mov bx, 7
     mov ah, 0Eh
-    int 10h    ; - VIDEO - WRITE CHARACTER AND ADVANCE CURSOR (TTY WRITE)
-         ; AL = character, BH = display page (alpha modes)
-         ; BL = foreground color (graphics modes)
-    jmp short nextchar
+    int 10h
+
+    jmp nextchar
 
 endloop:
     hlt
-    jmp short endloop
+    jmp endloop
 
-sub_7D56 proc near
-    sub cx, cx
+sub_7D56:
+    sub cx, cx                              ;ORIGINAL 2b c9
 
 loc_7D58:
-    in al, 64h    ; AT Keyboard controller 8042.
-    jmp short $+2
+    in al, 64h
+    jmp $+2
     and al, 2
     loopne loc_7D58
     and al, 2
     retn
 
-aInvalidPartiti db 'Invalid partition table',0
-aErrorLoadingOp db 'Error loading operating system',0
-aMissingOperati db 'Missing operating system',0
+aInvalitPart db 'Invalid partition table',0
+aErrorLoading db 'Error loading operating system',0
+anoOS db 'Missing operating system',0
+
+times 2 db 0
+
+lpinvalidpart:
+    db (aInvalitPart - STROFF) & 0ffh
+lperrorloading:
+    db (aErrorLoading - STROFF) & 0ffh
+lpnoos:
+    db (anoOS - STROFF) & 0ffh
+
+    db 0D4h
+    db  34h
+    db 0A0h
+    db  2Eh
     db    0
     db    0
-    db 63h, 7Bh, 9Ah, 0D4h, 34h, 0A0h, 2Eh, 2 dup(0), 80h
-    db 20h, 21h, 0, 7, 0DFh, 13h, 0Ch, 0, 8, 3 dup(0), 20h
-    db 3, 2 dup(0), 0DFh, 14h, 0Ch, 7, 0FEh, 2 dup(0FFh)
+
+bios:
+    db 080h, 020h, 021h, 000h, 007h, 0dfh, 013h, 00ch, 000h, 008h, 000h, 000h, 000h, 020h, 003h, 000h, 000h, 0dfh, 014h, 00ch, 007h, 0feh, 0ffh, 0ffh
 
 align 1feh, db 0
+marker dw MARKER
 
-word_7DFE dw 0AA55h
+;CHECKSUM 9d5458d36a14f55d0796b037af42daa6
