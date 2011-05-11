@@ -676,10 +676,12 @@ endstruc
 %endmacro
 
 %macro _c 0
-    align 16, int3
+    int3
+    align 4, int3
 %endmacro
 
 %macro _d 0
+    db 0
     align 16, db 0
 %endmacro
 
