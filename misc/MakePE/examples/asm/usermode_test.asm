@@ -22,13 +22,14 @@ _d
 ; fsave, fxsave
 ; setldtentries, xlat/movs* with selector
 ; scasb
+; 16b stub
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %macro print_ 1+
 ;    push %1
 ;    call printnl
-    mov dword [PRINTME] , %1 
+    mov dword [PRINTME] , %1
 %endmacro
 
 EntryPoint:
@@ -50,7 +51,7 @@ _c
 _c
 
 ;printing handler, for one opcode display operations - not perfect yet
-PRINTME equ 0fabecafeh
+PRINTME equ 0cafebabeh
 
 printer:
     mov edx, [esp + 4 * 6]
@@ -1668,7 +1669,7 @@ disassembly:
     sldt eax
     sldt ax
     sldt [eax]
-    
+
 ; smsw is not defined 16 bit, but actually reliable
     smsw eax
     smsw ax
@@ -1823,6 +1824,8 @@ no64b:
     retn
 _c
 
+align 16, int3
+
 _cmpxchg16b:
     dq 00a0a0a0a0a0a0a0ah
     dq 0d0d0d0d0d0d0d0d0h
@@ -1832,10 +1835,33 @@ rax_ dq -1
 rcx_ dq -1
 lockadd dq -1
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ; just for reference, another 15 bytes operation, in 16 bits.
 bits 16
+
 lock add dword [cs: eax + ebx + 01234567h], 01234567h    ; 66:67:f0:2e:81 8418 67452301 efcdab89
+
 bits 32
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; disabled because I cover only SSE
+
+str1 db "UseFlatAssembler"
+str2 db "UsingAnAssembler"
+
+EQUAL_ANY EQU 0000b
+RANGES        EQU     0100b
+EQUAL_EACH        EQU 1000b
+EQUAL_ORDERED     EQU 1100b
+NEGATIVE_POLARITY EQU 010000b
+BYTE_MASK  EQU 1000000b
+   movdqu xmm0, dqword[str1]
+   pcmpistrm xmm0, dqword[str2], EQUAL_EACH + BYTE_MASK
+;   => XMM0 = __XXXXX_________________
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;%IMPORTS
 _d
