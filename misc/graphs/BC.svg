@@ -30,16 +30,6 @@
          offset="1"
          id="stop3802" />
     </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3798"
-       id="linearGradient3804"
-       x1="7.4463086"
-       y1="1008.819"
-       x2="80.446312"
-       y2="1008.819"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-171.02655,-862.1579)" />
     <filter
        inkscape:collect="always"
        id="filter3826"
@@ -52,49 +42,9 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3798"
-       id="linearGradient3866"
+       id="linearGradient3851"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-191.02655,-842.1579)"
-       x1="7.4463086"
-       y1="1008.819"
-       x2="80.446312"
-       y2="1008.819" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3798"
-       id="linearGradient3940"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-197.78112,-18.100222)"
-       x1="7.4463086"
-       y1="1008.819"
-       x2="80.446312"
-       y2="1008.819" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3798"
-       id="linearGradient3962"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-197.78112,-18.100222)"
-       x1="7.4463086"
-       y1="1008.819"
-       x2="80.446312"
-       y2="1008.819" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3798"
-       id="linearGradient4034"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-197.78112,-18.100222)"
-       x1="7.4463086"
-       y1="1008.819"
-       x2="80.446312"
-       y2="1008.819" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3798"
-       id="linearGradient4134"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-277.78112,-4.100222)"
+       gradientTransform="translate(-283.78112,-12.100222)"
        x1="7.4463086"
        y1="1008.819"
        x2="80.446312"
@@ -107,17 +57,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.74023945"
-     inkscape:cx="582.78986"
-     inkscape:cy="526.18109"
+     inkscape:zoom="1.2364021"
+     inkscape:cx="378.18063"
+     inkscape:cy="884.04233"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1680"
-     inkscape:window-height="998"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="905"
+     inkscape:window-height="760"
+     inkscape:window-x="1790"
+     inkscape:window-y="826"
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -126,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -145,13 +95,13 @@
        inkscape:tile-y0="10.946639"
        transform="translate(80,-14)">
       <image
-         style="opacity:0.63716867;fill:url(#linearGradient4134);fill-opacity:1;filter:url(#filter3826)"
+         style="opacity:0.63716867;fill:url(#linearGradient3851);fill-opacity:1;filter:url(#filter3826)"
          width="73"
          height="73"
-         xlink:href="file:///C:/Users/Ange/avatar.png"
+         xlink:href="avatar.png"
          id="image3011"
-         x="205.22743"
-         y="122.30902" />
+         x="211.22743"
+         y="130.30902" />
       <text
          sodipodi:linespacing="125%"
          id="text2985"
@@ -167,52 +117,62 @@
              id="tspan3838"
              style="font-size:16px">Ange Albertini</tspan><tspan
              id="tspan3001"
-             style="font-style:oblique;font-weight:bold;fill:#00ffff;-inkscape-font-specification:Sans Bold Oblique">               @ange4771</tspan></tspan><tspan
+             style="font-style:oblique;font-weight:bold;fill:#008080;stroke:#00ffff;stroke-width:0.75;stroke-miterlimit:4;stroke-dasharray:none;-inkscape-font-specification:Sans Bold Oblique">               @ange4771</tspan></tspan><tspan
            id="tspan3842"
-           style="font-size:14px"
-           y="76.034729"
+           style="font-size:9px;font-style:oblique;-inkscape-font-specification:Sans Oblique"
+           y="70.212769"
            x="37.60545"
-           sodipodi:role="line" /><tspan
-           style="font-size:12px"
+           sodipodi:role="line">RCE enthusiast</tspan><tspan
+           style="font-size:9px;font-style:oblique;-inkscape-font-specification:Sans Oblique"
+           y="81.462769"
+           x="37.60545"
+           sodipodi:role="line"
+           id="tspan3826" /><tspan
+           style="font-size:14px"
            id="tspan2989"
-           y="92.692436"
+           y="96.863579"
            x="37.60545"
            sodipodi:role="line">ange@corkami.com</tspan><tspan
            style="font-size:14px;fill:#0000ff"
            id="tspan2991"
-           y="109.36358"
+           y="114.36358"
            x="37.60545"
-           sodipodi:role="line">http://(www|site|code).corkami.com</tspan><tspan
+           sodipodi:role="line">http://(www|code).corkami.com</tspan><tspan
            id="tspan3830"
            style="font-size:14px"
-           y="126.86358"
+           y="131.86359"
            x="37.60545"
            sodipodi:role="line" /><tspan
-           style="font-size:10px"
+           style="font-size:8px"
            id="tspan2993"
-           y="144.36359"
+           y="144.35014"
            x="37.60545"
-           sodipodi:role="line" /><tspan
-           id="tspan3840"
-           style="font-size:10px"
-           y="158.52129"
+           sodipodi:role="line"> </tspan><tspan
+           style="font-size:8px"
+           y="154.35014"
            x="37.60545"
-           sodipodi:role="line">sources, infographics, tutorials</tspan><tspan
+           sodipodi:role="line"
+           id="tspan3867" /><tspan
            id="tspan3836"
-           style="font-size:10px"
-           y="171.02129"
+           style="font-size:8px"
+           y="164.35014"
            x="37.60545"
-           sodipodi:role="line">x86, Python</tspan><tspan
-           style="font-size:10px"
+           sodipodi:role="line">sources, infographics, tutorials,...</tspan><tspan
+           style="font-size:8px"
+           y="174.35014"
+           x="37.60545"
+           sodipodi:role="line"
+           id="tspan3857">x86, Python,...</tspan><tspan
+           style="font-size:8px"
            id="tspan2997"
-           y="183.52129"
+           y="184.35014"
            x="37.60545"
-           sodipodi:role="line">Packers, PE, PDF</tspan><tspan
+           sodipodi:role="line">Packers, PE, PDF,...</tspan><tspan
            id="tspan3844"
            style="font-size:8px;font-style:oblique;-inkscape-font-specification:Sans Oblique"
            y="194.37419"
            x="37.60545"
-           sodipodi:role="line">(FreeBSD/Creative Commons BY Licence)</tspan><tspan
+           sodipodi:role="line">Licence: BSD/Creative Commons BY</tspan><tspan
            style="font-size:14px"
            id="tspan2999"
            y="204.37419"
@@ -233,14 +193,6 @@
          id="rect3846-8"
          style="opacity:0.63716867;color:#000000;fill:none;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
-    <use
-       x="0"
-       y="0"
-       inkscape:tiled-clone-of="#g4053"
-       xlink:href="#g4053"
-       id="use4072"
-       width="744.09448"
-       height="1052.3622" />
     <use
        x="0"
        y="0"
@@ -322,5 +274,25 @@
        id="use4090"
        width="744.09448"
        height="1052.3622" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-51.325554"
+       y="201.66846"
+       id="text3812"
+       sodipodi:linespacing="125%"
+       transform="translate(0,-4.2302535e-5)"><tspan
+         sodipodi:role="line"
+         id="tspan3814"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="324.3338"
+       y="-66.425652"
+       id="text3816"
+       sodipodi:linespacing="125%"
+       transform="translate(0,-4.2302535e-5)"><tspan
+         sodipodi:role="line"
+         id="tspan3818"></tspan></text>
   </g>
 </svg>
