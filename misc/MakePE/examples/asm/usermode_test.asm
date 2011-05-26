@@ -1711,13 +1711,13 @@ disassembly:
     prefetcht0 [eax]                        ;0f18 00 001 000 (08)
     prefetcht1 [eax]                        ;0f18 00 010 000 (10)
     prefetcht2 [eax]                        ;0f18 00 011 000 (18)
-	; hint nops with unusual encodings
+    ; hint nops with unusual encodings
     db 0fh, 018h, 100b << 3
     db 0fh, 018h, 101b << 3
     db 0fh, 018h, 110b << 3
     db 0fh, 018h, 111b << 3
 
-	db 0fh, 0ffh    ; ud0                   ;0fff
+    db 0fh, 0ffh    ; ud0                   ;0fff
 
     ud1                                     ;0fb9
     ud2                                     ;0f0b
@@ -1820,6 +1820,29 @@ end64b
     expect dword [lockadd + 4], -1
 _
 
+_96BCONST equ 11110101011100001101011001111100b
+    print_ %string:"Testing now: 32+64 bits code", 0dh, 0
+    setmsg_ %string:"ERROR: 96bit code", 0dh, 0ah, 0
+    mov eax, _96BCONST
+    mov ebx, 11b
+
+    push cs
+    push _96bnext
+
+    push 33h
+    call $ + 5
+                    ; 32 + 64 bit code
+    ;32 bit                                 ; 64 bit equivalent
+    arpl ax, bx                             ; movsxd ebx, eax
+
+    dec eax                                 ; add rax, rax
+    add eax, eax
+    retf                                    ; retf
+
+_96bnext:
+    expect ebx, ((_96BCONST + 11b - 1) * 2) & 0ffffffffh
+    expect eax, ((_96BCONST + 11b - 1) * 4) & 0ffffffffh
+_
     print_ ''
 sixtyfour_end:
     clearSEH
