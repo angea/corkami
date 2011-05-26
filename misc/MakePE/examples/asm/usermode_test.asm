@@ -1707,7 +1707,17 @@ disassembly:
         xlatb
     db 64h
         xlatb      ; reads from fs:[EBX + AL]
-    db 0fh, 0ffh    ; ud0                   ;0fff
+    prefetchnta [eax]                       ;0f18 00 000 000
+    prefetcht0 [eax]                        ;0f18 00 001 000 (08)
+    prefetcht1 [eax]                        ;0f18 00 010 000 (10)
+    prefetcht2 [eax]                        ;0f18 00 011 000 (18)
+	; hint nops with unusual encodings
+    db 0fh, 018h, 100b << 3
+    db 0fh, 018h, 101b << 3
+    db 0fh, 018h, 110b << 3
+    db 0fh, 018h, 111b << 3
+
+	db 0fh, 0ffh    ; ud0                   ;0fff
 
     ud1                                     ;0fb9
     ud2                                     ;0f0b
