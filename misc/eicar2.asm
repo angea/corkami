@@ -1,18 +1,28 @@
-; this EICAR file was created by Peter Ferrie @ http://pferrie.tripod.com/misc/eicar.htm
-
-; like the original EICAR file, 
+; this file was originally created in binary form by Peter Ferrie 
+;  http://pferrie.tripod.com/misc/eicar.htm
+; (public domain)
+;
+; like the original EICAR file
 ; it prints the official "EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$" string, 
-; and is made of printable characters only.
+; and is made of printable characters only in binary form.
 ;   5T2)D4)D65Z3PZEICAR-STANDARD-ANTIVIRUS-TEST-FILE!$UX!T!S
-
+;
 ; this version is 12 bytes smaller than the original one, which means 18% smaller
-
+;
 ; this version actually executes the EICAR string itself
-
+;
 ; (but it actually doesn't do anything relevant for the actual execution itself:
 ; the higher part of BP already contains the correct value, used later in AX, and is left unmodified.)
+;
+; unlike the original, it's not endorsed by the EICAR group
+;
+; build with:
+;  yasm -o eicar2.com eicar2.asm
+;
+; you can find my source rewrite of the original EICAR asm in this directory as ./Eicar.asm
+;
+; ASM rewrite done by Ange Albertini in 2011
 
-; yasm -o eicar2.com eicar2.asm
 
 KEY equ 3254h
 
@@ -96,5 +106,3 @@ patches:
 ;    int 021h
 ;    int 020h
 ;aString db 'EICAR-STANDARD-ANTIVIRUS-TEST-FILE!', '$'
-
-; ASM rewrite done by Ange Albertini in 2011
