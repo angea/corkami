@@ -13,23 +13,26 @@ _d
 ; general FPU/SSE+ opcodes are not included
 
 ;TODO:
+; check ints with WinDbg
 ; add IP checking for exception triggers
-; int2a-2b os dependent
+; int2a-2b os dependent. 2a = KeTickCount (XP)
 ; int2c-2e with wrong/right address
 ; finish int 2d slide detection
 ; merge os checks, just see values
 ; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
 ; setldtentries, xlat/movs* with selector
-; scasb
+; scasb for string
+; mmx <-> fpu transfer
+
+
 ; 16b stub
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %macro print_ 1+
-;    push %1
-;    call printnl
     mov dword [PRINTME] , %1
+;    mov dword [noprint] , %1
 %endmacro
 
 EntryPoint:
@@ -52,7 +55,7 @@ _c
 
 ;printing handler, for one opcode display operations - not perfect yet
 PRINTME equ 0cafebabeh
-
+noprint dd 0
 printer:
     mov edx, [esp + 4 * 6]
     mov eax, [edx + CONTEXT.regEip]
@@ -1025,6 +1028,17 @@ _
     print_ %string:"Testing now: SMSW anti-debug (XP only)", 0dh, 0
     call smswtrick ; xp only ?
 _
+    print_ %string:"Testing now: Int2Ah anti-debug (XP only)", 0dh, 0
+    setmsg_ %string:"ERROR: Int2Ah anti-debug (XP only)", 0dh, 0
+    int 2ah
+    mov [eax_], eax
+    mov [edx_], edx
+    int 2ah
+    sub eax, [eax_]
+    expect eax, 0
+    sub edx, [edx_]
+    expect edx, 0
+_
     print_ %string:"Testing now: sysenter (XP only)", 0dh, 0
     setmsg_ %string:"ERROR: sysenter [XP]", 0dh, 0ah, 0
     mov eax, 10001h
@@ -1045,6 +1059,10 @@ _return:
 _c
 ; disabled, not <SP3 compatible IMPORT ntdll.dll!KiFastSystemCallRet
 _c
+
+eax_ dd 0
+edx_ dd 0
+_d
 
 W7_tests:
     setmsg_ %string:"ERROR: SMSW [W7]", 0dh, 0ah, 0
@@ -1599,6 +1617,14 @@ _
     print_ %string:"Testing now: INVALID LOCK SEQUENCE via incorrect opcode", 0dh, 0
     mov dword [currentskip], 2
     lock wait
+    expect dword [counter], 1
+_
+    ; fe f0 is incorrectly analysed after exception occurance by windows as an invalid lock prefix (fe c0 = inc al)
+    setmsg_ %string:"ERROR: invalid 'fake' LOCK - no exception", 0dh, 0ah, 0
+    mov dword [counter], 0
+    print_ %string:"Testing now: INVALID LOCK SEQUENCE via incorrect opcode", 0dh, 0
+    mov dword [currentskip], 2
+    db 0feh, 0f0h
     expect dword [counter], 1
 _
     setmsg_ %string:"ERROR: privileged instruction - no exception", 0dh, 0ah, 0
