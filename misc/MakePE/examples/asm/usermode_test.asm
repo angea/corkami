@@ -30,9 +30,10 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+PRINTME equ 0cafebabeh
 %macro print_ 1+
-    mov dword [PRINTME] , %1
-;    mov dword [noprint] , %1
+ ;   mov dword [PRINTME] , %1
+	prefetch [%1]
 %endmacro
 
 EntryPoint:
@@ -54,8 +55,7 @@ _c
 _c
 
 ;printing handler, for one opcode display operations - not perfect yet
-PRINTME equ 0cafebabeh
-noprint dd 0
+
 printer:
     mov edx, [esp + 4 * 6]
     mov eax, [edx + CONTEXT.regEip]
@@ -1686,7 +1686,7 @@ disassembly:
 
 ; xor ecx, ecx
     loopne $
-
+retn
 ; str is only word in memory
     str eax
     str ax
@@ -1697,9 +1697,9 @@ disassembly:
     sldt [eax]
 
 ; smsw is not defined 16 bit, but actually reliable
+	smsw [eax]
     smsw eax
     smsw ax
-    retn
 
     call word $ + 3
     db 66h
