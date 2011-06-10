@@ -1,0 +1,41 @@
+title
+Ange Albertini
+revision x, 20xx/xx/xx (Build time %%date(%Y/%m/%d %H:%M))
+
+%!postproc(html):  'IFRAME:(.*) ([0-9]*)'  '<iframe src="\1" width="100%" height="\2"><p>Your browser does not support iframes.</p></iframe>'
+%!postproc(html): 'ANCHOR:(.*)' '<a name="\1"></a>'
+= Introduction =
+
+this document does is good for your health.
+
+it will explain x and y....
+
+
+
+== version history ==
+: 20xx/xx/xx, revision 1
+ - initial release
+
+ 
+: 2011/06/10 revision x
+ - [chapter 1 #chap1] much better!
+ 
+--------------------
+
+%%toc
+
+--------------------
+
++ Part 1+
+
+ANCHOR:chap1
+== chapter 1 ==
+
+IFRAME:frame1.html 200
+
+--------------------
++ extra +
+
+== this source ==
+
+%!include: ``makefile``
