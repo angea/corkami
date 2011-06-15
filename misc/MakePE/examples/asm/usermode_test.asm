@@ -32,8 +32,8 @@ _d
 
 PRINTME equ 0cafebabeh
 %macro print_ 1+
- ;   mov dword [PRINTME] , %1
-	prefetch [%1]
+    mov dword [PRINTME] , %1
+;	prefetch [%1]
 %endmacro
 
 EntryPoint:
@@ -1835,15 +1835,27 @@ end64b
     expect dword [rax_ + 4], 0
     expect dword [rcx_ + 4], -1
 _
-
     print_ %string:"Testing now: 15 bytes lock add (64 bits)", 0dh, 0
-    setmsg_ %string:"ERROR: 15 bytes LOCK ADD (64 bits)", 0dh, 0
+    setmsg_ %string:"ERROR: 15 bytes LOCK ADD (64 bits)", 0dh, 0ah, 0
     mov eax , 314159h
 start64b
     lock add qword [cs:eax + eax*4 + lockadd - 314159h*5], 0efcdab89h ; F0:2E:67:4C:818480 01234567 89ABCDEF
 end64b
     expect dword [lockadd], 0efcdab88h
     expect dword [lockadd + 4], -1
+_
+    print_ %string:"Testing now: inc on all sizes", 0dh, 0
+    setmsg_ %string:"ERROR: INC on all size (64b)", 0dh, 0ah,  0
+start64b
+	mov rax, 1111111111111111h
+	inc al
+	inc ax
+	inc eax	; zero extending !
+	inc rax
+	mov [rax_], rax
+end64b
+	expect dword [rax_], (1111111111111111h + 4*1) & 0ffffffffh
+	expect dword [rax_ + 4], 0
 _
 
 _96BCONST equ 11110101011100001101011001111100b
