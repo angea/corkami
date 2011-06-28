@@ -24,6 +24,7 @@ _d
 ; setldtentries, xlat/movs* with selector
 ; scasb for string
 ; mmx <-> fpu transfer
+; initial values
 
 
 ; 16b stub
@@ -89,6 +90,21 @@ _c
 
 
 main:
+	; call initvals
+;	cmp eax, 0		; xp
+;	je eax_good
+;	
+;	cmp eax, 700000h ; Win7 (actually kernel32.dll!BaseThreatInitThunk)
+;	jg eax_good
+;	
+;	add eax, 80h	; upx
+;	cmp eax, esp
+;	je bad
+;eax_good:
+;
+;	cmp esi, -1		; ollydbg
+;	jz bad
+
     ; call to word
     ; jump short, near, to word, to reg32, to reg16, far
     ; return near, near word, far, interrupt
