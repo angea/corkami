@@ -9,24 +9,31 @@ shape = "record"
 edge [
 ];
 
-class [
-label = "\
-Class_File \n|\
-U4  magic CAFEBABE \l|\
-U2 minor_version \l|\
-U2 major_version \l|\
-U2 constant_pool_count \l|\
-<constant_pool> cp_info constant_pool[constant_pool_count] \l|\
-<access_flags> U2 access_flags \l|\
-U2 super_class \l|\
-U2 interfaces_count  \l|\
-U2 interfaces[interfaces_count] \l|\
-U2 methods_count \l|\
-<methods> method_info methods[methods_count] \l|\
-U2 attributes_count \l|\
-<attributes> attribute_info attributes[attributes_count] \l"
+HOF [
+	label = "<top> Offset 0\l"
 ];
 
+class [
+label = "\
+<top> Class_File \n|\
+<magic> u4 magic \l|\
+u2 minor_version \l|\
+u2 major_version \l|\
+<constant_pool_count> u2 constant_pool_count \l|\
+   <constant_pool> cp_info constant_pool[constant_pool_count] \l|\
+<access_flags> u2 access_flags \l|\
+u2 super_class \l|\
+<interfaces_count> u2 interfaces_count  \l|\
+<interfaces> u2 interfaces[interfaces_count] \l|\
+<methods_count> u2 methods_count \l|\
+<methods> method_info methods[methods_count] \l|\
+<attributes_count> u2 attributes_count \l|\
+   <attributes> attribute_info attributes[attributes_count] \l"
+];
+
+magic [
+label = "0xCAFEBABE"
+];
 
 ACCESS_FLAGS [
 label = "<top> ACCESS_FLAGS \n |\
@@ -83,32 +90,33 @@ label = "<top> ACCESS_FLAGS \n |\
 0x1000 ACC_SYNTHETIC \l"
 ];
 
-cp_info [
-label = "<top> cp_info \n \
-|<tag> u1 tag \l\
-|<info> u1 info[] \l"
-];
-
 field_info [
 label = "<top> field_info \n |\
 u1 access_flags \l|\
 u2 name_index \l|\
 u2 descriptor_index \l|\
-u2 attributes_count \l|\
-attribute_info attributes[attributes_count] \l"
+<attributes_count> u2 attributes_count \l|\
+<attributes> attribute_info attributes[attributes_count] \l"
 ];
+
+subgraph cluster_method_info_array {
+label = "array"
+style = "dashed"
 
 method_info [
 label = "<top> method_info \n |\
 u1 access_flags  \l|\
 u2 name_index \l|\
 u2 descriptor_index \l|\
-u2 attributes_count  \l|\
-attribute_info attributes[attributes_count] \l"
+<attributes_count> u2 attributes_count \l|\
+<attributes> attribute_info attributes[attributes_count] \l"
 ];
 
+}
+
+/*
 constant_types [
-label = "<top> Constant types \n |\
+label = "<top> Constant types \n|\
 1 CONSTANT_Utf8 \l\
 2 \l\
 3 CONSTANT_Integer \l\
@@ -122,138 +130,162 @@ label = "<top> Constant types \n |\
 11 CONSTANT_InterfaceMethodref \l\
 12 CONSTANT_NameAndType \l"
 ];
+*/
+
+subgraph cluster_cp_info_array {
+label = "array"
+style = "dashed"
+
+cp_info [
+label = "<top> cp_info \n \
+|<tag> u1 tag \l\
+|<info> u1 info[] \l"
+];
+
+}
+
+subgraph cluster {
+label = "Constant types"
 
 CONSTANT_Class_info [
 label = "<top> CONSTANT_Class_info \n|\
-u1 tag \l|\
+u1 tag =7\l|\
 u2 name_index \l"
 ];
 
 CONSTANT_String_info [
 label = "<top> CONSTANT_String_info \n|\
-u1 tag \l|\
+u1 tag =8\l|\
 u2 string_index \l"
 ];
 
 CONSTANT_Integer_info [
 label = "<top> CONSTANT_Integer_info \n|\
-u1 tag \l|\
+u1 tag =3\l|\
 u4 bytes \l"
 ];
 
 CONSTANT_Float_info [
 label = "<top> CONSTANT_Float_info \n|\
-u1 tag \l|\
+u1 tag =4\l|\
 u4 bytes \l"
 ];
 
 CONSTANT_Long_info [
-label = "<top> CONSTANT_Long_info \n|\
-u1 tag \l|\
+label = "<top> CONSTANT_Long_info\n|\
+u1 tag =5\l|\
 u4 high_bytes \l|\
 u4 low_bytes \l"
 ];
 
 CONSTANT_Double_info [
 label = "<top> CONSTANT_Double_info \n|\
-u1 tag \l|\
+u1 tag =6\l|\
 u4 high_bytes \l|\
 u4 low_bytes \l"
 ];
 
 CONSTANT_Utf8_info [
-label = "<top> CONSTANT_Utf8_info \n|\
-u1 tag \l|\
+label = "<top> CONSTANT_Utf8_info\n|\
+u1 tag =1\l|\
 u2 length \l|\
 u1 bytes[length] \l"
 ];
 
 CONSTANT_Fieldref_info [
 label = "<top> CONSTANT_Fieldref_info \n|\
-u1 tag \l|\
+u1 tag =9\l|\
 u2 class_index \l|\
 u2 name_and_type_index \l"
 ];
 
 CONSTANT_NameAndType_info [
 label = "<top> CONSTANT_NameAndType_info \n|\
-u1 <tag> tag \l|\
-u2 <name_index> name_index \l|\
-u2 <descriptor_index> descriptor_index \l"
+u1 tag =12\l|\
+u2 name_index \l|\
+u2 descriptor_index \l"
 ];
 
 CONSTANT_Methodref_info [
 label = "<top> CONSTANT_Fieldref_info \n|\
-u1 <tag> tag \l|\
-u2 <class_index> class_index \l|\
-u2 <name_and_type_index> name_and_type_index \l"
+u1 tag =10\l|\
+u2 class_index \l|\
+u2 name_and_type_index \l"
 ];
 
 CONSTANT_InterfaceMethodref_info [
 label = "<top> CONSTANT_InterfaceMethodref_info \n|\
-u1 <tag> tag \l|\
-u2 <class_index> class_index \l|\
-u2 <name_and_type_index> name_and_type_index \l"
+u1 tag =11\l|\
+u2 class_index \l|\
+u2 name_and_type_index \l"
 ];
+
+}
+
+subgraph cluster_attribute_info_array {
+label = "array"
+style = "dashed"
 
 attribute_info [
 label = "<top> attribute_info \n|\
-u2 attribute_name_index <attribute_name_index> \l|\
-u4 attribute_length <attribute_length> \l|\
-u1 info[attribute_length] <info> \l"
+u2 attribute_name_index \l|\
+u4 attribute_length \l|\
+u1 info[attribute_length] \l"
 ];
+
+}
 
 ConstantValue_attribute [
 label = "<top> ConstantValue_attribute \n|\
-u2 attribute_name_index <attribute_name_index> \l|\
-u4 attribute_length <attribute_length> \l|\
-u2 constantvalue_index <constantvalue_index> \l"
+u2 attribute_name_index \l|\
+u4 attribute_length \l|\
+u2 constantvalue_index \l"
 ];
 
 Code_attribute [
 label = "<top> Code_attribute \n|\
-u2 attribute_name_index <attribute_name_index> \l|\
-u4 attribute_length <attribute_length> \l|\
-u2 max_stack <max_stack> \l|\
-u2 max_locals <max_locals> \l|\
-u4 code_length <code_length> \l|\
-u1 code[code_length] <code> \l|\
-u2 exception_table_length <exception_table_length> \l|\
-exception_info exception_table[exception_table_length] <exception_table> \l|\
-u2 attributes_count <attributes_count> \l|\
-attribute_info attributes[attributes_count] <attributes> \l"
+u2 attribute_name_index \l|\
+u4 attribute_length \l|\
+u2 max_stack \l|\
+u2 max_locals \l|\
+u4 code_length  \l|\
+u1 code[code_length] \l|\
+u2 exception_table_length \l|\
+exception_info exception_table[exception_table_length] \l|\
+u2 attributes_count \l|\
+attribute_info attributes[attributes_count] \l"
 ];
 
 exception_info [
 label= "<top> exception_info \n|\
-u2 start_pc <start_pc> \l|\
-u2 end_pc <end_pc> \l|\
-u2 handler_pc <handler_pc> \l|\
-u2 catch_type <catch_type> \l"
+u2 start_pc \l|\
+u2 end_pc \l|\
+u2 handler_pc \l|\
+u2 catch_type \l"
 ];
 
 Exceptions_attribute [
 label = "<top> Exceptions_attribute \n|\
-u2 attribute_name_index <attribute_name_index> \l|\
-u4 attribute_length <attribute_length> \l|\
-u2 number_of_exceptions <number_of_exceptions> \l|\
-u2 exception_index_table[number_of_exceptions] <exception_index_table> \l"
+u2 attribute_name_index \l|\
+u4 attribute_length \l|\
+u2 number_of_exceptions \l|\
+u2 exception_index_table[number_of_exceptions] \l"
 ];
 
 InnerClasses_attribute [
 label = "<top> InnerClasses_attribute \n|\
-u2 attribute_name_index <attribute_name_index> \l|\
-u4 attribute_length <attribute_length> \l|\
-u2 number_of_classes <number_of_classes> \l|\
-class_info classes[number_of_classes] <classes> \l"
+u2 attribute_name_index \l|\
+u4 attribute_length \l|\
+u2 number_of_classes \l|\
+class_info classes[number_of_classes] \l"
 ];
 
 class_info [
 label = "<top> class_info \n|\
-u2 inner_class_info_index <inner_class_info_index> \l|\
-u2 outer_class_info_index <outer_class_info_index> \l|\
-u2 inner_name_index <inner_name_index> \l|\
-u2 inner_class_access_flags <inner_class_access_flags> \l"
+u2 inner_class_info_index \l|\
+u2 outer_class_info_index \l|\
+u2 inner_name_index \l|\
+u2 inner_class_access_flags \l"
 ];
 
 EnclosingMethod_attribute [
@@ -261,38 +293,43 @@ label = "<top> EnclosingMethod_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
 u2 class_index  \l|\
-u2 method_index \l"];
+u2 method_index \l"
+];
 
 Synthetic_attribute [
 label = "<top> Synthetic_attribute \n|\
 u2 attribute_name_index \l|\
-u4 attribute_length \l"];
+u4 attribute_length \l"
+];
 
 Signature_attribute [
 label = "<top> Signature_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
-u2 signature_index \l"];
+u2 signature_index \l"
+];
 
 SourceFile_attribute [
 label = "<top> SourceFile_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
-u2 sourcefile_index \l "];
+u2 sourcefile_index \l"
+];
 
 SourceDebugExtension_attribute [
 label = "<top> SourceDebugExtension_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
-u1 debug_extension[attribute_length] \l "];
-
+u1 debug_extension[attribute_length] \l "
+];
 
 LineNumberTable_attribute [
 label = "<top> LineNumberTable_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
 u2 line_number_table_length \l|\
-line_number_table_type  line_number_table[line_number_table_length] \l"];
+line_number_table_type  line_number_table[line_number_table_length] \l"
+];
 
 line_number_table_type[
 label = "<top> line_number_table_type \n|\
@@ -305,7 +342,8 @@ label = "<top> LocalVariableTable_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
 u2 local_variable_table_length \l|\
-local_variable_table_type local_variable_table[local_variable_table_length] \l"];
+local_variable_table_type local_variable_table[local_variable_table_length] \l"
+];
 
 local_variable_table_type [
 label = "<top> local_variable_table_type \n|\
@@ -313,14 +351,16 @@ u2 start_pc \l|\
 u2 length \l|\
 u2 name_index \l|\
 u2 descriptor_index \l|\
-u2 index \l"];
+u2 index \l"
+];
 
 LocalVariableTypeTable_attribute [
 label = "<top> LocalVariableTypeTable_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
 u2 local_variable_type_table_length \l|\
-local_variable_type_table_type local_variable_type_table[local_variable_type_table_length] \l"];
+local_variable_type_table_type local_variable_type_table[local_variable_type_table_length] \l"
+];
 
 local_variable_type_table_type [
 label = "<top> local_variable_type_table_type \n|\
@@ -328,12 +368,14 @@ u2 start_pc  \l|\
 u2 length \l|\
 u2 name_index \l|\
 u2 signature_index \l|\
-u2 index \l"];
+u2 index \l"
+];
 
 Deprecated_attribute [
 label = "<top> Deprecated_attribute \n|\
 u2 attribute_name_index \l|\
-u4 attribute_length \l"];
+u4 attribute_length \l"
+];
 
 RuntimeVisibleAnnotations_attribute [
 label = "<top> RuntimeVisibleAnnotations_attribute \n|\
@@ -345,9 +387,10 @@ annotation annotations[num_annotations]"
 
 annotation [
 label = "<top> annotation \n|\
-u2 type_index <type_index> \l|\
+u2 type_index \l|\
 u2 num_element_value_pairs \l|\
-element_value_pairs[num_element_value_pairs] \l <element_value_pairs> \l"];
+element_value_pairs[num_element_value_pairs] \l \l"
+];
 
 element_value_pairs_type [
 label = "<top> element_value_pairs_type \n|\
@@ -379,20 +422,22 @@ label = "<top> RuntimeInvisibleAnnotations_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
 u2 num_annotations \l|\
-annotation annotations[num_annotations] \l | "];
+annotation annotations[num_annotations] \l"
+];
 
 RuntimeVisibleParameterAnnotations_attribute [
 label = "<top> RuntimeVisibleParameterAnnotations_attribute \n|\
 u2 attribute_name_index \l|\
 u4 attribute_length \l|\
 u1 num_parameters \l|\
-parameter_annotation_type parameter_annotations[num_parameters] \l"];
+parameter_annotation_type parameter_annotations[num_parameters] \l"
+];
 
 
 parameter_annotation_type [
 label = "<top> parameter_annotation_type \n|\
-u2 num_annotations <num_annotations> \l|\
-annotation annotations[num_annotations] <annotations> \l" 
+u2 num_annotations \l|\
+annotation annotations[num_annotations] \l" 
 ];
 
 RuntimeInvisibleParameterAnnotations_attribute [
@@ -414,10 +459,36 @@ u4 attribute_length \l|\
 element_value default_value \l"
 ];
 
+HOF:top-> class:top;
 
-class:access_flags -> ACCESS_FLAGS:top;
-class:constant_pool -> cp_info:top;
+class:magic-> magic;
+
+class:constant_pool -> cp_info;
+cp_info -> CONSTANT_Class_info:top;
+cp_info -> CONSTANT_String_info:top;
+cp_info -> CONSTANT_Integer_info:top;
+cp_info -> CONSTANT_Float_info:top;
+cp_info -> CONSTANT_Long_info:top;
+cp_info -> CONSTANT_Double_info:top;
+cp_info -> CONSTANT_Utf8_info:top;
+cp_info -> CONSTANT_Fieldref_info:top;
+cp_info -> CONSTANT_NameAndType_info:top;
+cp_info -> CONSTANT_InterfaceMethodref_info:top;
+cp_info -> CONSTANT_Methodref_info:top;
+
+
+
+class:access_flags -> ACCESS_FLAGS:top[label = "enum" style = "dotted"];
+
 class:methods -> method_info:top;
-class:attributes -> attribute_info:top;		
-cp_info:tag -> constant_types:top;
+class:attributes -> attribute_info:top;
+//cp_info:tag -> constant_types:top;
+
+method_info:attributes -> method_info:attributes_count [style = "dotted"];
+
+field_info:attributes -> field_info:attributes_count [style = "dotted"];
+class:constant_pool -> class:constant_pool_count [style="dotted"];
+class:interfaces -> class:interfaces_count [style="dotted"];
+class:methods -> class:methods_count [style="dotted"];
+class:attributes -> class:attributes_count [style="dotted"];
 }
