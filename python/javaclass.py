@@ -20,15 +20,71 @@ access_flags = [
 ("ACC_ANNOTATION", 0x2000    ),
 ("ACC_ENUM",      0x4000     ),
 ]
-ACCESS_FLAGS = dict([(i[1], i[0]) for i in tags_types] + tags_types)
+ACCESS_FLAGS = dict([(i[1], i[0]) for i in access_flags] + access_flags)
+
+def disasm_code(code):
+	listing = []
+	offset = 0
+	while offset < len(code):
+		opcode_byte = ord(code[offset : offset + 1])
+		offset += 1
+		if opcode_byte == 0xb1:
+			opcode = "return"
+			listing.append(["return"])
+
+		elif opcode_byte == 0x12:
+			listing.append(["ldc %s" % constant_pool[struct.unpack(">B", code[offset: offset + 1])[0] - 1]])
+			offset += 1
+
+		elif opcode_byte == 0xb2:
+			operand = constant_pool[struct.unpack(">H", code[offset: offset + 2])[0] - 1]
+			listing.append(["getstatic"])
+			offset += 2
+
+		elif opcode_byte == 0xb6:
+			listing.append(["invokevirtual"])
+			offset += 2
+		else:
+			return listing
+
+	return listing
+			
+			
+def get_exception_table(f, exception_table_length):
+	exception_table = []
+	for k in range(exception_table_length):
+		start_pc = struct.unpack(">H", f.read(2))[0]
+		end_pc = struct.unpack(">H", f.read(2))[0]
+		handler_pc = struct.unpack(">H", f.read(2))[0]
+		catch_type = struct.unpack(">H", f.read(2))[0]
+
+		exception_table.append([start_pc, end_pc, handler_pc, catch_type])
+	return exception_table
 
 def get_attributes(f, attributes_count):
 	attributes = []
 	for j in range(attributes_count):
 		attribute_name_index = struct.unpack(">H", f.read(2))[0]
+		attribute_name = constant_pool[attribute_name_index - 1][2]
+
 		attribute_length = struct.unpack(">L", f.read(4))[0]
-		info = f.read(attribute_length)
-		attributes.append([attribute_name_index, info])
+
+		if attribute_name == "Code":
+			max_stack = struct.unpack(">H", f.read(2))[0]
+			max_locals = struct.unpack(">H", f.read(2))[0]
+			code_length = struct.unpack(">L", f.read(4))[0]
+			code = f.read(code_length)
+			code = disasm_code(code)
+			exception_table_length = struct.unpack(">H", f.read(2))[0]
+			exception_table = get_exception_table(f, exception_table_length)
+			
+			attributes_count2 = struct.unpack(">H", f.read(2))[0]
+			attributes2 = get_attributes(f,attributes_count2)
+
+			attributes.append([max_stack, max_locals, code, exception_table, attributes2])
+		else:
+			info = f.read(attribute_length)
+			attributes.append([attribute_name_index, info])
 	return attributes
 
 f = open(sys.argv[1], "rb")
@@ -136,10 +192,11 @@ for i in range(methods_count):
 	descriptor_index = struct.unpack(">H", f.read(2))[0]
 	attributes_count = struct.unpack(">H", f.read(2))[0]
 	attributes = get_attributes(f, attributes_count)
-
 	methods.append([access_flags, name_index, descriptor_index, attributes])
 
-print "methods", methods
+import pprint
+print "methods", #methods
+pprint.pprint(methods)
 
 attributes_count = struct.unpack(">H", f.read(2))[0]
 attributes = get_attributes(f, attributes_count)
