@@ -69,7 +69,7 @@ lsd :
 ;%IMPORT kernel32.dll!ExitProcess
 
 tada db "Correct!", 0
-helloworld db "no error detected...", 0
+helloworld db "no errors detected...", 0
 
 ;%IMPORTS
 
