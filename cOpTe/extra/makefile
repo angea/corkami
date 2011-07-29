@@ -1,4 +1,7 @@
-all: undoc1.bin undoc2.exe oldpath.exe
+all: undoc1.bin undoc2.exe oldpath.exe ret.exe
+
+ret.exe: ret.asm
+	c:\python26\python ..\makepe.py ret.asm
 
 oldpath.exe: oldpath.asm
 	c:\python26\python ..\makepe.py oldpath.asm
