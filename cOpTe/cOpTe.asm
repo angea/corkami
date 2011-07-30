@@ -427,6 +427,15 @@ classics:
     mov eax, 3
     expect eax, 3
 _
+	setmsg_ %string:"ERROR: MOV reg32, selector", 0dh, 0ah,0 
+	mov eax, -1
+	mov eax, ds ; yes, copy from a word to a dword with no sx/sx
+	push 0
+	pop ebx
+	push ds
+	pop ebx
+	expect eax, ebx ; wrong under <pentium CPUs
+_
     setmsg_ %string:"ERROR: MOVZX", 0dh, 0ah, 0
     mov al, -1
     movzx ecx, al
@@ -641,13 +650,15 @@ _
     mov al, -3
     cbw
     expect ax, -3
+_
     setmsg_ %string:"ERROR: CWDE", 0dh, 0ah, 0
     cwde
     expect eax, -3
+_
     setmsg_ %string:"ERROR: CDQ", 0dh, 0ah, 0
     cdq
     expect edx, -1
-
+_
     setmsg_ %string:"ERROR: CWD", 0dh, 0ah, 0
     mov ax, -15
     mov ebx, eax
@@ -655,6 +666,22 @@ _
     expect eax, ebx
     expect dx, -1
 _
+	setmsg_ %string:"ERROR: Push <reg32>", 0dh, 0ah, 0
+	mov ebx, esp
+	sub ebx, 4
+	rdtsc
+	push eax
+	expect [esp], eax
+    expect esp, ebx
+	pop eax
+_
+	setmsg_ %string:"ERROR: Push <reg16>", 0dh, 0ah, 0
+	; TODO push ds pushes 16b of DS, and ESP -=4
+	
+	; TODO push dx pushes 16b of DS, but ESP -=2
+
+_
+
     retn
 _c
 
