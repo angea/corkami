@@ -1,4 +1,10 @@
-all: undoc1.bin undoc2.exe oldpath.exe ret.exe
+all: undoc1.bin undoc2.exe oldpath.exe ret.exe regs.exe bswap64.exe
+
+bswap64.exe: bswap64.asm
+	c:\python26\python ..\makepe.py bswap64.asm
+
+regs.exe: regs.asm
+	c:\python26\python ..\makepe.py regs.asm
 
 ret.exe: ret.asm
 	c:\python26\python ..\makepe.py ret.asm

@@ -224,3 +224,39 @@ IMAGE_FILE_32BIT_MACHINE           equ 00100h
     pop dword [fs:0]
     add esp, 4
 %endmacro
+
+struc IMAGE_OPTIONAL_HEADER64
+  .Magic                        resw 1
+  .MajorLinkerVersion           resb 1
+  .MinorLinkerVersion           resb 1
+  .SizeOfCode                   resd 1
+  .SizeOfInitializedData        resd 1
+  .SizeOfUninitializedData      resd 1
+  .AddressOfEntryPoint          resd 1
+  .BaseOfCode                   resd 1
+  .ImageBase                    resq 1
+  .SectionAlignment             resd 1
+  .FileAlignment                resd 1
+  .MajorOperatingSystemVersion  resw 1
+  .MinorOperatingSystemVersion  resw 1
+  .MajorImageVersion            resw 1
+  .MinorImageVersion            resw 1
+  .MajorSubsystemVersion        resw 1
+  .MinorSubsystemVersion        resw 1
+  .Win32VersionValue            resd 1
+  .SizeOfImage                  resd 1
+  .SizeOfHeaders                resd 1
+  .CheckSum                     resd 1
+  .Subsystem                    resw 1
+  .DllCharacteristics           resw 1
+  .SizeOfStackReserve           resq 1
+  .SizeOfStackCommit            resq 1
+  .SizeOfHeapReserve            resq 1
+  .SizeOfHeapCommit             resq 1
+  .LoaderFlags                  resd 1
+  .NumberOfRvaAndSizes          resd 1
+  .DataDirectory                resb 0
+endstruc
+
+IMAGE_FILE_MACHINE_AMD64        equ 8664h
+IMAGE_NT_OPTIONAL_HDR64_MAGIC   equ 020bh

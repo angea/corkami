@@ -46,8 +46,8 @@ times 100 db 90h
     jnz bad
 
     push 40h                ; UINT uType
-    push tada               ; LPCTSTR lpCaption
-    push helloworld         ; LPCTSTR lpText
+    push correct               ; LPCTSTR lpCaption
+    push noerrors         ; LPCTSTR lpText
     push 0                  ; HWND hWnd
     call MessageBoxA
 bad:
@@ -68,8 +68,8 @@ lsd :
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
 
-tada db "Correct!", 0
-helloworld db "no errors detected...", 0
+correct db "Correct!", 0
+noerrors db "no errors detected...", 0
 
 ;%IMPORTS
 

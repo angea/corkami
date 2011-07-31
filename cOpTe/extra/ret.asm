@@ -8,7 +8,6 @@ EntryPoint:
     push good
     db 66h
     retn
-
 _c
 
 good:
@@ -50,7 +49,7 @@ setup:
     mov esi, bad
     mov ecx, badsize
     rep movsb
-    
+
     popf
     popad
     retn
