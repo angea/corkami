@@ -15,15 +15,16 @@
  <manifest:file-entry manifest:media-type="application/vnd.sun.xml.ui.configuration" manifest:full-path="Configurations2/"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001E2000000B583B3039F.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000013F00000190FEA82CEC.png"/>
- <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000004000000030087B85878.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000032C0000036B156021FA.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000025F000000B13B48923C.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000040000000300E63FFB39.jpg"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001100000009E6436E008.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000025700000113DEE79D48.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000030000000400B0A35142.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000000200000002000309F1C.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000271000000A19A57FF3E.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001BA0000007962A636DE.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001D2000000C3005AAFB9.png"/>
- <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000002A900000400E034000C.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000137000000FBD96B3990.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002380000023B235318EB.png"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Pictures/"/>
