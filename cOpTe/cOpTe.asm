@@ -458,6 +458,11 @@ _
     expect al, 2
     expect bl, 1
 _
+    setmsg_ %string:"ERROR: XCHG on same register", 0dh, 0ah, 0
+	mov ax, 1234h
+	xchg ah, al
+	expect ax, 3412h
+_
     setmsg_ %string:"ERROR: ADD", 0dh, 0ah, 0
     mov eax, 3
     add eax, 3
