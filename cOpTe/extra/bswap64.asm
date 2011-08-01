@@ -1,5 +1,6 @@
 %include '..\copte.inc'
 
+IMAGE_SUBSYSTEM_WINDOWS_GUI equ 2
 FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE
 org IMAGEBASE
@@ -30,7 +31,7 @@ istruc IMAGE_OPTIONAL_HEADER64
     at IMAGE_OPTIONAL_HEADER64.MajorSubsystemVersion    , dw 4
     at IMAGE_OPTIONAL_HEADER64.SizeOfImage              , dd SIZEOFIMAGE
     at IMAGE_OPTIONAL_HEADER64.SizeOfHeaders            , dd SIZEOFHEADERS  ; can be 0 in some circumstances
-    at IMAGE_OPTIONAL_HEADER64.Subsystem                , dw 1 ;IMAGE_SUBSYSTEM_WINDOWS_GUI
+    at IMAGE_OPTIONAL_HEADER64.Subsystem                , dw IMAGE_SUBSYSTEM_WINDOWS_GUI
     at IMAGE_OPTIONAL_HEADER64.NumberOfRvaAndSizes      , dd NUMBEROFRVAANDSIZES
 iend
 
@@ -75,7 +76,7 @@ db 66h
     cmp rax, rbx
     jz bad
 
-    mov rbx, 0efcdab8901230000h
+    mov rbx, 01230000h
     cmp rax, rbx
     jnz bad
 
