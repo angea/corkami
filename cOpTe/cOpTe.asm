@@ -34,7 +34,7 @@ _d
 PRINTME equ 0cafebabeh
 %macro print_ 1+
     mov dword [PRINTME] , %1
-;	prefetch [%1]
+;    prefetch [%1]
 %endmacro
 
 EntryPoint:
@@ -90,20 +90,20 @@ _c
 
 
 main:
-	; call initvals
-;	cmp eax, 0		; xp
-;	je eax_good
-;	
-;	cmp eax, 700000h ; Win7 (actually kernel32.dll!BaseThreatInitThunk)
-;	jg eax_good
-;	
-;	add eax, 80h	; upx
-;	cmp eax, esp
-;	je bad
+    ; call initvals
+;    cmp eax, 0        ; xp
+;    je eax_good
+;    
+;    cmp eax, 700000h ; Win7 (actually kernel32.dll!BaseThreatInitThunk)
+;    jg eax_good
+;    
+;    add eax, 80h    ; upx
+;    cmp eax, esp
+;    je bad
 ;eax_good:
 ;
-;	cmp esi, -1		; ollydbg
-;	jz bad
+;    cmp esi, -1        ; ollydbg
+;    jz bad
 
     ; call to word
     ; jump short, near, to word, to reg32, to reg16, far
@@ -427,14 +427,13 @@ classics:
     mov eax, 3
     expect eax, 3
 _
-	setmsg_ %string:"ERROR: MOV reg32, selector", 0dh, 0ah,0 
-	mov eax, -1
-	mov eax, ds ; yes, copy from a word to a dword with no sx/sx
-	push 0
-	pop ebx
-	push ds
-	pop ebx
-	expect eax, ebx ; wrong under <pentium CPUs
+    setmsg_ %string:"ERROR: MOV reg32, selector", 0dh, 0ah,0 
+    mov eax, -1
+    mov eax, ds ; yes, copy from a word to a dword with no sx/sx
+    push ds
+    pop ebx
+    and ebx, 0ffffh
+    expect eax, ebx ; wrong under <pentium CPUs
 _
     setmsg_ %string:"ERROR: MOVZX", 0dh, 0ah, 0
     mov al, -1
@@ -459,9 +458,9 @@ _
     expect bl, 1
 _
     setmsg_ %string:"ERROR: XCHG on same register", 0dh, 0ah, 0
-	mov ax, 1234h
-	xchg ah, al
-	expect ax, 3412h
+    mov ax, 1234h
+    xchg ah, al
+    expect ax, 3412h
 _
     setmsg_ %string:"ERROR: ADD", 0dh, 0ah, 0
     mov eax, 3
@@ -671,19 +670,19 @@ _
     expect eax, ebx
     expect dx, -1
 _
-	setmsg_ %string:"ERROR: Push <reg32>", 0dh, 0ah, 0
-	mov ebx, esp
-	sub ebx, 4
-	rdtsc
-	push eax
-	expect [esp], eax
+    setmsg_ %string:"ERROR: Push <reg32>", 0dh, 0ah, 0
+    mov ebx, esp
+    sub ebx, 4
+    rdtsc
+    push eax
+    expect [esp], eax
     expect esp, ebx
-	pop eax
+    pop eax
 _
-	setmsg_ %string:"ERROR: Push <reg16>", 0dh, 0ah, 0
-	; TODO push ds pushes 16b of DS, and ESP -=4
-	
-	; TODO push dx pushes 16b of DS, but ESP -=2
+    setmsg_ %string:"ERROR: Push <reg16>", 0dh, 0ah, 0
+    ; TODO push ds pushes 16b of DS, and ESP -=4
+    
+    ; TODO push dx pushes 16b of DS, but ESP -=2
 
 _
 
@@ -947,7 +946,9 @@ _
     mov ebx, _movbe                         ; [_movbe] = 11223344h
     rdtsc
     movbe eax, [ebx]
-    expect eax, 44332211h
+    mov ecx, [ebx]
+    bswap ecx
+    expect eax, ecx
     jmp movbe_end
 no_movbe:
     print_ %string:"Info: MOVBE not supported", 0dh, 0ah, 0
@@ -1745,7 +1746,7 @@ retn
     sldt [eax]
 
 ; smsw is not defined 16 bit, but actually reliable
-	smsw [eax]
+    smsw [eax]
     smsw eax
     smsw ax
 
@@ -1895,15 +1896,15 @@ _
     print_ %string:"Testing now: inc on all sizes", 0dh, 0
     setmsg_ %string:"ERROR: INC on all size (64b)", 0dh, 0ah,  0
 start64b
-	mov rax, 1111111111111111h
-	inc al
-	inc ax
-	inc eax	; zero extending !
-	inc rax
-	mov [rax_], rax
+    mov rax, 1111111111111111h
+    inc al
+    inc ax
+    inc eax    ; zero extending !
+    inc rax
+    mov [rax_], rax
 end64b
-	expect dword [rax_], (1111111111111111h + 4*1) & 0ffffffffh
-	expect dword [rax_ + 4], 0
+    expect dword [rax_], (1111111111111111h + 4*1) & 0ffffffffh
+    expect dword [rax_ + 4], 0
 _
 
 _96BCONST equ 11110101011100001101011001111100b
