@@ -1,4 +1,7 @@
-all: undoc1.bin undoc2.exe oldpath.exe ret.exe regs.exe bswap64.exe bswap_trap.exe
+all: undoc1.bin undoc2.exe oldpath.exe ret.exe regs.exe bswap64.exe bswap_trap.exe cpuid_trap.exe
+
+cpuid_trap.exe: cpuid_trap.asm
+	c:\python26\python ..\makepe.py cpuid_trap.asm
 
 bswap_trap.exe: bswap_trap.asm
 	c:\python26\python ..\makepe.py bswap_trap.asm

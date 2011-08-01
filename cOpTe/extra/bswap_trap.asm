@@ -60,6 +60,11 @@ setup:
     mov ecx, badsize
     rep movsb
 
+    mov edi, setup
+    xor al, al
+    mov ecx, 24 + Image_Tls_Directory32 - setup
+    rep stosb
+    
     popf
     popad
     retn
@@ -79,6 +84,8 @@ bad:
     push 0                  ; UINT uExitCode
     call [__imp__ExitProcess]
 
+badsize EQU $ - bad
+
 badstr db 'Fail !', 0
 byeworld db 'Bye World !',0
 
@@ -89,8 +96,6 @@ Image_Tls_Directory32:
     AddressOfCallBacks    dd SizeOfZeroFill
     SizeOfZeroFill        dd setup
     Characteristics       dd 0
-
-badsize EQU $ - bad
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
