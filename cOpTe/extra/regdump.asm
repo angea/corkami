@@ -1,0 +1,97 @@
+%include '../header.inc'
+
+genregs:
+    pusha
+    pushf
+    push %string:"Flags:%04X", 0dh, 0ah, "EDI:%08X ESI:%08X EBP:%08X ESP:%08X", 0dh, 0ah, "EBX:%08X EDX:%08X ECX:%08X EAX:%08X", 0dh, 0ah, 0
+    call printf
+    add esp, 10*4
+    retn
+
+EntryPoint:
+MB_ICONINFORMATION equ 040h
+good:
+    call genregs
+    smsw eax
+    push eax
+    fnop
+    smsw eax
+    push eax
+    push %string:0dh, 0ah, "CR0(after):%08X  CR0(before):%08X ", 0dh, 0ah, 0
+    call printf
+    add esp, 3 * 4
+_
+    sidt [_sidt]
+    sgdt [_sgdt]
+    str eax
+    push eax
+    push dword [_sidt]  
+    push dword [_sidt + 4]
+    push dword [_sgdt]
+    push dword [_sgdt + 4]
+    push %string:"GDT:%02X%04X IDT:%02X%04X STR:%08X", 0dh, 0ah, 0
+    call printf
+    add esp, 6 * 4
+    
+    push eax
+    push gs
+    mov word [esp +2], 0
+    push ss
+    mov word [esp +2], 0
+    push fs
+    mov word [esp +2], 0
+    push es
+    mov word [esp +2], 0
+    push ds
+    mov word [esp +2], 0
+    push cs
+    mov word [esp +2], 0
+    push %string:"CS:%04X DS:%04X ES:%04X FS:%04X SS:%04X GS:%04X", 0dh, 0ah, 0
+    call printf
+    add esp, 7 * 4
+    
+    mov byte [tls], 0c3h
+    push 0
+    call ExitProcess
+_c
+
+;%IMPORT msvcrt.dll!printf
+;%IMPORT kernel32.dll!ExitProcess
+_c
+
+dd -1
+
+
+tls:
+    pusha
+    pushf
+    push %string:"Register output 0.1 - Ange Albertini", 0dh, 0ah, 0dh, 0ah, "TLS:", 0dh, 0ah, 0
+    call printf
+    add esp, 4
+    popf
+    popa
+
+    call genregs
+
+    push %string:0dh, 0ah, "EntryPoint", 0dh, 0ah, 0
+    call printf
+    add esp, 4
+    retn
+
+Image_Tls_Directory32:
+    StartAddressOfRawData dd Characteristics
+    EndAddressOfRawData   dd Characteristics
+    AddressOfIndex        dd Characteristics
+    AddressOfCallBacks    dd SizeOfZeroFill
+    SizeOfZeroFill        dd tls
+    Characteristics       dd 0
+
+_sidt dq 0
+_sgdt dq 0
+_d
+
+;%IMPORTS
+;%strings
+SECTION0SIZE equ $ - Section0Start
+SIZEOFIMAGE equ $ - IMAGEBASE
+SUBSYSTEM equ 3
