@@ -30,11 +30,11 @@ _
     cmp word [fstafter], 03800h
     jnz bad
 _
-    and dword [cr0before], 0fff0ffffh
-    cmp dword [cr0before],  8000003bh
+    and dword [cr0before], 0fffbfff5h
+    cmp dword [cr0before],  80010031h ; XP 8001003b / 7-64 80050031
     jnz bad
-    and dword [cr0after], 0fff0ffffh
-    cmp dword [cr0after],  80000031h
+    and dword [cr0after], 0fffbffffh
+    cmp dword [cr0after],  80010031h ; XP 80010031 / 7-64 80050031
     jnz bad
 _
     cmp dword [_mm7], 2168c235h
