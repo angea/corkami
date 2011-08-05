@@ -1,9 +1,3 @@
-%include 'header.inc'
-
-program db 'cOpTe - corkami Opcode Tester v0.2b 2011/??/??    ', 0dh, 0ah, 0
-author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
-_d
-
 ;this file tests each usermode opcode (at least, one of almost all families)
 ; using segment 33h trick to test 64b opcodes
 ; using ZwAllocateVirtualMemory trick to allocate [0000-ffff], so word jumps and returns are working
@@ -22,7 +16,6 @@ _d
 ; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
 ; setldtentries, xlat/movs* with selector
-; scasb for string
 ; mmx <-> fpu transfer
 ; initial values
 
@@ -31,6 +24,13 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+%include 'cOpTe.inc'
+
+FILEALIGN equ 4h
+SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE
+IMAGEBASE equ 31310000h
+org IMAGEBASE
+bits 32
 PRINTME equ 0cafebabeh
 %macro print_ 1+
     mov dword [PRINTME] , %1
@@ -38,20 +38,41 @@ PRINTME equ 0cafebabeh
 %endmacro
 
 EntryPoint:
+istruc IMAGE_DOS_HEADER
+    at IMAGE_DOS_HEADER.e_magic, db 'MZ'
+    push edx
+    inc ebp
     call setVEH
     call initconsole
     print_ program
     print_ author
     call init
     jmp main
-_c
+int3
 
 setVEH:
     push printer
     push -1
     call AddVectoredExceptionHandler
     retn
-_c
+
+    at IMAGE_DOS_HEADER.e_lfanew, dd nt_header - IMAGEBASE
+iend
+
+program db 'cOpTe - corkami Opcode Tester v0.2b 2011/??/??    ', 0dh, 0ah, 0
+author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
+
+
+align FILEALIGN, db 0
+align 1000h, db 0           ; necessary under Win7 x64
+SIZEOFHEADERS equ $ - IMAGEBASE
+
+Section0Start:
+
+_d
+
+
+
 ;%IMPORT kernel32.dll!AddVectoredExceptionHandler
 _c
 
@@ -1983,11 +2004,58 @@ BYTE_MASK  EQU 1000000b
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;%IMPORTS
-_d
-
 ;%strings
 _d
+
+align 4, db 0
+nt_header:
+istruc IMAGE_NT_HEADERS
+    at IMAGE_NT_HEADERS.Signature, db 'PE',0,0
+iend
+istruc IMAGE_FILE_HEADER
+    at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
+    at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
+    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
+    at IMAGE_FILE_HEADER.Characteristics,       dw CHARACTERISTICS
+iend
+
+OptionalHeader:
+istruc IMAGE_OPTIONAL_HEADER32
+    at IMAGE_OPTIONAL_HEADER32.Magic                    , dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint      , dd EntryPoint - IMAGEBASE
+    at IMAGE_OPTIONAL_HEADER32.ImageBase                , dd IMAGEBASE
+    at IMAGE_OPTIONAL_HEADER32.SectionAlignment         , dd SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.FileAlignment            , dd FILEALIGN
+    at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion    , dw 4
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage              , dd SIZEOFIMAGE
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders            , dd SIZEOFHEADERS  ; can be 0 in some circumstances
+    at IMAGE_OPTIONAL_HEADER32.Subsystem                , dw SUBSYSTEM
+    at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes      , dd -1 ;NUMBEROFRVAANDSIZES
+iend
+
+DataDirectory:
+istruc IMAGE_DATA_DIRECTORY_16
+    at IMAGE_DATA_DIRECTORY_16.ExportsVA,   dd Exports_Directory - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd IMPORT_DESCRIPTOR - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ResourceVA,  dd Directory_Entry_Resource - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.FixupsVA,    dd Directory_Entry_Basereloc - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.FixupsSize,  dd DIRECTORY_ENTRY_BASERELOC_SIZE
+    at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd Image_Tls_Directory32 - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.IATVA,       dd ImportsAddressTable - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE
+iend
+
+NUMBEROFRVAANDSIZES equ ($ - DataDirectory) / IMAGE_DATA_DIRECTORY_size
+
+ImportsAddressTable:
+;%IMPORTS
+IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
+_d
+
+SIZEOFOPTIONALHEADER equ $ - OptionalHeader
+
+SectionHeader:
+NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
