@@ -25,10 +25,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %include 'cOpTe.inc'
-
+IMAGE_REL_BASED_HIGHLOW equ 3
 FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE
-IMAGEBASE equ 31310000h
+IMAGEBASE equ 10000h
 org IMAGEBASE
 bits 32
 PRINTME equ 0cafebabeh
@@ -51,6 +51,7 @@ istruc IMAGE_DOS_HEADER
 int3
 
 setVEH:
+;%reloc 1
     push printer
     push -1
     call AddVectoredExceptionHandler
@@ -72,7 +73,7 @@ Section0Start:
 _d
 
 
-
+;%reloc 2
 ;%IMPORT kernel32.dll!AddVectoredExceptionHandler
 _c
 
@@ -2053,7 +2054,7 @@ IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 _d
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
-
+;%relocs
 SectionHeader:
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
