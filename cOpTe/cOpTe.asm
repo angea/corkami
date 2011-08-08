@@ -18,37 +18,77 @@
 ; setldtentries, xlat/movs* with selector
 ; mmx <-> fpu transfer
 ; initial values
-
-
-; 16b stub
+; TLS with on the fly update to initialize virtual memory
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %include 'cOpTe.inc'
-IMAGE_REL_BASED_HIGHLOW equ 3
+
 FILEALIGN equ 4h
-SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE
-IMAGEBASE equ 10000h
+SECTIONALIGN equ FILEALIGN
+;kernel IB doesn't work yet under XP for this example
+IMAGEBASE equ 08000000h
 org IMAGEBASE
 bits 32
+
 PRINTME equ 0cafebabeh
+
 %macro print_ 1+
     mov dword [PRINTME] , %1
-;    prefetch [%1]
+;    prefetch [%1]  ; wouldn't trigger an exception, but not all debuggers show it as a 'comment'
 %endmacro
 
+; some tools still don't like EntryPoint at 0....
+; c'mon, who taught you to follow the official specs... ?
 EntryPoint:
+
 istruc IMAGE_DOS_HEADER
+    ; pity we can't put ZM anymore...
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
+
+    ;welcome ! an obsolete yet welcoming opcode to invite our guests
+    into ; the dragon ! bomb the bass forever...
+
+    ; and an usually unsupported yet innocent opcode as an appetizer
+    db 0fh, 018h, 111b << 3
+    jmp EPP
+
+;for typability... the Budokan (tm) effect, 1989...
+db CR
+
+; Warning! a commercial banner is approaching fast !
+program db 'CoST - COrkami Standard Test v0.2b 2011/??/??', 0dh, 0ah, 0
+
+    ; omg, we're actually still in the header... quick, the first valid value...
+    at IMAGE_DOS_HEADER.e_lfanew, dd nt_header - IMAGEBASE
+iend
+
+; ok, that was too many valid compulsory headers values for now... we'll postpone it for now...
+; yes, it's really at the end ;)
+
+;author, licence, etc...
+db CR
+author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0
+db EOF
+
+;%reloc 2
+
+;TODO: FIXME ! (disabled)
+;IMPORT copte.exe!EPP
+EPP:
+
+
+;%EXPORT EPP
+EP2:
     push edx
     inc ebp
     call setVEH
     call initconsole
     print_ program
     print_ author
+    print_ %string:0dh, 0ah, 0dh, 0ah, 0
     call init
     jmp main
-int3
 
 setVEH:
 ;%reloc 1
@@ -56,25 +96,6 @@ setVEH:
     push -1
     call AddVectoredExceptionHandler
     retn
-
-    at IMAGE_DOS_HEADER.e_lfanew, dd nt_header - IMAGEBASE
-iend
-
-program db 'cOpTe - corkami Opcode Tester v0.2b 2011/??/??    ', 0dh, 0ah, 0
-author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0dh, 0ah, 0dh, 0ah, 0
-
-
-align FILEALIGN, db 0
-align 1000h, db 0           ; necessary under Win7 x64
-SIZEOFHEADERS equ $ - IMAGEBASE
-
-Section0Start:
-
-_d
-
-
-;%reloc 2
-;%IMPORT kernel32.dll!AddVectoredExceptionHandler
 _c
 
 ;printing handler, for one opcode display operations - not perfect yet
@@ -115,10 +136,10 @@ main:
     ; call initvals
 ;    cmp eax, 0        ; xp
 ;    je eax_good
-;    
+;
 ;    cmp eax, 700000h ; Win7 (actually kernel32.dll!BaseThreatInitThunk)
 ;    jg eax_good
-;    
+;
 ;    add eax, 80h    ; upx
 ;    cmp eax, esp
 ;    je bad
@@ -207,13 +228,6 @@ _c
 %%good:
 %endmacro
 
-;%IMPORT kernel32.dll!ExitProcess
-_c
-
-;%strings
-newline db 0dh, 0ah, 0
-_d
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 print:
@@ -247,9 +261,6 @@ printnl:
     retn 4
 _c
 
-;%IMPORT kernel32.dll!WriteConsoleA
-_c
-
 lpNumbersOfCharsWritten dd 0
 _d
 
@@ -257,10 +268,6 @@ _d
     mov dword [ErrorMsg], %1
 %endmacro
 
-errormsg_:
-    push dword [ErrorMsg]
-    call printnl
-    retn
 _c
 
 ErrorMsg dd 0
@@ -272,8 +279,6 @@ initconsole:
     call GetStdHandle
     mov [hConsoleOutput], eax
     retn
-_c
-;%IMPORT kernel32.dll!GetStdHandle
 _c
 
 hConsoleOutput dd 0
@@ -295,6 +300,7 @@ initmem:
     call ZwAllocateVirtualMemory
     retn
 _c
+
 
 checkOS:
     mov eax, [fs:18h]
@@ -320,9 +326,6 @@ W7:
     mov dword [prefix_exception], ACCESS_VIOLATION
     mov dword [os], W7_tests
     retn
-_c
-
-;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
 _c
 
 zwsize dd 0ffffh
@@ -449,7 +452,7 @@ classics:
     mov eax, 3
     expect eax, 3
 _
-    setmsg_ %string:"ERROR: MOV reg32, selector", 0dh, 0ah,0 
+    setmsg_ %string:"ERROR: MOV reg32, selector", 0dh, 0ah,0
     mov eax, -1
     mov eax, ds ; yes, copy from a word to a dword with no sx/sx
     push ds
@@ -703,7 +706,7 @@ _
 _
     setmsg_ %string:"ERROR: Push <reg16>", 0dh, 0ah, 0
     ; TODO push ds pushes 16b of DS, and ESP -=4
-    
+
     ; TODO push dx pushes 16b of DS, but ESP -=2
 
 _
@@ -711,7 +714,6 @@ _
     retn
 _c
 
-;%strings
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1519,7 +1521,6 @@ fpuenv:
     .LastInstructionOpcode dd 0
     dd 0
 
-;%strings
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1736,7 +1737,6 @@ current_exception dd 0
 currentskip db 0
 counter dd 0
 
-;%strings
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1820,7 +1820,6 @@ retn
     ud2                                     ;0f0b
 _c
 
-;%strings
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2005,61 +2004,77 @@ BYTE_MASK  EQU 1000000b
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;%strings
+errormsg_:
+    push dword [ErrorMsg]
+    call printnl
+    retn
 _d
 
-align 4, db 0
+ImportsAddressTable:
+;%IMPORTS
+IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
+
+;%EXPORTS cOpTe.exe
+_d
+
+;%relocs
+_d
+
+;%strings
+_d
 nt_header:
 istruc IMAGE_NT_HEADERS
     at IMAGE_NT_HEADERS.Signature, db 'PE',0,0
 iend
+
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
-    at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
-    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
+        at IMAGE_FILE_HEADER.NumberOfSections,      dw 0
+
+;%reloc 2
+;%IMPORT kernel32.dll!WriteConsoleA
+        at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw 108h ; from here till end of the file
     at IMAGE_FILE_HEADER.Characteristics,       dw CHARACTERISTICS
 iend
 
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic                    , dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
+;%reloc 2
+;%IMPORT kernel32.dll!AddVectoredExceptionHandler
+;%reloc 2
+;%IMPORT kernel32.dll!GetStdHandle
     at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint      , dd EntryPoint - IMAGEBASE
+;%reloc 2
+;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
     at IMAGE_OPTIONAL_HEADER32.ImageBase                , dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment         , dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment            , dd FILEALIGN
+newline db 0dh, 0ah, 0
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion    , dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage              , dd SIZEOFIMAGE
-    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders            , dd SIZEOFHEADERS  ; can be 0 in some circumstances
-    at IMAGE_OPTIONAL_HEADER32.Subsystem                , dw SUBSYSTEM
-    at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes      , dd -1 ;NUMBEROFRVAANDSIZES
+        at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders            , dd SIZEOFIMAGE - 1
+    at IMAGE_OPTIONAL_HEADER32.Subsystem                , dw IMAGE_SUBSYSTEM_WINDOWS_CUI
+        at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes      , dd -1
 iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ExportsVA,   dd Exports_Directory - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ExportsSize, dd EXPORT_SIZE
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd IMPORT_DESCRIPTOR - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.ResourceVA,  dd Directory_Entry_Resource - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.FixupsVA,    dd Directory_Entry_Basereloc - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.FixupsSize,  dd DIRECTORY_ENTRY_BASERELOC_SIZE
+    at IMAGE_DATA_DIRECTORY_16.DebugSize,   dd 0 ; prevent a fail under XP - don't ask :D
+;%reloc 2
+;%IMPORT kernel32.dll!ExitProcess
     at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd Image_Tls_Directory32 - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.IATVA,       dd ImportsAddressTable - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE
 iend
 
-NUMBEROFRVAANDSIZES equ ($ - DataDirectory) / IMAGE_DATA_DIRECTORY_size
+; some padding is needed (no section table...)
+times nt_header + 120h - $  db 0
 
-ImportsAddressTable:
-;%IMPORTS
-IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
-_d
-
-SIZEOFOPTIONALHEADER equ $ - OptionalHeader
-;%relocs
-SectionHeader:
-NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
-SUBSYSTEM equ IMAGE_SUBSYSTEM_WINDOWS_CUI
