@@ -170,6 +170,27 @@ if __name__ == "__main__":
             imports[dll] += [api]
 
     r = re.sub(r";%IMPORT ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
+
+    findimp = re.findall(";%IMPORTJMP ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
+    if findimp:
+        for dll, api in findimp:
+            if dll not in imports:
+                imports[dll] = list()
+            if api not in imports[dll]:
+                imports[dll] += [api]
+
+    r = re.sub(r";%IMPORTJMP ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""    jmp [__imp__\2]""", r)
+
+    findimp = re.findall(";%IMPORTCALL ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
+    if findimp:
+        for dll, api in findimp:
+            if dll not in imports:
+                imports[dll] = list()
+            if api not in imports[dll]:
+                imports[dll] += [api]
+
+    r = re.sub(r";%IMPORTCALL ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""    call [__imp__\2]""", r)
+
     r = r.replace(";%IMPORTS", MakeImports(imports))
 
 

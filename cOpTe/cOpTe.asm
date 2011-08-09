@@ -18,7 +18,7 @@
 ; setldtentries, xlat/movs* with selector
 ; mmx <-> fpu transfer
 ; initial values
-; TLS with on the fly update to initialize virtual memory
+; compress strings ?
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -26,20 +26,22 @@
 
 FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN
-;kernel IB doesn't work yet under XP for this example
-IMAGEBASE equ 08000000h
+
+;TODO: kernel IB doesn't work yet under XP/W7
+IMAGEBASE equ 080000000h - 10000000h
 org IMAGEBASE
 bits 32
 
 PRINTME equ 0cafebabeh
 
 %macro print_ 1+
-    mov dword [PRINTME] , %1
+    mov dword [PRINTME], %1
 ;    prefetch [%1]  ; wouldn't trigger an exception, but not all debuggers show it as a 'comment'
 %endmacro
 
 ; some tools still don't like EntryPoint at 0....
 ; c'mon, who taught you to follow the official specs... ?
+;%EXPORT EntryPoint
 EntryPoint:
 
 istruc IMAGE_DOS_HEADER
@@ -51,7 +53,7 @@ istruc IMAGE_DOS_HEADER
 
     ; and an usually unsupported yet innocent opcode as an appetizer
     db 0fh, 018h, 111b << 3
-    jmp EPP
+    jmp EP2
 
 ;for typability... the Budokan (tm) effect, 1989...
 db CR
@@ -71,24 +73,13 @@ db CR
 author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0
 db EOF
 
-;%reloc 2
-
-;TODO: FIXME ! (disabled)
-;IMPORT copte.exe!EPP
-EPP:
-
-
-;%EXPORT EPP
+;%EXPORT Entry_Point
 EP2:
     push edx
     inc ebp
-    call setVEH
-    call initconsole
-    print_ program
-    print_ author
-    print_ %string:0dh, 0ah, 0dh, 0ah, 0
     call init
-    jmp main
+;%IMPORTJMP copte.exe!Main
+
 
 setVEH:
 ;%reloc 1
@@ -117,11 +108,11 @@ _
 
     mov eax, -1
     retn 4
-_c
+_
 not_print:
     mov eax, 0
     retn 4
-_c
+_
 
 init:
     print_ %string:"allocating buffer [0000-ffff]", 0dh, 0
@@ -132,7 +123,7 @@ init:
 _c
 
 
-main:
+;%EXPORT Main
     ; call initvals
 ;    cmp eax, 0        ; xp
 ;    je eax_good
@@ -189,7 +180,7 @@ _
     print_ %string:"testing opcode-based GetIPs...", 0dh, 0ah, 0
     call get_ips ; call, call far, fstenv
 _
-    ; generic int 00-FF , int 2d, illegal instruction,
+    ; generic int 00-FF, int 2d, illegal instruction,
     ; into, int4, int3, int 3, IceBP, TF, bound, lock, in, hlt
     print_ %string:"testing opcode-based exception triggers...", 0dh, 0ah, 0
     call exceptions
@@ -254,7 +245,7 @@ print:
 _c
 
 printnl:
-    push %string:'                                                                         ', 0dh, 0
+    push fullline
     call print
     push dword [esp + 4]
     call print
@@ -262,16 +253,13 @@ printnl:
 _c
 
 lpNumbersOfCharsWritten dd 0
+ErrorMsg dd 0
 _d
 
 %macro setmsg_ 1+
     mov dword [ErrorMsg], %1
 %endmacro
 
-_c
-
-ErrorMsg dd 0
-_d
 
 STD_OUTPUT_HANDLE equ -11
 initconsole:
@@ -282,7 +270,7 @@ initconsole:
 _c
 
 hConsoleOutput dd 0
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -330,7 +318,7 @@ _c
 
 zwsize dd 0ffffh
 lpBuffer3 dd 1
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -340,6 +328,7 @@ _d
 ; 23 on W7 in 32 bit
 ; 33 in 64b
 
+;%EXPORT jumps
 jumps_:
 _retword:
     mov ecx, bad
@@ -442,11 +431,12 @@ _ret:
     ret
 _c
 
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;%EXPORT classics
 classics:
     setmsg_ %string:"ERROR: MOV reg32, imm32", 0dh, 0ah, 0
     mov eax, 3
@@ -522,7 +512,7 @@ _
     setmsg_ %string:"ERROR: OR", 0dh, 0ah, 0
     mov eax, 1010b
     or eax, 0110b
-    expect eax , 1110b
+    expect eax, 1110b
 _
     setmsg_ %string:"ERROR: AND", 0dh, 0ah, 0
     mov eax, 1010b
@@ -718,6 +708,7 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;%EXPORT rares
 rares:
     setmsg_ %string:"ERROR: XADD", 0dh, 0ah, 0
     mov al, 1
@@ -769,7 +760,7 @@ _
     push ds
     mov ebx, addseg                         ; [addseg] = 00:12345678
     lds eax, [ebx]
-    expect eax , 12345678h
+    expect eax, 12345678h
 ;    setmsg_ "ERROR: LDS - wrong segment value"
     push ds
     pop eax
@@ -804,8 +795,8 @@ _
 _cx0:
 _
     setmsg_ %string:"ERROR: XLATB (on EBX)", 0dh, 0ah, 0
-    mov al, 35
-    mov ebx, xlattable                      ; xlattable[35] = 75
+    mov al, 15
+    mov ebx, xlattable                      ; xlattable[15] = 75
     xlatb
     expect al, 75
 _
@@ -870,9 +861,8 @@ _
 _c
 
 xlattable:
-times 35 db 0
+times 15 db 0
          db 75
-_d
 
 boundslimit:
     dd 135
@@ -886,11 +876,12 @@ addseg:
     dd 12345678h
     dw 00h
 
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;%EXPORT undocumented
 undocumented:
     ; undocumented behavior with an immediate operand different from 10
     setmsg_ %string:"ERROR: AAM with non default operand (undocumented)", 0dh, 0ah, 0
@@ -931,6 +922,7 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;%EXPORT specifics
 cpu_specifics:
 ; XSAVE, XGETBV XRSTOR, LZCNT are missing, I don't have a CPU supporting them
     setmsg_ %string:"ERROR: CPUID", 0dh, 0ah, 0
@@ -1028,7 +1020,7 @@ cpuidstr db "Info: CPUID "
 cpuids:
     dd 0, 0, 0
     db 0dh, 0ah, 0
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1036,6 +1028,7 @@ _d
 CONST equ 035603h
 CONST8 equ 27h
 
+;%EXPORT encodings
 encodings: ; undocumented alternate encodings
     mov eax, CONST
     db 0f7h, 0c8h                           ; test eax, CONST
@@ -1061,7 +1054,7 @@ _
     retn
 _c
 
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1167,7 +1160,7 @@ sgdt_ dd 0,0
 sidt_ dd 0,0
 os dd 0
 
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1203,6 +1196,7 @@ randreg:
     retn
 _c
 
+;%EXPORT nops
 nops:
     call randreg
     pushad
@@ -1367,7 +1361,7 @@ _retn4:
     retn 4
 _c
 
-;%strings
+
 _d
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1431,6 +1425,8 @@ GSgood:
     retn
 _c
 
+;%EXPORT antis
+
 antis:
 TF equ 0100h
     print_ %string:"Testing now: Trap flag", 0dh, 0
@@ -1471,11 +1467,12 @@ _
     retn
 _c
 
-;%strings
+
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;%EXPORT getips
 get_ips:
     print_ %string:"Testing now: GetIP via Call/Pop", 0dh, 0
     setmsg_ %string:"ERROR: Wrong EIP via Call/pop", 0dh, 0ah, 0
@@ -1553,6 +1550,7 @@ ints_handler:
     mov eax, ExceptionContinueExecution
     retn
 
+;%EXPORT exceptions
 exceptions:
     print_ %string:"Setting Exception handler...", 0dh, 0
     setSEH ints_handler
@@ -1571,10 +1569,10 @@ _
 
     ints 005h, 02ah - 5
         ; int 02ah ; edx = ????????, eax = edx << 8 + ?? [step into next instruction]  / W7 : access violation
-        ; int 02bh ; eax = C0000258 , ecx = 00000000 [step into next instruction]  / W7 : access violation
-        ; int 02ch ; eax = C000014F, ecx = esp , edx = IP (if ran, not stepped) [step into next instruction] / W7: exception 0c0000420h
+        ; int 02bh ; eax = C0000258, ecx = 00000000 [step into next instruction]  / W7 : access violation
+        ; int 02ch ; eax = C000014F, ecx = esp, edx = IP (if ran, not stepped) [step into next instruction] / W7: exception 0c0000420h
         ; int 02dh = see below
-        ; int 02eh ; XP: eax = C0000xxx (depends on EAX before), ecx = esp , edx = IP (if ran, not stepped) [step into next instruction] / W7 : access violation
+        ; int 02eh ; XP: eax = C0000xxx (depends on EAX before), ecx = esp, edx = IP (if ran, not stepped) [step into next instruction] / W7 : access violation
     times 2*5 nop
     ints 02fh, 0ffh - 02fh + 1
     expect dword [counter], 256 - 2 - 5
@@ -1741,7 +1739,7 @@ _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+;%EXPORT disassembly
 disassembly:
     ; the following lines are just to test common mistakes in output gather together for easy visual testing
 
@@ -1837,10 +1835,12 @@ _c
     bits 32
     retf
 _c
+
 %$next:
     %pop
 %endmacro
 
+;%EXPORT sixtyfour
 sixtyfour:
     setSEH no64b
     print_ %string:"Testing now: CDQE (64 bits only)", 0dh, 0
@@ -1890,6 +1890,7 @@ rip_:
 end64b
     expect dword [rax_], rip_
 _
+
     print_ %string:"Testing now: MOVSXD (64 bits)", 0dh, 0
     setmsg_ %string:"ERROR: MOVSXD (64 bits)", 0dh, 0ah, 0
 start64b
@@ -1905,15 +1906,17 @@ end64b
     expect dword [rax_ + 4], 0
     expect dword [rcx_ + 4], -1
 _
+
     print_ %string:"Testing now: 15 bytes lock add (64 bits)", 0dh, 0
     setmsg_ %string:"ERROR: 15 bytes LOCK ADD (64 bits)", 0dh, 0ah, 0
-    mov eax , 314159h
+    mov eax, 314159h
 start64b
     lock add qword [cs:eax + eax*4 + lockadd - 314159h*5], 0efcdab89h ; F0:2E:67:4C:818480 01234567 89ABCDEF
 end64b
     expect dword [lockadd], 0efcdab88h
     expect dword [lockadd + 4], -1
 _
+
     print_ %string:"Testing now: inc on all sizes", 0dh, 0
     setmsg_ %string:"ERROR: INC on all size (64b)", 0dh, 0ah,  0
 start64b
@@ -1951,6 +1954,7 @@ _96bnext:
     expect ebx, ((_96BCONST + 11b - 1) * 2) & 0ffffffffh
     expect eax, ((_96BCONST + 11b - 1) * 4) & 0ffffffffh
 _
+
     print_ ''
 sixtyfour_end:
     clearSEH
@@ -1965,8 +1969,8 @@ no64b:
     retn
 _c
 
-align 16, int3
-
+;align 16, int3
+align 8
 _cmpxchg16b:
     dq 00a0a0a0a0a0a0a0ah
     dq 0d0d0d0d0d0d0d0d0h
@@ -1979,40 +1983,75 @@ lockadd dq -1
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; just for reference, another 15 bytes operation, in 16 bits.
-bits 16
-
-lock add dword [cs: eax + ebx + 01234567h], 01234567h    ; 66:67:f0:2e:81 8418 67452301 efcdab89
-
-bits 32
+;bits 16
+;
+;lock add dword [cs: eax + ebx + 01234567h], 01234567h    ; 66:67:f0:2e:81 8418 67452301 efcdab89
+;
+;bits 32
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; disabled because I cover only SSE
 
-str1 db "UseFlatAssembler"
-str2 db "UsingAnAssembler"
-
-EQUAL_ANY EQU 0000b
-RANGES        EQU     0100b
-EQUAL_EACH        EQU 1000b
-EQUAL_ORDERED     EQU 1100b
-NEGATIVE_POLARITY EQU 010000b
-BYTE_MASK  EQU 1000000b
-   movdqu xmm0, dqword[str1]
-   pcmpistrm xmm0, dqword[str2], EQUAL_EACH + BYTE_MASK
-;   => XMM0 = __XXXXX_________________
+;str1 db "UseFlatAssembler"
+;str2 db "UsingAnAssembler"
+;
+;EQUAL_ANY EQU 0000b
+;RANGES        EQU     0100b
+;EQUAL_EACH        EQU 1000b
+;EQUAL_ORDERED     EQU 1100b
+;NEGATIVE_POLARITY EQU 010000b
+;BYTE_MASK  EQU 1000000b
+;   movdqu xmm0, dqword[str1]
+;   pcmpistrm xmm0, dqword[str2], EQUAL_EACH + BYTE_MASK
+;;   => XMM0 = __XXXXX_________________
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-errormsg_:
-    push dword [ErrorMsg]
-    call printnl
+;%EXPORT TLS_START
+; first TLS - adds the 2nd one to TLS callbacks on the fly
+TLS:
+    mov eax, [hConsoleOutput]
+    mov ebx, bounds00
+    bound eax, [ebx] ; triggers exception if hConsoleOutput is not null
+
+    mov dword [TLSCharacteristics], TLS2
     retn
+_c
+
+;%EXPORT TLS_2
+; second TLS - initialization
+TLS2:
+    call setVEH
+    call initconsole
+    print_ program
+    print_ author
+    print_ %string:0dh, 0ah, 0dh, 0ah, 0
+    ;unhandled exception terminates TLS but not process
+    int3
+_c
+
+;required to use TLS
+;reloc 2
+;%IMPORT gdi32.dll!EngQueryEMFInfo
+_c
+
+bounds00 dd 0,0
+Image_Tls_Directory32:
+    StartAddressOfRawData dd TLSCharacteristics ; VA, should point to something null
+    EndAddressOfRawData   dd TLSCharacteristics ; VA, should point to something null
+    AddressOfIndex        dd TLSCharacteristics ; VA, should point to something null
+    AddressOfCallBacks    dd SizeOfZeroFill
+    SizeOfZeroFill        dd TLS
+    TLSCharacteristics    dd 0
+
 _d
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ImportsAddressTable:
 ;%IMPORTS
 IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
+_d
 
 ;%EXPORTS cOpTe.exe
 _d
@@ -2020,8 +2059,12 @@ _d
 ;%relocs
 _d
 
+fullline db '                                                                         ', 0dh, 0
 ;%strings
 _d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+align 4, db 0
 nt_header:
 istruc IMAGE_NT_HEADERS
     at IMAGE_NT_HEADERS.Signature, db 'PE',0,0
@@ -2033,48 +2076,123 @@ istruc IMAGE_FILE_HEADER
 
 ;%reloc 2
 ;%IMPORT kernel32.dll!WriteConsoleA
-        at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw 108h ; from here till end of the file
+;%reloc 2
+
+        ; from here till end of the file - has to be dword aligned on win7
+        at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw (End - 4 - $) & 0fffch
     at IMAGE_FILE_HEADER.Characteristics,       dw CHARACTERISTICS
 iend
 
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
-    at IMAGE_OPTIONAL_HEADER32.Magic                    , dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-;%reloc 2
-;%IMPORT kernel32.dll!AddVectoredExceptionHandler
-;%reloc 2
-;%IMPORT kernel32.dll!GetStdHandle
-    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint      , dd EntryPoint - IMAGEBASE
-;%reloc 2
-;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
-    at IMAGE_OPTIONAL_HEADER32.ImageBase                , dd IMAGEBASE
-    at IMAGE_OPTIONAL_HEADER32.SectionAlignment         , dd SECTIONALIGN
-    at IMAGE_OPTIONAL_HEADER32.FileAlignment            , dd FILEALIGN
-newline db 0dh, 0ah, 0
-    at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion    , dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage              , dd SIZEOFIMAGE
-        at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders            , dd SIZEOFIMAGE - 1
-    at IMAGE_OPTIONAL_HEADER32.Subsystem                , dw IMAGE_SUBSYSTEM_WINDOWS_CUI
-        at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes      , dd -1
+    at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
+
+        at IMAGE_OPTIONAL_HEADER32.MajorLinkerVersion,            db 0a6h
+        at IMAGE_OPTIONAL_HEADER32.MinorLinkerVersion,            db 0b9h
+        at IMAGE_OPTIONAL_HEADER32.SizeOfCode,                    dd 075a6e901h
+        at IMAGE_OPTIONAL_HEADER32.SizeOfInitializedData,         dd 06ae8b9f2h
+        at IMAGE_OPTIONAL_HEADER32.SizeOfUninitializedData,       dd 08ef4c2a6h
+
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
+
+        at IMAGE_OPTIONAL_HEADER32.BaseOfCode,                    dd 0a6f8b268h
+        at IMAGE_OPTIONAL_HEADER32.BaseOfData,                    dd 0982bfa53h
+
+    at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
+    at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
+
+        at IMAGE_OPTIONAL_HEADER32.MajorOperatingSystemVersion,   dw 0a65fh
+        at IMAGE_OPTIONAL_HEADER32.MinorOperatingSystemVersion,   dw 09a2bh
+        at IMAGE_OPTIONAL_HEADER32.MajorImageVersion,             dw 0e9fbh
+        at IMAGE_OPTIONAL_HEADER32.MinorImageVersion,             dw 03f29h
+
+    at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4 ; 4-6
+
+  at IMAGE_OPTIONAL_HEADER32.MinorSubsystemVersion,         dw 098a5h
+
+      ;this one not null will break the SMSW/GS trick :(
+      at IMAGE_OPTIONAL_HEADER32.Win32VersionValue,             dd 0
+
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd SIZEOFIMAGE
+
+        ; Grandmother, what a big header you have !
+        at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFIMAGE - 1
+
+        at IMAGE_OPTIONAL_HEADER32.CheckSum,                  dd 6a846845h
+
+    at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
+
+        at IMAGE_OPTIONAL_HEADER32.DllCharacteristics,        dw 0f84fh
+
+        ; can't put funny values here ...
+        at IMAGE_OPTIONAL_HEADER32.SizeOfStackReserve,        dd 1abedfh
+        at IMAGE_OPTIONAL_HEADER32.SizeOfStackCommit,         dd 1953h
+        at IMAGE_OPTIONAL_HEADER32.SizeOfHeapReserve,         dd 13580ch
+        at IMAGE_OPTIONAL_HEADER32.SizeOfHeapCommit,          dd 16a3h
+
+        at IMAGE_OPTIONAL_HEADER32.LoaderFlags,               dd 09a886345h
+
+        at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 0a5b8324eh
 iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ExportsVA,   dd Exports_Directory - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.ExportsSize, dd EXPORT_SIZE
+        at IMAGE_DATA_DIRECTORY_16.ExportsSize, dd 09f82359h
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd IMPORT_DESCRIPTOR - IMAGEBASE
+        at IMAGE_DATA_DIRECTORY_16.ImportsSize,   dd 098f549eh
     at IMAGE_DATA_DIRECTORY_16.ResourceVA,  dd Directory_Entry_Resource - IMAGEBASE
+        at IMAGE_DATA_DIRECTORY_16.ResourceSize,     dd 0abe03401h
+        at IMAGE_DATA_DIRECTORY_16.Exception,        dd 02438ba9dh, 6a8b0456h
+        at IMAGE_DATA_DIRECTORY_16.Security,         dd 068429110h, 093798818h
+
     at IMAGE_DATA_DIRECTORY_16.FixupsVA,    dd Directory_Entry_Basereloc - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.FixupsSize,  dd DIRECTORY_ENTRY_BASERELOC_SIZE
+        at IMAGE_DATA_DIRECTORY_16.FixupsSize,  dd 0abef068h
+        at IMAGE_DATA_DIRECTORY_16.DebugVA,     dd 09859768h
     at IMAGE_DATA_DIRECTORY_16.DebugSize,   dd 0 ; prevent a fail under XP - don't ask :D
-;%reloc 2
-;%IMPORT kernel32.dll!ExitProcess
+        at IMAGE_DATA_DIRECTORY_16.Description, dd 0e8f9b6a2h, 0f69b0ca6h
+        at IMAGE_DATA_DIRECTORY_16.MIPS,        dd 0f69b0e3ah, 3e695412h
+
     at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd Image_Tls_Directory32 - IMAGEBASE
+
+        at IMAGE_DATA_DIRECTORY_16.TLSSize,          dd 068ab8043h
+    at IMAGE_DATA_DIRECTORY_16.Load,             dd 0
+        dd 0aaf9e8b4h
+    at IMAGE_DATA_DIRECTORY_16.BoundImportsVA,   dd 0
+        at IMAGE_DATA_DIRECTORY_16.BoundImportsSize, dd 0f9824978h
+
     at IMAGE_DATA_DIRECTORY_16.IATVA,       dd ImportsAddressTable - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE
+    at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE ^ 1234h
+
+        at IMAGE_DATA_DIRECTORY_16.DelayImportsVA,   dd 0ef09845ch
+        at IMAGE_DATA_DIRECTORY_16.DelayImportsSize, dd 0c680398eh
+    at IMAGE_DATA_DIRECTORY_16.COM,              dd 0
+        dd 0a929f5eh
+        at IMAGE_DATA_DIRECTORY_16.reserved,         dd 098c0d9bh, 068fe9a5h
+
 iend
 
+errormsg_:
+    push dword [ErrorMsg]
+    call printnl
+    retn
+_d
+
+newline db 0dh, 0ah, 0
+;%reloc 2
+;%IMPORT kernel32.dll!ExitProcess
+
 ; some padding is needed (no section table...)
-times nt_header + 120h - $  db 0
+;times nt_header + 120h - $  db 0
+
+;%reloc 2
+;%IMPORT kernel32.dll!AddVectoredExceptionHandler
+;%reloc 2
+;%IMPORT kernel32.dll!GetStdHandle
+;%reloc 2
+;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
+
 
 SIZEOFIMAGE equ $ - IMAGEBASE
+End:
