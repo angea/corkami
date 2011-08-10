@@ -5,8 +5,8 @@ IMPORT_DESCRIPTOR: ; replace with imports:
 |IMAGE_IMPORT_DESCRIPTOR|
 %(dll)s_DESCRIPTOR:
     dd %(dll)s_hintnames - IMAGEBASE    ; OriginalFirstThunk/Characteristics, IMAGE_IMPORT_BY_NAME array
-    dd 0                                ; TimeDateStamp
-    dd 0                                ; ForwarderChain
+    dd 0%%RAND32h                        ; TimeDateStamp
+    dd 0%%RAND32h                       ; ForwarderChain
     dd %(dll)s - IMAGEBASE              ; Name
     dd %(dll)s_iat - IMAGEBASE          ; FirstThunk
 
@@ -46,7 +46,7 @@ __imp__%(api)s:
 |IMAGE_IMPORT_BY_NAME|
 ;align 2, db 0
 hn%(api)s:
-    dw 0            ; Hint
+    dw 0%%RAND16h            ; Hint
     db '%(api)s',0  ; Name
 
 |IMPORTS_END|

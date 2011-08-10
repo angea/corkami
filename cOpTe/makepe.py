@@ -255,6 +255,15 @@ if __name__ == "__main__":
         ind = r.find("%string:")
         inds = r.find(";%strings")
 
+    import random
+    random.seed(42) # :)
+    for i in xrange(r.count("%RAND32")):
+        r = r.replace("%RAND32", "%X" % random.randint(0x00000000, 0xffffffff), 1)
+    for i in xrange(r.count("%RAND16")):
+        r = r.replace("%RAND16", "%X" % random.randint(0x0000, 0xffff), 1)
+    for i in xrange(r.count("%RAND8")):
+        r = r.replace("%RAND8", "%X" % random.randint(0x00, 0xff), 1)
+    
 
 # add default values for variables that are not defined
     find_define = re.findall("([A-Z_0-9 ]+).*EQU", r, re.I | re.M)

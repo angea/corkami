@@ -32,7 +32,7 @@ FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN
 
 ;TODO: kernel IB doesn't work yet under XP/W7
-IMAGEBASE equ 080000000h - 10000000h
+IMAGEBASE equ 080000000h - 1030000h
 org IMAGEBASE
 bits 32
 
@@ -52,8 +52,8 @@ istruc IMAGE_DOS_HEADER
     ; pity we can't put ZM anymore...
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
 
-    ;welcome ! an obsolete yet welcoming opcode to invite our guests
-    into ; the dragon ! bomb the bass forever...
+    into     ; an obsolete yet welcoming opcode to invite our guests
+;%EXPORT the_dragon ; bomb the bass forever...
 
     ; and an usually unsupported yet innocent opcode as an appetizer
     db 0fh, 018h, 111b << 3
@@ -1974,7 +1974,7 @@ no64b:
 _c
 
 ;align 16, int3
-align 8
+align 8, db 0%RAND8h
 _cmpxchg16b:
     dq 00a0a0a0a0a0a0a0ah
     dq 0d0d0d0d0d0d0d0d0h
@@ -2047,7 +2047,8 @@ Image_Tls_Directory32:
     AddressOfIndex        dd TLSCharacteristics ; VA, should point to something null
     AddressOfCallBacks    dd SizeOfZeroFill
     SizeOfZeroFill        dd TLS
-    TLSCharacteristics    dd 0
+    TLSCharacteristics    dd -1
+dd -1
 
 _d
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2068,7 +2069,7 @@ fullline db '                                                                   
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-align 4, db 0
+align 4, db 0%RAND8h
 nt_header:
 istruc IMAGE_NT_HEADERS
     at IMAGE_NT_HEADERS.Signature, db 'PE',0,0
@@ -2077,13 +2078,12 @@ iend
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
         at IMAGE_FILE_HEADER.NumberOfSections,      dw 0
-
-;%reloc 2
-;%IMPORT kernel32.dll!WriteConsoleA
-;%reloc 2
+                at IMAGE_FILE_HEADER.TimeDateStamp        , dd 0%RAND32h
+                at IMAGE_FILE_HEADER.PointerToSymbolTable , dd 0%RAND32h
+                at IMAGE_FILE_HEADER.NumberOfSymbols      , dd 0%RAND32h
 
         ; from here till end of the file - has to be dword aligned on win7
-        at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw (End - 4 - $) & 0fffch
+        at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw ((End - OptionalHeader) & 0fffch)
     at IMAGE_FILE_HEADER.Characteristics,       dw CHARACTERISTICS
 iend
 
@@ -2091,89 +2091,93 @@ OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
 
-        at IMAGE_OPTIONAL_HEADER32.MajorLinkerVersion,            db 0a6h
-        at IMAGE_OPTIONAL_HEADER32.MinorLinkerVersion,            db 0b9h
-        at IMAGE_OPTIONAL_HEADER32.SizeOfCode,                    dd 075a6e901h
-        at IMAGE_OPTIONAL_HEADER32.SizeOfInitializedData,         dd 06ae8b9f2h
-        at IMAGE_OPTIONAL_HEADER32.SizeOfUninitializedData,       dd 08ef4c2a6h
+        at IMAGE_OPTIONAL_HEADER32.MajorLinkerVersion,            db 0%RAND8h
+        at IMAGE_OPTIONAL_HEADER32.MinorLinkerVersion,            db 0%RAND8h
+        at IMAGE_OPTIONAL_HEADER32.SizeOfCode,                    dd 0%RAND32h
+        at IMAGE_OPTIONAL_HEADER32.SizeOfInitializedData,         dd 0%RAND32h
+        at IMAGE_OPTIONAL_HEADER32.SizeOfUninitializedData,       dd 0%RAND32h
 
     at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
 
-        at IMAGE_OPTIONAL_HEADER32.BaseOfCode,                    dd 0a6f8b268h
-        at IMAGE_OPTIONAL_HEADER32.BaseOfData,                    dd 0982bfa53h
+            at IMAGE_OPTIONAL_HEADER32.BaseOfCode,                    dd 0%RAND32h
+            at IMAGE_OPTIONAL_HEADER32.BaseOfData,                    dd 0%RAND32h
 
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
 
-        at IMAGE_OPTIONAL_HEADER32.MajorOperatingSystemVersion,   dw 0a65fh
-        at IMAGE_OPTIONAL_HEADER32.MinorOperatingSystemVersion,   dw 09a2bh
-        at IMAGE_OPTIONAL_HEADER32.MajorImageVersion,             dw 0e9fbh
-        at IMAGE_OPTIONAL_HEADER32.MinorImageVersion,             dw 03f29h
+                at IMAGE_OPTIONAL_HEADER32.MajorOperatingSystemVersion,   dw 0%RAND16h
+                at IMAGE_OPTIONAL_HEADER32.MinorOperatingSystemVersion,   dw 0%RAND16h
+                at IMAGE_OPTIONAL_HEADER32.MajorImageVersion,             dw 0%RAND16h
+                at IMAGE_OPTIONAL_HEADER32.MinorImageVersion,             dw 0%RAND16h
 
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4 ; 4-6
 
-  at IMAGE_OPTIONAL_HEADER32.MinorSubsystemVersion,         dw 098a5h
+                at IMAGE_OPTIONAL_HEADER32.MinorSubsystemVersion,         dw 0%RAND16h
 
-      ;this one not null will break the SMSW/GS trick :(
-      at IMAGE_OPTIONAL_HEADER32.Win32VersionValue,             dd 0
+    ;this one not null will break the SMSW/GS trick :(
+    at IMAGE_OPTIONAL_HEADER32.Win32VersionValue,             dd 0; 0 + (4 << 8)+ (0 << 16)+ (0 << 30)
 
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd SIZEOFIMAGE
 
-        ; Grandmother, what a big header you have !
-        at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFIMAGE - 1
+    ; Grandmother, what a big header you have !
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFIMAGE - 1
 
-        at IMAGE_OPTIONAL_HEADER32.CheckSum,                  dd 6a846845h
+                at IMAGE_OPTIONAL_HEADER32.CheckSum,                  dd 0%RAND32h
 
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
+    ; not a (totally) random value
+    at IMAGE_OPTIONAL_HEADER32.DllCharacteristics,        dw 0%RAND16h & 0fa7fh
 
-        at IMAGE_OPTIONAL_HEADER32.DllCharacteristics,        dw 0f84fh
+    ; can't really put funny values here ...
+    at IMAGE_OPTIONAL_HEADER32.SizeOfStackReserve,        dd 100000h + (0%RAND16h << 4) + 0%RAND8h
+    at IMAGE_OPTIONAL_HEADER32.SizeOfStackCommit,         dd 0%RAND16h & 1fffh
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeapReserve,         dd 100000h + (0%RAND16h << 4) + 0%RAND8h
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeapCommit,          dd 0%RAND16h & 1fffh
 
-        ; can't put funny values here ...
-        at IMAGE_OPTIONAL_HEADER32.SizeOfStackReserve,        dd 1abedfh
-        at IMAGE_OPTIONAL_HEADER32.SizeOfStackCommit,         dd 1953h
-        at IMAGE_OPTIONAL_HEADER32.SizeOfHeapReserve,         dd 13580ch
-        at IMAGE_OPTIONAL_HEADER32.SizeOfHeapCommit,          dd 16a3h
-
-        at IMAGE_OPTIONAL_HEADER32.LoaderFlags,               dd 09a886345h
-
-        at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 0a5b8324eh
+                at IMAGE_OPTIONAL_HEADER32.LoaderFlags,               dd 0%RAND32h
+                at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 0%RAND32h
 iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ExportsVA,   dd Exports_Directory - IMAGEBASE
-        at IMAGE_DATA_DIRECTORY_16.ExportsSize, dd 09f82359h
+                dd 0%RAND32h
+                
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd IMPORT_DESCRIPTOR - IMAGEBASE
-        at IMAGE_DATA_DIRECTORY_16.ImportsSize,   dd 098f549eh
+                dd 0%RAND32h
+                
     at IMAGE_DATA_DIRECTORY_16.ResourceVA,  dd Directory_Entry_Resource - IMAGEBASE
-        at IMAGE_DATA_DIRECTORY_16.ResourceSize,     dd 0abe03401h
-        at IMAGE_DATA_DIRECTORY_16.Exception,        dd 02438ba9dh, 6a8b0456h
-        at IMAGE_DATA_DIRECTORY_16.Security,         dd 068429110h, 093798818h
+                dd 0%RAND32h
 
-    at IMAGE_DATA_DIRECTORY_16.FixupsVA,    dd Directory_Entry_Basereloc - IMAGEBASE
-        at IMAGE_DATA_DIRECTORY_16.FixupsSize,  dd 0abef068h
-        at IMAGE_DATA_DIRECTORY_16.DebugVA,     dd 09859768h
+                at IMAGE_DATA_DIRECTORY_16.Exception,        dd 0%RAND32h, 0%RAND32h
+                at IMAGE_DATA_DIRECTORY_16.Security,         dd 0%RAND32h, 0%RAND32h
+
+    at IMAGE_DATA_DIRECTORY_16.FixupsVA,    dd Directory_Entry_Basereloc - IMAGEBASE, DIRECTORY_ENTRY_BASERELOC_SIZE & 0fffh
+
+                at IMAGE_DATA_DIRECTORY_16.DebugVA,     dd 0%RAND32h
+
     at IMAGE_DATA_DIRECTORY_16.DebugSize,   dd 0 ; prevent a fail under XP - don't ask :D
-        at IMAGE_DATA_DIRECTORY_16.Description, dd 0e8f9b6a2h, 0f69b0ca6h
-        at IMAGE_DATA_DIRECTORY_16.MIPS,        dd 0f69b0e3ah, 3e695412h
+                at IMAGE_DATA_DIRECTORY_16.Description, dd 0%RAND32h, 0%RAND32h
+                at IMAGE_DATA_DIRECTORY_16.MIPS,        dd 0%RAND32h, 0%RAND32h
 
     at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd Image_Tls_Directory32 - IMAGEBASE
-
-        at IMAGE_DATA_DIRECTORY_16.TLSSize,          dd 068ab8043h
+                    dd 0%RAND32h
+                    
     at IMAGE_DATA_DIRECTORY_16.Load,             dd 0
-        dd 0aaf9e8b4h
+                    dd 0%RAND32h
+                    
     at IMAGE_DATA_DIRECTORY_16.BoundImportsVA,   dd 0
-        at IMAGE_DATA_DIRECTORY_16.BoundImportsSize, dd 0f9824978h
+                    dd 0%RAND32h
 
     at IMAGE_DATA_DIRECTORY_16.IATVA,       dd ImportsAddressTable - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE ^ 1234h
-
-        at IMAGE_DATA_DIRECTORY_16.DelayImportsVA,   dd 0ef09845ch
-        at IMAGE_DATA_DIRECTORY_16.DelayImportsSize, dd 0c680398eh
+    
+    at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE ^ 0%RAND8h
+                    at IMAGE_DATA_DIRECTORY_16.DelayImportsVA,   dd 0%RAND32h, 0%RAND32h
+                    
     at IMAGE_DATA_DIRECTORY_16.COM,              dd 0
-        dd 0a929f5eh
-        at IMAGE_DATA_DIRECTORY_16.reserved,         dd 098c0d9bh, 068fe9a5h
+                    dd 0%RAND32h
+                    at IMAGE_DATA_DIRECTORY_16.reserved,         dd 0%RAND32h, 0%RAND32h
 
 iend
 
@@ -2196,7 +2200,9 @@ newline db 0dh, 0ah, 0
 ;%IMPORT kernel32.dll!GetStdHandle
 ;%reloc 2
 ;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
-
+;%reloc 2
+;%IMPORT kernel32.dll!WriteConsoleA
 
 SIZEOFIMAGE equ $ - IMAGEBASE
 End:
+;EXPORT EOF
