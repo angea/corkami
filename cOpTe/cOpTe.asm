@@ -2041,15 +2041,14 @@ _c
 _c
 
 bounds00 dd 0,0
+TLSstart equ 0%RAND32h
 Image_Tls_Directory32:
-    StartAddressOfRawData dd TLSCharacteristics ; VA, should point to something null
-    EndAddressOfRawData   dd TLSCharacteristics ; VA, should point to something null
-    AddressOfIndex        dd TLSCharacteristics ; VA, should point to something null
+    StartAddressOfRawData dd TLSstart
+    EndAddressOfRawData   dd TLSstart
+    AddressOfIndex        dd IMAGEBASE  + 0%RAND8h  + (0%RAND8h  << 4)
     AddressOfCallBacks    dd SizeOfZeroFill
     SizeOfZeroFill        dd TLS
-    TLSCharacteristics    dd -1
-dd -1
-
+    TLSCharacteristics    dd 0%RAND32h
 _d
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
