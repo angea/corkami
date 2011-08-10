@@ -19,6 +19,10 @@
 ; mmx <-> fpu transfer
 ; initial values
 ; compress strings ?
+; Exports: non ascii, same name+diff hints, loop-forwarding
+; randomization
+; fix relocations and 0/kernel IB
+; imports: last dir outside memory ?
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
