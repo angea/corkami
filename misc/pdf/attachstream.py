@@ -19,6 +19,8 @@ with open(sys.argv[1], "rb") as f:
 	source = f.read()
 i = int(sys.argv[2])
 
+if source.find("/Encrypt") > -1:
+    print "/Encrypt object found. This PDF might be encrypted, thus it will not work if it's not decrypted first."
 off =  source.find("%i 0 obj" % i)
 
 if off == -1:
@@ -40,3 +42,5 @@ with open(
         "wb"
         ) as f:
 	f.write(template)
+
+print "object extracted and embedded successfully"
