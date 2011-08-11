@@ -1,4 +1,12 @@
+; small registers dumper
+
 %include '../header.inc'
+
+%macro printline 1
+    push %1
+    call printf
+    add esp, 4
+%endmacro
 
 genregs:
     pusha
@@ -8,16 +16,28 @@ genregs:
     add esp, 10*4
     retn
 
+print_upperbits:
+    shr eax, 16
+    movzx eax, ax
+    push eax
+    push %string:"%04X ", 0
+    call printf
+    add esp, 2 * 4
+    retn
+
 EntryPoint:
 MB_ICONINFORMATION equ 040h
 good:
     call genregs
     smsw eax
     push eax
+    
     fnop
     smsw eax
+    xchg [esp], eax
     push eax
-    push %string:0dh, 0ah, "CR0(after):%08X  CR0(before):%08X ", 0dh, 0ah, 0
+    
+    push %string:0dh, 0ah, "CR0(before):%08X  CR0(after):%08X ", 0dh, 0ah, 0
     call printf
     add esp, 3 * 4
 _
@@ -49,6 +69,48 @@ _
     push %string:"CS:%04X DS:%04X ES:%04X FS:%04X SS:%04X GS:%04X", 0dh, 0ah, 0
     call printf
     add esp, 7 * 4
+
+; dumping upper bits that are undefined and potentially different on pentium
+
+    printline %string:0dh, 0ah, "upper bits (10 times):", 0dh, 0ah, 0
+    printline %string:"Mov r32, sel", 0dh, 0ah,"   ", 0
+    
+    mov ecx, 10
+movselloop:
+    push ecx
+    mov eax, ds
+    call print_upperbits
+    pop ecx
+    loop movselloop
+
+    push %string:0dh, 0ah, "sldt", 0dh, 0ah,"   ", 0
+    call printf
+    add esp, 4
+    
+    mov ecx, 10
+sldtloop:
+    push ecx
+    sldt eax
+    call print_upperbits
+    pop ecx
+    loop sldtloop
+
+    push %string:0dh, 0ah, "smsw", 0dh, 0ah,"   ", 0
+    call printf
+    add esp, 4
+    
+    mov ecx, 10
+smswloop:
+    push ecx
+    smsw eax
+    call print_upperbits
+    pop ecx
+    loop smswloop
+
+    push %string:0dh, 0ah, 0
+    call printf
+    add esp, 4
+
     
     mov byte [tls], 0c3h
     push 0
@@ -65,9 +127,8 @@ dd -1
 tls:
     pusha
     pushf
-    push %string:"Register output 0.1 - Ange Albertini", 0dh, 0ah, 0dh, 0ah, "TLS:", 0dh, 0ah, 0
-    call printf
-    add esp, 4
+    printline %string:"Register dumper 0.2 - Ange Albertini - BSD Licence 2011", 0dh, 0ah, 0dh, 0ah, 0
+    printline %string:"TLS:", 0dh, 0ah, 0
     popf
     popa
 
