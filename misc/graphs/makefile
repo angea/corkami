@@ -3,7 +3,7 @@ include paths.inc
 all: pe.pdf packers.pdf opcodes.pdf
 
 clean:
-	del opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes_desc.pdf opcodes.pdf pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf pe.pdf packers_fp.pdf packers_models.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_algos.pdf packers.pdf *.out *.aux *.gz *.log opcodes.pdf cm.pdf
+	del opcodes_fp.pdf opcodes_1.pdf opcodes64_1.pdf opcodes_2.pdf opcodes_desc.pdf opcodes.pdf pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf pe.pdf packers_fp.pdf packers_models.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_algos.pdf packers.pdf *.out *.aux *.gz *.log opcodes.pdf cm.pdf
 
 packers_starts.pdf : packers_starts.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
@@ -55,8 +55,11 @@ cm.pdf: cm.tex
 pe.pdf: pe_fp.pdf pe-headers.pdf pe-layout.pdf pe-directories.pdf pe-directories-2.pdf
 	pdftk pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf output pe.pdf dontask
 
+pe-final.pdf: pe.pdf
+	jpdfbookmarks_cli.exe -w YES -a pe.txt pe.pdf -o pe-final.pdf
+
 packers.pdf: packers_fp.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_models.pdf packers_algos.pdf
 	pdftk packers_fp.pdf packers_models.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_algos.pdf output packers.pdf dontask
 
-opcodes.pdf: opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes_desc.pdf
-	pdftk opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes_desc.pdf output opcodes.pdf dontask
+opcodes.pdf: opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes_desc.pdf opcodes64_1.pdf 
+	pdftk opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes64_1.pdf opcodes_desc.pdf output opcodes.pdf dontask
