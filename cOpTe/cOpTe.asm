@@ -2045,7 +2045,7 @@ TLSstart equ 0%RAND32h
 Image_Tls_Directory32:
     StartAddressOfRawData dd TLSstart
     EndAddressOfRawData   dd TLSstart
-    AddressOfIndex        dd IMAGEBASE  + 0%RAND8h  + (0%RAND8h  << 4)
+    AddressOfIndex        dd StartAddressOfRawData ; this address will be overwritten with 00's
     AddressOfCallBacks    dd SizeOfZeroFill
     SizeOfZeroFill        dd TLS
     TLSCharacteristics    dd 0%RAND32h
@@ -2191,7 +2191,7 @@ newline db 0dh, 0ah, 0
 ;%IMPORT kernel32.dll!ExitProcess
 
 ; some padding is needed (no section table...)
-;times nt_header + 120h - $  db 0
+times nt_header + 120h - $  db 0 ; to please W7
 
 ;%reloc 2
 ;%IMPORT kernel32.dll!AddVectoredExceptionHandler
