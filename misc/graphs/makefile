@@ -1,65 +1,71 @@
 include paths.inc
 
-all: pe.pdf packers.pdf opcodes.pdf
+all: temp pe.pdf packers.pdf opcodes.pdf cm.pdf
 
 clean:
-	del opcodes_fp.pdf opcodes_1.pdf opcodes64_1.pdf opcodes_2.pdf opcodes_desc.pdf opcodes.pdf pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf pe.pdf packers_fp.pdf packers_models.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_algos.pdf packers.pdf *.out *.aux *.gz *.log opcodes.pdf cm.pdf
+	rd temp /s /q & del opcodes.pdf pe.pdf packers.pdf cm.pdf
 
-packers_starts.pdf : packers_starts.svg
+temp:
+	mkdir temp
+
+temp\packers_starts.pdf : packers_starts.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-packers_features.pdf: packers_features.svg
+temp\packers_features.pdf: packers_features.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-packers_models.pdf: packers_models.svg
+temp\packers_models.pdf: packers_models.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-packers_algos.pdf: packers_algos.svg
+temp\packers_algos.pdf: packers_algos.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-packers_landscape.pdf: packers_landscape.svg
+temp\packers_landscape.pdf: packers_landscape.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-packers_details.pdf: packers_details.tex
-	$(texify) $<
-packers_fp.pdf: packers_fp.tex
-	$(texify) $<
+temp\packers_details.pdf: packers_details.tex
+	cd temp & $(texify) ..\$< & cd ..
+temp\packers_fp.pdf: packers_fp.tex
+	cd temp & $(texify) ..\$< & cd ..
 
 
-opcodes_1.pdf: opcodes_1.svg
+temp\opcodes_1.pdf: opcodes_1.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-opcodes_2.pdf: opcodes_2.svg
+temp\opcodes_2.pdf: opcodes_2.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-opcodes64_1.pdf: opcodes64_1.svg
+temp\opcodes64_1.pdf: opcodes64_1.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-opcodes_desc.pdf: opcodes_desc.tex
-	$(texify) $<
-opcodes_fp.pdf: opcodes_fp.tex
-	$(texify) $<
-opcodes1.pdf: opcodes1.tex
-	$(texify) $<
+temp\opcodes_desc.pdf: opcodes_desc.tex
+	$(texify) $< & move opcodes_desc.pdf temp
+temp\opcodes_fp.pdf: opcodes_fp.tex
+	$(texify) $< & move opcodes_fp.pdf temp
+temp\opcodes1.pdf: opcodes1.tex
+	cd temp & $(texify) ..\$< & cd ..
 
-pe-headers.pdf: pe-headers.svg
+temp\pe-headers.pdf: pe-headers.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-pe-unusual.pdf: pe-unusual.svg
+temp\pe-unusual.pdf: pe-unusual.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-pe-layout.pdf: pe-layout.svg
+temp\pe-layout.pdf: pe-layout.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-pe-rules.pdf: pe-rules.svg
+temp\pe-rules.pdf: pe-rules.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-pe-directories.pdf: pe-directories.svg
+temp\pe-directories.pdf: pe-directories.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-pe-directories-2.pdf: pe-directories-2.svg
+temp\pe-directories-2.pdf: pe-directories-2.svg
 	$(inkpath)/inkscape.exe -A $(CURDIR)/$@ $(CURDIR)/$<
-pe_fp.pdf: pe_fp.tex
-	$(texify) $<
+temp\pe_fp.pdf: pe_fp.tex
+	cd temp & $(texify) ..\$< & cd ..
 
 cm.pdf: cm.tex
 	$(texify) $<
 
-pe.pdf: pe_fp.pdf pe-headers.pdf pe-layout.pdf pe-directories.pdf pe-directories-2.pdf
-	pdftk pe_fp.pdf pe-layout.pdf pe-headers.pdf pe-directories.pdf pe-directories-2.pdf output pe.pdf dontask
+temp\pe-raw.pdf: temp\pe_fp.pdf temp\pe-headers.pdf temp\pe-layout.pdf temp\pe-directories.pdf temp\pe-directories-2.pdf
+	pdftk temp\pe_fp.pdf temp\pe-layout.pdf temp\pe-headers.pdf temp\pe-directories.pdf temp\pe-directories-2.pdf output temp\pe-raw.pdf dontask
 
-pe-final.pdf: pe.pdf
-	jpdfbookmarks_cli.exe -w YES -a pe.txt pe.pdf -o pe-final.pdf
+temp\pe-book.pdf: temp\pe-raw.pdf
+	$(jpdf) -w YES temp\pe-raw.pdf -o temp\pe-book.pdf
 
-packers.pdf: packers_fp.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_models.pdf packers_algos.pdf
-	pdftk packers_fp.pdf packers_models.pdf packers_features.pdf packers_landscape.pdf packers_details.pdf packers_starts.pdf packers_algos.pdf output packers.pdf dontask
+pe.pdf: temp\pe-book.pdf pe.txt
+	$(jpdf) -a pe.txt temp\pe-book.pdf -o pe.pdf
 
-opcodes.pdf: opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes_desc.pdf opcodes64_1.pdf 
-	pdftk opcodes_fp.pdf opcodes_1.pdf opcodes_2.pdf opcodes64_1.pdf opcodes_desc.pdf output opcodes.pdf dontask
+packers.pdf: temp\packers_fp.pdf temp\packers_features.pdf temp\packers_landscape.pdf temp\packers_details.pdf temp\packers_starts.pdf temp\packers_models.pdf temp\packers_algos.pdf
+	pdftk temp\packers_fp.pdf temp\packers_models.pdf temp\packers_features.pdf temp\packers_landscape.pdf temp\packers_details.pdf temp\packers_starts.pdf temp\packers_algos.pdf output packers.pdf dontask
+
+opcodes.pdf: temp\opcodes_fp.pdf temp\opcodes_1.pdf temp\opcodes_2.pdf temp\opcodes_desc.pdf temp\opcodes64_1.pdf 
+	pdftk temp\opcodes_fp.pdf temp\opcodes_1.pdf temp\opcodes_2.pdf temp\opcodes64_1.pdf temp\opcodes_desc.pdf output opcodes.pdf dontask

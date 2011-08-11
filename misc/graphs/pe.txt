@@ -1,10 +1,9 @@
-Title/1,Black,notBold,notItalic,open,FitPage
-	Table of contents/2,Black,notBold,notItalic,closed,FitPage
-Pages/3,Black,notBold,notItalic,open,FitPage
-	Standard file and memory layouts/3,Black,notBold,notItalic,closed,FitPage
-PE Format/4,Black,notBold,notItalic,open,FitPage
-	PE Headers/4,Black,notBold,notItalic,open,FitPage
-	Data Directories/5,Black,notBold,notItalic,open,FitPage
-		Exports, Imports/5,Black,notBold,notItalic,closed,FitPage
-		Resources, TLS, Relocations, Debug, Delay imports/6,Black,notBold,notItalic,closed,FitPage
-this file/-1,Black,notBold,notItalic,closed,Uri,http://code.google.com/p/corkami/downloads/list?can=1&q=pe.pdf
+the PE Format/1,FitWidth,-1
+(check latest version)/-1,Black,notBold,italic,open,Uri,http://code.google.com/p/corkami/downloads/list?can=1&q=pe.pdf
+Table of contents/2,Black,notBold,notItalic,open,FitWidth,-1
+	Standard file and memory layouts/3,Black,notBold,notItalic,open,FitWidth,-1
+	Structures/4,Black,notBold,notItalic,open,FitWidth,-1
+		PE Headers/4,Black,notBold,notItalic,open,FitWidth
+		Data Directories/5,Black,notBold,notItalic,open,FitWidth
+			Exports/Imports/5,FitPage
+			Resources/TLS/Relocations/Debug/Delay imports/6,FitPage
