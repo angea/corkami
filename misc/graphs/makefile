@@ -57,15 +57,17 @@ cm.pdf: cm.tex
 
 temp\pe-raw.pdf: temp\pe_fp.pdf temp\pe-headers.pdf temp\pe-layout.pdf temp\pe-directories.pdf temp\pe-directories-2.pdf
 	pdftk temp\pe_fp.pdf temp\pe-layout.pdf temp\pe-headers.pdf temp\pe-directories.pdf temp\pe-directories-2.pdf output temp\pe-raw.pdf dontask
-
 temp\pe-book.pdf: temp\pe-raw.pdf
 	$(jpdf) -w YES temp\pe-raw.pdf -o temp\pe-book.pdf
-
 pe.pdf: temp\pe-book.pdf pe.txt
 	$(jpdf) -a pe.txt temp\pe-book.pdf -o pe.pdf
 
 packers.pdf: temp\packers_fp.pdf temp\packers_features.pdf temp\packers_landscape.pdf temp\packers_details.pdf temp\packers_starts.pdf temp\packers_models.pdf temp\packers_algos.pdf
 	pdftk temp\packers_fp.pdf temp\packers_models.pdf temp\packers_features.pdf temp\packers_landscape.pdf temp\packers_details.pdf temp\packers_starts.pdf temp\packers_algos.pdf output packers.pdf dontask
 
-opcodes.pdf: temp\opcodes_fp.pdf temp\opcodes_1.pdf temp\opcodes_2.pdf temp\opcodes_desc.pdf temp\opcodes64_1.pdf 
-	pdftk temp\opcodes_fp.pdf temp\opcodes_1.pdf temp\opcodes_2.pdf temp\opcodes64_1.pdf temp\opcodes_desc.pdf output opcodes.pdf dontask
+temp\opcodes-raw.pdf: temp\opcodes_fp.pdf temp\opcodes_1.pdf temp\opcodes_2.pdf temp\opcodes_desc.pdf temp\opcodes64_1.pdf 
+	pdftk temp\opcodes_fp.pdf temp\opcodes_1.pdf temp\opcodes_2.pdf temp\opcodes64_1.pdf temp\opcodes_desc.pdf output temp\opcodes-raw.pdf dontask
+temp\opcodes-book.pdf: temp\opcodes-raw.pdf
+	$(jpdf) -w YES temp\opcodes-raw.pdf -o temp\opcodes-book.pdf
+opcodes.pdf: temp\opcodes-book.pdf opcodes.txt
+	$(jpdf) -a opcodes.txt temp\opcodes-book.pdf -o opcodes.pdf

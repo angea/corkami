@@ -1,0 +1,8 @@
+x86 Opcodes/1,FitWidth,-1
+(check latest version)/-1,Black,notBold,italic,open,Uri,http://code.google.com/p/corkami/downloads/list?can=1&q=opcodes.pdf
+Table of contents/2,Black,notBold,notItalic,open,FitWidth,-1
+	Overview/3,Black,notBold,notItalic,open,FitWidth,-1
+		One-byte (32b)/3,Black,notBold,notItalic,open,FitWidth,-1
+		Two-bytes (32b)/4,Black,notBold,notItalic,open,FitWidth,-1
+		One-byte (64b)/5,Black,notBold,notItalic,open,FitWidth,-1
+	Descriptions/6,Black,notBold,notItalic,open,FitWidth,-1
