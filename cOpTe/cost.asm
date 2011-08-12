@@ -26,7 +26,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-%include 'cOpTe.inc'
+%include 'consts.inc'
 
 FILEALIGN equ 1
 SECTIONALIGN equ FILEALIGN
@@ -63,7 +63,7 @@ istruc IMAGE_DOS_HEADER
 db CR
 
 ; Warning! a commercial banner is approaching fast !
-program db 'CoST - COrkami Standard Test v0.2b 2011/??/??', 0dh, 0ah, 0
+program db 'CoST - Corkami Standard Test v0.2b 2011/??/??', 0dh, 0ah, 0
 
     ; omg, we're actually still in the header... quick, the first valid value...
     at IMAGE_DOS_HEADER.e_lfanew, dd nt_header - IMAGEBASE
@@ -82,7 +82,7 @@ EP2:
     push edx
     inc ebp
     call init
-;%IMPORTJMP copte.exe!4_Main
+;%IMPORTJMP cost.exe!4_Main
 
 
 setVEH:
@@ -2064,7 +2064,7 @@ ImportsAddressTable:
 IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 _d
 
-;%EXPORTS cOpTe.exe
+;%EXPORTS CoST.exe
 _d
 
 ;%relocs

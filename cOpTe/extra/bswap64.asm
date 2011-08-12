@@ -1,6 +1,5 @@
-%include '..\copte.inc'
+%include '..\consts.inc'
 
-IMAGE_SUBSYSTEM_WINDOWS_GUI equ 2
 FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE
 org IMAGEBASE

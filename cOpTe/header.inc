@@ -1,6 +1,6 @@
 ;Ange Albertini, BSD Licence, 2009-2011
 
-%include 'cOpTe.inc'
+%include 'consts.inc'
 
 FILEALIGN equ 4h
 SECTIONALIGN equ FILEALIGN  ; different alignements are not supported by MakePE
