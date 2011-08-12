@@ -28,7 +28,7 @@
 
 %include 'cOpTe.inc'
 
-FILEALIGN equ 4h
+FILEALIGN equ 1
 SECTIONALIGN equ FILEALIGN
 
 ;TODO: kernel IB doesn't work yet under XP/W7
@@ -45,7 +45,7 @@ PRINTME equ 0cafebabeh
 
 ; some tools still don't like EntryPoint at 0....
 ; c'mon, who taught you to follow the official specs... ?
-;%EXPORT EntryPoint
+;%EXPORT 2_EntryPoint
 EntryPoint:
 
 istruc IMAGE_DOS_HEADER
@@ -77,12 +77,12 @@ db CR
 author  db 'Ange Albertini, BSD Licence, 2009-2011 - http://corkami.com', 0
 db EOF
 
-;%EXPORT Entry_Point
+;%EXPORT 3_EntryPoint2
 EP2:
     push edx
     inc ebp
     call init
-;%IMPORTJMP copte.exe!Main
+;%IMPORTJMP copte.exe!4_Main
 
 
 setVEH:
@@ -127,7 +127,7 @@ init:
 _c
 
 
-;%EXPORT Main
+;%EXPORT 4_Main
     ; call initvals
 ;    cmp eax, 0        ; xp
 ;    je eax_good
@@ -243,7 +243,8 @@ print:
     push ecx                        ; DWORD nNumbersOfCharsToWrite
     push edi                        ; VOID *lpBuffer
     push dword [hConsoleOutput]     ; HANDLE hConsoleOutput
-    call WriteConsoleA
+;%reloc 2
+;%IMPORTCALL kernel32.dll!WriteConsoleA
     popad
     retn 4
 _c
@@ -268,7 +269,8 @@ _d
 STD_OUTPUT_HANDLE equ -11
 initconsole:
     push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
-    call GetStdHandle
+;%reloc 2
+;%IMPORTCALL kernel32.dll!GetStdHandle
     mov [hConsoleOutput], eax
     retn
 _c
@@ -289,7 +291,8 @@ initmem:
     push 0                  ; ULONG_PTR ZeroBits
     push lpBuffer3          ; PVOID *BaseAddress
     push -1                 ; HANDLE ProcessHandle
-    call ZwAllocateVirtualMemory
+;%reloc 2
+;%IMPORTCALL ntdll.dll!ZwAllocateVirtualMemory
     retn
 _c
 
@@ -2012,7 +2015,7 @@ lockadd dq -1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;%EXPORT TLS_START
+;%EXPORT 0_TLS_START
 ; first TLS - adds the 2nd one to TLS callbacks on the fly
 TLS:
     mov eax, [hConsoleOutput]
@@ -2023,9 +2026,14 @@ TLS:
     retn
 _c
 
-;%EXPORT TLS_2
+;%EXPORT 1_TLS_2
 ; second TLS - initialization
 TLS2:
+    db 0e8h         ; call to nowhere, patched to call $ + 5 with the TLS data directory initialization
+        dd 0%RAND32h
+
+    ; we don't really need to clear the stack, as we won't return
+    ; lea esp, [esp + 4] 
     call setVEH
     call initconsole
     print_ program
@@ -2033,7 +2041,6 @@ TLS2:
     print_ %string:0dh, 0ah, 0dh, 0ah, 0
     ;unhandled exception terminates TLS but not process
     int3
-_c
 
 ;required to use TLS
 ;reloc 2
@@ -2045,7 +2052,7 @@ TLSstart equ 0%RAND32h
 Image_Tls_Directory32:
     StartAddressOfRawData dd TLSstart
     EndAddressOfRawData   dd TLSstart
-    AddressOfIndex        dd StartAddressOfRawData ; this address will be overwritten with 00's
+    AddressOfIndex        dd TLS2 + 1 ; this address will be overwritten with 00's
     AddressOfCallBacks    dd SizeOfZeroFill
     SizeOfZeroFill        dd TLS
     TLSCharacteristics    dd 0%RAND32h
@@ -2195,12 +2202,6 @@ times nt_header + 120h - $  db 0 ; to please W7
 
 ;%reloc 2
 ;%IMPORT kernel32.dll!AddVectoredExceptionHandler
-;%reloc 2
-;%IMPORT kernel32.dll!GetStdHandle
-;%reloc 2
-;%IMPORT ntdll.dll!ZwAllocateVirtualMemory
-;%reloc 2
-;%IMPORT kernel32.dll!WriteConsoleA
 
 SIZEOFIMAGE equ $ - IMAGEBASE
 End:
