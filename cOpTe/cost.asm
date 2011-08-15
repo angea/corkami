@@ -85,7 +85,7 @@ TLS:
     mov eax, [hConsoleOutput]
     mov ebx, bounds00
     bound eax, [ebx] ; triggers exception if hConsoleOutput is not null
-    
+
     push %string:"[trick] Adding TLS 2 in TLS callbacks list", 0dh, 0
     call [__imp__OutputDebugStringA]
 
@@ -105,7 +105,7 @@ zeroed_here:
         dd 0%RAND32h
 
     ; we don't really need to clear the stack, as we won't return
-    ; lea esp, [esp + 4] 
+    ; lea esp, [esp + 4]
     call setVEH
     call initconsole
     print_ program
@@ -775,7 +775,7 @@ _
     setmsg_ %string:"ERROR: BTR", 0dh, 0ah, 0
     mov ax, 01101b
     mov bx, 2
-    btr ax, bx                              
+    btr ax, bx
     jnc bad
     expect ax, 1001b
 _
@@ -1161,7 +1161,7 @@ no_crc32:
     jmp crc32_end
 crc32_end:
 _
-    
+
     mov eax, 080000001h
     cpuid
     and edx, 1 << 27
@@ -2301,10 +2301,10 @@ DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ExportsVA,   dd Exports_Directory - IMAGEBASE
                 dd 0%RAND32h
-                
+
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd IMPORT_DESCRIPTOR - IMAGEBASE
                 dd 0%RAND32h
-                
+
     at IMAGE_DATA_DIRECTORY_16.ResourceVA,  dd Directory_Entry_Resource - IMAGEBASE
                 dd 0%RAND32h
 
@@ -2321,18 +2321,18 @@ istruc IMAGE_DATA_DIRECTORY_16
 
     at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd Image_Tls_Directory32 - IMAGEBASE
                     dd 0%RAND32h
-                    
+
     at IMAGE_DATA_DIRECTORY_16.Load,             dd 0
                     dd 0%RAND32h
-                    
+
     at IMAGE_DATA_DIRECTORY_16.BoundImportsVA,   dd 0
                     dd 0%RAND32h
 
     at IMAGE_DATA_DIRECTORY_16.IATVA,       dd ImportsAddressTable - IMAGEBASE
-    
+
     at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE ^ 0%RAND8h
                     at IMAGE_DATA_DIRECTORY_16.DelayImportsVA,   dd 0%RAND32h, 0%RAND32h
-                    
+
     at IMAGE_DATA_DIRECTORY_16.COM,              dd 0
                     dd 0%RAND32h
                     at IMAGE_DATA_DIRECTORY_16.reserved,         dd 0%RAND32h, 0%RAND32h
