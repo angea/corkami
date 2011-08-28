@@ -24,15 +24,20 @@
 ; fix relocations and 0/kernel IB
 ; imports: last dir outside memory ?
 
+;%define EASY_PE
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 %include 'consts.inc'
-
 FILEALIGN equ 1
 SECTIONALIGN equ FILEALIGN
 
 ;TODO: kernel IB doesn't work yet under XP/W7
+%ifdef EASY_PE
+IMAGEBASE equ 004000000h
+%else
 IMAGEBASE equ 080000000h - 1030000h
+%endif
 org IMAGEBASE
 bits 32
 
@@ -46,8 +51,9 @@ PRINTME equ 0cafebabeh
 ; some tools still don't like EntryPoint at 0....
 ; c'mon, who taught you to follow the official specs... ?
 ;%EXPORT 2_EntryPoint
+%ifndef EASY_PE
 EntryPoint:
-
+%endif
 istruc IMAGE_DOS_HEADER
     ; pity we can't put ZM anymore...
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
@@ -63,7 +69,7 @@ istruc IMAGE_DOS_HEADER
 db CR
 
 ; Warning! a commercial banner is approaching fast !
-program db 'CoST - Corkami Standard Test v0.2b 2011/??/??', 0dh, 0ah, 0
+program db 'CoST - Corkami Standard Test BETA 2011/08/XX', 0dh, 0ah, 0
 
     ; omg, we're actually still in the header... quick, the first valid value...
     at IMAGE_DOS_HEADER.e_lfanew, dd nt_header - IMAGEBASE
@@ -106,6 +112,9 @@ zeroed_here:
 
     ; we don't really need to clear the stack, as we won't return
     ; lea esp, [esp + 4]
+%ifdef EASY_PE
+EntryPoint:
+%endif
     call setVEH
     call initconsole
     print_ program
@@ -114,7 +123,9 @@ zeroed_here:
     call printnl
 _
     print_ %string:"[trick] finishing TLS by unhandled exception", 0dh, 0
-
+%ifdef EASY_PE
+    jmp EP2_easy
+%endif
     ;unhandled exception terminates TLS but not process
     int3
 
@@ -129,21 +140,28 @@ Image_Tls_Directory32:
     StartAddressOfRawData dd TLSstart
     EndAddressOfRawData   dd TLSstart
     AddressOfIndex        dd zeroed_here ; this address will be overwritten with 00's
+%ifndef EASY_PE
     AddressOfCallBacks    dd SizeOfZeroFill
+%else
+    AddressOfCallBacks    dd 0
+%endif
     SizeOfZeroFill        dd TLS
     TLSCharacteristics    dd 0%RAND32h
 _d
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;%EXPORT 3_EntryPoint2
 EP2:
     push edx
     inc ebp
+EP2_easy:
     call init
     print_ %string:"[trick] calling Main via my own export", 0dh, 0
+%ifdef EASY_PE
+    jmp Main
+%else
 ;%IMPORTJMP cost.exe!4_Main
-
+%endif
 
 setVEH:
 ;%reloc 1
@@ -191,6 +209,7 @@ _c
 
 
 ;%EXPORT 4_Main
+Main:
     ; call initvals
 ;    cmp eax, 0        ; xp
 ;    je eax_good
@@ -2236,9 +2255,11 @@ iend
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
         at IMAGE_FILE_HEADER.NumberOfSections,      dw 0
+%ifndef EASY_PE
                 at IMAGE_FILE_HEADER.TimeDateStamp        , dd 0%RAND32h
                 at IMAGE_FILE_HEADER.PointerToSymbolTable , dd 0%RAND32h
                 at IMAGE_FILE_HEADER.NumberOfSymbols      , dd 0%RAND32h
+%endif
 
         ; from here till end of the file - has to be dword aligned on win7
         at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw ((End - 4 - OptionalHeader) & 0fffch)
@@ -2248,27 +2269,27 @@ iend
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-
+%ifndef EASY_PE
         at IMAGE_OPTIONAL_HEADER32.MajorLinkerVersion,            db 0%RAND8h
         at IMAGE_OPTIONAL_HEADER32.MinorLinkerVersion,            db 0%RAND8h
         at IMAGE_OPTIONAL_HEADER32.SizeOfCode,                    dd 0%RAND32h
         at IMAGE_OPTIONAL_HEADER32.SizeOfInitializedData,         dd 0%RAND32h
         at IMAGE_OPTIONAL_HEADER32.SizeOfUninitializedData,       dd 0%RAND32h
-
+%endif
     at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
-
+%ifndef EASY_PE
             at IMAGE_OPTIONAL_HEADER32.BaseOfCode,                    dd 0%RAND32h
             at IMAGE_OPTIONAL_HEADER32.BaseOfData,                    dd 0%RAND32h
-
+%endif
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
-
+%ifndef EASY_PE
                 at IMAGE_OPTIONAL_HEADER32.MajorOperatingSystemVersion,   dw 0%RAND16h
                 at IMAGE_OPTIONAL_HEADER32.MinorOperatingSystemVersion,   dw 0%RAND16h
                 at IMAGE_OPTIONAL_HEADER32.MajorImageVersion,             dw 0%RAND16h
                 at IMAGE_OPTIONAL_HEADER32.MinorImageVersion,             dw 0%RAND16h
-
+%endif
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4 ; 4-6
 
                 at IMAGE_OPTIONAL_HEADER32.MinorSubsystemVersion,         dw 0%RAND16h
@@ -2284,8 +2305,10 @@ istruc IMAGE_OPTIONAL_HEADER32
                 at IMAGE_OPTIONAL_HEADER32.CheckSum,                  dd 0%RAND32h
 
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
+%ifndef EASY_PE
     ; not a (totally) random value
     at IMAGE_OPTIONAL_HEADER32.DllCharacteristics,        dw 0%RAND16h & 0fa7fh
+%endif
 
     ; can't really put funny values here ...
     at IMAGE_OPTIONAL_HEADER32.SizeOfStackReserve,        dd 100000h + (0%RAND16h << 4) + 0%RAND8h
@@ -2293,18 +2316,23 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeapReserve,         dd 100000h + (0%RAND16h << 4) + 0%RAND8h
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeapCommit,          dd 0%RAND16h & 1fffh
 
+%ifndef EASY_PE
                 at IMAGE_OPTIONAL_HEADER32.LoaderFlags,               dd 0%RAND32h
                 at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 0%RAND32h
+%else
+              at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
+%endif
 iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ExportsVA,   dd Exports_Directory - IMAGEBASE
+%ifndef EASY_PE
                 dd 0%RAND32h
-
+%endif
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd IMPORT_DESCRIPTOR - IMAGEBASE
+%ifndef EASY_PE
                 dd 0%RAND32h
-
     at IMAGE_DATA_DIRECTORY_16.ResourceVA,  dd Directory_Entry_Resource - IMAGEBASE
                 dd 0%RAND32h
 
@@ -2328,15 +2356,16 @@ istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.BoundImportsVA,   dd 0
                     dd 0%RAND32h
 
+%endif
     at IMAGE_DATA_DIRECTORY_16.IATVA,       dd ImportsAddressTable - IMAGEBASE
-
     at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE ^ 0%RAND8h
+%ifndef EASY_PE
                     at IMAGE_DATA_DIRECTORY_16.DelayImportsVA,   dd 0%RAND32h, 0%RAND32h
 
     at IMAGE_DATA_DIRECTORY_16.COM,              dd 0
                     dd 0%RAND32h
                     at IMAGE_DATA_DIRECTORY_16.reserved,         dd 0%RAND32h, 0%RAND32h
-
+%endif
 iend
 
 errormsg_:
