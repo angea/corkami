@@ -21,7 +21,7 @@
 ; undocumented FPU ?
 
 ;enable this define to make the executable easier to debug
-%define EASY_DEBUG
+;%define EASY_DEBUG
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -78,6 +78,59 @@ db EOF
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+print:
+    pushad
+    mov edi, [esp + 24h]
+    mov esi, edi
+    xor al, al
+    cld
+    push -1
+    pop ecx
+    repnz scasb
+    not ecx
+    sub edi, ecx
+    dec ecx
+
+    push 0                          ; LPVOID lpReserved
+    push lpNumbersOfCharsWritten    ; LPWORD lpNumbersOfCharsWritten
+    push ecx                        ; DWORD nNumbersOfCharsToWrite
+    push edi                        ; VOID *lpBuffer
+    push dword [hConsoleOutput]     ; HANDLE hConsoleOutput
+;%reloc 2
+;%IMPORTCALL KERNel32.DlL!WriteConsoleA
+    popad
+    retn 4
+_c
+
+printnl:    ; print full line then the parameter
+    push fullline
+    call print
+    push dword [esp + 4]
+    call print
+    retn 4
+_c
+
+lpNumbersOfCharsWritten dd 0
+ErrorMsg dd 0
+_d
+
+%macro setmsg_ 1+
+    mov dword [ErrorMsg], %1
+%endmacro
+
+;%EXPORT init_console
+STD_OUTPUT_HANDLE equ -11
+initconsole:
+    push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
+;%reloc 2
+;%IMPORTCALL kernel32.dll!GetStdHandle
+    mov [hConsoleOutput], eax
+    retn
+_c
+
+hConsoleOutput dd 0
+_d
 
 %ifdef EASY_DEBUG
 ;%EXPORT print_easy
@@ -139,6 +192,8 @@ setVEH:
     call AddVectoredExceptionHandler
     retn
 _c
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -250,7 +305,7 @@ Main:
 _
     ; mov movzx movsx lea xchg add sub sbb adc inc dec or and xor
     ; not neg rol ror rcl rcr shl shr shld shrd div mul imul enter leave
-    ; setXX cmovXX bsf bsr bt btr btc bswap cbw cwde cwd
+    ; setXX cmovXX bsf bsr bt btr btc bswap cbw cwde cwd push
     print_ %string:"Starting: classic opcodes...", 0dh, 0ah, 0
     call classics
 _
@@ -327,62 +382,6 @@ _c
     call errormsg_
 %%good:
 %endmacro
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-print:
-    pushad
-    mov edi, [esp + 24h]
-    mov esi, edi
-    xor al, al
-    cld
-    push -1
-    pop ecx
-    repnz scasb
-    not ecx
-    sub edi, ecx
-    dec ecx
-
-    push 0                          ; LPVOID lpReserved
-    push lpNumbersOfCharsWritten    ; LPWORD lpNumbersOfCharsWritten
-    push ecx                        ; DWORD nNumbersOfCharsToWrite
-    push edi                        ; VOID *lpBuffer
-    push dword [hConsoleOutput]     ; HANDLE hConsoleOutput
-;%reloc 2
-;%IMPORTCALL KERNel32.DlL!WriteConsoleA
-    popad
-    retn 4
-_c
-
-printnl:    ; print full line then the parameter
-    push fullline
-    call print
-    push dword [esp + 4]
-    call print
-    retn 4
-_c
-
-lpNumbersOfCharsWritten dd 0
-ErrorMsg dd 0
-_d
-
-%macro setmsg_ 1+
-    mov dword [ErrorMsg], %1
-%endmacro
-
-;%EXPORT init_console
-STD_OUTPUT_HANDLE equ -11
-initconsole:
-    push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
-;%reloc 2
-;%IMPORTCALL kernel32.dll!GetStdHandle
-    mov [hConsoleOutput], eax
-    retn
-_c
-
-hConsoleOutput dd 0
-
-_d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -872,7 +871,7 @@ _
     expect dx, -1
 _
     print_ %string:"Testing: PUSH <reg32>", 0dh, 0
-    setmsg_ %string:"ERROR: Push <reg32>", 0dh, 0ah, 0
+    setmsg_ %string:"ERROR: PUSH <reg32>", 0dh, 0ah, 0
     mov ebx, esp
     sub ebx, 4
     rdtsc
@@ -881,18 +880,67 @@ _
     expect esp, ebx
     pop eax
 _
-;    print_ %string:"Testing: push <Reg16>", 0dh, 0
+    print_ %string:"Testing: PUSH <reg16>", 0dh, 0
+    setmsg_ %string:"ERROR: PUSH <reg16>", 0dh, 0ah, 0
+    push -1
+    lea esp, [esp + 4]
+    rdtsc
+    mov [esp_], esp
 
-;    setmsg_ %string:"ERROR: Push <reg16>", 0dh, 0ah, 0
-    ; TODO push ds pushes 16b of DS, and ESP -=4
+    push ax
 
-    ; TODO push dx pushes 16b of DS, but ESP -=2
-
+    add esp, 2
+    expect [esp_], esp
+    or eax, 0ffff0000h
+    rol eax, 16
+    expect dword [esp - 4], eax
 _
+    RANDWORD equ 0%RAND16h
+    print_ %string:"Testing: PUSH <imm16>", 0dh, 0
+    setmsg_ %string:"ERROR: PUSH <imm16>", 0dh, 0ah, 0
+    mov [esp_], esp
+    mov dword [esp - 4], -1
 
+    push word RANDWORD
+
+    add esp, 2
+    expect [esp_], esp
+    mov ax, RANDWORD
+    or eax, 0ffff0000h
+    rol eax, 16
+    expect dword [esp - 4], eax
+_
+    print_ %string:"Testing: PUSH <selector>", 0dh, 0
+    setmsg_ %string:"ERROR: PUSH <selector>", 0dh, 0ah, 0
+    push -1
+    lea esp, [esp + 4]
+    mov eax, ds
+    or eax, 0ffff0000h
+    mov [esp_], esp
+    push ds
+
+    add esp, 4
+    expect [esp_], esp
+    expect dword [esp - 4], eax
+_
+    RANDBYTE equ 0%RAND8h
+    print_ %string:"Testing: PUSH <imm8>", 0dh, 0
+    setmsg_ %string:"ERROR: PUSH <imm8>", 0dh, 0ah, 0
+    push -1
+    lea esp, [esp + 4]
+    mov [esp_], esp
+    xor eax, eax
+    mov al, RANDBYTE
+
+    push RANDBYTE
+
+    add esp, 4
+    expect [esp_], esp
+    expect [esp - 4], eax
+_
     retn
 _c
-
+esp_ dd 0
 _d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2340,7 +2388,7 @@ __exp__0_TLS_START dd 0
 __exp__print_handler dd 0
 __exp__1_TLS_2 dd 0
 __exp__erased_call_operand dd 0
-reloc0:
+reloc2:
 %else
 __exp__print_easy dd 0
 %endif

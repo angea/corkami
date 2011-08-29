@@ -12,12 +12,15 @@ IMPORT_DESCRIPTOR: ; replace with imports:
 
 
 |Descriptor_end|
-     dd 0%RAND16h
-     dd 0%RAND16h
-     dd 0%RAND16h
-     dd 0%RAND16h
-     dd 0
-
+%ifdef EASY_DEBUG
+    times 5 dd 0
+%else
+    dd 0%RAND16h
+    dd 0%RAND16h
+    dd 0%RAND16h
+    dd 0%RAND16h
+    dd 0
+%endif
 |HINT_NAME_start|
 ;align 2, db 0
 %(dll)s_hintnames:
