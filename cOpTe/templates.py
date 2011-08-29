@@ -12,7 +12,11 @@ IMPORT_DESCRIPTOR: ; replace with imports:
 
 
 |Descriptor_end|
-    times 5 dd 0
+     dd 0%RAND16h
+     dd 0%RAND16h
+     dd 0%RAND16h
+     dd 0%RAND16h
+     dd 0
 
 |HINT_NAME_start|
 ;align 2, db 0
@@ -40,7 +44,6 @@ __imp__%(api)s:
     DQ 0
 
 |DLL_NAME|
-;align 2, db 0
 %(dll)s  DB '%(dll)s',0
 
 |IMAGE_IMPORT_BY_NAME|
@@ -81,12 +84,12 @@ Relocations = dict([i, j.lstrip("\n")] for i, j in zip(Relocations[::+2], Reloca
 
 Exports = """BODY|
 Exports_Directory:
-  Characteristics       dd 0
-  TimeDateStamp         dd 0
-  MajorVersion          dw 0
-  MinorVersion          dw 0
+  Characteristics       dd 0%%RAND16h ; doesn't like rand32 here
+  TimeDateStamp         dd 0%%RAND16h
+  MajorVersion          dw 0%%RAND16h
+  MinorVersion          dw 0%%RAND16h
   Name                  dd aDllName - IMAGEBASE
-  Base                  dd 0
+  Base                  dd 0%%RAND16h
   NumberOfFunctions     dd %(counter)i
   NumberOfNames         dd %(counter)i
   AddressOfFunctions    dd address_of_functions - IMAGEBASE

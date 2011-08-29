@@ -150,7 +150,7 @@ if __name__ == "__main__":
     f.close()
 
 #parse imports tags
-    findimp = re.findall(";%IMPORT64 ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
+    findimp = re.findall(";%IMPORT64 ([A-Za-z.0-9_]+)!([A-Za-z.0-9_]+)", r, re.I | re.M)
     imports = {}
     if findimp:
         for dll, api in findimp:
@@ -158,10 +158,10 @@ if __name__ == "__main__":
                 imports[dll] = list()
             imports[dll] += [api]
 
-    r = re.sub(r";%IMPORT64 ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
+    r = re.sub(r";%IMPORT64 ([A-Za-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
     r = r.replace(";%IMPORTS64", MakeImports64(imports)) # this one first to prevent collision
 
-    findimp = re.findall(";%IMPORT ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
+    findimp = re.findall(";%IMPORT ([A-Za-z.0-9_]+)!([A-Za-z.0-9_]+)", r, re.I | re.M)
     imports = {}
     if findimp:
         for dll, api in findimp:
@@ -169,9 +169,9 @@ if __name__ == "__main__":
                 imports[dll] = list()
             imports[dll] += [api]
 
-    r = re.sub(r";%IMPORT ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
+    r = re.sub(r";%IMPORT ([A-Za-z.0-9_]+)!([A-Za-z0-9_]+)", r"""\2:\n    jmp [__imp__\2]""", r)
 
-    findimp = re.findall(";%IMPORTJMP ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
+    findimp = re.findall(";%IMPORTJMP ([A-Za-z.0-9_]+)!([A-Za-z.0-9_]+)", r, re.I | re.M)
     if findimp:
         for dll, api in findimp:
             if dll not in imports:
@@ -179,9 +179,9 @@ if __name__ == "__main__":
             if api not in imports[dll]:
                 imports[dll] += [api]
 
-    r = re.sub(r";%IMPORTJMP ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""    jmp [__imp__\2]""", r)
+    r = re.sub(r";%IMPORTJMP ([A-Za-z.0-9_]+)!([A-Za-z0-9_]+)", r"""    jmp [__imp__\2]""", r)
 
-    findimp = re.findall(";%IMPORTCALL ([a-z.0-9_]+)!([a-z.0-9_]+)", r, re.I | re.M)
+    findimp = re.findall(";%IMPORTCALL ([A-Za-z.0-9_]+)!([A-Za-z.0-9_]+)", r, re.I | re.M)
     if findimp:
         for dll, api in findimp:
             if dll not in imports:
@@ -189,7 +189,7 @@ if __name__ == "__main__":
             if api not in imports[dll]:
                 imports[dll] += [api]
 
-    r = re.sub(r";%IMPORTCALL ([a-z.0-9_]+)!([A-Za-z0-9_]+)", r"""    call [__imp__\2]""", r)
+    r = re.sub(r";%IMPORTCALL ([A-Za-z.0-9_]+)!([A-Za-z0-9_]+)", r"""    call [__imp__\2]""", r)
 
     r = r.replace(";%IMPORTS", MakeImports(imports))
 

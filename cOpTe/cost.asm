@@ -15,16 +15,18 @@
 ; merge os checks, just see values
 ; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
-; setldtentries, xlat/movs* with selector
+; setldtentries, xlat/movs*/lock add: with selector
 ; mmx <-> fpu transfer
 ; initial values
-; compress strings ?
 ; Exports: non ascii, same name+diff hints, loop-forwarding
 ; randomization
-; fix relocations and 0/kernel IB
+; fix relocations and 0/kernel IB ?
+; compress strings ?
 ; imports: last dir outside memory ?
+; undocumented FPU ?
 
-;%define EASY_PE
+;enable this define to make the executable easier to debug
+;%define EASY_DEBUG
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -32,31 +34,27 @@
 FILEALIGN equ 1
 SECTIONALIGN equ FILEALIGN
 
-;TODO: kernel IB doesn't work yet under XP/W7
-%ifdef EASY_PE
-IMAGEBASE equ 004000000h
+
+%ifdef EASY_DEBUG
+    IMAGEBASE equ 041410000h
 %else
-IMAGEBASE equ 080000000h - 1030000h
+;TODO: kernel IB doesn't work yet under XP/W7
+    IMAGEBASE equ 080000000h - 1030000h
 %endif
+
 org IMAGEBASE
 bits 32
 
-PRINTME equ 0cafebabeh
-
-%macro print_ 1+
-    mov dword [PRINTME], %1
-;    prefetch [%1]  ; wouldn't trigger an exception, but not all debuggers show it as a 'comment'
-%endmacro
-
 ; some tools still don't like EntryPoint at 0....
 ; c'mon, who taught you to follow the official specs... ?
-;%EXPORT 2_EntryPoint
-%ifndef EASY_PE
 EntryPoint:
-%endif
 istruc IMAGE_DOS_HEADER
     ; pity we can't put ZM anymore...
-    at IMAGE_DOS_HEADER.e_magic, db 'MZ'
+    at IMAGE_DOS_HEADER.e_magic, db 'M'
+
+; can't put an export on IMAGEBASE :(
+;%EXPORT 2_EntryPoint 
+    db 'Z'
 
     into     ; an obsolete yet welcoming opcode to invite our guests
 ;%EXPORT the_dragon ; bomb the bass forever...
@@ -69,7 +67,7 @@ istruc IMAGE_DOS_HEADER
 db CR
 
 ; Warning! a commercial banner is approaching fast !
-program db 'CoST - Corkami Standard Test BETA 2011/08/XX', 0dh, 0ah, 0
+program db 'CoST - Corkami Standard Test BETA 2011/09/XX', 0dh, 0ah, 0
 
     ; omg, we're actually still in the header... quick, the first valid value...
     at IMAGE_DOS_HEADER.e_lfanew, dd nt_header - IMAGEBASE
@@ -85,95 +83,35 @@ db EOF
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;%EXPORT 0_TLS_START
-; first TLS - adds the 2nd one to TLS callbacks on the fly
-TLS:
-    mov eax, [hConsoleOutput]
-    mov ebx, bounds00
-    bound eax, [ebx] ; triggers exception if hConsoleOutput is not null
 
-    push %string:"[trick] Adding TLS 2 in TLS callbacks list", 0dh, 0
-    call [__imp__OutputDebugStringA]
-
-    mov dword [TLSCharacteristics], TLS2
-    retn
-_c
-
-;%EXPORT 1_TLS_2
-; second TLS - initialization
-TLS2:
-    push %string:"[trick] the next call's operand is zeroed by the loader", 0dh, 0
-    call [__imp__OutputDebugStringA]
-
-    db 0e8h         ; call to nowhere, patched to call $ + 5 with the TLS data directory initialization
-;%EXPORT erased_call_operand
-zeroed_here:
-        dd 0%RAND32h
-
-    ; we don't really need to clear the stack, as we won't return
-    ; lea esp, [esp + 4]
-%ifdef EASY_PE
-EntryPoint:
-%endif
-    call setVEH
-    call initconsole
-    print_ program
-    print_ author
-    print_ %string:0dh, 0ah, 0dh, 0ah, 0
+%ifdef EASY_DEBUG
+;%EXPORT print_easy
+print_easy:
+    push dword [esp + 4]
     call printnl
-_
-    print_ %string:"[trick] finishing TLS by unhandled exception", 0dh, 0
-%ifdef EASY_PE
-    jmp EP2_easy
-%endif
-    ;unhandled exception terminates TLS but not process
-    int3
+    pushad
+    push dword [esp + 24h]
+;%IMPORTCALL kernel32.dll!OutputDebugStringA
+    popa
+    retn 4
 
-;required to use TLS
-;reloc 2
-;%IMPORT gdi32.dll!EngQueryEMFInfo
-_c
+%macro print_ 1+
+    push %1
+    call print_easy
+%endmacro
 
-bounds00 dd 0,0
-TLSstart equ 0%RAND32h
-Image_Tls_Directory32:
-    StartAddressOfRawData dd TLSstart
-    EndAddressOfRawData   dd TLSstart
-    AddressOfIndex        dd zeroed_here ; this address will be overwritten with 00's
-%ifndef EASY_PE
-    AddressOfCallBacks    dd SizeOfZeroFill
 %else
-    AddressOfCallBacks    dd 0
-%endif
-    SizeOfZeroFill        dd TLS
-    TLSCharacteristics    dd 0%RAND32h
-_d
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PRINTME equ 0cafebabeh
 
-;%EXPORT 3_EntryPoint2
-EP2:
-    push edx
-    inc ebp
-EP2_easy:
-    call init
-    print_ %string:"[trick] calling Main via my own export", 0dh, 0
-%ifdef EASY_PE
-    jmp Main
-%else
-;%IMPORTJMP cost.exe!4_Main
-%endif
+%macro print_ 1+
+    mov dword [PRINTME], %1
+;    prefetch [%1]  ; wouldn't trigger an exception, but not all debuggers show it as a 'comment'
+%endmacro
 
-setVEH:
-;%reloc 1
-    push printer
-    push -1
-    call AddVectoredExceptionHandler
-    retn
-_c
 
-;printing handler, for one opcode display operations - not perfect yet
-
-printer:
+;printing handler, for one opcode display operations
+;%EXPORT print_handler
+printer_veh:
     mov edx, [esp + 4 * 6]
     mov eax, [edx + CONTEXT.regEip]
     cmp word [eax],  005c7h
@@ -199,6 +137,95 @@ not_print:
     retn 4
 _
 
+setVEH:
+;%reloc 1
+    push printer_veh
+    push -1
+    call AddVectoredExceptionHandler
+    retn
+_c
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; first TLS - adds the 2nd one to TLS callbacks on the fly
+;%EXPORT 0_TLS_START
+TLS:
+    mov eax, [hConsoleOutput]
+    mov ebx, bounds00
+    bound eax, [ebx] ; triggers exception if hConsoleOutput is not null
+
+    push %string:"[trick] Adding TLS 2 in TLS callbacks list", 0dh, 0
+    call [__imp__OutputDebugStringA]
+
+    mov dword [TLSCharacteristics], TLS2
+    retn
+_c
+
+;%EXPORT 1_TLS_2
+; second TLS - initialization
+TLS2:
+    push %string:"[trick] the next call's operand is zeroed by the loader", 0dh, 0
+    call [__imp__OutputDebugStringA]
+    db 0e8h         ; call to nowhere, patched to call $ + 5 with the TLS data directory initialization
+;%EXPORT erased_call_operand
+zeroed_here:
+        dd 0%RAND32h
+
+    ; we don't really need to clear the stack, as we won't return
+    ; lea esp, [esp + 4]
+    call setVEH
+    call initconsole
+    print_ program
+    print_ author
+    print_ %string:0dh, 0ah, 0dh, 0ah, 0
+_
+    print_ %string:"[trick] TLS terminating by unhandled exception (EP is executed)", 0dh, 0
+    ;unhandled exception terminates TLS but not process
+    int3
+
+;required to use TLS
+_c
+
+bounds00 dd 0,0
+TLSstart equ 0%RAND32h
+Image_Tls_Directory32:
+    StartAddressOfRawData dd TLSstart
+    EndAddressOfRawData   dd TLSstart
+    AddressOfIndex        dd zeroed_here ; this address will be overwritten with 00's
+    AddressOfCallBacks    dd SizeOfZeroFill
+    SizeOfZeroFill        dd TLS
+    TLSCharacteristics    dd 0%RAND32h
+_d
+%endif
+
+;reloc 2
+; no .dll extension needed
+;%IMPORT gdi32!EngQueryEMFInfo
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;trying to make addresses alphanumeric, for more confusion
+%ifdef EASY_DEBUG
+    align 4080h, db 'A'
+%endif
+;%EXPORT 3_EntryPoint2
+
+EP2:
+    push edx
+    inc ebp
+
+; if we're in EASY PE mode, things have not been initialized by the EntryPoint
+%ifdef EASY_DEBUG
+    call initconsole
+    print_ program
+    print_ author
+    print_ %string:0dh, 0ah, 0dh, 0ah, 0
+    print_ %string:"(EASY DEBUG build)", 0dh, 0ah, 0
+%endif
+    call init
+    print_ %string:"[trick] calling Main via my own export", 0dh, 0
+;%IMPORTJMP cost.exe!4_Main
+
+;%EXPORT init
 init:
     print_ %string:"[trick] allocating buffer [0000-ffff]", 0dh, 0
     call initmem
@@ -206,7 +233,6 @@ init:
     call checkOS
     retn
 _c
-
 
 ;%EXPORT 4_Main
 Main:
@@ -228,67 +254,71 @@ Main:
     ; call to word
     ; jump short, near, to word, to reg32, to reg16, far
     ; return near, near word, far, interrupt
-    print_ %string:"testing jumps opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: jumps opcodes...", 0dh, 0ah, 0
     call jumps_
 _
     ; mov movzx movsx lea xchg add sub sbb adc inc dec or and xor
     ; not neg rol ror rcl rcr shl shr shld shrd div mul imul enter leave
     ; setXX cmovXX bsf bsr bt btr btc bswap cbw cwde cwd
-    print_ %string:"testing classic opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: classic opcodes...", 0dh, 0ah, 0
     call classics
 _
-    print_ %string:"testing rare opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: rare opcodes...", 0dh, 0ah, 0
     ; xadd aaa daa aas das aad aam lds bound arpl inc jcxz xlatb (on ebx and bx) lar
     ; verr cmpxchg cmpxchg8b sldt lsl
     call rares
 _
-    print_ %string:"testing undocumented opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: undocumented opcodes...", 0dh, 0ah, 0
     call undocumented ; aam xx, salc, aad xx, bswap reg16, smsw reg32
 _
-    print_ %string:"testing cpu-specific opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: cpu-specific opcodes...", 0dh, 0ah, 0
     call cpu_specifics  ; popcnt movbe crc32
 _
-    print_ %string:"testing undocumented encodings...", 0dh, 0ah, 0
+    print_ %string:"Starting: undocumented encodings...", 0dh, 0ah, 0
     call encodings      ; test, 'sal'
 _
     ; smsw sidt sgdt str sysenter
-    print_ %string:"testing os-dependant opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: os-dependant opcodes...", 0dh, 0ah, 0
     call [os]   ; os should be before any fpu use
 _
     ; nop pause sfence mfence lfence prefetchnta 'hint nop' into, fpu, lock + operators
-    print_ %string:"testing 'nop' opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: 'nop' opcodes...", 0dh, 0ah, 0
     call nops
 _
     ; gs, smsw, rdtsc, pushf, pop ss
-    print_ %string:"testing opcode-based anti-debuggers...", 0dh, 0ah, 0
+    print_ %string:"Starting: opcode-based anti-debuggers...", 0dh, 0ah, 0
     call antis
 _
-    print_ %string:"testing opcode-based GetIPs...", 0dh, 0ah, 0
+    print_ %string:"Starting: opcode-based GetIPs...", 0dh, 0ah, 0
     call get_ips ; call, call far, fstenv
 _
     ; generic int 00-FF, int 2d, illegal instruction,
     ; into, int4, int3, int 3, IceBP, TF, bound, lock, in, hlt
-    print_ %string:"testing opcode-based exception triggers...", 0dh, 0ah, 0
+    print_ %string:"Starting: opcode-based exception triggers...", 0dh, 0ah, 0
     call exceptions
 _
     ; documented but frequent disassembly mistakes
     ; bswap, smsw, str, branch hints, word calls/rets/loops, FS:movsd, xlatb, ud*
     call disassembly
 _
-    print_ %string:"testing 64 bits opcodes...", 0dh, 0ah, 0
+    print_ %string:"Starting: 64 bits opcodes...", 0dh, 0ah, 0
     ; cwde cmpxchg16 lea movsxd
     call sixtyfour
 _
     jmp good
 _c
 
+;%EXPORT completed
 good:
     print_ ''
     print_ %string:0dh, 0ah, "...completed!", 0dh, 0ah, 0
+    setSEH ExitProcess
+;%IMPORTJMP cost.exe!zz_EOF
     push 0
     call ExitProcess
 _c
 
+;%EXPORT zz_bad
 bad:
     print_ %string:0dh, 0ah, "Error", 0dh, 0ah, 0
     call print
@@ -326,12 +356,12 @@ print:
     push edi                        ; VOID *lpBuffer
     push dword [hConsoleOutput]     ; HANDLE hConsoleOutput
 ;%reloc 2
-;%IMPORTCALL kernel32.dll!WriteConsoleA
+;%IMPORTCALL KERNel32.DlL!WriteConsoleA
     popad
     retn 4
 _c
 
-printnl:
+printnl:    ; print full line then the parameter
     push fullline
     call print
     push dword [esp + 4]
@@ -347,7 +377,7 @@ _d
     mov dword [ErrorMsg], %1
 %endmacro
 
-
+;%EXPORT init_console
 STD_OUTPUT_HANDLE equ -11
 initconsole:
     push STD_OUTPUT_HANDLE  ; DWORD nStdHandle
@@ -366,6 +396,12 @@ _d
 MEM_RESERVE               equ 2000h
 MEM_TOP_DOWN              equ 100000h
 
+error_allocated:
+    print_ %string:"Error: NULL buffer not allocated/valid/writeable", 0dh, 0
+    push 42
+    call ExitProcess 
+
+;%EXPORT init_null_buffer
 initmem:
     push PAGE_READWRITE     ; ULONG Protect
     push MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN     ; ULONG AllocationType
@@ -375,10 +411,15 @@ initmem:
     push -1                 ; HANDLE ProcessHandle
 ;%reloc 2
 ;%IMPORTCALL ntdll.dll!ZwAllocateVirtualMemory
+    print_ %string:"testing: NULL buffer", 0dh, 0
+
+    setSEH error_allocated
+    cmpxchg [0], eax
+    clearSEH
     retn
 _c
 
-
+;%EXPORT check_OS
 checkOS:
     mov eax, [fs:18h]
     mov ecx, [eax + 030h]
@@ -539,7 +580,7 @@ _
     push ds
     pop ebx
     and ebx, 0ffffh
-    expect eax, ebx ; wrong under <pentium CPUs ? TBC
+    expect eax, ebx ; I tested on a 2 pentium CPUs, and the upper word is still 0
 _
     print_ %string:"Testing: MOVZX (Zero eXtending)", 0dh, 0
     setmsg_ %string:"ERROR: MOVZX", 0dh, 0ah, 0
@@ -689,7 +730,7 @@ _
     print_ %string:"Testing: SHL (operand > 31)", 0dh, 0
     setmsg_ %string:"ERROR: SHL (operand > 31)", 0dh, 0ah, 0
     mov al, 1010b
-    shl al, 32
+    shl al, (0%RAND8h * 32) & 0ffh
     expect al, 1010b
 _
     print_ %string:"Testing: SHR", 0dh, 0
@@ -708,7 +749,7 @@ _
     setmsg_ %string:"ERROR: SHLD", 0dh, 0ah, 0
     mov ax, 1111b
     mov bx, 0100000000000000b
-    shld ax, bx, 3
+    shld ax, bx, ((0%RAND8h * 32) & 0ffh) + 3
     expect ax, 1111010b
 _
     print_ %string:"Testing: SHRD", 0dh, 0
@@ -824,12 +865,12 @@ _
     cwde
     expect eax, -3
 _
-    print_ %string:"Testing: CWDE (convert double to quad)", 0dh, 0
+    print_ %string:"Testing: CDQ (convert double to quad)", 0dh, 0
     setmsg_ %string:"ERROR: CDQ", 0dh, 0ah, 0
     cdq
     expect edx, -1
 _
-    print_ %string:"Testing: CWDE (convert word to doubleword (via eax/edx))", 0dh, 0
+    print_ %string:"Testing: CWD (convert word to doubleword (via eax/edx))", 0dh, 0
     setmsg_ %string:"ERROR: CWD", 0dh, 0ah, 0
     mov ax, -15
     mov ebx, eax
@@ -1073,6 +1114,14 @@ undocumented:
     aam 3                                   ; ah = al / 3, al = al % 3 => ah = 13h, al = 1
     expect ax, 1301h
 _
+    ; aad with an immediate operand that is not 10
+    print_ %string:"Testing[undoc]: AAD with non default operand", 0dh, 0
+    setmsg_ %string:"ERROR: AAD with non default operand (undocumented)", 0dh, 0ah, 0
+    rdtsc
+    mov ax, 0325h
+    aad 7                                   ; ah = 0, al = ah * 7 + al => al = 3Ah
+    expect ax, 003Ah
+_
     print_ %string:"Testing[undoc]: SETALC (Set Al on carry)", 0dh, 0
     setmsg_ %string:"ERROR: SETALC (Set Al on carry) [undocumented]", 0dh, 0ah, 0
     stc
@@ -1084,14 +1133,6 @@ _
     clc
     salc
     expect al, 0
-_
-    ; aad with an immediate operand that is not 10
-    print_ %string:"Testing[undoc]: AAD with non default operand", 0dh, 0
-    setmsg_ %string:"ERROR: AAD with non default operand (undocumented)", 0dh, 0ah, 0
-    rdtsc
-    mov ax, 0325h
-    aad 7                                   ; ah = 0, al = ah * 7 + al => al = 3Ah
-    expect ax, 003Ah
 _
     ; bswap behavior on 16bit
     print_ %string:"Testing[undoc]: BSWAP reg16 (clears reg)", 0dh, 0
@@ -1436,7 +1477,7 @@ _
     lock cmpxchg8b [eax]
     pop edx
 _
-    print_ %string:"Testing[nop]: LOCK + BTx*", 0dh, 0
+    print_ %string:"Testing[nop]: LOCK + BT*", 0dh, 0
     ; lock bt [eax], eax                    ; this one is not valid, and will trigger an exception
     lock btc [eax], eax
     lock btr [eax], eax
@@ -1533,15 +1574,17 @@ _
 _
     inc eax
     dec eax
-
+_
     add eax, 31415926h
     sub eax, 31415926h
-
+_
     lea eax, [eax + 31415926h]
     sub eax, 31415926h
-
-    rol eax, 35
-    ror eax, 35
+_
+    rol eax, 15
+    ror eax, ((0%RAND8h * 32) & 0ffh) + 15
+_
+    shl eax, (0%RAND8h * 32) & 0ffh
 _
     fnop
     emms
@@ -1890,7 +1933,7 @@ _
 _
     setmsg_ %string:"ERROR: wrong opcode LOCK - no exception", 0dh, 0ah, 0
     mov dword [counter], 0
-    print_ %string:"Testing: CPU-dependant via incorrect bt", 0dh, 0
+    print_ %string:"Testing: CPU-dependant via incorrect lock:bt", 0dh, 0
     push dword [lock_exception] ; INVALID LOCK SEQUENCE or ILLEGAL INSTRUCTION
     pop dword [current_exception]
     mov dword [currentskip], 4
@@ -1901,7 +1944,7 @@ _
     mov dword [counter], 0
     print_ %string:"Testing: INVALID LOCK SEQUENCE via incorrect mode access", 0dh, 0
     mov dword [currentskip], 3
-    lock add eax, eax
+    lock add eax, [eax]
     expect dword [counter], 1
 _
     setmsg_ %string:"ERROR: invalid opcode LOCK - no exception", 0dh, 0ah, 0
@@ -2191,8 +2234,7 @@ no64b:
     retn
 _c
 
-;align 16, int3
-align 8, db 0%RAND8h
+align 16, db 0%RAND8h
 _cmpxchg16b:
     dq 00a0a0a0a0a0a0a0ah
     dq 0d0d0d0d0d0d0d0d0h
@@ -2241,9 +2283,22 @@ _d
 ;%relocs
 _d
 
+newline db 0dh, 0ah, 0
 fullline db '                                                                         ', 0dh, 0
 ;%strings
 _d
+
+;hack to make the preprocessors happy together
+%ifdef EASY_DEBUG
+__exp__0_TLS_START dd 0
+__exp__print_handler dd 0
+__exp__1_TLS_2 dd 0
+__exp__erased_call_operand dd 0
+reloc0:
+%else
+__exp__print_easy dd 0
+%endif
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 align 4, db 0%RAND8h
@@ -2255,7 +2310,7 @@ iend
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
         at IMAGE_FILE_HEADER.NumberOfSections,      dw 0
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
                 at IMAGE_FILE_HEADER.TimeDateStamp        , dd 0%RAND32h
                 at IMAGE_FILE_HEADER.PointerToSymbolTable , dd 0%RAND32h
                 at IMAGE_FILE_HEADER.NumberOfSymbols      , dd 0%RAND32h
@@ -2269,7 +2324,7 @@ iend
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
         at IMAGE_OPTIONAL_HEADER32.MajorLinkerVersion,            db 0%RAND8h
         at IMAGE_OPTIONAL_HEADER32.MinorLinkerVersion,            db 0%RAND8h
         at IMAGE_OPTIONAL_HEADER32.SizeOfCode,                    dd 0%RAND32h
@@ -2277,14 +2332,14 @@ istruc IMAGE_OPTIONAL_HEADER32
         at IMAGE_OPTIONAL_HEADER32.SizeOfUninitializedData,       dd 0%RAND32h
 %endif
     at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
             at IMAGE_OPTIONAL_HEADER32.BaseOfCode,                    dd 0%RAND32h
             at IMAGE_OPTIONAL_HEADER32.BaseOfData,                    dd 0%RAND32h
 %endif
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
                 at IMAGE_OPTIONAL_HEADER32.MajorOperatingSystemVersion,   dw 0%RAND16h
                 at IMAGE_OPTIONAL_HEADER32.MinorOperatingSystemVersion,   dw 0%RAND16h
                 at IMAGE_OPTIONAL_HEADER32.MajorImageVersion,             dw 0%RAND16h
@@ -2295,7 +2350,7 @@ istruc IMAGE_OPTIONAL_HEADER32
                 at IMAGE_OPTIONAL_HEADER32.MinorSubsystemVersion,         dw 0%RAND16h
 
     ;this one not null will break the SMSW/GS trick :(
-    at IMAGE_OPTIONAL_HEADER32.Win32VersionValue,             dd 0; 0 + (4 << 8)+ (0 << 16)+ (0 << 30)
+    at IMAGE_OPTIONAL_HEADER32.Win32VersionValue,             dd 0%RAND16h; 0 + (4 << 8)+ (0 << 16)+ (0 << 30)
 
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd SIZEOFIMAGE
 
@@ -2305,7 +2360,7 @@ istruc IMAGE_OPTIONAL_HEADER32
                 at IMAGE_OPTIONAL_HEADER32.CheckSum,                  dd 0%RAND32h
 
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
     ; not a (totally) random value
     at IMAGE_OPTIONAL_HEADER32.DllCharacteristics,        dw 0%RAND16h & 0fa7fh
 %endif
@@ -2316,22 +2371,22 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeapReserve,         dd 100000h + (0%RAND16h << 4) + 0%RAND8h
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeapCommit,          dd 0%RAND16h & 1fffh
 
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
                 at IMAGE_OPTIONAL_HEADER32.LoaderFlags,               dd 0%RAND32h
                 at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 0%RAND32h
 %else
-              at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
+              at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,         dd 16
 %endif
 iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ExportsVA,   dd Exports_Directory - IMAGEBASE
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
                 dd 0%RAND32h
 %endif
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd IMPORT_DESCRIPTOR - IMAGEBASE
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
                 dd 0%RAND32h
     at IMAGE_DATA_DIRECTORY_16.ResourceVA,  dd Directory_Entry_Resource - IMAGEBASE
                 dd 0%RAND32h
@@ -2359,7 +2414,7 @@ istruc IMAGE_DATA_DIRECTORY_16
 %endif
     at IMAGE_DATA_DIRECTORY_16.IATVA,       dd ImportsAddressTable - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.IATSize,     dd IMPORTSADDRESSTABLESIZE ^ 0%RAND8h
-%ifndef EASY_PE
+%ifndef EASY_DEBUG
                     at IMAGE_DATA_DIRECTORY_16.DelayImportsVA,   dd 0%RAND32h, 0%RAND32h
 
     at IMAGE_DATA_DIRECTORY_16.COM,              dd 0
@@ -2374,7 +2429,6 @@ errormsg_:
     retn
 _d
 
-newline db 0dh, 0ah, 0
 ;%reloc 2
 ;%IMPORT kernel32.dll!ExitProcess
 
@@ -2386,4 +2440,5 @@ times nt_header + 120h - $  db 0 ; to please W7
 
 SIZEOFIMAGE equ $ - IMAGEBASE
 End:
-;EXPORT EOF
+;%reloc 0
+;%EXPORT zz_EOF
