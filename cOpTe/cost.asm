@@ -1,6 +1,4 @@
-;this file tests each usermode opcode (at least, one of almost all families)
-; using segment 33h trick to test 64b opcodes
-; using ZwAllocateVirtualMemory trick to allocate [0000-ffff], so word jumps and returns are working
+;this file tests makes use of most user-mode opcode, and check the result
 
 ; tested under W7 64b, XP SP3, XPSP1 under VmWare
 
@@ -13,20 +11,17 @@
 ; int2c-2e with wrong/right address
 ; finish int 2d slide detection
 ; merge os checks, just see values
-; merge 16b operations - expand stub for tests on [0000-ffff]
 ; fsave, fxsave
 ; setldtentries, xlat/movs*/lock add: with selector
-; mmx <-> fpu transfer
 ; initial values
 ; Exports: non ascii, same name+diff hints, loop-forwarding
-; randomization
 ; fix relocations and 0/kernel IB ?
 ; compress strings ?
 ; imports: last dir outside memory ?
 ; undocumented FPU ?
 
 ;enable this define to make the executable easier to debug
-;%define EASY_DEBUG
+%define EASY_DEBUG
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -53,7 +48,7 @@ istruc IMAGE_DOS_HEADER
     at IMAGE_DOS_HEADER.e_magic, db 'M'
 
 ; can't put an export on IMAGEBASE :(
-;%EXPORT 2_EntryPoint 
+;%EXPORT 2_EntryPoint
     db 'Z'
 
     into     ; an obsolete yet welcoming opcode to invite our guests
@@ -203,10 +198,6 @@ _d
 ;%IMPORT gdi32!EngQueryEMFInfo
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;trying to make addresses alphanumeric, for more confusion
-%ifdef EASY_DEBUG
-    align 4080h, db 'A'
-%endif
 ;%EXPORT 3_EntryPoint2
 
 EP2:
@@ -305,6 +296,8 @@ _
     ; cwde cmpxchg16 lea movsxd
     call sixtyfour
 _
+    print_ %string:"Starting: registers tests",  0dh, 0ah, 0
+    call regs
     jmp good
 _c
 
@@ -399,7 +392,7 @@ MEM_TOP_DOWN              equ 100000h
 error_allocated:
     print_ %string:"Error: NULL buffer not allocated/valid/writeable", 0dh, 0
     push 42
-    call ExitProcess 
+    call ExitProcess
 
 ;%EXPORT init_null_buffer
 initmem:
@@ -2245,6 +2238,59 @@ rcx_ dq -1
 lockadd dq -1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+regs:
+    print_ %string:"Testing[regs]: registers affected by FPU operation", 0dh, 0
+    finit
+    smsw ebx
+    mov [cr0before], ebx
+_
+    mov ebx, fstbefore
+    fstsw [ebx]
+    mov edx, fstafter
+_
+    fldpi
+    smsw ecx
+    mov [cr0after], ecx
+    fstsw [edx]
+    fstp tword [st0after]
+    movq qword [_mm7], mm7
+_
+    setmsg_ %string:"ERROR: wrong value for FST", 0dh, 0ah, 0
+    expect word [fstbefore], 0
+    expect word [fstafter], 03800h
+    jnz bad
+_
+    setmsg_ %string:"ERROR: wrong value for ST0", 0dh, 0ah, 0
+    expect dword [st0after], 02168c235h
+    expect dword [st0after + 4], 0c90fdaa2h
+    expect word [st0after + 8], 04000h
+_
+    setmsg_ %string:"ERROR: wrong value for CR0", 0dh, 0ah, 0
+    and dword [cr0before], 0fffbfff5h
+    cmp dword [cr0before],  80010031h ; XP 8001003b / 7-64 80050031
+    jnz bad
+    and dword [cr0after], 0fffbffffh
+    cmp dword [cr0after],  80010031h ; XP 80010031 / 7-64 80050031
+    jnz bad
+_
+    setmsg_ %string:"ERROR: wrong value for mm7", 0dh, 0ah, 0
+    expect dword [_mm7], 2168c235h
+    expect dword [_mm7 + 4], 0c90fdaa2h
+_
+    jnz bad
+    retn
+_c
+
+_mm7 dq 0
+fstbefore dw 0
+fstafter dw 0
+cr0before dd 0
+cr0after dd 0
+st0after dt 0
+_d
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ; just for reference, another 15 bytes operation, in 16 bits.
 ;bits 16
@@ -2427,8 +2473,6 @@ errormsg_:
     push dword [ErrorMsg]
     call printnl
     retn
-_d
-
 ;%reloc 2
 ;%IMPORT kernel32.dll!ExitProcess
 
@@ -2436,6 +2480,9 @@ _d
 times nt_header + 120h - $  db 0 ; to please W7
 
 ;%reloc 2
+;%reloc 1
+;%reloc 3
+;%reloc 0
 ;%IMPORT kernel32.dll!AddVectoredExceptionHandler
 
 SIZEOFIMAGE equ $ - IMAGEBASE
