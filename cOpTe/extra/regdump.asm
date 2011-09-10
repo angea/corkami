@@ -1,4 +1,10 @@
 ; small registers dumper
+; todo: 
+; * DLL tls and EP
+; * driver
+; * smsw/sldt/mov32 smarter
+
+; Ange Albertini, BSD licence 2011
 
 %include '..\consts.inc'
 
@@ -95,7 +101,7 @@ EntryPoint:
     popa
     popf
     call genregs
-    
+
 ; dumping upper bits that are undefined and potentially different on pentium
 
     printline %string:0dh, 0ah, "upper bits (10 times):", 0dh, 0ah, 0
@@ -138,8 +144,6 @@ smswloop:
     call printf
     add esp, 4
 
-    call exechars
-
     push 0
 ;%IMPORTCALL kernel32.dll!ExitProcess
 _c
@@ -155,15 +159,17 @@ tls:
     call printversion
     call selectors
     call systemregs
-    
+
     printline %string:" * general registers at TLS", 0dh, 0ah, 0
     popf
     popa
     call genregs
 
+    call exechars
+
     retn
 
-    
+
 printversion:
     printline %string:" * OS Version", 0dh, 0ah, "|| Version || Platform || !ServicePack || Suite || Product ||", 0dh, 0ah, 0
 
@@ -193,13 +199,13 @@ printversion:
     add esp, 9 * 4
     retn
 
-    
+
 exechars:
     push IMAGEBASE
     push TLSSIZE
     push Image_Tls_Directory32 - IMAGEBASE
     push tls
-    push %string:"(Info: TLS callback RVA %08X, TLS DD RVA:%X Size: %X, !ImageBase: %08X)",0dh, 0ah, 0dh, 0ah, 0
+    push %string:"(Executable info: TLS callback RVA %08X, TLS DD RVA:%X Size: %X, !ImageBase: %08X)",0dh, 0ah, 0dh, 0ah, 0
     call printf
     add esp, 5 * 4
     retn
@@ -224,7 +230,7 @@ selectors:
     add esp, 7 * 4
     retn
 
-    
+
 systemregs:
     printline %string:" * system registers", 0dh, 0ah,"|| CR0 || LDT || GDT || IDT || Task Register ||", 0dh, 0ah, 0
 
@@ -278,7 +284,7 @@ _
     add esp, 7 * 4
     retn
 
-    
+
 genregs:
     pusha
     pushf
@@ -286,7 +292,7 @@ genregs:
     call printf
     add esp, 10*4
     retn
-    
+
 
 Image_Tls_Directory32:
     StartAddressOfRawData dd Characteristics
