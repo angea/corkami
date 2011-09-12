@@ -19,6 +19,7 @@
 ; compress strings ?
 ; imports: last dir outside memory ?
 ; undocumented FPU ?
+; jump with branch hints ?
 
 ;enable this define to make the executable easier to debug
 ;%define EASY_DEBUG
@@ -1996,7 +1997,7 @@ _
     expect dword [counter], 1
 _
     ; fe f0 is incorrectly analysed after exception occurance by windows as an invalid lock prefix (fe c0 = inc al)
-    setmsg_ %string:"ERROR: invalid 'fake' LOCK - no exception", 0dh, 0ah, 0
+    setmsg_ %string:"ERROR: invalid 'fake' LOCK - no exception (XP BUG)", 0dh, 0ah, 0
     mov dword [counter], 0
     print_ %string:"Testing: INVALID LOCK SEQUENCE via incorrect opcode", 0dh, 0
     mov dword [currentskip], 2
