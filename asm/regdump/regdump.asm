@@ -1,8 +1,8 @@
 ; small registers dumper
-; todo: 
-; * DLL tls and EP
+; todo:
+; * fix DLL loading under XP
 ; * driver
-; * smsw/sldt/mov32 smarter
+; * smarter smsw/sldt/mov32
 
 ; Ange Albertini, BSD licence 2011
 
@@ -41,7 +41,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.FileAlignment            , dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion    , dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage              , dd SIZEOFIMAGE
-    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders            , dd SIZEOFHEADERS  ; can be 0 in some circumstances
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders            , dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem                , dw SUBSYSTEM
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes      , dd NUMBEROFRVAANDSIZES
 iend
@@ -63,7 +63,7 @@ SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-;    at IMAGE_SECTION_HEADER.VirtualSize, dd SECTION0SIZE
+    at IMAGE_SECTION_HEADER.VirtualSize, dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.VirtualAddress, dd Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData, dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
@@ -84,65 +84,17 @@ Section0Start:
     add esp, 4
 %endmacro
 
-print_upperbits:
-    shr eax, 16
-    movzx eax, ax
-    push eax
-    push %string:"%04X ", 0
-    call printf
-    add esp, 2 * 4
-    retn
-
 EntryPoint:
     pushf
     pusha
     mov byte [tls], 0c3h
-    printline %string:" * general registers at !EntryPoint", 0dh, 0ah, 0
+    printline %string:"|| !EntryPoint || ", 0
     popa
     popf
     call genregs
 
-; dumping upper bits that are undefined and potentially different on pentium
-
-    printline %string:0dh, 0ah, "upper bits (10 times):", 0dh, 0ah, 0
-    printline %string:"Mov r32, sel", 0dh, 0ah,"   ", 0
-
-    mov ecx, 10
-movselloop:
-    push ecx
-    mov eax, ds
-
-    call print_upperbits
-    pop ecx
-    loop movselloop
-
-    push %string:0dh, 0ah, "sldt", 0dh, 0ah,"   ", 0
-    call printf
-    add esp, 4
-
-    mov ecx, 10
-sldtloop:
-    push ecx
-    sldt eax
-    call print_upperbits
-    pop ecx
-    loop sldtloop
-
-    push %string:0dh, 0ah, "smsw", 0dh, 0ah,"   ", 0
-    call printf
-    add esp, 4
-
-    mov ecx, 10
-smswloop:
-    push ecx
-    smsw eax
-    call print_upperbits
-    pop ecx
-    loop smswloop
-
-    push %string:0dh, 0ah, 0
-    call printf
-    add esp, 4
+    push %string:"regdumplib.dll",0
+;%IMPORTCALL kernel32.dll!LoadLibraryA
 
     push 0
 ;%IMPORTCALL kernel32.dll!ExitProcess
@@ -151,30 +103,33 @@ _c
 ;%IMPORT msvcrt.dll!printf
 _c
 
+
+
 tls:
     pusha
     pushf
-    printline %string:"Register dumper 0.3 - Ange Albertini - BSD Licence 2011", 0dh, 0ah, 0dh, 0ah, 0
+    printline %string:"Register dumper 0.3 - Ange Albertini - BSD Licence 2011", 0ah, 0
+    call exechars
 
     call printversion
     call selectors
     call systemregs
 
-    printline %string:" * general registers at TLS", 0dh, 0ah, 0
+    printline %string:" * general registers", 0ah, 0
+    printline %string:"|| *execution point* || || Flags || EDI || ES || EBP || ESP || EBX || EDX || ECX || EAX ||", 0ah, "||||||||||||||||||||||||", 0ah, 0
+    printline %string:"|| TLS || ", 0
     popf
     popa
     call genregs
 
-    call exechars
-
     retn
-
+_c
 
 printversion:
-    printline %string:" * OS Version", 0dh, 0ah, "|| Version || Platform || !ServicePack || Suite || Product ||", 0dh, 0ah, 0
+    printline %string:" * OS Version", 0ah, "|| Version || Platform || !ServicePack || Suite || Product ||", 0ah, 0
 
     push OSVerEx
-    ;%IMPORTCALL kernel32!GetVersionExA
+;%IMPORTCALL kernel32!GetVersionExA
 
     movzx eax, byte [OSVerEx.wProductType]
     push eax
@@ -194,25 +149,24 @@ printversion:
     push dword [OSVerEx.dwMinorVersion]
     push dword [OSVerEx.dwMajorVersion]
 
-    push %string:"|| %i.%i.%i || %i || %i.%i || %04X || %i ||", 0dh, 0ah, 0dh, 0ah, 0
+    push %string:"|| %i.%i.%i || %i || %i.%i || %04X || %i ||", 0ah, 0ah, 0
     call printf
     add esp, 9 * 4
     retn
-
+_c
 
 exechars:
     push IMAGEBASE
     push TLSSIZE
     push Image_Tls_Directory32 - IMAGEBASE
     push tls
-    push %string:"(Executable info: TLS callback RVA %08X, TLS DD RVA:%X Size: %X, !ImageBase: %08X)",0dh, 0ah, 0dh, 0ah, 0
+    push %string:"(Executable info: TLS callback RVA %08X, TLS DD RVA:%X Size: %X, !ImageBase: %08X)",0dh, 0ah, 0ah, 0
     call printf
     add esp, 5 * 4
     retn
-
+_c
 
 selectors:
-    ;push eax
     push gs
     mov word [esp + 2], 0
     push ss
@@ -225,16 +179,17 @@ selectors:
     mov word [esp + 2], 0
     push cs
     mov word [esp + 2], 0
-    push %string:" * selectors", 0dh, 0ah,"|| CS || DS || ES || FS || SS || GS ||", 0dh, 0ah,"|| %04X || %04X || %04X || %04X || %04X || %04X ||", 0dh, 0ah, 0dh, 0ah, 0
+    push %string:" * selectors", 0ah,"|| CS || DS || ES || FS || SS || GS ||", 0ah,"|| %X || %X || %X || %X || %X || %X ||", 0ah, 0ah, 0
     call printf
     add esp, 7 * 4
     retn
+_c
 
 
 systemregs:
-    printline %string:" * system registers", 0dh, 0ah,"|| CR0 || LDT || GDT || IDT || Task Register ||", 0dh, 0ah, 0
+    printline %string:" * system registers", 0ah,"|| CR0 || LDT || GDT || IDT || Task Register ||", 0ah, 0
 
-cr0_check:
+;cr0_check
     smsw eax
     push eax
 
@@ -259,11 +214,9 @@ same_cr0:
     jmp cr0_end
 
 cr0_end:
-    ;retn
 _
     sidt [_sidt]
     sgdt [_sgdt]
-    sldt [_sldt]
 
     str eax
     push eax
@@ -279,20 +232,20 @@ _
     sldt eax
     push eax
 
-    push %string:"|| %08X || %04X%08X || %04X%08X || %08X ||", 0dh, 0ah, 0dh, 0ah, 0
+    push %string:"|| %08X || %04X%08X || %04X%08X || %08X ||", 0ah, 0ah, 0
     call printf
     add esp, 7 * 4
     retn
-
+_c
 
 genregs:
     pusha
     pushf
-    push %string:"|| Flags || EDI || ESI || EBP || ESP || EBX || EDX || ECX || EAX ||", 0dh, 0ah, "|| %04X || %08X || %08X || %08X || %08X || %08X || %08X || %08X || %08X ||", 0dh, 0ah, 0dh, 0ah, 0
+    push %string:"|| %04X || %08X || %08X || %08X || %08X || %08X || %08X || %08X || %08X ||", 0ah, 0
     call printf
     add esp, 10*4
     retn
-
+_c
 
 Image_Tls_Directory32:
     StartAddressOfRawData dd Characteristics
@@ -320,11 +273,64 @@ OSVerEx:
   .wProductType db 0
   .wReserved db 0
 OSVerExSize equ $ - OSVerEx
-
 _d
+
+;; dumping upper bits that are undefined and potentially different on pentium
+
+;print_upperbits:
+;    shr eax, 16
+;    movzx eax, ax
+;    push eax
+;    push %string:"%04X ", 0
+;    call printf
+;    add esp, 2 * 4
+;    retn
+
+
+;    printline %string:0dh, 0ah, "upper bits (10 times):", 0ah, 0
+;    printline %string:"Mov r32, sel", 0ah,"   ", 0
+;
+;    mov ecx, 10
+;movselloop:
+;    push ecx
+;    mov eax, ds
+;
+;    call print_upperbits
+;    pop ecx
+;    loop movselloop
+;
+;    push %string:0dh, 0ah, "sldt", 0ah,"   ", 0
+;    call printf
+;    add esp, 4
+;
+;    mov ecx, 10
+;sldtloop:
+;    push ecx
+;    sldt eax
+;    call print_upperbits
+;    pop ecx
+;    loop sldtloop
+;
+;    push %string:0dh, 0ah, "smsw", 0ah,"   ", 0
+;    call printf
+;    add esp, 4
+;
+;    mov ecx, 10
+;smswloop:
+;    push ecx
+;    smsw eax
+;    call print_upperbits
+;    pop ecx
+;    loop smswloop
+;
+;    push %string:0dh, 0ah, 0
+;    call printf
+;    add esp, 4
+;
 
 ;%IMPORTS
 ;%strings
+
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
 SUBSYSTEM equ 3
