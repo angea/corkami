@@ -1,0 +1,2 @@
+pefile is a Python module to read and work with PE (Portable Executable) files
+http://code.google.com/p/pefile/
