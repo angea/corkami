@@ -116,7 +116,7 @@ tls:
     call systemregs
 
     printline %string:" * general registers", 0ah, 0
-    printline %string:"|| *execution point* || || Flags || EDI || ES || EBP || ESP || EBX || EDX || ECX || EAX ||", 0ah, "||||||||||||||||||||||||", 0ah, 0
+    printline %string:"|| *execution point* || || Flags || || EDI || ESI || EBP || ESP || EBX || EDX || ECX || EAX ||", 0ah, "||||||||||||||||||||||||||", 0ah, 0
     printline %string:"|| TLS || ", 0
     popf
     popa
@@ -160,7 +160,7 @@ exechars:
     push TLSSIZE
     push Image_Tls_Directory32 - IMAGEBASE
     push tls
-    push %string:"(Executable info: TLS callback RVA %08X, TLS DD RVA:%X Size: %X, !ImageBase: %08X)",0dh, 0ah, 0ah, 0
+    push %string:"(Executable info: TLS callback RVA %08X, TLS DD RVA:%X Size: %X, !ImageBase: %08X)", 0ah, 0
     call printf
     add esp, 5 * 4
     retn
@@ -241,7 +241,7 @@ _c
 genregs:
     pusha
     pushf
-    push %string:"|| %04X || %08X || %08X || %08X || %08X || %08X || %08X || %08X || %08X ||", 0ah, 0
+    push %string:"|| %04X || || %08X || %08X || %08X || %08X || %08X || %08X || %08X || %08X ||", 0ah, 0
     call printf
     add esp, 10*4
     retn

@@ -116,7 +116,7 @@ genregs:
     pusha
     pushf
 ;%reloc 1
-    push %string:"|| %04X || %08X || %08X || %08X || %08X || %08X || %08X || %08X || %08X ||", 0ah, 0
+    push %string:"|| %04X || || %08X || %08X || %08X || %08X || %08X || %08X || %08X || %08X ||", 0ah, 0
     call printf
     add esp, 10*4
     retn
