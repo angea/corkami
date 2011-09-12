@@ -1,10 +1,10 @@
-This is a small register dumper, that dumps initial values of all registers on specific points:
+This is a small registers dumper, that dumps initial values of all general registers on specific points:
  * TLS
  * EntryPoint
  * DLL TLS (not working under XP for unknown reason)
  * DLL EntryPoint
 
-and also special registers values, such as: 
+and also special registers' values, such as: 
  * selectors
  * l/g/idt
  * Task register
