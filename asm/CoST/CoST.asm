@@ -26,7 +26,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-%include 'consts.inc'
+%include '..\consts.inc'
 FILEALIGN equ 1
 SECTIONALIGN equ FILEALIGN
 
