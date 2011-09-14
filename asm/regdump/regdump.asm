@@ -108,7 +108,7 @@ _c
 tls:
     pusha
     pushf
-    printline %string:"Register dumper 0.3 - Ange Albertini - BSD Licence 2011", 0ah, 0
+    printline %string:"Register dumper 0.4b - Ange Albertini - BSD Licence 2011", 0ah, 0
     call exechars
 
     call printversion
@@ -129,7 +129,7 @@ printversion:
     printline %string:" * OS Version", 0ah, "|| Version || Platform || !ServicePack || Suite || Product ||", 0ah, 0
 
     push OSVerEx
-;%IMPORTCALL kernel32!GetVersionExA
+;%IMPORTCALL kernel32.dll!GetVersionExA
 
     movzx eax, byte [OSVerEx.wProductType]
     push eax
