@@ -122,7 +122,7 @@
            style="font-size:9px;font-style:oblique;-inkscape-font-specification:Sans Oblique"
            y="70.212769"
            x="37.60545"
-           sodipodi:role="line">RCE enthusiast</tspan><tspan
+           sodipodi:role="line">RCE enthusiast since dos 3.21</tspan><tspan
            style="font-size:9px;font-style:oblique;-inkscape-font-specification:Sans Oblique"
            y="81.462769"
            x="37.60545"
@@ -137,7 +137,7 @@
            id="tspan2991"
            y="114.36358"
            x="37.60545"
-           sodipodi:role="line">http://(www|code).corkami.com</tspan><tspan
+           sodipodi:role="line">http://www.corkami.com</tspan><tspan
            id="tspan3830"
            style="font-size:14px"
            y="131.86359"
@@ -157,12 +157,12 @@
            style="font-size:8px"
            y="164.35014"
            x="37.60545"
-           sodipodi:role="line">sources, infographics, tutorials,...</tspan><tspan
+           sodipodi:role="line">sources, docs, tutorials,...</tspan><tspan
            style="font-size:8px"
            y="174.35014"
            x="37.60545"
            sodipodi:role="line"
-           id="tspan3857">x86, Python,...</tspan><tspan
+           id="tspan3857">x86-x64, Python...</tspan><tspan
            style="font-size:8px"
            id="tspan2997"
            y="184.35014"
@@ -283,7 +283,7 @@
        sodipodi:linespacing="125%"
        transform="translate(0,-4.2302535e-5)"><tspan
          sodipodi:role="line"
-         id="tspan3814"></tspan></text>
+         id="tspan3814" /></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -293,6 +293,6 @@
        sodipodi:linespacing="125%"
        transform="translate(0,-4.2302535e-5)"><tspan
          sodipodi:role="line"
-         id="tspan3818"></tspan></text>
+         id="tspan3818" /></text>
   </g>
 </svg>
