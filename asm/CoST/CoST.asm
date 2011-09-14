@@ -2444,8 +2444,9 @@ istruc IMAGE_OPTIONAL_HEADER32
 
                 at IMAGE_OPTIONAL_HEADER32.MinorSubsystemVersion,         dw 0%RAND16h
 
-    ;this one not null will break the SMSW/GS trick :(
-    at IMAGE_OPTIONAL_HEADER32.Win32VersionValue,             dd 0%RAND16h; 0 + (4 << 8)+ (0 << 16)+ (0 << 30)
+    ;this one not null will break the version identification, which will run wrongly the SMSW/GS trick under W7 :(
+    ; => to stay disabled until better win32versionvalue (EAX on startup ?)
+    at IMAGE_OPTIONAL_HEADER32.Win32VersionValue,             dd 0; 0 + (4 << 8)+ (0 << 16)+ (0 << 30)
 
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd SIZEOFIMAGE
 
