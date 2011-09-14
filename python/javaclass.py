@@ -236,14 +236,14 @@ opcodes = [
 ("if" + "lt", 153 + 2), # Branch if /int/ comparison with zero succeeds
 ("if" + "ge", 153 + 3), # Branch if /int/ comparison with zero succeeds
 ("if" + "gt", 153 + 4), # Branch if /int/ comparison with zero succeeds
-("if" + "ge", 153 + 5), # Branch if /int/ comparison with zero succeeds
+("if" + "le", 153 + 5), # Branch if /int/ comparison with zero succeeds
 
 ("if_imp" + "eq", 159 + 0), # Branch if /int/ comparison succeeds
 ("if_imp" + "ne", 159 + 1), # Branch if /int/ comparison succeeds
 ("if_imp" + "lt", 159 + 2), # Branch if /int/ comparison succeeds
 ("if_imp" + "ge", 159 + 3), # Branch if /int/ comparison succeeds
 ("if_imp" + "gt", 159 + 4), # Branch if /int/ comparison succeeds
-("if_imp" + "ge", 159 + 5), # Branch if /int/ comparison succeeds
+("if_imp" + "le", 159 + 5), # Branch if /int/ comparison succeeds
 
 ("if_acmp" + "eq", 165 + 0), # Branch if /reference/ comparison succeeds
 ("if_acmp" + "ne", 165 + 1), # Branch if /reference/ comparison succeeds
@@ -267,7 +267,7 @@ opcodes = [
 ("ior", 128), # boolean OR /int/
 ("lor", 129), # boolean OR /long/
 ("ixor", 130), # boolean XOR /int/
-("lor", 131), # boolean XOR /long/
+("lxor", 131), # boolean XOR /long/
 
 ("jsr", 168), # jump subroutine
 ("jsr_w", 201), # jump subroutine (wide index)
@@ -328,16 +328,56 @@ arguments = [
 
 OPCODES = dict([(i[1], i[0]) for i in opcodes] + opcodes)
 
-# t = []
-# for i in range(16):
-#     l = ["%02X" % (i * 16)]
-#     for j in range(16):
-#         opcode = i * 16 + j
-#         text = OPCODES[opcode] if opcode in OPCODES else ""
-#         l.append(text.rjust(15))
-#     t.append(" ".join(l))
-# with open("opcodes.txt", "wt") as f:
-#     f.write("\n".join(t))
+def print_opcodes_enum():
+	print "enum j_opcodes {"
+	for i in range(256):
+		if i in OPCODES:
+			print "\t j_%s = %i," % (OPCODES[i], i)
+	print "};"
+
+def opcodes_table():
+	s = ["const char *opcode_table[] = {"]
+	s.append("\n")
+	for i in range(256):
+		s.append("\t%s," % (('"%s"' % OPCODES[i]) if i in OPCODES else "0"))
+		if (i % 8) == 7:
+			s.append("\n")
+	s.append("};")
+	return s
+	
+#print "".join(opcodes_table())
+#sys.exit()
+def pprint_mat(l):
+	"""matrix pretty printer, with auto-calculation of row size"""
+	len_max = max(len(i) for i in l)
+	lengths = [0] * len_max
+	for row in l:
+		for i, el in enumerate(row):
+			lengths[i] = max(len(el), lengths[i])
+
+	m = []
+	for row in l:
+		s = []
+		for i, el in enumerate(row):
+			s.append(el.rjust(lengths[i]))
+		m.append(" ".join(s))
+	return m
+
+def print_opcodes_argtable():
+	NB_ROW = 16
+	NB_COL = 256 / NB_ROW
+	mat = []
+	for i in range(NB_ROW):
+		l = ["%X" % (i * NB_COL)]
+		for j in range(NB_COL):
+			opcode = i * NB_COL + j
+			text = "j_%s," % (OPCODES[opcode] if opcode in OPCODES else "UNDEF")
+			l.append(text)	
+		mat.append(l)		
+	return mat
+	
+#for i in pprint_mat(print_opcodes_argtable()):
+#	print i
 
 def get_flags(value, flags_mapping):
     flags = []
@@ -403,6 +443,7 @@ def get_attributes(f, attributes_count):
         attribute_name = constant_pool[attribute_name_index - 1][2]
 
         attribute_length = struct.unpack(">L", f.read(4))[0]
+        print "length", attribute_length
 
         if attribute_name == "Code":
             max_stack = struct.unpack(">H", f.read(2))[0]
@@ -499,7 +540,7 @@ for i in range(constant_pool_count - 1):
 access_flags = struct.unpack(">H", f.read(2))[0]
 this_class = struct.unpack(">H", f.read(2))[0]
 super_class = struct.unpack(">H", f.read(2))[0]
-
+print access_flags, this_class, super_class
 interfaces_count = struct.unpack(">H", f.read(2))[0]
 interfaces = []
 for i in range(interfaces_count):
@@ -521,12 +562,14 @@ for i in range(field_count):
 print "fields", fields
 
 methods_count = struct.unpack(">H", f.read(2))[0]
+print "methods", methods_count
 methods = []
 for i in range(methods_count):
     access_flags = struct.unpack(">H", f.read(2))[0]
     name_index = struct.unpack(">H", f.read(2))[0]
     descriptor_index = struct.unpack(">H", f.read(2))[0]
     attributes_count = struct.unpack(">H", f.read(2))[0]
+    print access_flags, name_index, descriptor_index, attributes_count
     attributes = get_attributes(f, attributes_count)
     methods.append([access_flags, name_index, descriptor_index, attributes])
 
