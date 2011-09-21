@@ -1,12 +1,15 @@
-; simple TLS PE
-; displays twice under XP, once under W7
+; PE with 96 sections (95 empty sections)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include '..\consts.inc'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
+EXTRA equ 95
+VEXTRA equ 1000h ;+ 1000h to compensate with sizeofheaders
+
 IMAGEBASE equ 400000h
+
 org IMAGEBASE
 bits 32
 
@@ -46,7 +49,6 @@ iend
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd VDELTA + Import_Descriptor - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd VDELTA + Image_Tls_Directory32 - IMAGEBASE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -58,6 +60,16 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
 iend
+
+%assign i 1
+%rep    EXTRA
+istruc IMAGE_SECTION_HEADER
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd Section0Size
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE + i * SECTIONALIGN
+iend
+%assign i i+1
+%endrep
+
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 ALIGN FILEALIGN, db 0
@@ -65,29 +77,22 @@ ALIGN FILEALIGN, db 0
 SIZEOFHEADERS equ $ - IMAGEBASE
 
 Section0Start:
-VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
+VDELTA equ VEXTRA + SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
+    push VDELTA + helloworld
+    call printf
+    add esp, 1 * 4
     push 0
     call ExitProcess
 _c
-
+printf:
+    jmp [VDELTA + __imp__printf]
 ExitProcess:
     jmp [VDELTA + __imp__ExitProcess]
 _c
 
-tls:
-    push VDELTA + helloworld
-    call printf
-    add esp, 1 * 4
-    retn
-_c
-
-printf:
-    jmp [VDELTA + __imp__printf]
-_c
-
-helloworld db "simple TLS CallBack", 0ah, 0
+helloworld db "96 sections (95 are empty)", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -102,7 +107,7 @@ msvcrt.dll_DESCRIPTOR:
     dd VDELTA + msvcrt.dll - IMAGEBASE
     dd VDELTA + msvcrt.dll_iat - IMAGEBASE
 ;terminator
-    dd 0, 0, 0, 0, 0
+    times 5 dd 0
 _d
 
 kernel32.dll_hintnames:
@@ -136,23 +141,8 @@ kernel32.dll  DB 'kernel32.dll', 0
 msvcrt.dll  DB 'msvcrt.dll', 0
 _d
 
-Image_Tls_Directory32:
-    StartAddressOfRawData dd VDELTA + some_values
-    EndAddressOfRawData   dd VDELTA + some_values + 4
-    AddressOfIndex        dd VDELTA + some_values + 8
-    AddressOfCallBacks    dd VDELTA + CallBacks
-    SizeOfZeroFill        dd VDELTA + some_values + 0ch
-    Characteristics       dd 0
-_d
-
-some_values dd 0, 0, 0, 0
-CallBacks:
-    dd VDELTA + tls
-    dd 0
-_d
-
 align FILEALIGN, db 0
 
 Section0Size EQU $ - Section0Start
 
-SIZEOFIMAGE EQU $ - IMAGEBASE
+SIZEOFIMAGE EQU $ - IMAGEBASE + SECTIONALIGN * EXTRA
