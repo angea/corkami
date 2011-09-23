@@ -23,7 +23,7 @@ iend
 
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
-    at IMAGE_FILE_HEADER.NumberOfSections,      dw 85 ; 85 sections if virtual section table, 96 otherwise
+    at IMAGE_FILE_HEADER.NumberOfSections,      dw 96
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
     at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
 iend
@@ -37,7 +37,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 77000000h ; filesize <= SizeofImage <= 77000000h
-    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 2ch ;02ch <= SIZEOFHEADERS < SIZEOFIMAGE 
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 2ch ; 2ch <= SIZEOFHEADERS < SIZEOFIMAGE
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
@@ -48,6 +48,36 @@ istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.IATVA,     dd ImportsAddressTable - IMAGEBASE ; required under XP if no section
     at IMAGE_DATA_DIRECTORY_16.IATSize,   dd IMPORTSADDRESSTABLESIZE
 iend
+
+SIZEOFOPTIONALHEADER equ $ - OptionalHeader
+; 0 <= VirtualSize <= SizeOfRawData <= 077777777h (on 1st section only ?)
+; 0 <= VirtualAddress == PointerToRawData <= 88888888h (on 1st section only ?)
+; Flags are totally ignored
+istruc IMAGE_SECTION_HEADER
+times 8 db '*'
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 0 
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 88888888h
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 77777777h 
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 88888888h 
+times 12 db '*'
+    at IMAGE_SECTION_HEADER.Characteristics,  dd 0
+iend
+%assign i 1
+%rep 95
+istruc IMAGE_SECTION_HEADER
+dd (i * 923456e7h)^ 0fabc4567h
+dd (i * 0a9123456h)^ 0bc4567h
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd (i * 1234f567h)^ 0fabc4567h
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd (i * 123456h)^ 0bc4567h
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd ((i * 1234f567h) ^ 0fabc4567h ) + i
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd (i * 123456h)^ 0bc4567h
+dd (i * 092384567h)^ 0fabc4567h
+dd (i * 086206856h)^ 0bc64a567h
+dd (i * 0a85b69e6h)^ 0bc45235h
+    at IMAGE_SECTION_HEADER.Characteristics,  dd (i * 0d459d9e6h)^ 0bc45235h
+iend
+%assign i i+1
+%endrep
 
 EntryPoint:
     push helloworld
@@ -104,22 +134,4 @@ IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 _d
 
 kernel32.dll  DB 'kernel32.dll', 0
-msvcrt.dll  DB 'msvcrt.dll', 0
-
-SIZEOFOPTIONALHEADER equ $ - OptionalHeader
-; 0 <= VirtualSize <= SizeOfRawData <= 077777777h
-; 0 <= VirtualAddress == PointerToRawData <= 88888888h
-; Flags are totally ignored
-%rep 1
-istruc IMAGE_SECTION_HEADER
-times 8 db '*'
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 0          
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 88888888h   
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 77777777h
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 88888888h
-;times 12 db '*'
-    at IMAGE_SECTION_HEADER.Characteristics,  dd 0
-iend
-%endrep
-
-;times 95*28h db 0
+msvcrt.dll  DB 'msvcrt.dll' ;, 0

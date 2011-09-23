@@ -1,4 +1,4 @@
-; Low Alignment PE for XP, with 85 sections, with the section table outside the file
+; Low Alignment PE for XP, with 85 sections, with the section table outside the file.
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -37,7 +37,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 77000000h ; filesize <= SizeofImage <= 77000000h
-    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 2ch ;02ch <= SIZEOFHEADERS < SIZEOFIMAGE 
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 2ch ; 2ch <= SIZEOFHEADERS < SIZEOFIMAGE
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend

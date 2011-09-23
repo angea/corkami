@@ -35,7 +35,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 77000000h ; filesize <=SizeofImage <= 77000000h
-    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 77000000h - 1 ;02ch <= SIZEOFHEADERS < SIZEOFIMAGE 
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 77000000h - 1 ; 2ch <= SIZEOFHEADERS < SIZEOFIMAGE
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
