@@ -65,16 +65,16 @@ iend
 %assign i 1
 %rep 95
 istruc IMAGE_SECTION_HEADER
-dd (i * 923456e7h)^ 0fabc4567h
-dd (i * 0a9123456h)^ 0bc4567h
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd (i * 1234f567h)^ 0fabc4567h
+dd ((i * 923456e7h)^ 0fabc4567h) & 0ffffffffh
+dd ((i * 0a9123456h)^ 0bc4567h) & 0ffffffffh
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd ((i * 1234f567h) ^ 0fabc4567h) & 0ffffffffh
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd (i * 123456h)^ 0bc4567h
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd ((i * 1234f567h) ^ 0fabc4567h ) + i
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd (((i * 1234f567h) ^ 0fabc4567h ) + i) & 0ffffffffh
     at IMAGE_SECTION_HEADER.PointerToRawData, dd (i * 123456h)^ 0bc4567h
-dd (i * 092384567h)^ 0fabc4567h
-dd (i * 086206856h)^ 0bc64a567h
-dd (i * 0a85b69e6h)^ 0bc45235h
-    at IMAGE_SECTION_HEADER.Characteristics,  dd (i * 0d459d9e6h)^ 0bc45235h
+dd ((i * 092384567h)^ 0fabc4567h) & 0ffffffffh
+dd ((i * 086206856h)^ 0bc64a567h) & 0ffffffffh
+dd ((i * 0a85b69e6h)^ 0bc45235h ) & 0ffffffffh
+    at IMAGE_SECTION_HEADER.Characteristics,  dd ((i * 0d459d9e6h)^ 0bc45235h) & 0ffffffffh
 iend
 %assign i i+1
 %endrep
