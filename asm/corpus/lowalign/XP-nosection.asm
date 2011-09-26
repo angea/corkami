@@ -57,7 +57,7 @@ EntryPoint:
     call [__imp__ExitProcess]
 _c
 
-helloworld db " * Low Alignment PE with no section (XP)", 0ah, 0
+helloworld db " * Low alignment PE with no section (XP)", 0ah, 0
 _d
 
 Import_Descriptor:
