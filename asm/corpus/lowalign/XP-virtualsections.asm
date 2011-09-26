@@ -23,7 +23,7 @@ iend
 
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
-    at IMAGE_FILE_HEADER.NumberOfSections,      dw 85 ; 0 <= NumberOfSections <= 85
+    at IMAGE_FILE_HEADER.NumberOfSections,      dw 82 ; 0 <= NumberOfSections <= 82 (varies with SizeOfOptionalHeader)
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
     at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
 iend
@@ -57,7 +57,7 @@ EntryPoint:
     call [__imp__ExitProcess]
 _c
 
-helloworld db "Low Alignment - 85 virtual sections PE (XP)", 0ah, 0
+helloworld db " * Low alignment PE with a virtual section table (XP)", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -106,5 +106,5 @@ _d
 kernel32.dll  DB 'kernel32.dll', 0
 msvcrt.dll  DB 'msvcrt.dll', 0
 
-SIZEOFOPTIONALHEADER equ $ - OptionalHeader
+SIZEOFOPTIONALHEADER equ 10h + $ - IMAGEBASE ; bigger than the file itself !
 ; section table starts here...
