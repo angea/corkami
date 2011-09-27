@@ -1,11 +1,11 @@
-; Low Alignment PE for Vista-W7, with ?? sections.
-
+; Low Alignment PE for Vista-W7, with many sections.
+EXTRAS equ 6665
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include '..\..\consts.inc'
 
-IMAGEBASE equ 400000h
+IMAGEBASE equ 10000h
 org IMAGEBASE
 bits 32
 
@@ -21,11 +21,11 @@ NT_Signature:
 istruc IMAGE_NT_HEADERS
     at IMAGE_NT_HEADERS.Signature, db 'PE', 0, 0
 iend
-; if vista+
+
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
-    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER ; should be 0 under Vista? 
+    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER ; should be 0 under Vista?
     at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
 iend
 
@@ -38,7 +38,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd SIZEOFIMAGE
-    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS ; not needed ?in paged layout (XP, W7)
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFIMAGE - 1; 0 <= SIZEOFHEADERS < SIZEOFIMAGE
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
@@ -46,60 +46,53 @@ iend
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA, dd Import_Descriptor - IMAGEBASE
-;    at IMAGE_DATA_DIRECTORY_16.ImportsSize, dd IMPORTSADDRESSTABLESIZE
-;    at IMAGE_DATA_DIRECTORY_16.IATVA,     dd ImportsAddressTable - IMAGEBASE ; required under XP if no section
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
-; 0 <= VirtualSize <= SizeOfRawData <= 077777777h
-; 0 <= VirtualAddress == PointerToRawData <= 88888888h
-; IMAGE_SCN_MEM_WRITE flag is required for imports
-
-%rep 1
-istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTION0SIZE
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd SECTION0SIZE
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_WRITE
-iend
-%endrep
-%rep 0
+; 0 <= VirtualSize <= SizeOfRawData <= actual file limit
 istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 0
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 0
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1000h
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics,  dd 0
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_WRITE ; required for imports
 iend
-%endrep
-NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
-align 1000h ; required Vista+
+%assign i 1
+%rep EXTRAS
+istruc IMAGE_SECTION_HEADER
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 0
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd i * 1000h + Section0Start - IMAGEBASE
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1000h
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE + i * 1000h
+iend
+%assign i i + 1
+%endrep
+
+NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 Section0Start:
 
 EntryPoint:
+    push EXTRAS + 1
     push helloworld
     call [__imp__printf]
-    add esp, 1 * 4
+    add esp, 2 * 4
     push 0
     call [__imp__ExitProcess]
 _c
 
-helloworld db "section-less", 0ah, 0
+helloworld db " * Low alignment PE with %d sections (W7)", 0ah, 0
 _d
 
-ImportsAddressTable:
-
 Import_Descriptor:
-kernel32.dll_DESCRIPTOR:
+;kernel32.dll_DESCRIPTOR:
     dd kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd kernel32.dll - IMAGEBASE
     dd kernel32.dll_iat - IMAGEBASE
-msvcrt.dll_DESCRIPTOR:
+;msvcrt.dll_DESCRIPTOR:
     dd msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd msvcrt.dll - IMAGEBASE
@@ -123,6 +116,8 @@ hnprintf:
     dw 0
     db 'printf', 0
 _d
+
+ImportsAddressTable:
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd hnExitProcess - IMAGEBASE
@@ -131,14 +126,15 @@ msvcrt.dll_iat:
 __imp__printf:
     dd hnprintf - IMAGEBASE
     dd 0
-IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 _d
 
-kernel32.dll  DB 'kernel32.dll', 0
-msvcrt.dll  DB 'msvcrt.dll', 0
-_d
+kernel32.dll db 'kernel32.dll', 0
+msvcrt.dll db 'msvcrt.dll', 0
 
-SECTION0SIZE EQU $ - Section0Start
+times 0ef9h - 1 db 0 ; align 1000h, db 0 ; required
 
-SIZEOFIMAGE EQU $ - IMAGEBASE 
-SIZEOFHEADERS equ SIZEOFIMAGE - 1
+%rep EXTRAS
+times 1000h db 0
+%endrep
+
+SIZEOFIMAGE EQU $ - IMAGEBASE
