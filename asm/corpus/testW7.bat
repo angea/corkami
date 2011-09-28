@@ -2,6 +2,6 @@
 @echo Low alignments:
 @tinyW7.exe
 @tinyW7x64.exe
-@W7.exe
-@W7-nosection.exe
-@8Kworkingsections.exe
+@maxsec_lowaligW7.exe
+@nosectionW7.exe
+@maxsecW7.exe
