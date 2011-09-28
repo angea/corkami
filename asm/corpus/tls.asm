@@ -87,7 +87,7 @@ printf:
     jmp [VDELTA + __imp__printf]
 _c
 
-helloworld db "simple TLS CallBack", 0ah, 0
+helloworld db " * PE with simple TLS", 0ah, 0
 _d
 
 Import_Descriptor:

@@ -2,7 +2,7 @@
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include '..\..\consts.inc'
+%include 'consts.inc'
 
 IMAGEBASE equ 400000h
 org IMAGEBASE

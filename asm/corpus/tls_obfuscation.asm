@@ -80,7 +80,7 @@ _c
 tls:
     mov dword [VDELTA + CallBacks + 4], 0
 tls2:
-    push VDELTA + helloworld
+    push VDELTA + message
 tls3:
     call printf
     add esp, 1 * 4
@@ -92,7 +92,7 @@ tls6:
     jmp [VDELTA + __imp__printf]
 _c
 
-helloworld db "TLS obfuscation", 0ah, 0
+message db " * PE with fake TLS for obfuscation", 0ah, 0
 _d
 
 Import_Descriptor:

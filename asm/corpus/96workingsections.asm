@@ -101,7 +101,7 @@ ExitProcess:
     jmp [VDELTA + __imp__ExitProcess]
 _c
 
-helloworld db "96 working sections (XP maximum)", 0ah, 0
+helloworld db " * a PE with 96 used code sections", 0ah, 0
 _d
 
 Import_Descriptor:

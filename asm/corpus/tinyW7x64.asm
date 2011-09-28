@@ -4,7 +4,7 @@
 
 ;Ange Albertini, BSD Licence, 2010-2011
 
-%include '..\..\consts.inc'
+%include 'consts.inc'
 
 IMAGEBASE equ 400000h
 
@@ -73,4 +73,4 @@ msvcrt.dll_hintnames:
 msvcrt.dll  db 'msvcrt.dll'
 
 ;filling up to 268 bytes for W7 x64, irritating... :(
-times 14 db 0
+times 11 db 0

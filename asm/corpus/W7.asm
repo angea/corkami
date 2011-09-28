@@ -3,7 +3,7 @@ EXTRAS equ 6665
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include '..\..\consts.inc'
+%include 'consts.inc'
 
 IMAGEBASE equ 10000h
 org IMAGEBASE
