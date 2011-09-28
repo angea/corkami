@@ -1,8 +1,6 @@
-; a 252-byte PE (as small as possible), W7 Compatible
+; a 268-byte PE (as small as possible), W7 x64 Compatible
 
-; technically, it's like the 97 bytes XP tiny PE, except that we need to fill with zeroes up to 252...
-; so we can fit code, imports and data
-; otherwise it could be just importless
+; same as the 252 bytes PE for W7, but the limit is 268 on W7 x64
 
 ;Ange Albertini, BSD Licence, 2010-2011
 
@@ -48,7 +46,7 @@ EntryPoint:
     add esp, 1 * 4
     retn
 
-helloworld db " * tiny 252 bytes PE (W7)", 0ah, 0
+helloworld db " * tiny 268 bytes PE (W7 x64)", 0ah, 0
 
 Import_Descriptor:
 ;msvcrt.dll_DESCRIPTOR
@@ -72,7 +70,7 @@ msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
     dd 0
 
-msvcrt.dll  db 'msvcrt'
+msvcrt.dll  db 'msvcrt.dll'
 
-;filling up to 252 bytes for W7, irritating... :(
-times 3 db 0
+;filling up to 268 bytes for W7 x64, irritating... :(
+times 14 db 0
