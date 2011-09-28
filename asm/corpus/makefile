@@ -1,19 +1,16 @@
-all: tls.exe tls_obfuscation.exe 96emptysections.exe 96workingsections.exe 8Kworkingsections.exe
+all: XP w7 common
 
-clean:
-	del tls.exe
-    
-test:
-	@tls.exe && tls_obfuscation.exe && 96emptysections.exe && 96workingsections.exe && 8Kworkingsections.exe
+common: tls.exe tls_obfuscation.exe 96emptysections.exe 96workingsections.exe 
 
-tls.exe: tls.asm ..\consts.inc
-	yasm -o tls.exe tls.asm
-tls_obfuscation.exe: tls_obfuscation.asm ..\consts.inc
-	yasm -o tls_obfuscation.exe tls_obfuscation.asm
+XP: tinyXP.exe XP.exe XP-appendeddata.exe XP-nosection.exe XP-nullOH.exe XP-virtualsections.exe 
 
-96emptysections.exe: 96emptysections.asm ..\consts.inc
-	yasm -o 96emptysections.exe 96emptysections.asm
-96workingsections.exe: 96workingsections.asm ..\consts.inc
-	yasm -o 96workingsections.exe 96workingsections.asm
-8Kworkingsections.exe: 8Kworkingsections.asm ..\consts.inc
-	yasm -o 8Kworkingsections.exe 8Kworkingsections.asm
+W7: tinyW7.exe tinyW7x64.exe W7.exe W7-nosection.exe 8Kworkingsections.exe
+
+%.exe: %.asm
+	yasm -o $@ $<
+
+%.dll: %.asm
+	yasm -o $@ $<
+
+testxp: 
+	$(XP)
