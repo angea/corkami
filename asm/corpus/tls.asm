@@ -68,16 +68,16 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
+    mov dword [VDELTA + TLSMsg], VDELTA + TLSEnd
+    push VDELTA + Exitproc
+    call printf
+    add esp, 1 * 4
     push 0
-    call ExitProcess
-_c
-
-ExitProcess:
-    jmp [VDELTA + __imp__ExitProcess]
+    call [VDELTA + __imp__ExitProcess]
 _c
 
 tls:
-    push VDELTA + helloworld
+    push dword [VDELTA + TLSMsg]
     call printf
     add esp, 1 * 4
     retn
@@ -87,7 +87,11 @@ printf:
     jmp [VDELTA + __imp__printf]
 _c
 
-helloworld db " * PE with simple TLS", 0ah, 0
+TLSMsg dd VDELTA + TLSstart
+TLSstart db " * PE with simple TLS: 1st TLS call", 0
+TLSEnd db " - 2nd TLS call", 0ah, 0
+Exitproc db " - EntryPoint executed - ExitProcess called",  0
+
 _d
 
 Import_Descriptor:

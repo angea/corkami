@@ -67,32 +67,20 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-tls4:
-    push 0
-tls5:
-    call ExitProcess
-_c
-
-ExitProcess:
-    jmp [VDELTA + __imp__ExitProcess]
-_c
-
-tls:
-    mov dword [VDELTA + CallBacks + 4], 0
 tls2:
     push VDELTA + message
 tls3:
-    call printf
-    add esp, 1 * 4
-    retn
-_c
-
-printf:
+    call [VDELTA + __imp__printf]
 tls6:
-    jmp [VDELTA + __imp__printf]
+    add esp, 1 * 4
+tls4:
+    push 0
+tls5:
+    call [VDELTA + __imp__ExitProcess]
+tls:
 _c
 
-message db " * PE with fake TLS for obfuscation", 0ah, 0
+message db " * PE with fake TLS callbacks for obfuscation", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -153,12 +141,10 @@ _d
 some_values dd 0, 0, 0, 0
 CallBacks:
     dd VDELTA + tls
-    dd VDELTA + tls + 1
     dd VDELTA + tls2 + 1
     dd VDELTA + tls3 + 1
     dd VDELTA + tls4 + 1
     dd VDELTA + tls5 + 1
-    dd VDELTA + tls6 + 1
     dd 0
 _d
 
