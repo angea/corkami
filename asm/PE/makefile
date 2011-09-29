@@ -4,7 +4,7 @@ common: tls.exe tls_obfuscation.exe 96emptysections.exe 96workingsections.exe dl
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe 
 
-W7: tinyW7.exe tinyW7x64.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe
+W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe
 
 %.exe: %.asm
 	yasm -o $@ $<
