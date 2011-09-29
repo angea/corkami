@@ -6,3 +6,5 @@
 @tls_obfuscation.exe
 @echo Imports loading:
 @imports.exe
+@imports_noint.exe
+@imports_noext.exe

@@ -1,5 +1,8 @@
 ba824ec99ebbb0e7e881214d6c893deade7cf89f *96emptysections.exe
 d3053b1745a8e3997c77c7cfe075dc7243bb2ca6 *96workingsections.exe
+dd6430c90777e359efac2d0c6c5fa72351e5084b *imports.exe
+c190eee90c97d9ae9261914bbdc561a4c0ee94b0 *imports_noext.exe
+0d75eaab169a8038ce69ff89556dd9f74390cfc2 *imports_noint.exe
 8fb6e67ee0ce0264455f566dd6dfc09382332bcc *maxsec_lowaligW7.exe
 d8e4499216c621da090a133bf4b6769c240651d7 *maxsecW7.exe
 97fab3bffc7060300b0ecdac66233d31323064ee *maxsecXP.exe
