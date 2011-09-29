@@ -89,7 +89,7 @@ EntryPoint:
 ;    mov eax, ebx
 ;    jmp zeroes_
 ;end_:
-    push VDELTA + helloworld
+    push VDELTA + message
     call printf
     add esp, 1 * 4
     push 0
@@ -101,7 +101,7 @@ ExitProcess:
     jmp [VDELTA + __imp__ExitProcess]
 _c
 
-helloworld db " * a PE with 96 used code sections", 0ah, 0
+message db " * a PE with 96 used code sections", 0ah, 0
 _d
 
 Import_Descriptor:

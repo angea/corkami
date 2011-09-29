@@ -50,14 +50,14 @@ istruc IMAGE_DATA_DIRECTORY_16
 iend
 
 EntryPoint:
-    push helloworld
+    push message
     call [__imp__printf]
     add esp, 1 * 4
     push 0
     call [__imp__ExitProcess]
 _c
 
-helloworld db " * Low alignment PE with a virtual section table (XP)", 0ah, 0
+message db " * Low alignment PE with a virtual section table (XP)", 0ah, 0
 _d
 
 Import_Descriptor:

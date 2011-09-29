@@ -76,14 +76,14 @@ Section0Start:
 
 EntryPoint:
     push EXTRAS + 1
-    push helloworld
+    push message
     call [__imp__printf]
     add esp, 2 * 4
     push 0
     call [__imp__ExitProcess]
 _c
 
-helloworld db " * Low alignment PE with %d sections (W7)", 0ah, 0
+message db " * Low alignment PE with %d sections (W7)", 0ah, 0
 _d
 
 Import_Descriptor:

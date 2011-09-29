@@ -18,7 +18,7 @@ SECTRVA equ 51000h ; first sections RVA (= SECTOFF rounded up to SECTIONALIGN)
 VDELTA equ 0E00h; VIRTUAL DELTA between this sections offset and virtual addresses
 
 HEADERALIGN equ 0c8h
-FIRSTSECALIGN equ 011Bh
+FIRSTSECALIGN equ 010eh
 
 IMPORTSRVA equ 51022h
 
@@ -89,7 +89,7 @@ times HEADERALIGN db 0 ; align FILEALIGN, db 0
 ; Section0Start
 
 EntryPoint:
-    push VDELTA + helloworld
+    push VDELTA + message
     call printf
     add esp, 1 * 4
     push 0
@@ -150,7 +150,8 @@ dd 0
 
 ; DATA (after imports, for fewer manual adjustments)
 
-helloworld db "8192 working sections", 0ah, 0
+message db     " * PE with 8192 code sections (W7)", 0ah, 0
+
 times 0dh db 0
 
 times FIRSTSECALIGN db 0 ;align FILEALIGN, db 0

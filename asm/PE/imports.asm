@@ -77,7 +77,7 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-    push VDELTA + helloworld
+    push VDELTA + message
     call printf
     add esp, 1 * 4
 
@@ -127,7 +127,7 @@ printf:
     jmp [VDELTA + __imp__printf]
 _c
 
-helloworld db " * Imports loader", 0ah, 0
+message db " * Imports loader", 0ah, 0
 loading db ' * loading dll:', 0
 loadingnoextension db ' * loading DLL without extension:', 0
 loadingunicode db ' * loading dll via unicode:', 0

@@ -80,7 +80,7 @@ Section0Start:
 VDELTA equ VEXTRA + SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-    push VDELTA + helloworld
+    push VDELTA + message
     call printf
     add esp, 1 * 4
     push 0
@@ -92,7 +92,7 @@ ExitProcess:
     jmp [VDELTA + __imp__ExitProcess]
 _c
 
-helloworld db " * a PE with 96 sections (95 are empty)", 0ah, 0
+message db " * a PE with 96 sections (95 are empty)", 0ah, 0
 _d
 
 Import_Descriptor:
