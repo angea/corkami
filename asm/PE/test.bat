@@ -18,3 +18,4 @@ dllweirdexp-ld.exe
 dllemptyexp-ld.exe
 dllord-ld.exe
 dll-dynunicld.exe
+dllnoreloc-ld.exe
