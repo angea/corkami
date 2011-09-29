@@ -1,14 +1,3 @@
-; dll imports loader
-
-;TODO:
-; forwarding
-; auto-forwarding
-; multiple names with different hints
-; export names: 
-;  split in one exports with null name, one export with 010000h long name, exportname starting like known API
-; try to mimick kernel32 ?
-
-; load by ascii, unicode, extensionless, mixedcase
 
 
 ; Ange Albertini, BSD LICENCE 2009-2011
@@ -78,59 +67,14 @@ VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections 
 
 EntryPoint:
     push VDELTA + message
-    call printf
+    call [VDELTA + __imp__printf]
     add esp, 1 * 4
-
-    push VDELTA + loading
-    call printf
-    add esp, 1 * 4
-    push VDELTA + dll.dll
-    call LoadLibraryA
-    push eax
-    call FreeLibrary
-
-    push VDELTA + loadingunicode
-    call printf
-    add esp, 1 * 4
-    push VDELTA + dllU
-    call LoadLibraryW
-    push eax
-    call FreeLibrary
-
-    push VDELTA + loadingnoextension
-    call printf
-    add esp, 1 * 4
-    push VDELTA + dll
-    call LoadLibraryA
-    push eax
-    call FreeLibrary
-
-    call [VDELTA + __imp__dllexport]
     push 0
-    call ExitProcess
+    call [VDELTA + __imp__ExitProcess]
 _c
 
-LoadLibraryA:
-    jmp [VDELTA + __imp__LoadLibraryA]
-_c
-LoadLibraryW:
-    jmp [VDELTA + __imp__LoadLibraryW]
-_c
-FreeLibrary:
-    jmp [VDELTA + __imp__FreeLibrary]
-_c
-ExitProcess:
-    jmp [VDELTA + __imp__ExitProcess]
-_c
 
-printf:
-    jmp [VDELTA + __imp__printf]
-_c
-
-message db " * Imports loader", 0ah, 0
-loading db ' * loading dll:', 0
-loadingnoextension db ' * loading DLL without extension:', 0
-loadingunicode db ' * loading dll via unicode:', 0
+message db " * PE with standard DLL import", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -144,81 +88,39 @@ msvcrt.dll_DESCRIPTOR:
     dd 0, 0
     dd VDELTA + msvcrt.dll - IMAGEBASE
     dd VDELTA + msvcrt.dll_iat - IMAGEBASE
-dll.dll_DESCRIPTOR:
-    dd VDELTA + dll.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd VDELTA + dll.dll - IMAGEBASE
-    dd VDELTA + dll.dll_iat - IMAGEBASE
 ;terminator
     dd 0, 0, 0, 0, 0
 _d
 
 kernel32.dll_hintnames:
-    DD VDELTA + hnExitProcess - IMAGEBASE
-    DD VDELTA + hnLoadLibraryA - IMAGEBASE
-    DD VDELTA + hnLoadLibraryW - IMAGEBASE
-    DD VDELTA + hnFreeLibrary - IMAGEBASE
-    DD 0
+    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd 0
 msvcrt.dll_hintnames:
     dd VDELTA + hnprintf - IMAGEBASE
-    dd 0
-dll.dll_hintnames:
-    dd VDELTA + hndllexport - IMAGEBASE
     dd 0
 _d
 
 hnExitProcess:
     dw 0
     db 'ExitProcess', 0
-hnLoadLibraryA:
-    dw 0
-    db 'LoadLibraryA', 0
-hnLoadLibraryW:
-    dw 0
-    db 'LoadLibraryW', 0
-hnFreeLibrary:
-    dw 0
-    db 'FreeLibrary', 0
-
 hnprintf:
     dw 0
     db 'printf', 0
-    
-hndllexport:
-    dw 0
-    times 010000h db 0ffh
-        db 0
 _d
 
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd VDELTA + hnExitProcess - IMAGEBASE
-__imp__LoadLibraryA:
-    dd VDELTA + hnLoadLibraryA - IMAGEBASE
-__imp__LoadLibraryW:
-    dd VDELTA + hnLoadLibraryW - IMAGEBASE
-__imp__FreeLibrary:
-    dd VDELTA + hnFreeLibrary - IMAGEBASE
     dd 0
 
 msvcrt.dll_iat:
 __imp__printf:
     dd VDELTA + hnprintf - IMAGEBASE
     dd 0
-dll.dll_iat:
-__imp__dllexport:
-    dd VDELTA + hndllexport - IMAGEBASE
-    dd 0
 _d
 
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
-;db 'Export', 0
-
-align 2, db 0
-dllU db 'd', 0, 'l', 0, 'l', 0, '.', 0, 'd', 0, 'l', 0, 'l', 0, 0, 0
-dll.dll db 'dll.dll', 0
-dll db 'dll', 0
 _d
 
 align FILEALIGN, db 0

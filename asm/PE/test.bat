@@ -4,5 +4,5 @@
 @echo TLS:
 @tls.exe
 @tls_obfuscation.exe
-:@echo Imports loading:
-:@imports.exe
+@echo Imports loading:
+@imports.exe

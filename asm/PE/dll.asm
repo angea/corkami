@@ -1,8 +1,9 @@
 ; DLL with minimal export table, and relocations
 
+; Ange Albertini, BSD LICENCE 2009-2011
+
 %include 'consts.inc'
 
-IMAGE_FILE_DLL equ 02000h
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 400000h
@@ -90,8 +91,8 @@ export_ db " * export executed successfully", 0ah, 0
 
 msvcrt.dll_iat:
 __imp__printf:
-    DD VDELTA + hnprintf - IMAGEBASE
-    DD 0
+    dd VDELTA + hnprintf - IMAGEBASE
+    dd 0
 
 import_descriptor:
 ;msvcrt.dll_DESCRIPTOR:

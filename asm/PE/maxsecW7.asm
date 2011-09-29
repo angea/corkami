@@ -104,10 +104,12 @@ int3
 
 ; IMPORT DATA DIRECTORY AND TABLE
 Import_Descriptor:
+;kernel32.dll_DESCRIPTOR:
     dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd VDELTA + kernel32.dll - IMAGEBASE
     dd VDELTA + kernel32.dll_iat - IMAGEBASE
+;msvcrt.dll_DESCRIPTOR:
     dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd VDELTA + msvcrt.dll - IMAGEBASE
@@ -117,8 +119,8 @@ Import_Descriptor:
 dd 0
 
 kernel32.dll_hintnames:
-    DD VDELTA + hnExitProcess - IMAGEBASE
-    DD 0
+    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd 0
 msvcrt.dll_hintnames:
     dd VDELTA + hnprintf - IMAGEBASE
     dd 0
@@ -143,8 +145,8 @@ __imp__printf:
     dd 0
 dd 0
 
-kernel32.dll  DB 'kernel32.dll', 0
-msvcrt.dll  DB 'msvcrt.dll', 0
+kernel32.dll db 'kernel32.dll', 0
+msvcrt.dll db 'msvcrt.dll', 0
 dd 0
 
 

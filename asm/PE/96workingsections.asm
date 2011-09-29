@@ -105,12 +105,12 @@ message db " * a PE with 96 used code sections", 0ah, 0
 _d
 
 Import_Descriptor:
-kernel32.dll_DESCRIPTOR:
+;kernel32.dll_DESCRIPTOR:
     dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd VDELTA + kernel32.dll - IMAGEBASE
     dd VDELTA + kernel32.dll_iat - IMAGEBASE
-msvcrt.dll_DESCRIPTOR:
+;msvcrt.dll_DESCRIPTOR:
     dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd VDELTA + msvcrt.dll - IMAGEBASE
@@ -120,8 +120,8 @@ msvcrt.dll_DESCRIPTOR:
 _d
 
 kernel32.dll_hintnames:
-    DD VDELTA + hnExitProcess - IMAGEBASE
-    DD 0
+    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd 0
 msvcrt.dll_hintnames:
     dd VDELTA + hnprintf - IMAGEBASE
     dd 0
@@ -137,17 +137,17 @@ _d
 
 kernel32.dll_iat:
 __imp__ExitProcess:
-    DD VDELTA + hnExitProcess - IMAGEBASE
-    DD 0
+    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd 0
 
 msvcrt.dll_iat:
 __imp__printf:
-    DD VDELTA + hnprintf - IMAGEBASE
-    DD 0
+    dd VDELTA + hnprintf - IMAGEBASE
+    dd 0
 _d
 
-kernel32.dll  DB 'kernel32.dll', 0
-msvcrt.dll  DB 'msvcrt.dll', 0
+kernel32.dll db 'kernel32.dll', 0
+msvcrt.dll db 'msvcrt.dll', 0
 _d
 zeroes_:
 align FILEALIGN, db 0

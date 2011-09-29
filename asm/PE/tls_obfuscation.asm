@@ -99,8 +99,8 @@ msvcrt.dll_DESCRIPTOR:
 _d
 
 kernel32.dll_hintnames:
-    DD VDELTA + hnExitProcess - IMAGEBASE
-    DD 0
+    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd 0
 msvcrt.dll_hintnames:
     dd VDELTA + hnprintf - IMAGEBASE
     dd 0

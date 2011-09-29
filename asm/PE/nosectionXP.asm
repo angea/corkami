@@ -76,8 +76,8 @@ Import_Descriptor:
 _d
 
 kernel32.dll_hintnames:
-    DD hnExitProcess - IMAGEBASE
-    DD 0
+    dd hnExitProcess - IMAGEBASE
+    dd 0
 msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
     dd 0
@@ -91,11 +91,12 @@ hnprintf:
     db 'printf', 0
 _d
 
-ImportsAddressTable: ; this part will be written to
+ImportsAddressTable:
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd hnExitProcess - IMAGEBASE
     dd 0
+
 msvcrt.dll_iat:
 __imp__printf:
     dd hnprintf - IMAGEBASE
@@ -103,5 +104,5 @@ __imp__printf:
 IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 _d
 
-kernel32.dll  DB 'kernel32.dll', 0
-msvcrt.dll  DB 'msvcrt.dll' ;,0
+kernel32.dll db 'kernel32.dll', 0
+msvcrt.dll db 'msvcrt.dll';, 0

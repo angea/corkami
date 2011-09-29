@@ -91,12 +91,12 @@ message db " * Low alignment PE with 96 fake sections (XP)", 0ah, 0
 _d
 
 Import_Descriptor:
-kernel32.dll_DESCRIPTOR:
+;kernel32.dll_DESCRIPTOR:
     dd kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd kernel32.dll - IMAGEBASE
     dd kernel32.dll_iat - IMAGEBASE
-msvcrt.dll_DESCRIPTOR:
+;msvcrt.dll_DESCRIPTOR:
     dd msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd msvcrt.dll - IMAGEBASE
@@ -106,8 +106,8 @@ msvcrt.dll_DESCRIPTOR:
 _d
 
 kernel32.dll_hintnames:
-    DD hnExitProcess - IMAGEBASE
-    DD 0
+    dd hnExitProcess - IMAGEBASE
+    dd 0
 msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
     dd 0
@@ -126,6 +126,7 @@ kernel32.dll_iat:
 __imp__ExitProcess:
     dd hnExitProcess - IMAGEBASE
     dd 0
+
 msvcrt.dll_iat:
 __imp__printf:
     dd hnprintf - IMAGEBASE
@@ -133,5 +134,5 @@ __imp__printf:
 IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 _d
 
-kernel32.dll  DB 'kernel32.dll', 0
-msvcrt.dll  DB 'msvcrt.dll' ;, 0
+kernel32.dll db 'kernel32.dll', 0
+msvcrt.dll db 'msvcrt.dll';, 0

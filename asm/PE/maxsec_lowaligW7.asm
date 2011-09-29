@@ -102,8 +102,8 @@ Import_Descriptor:
 _d
 
 kernel32.dll_hintnames:
-    DD hnExitProcess - IMAGEBASE
-    DD 0
+    dd hnExitProcess - IMAGEBASE
+    dd 0
 msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
     dd 0
