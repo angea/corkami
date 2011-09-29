@@ -9,6 +9,8 @@ echo Imports loading:
 imports.exe
 imports_noint.exe
 imports_noext.exe
+imports_mixed.exe
 echo DLL loading:
 echo  * statically loaded DLL and export call
 dll-ld.exe
+dll-dynld.exe
