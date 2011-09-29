@@ -140,7 +140,7 @@ address_of_name_ordinals:
 _d
 
 a__exp__Export:
-db 'export'
+db 'InitiateShutdown'
     db 0
 _d
 

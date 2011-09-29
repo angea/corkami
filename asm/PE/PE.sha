@@ -2,10 +2,15 @@ ba824ec99ebbb0e7e881214d6c893deade7cf89f *96emptysections.exe
 d3053b1745a8e3997c77c7cfe075dc7243bb2ca6 *96workingsections.exe
 6ca1b40702db016be5261865c12c0ccf4d3240a2 *dll.dll
 b2f55c33653072f1b1e81e44bfb3d2ced222895c *dll-dynld.exe
+fd6363324721c298cb9aaf099b5c22bc77db6b6a *dll-dynunicld.exe
 1d236d8adcf9b9d72ea3bdc7f9c84f7ca99e9279 *dllemptyexp.dll
 affd4478a687bfe0639d8b18bb651cf801455209 *dllemptyexp-ld.exe
 033c90a98c8bbdf99b5daa2257c7aeea78b95c52 *dll-ld.exe
-3ea59d3bab1db072b3ff0c5e99c07ce69881f209 *dllweirdexp.dll
+eaacf89cbc592b7f02e04b7ee45345644c7f6a70 *dllnoreloc.dll
+2abb1ead2e50edbb79ad22a047264d09ccfc6580 *dllnoreloc-ld.exe
+b7fab0819a33b6e2accf293fdead9a94ac04ce0b *dllord.dll
+5f882f35ab12da50173c89179403c78eb7ffd32e *dllord-ld.exe
+3f812459b0361d42bd37ff80f05549b794914bd7 *dllweirdexp.dll
 9532aaea6a2942e9a6d44510443095c2af3bf42d *dllweirdexp-ld.exe
 dd6430c90777e359efac2d0c6c5fa72351e5084b *imports.exe
 301702f349215874b274283263eb65302b2681da *imports_mixed.exe

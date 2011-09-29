@@ -105,7 +105,7 @@ _d
 
 hndllexport:
     dw 0
-    db 'export', 0
+    db 'InitiateShutdown', 0
 _d
 
 kernel32.dll_iat:
