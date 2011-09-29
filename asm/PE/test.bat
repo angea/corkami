@@ -16,3 +16,4 @@ dll-ld.exe
 dll-dynld.exe
 dllweirdexp-ld.exe
 dllemptyexp-ld.exe
+dllord-ld.exe

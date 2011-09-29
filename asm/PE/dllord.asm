@@ -1,4 +1,4 @@
-; DLL with minimal export table, and relocations
+; DLL with exports by ordinal and heavily export corrupted structure
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -70,22 +70,6 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-    cmp dword [esp + 8], DLL_PROCESS_ATTACH
-    jz attached_
-
-reloc01:
-    push VDELTA + detach
-    jmp print_
-
-attached_:
-reloc11:
-    push VDELTA + attach
-    jmp print_
-
-reloc22:
-print_:
-    call [VDELTA + __imp__printf]
-    add esp, 1 * 4
     retn 3 * 4
 _c
 
@@ -98,9 +82,7 @@ reloc42:
     retn
 _c
 
-attach db "  # DLL EntryPoint called on attach", 0ah, 0
-detach db "  # DLL EntryPoint called on detach", 0ah, 0
-export db "  # DLL export called", 0ah, 0
+export db " * DLL export by ordinal called", 0ah, 0
 _d
 
 msvcrt.dll_iat:
@@ -126,57 +108,39 @@ msvcrt.dll_hintnames:
 hnprintf:
     dw 0
     db 'printf', 0
+_d
 
 msvcrt.dll db 'msvcrt.dll', 0
+_d
 
 Exports_Directory:
-  Characteristics       dd 0
-  TimeDateStamp         dd 0
-  MajorVersion          dw 0
-  MinorVersion          dw 0
-  Name                  dd VDELTA + aDllName - IMAGEBASE
-  Base                  dd 0
-  NumberOfFunctions     dd NUMBER_OF_FUNCTIONS
-  NumberOfNames         dd NUMBER_OF_NAMES
+  Characteristics       dd -1
+  TimeDateStamp         dd -1
+  MajorVersion          dw -1
+  MinorVersion          dw -1
+  Name                  dd -1
+  Base                  dd 313h
+  NumberOfFunctions     dd -1
+  NumberOfNames         dd -1
   AddressOfFunctions    dd VDELTA + address_of_functions - IMAGEBASE
-  AddressOfNames        dd VDELTA + address_of_names - IMAGEBASE
-  AddressOfNameOrdinals dd VDELTA + address_of_name_ordinals - IMAGEBASE
+  AddressOfNames        dd -1
+  AddressOfNameOrdinals dd -1
 _d
-
-aDllName db 'dll.dll', 0
-_d
-
 
 address_of_functions:
+    dd -1                                   ; bogus entry that will be 313h
     dd VDELTA + __exp__Export - IMAGEBASE
-NUMBER_OF_FUNCTIONS equ ($ - address_of_functions) / 4
 _d
 
-address_of_names:
-    dd VDELTA + a__exp__Export - IMAGEBASE
-NUMBER_OF_NAMES equ ($ - address_of_names) / 4
 
-_d
-address_of_name_ordinals:
-    dw 0
-_d
-
-a__exp__Export:
-db 'export'
-    db 0
-_d
-
-EXPORT_SIZE equ $ - Exports_Directory
+EXPORT_SIZE equ -1
 
 Directory_Entry_Basereloc:
 block_start0:
-    .VirtualAddress dd VDELTA + reloc01 - IMAGEBASE
+    .VirtualAddress dd VDELTA + reloc31 - IMAGEBASE
     .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc11 + 1 - reloc01)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc22 + 2 - reloc01)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc31 + 1 - reloc01)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc31 + 1 - reloc31)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc31)
 BASE_RELOC_SIZE_OF_BLOCK0 equ $ - block_start0
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
