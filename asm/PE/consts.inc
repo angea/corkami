@@ -2,6 +2,9 @@
 PAGE_READWRITE equ 4
 ExceptionContinueExecution equ 0
 
+DLL_PROCESS_ATTACH equ 1
+DLL_PROCESS_DETACH equ 0
+
 IMAGE_SCN_MEM_EXECUTE            equ 020000000h
 IMAGE_SCN_MEM_READ               equ 040000000h
 IMAGE_SCN_MEM_WRITE              equ 080000000h

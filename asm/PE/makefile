@@ -1,6 +1,6 @@
 all: common XP W7
 
-common: tls.exe tls_obfuscation.exe 96emptysections.exe 96workingsections.exe dll.dll imports.exe imports_noint.exe imports_noext.exe
+common: tls.exe tls_obfuscation.exe 96emptysections.exe 96workingsections.exe dll.dll imports.exe imports_noint.exe imports_noext.exe dll.dll dll-ld.exe
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe 
 

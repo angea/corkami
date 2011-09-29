@@ -26,7 +26,7 @@ istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
-    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_LINE_NUMS_STRIPPED | IMAGE_FILE_LOCAL_SYMS_STRIPPED | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
+    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
 iend
 
 OptionalHeader:
@@ -70,29 +70,44 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
+    cmp dword [esp + 8], DLL_PROCESS_ATTACH
+    jz attached_
+
 reloc01:
-    push VDELTA + loaded_dll
-reloc12:
+    push VDELTA + detach
+    jmp print_
+
+attached_:
+reloc11:
+    push VDELTA + attach
+    jmp print_
+
+reloc22:
+print_:
     call [VDELTA + __imp__printf]
     add esp, 1 * 4
     retn 3 * 4
 _c
+
 __exp__Export:
-reloc21:
-    push VDELTA + export_
-reloc32:
+reloc31:
+    push VDELTA + export
+reloc42:
     call [VDELTA + __imp__printf]
     add esp, 1 * 4
     retn
 _c
 
-loaded_dll db " * DLL loaded successfully", 0ah, 0
-export_ db " * export executed successfully", 0ah, 0
+attach db "  # DLL EntryPoint called on attach", 0ah, 0
+detach db "  # DLL EntryPoint called on detach", 0ah, 0
+export db "  # DLL export called", 0ah, 0
+_d
 
 msvcrt.dll_iat:
 __imp__printf:
     dd VDELTA + hnprintf - IMAGEBASE
     dd 0
+_d
 
 import_descriptor:
 ;msvcrt.dll_DESCRIPTOR:
@@ -119,31 +134,37 @@ Exports_Directory:
   TimeDateStamp         dd 0
   MajorVersion          dw 0
   MinorVersion          dw 0
-  Name                  dd 0;VDELTA + aDllName - IMAGEBASE
+  Name                  dd VDELTA + aDllName - IMAGEBASE
   Base                  dd 0
   NumberOfFunctions     dd NUMBER_OF_FUNCTIONS
   NumberOfNames         dd NUMBER_OF_NAMES
   AddressOfFunctions    dd VDELTA + address_of_functions - IMAGEBASE
   AddressOfNames        dd VDELTA + address_of_names - IMAGEBASE
   AddressOfNameOrdinals dd VDELTA + address_of_name_ordinals - IMAGEBASE
+_d
 
-;aDllName db 'the dll name is completely ignored', 0
+aDllName db 'dll.dll', 0
+_d
 
-;align 2, db 0
-dllU db 'd', 0, 'l', 0, 'l', 0, '.', 0, 'd', 0, 'l', 0, 'l', 0, 0, 0
 
 address_of_functions:
     dd VDELTA + __exp__Export - IMAGEBASE
 NUMBER_OF_FUNCTIONS equ ($ - address_of_functions) / 4
+_d
+
 address_of_names:
     dd VDELTA + a__exp__Export - IMAGEBASE
 NUMBER_OF_NAMES equ ($ - address_of_names) / 4
+
+_d
 address_of_name_ordinals:
     dw 0
+_d
 
 a__exp__Export:
-times 010000h db 0ffh
+db 'export'
     db 0
+_d
 
 EXPORT_SIZE equ $ - Exports_Directory
 
@@ -152,9 +173,10 @@ block_start0:
     .VirtualAddress dd VDELTA + reloc01 - IMAGEBASE
     .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc12 + 2 - reloc01)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc21 + 1 - reloc01)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc32 + 2 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc11 + 1 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc22 + 2 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc31 + 1 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
 BASE_RELOC_SIZE_OF_BLOCK0 equ $ - block_start0
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc

@@ -1,10 +1,14 @@
-@echo PE with many sections:
-@96emptysections.exe
-@96workingsections.exe
-@echo TLS:
-@tls.exe
-@tls_obfuscation.exe
-@echo Imports loading:
-@imports.exe
-@imports_noint.exe
-@imports_noext.exe
+@echo off
+echo PE with many sections:
+96emptysections.exe
+96workingsections.exe
+echo TLS:
+tls.exe
+tls_obfuscation.exe
+echo Imports loading:
+imports.exe
+imports_noint.exe
+imports_noext.exe
+echo DLL loading:
+echo  * statically loaded DLL and export call
+dll-ld.exe
