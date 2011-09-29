@@ -70,16 +70,22 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
+Exp0:
     retn 3 * 4
+Exp1:
 _c
 
 __exp__Export:
 reloc31:
     push VDELTA + export
 reloc42:
+Exp2:
     call [VDELTA + __imp__printf]
+Exp3:
     add esp, 1 * 4
+Exp4:
     retn
+Exp5:
 _c
 
 export db " * statically loaded DLL with weird export name", 0ah, 0
@@ -117,7 +123,7 @@ Exports_Directory:
   MajorVersion          dw 0
   MinorVersion          dw 0
   Name                  dd VDELTA + aDllName - IMAGEBASE
-  Base                  dd 0
+  Base                  dd -7
   NumberOfFunctions     dd NUMBER_OF_FUNCTIONS
   NumberOfNames         dd NUMBER_OF_NAMES
   AddressOfFunctions    dd VDELTA + address_of_functions - IMAGEBASE
@@ -128,23 +134,33 @@ _d
 aDllName db 'completely unrelated dll name', 1, 2, 3, 4, 0
 _d
 
-
 address_of_functions:
+    dd VDELTA + Exp0 - IMAGEBASE
+    dd VDELTA + Exp1 - IMAGEBASE
     dd VDELTA + __exp__Export - IMAGEBASE
+    dd VDELTA + Exp2 - IMAGEBASE
+    dd VDELTA + Exp3 - IMAGEBASE
+    dd VDELTA + Exp4 - IMAGEBASE
+    dd VDELTA + Exp5 - IMAGEBASE
 NUMBER_OF_FUNCTIONS equ ($ - address_of_functions) / 4
 _d
 
 address_of_names:
     dd VDELTA + a__exp__Export - IMAGEBASE
+    dd VDELTA + a__exp__Export - IMAGEBASE
+    dd VDELTA + a__exp__Export - IMAGEBASE
+    dd VDELTA + aExp2 - IMAGEBASE
+    dd VDELTA + aExp3 - IMAGEBASE
+    dd VDELTA + aExp2 - IMAGEBASE
+    dd VDELTA + a__exp__Export - IMAGEBASE
 NUMBER_OF_NAMES equ ($ - address_of_names) / 4
 
 _d
 address_of_name_ordinals:
-    dw 0
+    dw 0,1,2,3,4,5,6
 _d
 
-a__exp__Export:
-db '.00401000: 8BFF                           mov         edi,edi                               '
+a__exp__Export db '.00401000: 8BFF                           mov         edi,edi                               '
 times 65535 db '/\'
 %assign i 1
 %rep 20h
@@ -152,6 +168,8 @@ db i
 %assign i i + 1
 %endrep
     db 0
+aExp2          db " **********************************       ", 0 
+aExp3          db " * Insert subliminal message here *       ", 0
 _d
 
 EXPORT_SIZE equ $ - Exports_Directory
