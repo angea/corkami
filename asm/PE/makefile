@@ -2,7 +2,7 @@ all: common XP W7
 
 common: tls.exe tls_obfuscation.exe 96emptysections.exe 96workingsections.exe imports dll
 
-dll: dll.dll  dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllemptyexp.dll dllemptyexp-ld.exe dllord.dll dllord-ld.exe
+dll: dll.dll  dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllemptyexp.dll dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 
