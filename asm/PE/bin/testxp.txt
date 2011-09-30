@@ -3,3 +3,5 @@ Low alignments:
  * Low alignment PE with a virtual section table (XP)
  * Low alignment PE with a null SizeOfOptionalHeader (XP)
  * Low alignment PE with 96 fake sections (XP)
+ * dynamically loading minimal 97 bytes DLL
+  # dll loaded

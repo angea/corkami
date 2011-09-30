@@ -35,3 +35,7 @@ DLL loading:
   # DLL EntryPoint called on attach
   # unloading dll
   # DLL EntryPoint called on detach
+ * forwarded import call via Export
+ * forwarded import call via forwarding loops
+ * DLL export called via BOUND IMPORTS
+ * unexpected export called via corrupted BOUND IMPORTS
