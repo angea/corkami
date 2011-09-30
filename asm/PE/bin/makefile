@@ -10,8 +10,8 @@ XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe
 
-%.exe: %.asm
+%.exe: ..\%.asm
 	yasm -o $@ $<
 
-%.dll: %.asm
+%.dll: ..\%.asm
 	yasm -o $@ $<
