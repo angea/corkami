@@ -67,7 +67,7 @@ VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections 
 
 EntryPoint:
     ; we know the address in advance... risky !
-    call 331004h - VDELTA    ; - VDELTA because YASM doesn't know the current VA
+    call 3301008h - VDELTA    ; - VDELTA because YASM doesn't know the current VA
     ;call [VDELTA + __imp__export]
     push 0
     call [VDELTA + __imp__ExitProcess]
@@ -105,7 +105,7 @@ _d
 
 hndllexport:
     dw 0
-    db 'InitiateShutdown', 0
+    db 'export', 0
 _d
 
 kernel32.dll_iat:

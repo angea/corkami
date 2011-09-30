@@ -85,6 +85,8 @@ reloc22:
 print_:
     call [VDELTA + __imp__printf]
     add esp, 1 * 4
+    push 1
+    pop eax
     retn 3 * 4
 _c
 

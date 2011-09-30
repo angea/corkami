@@ -6,7 +6,7 @@
 
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
-IMAGEBASE equ 400000h
+IMAGEBASE equ 1000000h
 org IMAGEBASE
 bits 32
 

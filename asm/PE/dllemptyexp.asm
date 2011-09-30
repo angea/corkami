@@ -70,6 +70,8 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
+    push 1
+    pop eax
     retn 3 * 4
 _c
 

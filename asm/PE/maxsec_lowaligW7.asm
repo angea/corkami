@@ -56,7 +56,7 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1000h
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_WRITE ; required for imports
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_WRITE | IMAGE_SCN_MEM_EXECUTE; required only for imports and DEP
 iend
 
 %assign i 1

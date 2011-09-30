@@ -6,7 +6,7 @@
 
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
-IMAGEBASE equ 330000h
+IMAGEBASE equ 3300000h
 org IMAGEBASE
 bits 32
 
@@ -68,6 +68,8 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
+    push 1
+    pop eax
     retn 3 * 4
 _c
 
@@ -78,7 +80,7 @@ __exp__Export:
     retn
 _c
 
-export db " * DLL with no relocation called (direct call)", 0ah, 0
+export db " * DLL with no relocation (with direct call)", 0ah, 0
 _d
 
 msvcrt.dll_iat:
@@ -140,7 +142,7 @@ address_of_name_ordinals:
 _d
 
 a__exp__Export:
-db 'InitiateShutdown'
+db 'export'
     db 0
 _d
 
