@@ -72,10 +72,6 @@ EntryPoint:
     retn 3 * 4
 _c
 
-__exp__Export:
-    retn
-_c
-
 Exports_Directory:
   Characteristics       dd 0
   TimeDateStamp         dd 0
@@ -107,9 +103,7 @@ address_of_name_ordinals:
     dw 0
 _d
 
-a__exp__Export:
-db 'export'
-    db 0
+a__exp__Export db 'ExitProcess', 0
 _d
 
 EXPORTS_SIZE equ $ - Exports_Directory

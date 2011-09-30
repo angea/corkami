@@ -1,4 +1,4 @@
-; forwarding dll loader
+; tiny dll loader
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -66,39 +66,51 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-    push VDELTA + msg
-    call [VDELTA + __imp__export]
+    push VDELTA + start
+    call [VDELTA + __imp__printf]
     add esp, 1 * 4
 _
+    push VDELTA + dll.dll
+    call [VDELTA + __imp__LoadLibraryA]
+    test eax, eax
+    jz end_
+_
+    push VDELTA + loading
+    call [VDELTA + __imp__printf]
+    add esp, 1 * 4
+end_:
     push 0
     call [VDELTA + __imp__ExitProcess]
 _c
 
-msg db " * forwarded import call via Export", 0
+start db ' * dynamically loading minimal 97 bytes DLL', 0ah, 0
+loading db '  # dll loaded', 0ah, 0
 _d
 
+
 Import_Descriptor:
-kernel32.dll_DESCRIPTOR:
+;kernel32.dll_DESCRIPTOR:
     dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd VDELTA + kernel32.dll - IMAGEBASE
     dd VDELTA + kernel32.dll_iat - IMAGEBASE
-dll.dll_DESCRIPTOR:
-    dd VDELTA + dll.dll_hintnames - IMAGEBASE
+;msvcrt.dll_DESCRIPTOR:
+    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd VDELTA + dll.dll - IMAGEBASE
-    dd VDELTA + dll.dll_iat - IMAGEBASE
+    dd VDELTA + msvcrt.dll - IMAGEBASE
+    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
 ;terminator
     dd 0, 0, 0, 0, 0
 _d
 
 kernel32.dll_hintnames:
     dd VDELTA + hnExitProcess - IMAGEBASE
+    dd VDELTA + hnLoadLibraryA - IMAGEBASE
     dd 0
 _d
 
-dll.dll_hintnames:
-    dd VDELTA + hndllexport - IMAGEBASE
+msvcrt.dll_hintnames:
+    dd VDELTA + hnprintf - IMAGEBASE
     dd 0
 _d
 
@@ -107,25 +119,33 @@ hnExitProcess:
     db 'ExitProcess', 0
 _d
 
-hndllexport:
+hnLoadLibraryA:
     dw 0
-    db 'ExitProcess', 0
+    db 'LoadLibraryA', 0
+_d
+
+hnprintf:
+    dw 0
+    db 'printf', 0
 _d
 
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd VDELTA + hnExitProcess - IMAGEBASE
+__imp__LoadLibraryA:
+    dd VDELTA + hnLoadLibraryA - IMAGEBASE
     dd 0
 _d
 
-dll.dll_iat:
-__imp__export:
-    dd VDELTA + hndllexport - IMAGEBASE
+msvcrt.dll_iat:
+__imp__printf:
+    dd VDELTA + hnprintf - IMAGEBASE
     dd 0
 _d
 
 kernel32.dll db 'kernel32.dll', 0
-dll.dll db 'dllfw.dll', 0
+dll.dll db 'tinydllXP.dll', 0
+msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 align FILEALIGN, db 0

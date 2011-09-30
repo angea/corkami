@@ -21,3 +21,4 @@ dllord-ld.exe
 dllnoreloc-ld.exe
 dllnoexp-dynld.exe
 dllfw-ld.exe
+dllfwloop-ld.exe

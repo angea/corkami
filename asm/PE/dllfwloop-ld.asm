@@ -1,4 +1,4 @@
-; forwarding dll loader
+; dll with forwarding loops loader
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -74,7 +74,7 @@ _
     call [VDELTA + __imp__ExitProcess]
 _c
 
-msg db " * forwarded import call via Export", 0
+msg db " * forwarded import call via forwarding loops", 0
 _d
 
 Import_Descriptor:
@@ -125,7 +125,7 @@ __imp__export:
 _d
 
 kernel32.dll db 'kernel32.dll', 0
-dll.dll db 'dllfw.dll', 0
+dll.dll db 'dllfwloop.dll', 0
 _d
 
 align FILEALIGN, db 0
