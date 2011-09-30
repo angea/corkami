@@ -23,7 +23,7 @@ istruc IMAGE_FILE_HEADER
 
 bits 32
 EntryPoint:
-    push byte 42
+    push 42
     pop eax
     ret
 

@@ -95,7 +95,7 @@ unloading db '  # unloading dll', 0ah, 0
 _d
 
 h dd 0
-exp dd 0
+
 _
 
 Import_Descriptor:
