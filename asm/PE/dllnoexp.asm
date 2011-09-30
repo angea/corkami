@@ -1,4 +1,4 @@
-; DLL with weird export
+; DLL with minimal export table, and relocations
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -45,7 +45,6 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd VDELTA + Exports_Directory - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd VDELTA + import_descriptor - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.FixupsVA,   dd VDELTA + Directory_Entry_Basereloc - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.FixupsSize, dd DIRECTORY_ENTRY_BASERELOC_SIZE
@@ -70,25 +69,37 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-Exp0:
+    cmp dword [esp + 8], DLL_PROCESS_ATTACH
+    jz attached_
+
+reloc01:
+    push VDELTA + detach
+    jmp print_
+
+attached_:
+reloc11:
+    push VDELTA + attach
+    jmp print_
+
+reloc22:
+print_:
+    call [VDELTA + __imp__printf]
+    add esp, 1 * 4
     retn 3 * 4
-Exp1:
 _c
 
 __exp__Export:
 reloc31:
     push VDELTA + export
 reloc42:
-Exp2:
     call [VDELTA + __imp__printf]
-Exp3:
     add esp, 1 * 4
-Exp4:
     retn
-Exp5:
 _c
 
-export db " * statically loaded DLL with weird export name", 0ah, 0
+attach db "  # DLL EntryPoint called on attach", 0ah, 0
+detach db "  # DLL EntryPoint called on detach", 0ah, 0
+export db "  # DLL export called", 0ah, 0
 _d
 
 msvcrt.dll_iat:
@@ -108,8 +119,8 @@ import_descriptor:
     times 5 dd 0
 
 msvcrt.dll_hintnames:
-    DD VDELTA + hnprintf - IMAGEBASE
-    DD 0
+    dd VDELTA + hnprintf - IMAGEBASE
+    dd 0
 
 hnprintf:
     dw 0
@@ -117,70 +128,15 @@ hnprintf:
 
 msvcrt.dll db 'msvcrt.dll', 0
 
-Exports_Directory:
-  Characteristics       dd 0
-  TimeDateStamp         dd 0
-  MajorVersion          dw 0
-  MinorVersion          dw 0
-  Name                  dd VDELTA + aDllName - IMAGEBASE
-  Base                  dd -7
-  NumberOfFunctions     dd NUMBER_OF_FUNCTIONS
-  NumberOfNames         dd NUMBER_OF_NAMES
-  AddressOfFunctions    dd VDELTA + address_of_functions - IMAGEBASE
-  AddressOfNames        dd VDELTA + address_of_names - IMAGEBASE
-  AddressOfNameOrdinals dd VDELTA + address_of_name_ordinals - IMAGEBASE
-_d
-
-aDllName db 'completely unrelated dll name', 1, 2, 3, 4, 0
-_d
-
-address_of_functions:
-    dd VDELTA + __exp__Export - IMAGEBASE
-    dd VDELTA + Exp0 - IMAGEBASE
-    dd VDELTA + Exp1 - IMAGEBASE
-    dd VDELTA + Exp2 - IMAGEBASE
-    dd VDELTA + Exp3 - IMAGEBASE
-    dd VDELTA + Exp4 - IMAGEBASE
-    dd VDELTA + Exp5 - IMAGEBASE
-NUMBER_OF_FUNCTIONS equ ($ - address_of_functions) / 4
-_d
-
-address_of_names:
-    dd VDELTA + a__exp__Export - IMAGEBASE
-    dd VDELTA + aFake - IMAGEBASE
-    dd VDELTA + aFake - IMAGEBASE
-    dd VDELTA + aExp2 - IMAGEBASE
-    dd VDELTA + aExp3 - IMAGEBASE
-    dd VDELTA + aExp2 - IMAGEBASE
-    dd VDELTA + aFake - IMAGEBASE
-NUMBER_OF_NAMES equ ($ - address_of_names) / 4
-
-_d
-address_of_name_ordinals:
-    dw 0,1,2,3,4,5,6
-_d
-
-aFake db '.00401000: 8BFF                           mov         edi,edi                               ', 0
-a__exp__Export db '.00401000: 8BFF                           mov         edi,edi                               '
-times 65535 db '/\'
-%assign i 1
-%rep 20h
-db i
-%assign i i + 1
-%endrep
-    db 0
-aExp2          db " **********************************       ", 0 
-aExp3          db " * Insert subliminal message here *       ", 0
-_d
-
-EXPORT_SIZE equ $ - Exports_Directory
-
 Directory_Entry_Basereloc:
 block_start0:
-    .VirtualAddress dd VDELTA + reloc31 - IMAGEBASE
+    .VirtualAddress dd VDELTA + reloc01 - IMAGEBASE
     .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc31 + 1 - reloc31)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc31)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc11 + 1 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc22 + 2 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc31 + 1 - reloc01)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
 BASE_RELOC_SIZE_OF_BLOCK0 equ $ - block_start0
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc

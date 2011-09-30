@@ -1,0 +1,42 @@
+PE with many sections:
+ * a PE with 96 sections (95 are empty)
+ * a PE with 96 used code sections
+TLS:
+ * PE with simple TLS:
+  # 1st TLS call
+  # EntryPoint executed
+  # ExitProcess called
+ * PE with fake TLS callbacks for obfuscation
+Imports loading:
+ * PE with standard DLL import
+ * PE with no Import Name Table
+ * PE with extensions-less imported dlls (>= XP)
+ * PE with mixed case imported dlls
+DLL loading:
+ * statically loaded DLL and export call
+  # DLL EntryPoint called on attach
+  # DLL export called
+  # DLL EntryPoint called on detach
+ * dynamically loaded DLL and export call
+  # loading dll
+  # DLL EntryPoint called on attach
+  # DLL export called
+  # unloading dll
+  # DLL EntryPoint called on detach
+ * loading DLL by Unicode
+  # DLL EntryPoint called on attach
+  # DLL EntryPoint called on detach
+ * statically loaded DLL with weird export name
+ * statically loaded DLL with empty export name
+ * DLL export by ordinal called
+ * DLL with no relocation called (direct call)
+ * dynamically loading export-less DLL
+  # loading dll
+  # DLL EntryPoint called on attach
+  # unloading dll
+  # DLL EntryPoint called on detach
+Low alignments:
+ * Low alignment PE with no section (XP)
+ * Low alignment PE with a virtual section table (XP)
+ * Low alignment PE with a null SizeOfOptionalHeader (XP)
+ * Low alignment PE with 96 fake sections (XP)

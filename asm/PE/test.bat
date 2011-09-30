@@ -14,8 +14,9 @@ echo DLL loading:
 echo  * statically loaded DLL and export call
 dll-ld.exe
 dll-dynld.exe
+dll-dynunicld.exe
 dllweirdexp-ld.exe
 dllemptyexp-ld.exe
 dllord-ld.exe
-dll-dynunicld.exe
 dllnoreloc-ld.exe
+dllnoexp-dynld.exe
