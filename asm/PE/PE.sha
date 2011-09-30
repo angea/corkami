@@ -6,11 +6,13 @@ fd6363324721c298cb9aaf099b5c22bc77db6b6a *dll-dynunicld.exe
 1d236d8adcf9b9d72ea3bdc7f9c84f7ca99e9279 *dllemptyexp.dll
 affd4478a687bfe0639d8b18bb651cf801455209 *dllemptyexp-ld.exe
 033c90a98c8bbdf99b5daa2257c7aeea78b95c52 *dll-ld.exe
+62485d4e136b793d68a9daa0095087e606b2e6c7 *dllnoexp.dll
+a56e55fb9129b5ad5e3d557e9feaf5128ab25935 *dllnoexp-dynld.exe
 eaacf89cbc592b7f02e04b7ee45345644c7f6a70 *dllnoreloc.dll
 2abb1ead2e50edbb79ad22a047264d09ccfc6580 *dllnoreloc-ld.exe
 b7fab0819a33b6e2accf293fdead9a94ac04ce0b *dllord.dll
 5f882f35ab12da50173c89179403c78eb7ffd32e *dllord-ld.exe
-3f812459b0361d42bd37ff80f05549b794914bd7 *dllweirdexp.dll
+909c8de1f62b34a2023dbb8c5c61317eb59fda4f *dllweirdexp.dll
 9532aaea6a2942e9a6d44510443095c2af3bf42d *dllweirdexp-ld.exe
 dd6430c90777e359efac2d0c6c5fa72351e5084b *imports.exe
 301702f349215874b274283263eb65302b2681da *imports_mixed.exe
