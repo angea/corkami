@@ -20,3 +20,4 @@ dllemptyexp-ld.exe
 dllord-ld.exe
 dllnoreloc-ld.exe
 dllnoexp-dynld.exe
+dllfw-ld.exe
