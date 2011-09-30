@@ -29,7 +29,7 @@ DLL loading:
  * statically loaded DLL with weird export name
  * statically loaded DLL with empty export name
  * DLL export by ordinal called
- * DLL with no relocation called (direct call)
+ * DLL with no relocation (with direct call)
  * dynamically loading export-less DLL
   # loading dll
   # DLL EntryPoint called on attach

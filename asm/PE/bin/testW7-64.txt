@@ -1,0 +1,6 @@
+Low alignments:
+ * tiny 268 bytes PE32 (W7 32b/64b)
+ * tiny 268 bytes PE32+ (W7 64b only)
+ * Low alignment PE with 6666 sections (W7)
+ * Low alignment PE with no section (W7)
+ * PE with 8192 code sections (W7)
