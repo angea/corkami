@@ -1,4 +1,4 @@
-; dll loader
+; dll loader with corrupted bound imports to call unexpected API
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -94,7 +94,7 @@ _d
 
 dll.dll_iat:
 __imp__export:
-    dd 01001018h
+    dd 01001018h ; corrupted VA of the import
     dd 0
 _d
 
@@ -102,7 +102,6 @@ dll.dll db 'dllbound.dll', 0
 _d
 
 BoundImports:
-; dllbound IMAGE_BOUND_IMPORT_DESCRIPTOR
 dd 31415925h
 dw bounddll - BoundImports
 dw 0

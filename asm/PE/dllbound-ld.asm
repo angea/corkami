@@ -1,4 +1,4 @@
-; dll loader
+; dll loader with bound imports
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -94,7 +94,7 @@ _d
 
 dll.dll_iat:
 __imp__export:
-    dd 01001008h;VDELTA + hndllexport - IMAGEBASE
+    dd 01001008h ;VA of the export of the loaded DLL
     dd 0
 _d
 
@@ -103,14 +103,14 @@ _d
 
 BoundImports:
 ; dllbound IMAGE_BOUND_IMPORT_DESCRIPTOR
-dd 31415925h
+dd 31415925h ; timestamp of the bound DLL
 dw bounddll - BoundImports
 dw 0
 
 ;terminator
 dd 0, 0
 
-bounddll db 'dllbound.dll', 0
+bounddll db 'dllbound.dll', 0 ; we really need to duplicate locally this string... it's a WORD relative offset :(
 
 BOUNDIMPORTSSIZE equ $ - BoundImports
 

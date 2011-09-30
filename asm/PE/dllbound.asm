@@ -1,4 +1,4 @@
-; DLL with minimal export table, and relocations
+; DLL with 2 exports (one normal one 'fake') to test imports binding
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -25,7 +25,7 @@ iend
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
-    at IMAGE_FILE_HEADER.TimeDateStamp,         dd 31415925h
+    at IMAGE_FILE_HEADER.TimeDateStamp,         dd 31415925h ; the timestamp has to match on bound imports. it could be 0 though.
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
     at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
 iend
