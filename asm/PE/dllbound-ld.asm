@@ -1,4 +1,4 @@
-; forwarding dll loader
+; dll loader
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -45,6 +45,8 @@ iend
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd VDELTA + Import_Descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.BoundImportsVA,   dd VDELTA + BoundImports - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.BoundImportsSize,   dd BOUNDIMPORTSSIZE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -54,7 +56,7 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd iround(Section0Size, FILEALIGN)
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
@@ -66,35 +68,18 @@ Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-    push VDELTA + msg
     call [VDELTA + __imp__export]
-    add esp, 1 * 4
-_
-    push 0
-    call [VDELTA + __imp__ExitProcess]
+    retn
 _c
 
-msg db " * forwarded import call via Export", 0ah, 0
-_d
-
 Import_Descriptor:
-kernel32.dll_DESCRIPTOR:
-    dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd VDELTA + kernel32.dll - IMAGEBASE
-    dd VDELTA + kernel32.dll_iat - IMAGEBASE
 dll.dll_DESCRIPTOR:
     dd VDELTA + dll.dll_hintnames - IMAGEBASE
-    dd 0, 0
+    dd -1, -1
     dd VDELTA + dll.dll - IMAGEBASE
     dd VDELTA + dll.dll_iat - IMAGEBASE
 ;terminator
     dd 0, 0, 0, 0, 0
-_d
-
-kernel32.dll_hintnames:
-    dd VDELTA + hnExitProcess - IMAGEBASE
-    dd 0
 _d
 
 dll.dll_hintnames:
@@ -102,31 +87,32 @@ dll.dll_hintnames:
     dd 0
 _d
 
-hnExitProcess:
-    dw 0
-    db 'ExitProcess', 0
-_d
-
 hndllexport:
     dw 0
-    db 'ExitProcess', 0
-_d
-
-kernel32.dll_iat:
-__imp__ExitProcess:
-    dd VDELTA + hnExitProcess - IMAGEBASE
-    dd 0
+    db 'RealExport', 0
 _d
 
 dll.dll_iat:
 __imp__export:
-    dd VDELTA + hndllexport - IMAGEBASE
+    dd 01001008h;VDELTA + hndllexport - IMAGEBASE
     dd 0
 _d
 
-kernel32.dll db 'kernel32.dll', 0
-dll.dll db 'dllfw.dll', 0
+dll.dll db 'dllbound.dll', 0
 _d
+
+BoundImports:
+; dllbound IMAGE_BOUND_IMPORT_DESCRIPTOR
+dd 31415925h
+dw bounddll - BoundImports
+dw 0
+
+;terminator
+dd 0, 0
+
+bounddll db 'dllbound.dll', 0
+
+BOUNDIMPORTSSIZE equ $ - BoundImports
 
 align FILEALIGN, db 0
 

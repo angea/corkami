@@ -22,3 +22,5 @@ dllnoreloc-ld.exe
 dllnoexp-dynld.exe
 dllfw-ld.exe
 dllfwloop-ld.exe
+dllbound-ld.exe
+dllbound-redirld.exe

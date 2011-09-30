@@ -74,7 +74,7 @@ _
     call [VDELTA + __imp__ExitProcess]
 _c
 
-msg db " * forwarded import call via forwarding loops", 0
+msg db " * forwarded import call via forwarding loops", 0ah, 0
 _d
 
 Import_Descriptor:
