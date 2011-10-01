@@ -32,5 +32,8 @@ dllfwloop-ld.exe
 dllbound-ld.exe
 dllbound-redirld.exe
 tiny.exe
+echo ImageBase:
+ibnull.exe
+ibkernel.exe
 echo EntryPoint:
 virtEP.exe

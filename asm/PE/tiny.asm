@@ -11,7 +11,7 @@ IMAGEBASE equ 400000h
 org IMAGEBASE
 
 DOS_HEADER:
-.e_magic       dw 'MZ'
+.e_magic dw 'MZ'
 
 align 4, db 0
 
@@ -62,7 +62,7 @@ iend
 istruc IMAGE_DATA_DIRECTORY_13
 
         at IMAGE_DATA_DIRECTORY_13.ImportsVA,   dd Import_Descriptor - IMAGEBASE
-        
+
 Import_Descriptor:
 ;msvcrt.dll_DESCRIPTOR
     dd msvcrt.dll_iat - IMAGEBASE
@@ -72,23 +72,17 @@ Import_Descriptor:
 ;terminator
     dd 0, 0, 0, 0
         at IMAGE_DATA_DIRECTORY_13.DebugSize, dd 0 ; required for safety under XP
-        
+
         at IMAGE_DATA_DIRECTORY_13.TLSVA, dd 0 ; required for safety under XP
-        
+
         at IMAGE_DATA_DIRECTORY_13.IATVA,     dd ImportsAddressTable - IMAGEBASE ; required under XP
         at IMAGE_DATA_DIRECTORY_13.IATSize,   dd IMPORTSADDRESSTABLESIZE    ; required under XP
 iend
 
 message db " * 268b universal tiny PE (XP-W7x64)", 0ah, 0
 
-    
-
-
-
 times 268 - 266 db 0
 SIZEOFIMAGE equ 268
-
-;filling up to 268 bytes for W7 x64, irritating... :(
 
 struc IMAGE_DATA_DIRECTORY_13
     .ExportsVA        resd 1

@@ -2,13 +2,13 @@
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-; YASM has a bug, it can't get its own line number correct after too many repeats and align. 
+; YASM has a bug, it can't get its own line number correct after too many repeats and align.
 ; so jmp $ will not even be correct, so alignments have to be hardcoded :(
 
 %include '..\consts.inc'
 
 IMAGEBASE equ 010000h
-SECTIONALIGN equ 1000h ; smallest section alignment 
+SECTIONALIGN equ 1000h ; smallest section alignment
 FILEALIGN equ 200h
 
 

@@ -66,7 +66,7 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
-; actual EntryPoint starts here... 
+; actual EntryPoint starts here...
 ; there will be a virtual 00 before, so 00C0 will be executed as `add al, al`
 EntryPoint:
     db 0c0h
