@@ -42,3 +42,4 @@ ibkernel.exe
 reloccrypt.exe
 echo EntryPoint:
 virtEP.exe
+bigsec.exe
