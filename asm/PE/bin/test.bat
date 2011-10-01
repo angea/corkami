@@ -15,8 +15,13 @@ echo  * statically loaded DLL and export call
 dll-ld.exe
 dll-dynld.exe
 dll-dynunicld.exe
+
 rem disabled until found a suitable host
 rem dll-webdavld.exe
+
+rem disabled because of the non-console output
+rem pdf.exe
+
 dllweirdexp-ld.exe
 dllemptyexp-ld.exe
 dllord-ld.exe
@@ -26,5 +31,6 @@ dllfw-ld.exe
 dllfwloop-ld.exe
 dllbound-ld.exe
 dllbound-redirld.exe
+tiny.exe
 echo EntryPoint:
 virtEP.exe

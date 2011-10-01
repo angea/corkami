@@ -75,4 +75,4 @@ Import_Descriptor:
     dd 0, 0, 0, 0, 0
 
 ;filling up to 268 bytes :(
-times 14 db 0
+times 10 db 0
