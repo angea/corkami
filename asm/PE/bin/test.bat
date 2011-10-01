@@ -5,6 +5,7 @@ echo PE with many sections:
 echo TLS:
 tls.exe
 tls_obfuscation.exe
+exportobf.exe
 echo Imports loading:
 imports.exe
 imports_noint.exe
