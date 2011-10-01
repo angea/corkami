@@ -1,4 +1,4 @@
-; a normal PE (dodgy, I know)
+; a normal PE (fishy, I know)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 

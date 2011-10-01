@@ -1,6 +1,21 @@
 ; PE with decryption via relocations
+; relocations itself are fixed by relocations
+; some relocations are not using the common HIGHLOW
 
 ; Ange Albertini, BSD LICENCE 2009-2011
+
+IMAGE_REL_BASED_ABSOLUTE equ 0
+IMAGE_REL_BASED_HIGH equ 1
+IMAGE_REL_BASED_LOW equ 2
+;IMAGE_REL_BASED_HIGHLOW equ 3
+IMAGE_REL_BASED_HIGHADJ equ 4
+IMAGE_REL_BASED_MIPS_JMPADDR equ 5
+IMAGE_REL_BASED_SECTION equ 6
+IMAGE_REL_BASED_REL32 equ 7
+IMAGE_REL_BASED_MIPS_JMPADDR16 equ 9
+IMAGE_REL_BASED_IA64_IMM64 equ 9
+IMAGE_REL_BASED_DIR64 equ 10
+IMAGE_REL_BASED_HIGH3ADJ equ 11
 
 %include '..\consts.inc'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
@@ -70,23 +85,23 @@ db 0,0
 EntryPoint:
 
 reloc01:            ;68h push VDELTA + msg
-crypt168 db 0
+crypt168 db 1
     dd VDELTA + msg
 
 reloc22:            ; FF15 call [VDELTA + __imp__printf]
-crypt2ff db 0
-crypt315 db 0
+crypt2ff db 2
+crypt315 db 3
     dd VDELTA + __imp__printf
 
-crypt483 db 0       ;83C404 add esp, 1 * 4
-crypt5c4 db 0
+crypt483 db 4       ;83C404 add esp, 1 * 4
+crypt5c4 db 5
 crypt604 db 0
 
-crypt76a db 0, 0    ;6A00 push 0
+crypt76a db 7, 0    ;6A00 push 0
 
 reloc42:            ;FF15 call [VDELTA + __imp__ExitProcess]
-crypt8ff db 0
-crypt915 db 0
+crypt8ff db 35
+crypt915 db 1
     dd VDELTA + __imp__ExitProcess
 _c
 
@@ -139,31 +154,54 @@ kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
 
-%macro cryptblock 2
-block_start%1:
-    .VirtualAddress dd VDELTA + %1 - IMAGEBASE - 2
-    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK%1
-times %2 dw (IMAGE_REL_BASED_HIGHLOW << 12)
-BASE_RELOC_SIZE_OF_BLOCK%1 equ $ - block_start%1
-%endmacro
-
 Directory_Entry_Basereloc:
+; this block will fix the SizeOfBlock of the next block
+block_start:
+    .VirtualAddress dd VDELTA + relocated_reloc - IMAGEBASE
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) ; + 10000h
+    dw (IMAGE_REL_BASED_ABSOLUTE << 12)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) ; + 10000h
+    dw (IMAGE_REL_BASED_HIGHADJ << 12)
+    dw (IMAGE_REL_BASED_HIGH    << 12) ; + 00001h
+    dw (IMAGE_REL_BASED_LOW     << 12) ; + 0
+    dw (IMAGE_REL_BASED_SECTION << 12)
+    dw (IMAGE_REL_BASED_REL32 << 12)
+;dw (IMAGE_REL_BASED_MIPS_JMPADDR << 12)
+;dw (IMAGE_REL_BASED_IA64_IMM64 << 12)
+;dw (IMAGE_REL_BASED_DIR64 << 12)
+BASE_RELOC_SIZE_OF_BLOCK equ $ - block_start
+
+;this block is actually the genuine relocations
 block_start0:
     .VirtualAddress dd VDELTA + reloc01 - IMAGEBASE
-    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0
+relocated_reloc:
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0 - 20001h
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc22 + 2 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
 BASE_RELOC_SIZE_OF_BLOCK0 equ $ - block_start0
-cryptblock crypt168, 068h
-cryptblock crypt2ff, 0ffh
-cryptblock crypt315, 015h
-cryptblock crypt483, 083h
-cryptblock crypt5c4, 0c4h
-cryptblock crypt604, 004h
-cryptblock crypt76a, 06ah
-cryptblock crypt8ff, 0ffh
-cryptblock crypt915, 015h
+
+;these blocks are obviously the one to implement the decryption
+
+%macro cryptblock 2
+block_start%1:
+    .VirtualAddress dd VDELTA + %1 - IMAGEBASE
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK%1
+    dw (IMAGE_REL_BASED_ABSOLUTE << 12)
+    times %2 dw (IMAGE_REL_BASED_HIGH << 12)
+BASE_RELOC_SIZE_OF_BLOCK%1 equ $ - block_start%1
+%endmacro
+
+cryptblock crypt168, 068h - 1
+cryptblock crypt2ff, 0ffh - 2
+cryptblock crypt315, 015h - 3
+cryptblock crypt483, 083h - 4
+cryptblock crypt5c4, 0c4h - 5
+cryptblock crypt604, 004h - 2
+cryptblock crypt76a, 06ah - 7
+cryptblock crypt8ff, 0ffh - 35
+cryptblock crypt915, 015h - 1
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
 
 align FILEALIGN, db 0

@@ -43,4 +43,11 @@ ibkernel.exe
 reloccrypt.exe
 echo EntryPoint:
 virtEP.exe
+echo sections:
 bigsec.exe
+dupsec.exe
+appendedsecttbl.exe
+appendedhdr.exe
+footer.exe
+bottomsecttbl.exe
+rem duphead.exe (broken ATM)

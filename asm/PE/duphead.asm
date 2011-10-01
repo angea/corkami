@@ -1,4 +1,4 @@
-; PE with virtually big section
+; a PE with a section mapping the header (broken atm)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -6,7 +6,6 @@
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 400000h
-extravirtualspace equ 010000h
 org IMAGEBASE
 bits 32
 
@@ -37,12 +36,13 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd VDELTA + SIZEOFIMAGE
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2200h
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
+DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd VDELTA + Import_Descriptor - IMAGEBASE
 iend
@@ -50,53 +50,30 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd Section0Size + SECTIONALIGN * extravirtualspace
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd Section0Size
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd iround(Section0Size, FILEALIGN)
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 ALIGN FILEALIGN, db 0
 
-SIZEOFHEADERS equ $ - IMAGEBASE
 
 Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 EntryPoint:
-VirtualStart equ (extravirtualspace - 1) * SECTIONALIGN + IMAGEBASE
-    mov edi, VirtualStart
-
-    ; 68 xxxxxxxx push VDELTA + Msg
-    mov al, 68h
-        stosb
-    mov eax, VDELTA + Msg
-        stosd
-    ; ff15 xxxxxxxx call [VDELTA + __imp__ExitProcess]
-    mov ax, 015ffh
-        stosw
-    mov eax, VDELTA + __imp__printf
-        stosd
-    ; 83c404 add esp, 1 * 4
-     mov ax, 0c483h
-        stosw
-    mov al, 4
-        stosb
-    ; 6a 00 push 0
-    mov ax, 0006ah
-        stosw
-    ; ff15 xxxxxxxx call [VDELTA + __imp__ExitProcess]
-    mov ax, 015ffh
-        stosw
-    mov eax, VDELTA + __imp__ExitProcess
-        stosd
-    jmp VirtualStart - VDELTA
+    push VDELTA + Msg
+    call [VDELTA + __imp__printf]
+    add esp, 1 * 4
+_
+    push 0
+    call [VDELTA + __imp__ExitProcess]
 _c
 
-Msg db " * PE with virtually oversized section", 0ah, 0
-
+Msg db " * PE with several sections with the same physical content", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -146,7 +123,7 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 align FILEALIGN, db 0
+Section0Size EQU 200h
 
-Section0Size EQU $ - Section0Start
-
-SIZEOFIMAGE EQU $ - IMAGEBASE + SECTIONALIGN * extravirtualspace
+SIZEOFIMAGE EQU 1200h
+SIZEOFHEADERS equ $ - IMAGEBASE
