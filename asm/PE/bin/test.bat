@@ -27,13 +27,17 @@ dllemptyexp-ld.exe
 dllord-ld.exe
 dllnoreloc-ld.exe
 dllnoexp-dynld.exe
+echo export forwarding:
 dllfw-ld.exe
 dllfwloop-ld.exe
+echo bound imports:
 dllbound-ld.exe
 dllbound-redirld.exe
+echo tiny PE
 tiny.exe
 echo ImageBase:
 ibnull.exe
 ibkernel.exe
+reloccrypt.exe
 echo EntryPoint:
 virtEP.exe
