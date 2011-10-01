@@ -1,4 +1,5 @@
 @echo off
+normal.exe
 echo PE with many sections:
 96emptysections.exe
 96workingsections.exe
