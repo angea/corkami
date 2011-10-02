@@ -6,7 +6,8 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe dllnoexp.dll dllnoexp-dynld.exe \
     dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe dllbound.dll dllbound-ld.exe dllbound-redirld.exe \
     dll-webdavld.exe virtEP.exe pdf.exe tiny.exe ibnull.exe ibkernel.exe reloccrypt.exe exportobf.exe bigsec.exe \
-    normal.exe truncatedlast.exe dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe duphead.exe
+    normal.exe truncatedlast.exe dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe duphead.exe \
+    dllbound2.dll dllbound-redirld2.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 

@@ -1,4 +1,4 @@
-; dll loader with bound imports
+; dll loader with corrupted bound imports to call an unexpected API from another DLL
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -93,7 +93,7 @@ _d
 
 dll.dll_iat:
 __imp__export:
-    dd 01001008h ;VA of the export of the loaded DLL
+    dd 1001000h ; the same 
     dd 0
 _d
 
@@ -101,15 +101,14 @@ dll.dll db 'dllbound.dll', 0
 _d
 
 BoundImports:
-; dllbound IMAGE_BOUND_IMPORT_DESCRIPTOR
-dd 31415925h ; timestamp of the bound DLL
+dd 27182818h
 dw bounddll - BoundImports
 dw 0
 
 ;terminator
 dd 0, 0
 
-bounddll db 'dllbound.dll', 0 ; we really need to duplicate locally this string... it's a WORD relative offset :(
+bounddll db 'dllbound2.dll', 0
 
 align FILEALIGN, db 0
 

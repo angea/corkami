@@ -1,4 +1,4 @@
-; DLL with 2 exports (one normal one 'fake') to test imports binding
+; extra DLL to test corruption at dll level (different name, different timestamp)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -25,7 +25,7 @@ iend
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
-    at IMAGE_FILE_HEADER.TimeDateStamp,         dd 31415925h ; the timestamp has to match on bound imports. it could be 0 though.
+    at IMAGE_FILE_HEADER.TimeDateStamp,         dd 27182818h ; the timestamp has to match on bound imports. it could be 0 though.
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
     at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
 iend
@@ -70,21 +70,6 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
-EntryPoint:
-    push 1
-    pop eax
-    retn 3 * 4
-_c
-
-__exp__Export:
-reloc11:
-    push VDELTA + export
-reloc22:
-    call [VDELTA + __imp__printf]
-    add esp, 1 * 4
-    retn
-_c
-
 __exp__FakeExport:
 reloc31:
     push VDELTA + fakeexport
@@ -94,8 +79,13 @@ reloc42:
     retn
 _c
 
-export     db " * export called (bound imports)", 0ah, 0
-fakeexport db " * unexpected export called (corrupted bound imports)", 0ah, 0
+EntryPoint:
+    push 1
+    pop eax
+    retn 3 * 4
+_c
+
+fakeexport db " * export of an unexpected DLL called (corrupted bound imports)", 0ah, 0
 _d
 
 msvcrt.dll_iat:
@@ -139,13 +129,11 @@ Exports_Directory:
 _d
 
 address_of_functions:
-    dd VDELTA + __exp__Export - IMAGEBASE
     dd VDELTA + __exp__FakeExport - IMAGEBASE
 NUMBER_OF_FUNCTIONS equ ($ - address_of_functions) / 4
 _d
 
 address_of_names:
-    dd VDELTA + a__exp__Export - IMAGEBASE
     dd VDELTA + a__exp__FakeExport - IMAGEBASE
 NUMBER_OF_NAMES equ ($ - address_of_names) / 4
 
@@ -154,7 +142,6 @@ address_of_name_ordinals:
     dw 0, 1
 _d
 
-a__exp__Export db 'RealExport', 0
 a__exp__FakeExport db 'FakeExport', 0
 
 _d
@@ -163,12 +150,10 @@ EXPORT_SIZE equ $ - Exports_Directory
 
 Directory_Entry_Basereloc:
 block_start0:
-    .VirtualAddress dd VDELTA + reloc11 - IMAGEBASE
+    .VirtualAddress dd VDELTA + reloc31 - IMAGEBASE
     .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc11 + 1 - reloc11)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc22 + 2 - reloc11)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc31 + 1 - reloc11)
-    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc11)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc31 + 1 - reloc31)
+    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc31)
 BASE_RELOC_SIZE_OF_BLOCK0 equ $ - block_start0
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc

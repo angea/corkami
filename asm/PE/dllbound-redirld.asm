@@ -46,7 +46,6 @@ DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd VDELTA + Import_Descriptor - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.BoundImportsVA,   dd VDELTA + BoundImports - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.BoundImportsSize,   dd BOUNDIMPORTSSIZE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -110,8 +109,6 @@ dw 0
 dd 0, 0
 
 bounddll db 'dllbound.dll', 0
-
-BOUNDIMPORTSSIZE equ $ - BoundImports
 
 align FILEALIGN, db 0
 

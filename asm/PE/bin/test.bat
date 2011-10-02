@@ -35,6 +35,7 @@ dllfwloop-ld.exe
 echo bound imports:
 dllbound-ld.exe
 dllbound-redirld.exe
+dllbound-redirld2.exe
 echo tiny PE
 tiny.exe
 echo ImageBase:
