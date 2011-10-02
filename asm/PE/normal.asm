@@ -3,7 +3,6 @@
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include '..\consts.inc'
-%define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 400000h
 org IMAGEBASE
@@ -42,7 +41,6 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
-DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
 iend
@@ -58,6 +56,8 @@ istruc IMAGE_SECTION_HEADER
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE
+
+db "this will not be in memory, as it's between the declared header and before the first section"
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 Section0Start:
@@ -121,4 +121,3 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 align FILEALIGN, db 0
-

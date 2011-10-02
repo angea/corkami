@@ -3,7 +3,6 @@
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include 'consts.inc'
-%define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 33000000h
 org IMAGEBASE
@@ -36,7 +35,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd VDELTA + SIZEOFIMAGE
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -44,49 +43,47 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd VDELTA + Import_Descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd Section0Size
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd iround(Section0Size, FILEALIGN)
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
-ALIGN FILEALIGN, db 0
-
 SIZEOFHEADERS equ $ - IMAGEBASE
 
+section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 Section0Start:
-VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
 Import_Descriptor:
 kernel32.dll_DESCRIPTOR:
-    dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
+    dd kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd VDELTA + kernel32.dll - IMAGEBASE
-    dd VDELTA + kernel32.dll_iat - IMAGEBASE
+    dd kernel32.dll - IMAGEBASE
+    dd kernel32.dll_iat - IMAGEBASE
 dll.dll_DESCRIPTOR:
-    dd VDELTA + dll.dll_hintnames - IMAGEBASE
+    dd dll.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd VDELTA + dll.dll - IMAGEBASE
-    dd VDELTA + dll.dll_iat - IMAGEBASE
+    dd dll.dll - IMAGEBASE
+    dd dll.dll_iat - IMAGEBASE
 ;terminator
     dd 0, 0, 0, 0, 0
 _d
 
 kernel32.dll_hintnames:
-    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd hnExitProcess - IMAGEBASE
     dd 0
 _d
 
 dll.dll_hintnames:
-    dd VDELTA + hndllexport - IMAGEBASE
+    dd hndllexport - IMAGEBASE
     dd 0
 _d
 
@@ -102,12 +99,12 @@ _d
 
 kernel32.dll_iat:
 __imp__ExitProcess:
-    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd hnExitProcess - IMAGEBASE
     dd 0
 _d
 dll.dll_iat:
 __imp__export:
-    dd VDELTA + hndllexport - IMAGEBASE
+    dd hndllexport - IMAGEBASE
     dd 0
 _d
 
@@ -116,7 +113,3 @@ dll.dll db 'dllextep.dll', 0
 _d
 
 align FILEALIGN, db 0
-
-Section0Size EQU $ - Section0Start
-
-SIZEOFIMAGE EQU $ - IMAGEBASE
