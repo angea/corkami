@@ -67,7 +67,7 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 
 align FILEALIGN, db 0
 
-section nobits vstart=IMAGEBASE + 2000h
+section nobits vstart=IMAGEBASE + SECTIONALIGN * 2
 Msg db " * sections in wrong physical order", 0ah, 0
 _d
 
@@ -116,9 +116,10 @@ _d
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
+
 align FILEALIGN, db 0
 
-section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
+section progbits vstart=IMAGEBASE + SECTIONALIGN
 EntryPoint:
     push Msg
     call [__imp__printf]

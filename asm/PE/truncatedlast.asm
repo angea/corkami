@@ -50,7 +50,7 @@ SectionHeader:
 istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd SECTION0SIZE
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
@@ -67,9 +67,8 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 Section0Start:
-
 EntryPoint:
-    push Msg - Section1Start + SECTIONALIGN * 2 + IMAGEBASE
+    push Msg
     call [__imp__printf]
     add esp, 1 * 4
 _
@@ -122,6 +121,7 @@ _d
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
+
 SECTION0SIZE EQU $ - Section0Start
 
 _d
@@ -130,7 +130,7 @@ db 'this will be in memory even if physically and virtually (but before rounding
 
 align FILEALIGN, db 0
 
+section nobits vstart=IMAGEBASE + 2 * SECTIONALIGN
 Section1Start:
 Msg db " * last section truncated", 0ah, 0
-_d
 SECTION1SIZE equ $ - Section1Start
