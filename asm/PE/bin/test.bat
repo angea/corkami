@@ -36,7 +36,9 @@ ibnull.exe
 ibkernel.exe
 reloccrypt.exe
 echo EntryPoint:
+nullEP.exe
 virtEP.exe
+dllextep-ld.exe
 echo sections:
 bigsec.exe
 dupsec.exe

@@ -1,11 +1,11 @@
-; PE with EntryPoint in virtual space
+; PE with external EntryPoint in fixed address DLL
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include '..\consts.inc'
+%include 'consts.inc'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
-IMAGEBASE equ 400000h
+IMAGEBASE equ 33000000h
 org IMAGEBASE
 bits 32
 
@@ -31,7 +31,7 @@ iend
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd VDELTA + EntryPoint - IMAGEBASE - 1 ; -1 to start in virtual space
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd 1001008h - IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
@@ -65,32 +65,17 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
-; actual EntryPoint starts here...
-; there will be a virtual 00 before, so 00C0 will be executed as `add al, al`
-EntryPoint:
-    db 0c0h
-    push VDELTA + Msg
-    call [VDELTA + __imp__printf]
-    add esp, 1 * 4
-_
-    push 0
-    call [VDELTA + __imp__ExitProcess]
-_c
-
-Msg db " * virtual EntryPoint", 0ah, 0
-_d
-
 Import_Descriptor:
-;kernel32.dll_DESCRIPTOR:
+kernel32.dll_DESCRIPTOR:
     dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
     dd VDELTA + kernel32.dll - IMAGEBASE
     dd VDELTA + kernel32.dll_iat - IMAGEBASE
-;msvcrt.dll_DESCRIPTOR:
-    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
+dll.dll_DESCRIPTOR:
+    dd VDELTA + dll.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd VDELTA + msvcrt.dll - IMAGEBASE
-    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
+    dd VDELTA + dll.dll - IMAGEBASE
+    dd VDELTA + dll.dll_iat - IMAGEBASE
 ;terminator
     dd 0, 0, 0, 0, 0
 _d
@@ -98,32 +83,36 @@ _d
 kernel32.dll_hintnames:
     dd VDELTA + hnExitProcess - IMAGEBASE
     dd 0
-msvcrt.dll_hintnames:
-    dd VDELTA + hnprintf - IMAGEBASE
+_d
+
+dll.dll_hintnames:
+    dd VDELTA + hndllexport - IMAGEBASE
     dd 0
 _d
 
 hnExitProcess:
     dw 0
     db 'ExitProcess', 0
-hnprintf:
+_d
+
+hndllexport:
     dw 0
-    db 'printf', 0
+    db 'export', 0
 _d
 
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd VDELTA + hnExitProcess - IMAGEBASE
     dd 0
-
-msvcrt.dll_iat:
-__imp__printf:
-    dd VDELTA + hnprintf - IMAGEBASE
+_d
+dll.dll_iat:
+__imp__export:
+    dd VDELTA + hndllexport - IMAGEBASE
     dd 0
 _d
 
 kernel32.dll db 'kernel32.dll', 0
-msvcrt.dll db 'msvcrt.dll', 0
+dll.dll db 'dllextep.dll', 0
 _d
 
 align FILEALIGN, db 0

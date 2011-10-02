@@ -1,4 +1,4 @@
-; PE with EntryPoint in virtual space
+; PE with null EntryPoint
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -12,8 +12,14 @@ bits 32
 SECTIONALIGN equ 1000h
 FILEALIGN equ 200h
 
+EntryPoint:
 istruc IMAGE_DOS_HEADER
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
+    push VDELTA + Msg
+    call [VDELTA + __imp__printf]
+    add esp, 1 * 4
+    push 0
+    call [VDELTA + __imp__ExitProcess]
     at IMAGE_DOS_HEADER.e_lfanew, dd NT_Signature - IMAGEBASE
 iend
 
@@ -31,7 +37,7 @@ iend
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd VDELTA + EntryPoint - IMAGEBASE - 1 ; -1 to start in virtual space
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd 0
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
@@ -65,19 +71,7 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
-; actual EntryPoint starts here...
-; there will be a virtual 00 before, so 00C0 will be executed as `add al, al`
-EntryPoint:
-    db 0c0h
-    push VDELTA + Msg
-    call [VDELTA + __imp__printf]
-    add esp, 1 * 4
-_
-    push 0
-    call [VDELTA + __imp__ExitProcess]
-_c
-
-Msg db " * virtual EntryPoint", 0ah, 0
+Msg db " * null EntryPoint", 0ah, 0
 _d
 
 Import_Descriptor:

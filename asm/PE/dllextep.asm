@@ -1,11 +1,12 @@
-; PE with EntryPoint in virtual space
+; DLL with no relocations for external EntryPoint execution
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include '..\consts.inc'
+%include 'consts.inc'
+
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
-IMAGEBASE equ 400000h
+IMAGEBASE equ 1000000h
 org IMAGEBASE
 bits 32
 
@@ -25,13 +26,13 @@ istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
-    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
+    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
 iend
 
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd VDELTA + EntryPoint - IMAGEBASE - 1 ; -1 to start in virtual space
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd VDELTA + EntryPoint - IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
@@ -44,7 +45,8 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd VDELTA + Import_Descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd VDELTA + Exports_Directory - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd VDELTA + import_descriptor - IMAGEBASE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -65,56 +67,21 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 Section0Start:
 VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
 
-; actual EntryPoint starts here...
-; there will be a virtual 00 before, so 00C0 will be executed as `add al, al`
 EntryPoint:
-    db 0c0h
-    push VDELTA + Msg
-    call [VDELTA + __imp__printf]
-    add esp, 1 * 4
-_
-    push 0
-    call [VDELTA + __imp__ExitProcess]
+    push 1
+    pop eax
+    retn 3 * 4
 _c
 
-Msg db " * virtual EntryPoint", 0ah, 0
-_d
+__exp__Export:
+    push VDELTA + export
+    call [VDELTA + __imp__printf]
+    add esp, 1 * 4
+    retn
+_c
 
-Import_Descriptor:
-;kernel32.dll_DESCRIPTOR:
-    dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd VDELTA + kernel32.dll - IMAGEBASE
-    dd VDELTA + kernel32.dll_iat - IMAGEBASE
-;msvcrt.dll_DESCRIPTOR:
-    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd VDELTA + msvcrt.dll - IMAGEBASE
-    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
-;terminator
-    dd 0, 0, 0, 0, 0
+export db " * external EntryPoint (in fixed address DLL)", 0ah, 0
 _d
-
-kernel32.dll_hintnames:
-    dd VDELTA + hnExitProcess - IMAGEBASE
-    dd 0
-msvcrt.dll_hintnames:
-    dd VDELTA + hnprintf - IMAGEBASE
-    dd 0
-_d
-
-hnExitProcess:
-    dw 0
-    db 'ExitProcess', 0
-hnprintf:
-    dw 0
-    db 'printf', 0
-_d
-
-kernel32.dll_iat:
-__imp__ExitProcess:
-    dd VDELTA + hnExitProcess - IMAGEBASE
-    dd 0
 
 msvcrt.dll_iat:
 __imp__printf:
@@ -122,12 +89,63 @@ __imp__printf:
     dd 0
 _d
 
-kernel32.dll db 'kernel32.dll', 0
+import_descriptor:
+;msvcrt.dll_DESCRIPTOR:
+    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
+    dd 0
+    dd 0
+    dd VDELTA + msvcrt.dll - IMAGEBASE
+    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
+
+    times 5 dd 0
+
+msvcrt.dll_hintnames:
+    dd VDELTA + hnprintf - IMAGEBASE
+    dd 0
+
+hnprintf:
+    dw 0
+    db 'printf', 0
+
 msvcrt.dll db 'msvcrt.dll', 0
+
+Exports_Directory:
+  Characteristics       dd 0
+  TimeDateStamp         dd 0
+  MajorVersion          dw 0
+  MinorVersion          dw 0
+  Name                  dd VDELTA + aDllName - IMAGEBASE
+  Base                  dd 0
+  NumberOfFunctions     dd NUMBER_OF_FUNCTIONS
+  NumberOfNames         dd NUMBER_OF_NAMES
+  AddressOfFunctions    dd VDELTA + address_of_functions - IMAGEBASE
+  AddressOfNames        dd VDELTA + address_of_names - IMAGEBASE
+  AddressOfNameOrdinals dd VDELTA + address_of_name_ordinals - IMAGEBASE
+_d
+
+aDllName db 'dll.dll', 0
+_d
+
+
+address_of_functions:
+    dd VDELTA + __exp__Export - IMAGEBASE
+NUMBER_OF_FUNCTIONS equ ($ - address_of_functions) / 4
+_d
+
+address_of_names:
+    dd VDELTA + a__exp__Export - IMAGEBASE
+NUMBER_OF_NAMES equ ($ - address_of_names) / 4
+
+_d
+address_of_name_ordinals:
+    dw 0
+_d
+
+a__exp__Export:
+db 'export'
+    db 0
 _d
 
 align FILEALIGN, db 0
-
-Section0Size EQU $ - Section0Start
-
-SIZEOFIMAGE EQU $ - IMAGEBASE
+SIZEOFIMAGE equ $ - IMAGEBASE
+Section0Size equ $ - Section0Start
