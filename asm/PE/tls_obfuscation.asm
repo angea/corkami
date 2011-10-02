@@ -80,7 +80,7 @@ tls5:
 tls:
 _c
 
-message db " * PE with fake TLS callbacks for obfuscation", 0ah, 0
+message db " * fake TLS callbacks for obfuscation", 0ah, 0
 _d
 
 Import_Descriptor:

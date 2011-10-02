@@ -32,7 +32,7 @@ _
     call [VDELTA + __imp__ExitProcess]
 _c
 
-Msg db " a PE with NT headers in appended data", 0ah, 0
+Msg db " * NT headers in appended data", 0ah, 0
 _d
 
 Import_Descriptor:

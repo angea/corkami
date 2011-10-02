@@ -62,7 +62,7 @@ _
     call [VDELTA + __imp__ExitProcess]
 _c
 
-Msg db " * PE with the section table in appended data", 0ah, 0
+Msg db " * section table in appended data", 0ah, 0
 _d
 
 Import_Descriptor:

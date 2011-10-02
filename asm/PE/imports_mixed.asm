@@ -74,7 +74,7 @@ EntryPoint:
 _c
 
 
-message db " * PE with mixed case imported dlls", 0ah, 0
+message db " * mixed-case imported dlls", 0ah, 0
 _d
 
 Import_Descriptor:

@@ -77,7 +77,7 @@ Export3 equ $ + 1
     retn
 _c
 
-export db " * PE with fake exports to disrupt disassembly", 0ah, 0
+export db " * fake exports to disrupt disassembly", 0ah, 0
 _d
 
 msvcrt.dll_iat:

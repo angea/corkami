@@ -32,7 +32,7 @@ _
     call [VDELTA + __imp__ExitProcess]
 _c
 
-Msg db " * PE with NT headers at the bottom of the file", 0ah, 0
+Msg db " * NT headers at the bottom of the file", 0ah, 0
 _d
 
 Import_Descriptor:

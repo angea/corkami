@@ -135,7 +135,7 @@ db 'this will be in memory even if physically and virtually (but before rounding
 align FILEALIGN, db 0
 
 Section1Start:
-Msg db " * a PE with last section truncated", 0ah, 0
+Msg db " * last section truncated", 0ah, 0
 _d
 SECTION1SIZE equ $ - Section1Start
 

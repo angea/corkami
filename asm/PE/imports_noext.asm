@@ -74,7 +74,7 @@ EntryPoint:
 _c
 
 
-message db " * PE with extensions-less imported dlls (>= XP)", 0ah, 0
+message db " * extensions-less imported dlls (>= XP)", 0ah, 0
 _d
 
 Import_Descriptor:

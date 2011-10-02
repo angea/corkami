@@ -74,7 +74,7 @@ EntryPoint:
 _c
 
 
-message db " * PE with standard DLL import", 0ah, 0
+message db " * standard DLL import", 0ah, 0
 _d
 
 Import_Descriptor:

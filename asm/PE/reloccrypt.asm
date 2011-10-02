@@ -105,7 +105,7 @@ crypt915 db 1
     dd VDELTA + __imp__ExitProcess
 _c
 
-msg db " * PE with decryption via relocations", 0ah, 0
+msg db " * decryption via relocations", 0ah, 0
 _d
 
 Import_Descriptor:

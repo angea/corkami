@@ -78,7 +78,7 @@ reloc42:
     call [VDELTA + __imp__ExitProcess]
 _c
 
-msg db " * PE with null IMAGEBASE (and relocations)", 0ah, 0
+msg db " * null IMAGEBASE (and relocations)", 0ah, 0
 
 _d
 

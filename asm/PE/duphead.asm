@@ -73,7 +73,7 @@ _
     call [VDELTA + __imp__ExitProcess]
 _c
 
-Msg db " * PE with several sections with the same physical content", 0ah, 0
+Msg db " * several sections with the same physical content", 0ah, 0
 _d
 
 Import_Descriptor:

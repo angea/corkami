@@ -78,7 +78,7 @@ _
     call [VDELTA + __imp__ExitProcess]
 _c
 
-Msg db " * PE with virtual EntryPoint", 0ah, 0
+Msg db " * virtual EntryPoint", 0ah, 0
 _d
 
 Import_Descriptor:

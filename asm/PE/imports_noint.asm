@@ -74,7 +74,7 @@ EntryPoint:
 _c
 
 
-message db " * PE with no Import Name Table", 0ah, 0
+message db " * no Import Name Table", 0ah, 0
 _d
 
 Import_Descriptor:

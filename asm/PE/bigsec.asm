@@ -95,7 +95,7 @@ VirtualStart equ (extravirtualspace - 1) * SECTIONALIGN + IMAGEBASE
     jmp VirtualStart - VDELTA
 _c
 
-Msg db " * PE with virtually oversized section", 0ah, 0
+Msg db " * virtually oversized section", 0ah, 0
 
 _d
 

@@ -88,7 +88,7 @@ printf:
 _c
 
 TLSMsg dd VDELTA + TLSstart
-TLSstart db " * PE with simple TLS:", 0ah, "  # 1st TLS call", 0ah, 0
+TLSstart db " * simple TLS:", 0ah, "  # 1st TLS call", 0ah, 0
 TLSEnd db "  # 2nd TLS call", 0ah, 0
 Exitproc db "  # EntryPoint executed", 0ah, "  # ExitProcess called", 0ah, 0
 

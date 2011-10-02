@@ -92,7 +92,7 @@ ExitProcess:
     jmp [VDELTA + __imp__ExitProcess]
 _c
 
-message db " * a PE with 96 sections (95 are empty)", 0ah, 0
+message db " * 96 sections (95 are empty)", 0ah, 0
 _d
 
 Import_Descriptor:
