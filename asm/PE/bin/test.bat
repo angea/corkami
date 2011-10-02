@@ -51,3 +51,5 @@ rem duphead.exe (broken ATM)
 rem slackspace.exe (broken ATM)
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
+rem delayimports broken ATM
+shuffledsect.exe

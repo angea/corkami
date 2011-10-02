@@ -58,7 +58,7 @@ iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 SIZEOFHEADERS equ $ - IMAGEBASE
-Section0Start:
+
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
@@ -145,7 +145,5 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 align FILEALIGN, db 0
-
-Section0Size EQU $ - Section0Start
 
 SIZEOFIMAGE EQU $ - IMAGEBASE

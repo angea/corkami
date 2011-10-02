@@ -58,7 +58,7 @@ iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 SIZEOFHEADERS equ $ - IMAGEBASE
-Section0Start:
+
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
@@ -118,7 +118,5 @@ dll.dll db '\\127.0.0.1\dll.dll', 0 ; replace with your server location...
 _d
 
 align FILEALIGN, db 0
-
-Section0Size EQU $ - Section0Start
 
 SIZEOFIMAGE EQU $ - IMAGEBASE

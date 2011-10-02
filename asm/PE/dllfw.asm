@@ -59,7 +59,7 @@ iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 SIZEOFHEADERS equ $ - IMAGEBASE
-Section0Start:
+
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
@@ -105,5 +105,3 @@ _d
 EXPORTS_SIZE equ $ - Exports_Directory
 
 align FILEALIGN, db 0
-SIZEOFIMAGE equ $ - IMAGEBASE
-Section0Size equ $ - Section0Start

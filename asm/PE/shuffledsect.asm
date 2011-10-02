@@ -1,8 +1,8 @@
-; dll loader
+; a PE with sections in wrong order in the section table
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include 'consts.inc'
+%include '..\consts.inc'
 
 IMAGEBASE equ 400000h
 org IMAGEBASE
@@ -35,13 +35,12 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 3 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
-DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
 iend
@@ -51,7 +50,14 @@ SectionHeader:
 istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 2 * FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_READ
+iend
+istruc IMAGE_SECTION_HEADER
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
@@ -59,45 +65,11 @@ NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 SIZEOFHEADERS equ $ - IMAGEBASE
 
-section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
+align FILEALIGN, db 0
 
-EntryPoint:
-    push start
-    call [__imp__printf]
-    add esp, 1 * 4
-_
-    push loading
-    call [__imp__printf]
-    add esp, 1 * 4
-_
-    push dll.dll
-    call [__imp__LoadLibraryA]
-    mov [h], eax
-_
-    push export
-    push eax
-    call [__imp__GetProcAddress]
-    call eax
-_
-    push unloading
-    call [__imp__printf]
-    add esp, 1 * 4
-_
-    push dword [h]
-    call [__imp__FreeLibrary]
-_
-    push 0
-    call [__imp__ExitProcess]
-_c
-
-start db ' * dynamically loaded DLL and export call', 0ah, 0
-loading db '  # loading dll', 0ah, 0
-unloading db '  # unloading dll', 0ah, 0
+section nobits vstart=IMAGEBASE + 2000h
+Msg db " * sections in wrong physical order", 0ah, 0
 _d
-
-h dd 0
-exp dd 0
-_
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
@@ -116,12 +88,7 @@ _d
 
 kernel32.dll_hintnames:
     dd hnExitProcess - IMAGEBASE
-    dd hnLoadLibraryA - IMAGEBASE
-    dd hnFreeLibrary - IMAGEBASE
-    dd hnGetProcAddress - IMAGEBASE
     dd 0
-_d
-
 msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
     dd 0
@@ -130,26 +97,6 @@ _d
 hnExitProcess:
     dw 0
     db 'ExitProcess', 0
-_d
-
-hnLoadLibraryA:
-    dw 0
-    db 'LoadLibraryA', 0
-_d
-
-hnFreeLibrary:
-    dw 0
-    db 'FreeLibrary', 0
-_d
-
-hnGetProcAddress:
-    dw 0
-    db 'GetProcAddress', 0
-_d
-
-export db 'export', 0
-_d
-
 hnprintf:
     dw 0
     db 'printf', 0
@@ -158,14 +105,7 @@ _d
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd hnExitProcess - IMAGEBASE
-__imp__LoadLibraryA:
-    dd hnLoadLibraryA - IMAGEBASE
-__imp__FreeLibrary:
-    dd hnFreeLibrary - IMAGEBASE
-__imp__GetProcAddress:
-    dd hnGetProcAddress - IMAGEBASE
     dd 0
-_d
 
 msvcrt.dll_iat:
 __imp__printf:
@@ -174,10 +114,18 @@ __imp__printf:
 _d
 
 kernel32.dll db 'kernel32.dll', 0
-dll.dll db 'dll.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
-
 align FILEALIGN, db 0
 
-SIZEOFIMAGE EQU $ - IMAGEBASE
+section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
+EntryPoint:
+    push Msg
+    call [__imp__printf]
+    add esp, 1 * 4
+_
+    push 0
+    call [__imp__ExitProcess]
+_c
+
+align FILEALIGN, db 0
