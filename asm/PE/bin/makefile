@@ -7,7 +7,7 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe dllbound.dll dllbound-ld.exe dllbound-redirld.exe \
     dll-webdavld.exe virtEP.exe pdf.exe tiny.exe ibnull.exe ibkernel.exe reloccrypt.exe exportobf.exe bigsec.exe \
     normal.exe truncatedlast.exe dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe duphead.exe \
-    dllbound2.dll dllbound-redirld2.exe
+    dllbound2.dll dllbound-redirld2.exe slackspace.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 

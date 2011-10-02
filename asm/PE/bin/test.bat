@@ -17,13 +17,6 @@ echo  * statically loaded DLL and export call
 dll-ld.exe
 dll-dynld.exe
 dll-dynunicld.exe
-
-rem disabled until found a suitable host
-rem dll-webdavld.exe
-
-rem disabled because of the non-console output
-rem pdf.exe
-
 dllweirdexp-ld.exe
 dllemptyexp-ld.exe
 dllord-ld.exe
@@ -51,4 +44,8 @@ appendedsecttbl.exe
 appendedhdr.exe
 footer.exe
 bottomsecttbl.exe
+truncatedlast.exe
 rem duphead.exe (broken ATM)
+rem slackspace.exe (broken ATM)
+rem dll-webdavld.exe disabled until found a suitable host
+rem pdf.exe disabled because of the non-console output

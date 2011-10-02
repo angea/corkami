@@ -1,4 +1,4 @@
-; a PE with last section truncated
+; ... not sure now...
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -50,7 +50,7 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTION0SIZE
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTION0SIZE ; SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
@@ -128,17 +128,15 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 SECTION0SIZE EQU $ - Section0Start
 
-_d
-times 0A0h db 0
-db 'this will be in memory even if physically and virtually (but before rounding up) out of the section', 0
-
 align FILEALIGN, db 0
 
 Section1Start:
-Msg db " * a PE with last section truncated", 0ah, 0
+Msg db "BROKEN FOR NOW", 0ah, 0
 _d
+
 SECTION1SIZE equ $ - Section1Start
 
 ;align FILEALIGN, db 0
+
 
 SIZEOFIMAGE EQU 3000h
