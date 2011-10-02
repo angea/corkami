@@ -5,6 +5,8 @@ echo PE with many sections:
 96workingsections.exe
 echo TLS:
 tls.exe
+tls_import.exe
+tls_onthefly.exe
 tls_obfuscation.exe
 exportobf.exe
 echo Imports loading:

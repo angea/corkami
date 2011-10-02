@@ -9,7 +9,7 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     ibnull.exe ibkernel.exe reloccrypt.exe exportobf.exe bigsec.exe normal.exe truncatedlast.exe \
     dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe duphead.exe \
     dllbound2.dll dllbound-redirld2.exe slackspace.exe dllextep.dll dllextep-ld.exe nullEP.exe \
-    delayimports.exe shuffledsect.exe
+    delayimports.exe shuffledsect.exe tls_import.exe mz.exe tls_onthefly.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 
