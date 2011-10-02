@@ -89,7 +89,7 @@ times HEADERALIGN db 0 ; align FILEALIGN, db 0
 ; Section0Start
 
 EntryPoint:
-    push VDELTA + message
+    push message
     call printf
     add esp, 1 * 4
     push 0
@@ -97,32 +97,32 @@ EntryPoint:
 int3
 
 printf:
-    jmp [VDELTA + __imp__printf]
+    jmp [__imp__printf]
 ExitProcess:
-    jmp [VDELTA + __imp__ExitProcess]
+    jmp [__imp__ExitProcess]
 int3
 
 ; IMPORT DATA DIRECTORY AND TABLE
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
-    dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
+    dd kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd VDELTA + kernel32.dll - IMAGEBASE
-    dd VDELTA + kernel32.dll_iat - IMAGEBASE
+    dd kernel32.dll - IMAGEBASE
+    dd kernel32.dll_iat - IMAGEBASE
 ;msvcrt.dll_DESCRIPTOR:
-    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
+    dd msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd VDELTA + msvcrt.dll - IMAGEBASE
-    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
+    dd msvcrt.dll - IMAGEBASE
+    dd msvcrt.dll_iat - IMAGEBASE
 ;I'll be back
     times 5 dd 0
 dd 0
 
 kernel32.dll_hintnames:
-    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd hnExitProcess - IMAGEBASE
     dd 0
 msvcrt.dll_hintnames:
-    dd VDELTA + hnprintf - IMAGEBASE
+    dd hnprintf - IMAGEBASE
     dd 0
 dd 0
 
@@ -136,12 +136,12 @@ dd 0
 
 kernel32.dll_iat:
 __imp__ExitProcess:
-    dd VDELTA + hnExitProcess - IMAGEBASE
+    dd hnExitProcess - IMAGEBASE
     dd 0
 
 msvcrt.dll_iat:
 __imp__printf:
-    dd VDELTA + hnprintf - IMAGEBASE
+    dd hnprintf - IMAGEBASE
     dd 0
 dd 0
 

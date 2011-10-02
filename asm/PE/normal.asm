@@ -60,7 +60,6 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 db "this will not be in memory, as it's between the declared header and before the first section"
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
-Section0Start:
 
 EntryPoint:
     push Msg

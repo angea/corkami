@@ -3,7 +3,6 @@
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include 'consts.inc'
-%define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 1000000h
 org IMAGEBASE
@@ -31,12 +30,12 @@ iend
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd VDELTA + EntryPoint - IMAGEBASE
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd VDELTA + SIZEOFIMAGE
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -44,27 +43,24 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd VDELTA + Exports_Directory - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd Exports_Directory - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.ExportsSize,  dd EXPORTS_SIZE    ; exports size is *REQUIRED* in this case
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd Section0Size
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd iround(Section0Size, FILEALIGN)
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
-ALIGN FILEALIGN, db 0
-
 SIZEOFHEADERS equ $ - IMAGEBASE
-
 Section0Start:
-VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
+section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
     push 1
@@ -81,28 +77,28 @@ Exports_Directory:
   Base                  dd 0
   NumberOfFunctions     dd NUMBER_OF_FUNCTIONS
   NumberOfNames         dd NUMBER_OF_NAMES
-  AddressOfFunctions    dd VDELTA + address_of_functions - IMAGEBASE
-  AddressOfNames        dd VDELTA + address_of_names - IMAGEBASE
-  AddressOfNameOrdinals dd VDELTA + address_of_name_ordinals - IMAGEBASE
+  AddressOfFunctions    dd address_of_functions - IMAGEBASE
+  AddressOfNames        dd address_of_names - IMAGEBASE
+  AddressOfNameOrdinals dd address_of_name_ordinals - IMAGEBASE
 _d
 
 address_of_functions:
-    dd VDELTA + adllfwloop_loophere  - IMAGEBASE
-    dd VDELTA + adllfwloop_looponceagain  - IMAGEBASE
-    dd VDELTA + amsvcrt_printf - IMAGEBASE
-    dd VDELTA + adllfwloop_GroundHogDay - IMAGEBASE
-    dd VDELTA + adllfwloop_Yang - IMAGEBASE
-    dd VDELTA + adllfwloop_Ying - IMAGEBASE
+    dd adllfwloop_loophere  - IMAGEBASE
+    dd adllfwloop_looponceagain  - IMAGEBASE
+    dd amsvcrt_printf - IMAGEBASE
+    dd adllfwloop_GroundHogDay - IMAGEBASE
+    dd adllfwloop_Yang - IMAGEBASE
+    dd adllfwloop_Ying - IMAGEBASE
 NUMBER_OF_FUNCTIONS equ ($ - address_of_functions) / 4
 _d
 
 address_of_names:
-    dd VDELTA + a__exp__ExitProcess - IMAGEBASE
-    dd VDELTA + a__exp__LoopHere - IMAGEBASE
-    dd VDELTA + a__exp__LoopOnceAgain - IMAGEBASE
-    dd VDELTA + a__exp__GroundHogDay - IMAGEBASE
-    dd VDELTA + a__exp__Ying - IMAGEBASE
-    dd VDELTA + a__exp__Yang - IMAGEBASE
+    dd a__exp__ExitProcess - IMAGEBASE
+    dd a__exp__LoopHere - IMAGEBASE
+    dd a__exp__LoopOnceAgain - IMAGEBASE
+    dd a__exp__GroundHogDay - IMAGEBASE
+    dd a__exp__Ying - IMAGEBASE
+    dd a__exp__Yang - IMAGEBASE
 NUMBER_OF_NAMES equ ($ - address_of_names) / 4
 _d
 

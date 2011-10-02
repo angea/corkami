@@ -37,7 +37,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd SIZEOFIMAGE
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFIMAGE - 1; 0 <= SIZEOFHEADERS < SIZEOFIMAGE
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -55,7 +55,7 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 0
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd Section0Start - IMAGEBASE
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1000h
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_WRITE | IMAGE_SCN_MEM_EXECUTE; required only for imports and DEP
 iend
 

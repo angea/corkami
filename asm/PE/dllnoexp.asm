@@ -4,7 +4,6 @@
 
 %include 'consts.inc'
 
-%define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 400000h
 org IMAGEBASE
@@ -32,12 +31,12 @@ iend
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd VDELTA + EntryPoint - IMAGEBASE
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd VDELTA + SIZEOFIMAGE
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -45,45 +44,42 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd VDELTA + import_descriptor - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.FixupsVA,   dd VDELTA + Directory_Entry_Basereloc - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd import_descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.FixupsVA,   dd Directory_Entry_Basereloc - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.FixupsSize, dd DIRECTORY_ENTRY_BASERELOC_SIZE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd Section0Size
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd iround(Section0Size, FILEALIGN)
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
-ALIGN FILEALIGN, db 0
-
 SIZEOFHEADERS equ $ - IMAGEBASE
-
 Section0Start:
-VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
+section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
     cmp dword [esp + 8], DLL_PROCESS_ATTACH
     jz attached_
 
 reloc01:
-    push VDELTA + detach
+    push detach
     jmp print_
 
 attached_:
 reloc11:
-    push VDELTA + attach
+    push attach
     jmp print_
 
 reloc22:
 print_:
-    call [VDELTA + __imp__printf]
+    call [__imp__printf]
     add esp, 1 * 4
     push 1
     pop eax
@@ -92,9 +88,9 @@ _c
 
 __exp__Export:
 reloc31:
-    push VDELTA + export
+    push export
 reloc42:
-    call [VDELTA + __imp__printf]
+    call [__imp__printf]
     add esp, 1 * 4
     retn
 _c
@@ -106,22 +102,22 @@ _d
 
 msvcrt.dll_iat:
 __imp__printf:
-    dd VDELTA + hnprintf - IMAGEBASE
+    dd hnprintf - IMAGEBASE
     dd 0
 _d
 
 import_descriptor:
 ;msvcrt.dll_DESCRIPTOR:
-    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
+    dd msvcrt.dll_hintnames - IMAGEBASE
     dd 0
     dd 0
-    dd VDELTA + msvcrt.dll - IMAGEBASE
-    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
+    dd msvcrt.dll - IMAGEBASE
+    dd msvcrt.dll_iat - IMAGEBASE
 
     times 5 dd 0
 
 msvcrt.dll_hintnames:
-    dd VDELTA + hnprintf - IMAGEBASE
+    dd hnprintf - IMAGEBASE
     dd 0
 
 hnprintf:
@@ -132,7 +128,7 @@ msvcrt.dll db 'msvcrt.dll', 0
 
 Directory_Entry_Basereloc:
 block_start0:
-    .VirtualAddress dd VDELTA + reloc01 - IMAGEBASE
+    .VirtualAddress dd reloc01 - IMAGEBASE
     .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc11 + 1 - reloc01)

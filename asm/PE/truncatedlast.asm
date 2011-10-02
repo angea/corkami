@@ -48,7 +48,7 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTION0SIZE
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd SECTION0SIZE
     at IMAGE_SECTION_HEADER.PointerToRawData, dd FILEALIGN

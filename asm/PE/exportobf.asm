@@ -4,7 +4,6 @@
 
 %include 'consts.inc'
 
-%define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 400000h
 org IMAGEBASE
@@ -32,12 +31,12 @@ iend
 OptionalHeader:
 istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
-    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd VDELTA + EntryPoint - IMAGEBASE
+    at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd VDELTA + SIZEOFIMAGE
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -45,33 +44,30 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd VDELTA + Exports_Directory - IMAGEBASE
-    at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd VDELTA + import_descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd Exports_Directory - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd import_descriptor - IMAGEBASE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd Section0Size
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd VDELTA + Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd iround(Section0Size, FILEALIGN)
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd Section0Start - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
-ALIGN FILEALIGN, db 0
-
 SIZEOFHEADERS equ $ - IMAGEBASE
 
-Section0Start:
-VDELTA equ SECTIONALIGN - ($ - IMAGEBASE) ; VIRTUAL DELTA between this sections offset and virtual addresses
+section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
 Export1 equ $ + 1
-    push VDELTA + export
+    push export
 Export2 equ $ + 1
-    call [VDELTA + __imp__printf]
+    call [__imp__printf]
 Export3 equ $ + 1
     add esp, 1 * 4
     retn
@@ -82,22 +78,22 @@ _d
 
 msvcrt.dll_iat:
 __imp__printf:
-    dd VDELTA + hnprintf - IMAGEBASE
+    dd hnprintf - IMAGEBASE
     dd 0
 _d
 
 import_descriptor:
 ;msvcrt.dll_DESCRIPTOR:
-    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
+    dd msvcrt.dll_hintnames - IMAGEBASE
     dd 0
     dd 0
-    dd VDELTA + msvcrt.dll - IMAGEBASE
-    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
+    dd msvcrt.dll - IMAGEBASE
+    dd msvcrt.dll_iat - IMAGEBASE
 
     times 5 dd 0
 
 msvcrt.dll_hintnames:
-    dd VDELTA + hnprintf - IMAGEBASE
+    dd hnprintf - IMAGEBASE
     dd 0
 
 hnprintf:
@@ -115,23 +111,21 @@ Exports_Directory:
   Base                  dd 0
   NumberOfFunctions     dd 3
   NumberOfNames         dd 1
-  AddressOfFunctions    dd VDELTA + address_of_functions - IMAGEBASE
-  AddressOfNames        dd VDELTA + address_of_names - IMAGEBASE
-  AddressOfNameOrdinals dd VDELTA + address_of_ordinals - IMAGEBASE
+  AddressOfFunctions    dd address_of_functions - IMAGEBASE
+  AddressOfNames        dd address_of_names - IMAGEBASE
+  AddressOfNameOrdinals dd address_of_ordinals - IMAGEBASE
 _d
 
 address_of_functions:
-    dd VDELTA + Export1 - IMAGEBASE
-    dd VDELTA + Export2 - IMAGEBASE
-    dd VDELTA + Export3 - IMAGEBASE
+    dd Export1 - IMAGEBASE
+    dd Export2 - IMAGEBASE
+    dd Export3 - IMAGEBASE
 _d
 
 address_of_names:
- times 1 dd VDELTA + name - IMAGEBASE
+ times 1 dd name - IMAGEBASE
 name db 0
 
 address_of_ordinals dw 0,1,2,3,4,5,6,7
 
 align FILEALIGN, db 0
-SIZEOFIMAGE equ $ - IMAGEBASE
-Section0Size equ $ - Section0Start
