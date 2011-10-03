@@ -1,7 +1,7 @@
 @echo off
 echo Low alignments:
-nosectionXP.exe
-virtsectblXP.exe
-nullSOH-XP.exe
-maxsecXP.exe
-tinydllXP-ld.exe
+echo nosectionXP.exe:& nosectionXP.exe
+echo virtsectblXP.exe:& virtsectblXP.exe
+echo nullSOH-XP.exe:& nullSOH-XP.exe
+echo maxsecXP.exe:& maxsecXP.exe
+echo tinydllXP-ld.exe:& tinydllXP-ld.exe

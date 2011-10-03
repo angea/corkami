@@ -1,7 +1,12 @@
 Low alignments:
+nosectionXP.exe:
  * Low alignment PE with no section (XP)
+virtsectblXP.exe:
  * Low alignment PE with a virtual section table (XP)
+nullSOH-XP.exe:
  * Low alignment PE with a null SizeOfOptionalHeader (XP)
+maxsecXP.exe:
  * Low alignment PE with 96 fake sections (XP)
+tinydllXP-ld.exe:
  * dynamically loading minimal 97 bytes DLL
   # dll loaded

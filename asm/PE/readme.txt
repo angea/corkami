@@ -3,6 +3,8 @@ a set of handmade files showing the various possibilities of the Portable Execut
 
 All these files are clean; however, they are hand-made and break the limits of the PE file format, so they might be detected as malicious or as corrupted files.
 
+check bin\test*.txt for the descriptions of each binary
+
 Ange Albertini
 @ange4771 (@corkami for news only)
 

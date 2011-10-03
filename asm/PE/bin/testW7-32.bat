@@ -1,7 +1,7 @@
 @echo off
 echo Low alignments:
-tinyW7.exe
-tinyW7_3264.exe
-maxsec_lowaligW7.exe
-nosectionW7.exe
-maxsecW7.exe
+echo tinyW7.exe:& tinyW7.exe
+echo tinyW7_3264.exe:& tinyW7_3264.exe
+echo maxsec_lowaligW7.exe:& maxsec_lowaligW7.exe
+echo nosectionW7.exe:& nosectionW7.exe
+echo maxsecW7.exe:& maxsecW7.exe
