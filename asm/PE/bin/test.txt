@@ -1,17 +1,23 @@
+ * a normal PE
 PE with many sections:
- * a PE with 96 sections (95 are empty)
+ * 96 sections (95 are empty)
  * a PE with 96 used code sections
 TLS:
- * PE with simple TLS:
+ * simple TLS:
   # 1st TLS call
   # EntryPoint executed
   # ExitProcess called
- * PE with fake TLS callbacks for obfuscation
+ * executed via imported TLS
+ * TLS on the fly update started
+  # adding 2nd TLS to callbacks
+  # 2nd TLS executed. removing all TLS from callbacks to prevent further executions
+ * fake TLS callbacks for obfuscation
+ * fake exports to disrupt disassembly
 Imports loading:
- * PE with standard DLL import
- * PE with no Import Name Table
- * PE with extensions-less imported dlls (>= XP)
- * PE with mixed case imported dlls
+ * standard DLL import
+ * no Import Name Table
+ * extensions-less imported dlls (>= XP)
+ * mixed-case imported dlls
 DLL loading:
  * statically loaded DLL and export call
   # DLL EntryPoint called on attach
@@ -35,7 +41,28 @@ DLL loading:
   # DLL EntryPoint called on attach
   # unloading dll
   # DLL EntryPoint called on detach
+export forwarding:
  * forwarded import call via Export
  * forwarded import call via forwarding loops
- * DLL export called via BOUND IMPORTS
- * unexpected export called via corrupted BOUND IMPORTS
+bound imports:
+ * export called (bound imports)
+ * unexpected export called (corrupted bound imports)
+ * export of an unexpected DLL called (corrupted bound imports)
+tiny PE
+ * 268b universal tiny PE (XP-W7x64)
+ImageBase:
+ * null IMAGEBASE (and relocations)
+ * kernel range IMAGEBASE (and relocations)
+ * decryption via relocations
+EntryPoint:
+ * null EntryPoint
+ * virtual EntryPoint
+ * external EntryPoint (in fixed address DLL)
+sections:
+ * virtually oversized section
+ * several sections - including the header - with the same physical content
+ * section table in appended data
+ * NT headers in appended data
+ * section table at the bottom of the file
+ * last section truncated
+ * sections in wrong physical order

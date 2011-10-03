@@ -1,4 +1,4 @@
-; a normal PE (fishy, I know)
+; PE with delay imports (broken ATM)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 

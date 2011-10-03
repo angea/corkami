@@ -53,11 +53,11 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 SIZEOFHEADERS equ $ - IMAGEBASE
-Section0Start:
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
@@ -81,7 +81,6 @@ _c
 start db ' * dynamically loading minimal 97 bytes DLL', 0ah, 0
 loading db '  # dll loaded', 0ah, 0
 _d
-
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
@@ -144,7 +143,3 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 align FILEALIGN, db 0
-
-Section0Size EQU $ - Section0Start
-
-SIZEOFIMAGE EQU $ - IMAGEBASE

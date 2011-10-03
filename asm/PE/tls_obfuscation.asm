@@ -41,7 +41,6 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
-DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
     at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd Image_Tls_Directory32 - IMAGEBASE
@@ -51,7 +50,7 @@ SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd Section0Start - IMAGEBASE
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
@@ -61,7 +60,6 @@ NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
-Section0Start:
 
 EntryPoint:
 tls2:
@@ -142,11 +140,8 @@ CallBacks:
     dd tls3 + 1
     dd tls4 + 1
     dd tls5 + 1
+db "Que j'aime à faire apprendre un nombre utile aux sages !"
     dd 0
 _d
 
 align FILEALIGN, db 0
-
-Section0Size EQU $ - Section0Start
-
-SIZEOFIMAGE EQU $ - IMAGEBASE

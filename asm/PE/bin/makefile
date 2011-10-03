@@ -7,9 +7,11 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
     dllbound.dll dllbound-ld.exe dllbound-redirld.exe dll-webdavld.exe virtEP.exe pdf.exe tiny.exe \
     ibnull.exe ibkernel.exe reloccrypt.exe exportobf.exe bigsec.exe normal.exe truncatedlast.exe \
-    dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe duphead.exe \
-    dllbound2.dll dllbound-redirld2.exe slackspace.exe dllextep.dll dllextep-ld.exe nullEP.exe \
-    delayimports.exe shuffledsect.exe tls_import.exe mz.exe tls_onthefly.exe
+    dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe shuffledsect.exe \
+    dllbound2.dll dllbound-redirld2.exe dllextep.dll dllextep-ld.exe nullEP.exe tls_import.exe \
+    mz.exe tls_onthefly.exe
+
+beta: duphead.exe  slackspace.exe delayimports.exe 
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 
