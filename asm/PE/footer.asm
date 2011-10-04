@@ -13,13 +13,9 @@ FILEALIGN equ 200h
 
 istruc IMAGE_DOS_HEADER
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
-    at IMAGE_DOS_HEADER.e_lfanew, dd NT_Signature - IMAGEBASE
+    at IMAGE_DOS_HEADER.e_lfanew, dd NT_Signature - IMAGEBASE - (SECTIONALIGN - FILEALIGN)
 iend
 
-ALIGN FILEALIGN, db 0
-
-
-Section0Start:
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
@@ -82,10 +78,8 @@ _d
 
 align FILEALIGN, db 0
 
-Section0Size EQU $ - Section0Start
+; align 4, db 0 ; we're already aligned
 
-
-align 4, db 0
 NT_Signature:
 istruc IMAGE_NT_HEADERS
     at IMAGE_NT_HEADERS.Signature, db 'PE', 0, 0
@@ -119,12 +113,12 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
-SIZEOFIMAGE EQU $ - IMAGEBASE
-SIZEOFHEADERS equ $ - IMAGEBASE
+SIZEOFIMAGE EQU $ - IMAGEBASE - (SECTIONALIGN - FILEALIGN)
+SIZEOFHEADERS equ $ - IMAGEBASE - (SECTIONALIGN - FILEALIGN)

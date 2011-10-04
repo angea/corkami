@@ -140,6 +140,7 @@ __imp__printf:
 _d
 
 kernel32.dll db 'kernel32.dll', 0
+align 2, db 0 ; required under W7
 dllU db 'd', 0, 'l', 0, 'l', 0, '.', 0, 'd', 0, 'l', 0, 'l', 0, 0, 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d

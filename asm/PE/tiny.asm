@@ -34,6 +34,7 @@ EntryPoint:
     call [__imp__printf]
     jmp _2
         at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd EntryPoint - IMAGEBASE
+        at IMAGE_OPTIONAL_HEADER32.BaseOfCode, dd 0 ; must be valid for W7
 _2:
     add esp, 1 * 4
     retn
