@@ -9,7 +9,7 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
-    quine.exe ownexports.exe bigalign.exe
+    quine.exe ownexports.exe bigalign.exe exportsdata.exe
 down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
 entrypoint: virtEP.exe dllextep.dll dllextep-ld.exe nullEP.exe
 bound: dllbound.dll dllbound-ld.exe dllbound-redirld.exe
