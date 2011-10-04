@@ -1,6 +1,7 @@
 @echo off
 echo normal.exe:& normal.exe
 echo truncsectbl.exe:& truncsectbl.exe
+echo bigalign.exe
 echo.
 echo PE with many sections:
 echo 96emptysections.exe:& 96emptysections.exe
