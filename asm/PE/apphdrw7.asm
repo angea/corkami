@@ -1,4 +1,4 @@
-; PE with NT headers in appended data (in extended header)
+; PE with NT headers in appended data (W7)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -28,7 +28,7 @@ _
     call [__imp__ExitProcess]
 _c
 
-Msg db " * NT headers in appended data", 0ah, 0
+Msg db " * NT headers in appended data (W7)", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -108,6 +108,7 @@ iend
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
+SIZEOFHEADERS equ $ - IMAGEBASE - (SECTIONALIGN - FILEALIGN)
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -120,4 +121,3 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
-SIZEOFHEADERS equ $ - IMAGEBASE - (SECTIONALIGN - FILEALIGN) ; it's an offset not a VA

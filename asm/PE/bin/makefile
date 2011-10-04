@@ -1,25 +1,27 @@
 all: common XP W7
 
-common: tls.exe tls_obfuscation.exe 96emptysections.exe 96workingsections.exe imports dll
+common: imports dll gaps tls bound entrypoint down many misc
 
+many: 96emptysections.exe 96workingsections.exe
 dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllemptyexp.dll \
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
-    dllbound.dll dllbound-ld.exe dllbound-redirld.exe dll-webdavld.exe virtEP.exe pdf.exe tiny.exe \
-    ibkernel.exe reloccrypt.exe exportobf.exe bigsec.exe normal.exe truncatedlast.exe \
-    dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe shuffledsect.exe \
-    dllextep.dll dllextep-ld.exe nullEP.exe tls_import.exe \
-    mz.exe tls_onthefly.exe appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe \
-    virtgap.exe
+    dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe
 
+misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe
+down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
+entrypoint: virtEP.exe dllextep.dll dllextep-ld.exe nullEP.exe
+bound: dllbound.dll dllbound-ld.exe dllbound-redirld.exe
+tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe
+gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 beta: duphead.exe delayimports.exe
-
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
-    tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll 
+    tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll
 
-W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe
+W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
+    appsectableW7.exe apphdrW7.exe
 
 %.exe: ..\%.asm
 	yasm -o $@ $<

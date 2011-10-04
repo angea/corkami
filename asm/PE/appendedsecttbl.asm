@@ -1,4 +1,4 @@
-; a PE with the section table outside the PE, in appended data (but in the header itself - unless w7 ?)
+; a PE with the section table outside the PE, in appended data (but in the header itself, for XP compatibility)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
