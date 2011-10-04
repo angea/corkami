@@ -1,4 +1,4 @@
-; PE with null IMAGEBASE
+; PE with null IMAGEBASE (XP only)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -74,7 +74,7 @@ reloc42:
     call [__imp__ExitProcess]
 _c
 
-msg db " * null IMAGEBASE (and relocations)", 0ah, 0
+msg db " * null IMAGEBASE with relocations (XP only)", 0ah, 0
 
 _d
 

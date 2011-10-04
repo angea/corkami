@@ -1,3 +1,7 @@
+ibnullXP.exe:
+ * null IMAGEBASE with relocations (XP only)
+dllbound-redirld2.exe:
+ * export of an unexpected DLL called (corrupted bound imports)
 Low alignments:
 nosectionXP.exe:
  * Low alignment PE with no section (XP)

@@ -6,16 +6,18 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
     dllbound.dll dllbound-ld.exe dllbound-redirld.exe dll-webdavld.exe virtEP.exe pdf.exe tiny.exe \
-    ibnull.exe ibkernel.exe reloccrypt.exe exportobf.exe bigsec.exe normal.exe truncatedlast.exe \
+    ibkernel.exe reloccrypt.exe exportobf.exe bigsec.exe normal.exe truncatedlast.exe \
     dupsec.exe appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe shuffledsect.exe \
-    dllbound2.dll dllbound-redirld2.exe dllextep.dll dllextep-ld.exe nullEP.exe tls_import.exe \
-    mz.exe tls_onthefly.exe
+    dllextep.dll dllextep-ld.exe nullEP.exe tls_import.exe \
+    mz.exe tls_onthefly.exe appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe \
+    virtgap.exe
 
-beta: duphead.exe  slackspace.exe delayimports.exe 
+beta: duphead.exe delayimports.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 
-XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll tinydllXP-ld.exe
+XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
+    tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll 
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe
 

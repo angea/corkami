@@ -1,108 +1,126 @@
-normal.exe: 
+normal.exe:
  * a normal PE
+
 PE with many sections:
-96emptysections.exe: 
+96emptysections.exe:
  * 96 sections (95 are empty)
-96workingsections.exe: 
+96workingsections.exe:
  * a PE with 96 used code sections
+
 TLS:
-tls.exe: 
+tls.exe:
  * simple TLS:
   # 1st TLS call
   # EntryPoint executed
   # ExitProcess called
-tls_import.exe: 
-tls_onthefly.exe: 
+tls_import.exe:
+tls_onthefly.exe:
  * executed via imported TLS
  * TLS on the fly update started
   # adding 2nd TLS to callbacks
   # 2nd TLS executed. removing all TLS from callbacks to prevent further executions
-tls_obfuscation.exe: 
+tls_obfuscation.exe:
  * fake TLS callbacks for obfuscation
-exportobf.exe: 
+exportobf.exe:
  * fake exports to disrupt disassembly
+
 Imports loading:
-imports.exe: 
+imports.exe:
  * standard DLL import
-imports_noint.exe: 
+imports_noint.exe:
  * no Import Name Table
-imports_noext.exe: 
+imports_noext.exe:
  * extensions-less imported dlls (>= XP)
-imports_mixed.exe: 
+imports_mixed.exe:
  * mixed-case imported dlls
+
 DLL loading:
  * statically loaded DLL and export call
-dll-ld.exe: 
+dll-ld.exe:
   # DLL EntryPoint called on attach
   # DLL export called
   # DLL EntryPoint called on detach
-dll-dynld.exe: 
+dll-dynld.exe:
  * dynamically loaded DLL and export call
   # loading dll
   # DLL EntryPoint called on attach
   # DLL export called
   # unloading dll
   # DLL EntryPoint called on detach
-dll-dynunicld.exe: 
+dll-dynunicld.exe:
  * loading DLL by Unicode
   # DLL EntryPoint called on attach
   # DLL EntryPoint called on detach
-dllweirdexp-ld.exe: 
+dllweirdexp-ld.exe:
  * statically loaded DLL with weird export name
-dllemptyexp-ld.exe: 
+dllemptyexp-ld.exe:
  * statically loaded DLL with empty export name
-dllord-ld.exe: 
+dllord-ld.exe:
  * DLL export by ordinal called
-dllnoreloc-ld.exe: 
+dllnoreloc-ld.exe:
  * DLL with no relocation (with direct call)
-dllnoexp-dynld.exe: 
+dllnoexp-dynld.exe:
  * dynamically loading export-less DLL
   # loading dll
   # DLL EntryPoint called on attach
   # unloading dll
   # DLL EntryPoint called on detach
+
 export forwarding:
-dllfw-ld.exe: 
+dllfw-ld.exe:
  * forwarded import call via Export
-dllfwloop-ld.exe: 
+dllfwloop-ld.exe:
  * forwarded import call via forwarding loops
+
 bound imports:
-dllbound-ld.exe: 
+dllbound-ld.exe:
  * export called (bound imports)
-dllbound-redirld.exe: 
+dllbound-redirld.exe:
  * unexpected export called (corrupted bound imports)
-dllbound-redirld2.exe: 
- * export of an unexpected DLL called (corrupted bound imports)
+
 tiny PE
-tiny.exe: 
+tiny.exe:
  * 268b universal tiny PE (XP-W7x64)
+
 ImageBase:
-ibnull.exe: 
- * null IMAGEBASE (and relocations)
-ibkernel.exe: 
+ibkernel.exe:
  * kernel range IMAGEBASE (and relocations)
-reloccrypt.exe: 
+reloccrypt.exe:
  * decryption via relocations
+
 EntryPoint:
-nullEP.exe: 
+nullEP.exe:
  * null EntryPoint
-virtEP.exe: 
+virtEP.exe:
  * virtual EntryPoint
-dllextep-ld.exe: 
+dllextep-ld.exe:
  * external EntryPoint (in fixed address DLL)
+
 sections:
-bigsec.exe: 
+bigsec.exe:
  * virtually oversized section
-dupsec.exe: 
+dupsec.exe:
  * several sections - including the header - with the same physical content
-appendedsecttbl.exe: 
+appendedsecttbl.exe:
  * section table in appended data
-appendedhdr.exe: 
+appendedhdr.exe:
  * NT headers in appended data
-footer.exe: 
-bottomsecttbl.exe: 
+footer.exe:
+bottomsecttbl.exe:
  * section table at the bottom of the file
-truncatedlast.exe: 
+truncatedlast.exe:
  * last section truncated
-shuffledsect.exe: 
+shuffledsect.exe:
  * sections in wrong physical order
+
+gaps:
+slackspace.exe:
+ * slack space between sections
+appendeddata.exe:
+ * appended data
+hiddenappdata1.exe:
+ * appended data, hidden by an extra section
+hiddenappdata2.exe:
+ * appended data, hidden by enlarged last section
+virtgap.exe:
+ * virtual gap between code sections

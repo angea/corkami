@@ -1,9 +1,10 @@
-; slack space between sections
+; a PE with a huge virtual gap between physical section
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include '..\consts.inc'
 
+EXTRAVIRTUALSPACE equ 10000h
 IMAGEBASE equ 400000h
 org IMAGEBASE
 bits 32
@@ -35,13 +36,12 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2200h
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd (EXTRAVIRTUALSPACE + 3) * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
-DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
 iend
@@ -49,34 +49,32 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd FILEALIGN
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTIONALIGN * 2
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd EXTRAVIRTUALSPACE * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 0
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 0
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE
+iend
+istruc IMAGE_SECTION_HEADER
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd (EXTRAVIRTUALSPACE + 2) * SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 3 * FILEALIGN
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_READ
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 2 * FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE
 
-ALIGN FILEALIGN, db 0
-
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
-
-EntryPoint:
-    push Msg
-    call [__imp__printf]
-    add esp, 1 * 4
-_
-    push 0
-    call [__imp__ExitProcess]
-_c
+Msg db " * virtual gap between code sections", 0ah, 0
+_d
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
@@ -123,17 +121,17 @@ _d
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
+EntryPoint:
+    mov eax, ebx
 
 align FILEALIGN, db 0
-db '! <== start of the slack space'
-_d
-
-times 1c8h db 0
-db 'end of slack space ==> !'
-align FILEALIGN, db 0
-
-section nobits vstart=IMAGEBASE + 2 * SECTIONALIGN
-Msg db " * slack space between sections", 0ah, 0
-_d
+times FILEALIGN - 20h db 0
+    push Msg
+    call [__imp__printf]
+    add esp, 1 * 4
+_
+    push 0
+    call [__imp__ExitProcess]
+_c
 
 align FILEALIGN, db 0
