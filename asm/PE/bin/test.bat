@@ -9,8 +9,7 @@ echo 96workingsections.exe:& 96workingsections.exe
 echo.
 echo TLS:
 echo tls.exe:& tls.exe
-echo tls_import.exe:& tls_import.exe
-echo.
+rem echo tls_import.exe:& tls_import.exe displayed afterwards, but working
 echo tls_onthefly.exe:& tls_onthefly.exe
 echo tls_obfuscation.exe:& tls_obfuscation.exe
 echo exportobf.exe:& exportobf.exe
