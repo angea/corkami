@@ -1,5 +1,6 @@
 @echo off
 echo normal.exe:& normal.exe
+echo truncsectbl.exe:& truncsectbl.exe
 echo.
 echo PE with many sections:
 echo 96emptysections.exe:& 96emptysections.exe
@@ -7,7 +8,7 @@ echo 96workingsections.exe:& 96workingsections.exe
 echo.
 echo TLS:
 echo tls.exe:& tls.exe
-echo tls_import.exe:& tls_import.exe
+rem tls_import.exe disabled because it doesn't create an output from a batch file
 echo tls_onthefly.exe:& tls_onthefly.exe
 echo tls_obfuscation.exe:& tls_obfuscation.exe
 echo exportobf.exe:& exportobf.exe
@@ -28,6 +29,7 @@ echo dllemptyexp-ld.exe:& dllemptyexp-ld.exe
 echo dllord-ld.exe:& dllord-ld.exe
 echo dllnoreloc-ld.exe:& dllnoreloc-ld.exe
 echo dllnoexp-dynld.exe:& dllnoexp-dynld.exe
+echo ownexports.exe:& ownexports.exe
 echo.
 echo export forwarding:
 echo dllfw-ld.exe:& dllfw-ld.exe
@@ -70,3 +72,4 @@ rem duphead.exe (broken ATM)
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
 rem delayimports broken ATM
+rem quine.exe disabled because creates an extra window

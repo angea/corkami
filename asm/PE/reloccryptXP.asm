@@ -1,4 +1,4 @@
-; PE with decryption via relocations
+; PE with decryption via relocations (from IB null, XP only)
 ; relocations itself are fixed by relocations
 ; some relocations are not using the common HIGHLOW
 
@@ -20,7 +20,7 @@ IMAGE_REL_BASED_HIGH3ADJ equ 11
 %include '..\consts.inc'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
-IMAGEBASE equ 0ffff0000h
+IMAGEBASE equ 0
 org IMAGEBASE
 bits 32
 
@@ -85,27 +85,27 @@ db 0,0
 EntryPoint:
 
 reloc01:            ;68h push VDELTA + msg
-crypt168 db 0
+crypt168 db 1
     dd VDELTA + msg
 
 reloc22:            ; FF15 call [VDELTA + __imp__printf]
-crypt2ff db 1
-crypt315 db 1
+crypt2ff db 2
+crypt315 db 3
     dd VDELTA + __imp__printf
 
-crypt483 db 1       ;83C404 add esp, 1 * 4
-crypt5c4 db 0
+crypt483 db 4       ;83C404 add esp, 1 * 4
+crypt5c4 db 5
 crypt604 db 0
 
-crypt76a db 0, 0    ;6A00 push 0
+crypt76a db 7, 0    ;6A00 push 0
 
 reloc42:            ;FF15 call [VDELTA + __imp__ExitProcess]
-crypt8ff db 1
+crypt8ff db 35
 crypt915 db 1
     dd VDELTA + __imp__ExitProcess
 _c
 
-msg db " * decryption via relocations", 0ah, 0
+msg db " * decryption via relocations (from null imagebase, XP only)", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -176,7 +176,7 @@ BASE_RELOC_SIZE_OF_BLOCK equ $ - block_start
 block_start0:
     .VirtualAddress dd VDELTA + reloc01 - IMAGEBASE
 relocated_reloc:
-    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0 - 40002h
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0 - 20001h
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc22 + 2 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
@@ -189,19 +189,19 @@ block_start%1:
     .VirtualAddress dd VDELTA + %1 - IMAGEBASE
     .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK%1
     dw (IMAGE_REL_BASED_ABSOLUTE << 12)
-    times %2 / 2 dw (IMAGE_REL_BASED_HIGH << 12)
+    times %2 dw (IMAGE_REL_BASED_HIGH << 12)
 BASE_RELOC_SIZE_OF_BLOCK%1 equ $ - block_start%1
 %endmacro
 
-cryptblock crypt168, 068h
-cryptblock crypt2ff, 0feh
-cryptblock crypt315, 015h 
-cryptblock crypt483, 083h
-cryptblock crypt5c4, 0c4h
+cryptblock crypt168, 068h - 1
+cryptblock crypt2ff, 0ffh - 2
+cryptblock crypt315, 015h - 3
+cryptblock crypt483, 083h - 4
+cryptblock crypt5c4, 0c4h - 5
 cryptblock crypt604, 004h
-cryptblock crypt76a, 06ah
-cryptblock crypt8ff, 0ffh
-cryptblock crypt915, 015h
+cryptblock crypt76a, 06ah - 7
+cryptblock crypt8ff, 0ffh - 35
+cryptblock crypt915, 015h - 1
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
 

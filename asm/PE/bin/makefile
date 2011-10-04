@@ -8,7 +8,8 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
     dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe
 
-misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe
+misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
+    quine.exe ownexports.exe
 down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
 entrypoint: virtEP.exe dllextep.dll dllextep-ld.exe nullEP.exe
 bound: dllbound.dll dllbound-ld.exe dllbound-redirld.exe
@@ -18,7 +19,7 @@ beta: duphead.exe delayimports.exe
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
-    tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll
+    tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
     appsectableW7.exe apphdrW7.exe
