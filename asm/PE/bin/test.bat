@@ -69,7 +69,7 @@ echo appendeddata.exe:& appendeddata.exe
 echo hiddenappdata1.exe:& hiddenappdata1.exe
 echo hiddenappdata2.exe:& hiddenappdata2.exe
 echo virtgap.exe:& virtgap.exe
-
+echo foldedhdr.exe:& foldedhdr.exe
 rem duphead.exe (broken ATM)
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
