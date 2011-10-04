@@ -2,13 +2,13 @@
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-; YASM has a bug, it can't get its own line number correct after too many repeats and align.
+; YASM has a bug, it can't get its own line number correct after too many repeats and align. 
 ; so jmp $ will not even be correct, so alignments have to be hardcoded :(
 
 %include '..\consts.inc'
 
 IMAGEBASE equ 010000h
-SECTIONALIGN equ 1000h ; smallest section alignment
+SECTIONALIGN equ 1000h ; smallest section alignment 
 FILEALIGN equ 200h
 
 
@@ -68,7 +68,7 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTRVA
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd SECTOFF
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 
 %assign i 1
@@ -78,7 +78,7 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTRVA + i * SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd SECTOFF + i * FILEALIGN
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE + IMAGE_SCN_MEM_WRITE
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 %assign i i+1
 %endrep
@@ -89,7 +89,7 @@ times HEADERALIGN db 0 ; align FILEALIGN, db 0
 ; Section0Start
 
 EntryPoint:
-    push message
+    push VDELTA + message
     call printf
     add esp, 1 * 4
     push 0
@@ -97,32 +97,32 @@ EntryPoint:
 int3
 
 printf:
-    jmp [__imp__printf]
+    jmp [VDELTA + __imp__printf]
 ExitProcess:
-    jmp [__imp__ExitProcess]
+    jmp [VDELTA + __imp__ExitProcess]
 int3
 
 ; IMPORT DATA DIRECTORY AND TABLE
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
-    dd kernel32.dll_hintnames - IMAGEBASE
+    dd VDELTA + kernel32.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd kernel32.dll - IMAGEBASE
-    dd kernel32.dll_iat - IMAGEBASE
+    dd VDELTA + kernel32.dll - IMAGEBASE
+    dd VDELTA + kernel32.dll_iat - IMAGEBASE
 ;msvcrt.dll_DESCRIPTOR:
-    dd msvcrt.dll_hintnames - IMAGEBASE
+    dd VDELTA + msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd msvcrt.dll - IMAGEBASE
-    dd msvcrt.dll_iat - IMAGEBASE
+    dd VDELTA + msvcrt.dll - IMAGEBASE
+    dd VDELTA + msvcrt.dll_iat - IMAGEBASE
 ;I'll be back
     times 5 dd 0
 dd 0
 
 kernel32.dll_hintnames:
-    dd hnExitProcess - IMAGEBASE
+    dd VDELTA + hnExitProcess - IMAGEBASE
     dd 0
 msvcrt.dll_hintnames:
-    dd hnprintf - IMAGEBASE
+    dd VDELTA + hnprintf - IMAGEBASE
     dd 0
 dd 0
 
@@ -136,12 +136,12 @@ dd 0
 
 kernel32.dll_iat:
 __imp__ExitProcess:
-    dd hnExitProcess - IMAGEBASE
+    dd VDELTA + hnExitProcess - IMAGEBASE
     dd 0
 
 msvcrt.dll_iat:
 __imp__printf:
-    dd hnprintf - IMAGEBASE
+    dd VDELTA + hnprintf - IMAGEBASE
     dd 0
 dd 0
 
