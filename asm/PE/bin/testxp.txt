@@ -2,6 +2,7 @@ ibnullXP.exe:
  * null IMAGEBASE with relocations (XP only)
 dllbound-redirld2.exe:
  * export of an unexpected DLL called (corrupted bound imports)
+
 Low alignments:
 nosectionXP.exe:
  * Low alignment PE with no section (XP)
@@ -11,6 +12,10 @@ nullSOH-XP.exe:
  * Low alignment PE with a null SizeOfOptionalHeader (XP)
 maxsecXP.exe:
  * Low alignment PE with 96 fake sections (XP)
+
+misc:
 tinydllXP-ld.exe:
  * dynamically loading minimal 97 bytes DLL
   # dll loaded
+reloccryptXP.exe:
+ * decryption via relocations (from null imagebase, XP only)

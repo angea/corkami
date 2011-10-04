@@ -9,7 +9,8 @@ echo 96workingsections.exe:& 96workingsections.exe
 echo.
 echo TLS:
 echo tls.exe:& tls.exe
-rem tls_import.exe disabled because it doesn't create an output from a batch file
+echo tls_import.exe:& tls_import.exe
+echo.
 echo tls_onthefly.exe:& tls_onthefly.exe
 echo tls_obfuscation.exe:& tls_obfuscation.exe
 echo exportobf.exe:& exportobf.exe
