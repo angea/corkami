@@ -121,42 +121,41 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
-    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 2ch ; 1<=SIZEOFHEADERS under w7
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
 istruc IMAGE_DATA_DIRECTORY_16
-dd 00000001h,10000000h
+dd 88660001h,010009988h
 ;---------------------------------------------- CUT and FOLD here ----------------------------------
-SIZEOFHEADERS equ $ - IMAGEBASE -  (SECTIONALIGN - FILEALIGN)
 ; we cut the header here, and we're right at offset 1000h
 ;---------------------------------------------- CUT and FOLD here ----------------------------------
 
-dd 00000010h,01000000h
-dd 00000100h,00100000h
-dd 00001000h,00010000h
-dd 00010000h,00001000h
-dd 00100000h,00000100h
-dd 01000005h,20000010h
-dd 10000055h,22000001h
-dd 10000055h,22000001h
-dd 01000005h,20000010h
-dd 00100000h,00000100h
-dd 00010000h,00001000h
-dd 00001000h,00010000h
-dd 00000100h,00100000h
-dd 00000010h,01000000h
-dd 00000001h,10000000h
+dd 86600010h,001000998h
+dd 66000100h,000100099h
+dd 6000100Fh,0F0010009h
+dd 000100FFh,0FF001000h
+dd 00100FF0h,00FF00100h
+dd 0100FF05h,020FF0010h
+dd 100FF055h,0220FF001h
+dd 100FF055h,0220FF001h
+dd 0100FF05h,020FF0010h
+dd 00100FF0h,00FF00100h
+dd 000100FFh,0FF001000h
+dd 6000100Fh,0F0010009h
+dd 66000100h,000100099h
+dd 86600010h,001000998h
+dd 88660001h,010009988h
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 ; we still need realistic values here to get the PE validated and loaded
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
