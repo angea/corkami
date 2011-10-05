@@ -6,7 +6,8 @@ many: 96emptysections.exe 96workingsections.exe
 dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllemptyexp.dll \
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
-    dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe importshint.exe
+    dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe importshint.exe \
+    secinsec.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
     quine.exe ownexports.exe bigalign.exe exportsdata.exe foldedhdr.exe compiled.exe duphead.exe

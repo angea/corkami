@@ -112,6 +112,8 @@ dupsec.exe:
  * several sections - including the header - with the same physical content
 duphead.exe:
  * section mapping the complete PE
+secinsec:
+ * section in section
 appendedsecttbl.exe:
  * section table in appended data
 appendedhdr.exe:

@@ -59,6 +59,7 @@ echo sections:
 echo bigsec.exe:& bigsec.exe
 echo dupsec.exe:& dupsec.exe
 echo duphead.exe:& duphead.exe
+echo secinsec:& secinsec.exe
 echo appendedsecttbl.exe:& appendedsecttbl.exe
 echo appendedhdr.exe:& appendedhdr.exe
 echo footer.exe:& footer.exe
