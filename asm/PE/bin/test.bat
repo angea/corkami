@@ -1,5 +1,6 @@
 @echo off
 echo normal.exe:& normal.exe
+echo compiled.exe:& compiled.exe
 echo truncsectbl.exe:& truncsectbl.exe
 echo bigalign.exe
 echo.
@@ -57,6 +58,7 @@ echo.
 echo sections:
 echo bigsec.exe:& bigsec.exe
 echo dupsec.exe:& dupsec.exe
+echo duphead.exe:& duphead.exe
 echo appendedsecttbl.exe:& appendedsecttbl.exe
 echo appendedhdr.exe:& appendedhdr.exe
 echo footer.exe:& footer.exe
@@ -71,7 +73,6 @@ echo hiddenappdata1.exe:& hiddenappdata1.exe
 echo hiddenappdata2.exe:& hiddenappdata2.exe
 echo virtgap.exe:& virtgap.exe
 echo foldedhdr.exe:& foldedhdr.exe
-rem duphead.exe (broken ATM)
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
 rem delayimports broken ATM

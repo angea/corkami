@@ -9,7 +9,7 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe importshint.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
-    quine.exe ownexports.exe bigalign.exe exportsdata.exe foldedhdr.exe
+    quine.exe ownexports.exe bigalign.exe exportsdata.exe foldedhdr.exe compiled.exe duphead.exe
 
 down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
 
@@ -21,7 +21,7 @@ tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe
 
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 
-beta: duphead.exe delayimports.exe
+beta: delayimports.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe
 

@@ -1,5 +1,7 @@
 normal.exe:
  * a normal PE
+compiled.exe:
+ * a 'compiled' PE
 truncsectbl.exe:
  * truncated section table
 bigalign.exe
@@ -108,6 +110,8 @@ bigsec.exe:
  * virtually oversized section
 dupsec.exe:
  * several sections - including the header - with the same physical content
+duphead.exe:
+ * section mapping the complete PE
 appendedsecttbl.exe:
  * section table in appended data
 appendedhdr.exe:

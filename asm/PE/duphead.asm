@@ -1,4 +1,4 @@
-; a PE with a section mapping the header (broken atm)
+; a PE with a section mapping the header
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -35,7 +35,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2200h
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 3 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -49,18 +49,22 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
+iend
+istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
+SIZEOFHEADERS equ $ - IMAGEBASE ;- (SECTIONALIGN - FILEALIGN)
 
-ALIGN FILEALIGN, db 0
-
-
-Section0Start:
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
@@ -72,7 +76,7 @@ _
     call [__imp__ExitProcess]
 _c
 
-Msg db " * several sections with the same physical content", 0ah, 0
+Msg db " * section mapping the complete PE", 0ah, 0
 _d
 
 Import_Descriptor:
@@ -122,7 +126,3 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 align FILEALIGN, db 0
-Section0Size EQU 200h
-
-SIZEOFIMAGE EQU 1200h
-SIZEOFHEADERS equ $ - IMAGEBASE
