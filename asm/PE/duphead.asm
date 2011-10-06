@@ -59,25 +59,26 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1ffh ; upper limit of the down-rounding trick
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE ;- (SECTIONALIGN - FILEALIGN)
+_d
+; this string will not be mapped in the header (SizeOfHeaders is shorter)
+; but only in the second section
+Msg db " * section mapping the complete PE", 0ah, 0 
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
-    push Msg
+    push Msg + 2 * SECTIONALIGN
     call [__imp__printf]
     add esp, 1 * 4
 _
     push 0
     call [__imp__ExitProcess]
 _c
-
-Msg db " * section mapping the complete PE", 0ah, 0
-_d
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
