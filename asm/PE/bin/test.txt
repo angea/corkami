@@ -40,6 +40,8 @@ imports_mixed.exe:
  * mixed-case imported dlls
 importshint.exe:
  * correct import called via hinting
+impbyord.exe:
+ * imports resolving to its own exports
 
 DLL loading:
  * statically loaded DLL and export call

@@ -22,6 +22,7 @@ echo imports_noint.exe:& imports_noint.exe
 echo imports_noext.exe:& imports_noext.exe
 echo imports_mixed.exe:& imports_mixed.exe
 echo importshint.exe:& importshint.exe
+echo impbyord.exe:& impbyord.exe
 echo.
 echo DLL loading:
 echo  * statically loaded DLL and export call
