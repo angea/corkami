@@ -113,7 +113,7 @@ bigsec.exe:
 dupsec.exe:
  * several sections - including the header - with the same physical content
 duphead.exe:
- * section mapping the complete PE
+ * section mapping the complete PE (offset rounded down to 0x200, FileAlignment is 400h)
 secinsec:
  * section in section
 appendedsecttbl.exe:

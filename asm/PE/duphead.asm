@@ -9,7 +9,7 @@ org IMAGEBASE
 bits 32
 
 SECTIONALIGN equ 1000h
-FILEALIGN equ 200h
+FILEALIGN equ 400h
 
 istruc IMAGE_DOS_HEADER
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
@@ -35,7 +35,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 3 * SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -51,14 +51,9 @@ SectionHeader:
 istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd FILEALIGN
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
-iend
-istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    ; the file is 2 * FILEALIGN long
+    ; we need to remove the 'official' offset so that it fits in the file
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 2 * FILEALIGN - 1ffh
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1ffh ; upper limit of the down-rounding trick
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
@@ -67,12 +62,12 @@ SIZEOFHEADERS equ $ - IMAGEBASE ;- (SECTIONALIGN - FILEALIGN)
 _d
 ; this string will not be mapped in the header (SizeOfHeaders is shorter)
 ; but only in the second section
-Msg db " * section mapping the complete PE", 0ah, 0 
+Msg db " * section mapping the complete PE (offset rounded down to 0x200, FileAlignment is 400h)", 0ah, 0
 
-section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
+section progbits vstart=IMAGEBASE + SECTIONALIGN + FILEALIGN align=FILEALIGN
 
 EntryPoint:
-    push Msg + 2 * SECTIONALIGN
+    push Msg + SECTIONALIGN
     call [__imp__printf]
     add esp, 1 * 4
 _
