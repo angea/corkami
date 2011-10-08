@@ -11,3 +11,6 @@ echo.
 echo misc:
 echo tinydllXP-ld.exe:& tinydllXP-ld.exe
 echo reloccryptXP.exe:& reloccryptXP.exe
+echo.
+echo DOS:
+echo dosZMXP.exe:& dosZMXP.exe

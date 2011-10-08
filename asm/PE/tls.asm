@@ -137,15 +137,16 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 Image_Tls_Directory32:
-    StartAddressOfRawData dd some_values
-    EndAddressOfRawData   dd some_values + 4
-    AddressOfIndex        dd some_values + 8
+    StartAddressOfRawData dd 0
+    EndAddressOfRawData   dd 0
+    AddressOfIndex        dd some_value
     AddressOfCallBacks    dd CallBacks
-    SizeOfZeroFill        dd some_values + 0ch
+    SizeOfZeroFill        dd 0
     Characteristics       dd 0
 _d
 
-some_values dd 0, 0, 0, 0
+some_value dd 012345h
+
 CallBacks:
     dd tls
     dd 0
