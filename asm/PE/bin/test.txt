@@ -1,5 +1,5 @@
 normal.exe:
- * a normal PE
+ * a standard PE (imports, standard alignments)
 compiled.exe:
  * a 'compiled' PE
 truncsectbl.exe:
@@ -96,6 +96,8 @@ tiny.exe:
 ImageBase:
 ibkernel.exe:
  * kernel range IMAGEBASE (and relocations)
+bigib.exe:
+ * ImageBase is 7ffd0000h, and no relocations
 reloccrypt.exe:
  * decryption via relocations
 

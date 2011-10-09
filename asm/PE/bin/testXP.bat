@@ -1,6 +1,6 @@
 @echo off
 echo ibnullXP.exe:& ibnullXP.exe
-echo dllbound-redirld2.exe:& dllbound-redirld2.exe
+echo dllbound-redirldXP.exe:& dllbound-redirldXP.exe
 echo.
 echo Low alignments:
 echo nosectionXP.exe:& nosectionXP.exe

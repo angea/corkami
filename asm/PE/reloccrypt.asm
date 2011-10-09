@@ -182,8 +182,6 @@ relocated_reloc:
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
 BASE_RELOC_SIZE_OF_BLOCK0 equ $ - block_start0
 
-;these blocks are obviously the one to implement the decryption
-
 %macro cryptblock 2
 block_start%1:
     .VirtualAddress dd VDELTA + %1 - IMAGEBASE
@@ -193,6 +191,7 @@ block_start%1:
 BASE_RELOC_SIZE_OF_BLOCK%1 equ $ - block_start%1
 %endmacro
 
+;these blocks are the ones to implement the decryption
 cryptblock crypt168, 068h
 cryptblock crypt2ff, 0feh
 cryptblock crypt315, 015h 

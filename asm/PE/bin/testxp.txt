@@ -1,6 +1,6 @@
 ibnullXP.exe:
  * null IMAGEBASE with relocations (XP only)
-dllbound-redirld2.exe:
+dllbound-redirldXP.exe:
  * export of an unexpected DLL called (corrupted bound imports)
 
 Low alignments:
@@ -19,3 +19,7 @@ tinydllXP-ld.exe:
   # dll loaded
 reloccryptXP.exe:
  * decryption via relocations (from null imagebase, XP only)
+
+DOS:
+dosZMXP.exe:
+ * EXE with ZM signature

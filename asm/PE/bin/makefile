@@ -7,7 +7,7 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
     dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe importshint.exe \
-    secinsec.exe
+    secinsec.exe bigib.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
     quine.exe ownexports.exe bigalign.exe exportsdata.exe foldedhdr.exe compiled.exe duphead.exe

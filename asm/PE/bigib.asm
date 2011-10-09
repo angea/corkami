@@ -1,10 +1,10 @@
-; a 'normal' PE (fishy, I know)
+; a PE with an imagebase as big as possible (with no relocations)
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include '..\consts.inc'
 
-IMAGEBASE equ 400000h
+IMAGEBASE equ 7ffd0000h
 org IMAGEBASE
 bits 32
 
@@ -57,7 +57,6 @@ iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE
 
-db "this will not be in memory, as it's between the declared header and before the first section"
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
@@ -70,7 +69,7 @@ _
     call [__imp__ExitProcess]
 _c
 
-Msg db " * a standard PE (imports, standard alignments)", 0ah, 0
+Msg db " * ImageBase is 7ffd0000h, and no relocations", 0ah, 0
 _d
 
 Import_Descriptor:
