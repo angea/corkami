@@ -1,4 +1,4 @@
-; a PE with a resource
+; a PE with a resource loaded by its IDs as strings
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -7,8 +7,8 @@
 IMAGEBASE equ 400000h
 IMAGE_RESOURCE_DATA_IS_DIRECTORY equ 80000000h
 
-SOME_TYPE equ 315h
-SOME_NAME equ 7354h
+SOME_TYPE equ 315
+SOME_NAME equ 7354
 
 org IMAGEBASE
 bits 32
@@ -66,8 +66,8 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
-    push SOME_TYPE              ; lpType
-    push SOME_NAME              ; lpName
+    push atype                  ; lpType
+    push ares                   ; lpName
     push 0                      ; hModule
     call [__imp__FindResourceA]
 _
@@ -83,6 +83,10 @@ _
     call [__imp__ExitProcess]
 _c
 
+atype db '#315', 0
+ares db "#7354", 0
+
+_d
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
     dd kernel32.dll_hintnames - IMAGEBASE
@@ -163,7 +167,7 @@ resource_directory_languages0:
     .NumberOfNamedEntries dw 0
     .NumberOfIdEntries    dw 1
 IMAGE_RESOURCE_DIRECTORY_ENTRY_001:
-    .ID dd 0    ; unused ?
+    .ID dd 0
     .OffsetToData dd IMAGE_RESOURCE_DATA_ENTRY_101 - resource_directory
 
 ; type subdirectory
@@ -175,7 +179,7 @@ resource_directory_type_rcdata:
     .NumberOfNamedEntries dw 0
     .NumberOfIdEntries    dw 1
 IMAGE_RESOURCE_DIRECTORY_ENTRY_01:
-    .ID dd SOME_NAME ; name of the underneath resource
+    .ID dd SOME_NAME  ; name of the underneath resource
     .OffsetToData dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_languages0 - resource_directory)
 
 IMAGE_RESOURCE_DATA_ENTRY_101:
@@ -185,7 +189,7 @@ IMAGE_RESOURCE_DATA_ENTRY_101:
     .Reserved dd 0
 
 resource_data:
-Msg db " * Message stored in resources", 0ah, 0
+Msg db " * Resource loaded with IDs as string", 0ah, 0
 RESOURCE_SIZE equ $ - resource_data
 _d
 
