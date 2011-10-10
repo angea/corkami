@@ -2,7 +2,7 @@
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include '..\consts.inc'
+%include 'consts.inc'
 
 IMAGEBASE equ 400000h
 IMAGE_RESOURCE_DATA_IS_DIRECTORY equ 80000000h
@@ -70,15 +70,15 @@ EntryPoint:
     push SOME_NAME              ; lpName
     push 0                      ; hModule
     call [__imp__FindResourceA]
-_
+
     push eax
     push 0                      ; hModule
     call [__imp__LoadResource]
-_
+
     push eax
     call [__imp__printf]
     add esp, 1 * 4
-_
+
     push 0
     call [__imp__ExitProcess]
 _c
@@ -141,51 +141,42 @@ kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
 
-; root directory
 Directory_Entry_Resource:
-resource_directory:
-    .Characteristics      dd 0
-    .TimeDateStamp        dd 0
-    .MajorVersion         dw 0
-    .MinorVersion         dw 0
-    .NumberOfNamedEntries dw 0
-    .NumberOfIdEntries    dw 1
-IMAGE_RESOURCE_DIRECTORY_ENTRY_1:
-    .ID dd SOME_TYPE    ; .. resource type of that directory
-    .OffsetToData dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type_rcdata - resource_directory)
+; root directory
+istruc IMAGE_RESOURCE_DIRECTORY
+    at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
+iend
+istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd SOME_TYPE    ; .. resource type of that directory
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type - Directory_Entry_Resource)
+iend
 
-; resource subdirectory
-resource_directory_languages0:
-    .Characteristics      dd 0
-    .TimeDateStamp        dd 0
-    .MajorVersion         dw 0
-    .MinorVersion         dw 0
-    .NumberOfNamedEntries dw 0
-    .NumberOfIdEntries    dw 1
-IMAGE_RESOURCE_DIRECTORY_ENTRY_001:
-    .ID dd 0    ; unused ?
-    .OffsetToData dd IMAGE_RESOURCE_DATA_ENTRY_101 - resource_directory
+resource_directory_type:
+istruc IMAGE_RESOURCE_DIRECTORY
+    at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
+iend
+istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd SOME_NAME ; name of the underneath resource
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_language - Directory_Entry_Resource)
+iend
 
-; type subdirectory
-resource_directory_type_rcdata:
-    .Characteristics      dd 0
-    .TimeDateStamp        dd 0
-    .MajorVersion         dw 0
-    .MinorVersion         dw 0
-    .NumberOfNamedEntries dw 0
-    .NumberOfIdEntries    dw 1
-IMAGE_RESOURCE_DIRECTORY_ENTRY_01:
-    .ID dd SOME_NAME ; name of the underneath resource
-    .OffsetToData dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_languages0 - resource_directory)
+resource_directory_language:
+istruc IMAGE_RESOURCE_DIRECTORY
+    at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
+iend
+istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
+at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd resource_entry - Directory_Entry_Resource
+iend
 
-IMAGE_RESOURCE_DATA_ENTRY_101:
-    .OffsetToData dd resource_data - IMAGEBASE
-    .Size1 dd        RESOURCE_SIZE
-    .CodePage dd 0
-    .Reserved dd 0
+resource_entry:
+istruc IMAGE_RESOURCE_DATA_ENTRY
+    at IMAGE_RESOURCE_DATA_ENTRY.OffsetToData, dd resource_data - IMAGEBASE
+    at IMAGE_RESOURCE_DATA_ENTRY.Size1, dd RESOURCE_SIZE
+iend
 
 resource_data:
-Msg db " * Message stored in resources", 0ah, 0
+Msg db " * message stored in resources", 0ah, 0
+
 RESOURCE_SIZE equ $ - resource_data
 _d
 

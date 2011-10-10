@@ -144,3 +144,15 @@ virtgap.exe:
  * virtual gap between code sections
 foldedhdr.exe:
  * PE header overwritten on loading
+
+resources:
+resource.exe:
+ * message stored in resources
+resource2.exe:
+ * resource loaded with IDs as string
+namedresource.exe:
+ * resource loaded by 'named' name and type
+reshdr.exe:
+ * resource stored in header and shuffled resource structure
+resourceloop.exe:
+ * recursive resources directory

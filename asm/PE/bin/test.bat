@@ -79,8 +79,10 @@ echo foldedhdr.exe:& foldedhdr.exe
 echo.
 echo resources:
 echo resource.exe:& resource.exe
+echo resource2.exe:& resource2.exe
 echo namedresource.exe:& namedresource.exe
 echo reshdr.exe:& reshdr.exe
+echo resourceloop.exe:& resourceloop.exe
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
 rem delayimports broken ATM

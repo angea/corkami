@@ -23,7 +23,7 @@ tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe
 
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 
-resource: resource.exe resource2.exe reshdr.exe namedresource.exe
+resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe
 
 beta: delayimports.exe
 
