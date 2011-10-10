@@ -1,4 +1,4 @@
-; a PE with a resource
+; a PE with a resource, loaded by name
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -66,7 +66,7 @@ EntryPoint:
     push arestype               ; lpType
     push aresname               ; lpName
     push 0                      ; hModule
-    call [__imp__FindResourceW]
+    call [__imp__FindResourceA]
 _
     push eax
     push 0                      ; hModule
@@ -79,6 +79,10 @@ _
     push 0
     call [__imp__ExitProcess]
 _c
+
+aresname db 'RES', 0
+arestype db 'TYPE', 0
+_d
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
@@ -97,7 +101,7 @@ _d
 
 kernel32.dll_hintnames:
     dd hnExitProcess - IMAGEBASE
-    dd hnFindResourceW - IMAGEBASE
+    dd hnFindResourceA - IMAGEBASE
     dd hnLoadResource - IMAGEBASE
     dd 0
 msvcrt.dll_hintnames:
@@ -108,9 +112,9 @@ _d
 hnExitProcess:
     dw 0
     db 'ExitProcess', 0
-hnFindResourceW:
+hnFindResourceA:
     dw 0
-    db 'FindResourceW', 0
+    db 'FindResourceA', 0
 hnLoadResource:
     dw 0
     db 'LoadResource', 0
@@ -122,8 +126,8 @@ _d
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd hnExitProcess - IMAGEBASE
-__imp__FindResourceW:
-    dd hnFindResourceW - IMAGEBASE
+__imp__FindResourceA:
+    dd hnFindResourceA - IMAGEBASE
 __imp__LoadResource:
     dd hnLoadResource  - IMAGEBASE
     dd 0
@@ -185,14 +189,12 @@ IMAGE_RESOURCE_DATA_ENTRY_101:
 
 align 4, db 0
 
-alresname dw 3 ; length + string next
-aresname dw "R", "E", "S",0
-
-alrestype dw 4    
-arestype dw "T", "Y", "P", "E", 0
+; length + widestring
+alresname dw 3, "R", "E", "S", 0
+alrestype dw 4, "T", "Y", "P", "E", 0
 
 resource_data:
-Msg db " * resource loaded by 'named'  name and type", 0ah, 0
+Msg db " * resource loaded by 'named' name and type", 0ah, 0
 RESOURCE_SIZE equ $ - resource_data
 _d
 
