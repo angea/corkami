@@ -143,53 +143,46 @@ _d
 
 ; root directory
 Directory_Entry_Resource:
-resource_directory:
 resource_directory_type:
 istruc IMAGE_RESOURCE_DIRECTORY
     at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries,    dw 2
 iend
 istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
     at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd SOME_TYPE    ; .. resource type of that directory
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type_rcdata - resource_directory)
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type_rcdata - Directory_Entry_Resource)
 iend
 istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData,  dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_loop - resource_directory)
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData,  dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_loop - Directory_Entry_Resource)
 iend
 
 resource_directory_loop:
 istruc IMAGE_RESOURCE_DIRECTORY
     at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries,    dw 2
 iend
-; direct recursivity
-istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData,  dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type - resource_directory)
-iend
 ; double level recursivity
 istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData,  dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_loop - resource_directory)
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData,  dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type - Directory_Entry_Resource)
+iend
+; direct recursivity
+istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData,  dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_loop - Directory_Entry_Resource)
 iend
 
-resource_directory_type_rcdata:
+resource_directory_type_rcdata: ;resource_name1:
 istruc IMAGE_RESOURCE_DIRECTORY
     at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries,    dw 1
 iend
-;resource_name1:
 istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
     at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd SOME_NAME           ; name of the underneath resource
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_languages0 - resource_directory)
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_languages0 - Directory_Entry_Resource)
 iend
 
-DIRECTORY_ENTRY_RESOURCE_SIZE equ  0 ;$ - Directory_Entry_Resource
-
-; resource subdirectory
 resource_directory_languages0:
 istruc IMAGE_RESOURCE_DIRECTORY
     at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries,    dw 1
 iend
-
-IMAGE_RESOURCE_DIRECTORY_ENTRY_00001:
 istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd resource_data1 - resource_directory
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd resource_data1 - Directory_Entry_Resource
 iend
 
 resource_data1:
