@@ -21,7 +21,6 @@ start:
     rep movsb
     retf
 
-
 next:
     mov si, 7BEh
     mov cl, 4
