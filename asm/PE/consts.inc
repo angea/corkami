@@ -230,6 +230,15 @@ IMAGE_FILE_32BIT_MACHINE           equ 00100h
     add esp, 4
 %endmacro
 
+struc IMAGE_RESOURCE_DIRECTORY
+ .Characteristics         resd 1
+ .TimeDateStamp           resd 1
+ .MajorVersion            resw 1
+ .MinorVersion            resw 1
+ .NumberOfNamedEntries    resw 1
+ .NumberOfIdEntries       resw 1
+endstruc
+
 struc IMAGE_OPTIONAL_HEADER64
   .Magic                        resw 1
   .MajorLinkerVersion           resb 1
@@ -271,3 +280,8 @@ CR equ 0dh
 EOF equ 1ah
 LF equ 0ah
 
+
+struc IMAGE_RESOURCE_DIRECTORY_ENTRY
+    .Name resd 1
+    .OffsetToData resd 1
+endstruc

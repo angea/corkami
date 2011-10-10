@@ -76,6 +76,11 @@ echo hiddenappdata1.exe:& hiddenappdata1.exe
 echo hiddenappdata2.exe:& hiddenappdata2.exe
 echo virtgap.exe:& virtgap.exe
 echo foldedhdr.exe:& foldedhdr.exe
+echo.
+echo resources:
+echo resource.exe:& resource.exe
+echo namedresource.exe:& namedresource.exe
+echo reshdr.exe:& reshdr.exe
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
 rem delayimports broken ATM
