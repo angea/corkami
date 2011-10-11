@@ -4,7 +4,7 @@
 
 %include '..\consts.inc'
 
-IMAGEBASE equ 7ffd0000h
+IMAGEBASE equ 7efd0000h ; 7ffd0000h also works under XP
 org IMAGEBASE
 bits 32
 
@@ -69,7 +69,7 @@ _
     call [__imp__ExitProcess]
 _c
 
-Msg db " * ImageBase is 7ffd0000h, and no relocations", 0ah, 0
+Msg db " * ImageBase is 7efd0000h, and no relocations", 0ah, 0
 _d
 
 Import_Descriptor:

@@ -9,3 +9,11 @@ nosectionW7.exe:
  * Low alignment PE with no section (W7)
 maxsecW7.exe:
  * PE with 8192 code sections (W7)
+appsectableW7.exe:
+ * section table in appended data (W7)
+apphdrW7.exe:
+ * NT headers in appended data (W7)
+foldedhdr.exe:
+ * PE header overwritten on loading
+foldedhdrW7.exe:
+ * PE header overwritten on loading (W7)

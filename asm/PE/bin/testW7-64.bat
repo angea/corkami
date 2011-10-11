@@ -7,5 +7,4 @@ echo nosectionW7.exe:& nosectionW7.exe
 echo maxsecW7.exe:& maxsecW7.exe
 echo appsectableW7.exe:& appsectableW7.exe
 echo apphdrW7.exe:& apphdrW7.exe
-echo foldedhdr.exe:& foldedhdr.exe
 echo foldedhdrW7.exe:& foldedhdrW7.exe

@@ -97,7 +97,7 @@ ImageBase:
 ibkernel.exe:
  * kernel range IMAGEBASE (and relocations)
 bigib.exe:
- * ImageBase is 7ffd0000h, and no relocations
+ * ImageBase is 7efd0000h, and no relocations
 reloccrypt.exe:
  * decryption via relocations
 
