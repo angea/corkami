@@ -2,7 +2,7 @@
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include '..\consts.inc'
+%include 'consts.inc'
 
 IMAGEBASE equ 7efd0000h ; 7ffd0000h also works under XP
 org IMAGEBASE

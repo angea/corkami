@@ -18,12 +18,18 @@ tls.exe:
   # 1st TLS call
   # EntryPoint executed
   # ExitProcess called
+tls_import.exe (displayed afterwards, but working):
+ * executed via imported TLS
 tls_onthefly.exe:
  * TLS on the fly update started
   # adding 2nd TLS to callbacks
   # 2nd TLS executed. removing all TLS from callbacks to prevent further executions
 tls_obfuscation.exe:
  * fake TLS callbacks for obfuscation
+tls_aoi.exe:
+ * TLS AddressOfIndex set to 0
+
+Exports:
 exportobf.exe:
  * fake exports to disrupt disassembly
 exportsdata.exe:
@@ -34,6 +40,8 @@ imports.exe:
  * standard DLL import
 imports_noint.exe:
  * no Import Name Table
+imports_badterm.exe:
+ * non-null import terminator
 imports_noext.exe:
  * extensions-less imported dlls (>= XP)
 imports_mixed.exe:

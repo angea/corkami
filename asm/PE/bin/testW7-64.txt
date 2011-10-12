@@ -1,3 +1,6 @@
+normal64.exe:
+ * a standard PE32+ (imports, standard alignments)
+
 Low alignments:
 tinyW7_3264.exe:
  * tiny 268 bytes PE32 (W7 32b/64b)
@@ -13,7 +16,5 @@ appsectableW7.exe:
  * section table in appended data (W7)
 apphdrW7.exe:
  * NT headers in appended data (W7)
-foldedhdr.exe:
- * PE header overwritten on loading
 foldedhdrW7.exe:
  * PE header overwritten on loading (W7)

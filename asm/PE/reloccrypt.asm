@@ -17,7 +17,7 @@ IMAGE_REL_BASED_IA64_IMM64 equ 9
 IMAGE_REL_BASED_DIR64 equ 10
 IMAGE_REL_BASED_HIGH3ADJ equ 11
 
-%include '..\consts.inc'
+%include 'consts.inc'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 IMAGEBASE equ 0ffff0000h

@@ -1,10 +1,9 @@
-; a PE with a huge virtual gap between physical section
+; file with too many fake imports, which are 'ignored' on loading by TLS AddressOfIndex
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
 %include 'consts.inc'
 
-EXTRAVIRTUALSPACE equ 10000h
 IMAGEBASE equ 400000h
 org IMAGEBASE
 bits 32
@@ -36,60 +35,46 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd (EXTRAVIRTUALSPACE + 3) * SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd Section0Size + 2 * SECTIONALIGN - FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
+DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.TLSVA,       dd Image_Tls_Directory32 - IMAGEBASE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 101000h 
+;    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd Section0Size
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
-istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd EXTRAVIRTUALSPACE * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 0
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 0
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE
-iend
-istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd (EXTRAVIRTUALSPACE + 2) * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 2 * FILEALIGN
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE
-iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
+
 SIZEOFHEADERS equ $ - IMAGEBASE
-
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
-Msg db " * virtual gap between code sections", 0ah, 0
+Section0Start:
+
+EntryPoint:
+    push message
+    call [__imp__printf]
+    add esp, 1 * 4
+    push 0
+    call [__imp__ExitProcess]
+
+_c
+
+message db " * many fake imports, ignored by terminator set by TLS AoI (W7)", 0ah, 0
 _d
 
-Import_Descriptor:
-;kernel32.dll_DESCRIPTOR:
-    dd kernel32.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd kernel32.dll - IMAGEBASE
-    dd kernel32.dll_iat - IMAGEBASE
-;msvcrt.dll_DESCRIPTOR:
-    dd msvcrt.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd msvcrt.dll - IMAGEBASE
-    dd msvcrt.dll_iat - IMAGEBASE
-;terminator
-    dd 0, 0, 0, 0, 0
-_d
 
 kernel32.dll_hintnames:
     dd hnExitProcess - IMAGEBASE
@@ -121,17 +106,52 @@ _d
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
-EntryPoint:
-    mov eax, ebx
+
+Image_Tls_Directory32:
+    StartAddressOfRawData dd 0
+    EndAddressOfRawData   dd 0
+    AddressOfIndex        dd zero_here_plz
+    AddressOfCallBacks    dd CallBacks
+    SizeOfZeroFill        dd 0
+    Characteristics       dd 0
+_d
+
+
+CallBacks:
+    dd tls
+    dd 0
+tls:_d
+
+Import_Descriptor:
+kernel32.dll_DESCRIPTOR:
+    dd kernel32.dll_hintnames - IMAGEBASE
+    dd 0, 0
+    dd kernel32.dll - IMAGEBASE
+    dd kernel32.dll_iat - IMAGEBASE
+msvcrt.dll_DESCRIPTOR:
+    dd msvcrt.dll_hintnames - IMAGEBASE
+    dd 0, 0
+    dd msvcrt.dll - IMAGEBASE
+    dd msvcrt.dll_iat - IMAGEBASE
+fake_imports:
+dd fake_imports - IMAGEBASE + 100h * 4
+%assign i 0
+%rep 3;
+dd fake_imports - IMAGEBASE + i * 4
+%assign i i + 1
+%endrep
+zero_here_plz:
+
+%rep 40000h
+dd fake_imports - IMAGEBASE + i * 4
+%assign i i + 1
+%endrep
+;terminator
+    dd 0, 0, 0, 0, 0
+_d
 
 align FILEALIGN, db 0
-times FILEALIGN - 20h db 0
-    push Msg
-    call [__imp__printf]
-    add esp, 1 * 4
-_
-    push 0
-    call [__imp__ExitProcess]
-_c
 
-align FILEALIGN, db 0
+Section0Size EQU $ - Section0Start
+
+SIZEOFIMAGE EQU $ - IMAGEBASE

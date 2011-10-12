@@ -2,7 +2,7 @@
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
-%include '..\consts.inc'
+%include 'consts.inc'
 %define iround(n, r) (((n + (r - 1)) / r) * r)
 
 EXTRA equ 95
