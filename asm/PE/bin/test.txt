@@ -19,8 +19,8 @@ tls.exe:
   # EntryPoint executed
   # ExitProcess called
 tls_import.exe (displayed afterwards, but working):
- * executed via imported TLS
 tls_onthefly.exe:
+ * executed via imported TLS
  * TLS on the fly update started
   # adding 2nd TLS to callbacks
   # 2nd TLS executed. removing all TLS from callbacks to prevent further executions
@@ -164,3 +164,7 @@ reshdr.exe:
  * resource stored in header and shuffled resource structure
 resourceloop.exe:
  * recursive resources directory
+
+delay imports:
+delayimports.exe:
+ * delay imports

@@ -1,6 +1,8 @@
 all: common XP W7
 
-common: imports dll gaps tls bound entrypoint down many misc resource
+beta: 
+
+common: imports dll gaps tls bound entrypoint down many misc resource delay
 
 many: 96emptysections.exe 96workingsections.exe
 
@@ -21,11 +23,11 @@ bound: dllbound.dll dllbound-ld.exe dllbound-redirld.exe
 
 tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe tls_aoi.exe
 
+delay: delayimports.exe
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 
 resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe
 
-beta: delayimports.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impbyord.exe \
     imports_badterm.exe manyimportsW7.exe

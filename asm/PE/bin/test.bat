@@ -87,7 +87,9 @@ echo resource2.exe:& resource2.exe
 echo namedresource.exe:& namedresource.exe
 echo reshdr.exe:& reshdr.exe
 echo resourceloop.exe:& resourceloop.exe
+echo.
+echo delay imports:
+echo delayimports.exe:& delayimports.exe
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
-rem delayimports broken ATM
 rem quine.exe disabled because creates an extra window
