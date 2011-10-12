@@ -1,4 +1,5 @@
-; Low Alignment PE for XP, with 96 sections.
+; Low Alignment PE for XP, with a null SizeOfHeaders
+; which means the Section table is overlapping the Optional header
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
