@@ -12,19 +12,19 @@ fn = "%isects.exe" % NbSec
 SECTIONALIGN = 0x1000
 FILEALIGN = 0x200
 SizeOfHeaders = 0x138 + 0x28 * NbSec
-print "%i sections, header %X" % (NbSec, SizeOfHeaders)
-print "header size %08X" % SizeOfHeaders
 FstSecOff = SizeOfHeaders if (SizeOfHeaders % FILEALIGN == 0) else ((SizeOfHeaders / FILEALIGN) + 1) * FILEALIGN
-print "first section's offset %08X" % FstSecOff
 FstSecRVA = FstSecOff if (FstSecOff % SECTIONALIGN == 0) else ((FstSecOff / SECTIONALIGN) + 1) * SECTIONALIGN
-print "first section's RVA %08X" % FstSecRVA
+#print "%i sections, header %X" % (NbSec, SizeOfHeaders)
+#print "header size %08X" % SizeOfHeaders
+#print "first section's offset %08X" % FstSecOff
+#print "first section's RVA %08X" % FstSecRVA
 
 AddressOfEntryPoint = FstSecRVA
 ImportsVA = FstSecRVA + 0x18
 SizeOfImage = FstSecRVA + SECTIONALIGN * NbSec
 
 header = """
-%%include 'consts.inc'
+%%include '..\consts.inc'
 
 IMAGEBASE equ 010000h
 SECTIONALIGN equ 01000h
@@ -90,7 +90,7 @@ with open("%s" % fn, "ab") as f:
 firstsec = """
 bits 32
 IMAGEBASE equ 010000h
-%%include 'consts.inc'
+%%include '..\consts.inc'
 
 section progbits vstart= 0%xh + IMAGEBASE
 
@@ -149,7 +149,7 @@ kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
 
-Msg db " * %i sections", 0ah, 0
+Msg db " * %i physically identical sections", 0ah, 0
 _d
 
 align 0200h, db 0

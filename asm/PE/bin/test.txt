@@ -168,3 +168,5 @@ resourceloop.exe:
 delay imports:
 delayimports.exe:
  * delay imports
+delaycorrupt.exe:
+ * delay imports with empty values

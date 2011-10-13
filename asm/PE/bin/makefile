@@ -1,6 +1,6 @@
 all: common XP W7
 
-beta: 
+beta:
 
 common: imports dll gaps tls bound entrypoint down many misc resource delay
 
@@ -23,7 +23,8 @@ bound: dllbound.dll dllbound-ld.exe dllbound-redirld.exe
 
 tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe tls_aoi.exe tls_aoiOSDET.exe
 
-delay: delayimports.exe
+delay: delayimports.exe delaycorrupt.exe
+
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 
 resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe
@@ -37,7 +38,10 @@ XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tiny
     dosZMXP.exe
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
-    appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe
+    appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe
+
+65535sects.exe: ..\mkpe1.py
+	c:\python26\python ..\mkpe1.py 65535
 
 %.exe: ..\%.asm
 	yasm -o $@ $<
