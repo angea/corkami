@@ -14,3 +14,6 @@ echo reloccryptXP.exe:& reloccryptXP.exe
 echo.
 echo DOS:
 echo dosZMXP.exe:& dosZMXP.exe
+echo.
+echo OS Specific:
+echo tls_aoiOSDET.exe:& tls_aoiOSDET.exe

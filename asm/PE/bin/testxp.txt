@@ -23,3 +23,7 @@ reloccryptXP.exe:
 DOS:
 dosZMXP.exe:
  * EXE with ZM signature
+
+OS Specific:
+tls_aoiOSDET.exe:
+ * TLS AoI => XP

@@ -21,7 +21,7 @@ entrypoint: virtEP.exe dllextep.dll dllextep-ld.exe nullEP.exe
 
 bound: dllbound.dll dllbound-ld.exe dllbound-redirld.exe
 
-tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe tls_aoi.exe
+tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe tls_aoi.exe tls_aoiOSDET.exe
 
 delay: delayimports.exe
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
