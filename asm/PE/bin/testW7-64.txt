@@ -12,6 +12,8 @@ nosectionW7.exe:
  * Low alignment PE with no section (W7)
 maxsecW7.exe:
  * PE with 8192 code sections (W7)
+65535sects.exe:
+ * 65535 physically identical, virtually executed sections
 appsectableW7.exe:
  * section table in appended data (W7)
 apphdrW7.exe:

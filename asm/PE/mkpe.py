@@ -1,4 +1,4 @@
-# script to generate PE with any number of physically identical section
+# script to generate PE with any number of physically identical section, all executed
 
 # Ange Albertini, BSD Licence 2011
 
@@ -7,9 +7,13 @@ import sys
 import os
 
 NbSec = int(sys.argv[1])
+SECTIONALIGN = 0x1000
+SizeFactor = 7 # number of SECTIONALIGN per section
+if NbSec > 65535 or NbSec * SizeFactor * SECTIONALIGN > 0x80000000:
+    sys.exit()
+    
 fn = "%isects.exe" % NbSec
 
-SECTIONALIGN = 0x1000
 FILEALIGN = 0x200
 SizeOfHeaders = 0x138 + 0x28 * NbSec
 FstSecOff = SizeOfHeaders if (SizeOfHeaders % FILEALIGN == 0) else ((SizeOfHeaders / FILEALIGN) + 1) * FILEALIGN
@@ -19,9 +23,9 @@ FstSecRVA = FstSecOff if (FstSecOff % SECTIONALIGN == 0) else ((FstSecOff / SECT
 #print "first section's offset %08X" % FstSecOff
 #print "first section's RVA %08X" % FstSecRVA
 
-AddressOfEntryPoint = FstSecRVA
-ImportsVA = FstSecRVA + 0x18
-SizeOfImage = FstSecRVA + SECTIONALIGN * NbSec
+AddressOfEntryPoint = FstSecRVA + 0x120
+ImportsVA = FstSecRVA + 0x20
+SizeOfImage = FstSecRVA + SECTIONALIGN * NbSec * SizeFactor
 
 header = """
 %%include '..\consts.inc'
@@ -76,11 +80,15 @@ os.system("yasm -o %s _hdr.as_" % fn)
 os.remove("_hdr.as_")
 
 sec = ""
-for i in range(NbSec):
-	vs = SECTIONALIGN
-	va = FstSecRVA + i * SECTIONALIGN
-	ps = FILEALIGN
-	pa = FstSecOff
+vs = SECTIONALIGN * SizeFactor
+ps = FILEALIGN
+pa = FstSecOff
+va = FstSecRVA
+sec += chr(0) * 4 * 2 + struct.pack("<4L", vs, va, ps, pa) + chr(0) * 4 * 3 + struct.pack("<L", 0xe00000c0)
+
+ps = 0
+for i in range(NbSec - 1):
+	va = FstSecRVA + (i + 1) * SizeFactor * SECTIONALIGN
 	sec += chr(0) * 4 * 2 + struct.pack("<4L", vs, va, ps, pa) + chr(0) * 4 * 3 + struct.pack("<L", 0xe00000c0)
 
 sec += (FstSecOff - SizeOfHeaders) * chr(0)
@@ -94,7 +102,7 @@ IMAGEBASE equ 010000h
 
 section progbits vstart= 0%xh + IMAGEBASE
 
-EntryPoint:
+start:
     push Msg
     call [__imp__printf]
     add esp, 1 * 4
@@ -103,6 +111,7 @@ _
     call [__imp__ExitProcess]
 _c
 
+_d
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
     dd kernel32.dll_hintnames - IMAGEBASE
@@ -149,11 +158,26 @@ kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
 
-Msg db " * %i physically identical sections", 0ah, 0
+Msg db " * %i physically identical, virtually executed sections", 0ah, 0
 _d
 
+EntryPoint:
+    ; build a return jump at the bottom of the virtual space
+    mov edi, 0%xh
+    mov al, 68h
+    stosb
+    mov eax, start
+    stosd
+    mov ax, 0c3h
+    stosb
+    ; give eax a good value to go thru 00 00's
+    mov eax, ebx
 align 0200h, db 0
-""" % (FstSecRVA, NbSec)
+""" % (
+    FstSecRVA,
+    # 6 = size of the patch, 1 = avoiding an extra 00
+    NbSec, SECTIONALIGN * (1 + SizeFactor * NbSec) + FstSecRVA - 6 - 1
+    )
 
 with open("_1st.as_", "wt") as f:
     f.write(firstsec)
@@ -163,5 +187,6 @@ os.remove("_1st.as_")
 with open("_1st.bi_", "rb") as f:
     r = f.read()
 os.remove("_1st.bi_")
+
 with open("%s" % fn, "ab") as f:
     f.write(r)

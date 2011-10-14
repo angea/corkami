@@ -29,7 +29,6 @@ gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virt
 
 resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe
 
-
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impbyord.exe \
     imports_badterm.exe manyimportsW7.exe
 
