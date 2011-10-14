@@ -18,3 +18,9 @@ apphdrW7.exe:
  * NT headers in appended data (W7)
 foldedhdrW7.exe:
  * PE header overwritten on loading (W7)
+manyimportsW7.exe:
+ * many fake imports, ignored by terminator set by TLS AoI (W7)
+
+OS Specific:
+tls_aoiOSDET.exe:
+ * TLS AoI => W7

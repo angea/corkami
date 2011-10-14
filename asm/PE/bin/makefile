@@ -40,8 +40,8 @@ XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tiny
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
     appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe
 
-65535sects.exe: ..\mkpe1.py
-	c:\python26\python ..\mkpe1.py 65535
+65535sects.exe: ..\mkpe.py
+	c:\python26\python ..\mkpe.py 65535
 
 %.exe: ..\%.asm
 	yasm -o $@ $<
