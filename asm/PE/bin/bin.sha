@@ -29,7 +29,7 @@ ec1b98fdf9a44bb271556639a322f3b6b5e9cbe7 *dll-dynld.exe
 d91f39d5fc8329d81035e4e9ea6d48c07cb1cfaf *dllfw-ld.exe
 097859e755e97314ce47614ae452067ea9059cc7 *dllfwloop.dll
 a9a2c41e5a53a90dc7ebd8f3472bbdf0271c8d00 *dllfwloop-ld.exe
-d954c6c9bbf4ce41151ea96680e9c4b542fd44c9 *dll-ld.exe
+4b9e0869f52a4db3d9b05ebf534e53c86e1d9bac *dll-ld.exe
 d4ad97d67014493438e83be7f1980e4ebdd940a1 *dllnoexp.dll
 e244f708990be4fbd1c7439251a2ecb6ee0aa0f3 *dllnoexp-dynld.exe
 d73b22d0eeb508fcc67229c9d6fd6479d7539140 *dllnoreloc.dll
@@ -66,8 +66,8 @@ d8e4499216c621da090a133bf4b6769c240651d7 *maxsecW7.exe
 cfeb2cd053b1e5a470bccbf1190cb26f10f42d60 *namedresource.exe
 8f06da531f9c18b60c14d67a2067d4a0f0618374 *normal.exe
 e55f71b59d363072038c2a0a9c76d0573d88b1d9 *normal64.exe
-cbba260ad3354ffa1709f5c7eb1a1109b5378e89 *nosectionW7.exe
-e3a25e63c049d28426dd49471590d193a90022bf *nosectionXP.exe
+aa0c81642bab232eb512d9c619d1f4d613e14918 *nosectionW7.exe
+a278c99c7cd0c6de535959c146a986e528015ff0 *nosectionXP.exe
 2028d80eb6ecbd633b563857211238942e1439dd *nullEP.exe
 1594da1e9724ba55f49d6195c47cee4750b9c9d1 *nullSOH-XP.exe
 175d0521661d28e3cf9dcabe8ddaa55578a1f0da *ownexports.exe

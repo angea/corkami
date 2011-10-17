@@ -8,8 +8,8 @@ IMAGEBASE equ 400000h
 org IMAGEBASE
 bits 32
 
-SECTIONALIGN equ 4
-FILEALIGN equ 4
+SECTIONALIGN equ 1
+FILEALIGN equ 1
 
 istruc IMAGE_DOS_HEADER
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
@@ -20,7 +20,6 @@ NT_Signature:
 istruc IMAGE_NT_HEADERS
     at IMAGE_NT_HEADERS.Signature, db 'PE', 0, 0
 iend
-
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     ; at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw 0 ; required to be null if no sections, under W7

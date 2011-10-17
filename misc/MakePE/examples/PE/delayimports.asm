@@ -71,15 +71,11 @@ EntryPoint:
     push tada               ; LPCTSTR lpCaption
     push helloworld         ; LPCTSTR lpText
     push 0                  ; HWND hWnd
-    call MessageBoxA
+    call [__imp__MessageBoxA]
     push 0                  ; UINT uExitCode
     call ExitProcess
 
 align 10h, db 090h
-
-__delay__MessageBoxA:
-    mov eax, hnMessageBoxA + 2
-    jmp DelayImportLoad
 
 align 10h, db 090h
 
@@ -205,22 +201,6 @@ tada db "Tada!", 0
 helloworld db "Hello World!", 0
 align 10h, db 0
 
-delay_imports:
-istruc _IMAGE_DELAY_IMPORT_DESCRIPTOR
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.grAttrs,      dd 1        ; if 0, VAs, if 1, RVAs
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaDLLName,   dd szuser32 - IMAGEBASE
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaHmod,      dd diHandle - IMAGEBASE
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaIAT,       dd user32IAT - IMAGEBASE
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaINT,       dd user32INT - IMAGEBASE
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaBoundIAT,  dd user32dbiat - IMAGEBASE
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaUnloadIAT, dd user32duiat - IMAGEBASE
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.dwTimeStamp,  dd 0 ; TimeStamp of a DLL bound the old way
-iend
-istruc _IMAGE_DELAY_IMPORT_DESCRIPTOR
-iend
-
-diHandle dd 0   ; not used here
-
 user32IAT:
 __imp__MessageBoxA:
     DD __delay__MessageBoxA
@@ -234,13 +214,24 @@ hnMessageBoxA:
     dw 0
     db 'MessageBoxA',0
 
-user32dbiat:
-    dd 0
-    dd 0
+__delay__MessageBoxA:
+    mov eax, hnMessageBoxA + 2
+    jmp DelayImportLoad
 
-user32duiat:
-    dd DelayImportLoad
-    dd 0
+delay_imports:
+istruc _IMAGE_DELAY_IMPORT_DESCRIPTOR
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.grAttrs,      dd 1        ; if 0, VAs, if 1, RVAs
+;    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaDLLName,   dd szuser32 - IMAGEBASE
+;    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaHmod,      dd diHandle - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaIAT,       dd user32IAT - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaINT,       dd user32INT - IMAGEBASE
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.dwTimeStamp,  dd 0 ; TimeStamp of a DLL bound the old way
+iend
+istruc _IMAGE_DELAY_IMPORT_DESCRIPTOR
+iend
+
+;diHandle dd 0   ; not used here
+
 
 DELAY_IMPORTS_SIZE equ $ - delay_imports
 

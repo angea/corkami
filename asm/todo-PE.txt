@@ -1,0 +1,14 @@
+* PE with as much random values as possible - the opposite of 'normal.exe', with as few set as possible.
+* standard, low alignment PE, on both os
+* win32value
+* reloc on 
+ * EntrypointVA
+ * imagebase
+ * e_lfanew
+* dll with no entrypoint, with loadlibraryex and resources
+* string resources
+* try: tls + no entrypoint
+* reloc crypt: +mips
+* bound imports: old style
+
+* make little outputter/grapher for msimg32.dll

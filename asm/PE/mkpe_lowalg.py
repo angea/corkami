@@ -1,4 +1,8 @@
 # script to generate PE with any number of physically identical section, all executed
+# low alignment (broken under w7 so far)
+
+# virtual sections are forbidden
+# physical offset == RVA
 
 # Ange Albertini, BSD Licence 2011
 
@@ -10,14 +14,15 @@ def roundup(value, rounding):
     return value if (value % rounding == 0) else ((value / rounding) + 1) * rounding
 
 NbSec = int(sys.argv[1])
-SECTIONALIGN = 0x1000
+NbSec = 96
+SECTIONALIGN = 4
 SizeFactor = 7 # number of SECTIONALIGN per section
 if NbSec > 65535 or NbSec * SizeFactor * SECTIONALIGN > 0x80000000:
     sys.exit()
-    
-fn = "%isects.exe" % NbSec
 
-FILEALIGN = 0x200
+fn = "%isectsLA.exe" % NbSec
+
+FILEALIGN = 4
 SizeOfHeaders = 0x138 + 0x28 * NbSec
 FstSecOff = roundup(SizeOfHeaders, FILEALIGN)
 FstSecRVA = roundup(FstSecOff, SECTIONALIGN)
@@ -26,16 +31,21 @@ FstSecRVA = roundup(FstSecOff, SECTIONALIGN)
 #print "first section's offset %08X" % FstSecOff
 #print "first section's RVA %08X" % FstSecRVA
 
-AddressOfEntryPoint = FstSecRVA + 0x120
+AddressOfEntryPoint = FstSecRVA + 0x110
 ImportsVA = FstSecRVA + 0x20
-SizeOfImage = FstSecRVA + SECTIONALIGN * NbSec * SizeFactor
+
+FstSecPS = 0x140
+FstSecVS = roundup(FstSecPS, SECTIONALIGN)
+
+SizeOfImage = FstSecRVA + FstSecVS + SECTIONALIGN * (NbSec - 1)* SizeFactor
+
 
 header = """
 %%include '..\consts.inc'
 
 IMAGEBASE equ 010000h
-SECTIONALIGN equ 01000h
-FILEALIGN equ 0200h
+SECTIONALIGN equ 4
+FILEALIGN equ 4
 
 org IMAGEBASE
 bits 32
@@ -61,8 +71,8 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.Magic,                     dw IMAGE_NT_OPTIONAL_HDR32_MAGIC
     at IMAGE_OPTIONAL_HEADER32.AddressOfEntryPoint,       dd 0%xh
     at IMAGE_OPTIONAL_HEADER32.ImageBase,                 dd IMAGEBASE
-    at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd 1000h
-    at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd 200h
+    at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd 4
+    at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd 4
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 0%xh
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd 0%xh
@@ -72,10 +82,12 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd 0%04xh
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd 0%xh
+    at IMAGE_DATA_DIRECTORY_16.IATVA,     dd 0%xh
+    at IMAGE_DATA_DIRECTORY_16.IATSize,   dd 0b0h
 iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
-""" % ( NbSec, AddressOfEntryPoint, SizeOfImage, SizeOfHeaders, ImportsVA)
+""" % ( NbSec, AddressOfEntryPoint, SizeOfImage, SizeOfImage - 1, ImportsVA, ImportsVA)
 
 with open("_hdr.as_", "wt") as f:
     f.write(header)
@@ -83,20 +95,22 @@ os.system("yasm -o %s _hdr.as_" % fn)
 os.remove("_hdr.as_")
 
 sec = ""
-vs = SECTIONALIGN * SizeFactor
-ps = FILEALIGN
+vs = FstSecVS
+ps = FstSecPS
 pa = FstSecOff
 va = FstSecRVA
 sec += chr(0) * 4 * 2 + struct.pack("<4L", vs, va, ps, pa) + chr(0) * 4 * 3 + struct.pack("<L", 0xe00000c0)
 
-ps = 0
+vs = SECTIONALIGN * SizeFactor
+ps = SECTIONALIGN * SizeFactor
 for i in range(NbSec - 1):
-	va = FstSecRVA + (i + 1) * SizeFactor * SECTIONALIGN
-	sec += chr(0) * 4 * 2 + struct.pack("<4L", vs, va, ps, pa) + chr(0) * 4 * 3 + struct.pack("<L", 0xe00000c0)
+    va = FstSecRVA + FstSecVS + i * SizeFactor * SECTIONALIGN
+    pa = va
+    sec += chr(0) * 4 * 2 + struct.pack("<4L", vs, va, ps, pa) + chr(0) * 4 * 3 + struct.pack("<L", 0xe00000c0)
 
 sec += (FstSecOff - SizeOfHeaders) * chr(0)
 with open("%s" % fn, "ab") as f:
-	f.write(sec)
+    f.write(sec)
 
 firstsec = """
 bits 32
@@ -161,7 +175,7 @@ kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
 
-Msg db " * %i physically identical, virtually executed sections", 0ah, 0
+Msg db " * %i executed sections, low alignments", 0ah, 0
 _d
 
 EntryPoint:
@@ -175,11 +189,12 @@ EntryPoint:
     stosb
     ; give eax a good value to go thru 00 00's
     mov eax, ebx
-align 0200h, db 0
+align 140h, db 0
 """ % (
     FstSecRVA,
     # 6 = size of the patch, 1 = avoiding an extra 00
-    NbSec, SECTIONALIGN * (1 + SizeFactor * NbSec) + FstSecRVA - 6 - 1
+    NbSec, 
+    SECTIONALIGN * (SizeFactor * (NbSec - 1) ) + FstSecRVA + FstSecVS - 6 - 1 + 0x10000
     )
 
 with open("_1st.as_", "wt") as f:
@@ -191,5 +206,6 @@ with open("_1st.bi_", "rb") as f:
     r = f.read()
 os.remove("_1st.bi_")
 
+r += (NbSec - 1) * SECTIONALIGN * SizeFactor * chr(0)
 with open("%s" % fn, "ab") as f:
     f.write(r)
