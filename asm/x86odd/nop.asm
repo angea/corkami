@@ -1,4 +1,4 @@
-; a test for BSWAP opcodes
+; a test for NOP and HINT NOP opcode
 
 ; Ange Albertini, BSD LICENCE 2011
 
@@ -64,48 +64,49 @@ EntryPoint:
 _
     print _32bmode
 _
-    print testingbswap16
-    mov dword [ok], _3216
+    print testingnop
     mov eax, 12345678h
-    db 66h
-    bswap eax
-    cmp eax, 12340000h
+    nop
+    cmp eax, 12345678h
+_
+    print testingxchgeax
+    mov dword [ok], _32xchg
+    mov eax, 12345678h
+    db 87h, 0c0h
+    cmp eax, 12345678h
     test32
 _
-    print testingbswap32
-    mov dword [ok], _3232
-    mov eax, 12345678h
-    bswap eax
-    cmp eax, 78563412h
-    test32
+    print testinghintnopdoc
+    db 0fh, 19h, 0c0h
+    print testinghintnopundoc
+    db 0fh, 1fh, 0c0h
+    print testinghintnopinvalidmem
+    xor eax, eax
+    dec eax
+    db 0fh, 19h, 0
+    _
+    print testinghintnopexception
+    push exception1
+    push dword [fs:0]
+    mov [fs:0], esp
+    mov edi, IMAGEBASE + 2 * SECTIONALIGN - 2
+    mov ax, 0190fh
+    stosw
+    jmp IMAGEBASE + 2 * SECTIONALIGN - 2
+
+exception1:
+    print exceptiontriggered
 _
     stop_if_no_64b
-
+_
     print _started64b
 _
 start64b
-    print64 testingbswap16
-    mov dword [ok], _6416
+    print64 testingxchgeax
+    mov dword [ok], _64xchg
     mov rax, 0123456789abcdefh
-    db 66h
-    bswap eax
-    mov rbx, 0123456789ab0000h
-    cmp rax, rbx
-    test64
-_
-    print64 testingbswap32
-    mov dword [ok], _6432
-    mov rax, 0123456789abcdefh
-    bswap eax
+    db 87h, 0c0h
     mov rbx, 00000000efcdab89h
-    cmp rax, rbx
-    test64
-_
-    print64 testingbswap64
-    mov dword [ok], _6464
-    mov rax, 0123456789abcdefh
-    bswap rax
-    mov rbx, 0efcdab8967452301h
     cmp rax, rbx
     test64
 _
@@ -117,19 +118,21 @@ backto32b
 _c
 bits 32
 
-executionstarted db " * testing bswap", 0ah, 0
-_32bmode db "  # 32b mode", 0ah, 0
-testingbswap16 db "   # 16b reg: ", 0
-testingbswap32 db "   # 32b reg: ", 0
+executionstarted db " * testing nop", 0ah, 0
 
-_3216 db "`bswap 1234<5678> => 1234<0000>`", 0ah, 0
-_3232 db "`bswap <12345678> => <78563412>`", 0ah, 0
+_32bmode db "  # 32b mode", 0ah, 0
+testingnop db "   # nop ", 0ah, 0
+testingxchgeax db "   # xchg eax, eax: ", 0
+_32xchg db "`xchg eax, eax: 01234567 => 01234567`", 0ah, 0
+
+testinghintnopdoc db "   # documented hint nop: `0f 19 c0: nop eax`", 0ah, 0
+testinghintnopinvalidmem db "   # hint nop on invalid address: `0f 19 c0: nop [ffffffff] => nothing`", 0ah, 0
+testinghintnopundoc db "   # undocumented hint nop: `0f 1f c0: nop eax`", 0ah, 0
+testinghintnopexception db "   # hint-nop triggered exception: ", 0
+exceptiontriggered db "exception triggered", 0ah, 0
 
 _started64b db "  # 64b detected, starting 64b mode", 0ah, 0
-testingbswap64 db "   # 64b reg: ", 0
-_6416 db "`bswap 0123456789ab<cdef> => 0123456789ab<0000>`", 0ah, 0
-_6432 db "`bswap 01234567<89abcdef> => 00000000<efcdab89>`", 0ah, 0
-_6464 db "`bswap <0123456789abcdef> => <efcdab8967452301>`", 0ah, 0
+_64xchg db "`xchg eax, eax: 01234567<89abcdef> => 00000000<efcdab89>`", 0ah, 0
 
 ok dd _ok
 _fail db "FAIL", 0ah, 0

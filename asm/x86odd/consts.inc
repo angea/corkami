@@ -228,3 +228,59 @@ IMAGE_REL_BASED_HIGHLOW equ 3
 CR equ 0dh
 EOF equ 1ah
 LF equ 0ah
+
+%macro start64b 0
+    jmp 33h: $ + 7
+    bits 64
+%endmacro
+
+%macro backto32b 0
+    push qword [cs_]
+    push $ + 7
+    retf
+    bits 32
+%endmacro
+
+%macro print 1
+    push %1
+    call [__imp__printf]
+    add esp, 1 * 4
+%endmacro
+
+%macro print64 1
+    backto32b
+    print %1
+    start64b
+%endmacro
+
+%macro test64 0
+    jz %%ok
+    print64 _fail
+    jmp %%end
+%%ok:
+    print64 dword [ok]
+%%end:
+%endmacro
+
+%macro test32 0
+    jz %%ok
+    print _fail
+    jmp %%end
+%%ok:
+    print dword [ok]
+%%end:
+%endmacro
+
+%macro stop_if_no_64b 0
+    push gs
+    pop eax
+    cmp ax, 2bh
+    jz _64bpresent
+    push 0
+    call [__imp__ExitProcess]
+_64bpresent:
+_
+    push cs
+    pop dword [cs_]
+_
+%endmacro
