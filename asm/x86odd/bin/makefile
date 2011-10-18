@@ -1,6 +1,6 @@
 all: common XP W7 64b
 
-common: 
+common: bswap.exe
 
 XP: 
 

@@ -1,0 +1,5 @@
+bswap.exe:
+ * testing bswap
+  # 32b mode
+   # 16b reg: `bswap 1234<5678> => 1234<0000>`
+   # 32b reg: `bswap <12345678> => <78563412>`
