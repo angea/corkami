@@ -1,32 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">
  <manifest:file-entry manifest:media-type="application/vnd.oasis.opendocument.presentation" manifest:version="1.2" manifest:full-path="/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/current.xml"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/text-base/current.xml.svn-base"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/.svn/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/.svn/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/all-wcprops"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/tmp/text-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/tmp/prop-base/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/tmp/props/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/tmp/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/entries"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/.svn/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/"/>
  <manifest:file-entry manifest:media-type="application/vnd.sun.xml.ui.configuration" manifest:full-path="Configurations2/"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001E2000000B583B3039F.png"/>
- <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000000B800000041DD6DF34A.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000013F00000190FEA82CEC.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000032C0000036B156021FA.png"/>
- <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000040000000300E63FFB39.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001100000009E6436E008.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000025700000113DEE79D48.png"/>
- <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001D80000005761D1D508.png"/>
- <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000030000000400B0A35142.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000000200000002000309F1C.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001BA0000007962A636DE.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000137000000FBD96B3990.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002380000023B235318EB.png"/>
- <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001E2000000819B9EA1B3.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000000CF00000162C9D664BA.png"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Pictures/"/>
  <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="content.xml"/>
  <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="styles.xml"/>
