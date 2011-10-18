@@ -60,11 +60,17 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
-    rdtsc
+    mov rax, 00123456789abcdefh
+    mov rbx, 01111111111111111h
+    mov rcx, 0ffffffffffffffffh
+    mov rdx, 00000000089abcdefh
     mov ebx, eax
     db 63h, 0c8h ; movsxd ecx, eax
     cmp rcx, rbx
     jnz end_
+    cmp rcx, rdx
+    jnz end_
+    
     sub rsp, 8 * 5
     lea ecx, [message]
     call [__imp__printf]
