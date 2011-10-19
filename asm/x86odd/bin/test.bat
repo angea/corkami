@@ -1,2 +1,4 @@
 @echo off
-@echo bswap.exe:&bswap.exe
+bswap.exe
+echo.
+nop.exe

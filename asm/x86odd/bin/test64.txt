@@ -2,6 +2,10 @@
   # 32b mode
    # 16b reg: `bswap 1234<5678> => 1234<0000>`
    # 32b reg: `bswap <12345678> => <78563412>`
+  # 64b detected, starting 64b mode
+   # 16b reg: `bswap 0123456789ab<cdef> => 0123456789ab<0000>`
+   # 32b reg: `bswap 01234567<89abcdef> => 00000000<efcdab89>`
+   # 64b reg: `bswap <0123456789abcdef> => <efcdab8967452301>`
 
  * testing nop
   # 32b mode
@@ -11,3 +15,5 @@
    # undocumented hint nop: `0f1fc0 nop eax`
    # hint nop on invalid address: `0f1900 nop [ffffffff]` => nothing
    # hint-nop triggered exception: exception triggered
+  # 64b detected, starting 64b mode
+   # `87c0 xchg eax, eax`: `01234567<89abcdef> => 00000000<89abcdef>`
