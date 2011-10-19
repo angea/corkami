@@ -4,7 +4,7 @@ beta:
 
 common: imports dll gaps tls bound entrypoint down many misc resource delay
 
-many: 96emptysections.exe 96workingsections.exe
+many: 96emptysections.exe 96workingsections.exe bigSoRD.exe
 
 dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllemptyexp.dll \
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
@@ -34,7 +34,7 @@ imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impby
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
     tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe \
-    dosZMXP.exe
+    dosZMXP.exe driver.sys
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
     appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe
@@ -46,4 +46,7 @@ W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.ex
 	yasm -o $@ $<
 
 %.dll: ..\%.asm
+	yasm -o $@ $<
+
+%.sys: ..\%.asm
 	yasm -o $@ $<
