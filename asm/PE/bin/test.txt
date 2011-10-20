@@ -120,6 +120,8 @@ dllextep-ld.exe:
 sections:
 bigsec.exe:
  * virtually oversized section
+bigSoRD.exe:
+ * oversized SizeOfRawData
 dupsec.exe:
  * several sections - including the header - with the same physical content
 duphead.exe:

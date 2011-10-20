@@ -63,6 +63,7 @@ echo dllextep-ld.exe:& dllextep-ld.exe
 echo.
 echo sections:
 echo bigsec.exe:& bigsec.exe
+echo bigSoRD.exe:& bigSoRD.exe
 echo dupsec.exe:& dupsec.exe
 echo duphead.exe:& duphead.exe
 echo secinsec:& secinsec.exe
@@ -94,3 +95,4 @@ echo delaycorrupt.exe:& delaycorrupt.exe
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
 rem quine.exe disabled because creates an extra window
+rem driver.sys disabled because, well, it's a driver :D

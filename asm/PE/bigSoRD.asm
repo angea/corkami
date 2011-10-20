@@ -1,4 +1,4 @@
-; PE with big SoRD when VS is correct (test)
+; a PE with big (fake) SoRD when VS is correct, and not in last section
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -35,7 +35,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 3 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -50,14 +50,19 @@ SectionHeader:
 istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN + 70000000h
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN + 0ffff0000h
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
+istruc IMAGE_SECTION_HEADER
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
+    at IMAGE_SECTION_HEADER.PointerToRawData, dd 2 * FILEALIGN
+    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_READ
+iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE
-
-db "this will not be in memory, as it's between the declared header and before the first section"
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
@@ -70,8 +75,6 @@ _
     call [__imp__ExitProcess]
 _c
 
-Msg db " * oversized SizeOfRawData", 0ah, 0
-_d
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
@@ -118,5 +121,10 @@ _d
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
+
+align FILEALIGN, db 0
+
+section nobits vstart=IMAGEBASE + 2 * SECTIONALIGN align=FILEALIGN
+Msg db " * oversized SizeOfRawData", 0ah, 0
 
 align FILEALIGN, db 0
