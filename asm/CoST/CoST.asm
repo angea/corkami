@@ -63,7 +63,7 @@ istruc IMAGE_DOS_HEADER
 db CR
 
 ; Warning! a commercial banner is approaching fast !
-program db 'CoST - Corkami Standard Test BETA 2011/09/XX', 0dh, 0ah, 0
+program db 'CoST - Corkami Standard Test BETA 2011/10/XX', 0dh, 0ah, 0
 
     ; omg, we're actually still in the header... quick, the first valid value...
     at IMAGE_DOS_HEADER.e_lfanew, dd nt_header - IMAGEBASE
