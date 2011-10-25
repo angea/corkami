@@ -1,8 +1,8 @@
 all: common XP W7 64b
 
-common: bswap.exe nop.exe
+common: bswap.exe nop.exe oldpath.exe pushret.exe
 
-XP: 
+XP: gs.exe smsw.exe
 
 W7: 
 

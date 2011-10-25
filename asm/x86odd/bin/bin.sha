@@ -1,3 +1,7 @@
 0f236d0aa8d8ed6be14f8345fdbfcc91d9026f78 *bswap.exe
+bf8c4f84ca4a3dea2ae19bb2f8be820a5d993615 *gs.exe
 77072e4f10e5f605a7b2829c7117c7a82e230797 *movsxd64.exe
 38fd2a13fc52b15b9f7dcaa8707b9dd15596f0b9 *nop.exe
+a2c9c43e68f6ffdfcc8cfb887cb5a63fcf1834ef *oldpath.exe
+6db89efa6bfb8c894019328c01aa8d966bd46a26 *pushret.exe
+f24aeec18527476c1c53cf1f63cd9269dd262b65 *smsw.exe

@@ -11,3 +11,14 @@
    # undocumented hint nop: `0f1fc0 nop eax`
    # hint nop on invalid address: `0f1900 nop [ffffffff]` => nothing
    # hint-nop triggered exception: exception triggered
+
+ * push/ret test: "fail" as expected
+
+ * obsolete instructions: OK
+
+ * GS tricks: 
+  # GS modified, stayed as-is
+  # GS modified, eventually reset
+  # GS reset took long enough
+
+ * smsw trick: fail

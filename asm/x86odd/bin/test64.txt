@@ -17,3 +17,13 @@
    # hint-nop triggered exception: exception triggered
   # 64b detected, starting 64b mode
    # `87c0 xchg eax, eax`: `01234567<89abcdef> => 00000000<89abcdef>`
+
+ * push/ret test: "fail" as expected
+
+ * obsolete instructions: OK
+
+ * GS tricks:
+  # requires a 32b OS
+
+ * smsw trick:
+  # requires XP
