@@ -10,3 +10,5 @@ echo.
 gs.exe
 echo.
 smsw.exe
+echo.
+initvals.exe

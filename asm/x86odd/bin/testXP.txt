@@ -22,3 +22,8 @@
   # GS reset took long enough
 
  * smsw trick: fail
+
+ * initial registers value tester:
+  # started TLS
+  # started EntryPoint
+  # finished
