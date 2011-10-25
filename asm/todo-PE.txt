@@ -7,7 +7,6 @@
  * e_lfanew
 * dll with no entrypoint, with loadlibraryex and resources
 * string resources
-* try: tls + no entrypoint
 * reloc crypt: +mips
 * bound imports: old style
 
