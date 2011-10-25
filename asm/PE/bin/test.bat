@@ -14,6 +14,8 @@ echo tls_import.exe (displayed afterwards, but working):& tls_import.exe
 echo tls_onthefly.exe:& tls_onthefly.exe
 echo tls_obfuscation.exe:& tls_obfuscation.exe
 echo tls_aoi.exe:& tls_aoi.exe
+echo tls_exiting.exe:& tls_exiting.exe
+echo tls_noEP.exe:& tls_noEP.exe
 echo.
 echo Exports:
 echo exportobf.exe:& exportobf.exe
@@ -23,6 +25,7 @@ echo Imports loading:
 echo imports.exe:& imports.exe
 echo imports_noint.exe:& imports_noint.exe
 echo imports_badterm.exe:& imports_badterm.exe
+echo imports_vterm.exe:& imports_vterm.exe
 echo imports_noext.exe:& imports_noext.exe
 echo imports_mixed.exe:& imports_mixed.exe
 echo importshint.exe:& importshint.exe

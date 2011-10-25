@@ -59,6 +59,7 @@ a19d35c7afd3132f210313aa8e91749b2c8b2a6b *imports.exe
 ca75d3f7efb6b18d6bf0c3bd8e896c81e7539d74 *imports_mixed.exe
 79189e97c5e779eb022ac37267fba86a41810ef4 *imports_noext.exe
 0641c6531625d1f5e93d04f31808f915404d9043 *imports_noint.exe
+bcb7a3e77e416d9527892a2941ce02864ff626e7 *imports_vterm.exe
 dc3977014027d86539bd6986b857c51da5a0ac5c *importshint.exe
 58596114b8cd3d9fdf3ed4dca000b3ff64dbba3d *manyimportsW7.exe
 596f786f7294d463c167a4705af3370040d812f6 *maxsec_lowaligW7.exe
@@ -87,6 +88,7 @@ e7a1caebdd7d3ec194903876077078525f4d002f *secinsec.exe
 da14dc8c5cc23c9c6fa3b2453e2f88920ea4b85a *tiny.exe
 8499a0bb33aeba8f59a172584abc7ca0ab82a78c *tinydllXP.dll
 5bb04a8b45e7bf2abfc9c19399cfafa2cbfd2728 *tinydllXP-ld.exe
+436fed5684a93d39220a1e4973541f10e98325e8 *tinydrivXP.sys
 e9b746a1300530bc3658dc0085b040942b255b97 *tinyW7.exe
 abaa4210f8f614ac638aed678eec251616d9838c *tinyW7_3264.exe
 7fb061ebd29b0b8826e92078207ad3e4bc3cb150 *tinyW7x64.exe
@@ -94,7 +96,9 @@ abaa4210f8f614ac638aed678eec251616d9838c *tinyW7_3264.exe
 0d0926348fa125433bf25eadb1dfdf600d9bd6dc *tls.exe
 e4ee093a785f6b18a45e7da66927e605bd1e8d70 *tls_aoi.exe
 d490a8c436c0aa936209ca957667d63c00e41736 *tls_aoiOSDET.exe
+2e883cb91248ae1e6829696b5664cb56992a9323 *tls_exiting.exe
 537a35ebc366aad08d2c4ea7c9c855a4454adcb1 *tls_import.exe
+802d37a85c2690563cb7b0b4d433fd500221ae56 *tls_noEP.exe
 c415fbb5669cd68b1eb7fb2be282aed0f55c0446 *tls_obfuscation.exe
 140fc4723d0dcbf25429c5013901ecb1f7e297bf *tls_onthefly.exe
 946d7ee8f1fbbc82995275ebdb6720d2e8030d14 *truncatedlast.exe

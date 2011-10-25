@@ -28,6 +28,12 @@ tls_obfuscation.exe:
  * fake TLS callbacks for obfuscation
 tls_aoi.exe:
  * TLS AddressOfIndex set to 0
+tls_exiting.exe:
+ * exiting TLS:
+  # 1st TLS call, ExitProcess() called
+tls_noEP.exe:
+ * Exiting TLS with no EP:
+  # 1st TLS call, ExitProcess() called
 
 Exports:
 exportobf.exe:
@@ -42,6 +48,8 @@ imports_noint.exe:
  * no Import Name Table
 imports_badterm.exe:
  * non-null import terminator
+imports_vterm.exe:
+ * virtual imports terminator
 imports_noext.exe:
  * extensions-less imported dlls (>= XP)
 imports_mixed.exe:
