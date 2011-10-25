@@ -3,5 +3,6 @@ bf8c4f84ca4a3dea2ae19bb2f8be820a5d993615 *gs.exe
 77072e4f10e5f605a7b2829c7117c7a82e230797 *movsxd64.exe
 38fd2a13fc52b15b9f7dcaa8707b9dd15596f0b9 *nop.exe
 a2c9c43e68f6ffdfcc8cfb887cb5a63fcf1834ef *oldpath.exe
+4d36d7e8f5ae9522fd4ff053fa540f7e96e32842 *privileged.sys
 6db89efa6bfb8c894019328c01aa8d966bd46a26 *pushret.exe
 f24aeec18527476c1c53cf1f63cd9269dd262b65 *smsw.exe
