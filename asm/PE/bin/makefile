@@ -31,14 +31,14 @@ gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virt
 resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impbyord.exe \
-    imports_badterm.exe manyimportsW7.exe imports_vterm.exe
+    imports_badterm.exe manyimportsW7.exe imports_vterm.exe imports_nothunk.exe
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
     tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe \
     dosZMXP.exe driver.sys tinydrivXP.sys
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
-    appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe
+    appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe imports_apimsW7.exe
 
 65535sects.exe: ..\mkpe.py
 	c:\python26\python ..\mkpe.py 65535

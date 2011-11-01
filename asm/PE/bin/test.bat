@@ -28,6 +28,7 @@ echo imports_badterm.exe:& imports_badterm.exe
 echo imports_vterm.exe:& imports_vterm.exe
 echo imports_noext.exe:& imports_noext.exe
 echo imports_mixed.exe:& imports_mixed.exe
+echo imports_nothunk.exe:& imports_nothunk.exe
 echo importshint.exe:& importshint.exe
 echo impbyord.exe:& impbyord.exe
 echo.

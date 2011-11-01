@@ -54,6 +54,8 @@ imports_noext.exe:
  * extensions-less imported dlls (>= XP)
 imports_mixed.exe:
  * mixed-case imported dlls
+imports_nothunk.exe:
+ * imports with missing thunks
 importshint.exe:
  * correct import called via hinting
 impbyord.exe:
