@@ -1,10 +1,10 @@
 all: common XP W7 64b
 
-common: bswap.exe nop.exe oldpath.exe pushret.exe initvals.exe
+common: bswap.exe nop.exe oldpath.exe pushret.exe initvals.exe overdasm.exe fpu.exe
 
 XP: gs.exe smsw.exe privileged.sys
 
-W7:
+W7: 96bits.exe
 
 64b: movsxd64.exe
 
