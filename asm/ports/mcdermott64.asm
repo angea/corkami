@@ -86,7 +86,7 @@ wrong_dll:
     jne for_each_dll
 
     xor rax, rax            ;DLL not found
-    ret
+    jmp done
 
 found_dll:
     mov rbx, [r8+30h]       ;get dll base addr - points to DOS "MZ" header
@@ -102,7 +102,7 @@ found_dll:
     jnz has_exports
 
     xor rax, rax            ;no exports - function will not be found in dll
-    ret
+    jmp done
 
 has_exports:
     lea r8, [rbx+r13]       ;add dll base to get actual memory address
@@ -139,7 +139,7 @@ wrong_func:
     loop for_each_func      ;try next function in array
 
     xor rax, rax            ;function not found in export table
-    ret
+    jmp done
 
 found_func:                 ;ecx is array index where function name found
 
@@ -182,6 +182,6 @@ copy_dll_name:
 
 not_forwarded:
     add rax, rbx            ;add base addr to rva to get function address
+done:
     add rsp, 28h            ;clean up stack
     ret
-
