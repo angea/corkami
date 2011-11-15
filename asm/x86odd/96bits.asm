@@ -57,8 +57,6 @@ iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE
 
-db "this will not be in memory, as it's between the declared header and before the first section"
-
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 
