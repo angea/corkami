@@ -166,7 +166,7 @@ def parse_integer_c(f):
 
 
 def parse_float_c(f):
-    return parse_integer
+    return parse_integer_c(f)
 
 
 def parse_long_c(f):
@@ -175,7 +175,7 @@ def parse_long_c(f):
 
 
 def parse_double_c(f):
-    return parse_long(f)
+    return parse_long_c(f)
 
 
 def parse_constant(f):
@@ -208,25 +208,25 @@ def print_utf8_c(constant):
 
 def print_intfloat_c(constant):
     tag, info = constant
-    if TAG_TYPES[tag] not in ["CONSTANT_Integer", "CONSTANT_Float"]:
+    if TAGS_TYPES[tag] not in ["CONSTANT_Integer", "CONSTANT_Float"]:
         print "ERROR - Integer or Float constant expected"
-    [bytes] = constant
+    [bytes] = info
 
     dprint("%04X" % bytes)
     return
 
-def print_long_c(tag):
+def print_long_c(constant):
     tag, info = constant
-    if TAG_TYPES[tag] not in ["CONSTANT_Long"]:
+    if TAGS_TYPES[tag] not in ["CONSTANT_Long"]:
         print "ERROR - Long or Double constant expected"
     [high_bytes, low_bytes] = info
 
     dprint("%04X%04X [long]" % (high_bytes, low_bytes))
     return
 
-def print_double_c(tag):
+def print_double_c(constant):
     tag, info = constant
-    if TAG_TYPES[tag] not in ["CONSTANT_Double"]:
+    if TAGS_TYPES[tag] not in ["CONSTANT_Double"]:
         print "ERROR - Long or Double constant expected"
     [high_bytes, low_bytes] = info
 
@@ -312,13 +312,13 @@ def print_flags(flags):
 
 """
 #multinewarray:
-#	indexbyte16
-#	dimensions8
+#    indexbyte16
+#    dimensions8
 #
 #invokeinterface
-#	indexbyte16
-#	const8
-#	zero8
+#    indexbyte16
+#    const8
+#    zero8
 """
 
 def parse_code(info):
@@ -341,44 +341,54 @@ def parse_code(info):
         nbops = NB_OPERANDS[opcode]
         operand = ()
 
-        if opcode == "lookupswitch":
-            pad = 4 - (opcode_start % 4)
-            [pad, default, npairs], code = unpack_from_buffer(">%iBLL" % pad, code)
+        if opcode == MNEMONICS["lookupswitch"]:
+            pad = (4 - ((opcode_start + 1) % 4)) if ((opcode_start + 1) % 4) > 0 else 0
+            code = code[pad:]
+            [default, npairs], code = unpack_from_buffer(">ll", code)
+            if npairs < 0:
+                print "npairs shouldn't be zero" # ?!?
 
             offset += pad + 4  * (2 + npairs)
 
             pairs = [None] * npairs
             for i in xrange(npairs):
-                [match, offset], code = unpack_from_buffer(">LL", code)
+                [match, offset], code = unpack_from_buffer(">ll", code) # signed
                 pairs[i] = [match, offset]
+            operand = default, pairs
 
-        elif opcode == "tableswitch":
-            pad = 4 - (opcode_start % 4)
-            [pad, low, high], code = unpack_from_buffer(">%iBLLL" % pad, code)
+        elif opcode == MNEMONICS["tableswitch"]:
+            pad = (4 - ((opcode_start + 1) % 4)) if ((opcode_start + 1) % 4) > 0 else 0
+            code = code[pad:]
+            [default, low, high], code = unpack_from_buffer(">lll", code) # signed
+            print default, low, high
             jumps = [None] * (high - low + 1)
-            offset += pad + 4 * (2 + high - low + 1)
 
             for i in xrange(high - low + 1):
-                [jump], code = unpack_from_buffer(">L", code)
+                [jump], code = unpack_from_buffer(">l", code) # signed
                 jumps[i] = jump
-
-        elif opcode == "wide":
+            offset += pad + 4 * (3 + high - low + 1)
+            operand = default, low, high, jumps
+        elif opcode == MNEMONICS["wide"]:
+            #code = code[1:]
             [subopcode], code = unpack_from_buffer(">B", code)
-            mnemonic = MNEMONIC[subopcode]
+            mnemonic = MNEMONICS[subopcode]
 
             if mnemonic in ["iload", "fload", "aload", "lload", "dload", "istore", "fstore", "astore", "lstore", "dstore", "ret"]:
-                [operand], code = unpack_from_buffer(">H", code)
+                [index], code = unpack_from_buffer(">H", code)
                 offset += 2 + 1
+                operand = "%s %i" % (mnemonic, index)
 
             elif mnemonic == "iinc":
-                [operand], code = unpack_from_buffer(">L", code)
+                [index, const], code = unpack_from_buffer(">HH", code)
                 offset += 4 + 1
+                operand = "%s %i %i" % (mnemonic, index, const)
             else:
                 print "ERROR: wrong opcode with wide"
 
-        elif opcode == "invokeinterface":
+        elif opcode == MNEMONICS["invokeinterface"]:
             [index, const, zero], code = unpack_from_buffer(">HBB", code)
             offset += 4
+            operand = index, const
 
         elif nbops in [0, 99]:
             print "ERROR"
@@ -400,7 +410,7 @@ def parse_code(info):
             operand, code = unpack_from_buffer(">H", code)
             offset += 4
 
-        dprint("%02X: %s\t\t%s" % (opcode_start, MNEMONICS[opcode], operand))
+        dprint("%03i: %s\t\t%s" % (opcode_start, MNEMONICS[opcode], operand))
     higher()
 
     [exception_table_length], info = unpack_from_buffer(">H", info)
@@ -412,19 +422,26 @@ def parse_code(info):
 
     [attributes_count], info = unpack_from_buffer(">H", info)
     attributes = [None] * attributes_count
+	#TODO: replace with a buffer/file compatible call
+    for i in xrange(attributes_count):
+        [attribute_name_index, attribute_length], info = unpack_from_buffer(">HL", info)
+        att_info, info = info[:attribute_length], info[attribute_length:]
 
-    assert attributes_count == 0 # no attribute_parser at buffer level for now :(
+        attributes[i] = attribute_name_index, attribute_length, att_info
+        print attributes[i]
+
+        offset += attribute_length + 2 + 4
 
     dprint("Max stack:%i locals:%i" % (max_stack, max_locals))
     dprint("Exception table [%i]" % exception_table_length);
     lower()
-    for i,j in exceptions:
+    for i,j in enumerate(exceptions):
         dprint("%i: %s" % (i, str(j)))
     higher()
 
     dprint("Attributes [%i]" % attributes_count);
     lower()
-    for i,j in attributes:
+    for i,j in enumerate(attributes):
         dprint("%i: %s" % (i, str(j)))
     higher()
     return
@@ -469,6 +486,9 @@ def print_fldmet(fldmet):
     higher()
     higher()
 
+def print_interface(inter):
+    print_constant(constant_pool[inter])
+
 #******************************************************************************
 
 def parse_attribute(f):
@@ -485,6 +505,10 @@ def parse_field(f):
 
 def parse_method(f):
     return parse_field(f)
+
+def parse_interface(f):
+    [inter] = struct.unpack(">H", f.read(2))
+    return inter
 
 #******************************************************************************
 
