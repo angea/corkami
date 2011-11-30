@@ -96,6 +96,8 @@ echo.
 echo delay imports:
 echo delayimports.exe:& delayimports.exe
 echo delaycorrupt.exe:& delaycorrupt.exe
+echo register corruptions:
+echo fakeregs.exe:& fakeregs.exe
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe disabled because of the non-console output
 rem quine.exe disabled because creates an extra window
