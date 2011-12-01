@@ -24,8 +24,8 @@ mnemonics_ = [
 "ior",          "lor",          "ixor",         "lxor",         "iinc",     "i2l",           "i2f",          "i2d",
 "l2i",          "l2f",          "l2d",          "f2i",          "f2l",      "f2d",           "d2i",          "d2l",
 "d2f",          "i2b",          "i2c",          "i2s",          "lcmp",     "fcmpl",         "fcmpg",        "dcmpl",
-"dcmpg",        "ifeq",         "ifne",         "iflt",         "ifge",     "ifgt",          "ifle",         "if_impeq",
-"if_impne",     "if_implt",     "if_impge",     "if_impgt",     "if_imple", "if_acmpeq",     "if_acmpne",    "goto",
+"dcmpg",        "ifeq",         "ifne",         "iflt",         "ifge",     "ifgt",          "ifle",         "if_icmpeq",
+"if_icmpne",     "if_icmplt",   "if_icmpge",  "if_icmpgt",     "if_icmple", "if_acmpeq",     "if_acmpne",    "goto",
 "jsr",          "ret",          "tableswitch",  "lookupswitch", "ireturn",  "lreturn",       "freturn",      "dreturn",
 "areturn",      "return",       "getstatic",    "putstatic",    "getfield", "putfield",      "invokevirtual","invokespecial",
 "invokestatic", "invokeinterface",      0,      "new",          "newarray", "anewarray",     "arraylength",  "athrow",
@@ -39,10 +39,12 @@ mnemonics_ = [
 0,      0,      0,      0,      0,      0,                                                   "impdep1",      "impdep2",
 ]
 
+hits = [0] * 256
+
 MNEMONICS = {}
 for i, j in enumerate(mnemonics_):
-    MNEMONICS[i] = j
     if j != 0:
+        MNEMONICS[i] = j
         MNEMONICS[j] = i
 
 NB_OPERANDS = [
@@ -310,17 +312,6 @@ def print_constant(constant):
 def print_flags(flags):
     print flags
 
-"""
-#multinewarray:
-#    indexbyte16
-#    dimensions8
-#
-#invokeinterface
-#    indexbyte16
-#    const8
-#    zero8
-"""
-
 def parse_code(info):
     """not a parser at file level, already loaded in attribute info"""
 
@@ -337,37 +328,45 @@ def parse_code(info):
             print "MNEMONIC absent"
             break;
         offset += 1
+        hits[opcode] = 1
 
         nbops = NB_OPERANDS[opcode]
         operand = ()
 
-        if opcode == MNEMONICS["lookupswitch"]:
+        if opcode == MNEMONICS["lookupswitch"]: # 99
             pad = (4 - ((opcode_start + 1) % 4)) if ((opcode_start + 1) % 4) > 0 else 0
             code = code[pad:]
+            offset += pad
+            
             [default, npairs], code = unpack_from_buffer(">ll", code)
+            offset += 2 * 4
+            
             if npairs < 0:
                 print "npairs shouldn't be zero" # ?!?
 
-            offset += pad + 4  * (2 + npairs)
+            offset += 4  * ( 2 * npairs)
 
             pairs = [None] * npairs
             for i in xrange(npairs):
-                [match, offset], code = unpack_from_buffer(">ll", code) # signed
-                pairs[i] = [match, offset]
+                [match, offset_], code = unpack_from_buffer(">ll", code) # signed
+                pairs[i] = [match, offset_]
             operand = default, pairs
 
-        elif opcode == MNEMONICS["tableswitch"]:
+        elif opcode == MNEMONICS["tableswitch"]: # 99
             pad = (4 - ((opcode_start + 1) % 4)) if ((opcode_start + 1) % 4) > 0 else 0
             code = code[pad:]
+            offset += pad
             [default, low, high], code = unpack_from_buffer(">lll", code) # signed
-            print default, low, high
+            offset += 3 * 4
+            #print default, low, high
             jumps = [None] * (high - low + 1)
 
             for i in xrange(high - low + 1):
                 [jump], code = unpack_from_buffer(">l", code) # signed
                 jumps[i] = jump
-            offset += pad + 4 * (3 + high - low + 1)
+            offset += (high - low + 1) * 4
             operand = default, low, high, jumps
+            
         elif opcode == MNEMONICS["wide"]:
             #code = code[1:]
             [subopcode], code = unpack_from_buffer(">B", code)
@@ -402,12 +401,12 @@ def parse_code(info):
             operand, code = unpack_from_buffer(">H", code)
             offset += 2
 
-        elif nbops == 4:
-            operand, code = unpack_from_buffer(">LB", code)
+        elif nbops == 4: # multianewarray
+            operand, code = unpack_from_buffer(">HB", code)
             offset += 3
 
-        elif nbops == 5:
-            operand, code = unpack_from_buffer(">H", code)
+        elif nbops == 5: # jsr_w goto_w
+            operand, code = unpack_from_buffer(">L", code)
             offset += 4
 
         dprint("%03i: %s\t\t%s" % (opcode_start, MNEMONICS[opcode], operand))
@@ -629,3 +628,8 @@ for method in methods:
 dprint("attributes [%i]" % attributes_count)
 for attribute in attributes:
     print_attribute(attribute)
+
+print "missing hits"
+for i,j in enumerate(hits):
+    if j == 0 and i in MNEMONICS:
+        print MNEMONICS[i],
