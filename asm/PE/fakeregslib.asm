@@ -1,10 +1,10 @@
-; PE corrupting registers as much as possible, during TLS and EP
+; loaded DLL corrupting registers as much as possible, during TLS and DllMain
 
 ; Ange Albertini, BSD LICENCE 2011
 
 %include 'consts.inc'
 
-IMAGEBASE equ 400000h
+IMAGEBASE equ 10000000h
 org IMAGEBASE
 bits 32
 
@@ -24,7 +24,7 @@ istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
-    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
+    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE | IMAGE_FILE_DLL
 iend
 
 OptionalHeader:
@@ -86,23 +86,24 @@ randreg:
     retn
 
 EntryPoint:
-    push afakeregslibdll
-    call [__imp__loadlibrarya]
-    push Msg
-    call printf
-    add esp, 1 * 4
+    pop dword [ret_]
+    mov dword [saved_reg], esi
 
     call randreg
-    xor eax, edx
+    call randw
+    mov esp, eax
+    xor esp, edx
+    mov esi, dword [saved_reg]
+    jmp dword [ret_]
     retn
 _c
-afakeregslibdll dd 'fakeregslib.dll', 0
 
 ret_ dd 0
 saved_reg dd 0
 key dd 0
 
 align 20h db 0
+
 tls:
     mov dword [CallBacks], 0
     pop dword [ret_]
@@ -126,10 +127,6 @@ Msg dd " * corrupted registers on TLS and Exit return", 0ah, 0
 _d
 
 Import_Descriptor:
-    dd kernel32.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd kernel32.dll - IMAGEBASE
-    dd kernel32.dll_iat - IMAGEBASE
 ;msvcrt.dll_DESCRIPTOR:
     dd msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
@@ -139,26 +136,15 @@ Import_Descriptor:
     dd 0, 0, 0, 0, 0
 _d
 
-kernel32.dll_hintnames:
-    dd hnLoadLibraryA - IMAGEBASE
-    dd 0
 msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
     dd 0
 _d
 
-hnLoadLibraryA:
-    dw 0
-    db 'LoadLibraryA', 0
 hnprintf:
     dw 0
     db 'printf', 0
 _d
-
-kernel32.dll_iat:
-__imp__loadlibrarya:
-    dd hnLoadLibraryA - IMAGEBASE
-    dd 0
 
 msvcrt.dll_iat:
 __imp__printf:
@@ -166,7 +152,6 @@ __imp__printf:
     dd 0
 _d
 
-kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
 
