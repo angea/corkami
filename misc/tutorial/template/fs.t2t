@@ -1,0 +1,6 @@
+
+%left empty for titles...
+%!postproc(html):  'IFRAME:(.*)'  '<iframe src="\1" width="100%" height="100%"><p>Your browser does not support iframes.</p></iframe>'
+%!postproc(html): 'ANCHOR:(.*)' '<a name="\1"></a>'
+[[zoom out template.html#chap1]]
+IFRAME:frame1.html

@@ -30,7 +30,7 @@ it will explain x and y....
 
 ANCHOR:chap1
 == chapter 1 ==
-
+[[zoom in fs.html]]
 IFRAME:frame1.html 200
 
 --------------------
