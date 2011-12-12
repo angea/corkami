@@ -18,6 +18,7 @@ op db "open", 0
 fn db "cmd", 0
 param db "/K type quine.exe", 0
 
+; required for self-contained aspects
 struc IMAGE_NT_HEADERS
   .Signature         resd 1
 endstruc
