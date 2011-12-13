@@ -45,6 +45,7 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001E60000012A0314162B.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000176000000745C6C70A9.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000137000000FBD96B3990.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000000580000001FED1EC38A.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000011B000000DAE0D1A97F.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000001A40000009C5F0B4D9D.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000014B000000A014D7FCEE.png"/>
