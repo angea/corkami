@@ -59,6 +59,7 @@ echo tiny.exe:& tiny.exe
 echo.
 echo ImageBase:
 echo ibkernel.exe:& ibkernel.exe
+echo ibreloc.exe:& ibreloc.exe
 echo ibkmanual.exe:& ibkmanual.exe
 echo bigib.exe:& bigib.exe
 echo reloccrypt.exe:& reloccrypt.exe

@@ -1,16 +1,18 @@
 all: common XP W7
 
-beta: epreloc.exe
+beta:
 
-common: imports dll gaps tls bound entrypoint down many misc resource delay
+common: imports dll gaps tls bound entrypoint down many misc resource delay relocs
 
 many: 96emptysections.exe 96workingsections.exe bigSoRD.exe
 
 dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllemptyexp.dll \
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
-    dll-webdavld.exe dupsec.exe ibkernel.exe reloccrypt.exe exportobf.exe importshint.exe \
-    secinsec.exe bigib.exe ibkmanual.exe
+    dll-webdavld.exe dupsec.exe exportobf.exe importshint.exe \
+    secinsec.exe bigib.exe
+
+relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
     quine.exe ownexports.exe bigalign.exe exportsdata.exe foldedhdr.exe compiled.exe duphead.exe \
