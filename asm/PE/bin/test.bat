@@ -16,6 +16,7 @@ echo tls_obfuscation.exe:& tls_obfuscation.exe
 echo tls_aoi.exe:& tls_aoi.exe
 echo tls_exiting.exe:& tls_exiting.exe
 echo tls_noEP.exe:& tls_noEP.exe
+echo tls_reloc.exe:& tls_reloc.exe
 echo.
 echo Exports:
 echo exportobf.exe:& exportobf.exe
@@ -31,6 +32,7 @@ echo imports_mixed.exe:& imports_mixed.exe
 echo imports_nothunk.exe:& imports_nothunk.exe
 echo importshint.exe:& importshint.exe
 echo impbyord.exe:& impbyord.exe
+echo imports_iatindesc.exe:& imports_iatindesc.exe
 echo.
 echo DLL loading:
 echo  * statically loaded DLL and export call
@@ -57,6 +59,7 @@ echo tiny.exe:& tiny.exe
 echo.
 echo ImageBase:
 echo ibkernel.exe:& ibkernel.exe
+echo ibkmanual.exe:& ibkmanual.exe
 echo bigib.exe:& bigib.exe
 echo reloccrypt.exe:& reloccrypt.exe
 echo.

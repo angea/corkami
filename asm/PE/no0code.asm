@@ -93,8 +93,5 @@ align FILEALIGN, db 0
 align 1000h, db 0           ; necessary under Win7
 SIZEOFHEADERS equ $ - IMAGEBASE
 
-bits 32
-Section0Start:
 times 4 db 0
-SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE

@@ -20,11 +20,11 @@ tls.exe:
   # ExitProcess called
 tls_import.exe (displayed afterwards, but working):
 tls_onthefly.exe:
- * executed via imported TLS
  * TLS on the fly update started
   # adding 2nd TLS to callbacks
   # 2nd TLS executed. removing all TLS from callbacks to prevent further executions
 tls_obfuscation.exe:
+ * executed via imported TLS
  * fake TLS callbacks for obfuscation
 tls_aoi.exe:
  * TLS AddressOfIndex set to 0
@@ -34,6 +34,8 @@ tls_exiting.exe:
 tls_noEP.exe:
  * Exiting TLS with no EP:
   # 1st TLS call, ExitProcess() called
+tls_reloc.exe:
+ * relocated TLS
 
 Exports:
 exportobf.exe:
@@ -60,6 +62,8 @@ importshint.exe:
  * correct import called via hinting
 impbyord.exe:
  * imports resolving to its own exports
+imports_iatindesc.exe:
+ * IAT inside descriptors
 
 DLL loading:
  * statically loaded DLL and export call
@@ -114,6 +118,8 @@ tiny.exe:
 ImageBase:
 ibkernel.exe:
  * kernel range IMAGEBASE (and relocations)
+ibkmanual.exe:
+ * kernel range IMAGEBASE (with manual relocations)
 bigib.exe:
  * ImageBase is 7efd0000h, and no relocations
 reloccrypt.exe:
@@ -129,7 +135,6 @@ dllextep-ld.exe:
 
 sections:
 bigsec.exe:
- * virtually oversized section
 bigSoRD.exe:
  * oversized SizeOfRawData
 dupsec.exe:
@@ -161,7 +166,6 @@ hiddenappdata1.exe:
 hiddenappdata2.exe:
  * appended data, hidden by enlarged last section
 virtgap.exe:
- * virtual gap between code sections
 foldedhdr.exe:
  * PE header overwritten on loading
 
@@ -182,3 +186,6 @@ delayimports.exe:
  * delay imports
 delaycorrupt.exe:
  * delay imports with empty values
+register corruptions:
+fakeregs.exe:
+ * corrupted registers on TLS and Exit return
