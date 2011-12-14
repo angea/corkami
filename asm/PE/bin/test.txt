@@ -20,11 +20,11 @@ tls.exe:
   # ExitProcess called
 tls_import.exe (displayed afterwards, but working):
 tls_onthefly.exe:
+ * executed via imported TLS
  * TLS on the fly update started
   # adding 2nd TLS to callbacks
   # 2nd TLS executed. removing all TLS from callbacks to prevent further executions
 tls_obfuscation.exe:
- * executed via imported TLS
  * fake TLS callbacks for obfuscation
 tls_aoi.exe:
  * TLS AddressOfIndex set to 0
@@ -135,6 +135,7 @@ dllextep-ld.exe:
 
 sections:
 bigsec.exe:
+ * virtually oversized section
 bigSoRD.exe:
  * oversized SizeOfRawData
 dupsec.exe:
@@ -166,6 +167,7 @@ hiddenappdata1.exe:
 hiddenappdata2.exe:
  * appended data, hidden by enlarged last section
 virtgap.exe:
+ * virtual gap between code sections
 foldedhdr.exe:
  * PE header overwritten on loading
 
