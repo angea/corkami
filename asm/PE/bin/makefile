@@ -16,7 +16,7 @@ relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
     quine.exe ownexports.exe bigalign.exe exportsdata.exe foldedhdr.exe compiled.exe duphead.exe \
-    no0code.exe fakeregs.exe fakeregslib.dll gui.exe
+    no0code.exe fakeregs.exe fakeregslib.dll gui.exe multiss.exe
 
 down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
 
@@ -39,7 +39,7 @@ imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impby
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
     tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe \
-    dosZMXP.exe driver.sys tinydrivXP.sys
+    dosZMXP.exe driver.sys tinydrivXP.sys multiss.sys
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
     appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe imports_apimsW7.exe \
@@ -56,3 +56,4 @@ W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.ex
 
 %.sys: ..\%.asm
 	yasm -o $@ $<
+	c:\python26\python fixsum.py $@
