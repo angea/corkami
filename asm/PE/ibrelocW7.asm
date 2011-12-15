@@ -27,8 +27,8 @@ istruc IMAGE_NT_HEADERS
 iend
 istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
-    at IMAGE_FILE_HEADER.NumberOfSections,      dw NUMBEROFSECTIONS
-    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
+    at IMAGE_FILE_HEADER.NumberOfSections,      dw 0
+    at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw 0 ; necessary under win7 !
     at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
 iend
 
@@ -54,20 +54,10 @@ istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.FixupsSize, dd DIRECTORY_ENTRY_BASERELOC_SIZE
 iend
 
-SIZEOFOPTIONALHEADER equ $ - OptionalHeader
-SectionHeader:
-istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
-iend
-NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
+align FILEALIGN, db 0
 
 SIZEOFHEADERS equ $ - IMAGEBASE
-
-align FILEALIGN, db 0
+Section0Start:
 
 EntryPoint:
 reloc01:
@@ -147,5 +137,7 @@ BASE_RELOC_SIZE_OF_BLOCK0 equ $ - block_start0
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
 
 align FILEALIGN, db 0
+
+Section0Size EQU $ - Section0Start
 
 SIZEOFIMAGE EQU $ - IMAGEBASE

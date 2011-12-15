@@ -42,7 +42,8 @@ XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tiny
     dosZMXP.exe driver.sys tinydrivXP.sys
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
-    appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe imports_apimsW7.exe
+    appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe imports_apimsW7.exe \
+    ibrelocW7.exe
 
 65535sects.exe: ..\mkpe.py
 	c:\python26\python ..\mkpe.py 65535
