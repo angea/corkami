@@ -4,12 +4,12 @@
 
 %include 'consts.inc'
 
-IMAGEBASE EQU 10000h
+IMAGEBASE EQU 400000h
 org IMAGEBASE
 bits 32
 
 SECTIONALIGN equ 200h
-FILEALIGN equ 200h
+FILEALIGN equ SECTIONALIGN
 
 istruc IMAGE_DOS_HEADER
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
@@ -35,9 +35,9 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 3 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
-    at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw 1 ; IMAGE_SUBSYSTEM_NATIVE
+    at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw 0 ; to make a neutral main file
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
@@ -49,9 +49,9 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 2 * SECTIONALIGN
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 2 * FILEALIGN
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
@@ -60,7 +60,7 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
-DBGPRINT equ 072015887h
+;******************************************************************************
 
 EntryPoint:
     pushad
@@ -68,11 +68,18 @@ _
     mov eax, cs
     cmp eax, 8
     jz driver
-    jmp usermode
+
+    cmp eax, 1bh
+    jz usermode
+
+    jmp oh_merde
 _c
 
+;******************************************************************************
+
+DBGPRINT equ 072015887h
+
 driver:
-_
     mov eax, [fs:034h]
     mov eax, [eax + 010h]
 _
@@ -84,6 +91,7 @@ reloc01:
     call ebx
     add esp, 1 * 4
 _
+oh_merde:
     popad
 _
     mov eax, 0xC0000182; STATUS_DEVICE_CONFIGURATION_ERROR
@@ -93,9 +101,110 @@ _c
 msgdriver db " * multisystem PE (driver)", 0
 _d
 
+;******************************************************************************
+
 usermode:
+    call ring3start
+
+    push aGetConsoleWindow
+    push dword [hKernel32]
+    call [GetProcAddress]
+
+    call eax
+    test eax, eax
+    jz GUI
+    jmp CUI
+_c
+
+aGetConsoleWindow db 'GetConsoleWindow', 0
+_d
+
+;******************************************************************************
+
+LOADLIBRARYA equ 06FFFE488h
+GETPROCADDRESS equ 03F8AAA7Eh
+
+ring3start:
+    mov eax,[fs:030h]   ; _TIB.PebPtr
+    mov eax,[eax + 0ch] ; _PEB.Ldr
+    mov eax,[eax + 0ch] ; _PEB_LDR_DATA.InLoadOrderModuleList.Flink
+    mov eax,[eax]       ; _LDR_MODULE.InLoadOrderModuleList.Flink
+    mov eax,[eax]       ; _LDR_MODULE.InLoadOrderModuleList.Flink
+    mov eax,[eax + 18h] ; _LDR_MODULE.BaseAddress
+
+;   brutal way, not as much compatible
+;   mov eax, [esp + 4]
+;   and eax, 0fff00000h
+
+    mov [hKernel32], eax
+
+    mov eax, [hKernel32]
+    mov ebx, LOADLIBRARYA
+    call GetProcAddress_Hash
+    mov [LoadLibraryA], ebx
+
+    mov eax, [hKernel32]
+    mov ebx, GETPROCADDRESS
+    call GetProcAddress_Hash
+    mov [GetProcAddress], ebx
+
     retn
 _c
+hKernel32 dd 0
+LoadLibraryA dd 0
+GetProcAddress dd 0
+
+;******************************************************************************
+
+CUI:
+    push amsvcrt
+    call [LoadLibraryA]
+_
+    push aprintf
+    push eax
+    call [GetProcAddress]
+_
+    push msgcui
+    call eax
+    add esp, 1 * 4
+_
+    popad
+    retn
+_c
+
+amsvcrt db 'msvcrt.dll', 0
+aprintf db 'printf', 0
+msgcui db ' * multisystem PE (console)', 0
+_d
+
+;******************************************************************************
+
+GUI:
+    push auser32
+    call [LoadLibraryA]
+_
+    push aMessageBoxA
+    push eax
+    call [GetProcAddress]
+_
+    push 40h
+    push aTada
+    push msggui
+    push 0
+    call eax
+_
+    popad
+    retn
+_c
+
+aFreeConsole db 'FreeConsole', 0
+auser32 db 'user32.dll', 0
+aMessageBoxA db 'MessageBoxA', 0
+aTada db 'multisystem PE', 0
+msggui db '(GUI)', 0
+_d
+
+;******************************************************************************
 
 DOS_HEADER__e_lfanew equ 03ch
 
@@ -180,14 +289,15 @@ _c
 
 checksum dd 0
 ImageBase dd 0
+_d
+
+;******************************************************************************
 
 Directory_Entry_Basereloc:
 block_start0:
-; relocation block start
     .VirtualAddress dd reloc01 - IMAGEBASE
     .SizeOfBlock dd base_reloc_size_of_block0
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
-;    dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc1 + 1 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc21 + 1 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc32 + 2 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
@@ -200,9 +310,6 @@ block_start0:
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (relocb2 + 2 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (relocc2 + 2 - reloc01)
     base_reloc_size_of_block0 equ $ - block_start0
-;relocation block end
-
-;relocations end
 
 DIRECTORY_ENTRY_BASERELOC_SIZE  equ $ - Directory_Entry_Basereloc
 _d
