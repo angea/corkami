@@ -1,6 +1,6 @@
 ; PE with decryption via relocations
 ; relocations itself are fixed by relocations
-; some relocations are not using the common HIGHLOW
+; some relocations are not using the common HIGHLOW, such as MIPS_JMPADDR
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -167,7 +167,7 @@ block_start:
     dw (IMAGE_REL_BASED_LOW     << 12) ; + 0
     dw (IMAGE_REL_BASED_SECTION << 12)
     dw (IMAGE_REL_BASED_REL32 << 12)
-;dw (IMAGE_REL_BASED_MIPS_JMPADDR << 12)
+    dw (IMAGE_REL_BASED_MIPS_JMPADDR << 12)
 ;dw (IMAGE_REL_BASED_IA64_IMM64 << 12)
 ;dw (IMAGE_REL_BASED_DIR64 << 12)
 BASE_RELOC_SIZE_OF_BLOCK equ $ - block_start
@@ -176,7 +176,7 @@ BASE_RELOC_SIZE_OF_BLOCK equ $ - block_start
 block_start0:
     .VirtualAddress dd VDELTA + reloc01 - IMAGEBASE
 relocated_reloc:
-    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK0 - 40002h
+    .SizeOfBlock dd (BASE_RELOC_SIZE_OF_BLOCK0 - 40002h - (0fc000000h + (20000h >> 2))) & 0ffffffffh
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc01 + 1 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc22 + 2 - reloc01)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) | (reloc42 + 2 - reloc01)
