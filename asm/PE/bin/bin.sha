@@ -46,7 +46,7 @@ e85254ed6c66db30570735b0a4f7d178d456b181 *driver.sys
 67336d2237b1518c4c8e691ede4c47540eb8d247 *dupsec.exe
 857bb43832bc7821665999c98c47afc5a48acf95 *exportobf.exe
 dca29b98bdc5f021fad4967504318dd7d37b5c86 *exportsdata.exe
-af7e654a7ee1c6dd298c3aa49466e08ab751f61a *fakeregs.exe
+e1ce8b47b99b176962a7a5b78b243155f012ca84 *fakeregs.exe
 02adc7305a44257f2ddbae557c8507296e051d7c *fakeregslib.dll
 5730515185135fe173db6770092873eeb36e8035 *foldedhdr.exe
 68230facbdc3691f896d004b55c36f77cb76a063 *foldedhdrW7.exe
@@ -90,7 +90,7 @@ a278c99c7cd0c6de535959c146a986e528015ff0 *nosectionXP.exe
 175d0521661d28e3cf9dcabe8ddaa55578a1f0da *ownexports.exe
 ea42e2179a8e43b2f450b49d1927e46dad6106d3 *pdf.exe
 89f09855527f9ce55e3906f9d5496486ad5cbf7a *quine.exe
-0e7763be7d40b017bfe9abbb1b6045804c3884e1 *reloccrypt.exe
+1dc4918597f342a5d4c771eccd8a1c545a6dc53f *reloccrypt.exe
 722b2dce27eeba8061f4b4bf5adf0b9b57121997 *reloccryptXP.exe
 0f5f36845cb537c53251ab127c2b934a7c1dbae3 *reshdr.exe
 ada1a47f2a9bdaccdbef24e54fe26c6ed0cd4817 *resource.exe
