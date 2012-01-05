@@ -80,8 +80,18 @@ _c
 DBGPRINT equ 072015887h
 
 driver:
-    mov eax, [fs:034h]
-    mov eax, [eax + 010h]
+    ; not reliable on multicore
+    ;mov eax, [fs:034h]
+    ;mov eax, [eax + 010h]
+
+    mov ecx,176h
+    rdmsr
+
+    and ax,0f001h
+scan_loop:
+    dec eax
+    cmp dword [eax],00905a4dh
+    jnz scan_loop
 _
     mov ebx, DBGPRINT
     call GetProcAddress_Hash
