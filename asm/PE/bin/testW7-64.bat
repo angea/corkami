@@ -1,5 +1,6 @@
 @echo off
 echo normal64.exe:& normal64.exe
+echo ibknoreloc64.exe:& ibknoreloc64.exe
 echo.
 echo Low alignments:
 echo tinyW7_3264.exe:& tinyW7_3264.exe

@@ -1,5 +1,7 @@
 normal64.exe:
  * a standard PE32+ (imports, standard alignments)
+ibknoreloc64.exe:
+ * kernel IB + RIP-relative code (PE32+)
 
 Low alignments:
 tinyW7_3264.exe:
