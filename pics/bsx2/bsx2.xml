@@ -211,12 +211,14 @@
 <p>now you know that this is what is in the file itself.</p>
 <p>this is how it's read by 'us' (reverse engineers, malware analysts, exploit developers...).</p>
 <p></p>
-<p>the CPU itself only reads the hex.</p>
+<p>the CPU itself only reads the opcodes.</p>
 <p></p>
 <p>as you can see, there is a relation:</p>
-<p>68 - in hex - is used to push offsets</p>
-<p>calls starts with FF 15...</p>
-<p>and you can see the used addresses here (read them backward).</p>
+<ul>
+<li/>68 - in binary - is used to push offsets
+<li/>calls starts with FF 15...
+<li/>and you can also see the addresses (read them backward).
+</ul>
 <p></p>
 <p>so, you see the first byte determine the actual opcode.</p>
 <p>and depending on each opcode, the length is variable.</p>
@@ -227,9 +229,9 @@
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img19.png border=1 >
 </td><td valign=top>
-<p>This is what is actually in the file on the hard disk (the 'hex').</p>
+<p>This is what is actually in the file on the hard disk (the opcodes).</p>
 <p></p>
-<p>If you'd accidentally open the file in, say notepad - it doesn't really make sense, but at least you have that on your machine - you could find it here (remember, it's hex).</p>
+<p>If you'd accidentally open the file in, say notepad - it doesn't really make sense, but at least you have that on your machine - you could find it here (remember, it's in binary).</p>
 <p></p>
 <p>Note that it's actually a very tiny part of the whole file (&lt;30bytes out of 56000).</p>
 <p></p>
@@ -243,7 +245,7 @@
 </td><td valign=top>
 <p>What's important is that in the end, anything running on your machine is about the CPU executing opcode, no matter what.</p>
 <p></p>
-<p>the compiled file is full of 'unneeded' stuff. while you can make a much smaller file with exactly the same functionality (that's the whole file), and even though they're very different, the same opcodes are present again.</p>
+<p>the compiled file is full of 'unneeded' stuff. while you can make a much smaller file with exactly the same functionality (that's the whole file, on the right), and even though they're very different, the same opcodes are present again.</p>
 </td></tr></table>
 
 
@@ -434,12 +436,12 @@
 </td><td valign=top>
 <p>new generation : English and opcodes.</p>
 <p></p>
-<p>probably unknown to most people</p>
+<p>probably unknown to most people, only the new generation</p>
 <p></p>
 <p>single opcodes for CRC, AES, string masking...</p>
 <p></p>
-<p>MOVBE = rejected offspring </p>
-<p>netbook only. absent from i7</p>
+<p>MOVBE is an exception in itself:</p>
+<p>it's only available on netbook. not on more recent CPUs like i7</p>
 <p>=&gt; so much for backward compatibility</p>
 </td></tr></table>
 
@@ -461,14 +463,16 @@
 <p>the basics of assembly are the registers...</p>
 <p></p>
 <p>registers are overlapping. </p>
-<p>unlike many documentations, ST0 &lt;&gt; MM7</p>
+<p>but unlike many documentations, ST0 actually overlaps MM7, not MM0</p>
 <p></p>
 <p>before any operation, registers have the value assigned to themselves by the OS.</p>
-<p>I collected these values</p>
-<p>under windows, specific values it's not CPU specific, but the initial values of the register on process start-up, under windows, gives a few hint that are used by malwares.</p>
-<p></p>
-<p>eax can immediately tell if you're on an older OS or not.</p>
-<p>While GS can tell you if the machine is 64b or not, even in a 32b process.</p>
+<p>I collected these values (under Windows). It's not CPU specific, but the initial values of the register on process start-up gives a few hint that are used by malwares:</p>
+<ul>
+<li/>
+EAX can immediately tell if you're on an older OS or not.
+<li/>
+While GS can tell you if the machine is 64b or not, even in a 32b process.
+</ul>
 </td></tr></table>
 
 
