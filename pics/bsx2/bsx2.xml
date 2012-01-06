@@ -21,7 +21,7 @@
 <ol>
 <li/>I studied ASM and PE, from scratch
 <li/>I failed all tools I tried: IDA, OllyDbg, Hiew, pefile, WinDbg, HT, CFF Explorer...
-<li/>3.here are a few of my findings
+<li/>here are a few of my findings
 </ol>
  </td></tr></table>
 
@@ -55,12 +55,13 @@
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img3.png border=1 >
 </td><td valign=top>
-<p>so, whether it's </p>
-<p>a non PE exe with an inverted ZM signature, in 16bits asm.</p>
-<p>a complete 'correct' PDF with text (that's the full PDF btw), typed in notepad</p>
-<p>a working java class, with opcodes generated manually</p>
-<p>a tiny PE, with imports and code in the middle of the header</p>
-<p></p>
+<p>so, whether it's: </p>
+<ul>
+<li/>a non PE exe with an inverted ZM signature, in 16bits asm.
+<li/>a complete 'correct' PDF with text (that's the full PDF btw), typed in notepad
+<li/>a working java class, with opcodes generated manually
+<li/>a tiny PE, with imports and code in the middle of the header
+</ul>
 <p>you can see that all of them only have the necessary elements.</p>
 </td></tr></table>
 
@@ -370,10 +371,12 @@
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img32.png border=1 >
 </td><td valign=top>
 <p>before focusing on particular opcodes,</p>
-<p>my first questions was: </p>
-<p>what are actually all the supported opcodes ?</p>
-<p>then, actually how many registers are there ?</p>
-<p>before anything happen, do they have any particular value ?</p>
+<p>my first questions were: </p>
+<ul>
+<li/>what are actually all the supported opcodes ?
+<li/>then, actually how many registers are there ?
+<li/>before anything happen, do they have any particular value ?
+</ul>
 </td></tr></table>
 
 
@@ -494,7 +497,6 @@
 
 <a name=slide42></a>Slide 42: <a href=#slide41>&lt;&lt; Previous</a> <a href=#slide43>&gt;&gt; Next</a>
 <table><tr><td>
-<p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/smsw.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/smsw.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
 </td><td valign=top>
 <p>demo of smsw:</p>
@@ -522,7 +524,6 @@
 
 <a name=slide44></a>Slide 44: <a href=#slide43>&lt;&lt; Previous</a> <a href=#slide45>&gt;&gt; Next</a>
 <table><tr><td>
-<p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/gs.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/gs.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
 </td><td valign=top>
 <p>demo of all GS features</p>
@@ -619,7 +620,6 @@
 
 <a name=slide51></a>Slide 51: <a href=#slide50>&lt;&lt; Previous</a> <a href=#slide52>&gt;&gt; Next</a>
 <table><tr><td>
-<p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/pushret.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/pushret.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
 </td><td valign=top>
 <p>so, what happened ?</p>
@@ -702,7 +702,6 @@
 
 <a name=slide58></a>Slide 58: <a href=#slide57>&lt;&lt; Previous</a> <a href=#slide59>&gt;&gt; Next</a>
 <table><tr><td>
-<p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/96bits.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/96bits.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
 </td><td valign=top>
 <p>and these opcodes gives exclusive mnemonics to each side...</p>
@@ -860,10 +859,8 @@
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img71.png border=1 >
 </td><td valign=top>
-<ul>
-<li/>Eternal thanks to Peter Ferrie, my permanent reviewer.
-<li/>Ivanlef0u is also very helpful.
-</ul>
+<p>Eternal thanks to Peter Ferrie, my permanent reviewer.</p>
+<p>Ivanlef0u is also very helpful.</p>
 <p>a lot of people helped me in the process to make this presentation and the content on corkami, in one way or another.</p>
 <p></p>
 <p>Any questions?</p>
