@@ -3,7 +3,7 @@
   <ModulePrefs title="screencasts"/> 
   <Content type="html">
   <![CDATA[
-<a name=slide0 ></a>Slide 0: &lt;&lt; Previous <a href=#slide0h>&gt;&gt; Next</a>
+<a name=slide0></a>Slide 0: &lt;&lt; Previous <a href=#slide0h>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img0.png border=1 >
 </td><td valign=top>
@@ -12,27 +12,29 @@
 <p>I'm Ange Albertini, and I will talk about x86 and PE</p>
 </td></tr></table>
 
-<a name=slide0h />Slide 0h: <a  href=#slide0>&lt;&lt; Previous</a> <a  href=#slide1>&gt;&gt; Next</a>
+<a name=slide0h></a>Slide 0h: <a href=#slide0>&lt;&lt; Previous</a> <a href=#slide1>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img0h.png border=1 >
 </td><td valign=top>
 <p>this extra slide to let you decide if you really want to 
  read further ;)</p>
-<p>1.I studied ASM and PE, from scratch</p>
-<p>2.I failed all tools I tried: IDA, OllyDbg, Hiew, pefile, WinDbg, HT, CFF Explorer...</p>
-<p>3.here are a few of my findings</p>
+<ol>
+<li/>I studied ASM and PE, from scratch
+<li/>I failed all tools I tried: IDA, OllyDbg, Hiew, pefile, WinDbg, HT, CFF Explorer...
+<li/>3.here are a few of my findings
+</ol>
  </td></tr></table>
 
-<a name=slide1 />Slide 1: <a href=#slide0>&lt;&lt; Previous</a> <a href=#slide2>&gt;&gt; Next</a>
+<a name=slide1></a>Slide 1: <a href=#slide0>&lt;&lt; Previous</a> <a href=#slide2>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img1.png border=1 >
 </td><td valign=top>
-<p>This  is an improved version of my presentation at Hashdays.</p>
+<p>This is an improved version of my presentation at Hashdays.</p>
 <p>I reworked it, but most of the content is still the same.</p>
 </td></tr></table>
 
 
-<a name=slide2 />Slide 2: <a href=#slide1>&lt;&lt; Previous</a> <a href=#slide3>&gt;&gt; Next</a>
+<a name=slide2></a>Slide 2: <a href=#slide1>&lt;&lt; Previous</a> <a href=#slide3>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img2.png border=1 >
 </td><td valign=top>
@@ -49,7 +51,7 @@
 </td></tr></table>
 
 
-<a name=slide3 />Slide 3: <a href=#slide2>&lt;&lt; Previous</a> <a href=#slide4>&gt;&gt; Next</a>
+<a name=slide3></a>Slide 3: <a href=#slide2>&lt;&lt; Previous</a> <a href=#slide4>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img3.png border=1 >
 </td><td valign=top>
@@ -63,7 +65,7 @@
 </td></tr></table>
 
 
-<a name=slide4 />Slide 4: <a href=#slide3>&lt;&lt; Previous</a> <a href=#slide5>&gt;&gt; Next</a>
+<a name=slide4></a>Slide 4: <a href=#slide3>&lt;&lt; Previous</a> <a href=#slide5>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img4.png border=1 >
 </td><td valign=top>
@@ -71,7 +73,7 @@
 </td></tr></table>
 
 
-<a name=slide5 />Slide 5: <a href=#slide4>&lt;&lt; Previous</a> <a href=#slide6>&gt;&gt; Next</a>
+<a name=slide5></a>Slide 5: <a href=#slide4>&lt;&lt; Previous</a> <a href=#slide6>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img5.png border=1 >
 </td><td valign=top>
@@ -79,7 +81,7 @@
 </td></tr></table>
 
 
-<a name=slide6 />Slide 6: <a href=#slide5>&lt;&lt; Previous</a> <a href=#slide7>&gt;&gt; Next</a>
+<a name=slide6></a>Slide 6: <a href=#slide5>&lt;&lt; Previous</a> <a href=#slide7>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img6.png border=1 >
 </td><td valign=top>
@@ -89,7 +91,7 @@
 </td></tr></table>
 
 
-<a name=slide7 />Slide 7: <a href=#slide6>&lt;&lt; Previous</a> <a href=#slide8>&gt;&gt; Next</a>
+<a name=slide7></a>Slide 7: <a href=#slide6>&lt;&lt; Previous</a> <a href=#slide8>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img7.png border=1 >
 </td><td valign=top>
@@ -99,7 +101,7 @@
 </td></tr></table>
 
 
-<a name=slide8 />Slide 8: <a href=#slide7>&lt;&lt; Previous</a> <a href=#slide9>&gt;&gt; Next</a>
+<a name=slide8></a>Slide 8: <a href=#slide7>&lt;&lt; Previous</a> <a href=#slide9>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img8.png border=1 >
 </td><td valign=top>
@@ -107,7 +109,7 @@
 </td></tr></table>
 
 
-<a name=slide9 />Slide 9: <a href=#slide8>&lt;&lt; Previous</a> <a href=#slide10>&gt;&gt; Next</a>
+<a name=slide9></a>Slide 9: <a href=#slide8>&lt;&lt; Previous</a> <a href=#slide10>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img9.png border=1 >
 </td><td valign=top>
@@ -115,7 +117,7 @@
 </td></tr></table>
 
 
-<a name=slide10 />Slide 10: <a href=#slide9>&lt;&lt; Previous</a> <a href=#slide11>&gt;&gt; Next</a>
+<a name=slide10></a>Slide 10: <a href=#slide9>&lt;&lt; Previous</a> <a href=#slide11>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img10.png border=1 >
 </td><td valign=top>
@@ -123,7 +125,7 @@
 </td></tr></table>
 
 
-<a name=slide11 />Slide 11: <a href=#slide10>&lt;&lt; Previous</a> <a href=#slide12>&gt;&gt; Next</a>
+<a name=slide11></a>Slide 11: <a href=#slide10>&lt;&lt; Previous</a> <a href=#slide12>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img11.png border=1 >
 </td><td valign=top>
@@ -135,7 +137,7 @@
 </td></tr></table>
 
 
-<a name=slide12 />Slide 12: <a href=#slide11>&lt;&lt; Previous</a> <a href=#slide13>&gt;&gt; Next</a>
+<a name=slide12></a>Slide 12: <a href=#slide11>&lt;&lt; Previous</a> <a href=#slide13>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img12.png border=1 >
 </td><td valign=top>
@@ -150,7 +152,7 @@
 </td></tr></table>
 
 
-<a name=slide13 />Slide 13: <a href=#slide12>&lt;&lt; Previous</a> <a href=#slide14>&gt;&gt; Next</a>
+<a name=slide13></a>Slide 13: <a href=#slide12>&lt;&lt; Previous</a> <a href=#slide14>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img13.png border=1 >
 </td><td valign=top>
@@ -160,7 +162,7 @@
 </td></tr></table>
 
 
-<a name=slide14 />Slide 14: <a href=#slide13>&lt;&lt; Previous</a> <a href=#slide15>&gt;&gt; Next</a>
+<a name=slide14></a>Slide 14: <a href=#slide13>&lt;&lt; Previous</a> <a href=#slide15>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img14.png border=1 >
 </td><td valign=top>
@@ -174,7 +176,7 @@
 </td></tr></table>
 
 
-<a name=slide15 />Slide 15: <a href=#slide14>&lt;&lt; Previous</a> <a href=#slide16>&gt;&gt; Next</a>
+<a name=slide15></a>Slide 15: <a href=#slide14>&lt;&lt; Previous</a> <a href=#slide16>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img15.png border=1 >
 </td><td valign=top>
@@ -183,7 +185,7 @@
 </td></tr></table>
 
 
-<a name=slide16 />Slide 16: <a href=#slide15>&lt;&lt; Previous</a> <a href=#slide17>&gt;&gt; Next</a>
+<a name=slide16></a>Slide 16: <a href=#slide15>&lt;&lt; Previous</a> <a href=#slide17>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img16.png border=1 >
 </td><td valign=top>
@@ -191,7 +193,7 @@
 </td></tr></table>
 
 
-<a name=slide17 />Slide 17: <a href=#slide16>&lt;&lt; Previous</a> <a href=#slide18>&gt;&gt; Next</a>
+<a name=slide17></a>Slide 17: <a href=#slide16>&lt;&lt; Previous</a> <a href=#slide18>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img17.png border=1 >
 </td><td valign=top>
@@ -201,12 +203,12 @@
 </td></tr></table>
 
 
-<a name=slide18 />Slide 18: <a href=#slide17>&lt;&lt; Previous</a> <a href=#slide19>&gt;&gt; Next</a>
+<a name=slide18></a>Slide 18: <a href=#slide17>&lt;&lt; Previous</a> <a href=#slide19>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img18.png border=1 >
 </td><td valign=top>
 <p>now you know that this is what is in the file itself.</p>
-<p>this is how it's read by 'us' (reverse engineers, malware analysts,  exploit developers...).</p>
+<p>this is how it's read by 'us' (reverse engineers, malware analysts, exploit developers...).</p>
 <p></p>
 <p>the CPU itself only reads the hex.</p>
 <p></p>
@@ -220,7 +222,7 @@
 </td></tr></table>
 
 
-<a name=slide19 />Slide 19: <a href=#slide18>&lt;&lt; Previous</a> <a href=#slide20>&gt;&gt; Next</a>
+<a name=slide19></a>Slide 19: <a href=#slide18>&lt;&lt; Previous</a> <a href=#slide20>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img19.png border=1 >
 </td><td valign=top>
@@ -228,13 +230,13 @@
 <p></p>
 <p>If you'd accidentally open the file in, say notepad - it doesn't really make sense, but at least you have that on your machine - you could find it here (remember, it's hex).</p>
 <p></p>
-<p>Note that it's actually a very tiny part of the whole file  (&lt;30bytes out of 56000).</p>
+<p>Note that it's actually a very tiny part of the whole file (&lt;30bytes out of 56000).</p>
 <p></p>
 <p></p>
 </td></tr></table>
 
 
-<a name=slide20 />Slide 20: <a href=#slide19>&lt;&lt; Previous</a> <a href=#slide21>&gt;&gt; Next</a>
+<a name=slide20></a>Slide 20: <a href=#slide19>&lt;&lt; Previous</a> <a href=#slide21>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img20.png border=1 >
 </td><td valign=top>
@@ -244,12 +246,12 @@
 </td></tr></table>
 
 
-<a name=slide21 />Slide 21: <a href=#slide20>&lt;&lt; Previous</a> <a href=#slide22>&gt;&gt; Next</a>
+<a name=slide21></a>Slide 21: <a href=#slide20>&lt;&lt; Previous</a> <a href=#slide22>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img21.png border=1 >
 </td><td valign=top>
 <p>so, the compiler translates our C to a series of assembly operations, which is itself encoded in opcodes.</p>
-<p>the resulting executable only contains the opcodes, which are directly understood and executed by the CPU. If no error happens, what is here directly affects the behavior of the program, there is  no 'man in the middle' from the OS.</p>
+<p>the resulting executable only contains the opcodes, which are directly understood and executed by the CPU. If no error happens, what is here directly affects the behavior of the program, there is no 'man in the middle' from the OS.</p>
 <p></p>
 <p>so our C code will just eventually lead the CPU to read and execute</p>
 <p>6A 40 68 F4 20 40 00 68 FC 20...</p>
@@ -258,7 +260,7 @@
 </td></tr></table>
 
 
-<a name=slide22 />Slide 22: <a href=#slide21>&lt;&lt; Previous</a> <a href=#slide23>&gt;&gt; Next</a>
+<a name=slide22></a>Slide 22: <a href=#slide21>&lt;&lt; Previous</a> <a href=#slide23>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img22.png border=1 >
 </td><td valign=top>
@@ -266,7 +268,7 @@
 </td></tr></table>
 
 
-<a name=slide23 />Slide 23: <a href=#slide22>&lt;&lt; Previous</a> <a href=#slide24>&gt;&gt; Next</a>
+<a name=slide23></a>Slide 23: <a href=#slide22>&lt;&lt; Previous</a> <a href=#slide24>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img23.png border=1 >
 </td><td valign=top>
@@ -276,7 +278,7 @@
 </td></tr></table>
 
 
-<a name=slide24 />Slide 24: <a href=#slide23>&lt;&lt; Previous</a> <a href=#slide25>&gt;&gt; Next</a>
+<a name=slide24></a>Slide 24: <a href=#slide23>&lt;&lt; Previous</a> <a href=#slide25>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img24.png border=1 >
 </td><td valign=top>
@@ -284,7 +286,7 @@
 </td></tr></table>
 
 
-<a name=slide25 />Slide 25: <a href=#slide24>&lt;&lt; Previous</a> <a href=#slide26>&gt;&gt; Next</a>
+<a name=slide25></a>Slide 25: <a href=#slide24>&lt;&lt; Previous</a> <a href=#slide26>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img25.png border=1 >
 </td><td valign=top>
@@ -294,7 +296,7 @@
 </td></tr></table>
 
 
-<a name=slide26 />Slide 26: <a href=#slide25>&lt;&lt; Previous</a> <a href=#slide27>&gt;&gt; Next</a>
+<a name=slide26></a>Slide 26: <a href=#slide25>&lt;&lt; Previous</a> <a href=#slide27>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img26.png border=1 >
 </td><td valign=top>
@@ -308,7 +310,7 @@
 </td></tr></table>
 
 
-<a name=slide27 />Slide 27: <a href=#slide26>&lt;&lt; Previous</a> <a href=#slide28>&gt;&gt; Next</a>
+<a name=slide27></a>Slide 27: <a href=#slide26>&lt;&lt; Previous</a> <a href=#slide28>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img27.png border=1 >
 </td><td valign=top>
@@ -325,7 +327,7 @@
 </td></tr></table>
 
 
-<a name=slide28 />Slide 28: <a href=#slide27>&lt;&lt; Previous</a> <a href=#slide29>&gt;&gt; Next</a>
+<a name=slide28></a>Slide 28: <a href=#slide27>&lt;&lt; Previous</a> <a href=#slide29>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img28.png border=1 >
 </td><td valign=top>
@@ -335,7 +337,7 @@
 </td></tr></table>
 
 
-<a name=slide29 />Slide 29: <a href=#slide28>&lt;&lt; Previous</a> <a href=#slide30>&gt;&gt; Next</a>
+<a name=slide29></a>Slide 29: <a href=#slide28>&lt;&lt; Previous</a> <a href=#slide30>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img29.png border=1 >
 </td><td valign=top>
@@ -345,7 +347,7 @@
 </td></tr></table>
 
 
-<a name=slide30 />Slide 30: <a href=#slide29>&lt;&lt; Previous</a> <a href=#slide31>&gt;&gt; Next</a>
+<a name=slide30></a>Slide 30: <a href=#slide29>&lt;&lt; Previous</a> <a href=#slide31>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img30.png border=1 >
 </td><td valign=top>
@@ -355,7 +357,7 @@
 </td></tr></table>
 
 
-<a name=slide31 />Slide 31: <a href=#slide30>&lt;&lt; Previous</a> <a href=#slide32>&gt;&gt; Next</a>
+<a name=slide31></a>Slide 31: <a href=#slide30>&lt;&lt; Previous</a> <a href=#slide32>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img31.png border=1 >
 </td><td valign=top>
@@ -363,7 +365,7 @@
 </td></tr></table>
 
 
-<a name=slide32 />Slide 32: <a href=#slide31>&lt;&lt; Previous</a> <a href=#slide33>&gt;&gt; Next</a>
+<a name=slide32></a>Slide 32: <a href=#slide31>&lt;&lt; Previous</a> <a href=#slide33>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img32.png border=1 >
 </td><td valign=top>
@@ -375,7 +377,7 @@
 </td></tr></table>
 
 
-<a name=slide33 />Slide 33: <a href=#slide32>&lt;&lt; Previous</a> <a href=#slide34>&gt;&gt; Next</a>
+<a name=slide33></a>Slide 33: <a href=#slide32>&lt;&lt; Previous</a> <a href=#slide34>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img33.png border=1 >
 </td><td valign=top>
@@ -390,7 +392,7 @@
 </td></tr></table>
 
 
-<a name=slide34 />Slide 34: <a href=#slide33>&lt;&lt; Previous</a> <a href=#slide35>&gt;&gt; Next</a>
+<a name=slide34></a>Slide 34: <a href=#slide33>&lt;&lt; Previous</a> <a href=#slide35>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img34.png border=1 >
 </td><td valign=top>
@@ -403,7 +405,7 @@
 </td></tr></table>
 
 
-<a name=slide35 />Slide 35: <a href=#slide34>&lt;&lt; Previous</a> <a href=#slide36>&gt;&gt; Next</a>
+<a name=slide35></a>Slide 35: <a href=#slide34>&lt;&lt; Previous</a> <a href=#slide36>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img35.png border=1 >
 </td><td valign=top>
@@ -413,7 +415,7 @@
 </td></tr></table>
 
 
-<a name=slide36 />Slide 36: <a href=#slide35>&lt;&lt; Previous</a> <a href=#slide37>&gt;&gt; Next</a>
+<a name=slide36></a>Slide 36: <a href=#slide35>&lt;&lt; Previous</a> <a href=#slide37>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img36.png border=1 >
 </td><td valign=top>
@@ -423,7 +425,7 @@
 </td></tr></table>
 
 
-<a name=slide37 />Slide 37: <a href=#slide36>&lt;&lt; Previous</a> <a href=#slide38>&gt;&gt; Next</a>
+<a name=slide37></a>Slide 37: <a href=#slide36>&lt;&lt; Previous</a> <a href=#slide38>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img37.png border=1 >
 </td><td valign=top>
@@ -439,7 +441,7 @@
 </td></tr></table>
 
 
-<a name=slide38 />Slide 38: <a href=#slide37>&lt;&lt; Previous</a> <a href=#slide39>&gt;&gt; Next</a>
+<a name=slide38></a>Slide 38: <a href=#slide37>&lt;&lt; Previous</a> <a href=#slide39>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img38.png border=1 >
 </td><td valign=top>
@@ -449,7 +451,7 @@
 </td></tr></table>
 
 
-<a name=slide39 />Slide 39: <a href=#slide38>&lt;&lt; Previous</a> <a href=#slide40>&gt;&gt; Next</a>
+<a name=slide39></a>Slide 39: <a href=#slide38>&lt;&lt; Previous</a> <a href=#slide40>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img39.png border=1 >
 </td><td valign=top>
@@ -467,7 +469,7 @@
 </td></tr></table>
 
 
-<a name=slide40 />Slide 40: <a href=#slide39>&lt;&lt; Previous</a> <a href=#slide41>&gt;&gt; Next</a>
+<a name=slide40></a>Slide 40: <a href=#slide39>&lt;&lt; Previous</a> <a href=#slide41>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img40.png border=1 >
 </td><td valign=top>
@@ -477,7 +479,7 @@
 </td></tr></table>
 
 
-<a name=slide41 />Slide 41: <a href=#slide40>&lt;&lt; Previous</a> <a href=#slide42>&gt;&gt; Next</a>
+<a name=slide41></a>Slide 41: <a href=#slide40>&lt;&lt; Previous</a> <a href=#slide42>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img41.png border=1 >
 </td><td valign=top>
@@ -490,7 +492,7 @@
 </td></tr></table>
 
 
-<a name=slide42 />Slide 42: <a href=#slide41>&lt;&lt; Previous</a> <a href=#slide43>&gt;&gt; Next</a>
+<a name=slide42></a>Slide 42: <a href=#slide41>&lt;&lt; Previous</a> <a href=#slide43>&gt;&gt; Next</a>
 <table><tr><td>
 <p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/smsw.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/smsw.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
@@ -502,7 +504,7 @@
 </td></tr></table>
 
 
-<a name=slide43 />Slide 43: <a href=#slide42>&lt;&lt; Previous</a> <a href=#slide44>&gt;&gt; Next</a>
+<a name=slide43></a>Slide 43: <a href=#slide42>&lt;&lt; Previous</a> <a href=#slide44>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img43.png border=1 >
 </td><td valign=top>
@@ -518,7 +520,7 @@
 </td></tr></table>
 
 
-<a name=slide44 />Slide 44: <a href=#slide43>&lt;&lt; Previous</a> <a href=#slide45>&gt;&gt; Next</a>
+<a name=slide44></a>Slide 44: <a href=#slide43>&lt;&lt; Previous</a> <a href=#slide45>&gt;&gt; Next</a>
 <table><tr><td>
 <p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/gs.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/gs.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
@@ -527,7 +529,7 @@
 </td></tr></table>
 
 
-<a name=slide45 />Slide 45: <a href=#slide44>&lt;&lt; Previous</a> <a href=#slide46>&gt;&gt; Next</a>
+<a name=slide45></a>Slide 45: <a href=#slide44>&lt;&lt; Previous</a> <a href=#slide46>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img45.png border=1 >
 </td><td valign=top>
@@ -543,7 +545,7 @@
 </td></tr></table>
 
 
-<a name=slide46 />Slide 46: <a href=#slide45>&lt;&lt; Previous</a> <a href=#slide47>&gt;&gt; Next</a>
+<a name=slide46></a>Slide 46: <a href=#slide45>&lt;&lt; Previous</a> <a href=#slide47>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img46.png border=1 >
 </td><td valign=top>
@@ -554,7 +556,7 @@
 </td></tr></table>
 
 
-<a name=slide47 />Slide 47: <a href=#slide46>&lt;&lt; Previous</a> <a href=#slide48>&gt;&gt; Next</a>
+<a name=slide47></a>Slide 47: <a href=#slide46>&lt;&lt; Previous</a> <a href=#slide48>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img47.png border=1 >
 </td><td valign=top>
@@ -566,7 +568,7 @@
 </td></tr></table>
 
 
-<a name=slide48 />Slide 48: <a href=#slide47>&lt;&lt; Previous</a> <a href=#slide49>&gt;&gt; Next</a>
+<a name=slide48></a>Slide 48: <a href=#slide47>&lt;&lt; Previous</a> <a href=#slide49>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img48.png border=1 >
 </td><td valign=top>
@@ -583,7 +585,7 @@
 <p>and on 16b, it's 'undefined' but it just clears the 16b register itself (the rest stays unchanged, of course)...</p>
 </td></tr></table>
 
-<a name=slide49 />Slide 49: <a href=#slide48>&lt;&lt; Previous</a> <a href=#slide49b>&gt;&gt; Next</a> (32b)
+<a name=slide49></a>Slide 49: <a href=#slide48>&lt;&lt; Previous</a> <a href=#slide49b>&gt;&gt; Next</a> (32b)
 <table><tr><td>
 <p>Demo in 32 bits</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/demo32.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/demo32.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
@@ -591,7 +593,7 @@
 <p>demo of nop / mov / bswap, in 32b </p>
 </td></tr></table>
 
-<a name=slide49b />Slide 49b: <a href=#slide49>&lt;&lt; Previous</a> <a href=#slide50>&gt;&gt; Next</a> (64b)
+<a name=slide49b></a>Slide 49b: <a href=#slide49>&lt;&lt; Previous</a> <a href=#slide50>&gt;&gt; Next</a> (64b)
 <table><tr><td>
 <p>Demo in 64 bits</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/demo64.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/demo64.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
@@ -601,7 +603,7 @@
 
 
 
-<a name=slide50 />Slide 50: <a href=#slide49>&lt;&lt; Previous</a> <a href=#slide51>&gt;&gt; Next</a>
+<a name=slide50></a>Slide 50: <a href=#slide49>&lt;&lt; Previous</a> <a href=#slide51>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img50.png border=1 >
 </td><td valign=top>
@@ -615,7 +617,7 @@
 </td></tr></table>
 
 
-<a name=slide51 />Slide 51: <a href=#slide50>&lt;&lt; Previous</a> <a href=#slide52>&gt;&gt; Next</a>
+<a name=slide51></a>Slide 51: <a href=#slide50>&lt;&lt; Previous</a> <a href=#slide52>&gt;&gt; Next</a>
 <table><tr><td>
 <p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/pushret.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/pushret.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
@@ -631,7 +633,7 @@
 </td></tr></table>
 
 
-<a name=slide52 />Slide 52: <a href=#slide51>&lt;&lt; Previous</a> <a href=#slide53>&gt;&gt; Next</a>
+<a name=slide52></a>Slide 52: <a href=#slide51>&lt;&lt; Previous</a> <a href=#slide53>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img52.png border=1 >
 </td><td valign=top>
@@ -642,7 +644,7 @@
 </td></tr></table>
 
 
-<a name=slide53 />Slide 53: <a href=#slide52>&lt;&lt; Previous</a> <a href=#slide54>&gt;&gt; Next</a>
+<a name=slide53></a>Slide 53: <a href=#slide52>&lt;&lt; Previous</a> <a href=#slide54>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img53.png border=1 >
 </td><td valign=top>
@@ -650,7 +652,7 @@
 </td></tr></table>
 
 
-<a name=slide54 />Slide 54: <a href=#slide53>&lt;&lt; Previous</a> <a href=#slide55>&gt;&gt; Next</a>
+<a name=slide54></a>Slide 54: <a href=#slide53>&lt;&lt; Previous</a> <a href=#slide55>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img54.png border=1 >
 </td><td valign=top>
@@ -661,7 +663,7 @@
 </td></tr></table>
 
 
-<a name=slide55 />Slide 55: <a href=#slide54>&lt;&lt; Previous</a> <a href=#slide56>&gt;&gt; Next</a>
+<a name=slide55></a>Slide 55: <a href=#slide54>&lt;&lt; Previous</a> <a href=#slide56>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img55.png border=1 >
 </td><td valign=top>
@@ -671,7 +673,7 @@
 </td></tr></table>
 
 
-<a name=slide56 />Slide 56: <a href=#slide55>&lt;&lt; Previous</a> <a href=#slide57>&gt;&gt; Next</a>
+<a name=slide56></a>Slide 56: <a href=#slide55>&lt;&lt; Previous</a> <a href=#slide57>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img56.png border=1 >
 </td><td valign=top>
@@ -683,7 +685,7 @@
 </td></tr></table>
 
 
-<a name=slide57 />Slide 57: <a href=#slide56>&lt;&lt; Previous</a> <a href=#slide58>&gt;&gt; Next</a>
+<a name=slide57></a>Slide 57: <a href=#slide56>&lt;&lt; Previous</a> <a href=#slide58>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img57.png border=1 >
 </td><td valign=top>
@@ -698,7 +700,7 @@
 </td></tr></table>
 
 
-<a name=slide58 />Slide 58: <a href=#slide57>&lt;&lt; Previous</a> <a href=#slide59>&gt;&gt; Next</a>
+<a name=slide58></a>Slide 58: <a href=#slide57>&lt;&lt; Previous</a> <a href=#slide59>&gt;&gt; Next</a>
 <table><tr><td>
 <p>Demo</p>
 <OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" WIDTH="800" HEIGHT="602" CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=7,0,0,0"><PARAM NAME=movie VALUE=https://sites.google.com/site/corkami/download/96bits.swf><PARAM NAME=play VALUE=true><PARAM NAME=loop VALUE=false><PARAM NAME=wmode VALUE=transparent><PARAM NAME=quality VALUE=low><EMBED src=https://sites.google.com/site/corkami/download/96bits.swf WIDTH=800 HEIGHT=602 quality=low loop=false wmode=transparent TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED></OBJECT><br/>
@@ -711,7 +713,7 @@
 </td></tr></table>
 
 
-<a name=slide59 />Slide 59: <a href=#slide58>&lt;&lt; Previous</a> <a href=#slide60>&gt;&gt; Next</a>
+<a name=slide59></a>Slide 59: <a href=#slide58>&lt;&lt; Previous</a> <a href=#slide60>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img59.png border=1 >
 </td><td valign=top>
@@ -723,7 +725,7 @@
 </td></tr></table>
 
 
-<a name=slide60 />Slide 60: <a href=#slide59>&lt;&lt; Previous</a> <a href=#slide61>&gt;&gt; Next</a>
+<a name=slide60></a>Slide 60: <a href=#slide59>&lt;&lt; Previous</a> <a href=#slide61>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img60.png border=1 >
 </td><td valign=top>
@@ -735,7 +737,7 @@
 </td></tr></table>
 
 
-<a name=slide61 />Slide 61: <a href=#slide60>&lt;&lt; Previous</a> <a href=#slide62>&gt;&gt; Next</a>
+<a name=slide61></a>Slide 61: <a href=#slide60>&lt;&lt; Previous</a> <a href=#slide62>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img61.png border=1 >
 </td><td valign=top>
@@ -746,7 +748,7 @@
 </td></tr></table>
 
 
-<a name=slide62 />Slide 62: <a href=#slide61>&lt;&lt; Previous</a> <a href=#slide63>&gt;&gt; Next</a>
+<a name=slide62></a>Slide 62: <a href=#slide61>&lt;&lt; Previous</a> <a href=#slide63>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img62.png border=1 >
 </td><td valign=top>
@@ -756,7 +758,7 @@
 </td></tr></table>
 
 
-<a name=slide63 />Slide 63: <a href=#slide62>&lt;&lt; Previous</a> <a href=#slide64>&gt;&gt; Next</a>
+<a name=slide63></a>Slide 63: <a href=#slide62>&lt;&lt; Previous</a> <a href=#slide64>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img63.png border=1 >
 </td><td valign=top>
@@ -768,7 +770,7 @@
 </td></tr></table>
 
 
-<a name=slide64 />Slide 64: <a href=#slide63>&lt;&lt; Previous</a> <a href=#slide65>&gt;&gt; Next</a>
+<a name=slide64></a>Slide 64: <a href=#slide63>&lt;&lt; Previous</a> <a href=#slide65>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img64.png border=1 >
 </td><td valign=top>
@@ -782,7 +784,7 @@
 </td></tr></table>
 
 
-<a name=slide65 />Slide 65: <a href=#slide64>&lt;&lt; Previous</a> <a href=#slide66>&gt;&gt; Next</a>
+<a name=slide65></a>Slide 65: <a href=#slide64>&lt;&lt; Previous</a> <a href=#slide66>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img65.png border=1 >
 </td><td valign=top>
@@ -797,7 +799,7 @@
 </td></tr></table>
 
 
-<a name=slide66 />Slide 66: <a href=#slide65>&lt;&lt; Previous</a> <a href=#slide67>&gt;&gt; Next</a>
+<a name=slide66></a>Slide 66: <a href=#slide65>&lt;&lt; Previous</a> <a href=#slide67>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img66.png border=1 >
 </td><td valign=top>
@@ -809,7 +811,7 @@
 </td></tr></table>
 
 
-<a name=slide67 />Slide 67: <a href=#slide66>&lt;&lt; Previous</a> <a href=#slide68>&gt;&gt; Next</a>
+<a name=slide67></a>Slide 67: <a href=#slide66>&lt;&lt; Previous</a> <a href=#slide68>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img67.png border=1 >
 </td><td valign=top>
@@ -819,7 +821,7 @@
 </td></tr></table>
 
 
-<a name=slide68 />Slide 68: <a href=#slide67>&lt;&lt; Previous</a> <a href=#slide69>&gt;&gt; Next</a>
+<a name=slide68></a>Slide 68: <a href=#slide67>&lt;&lt; Previous</a> <a href=#slide69>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img68.png border=1 >
 </td><td valign=top>
@@ -834,7 +836,7 @@
 </td></tr></table>
 
 
-<a name=slide69 />Slide 69: <a href=#slide68>&lt;&lt; Previous</a> <a href=#slide70>&gt;&gt; Next</a>
+<a name=slide69></a>Slide 69: <a href=#slide68>&lt;&lt; Previous</a> <a href=#slide70>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img69.png border=1 >
 </td><td valign=top>
@@ -844,7 +846,7 @@
 </td></tr></table>
 
 
-<a name=slide70 />Slide 70: <a href=#slide69>&lt;&lt; Previous</a> <a href=#slide71>&gt;&gt; Next</a>
+<a name=slide70></a>Slide 70: <a href=#slide69>&lt;&lt; Previous</a> <a href=#slide71>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img70.png border=1 >
 </td><td valign=top>
@@ -854,20 +856,21 @@
 </td></tr></table>
 
 
-<a name=slide71 />Slide 71: <a href=#slide70>&lt;&lt; Previous</a> <a href=#slide72>&gt;&gt; Next</a>
+<a name=slide71></a>Slide 71: <a href=#slide70>&lt;&lt; Previous</a> <a href=#slide72>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img71.png border=1 >
 </td><td valign=top>
-<p>Eternal thanks to Peter Ferrie, my permanent reviewer.</p>
-<p>Ivanlef0u is also very helpful.</p>
-<p></p>
+<ul>
+<li/>Eternal thanks to Peter Ferrie, my permanent reviewer.
+<li/>Ivanlef0u is also very helpful.
+</ul>
 <p>a lot of people helped me in the process to make this presentation and the content on corkami, in one way or another.</p>
 <p></p>
 <p>Any questions?</p>
 </td></tr></table>
 
 
-<a name=slide72 />Slide 72: <a href=#slide71>&lt;&lt; Previous</a> <a href=#slide73>&gt;&gt; Next</a>
+<a name=slide72></a>Slide 72: <a href=#slide71>&lt;&lt; Previous</a> <a href=#slide73>&gt;&gt; Next</a>
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img72.png border=1 >
 </td><td valign=top>
@@ -875,17 +878,16 @@
 </td></tr></table>
 
 
-<a name=slide73 />Slide 73: <a href=#slide72>&lt;&lt; Previous</a> &gt;&gt; Next
+<a name=slide73></a>Slide 73: <a href=#slide72>&lt;&lt; Previous</a> &gt;&gt; Next
 <table><tr><td>
 <img src=https://corkami.googlecode.com/svn/trunk/pics/bsx2/img73.png border=1 >
 </td><td valign=top>
-<p>mips relocs are still working, even with x86 CPU and PE. and relocs apply on relocs data themselves... so does my PoC</p>
-<p></p>
-<p>adding an extra relocation on the imagebase doesn't influence the loading (the PE is already mapped), but it interferes with the EP calculation.</p>
-<p></p>
-<p>Drivers are just low alignment PEs with different import. so I made a PE with low alig and no imports, that detects how it's ran, and resolves its own imports accordingly</p>
-<p></p>
-<p>on TLS and DLLMain return, only ESI and EIP have to be correct, so my PoC corrupts everything else... IDA didn't like a weird ESP...</p>
+<ul>
+<li/>Mips relocs are still working, even with x86 CPU and PE. and relocs can be applied on further relocations... so does my PoC
+<li/>Adding an extra relocation on the imagebase doesn't influence the loading (the PE is already mapped), but it interferes with the EP calculation.
+<li/>Drivers are just low alignment PEs with different import. so I made a PE with low alig and no imports, that detects how it's ran, and resolves its own imports accordingly
+<li/>on TLS and DLLMain return, only ESI and EIP have to be correct, so my PoC corrupts everything else... IDA didn't like a weird ESP...
+</ul>
 </td></tr></table>
 <br/>
 <br/>
@@ -894,7 +896,6 @@
 <br/>
 <br/>
 <br/>
-<br/>
-   ]]>
+  ]]>
   </Content>
 </Module>
