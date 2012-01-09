@@ -48,6 +48,7 @@ e85254ed6c66db30570735b0a4f7d178d456b181 *driver.sys
 dca29b98bdc5f021fad4967504318dd7d37b5c86 *exportsdata.exe
 e1ce8b47b99b176962a7a5b78b243155f012ca84 *fakeregs.exe
 02adc7305a44257f2ddbae557c8507296e051d7c *fakeregslib.dll
+cd83dc8a29063be6b5b532d394a45215e19b9c44 *fakerelocs.exe
 5730515185135fe173db6770092873eeb36e8035 *foldedhdr.exe
 68230facbdc3691f896d004b55c36f77cb76a063 *foldedhdrW7.exe
 26d5fb40466ca9c7f8f588afebad23e7c2529d5e *footer.exe
@@ -69,6 +70,7 @@ ca75d3f7efb6b18d6bf0c3bd8e896c81e7539d74 *imports_mixed.exe
 79189e97c5e779eb022ac37267fba86a41810ef4 *imports_noext.exe
 0641c6531625d1f5e93d04f31808f915404d9043 *imports_noint.exe
 ab309b67e3872a3c4e092090078f4d42994de645 *imports_nothunk.exe
+967fc9a98006927047fabd2c39f576dedcbb45d1 *imports_tiny.exe
 bcb7a3e77e416d9527892a2941ce02864ff626e7 *imports_vterm.exe
 dc3977014027d86539bd6986b857c51da5a0ac5c *importshint.exe
 58596114b8cd3d9fdf3ed4dca000b3ff64dbba3d *manyimportsW7.exe
