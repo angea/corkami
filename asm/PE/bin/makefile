@@ -1,6 +1,6 @@
 all: common XP W7
 
-beta:
+beta: no_dd64.exe
 
 common: imports dll gaps tls bound entrypoint down many misc resource delay relocs
 
