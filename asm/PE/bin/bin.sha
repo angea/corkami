@@ -45,6 +45,7 @@ e85254ed6c66db30570735b0a4f7d178d456b181 *driver.sys
 35c8cfb7d07a165e4bab7902135c21c9d83c709c *duphead.exe
 67336d2237b1518c4c8e691ede4c47540eb8d247 *dupsec.exe
 857bb43832bc7821665999c98c47afc5a48acf95 *exportobf.exe
+c7098f9b6771487f6645c9ecf5f1900aae6401c8 *exports_doc.exe
 dca29b98bdc5f021fad4967504318dd7d37b5c86 *exportsdata.exe
 e1ce8b47b99b176962a7a5b78b243155f012ca84 *fakeregs.exe
 02adc7305a44257f2ddbae557c8507296e051d7c *fakeregslib.dll
@@ -71,6 +72,7 @@ ca75d3f7efb6b18d6bf0c3bd8e896c81e7539d74 *imports_mixed.exe
 0641c6531625d1f5e93d04f31808f915404d9043 *imports_noint.exe
 ab309b67e3872a3c4e092090078f4d42994de645 *imports_nothunk.exe
 967fc9a98006927047fabd2c39f576dedcbb45d1 *imports_tiny.exe
+17cf7ce88241b06ff89a7278a0199787d9574afa *imports_virtdesc.exe
 bcb7a3e77e416d9527892a2941ce02864ff626e7 *imports_vterm.exe
 dc3977014027d86539bd6986b857c51da5a0ac5c *importshint.exe
 58596114b8cd3d9fdf3ed4dca000b3ff64dbba3d *manyimportsW7.exe
@@ -85,6 +87,7 @@ d8e4499216c621da090a133bf4b6769c240651d7 *maxsecW7.exe
 4b2cfe4f3869fdea0bda9624fbfa20341a3b543a *mz.exe
 cfeb2cd053b1e5a470bccbf1190cb26f10f42d60 *namedresource.exe
 f5c0ddd42ac72382d0866649a19620ba6ba73dc9 *no_dd.exe
+e0cc72d6a2980324fb7602fb64c278884dc5fd69 *no_dd64.exe
 4b892f10cfe1bc0eebc5aa58cb0745435d105cf7 *no0code.exe
 8f06da531f9c18b60c14d67a2067d4a0f0618374 *normal.exe
 e55f71b59d363072038c2a0a9c76d0573d88b1d9 *normal64.exe
@@ -93,12 +96,14 @@ a278c99c7cd0c6de535959c146a986e528015ff0 *nosectionXP.exe
 2028d80eb6ecbd633b563857211238942e1439dd *nullEP.exe
 1594da1e9724ba55f49d6195c47cee4750b9c9d1 *nullSOH-XP.exe
 175d0521661d28e3cf9dcabe8ddaa55578a1f0da *ownexports.exe
+fc88d459552a7aa323ca30e4a5ae460a786c5def *ownexports2.exe
 ea42e2179a8e43b2f450b49d1927e46dad6106d3 *pdf.exe
 89f09855527f9ce55e3906f9d5496486ad5cbf7a *quine.exe
 1dc4918597f342a5d4c771eccd8a1c545a6dc53f *reloccrypt.exe
 722b2dce27eeba8061f4b4bf5adf0b9b57121997 *reloccryptXP.exe
 0f5f36845cb537c53251ab127c2b934a7c1dbae3 *reshdr.exe
 ada1a47f2a9bdaccdbef24e54fe26c6ed0cd4817 *resource.exe
+d9b94a7de24ccb1a2a3f2f5ddf978b3444d335dd *resource_string.exe
 fba326742f645db3595ec891d22f066d8dd526fb *resource2.exe
 8916eca8be278d1e43e67c4a90b5a6a870250c77 *resourceloop.exe
 e7a1caebdd7d3ec194903876077078525f4d002f *secinsec.exe
@@ -117,6 +122,7 @@ e4ee093a785f6b18a45e7da66927e605bd1e8d70 *tls_aoi.exe
 d490a8c436c0aa936209ca957667d63c00e41736 *tls_aoiOSDET.exe
 2e883cb91248ae1e6829696b5664cb56992a9323 *tls_exiting.exe
 537a35ebc366aad08d2c4ea7c9c855a4454adcb1 *tls_import.exe
+9da8c0c33c1eb767cc23a8e70eb0ec9a13bc121c *tls_k32.exe
 802d37a85c2690563cb7b0b4d433fd500221ae56 *tls_noEP.exe
 c415fbb5669cd68b1eb7fb2be282aed0f55c0446 *tls_obfuscation.exe
 140fc4723d0dcbf25429c5013901ecb1f7e297bf *tls_onthefly.exe
