@@ -43,6 +43,8 @@ iend
 
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE - 3 * 4
+        at IMAGE_DATA_DIRECTORY_16.IATVA,     dd ImportsAddressTable - IMAGEBASE ; required under XP
+        at IMAGE_DATA_DIRECTORY_16.IATSize,   dd IMPORTSADDRESSTABLESIZE    ; required under XP
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -90,7 +92,7 @@ hnprintf:
     dw 0
     db 'printf', 0
 _d
-
+ImportsAddressTable:
 kernel32.dll_iat:
 __imp__ExitProcess:
     dd hnExitProcess - IMAGEBASE
@@ -100,6 +102,7 @@ msvcrt.dll_iat:
 __imp__printf:
     dd hnprintf - IMAGEBASE
     dd 0
+IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 _d
 
 kernel32.dll db 'kernel32.dll', 0
@@ -115,7 +118,7 @@ _
     call [__imp__ExitProcess]
 _c
 
-Msg db " * virtual 1st import descriptor (W7)", 0ah, 0
+Msg db " * virtual 1st import descriptor", 0ah, 0
 _d
 
 
