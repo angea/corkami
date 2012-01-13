@@ -2,20 +2,21 @@ all: common XP W7
 
 beta: no_dd64.exe
 
-common: imports dll gaps tls bound entrypoint down many misc resource delay relocs
+common: exports imports dll gaps tls bound entrypoint down many misc resource delay relocs
+
+exports: ownexports.exe ownexports2.exe exportsdata.exe exportobf.exe exports_doc.exe
 
 many: 96emptysections.exe 96workingsections.exe bigSoRD.exe
 
 dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllemptyexp.dll \
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
-    dll-webdavld.exe dupsec.exe exportobf.exe importshint.exe \
-    secinsec.exe bigib.exe
+    dll-webdavld.exe dupsec.exe secinsec.exe bigib.exe
 
 relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe fakerelocs.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
-    quine.exe ownexports.exe bigalign.exe exportsdata.exe foldedhdr.exe compiled.exe duphead.exe \
+    quine.exe bigalign.exe foldedhdr.exe compiled.exe duphead.exe \
     no0code.exe fakeregs.exe fakeregslib.dll gui.exe multiss.exe multiss_gui.exe no_dd.exe \
     maxvals.exe
 
@@ -32,11 +33,12 @@ delay: delayimports.exe delaycorrupt.exe
 
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 
-resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe
+resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe \
+    resource_string.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impbyord.exe \
     imports_badterm.exe manyimportsW7.exe imports_vterm.exe imports_nothunk.exe \
-    imports_iatindesc.exe imports_tiny.exe imports_virtdesc.exe
+    imports_iatindesc.exe imports_tiny.exe imports_virtdesc.exe importshint.exe
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
     tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe \
