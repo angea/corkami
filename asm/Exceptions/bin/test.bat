@@ -21,3 +21,9 @@ echo set_tibself.exe:&set_tibself.exe
 echo set_gs.exe:&set_gs.exe
 rem echo set_ss.exe:&set_ss.exe
 echo set_hardcoded.exe:&set_hardcoded.exe
+echo.
+echo skip.exe:&skip.exe
+echo overwrite.exe:&overwrite.exe
+echo hwbp.exe:&hwbp.exe
+rem echo flow.exe:&flow.exe
+echo tf_step.exe:&tf_step.exe

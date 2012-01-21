@@ -23,5 +23,4 @@ _c
 Msg db " * SINGLE STEP exception trigger via IceBP", 0ah, 0
 _d
 
-bound_ dd 3, 5
 ALIGN FILEALIGN, db 0

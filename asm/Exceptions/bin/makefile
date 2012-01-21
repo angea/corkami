@@ -1,8 +1,8 @@
 all: common XP W7
 
-beta: set_ss.exe
+beta: set_ss.exe flow.exe
 
-common: triggers veh.exe set
+common: triggers veh.exe set hwbp.exe overwrite.exe skip.exe tf_step.exe
 
 triggers: trig_invalidmem.exe trig_divzero.exe trig_intov1.exe trig_intov2.exe trig_invalidins.exe \
     trig_privins.exe trig_bound.exe trig_bpint3.exe trig_bpint_3.exe trig_ssflags.exe \

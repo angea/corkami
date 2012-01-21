@@ -41,5 +41,4 @@ _c
 Msg db " * set a SEH via hardcoded value", 0ah, 0
 _d
 
-bound_ dd 3, 5
 ALIGN FILEALIGN, db 0
