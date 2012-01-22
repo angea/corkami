@@ -15,6 +15,7 @@ echo trig_bpint3.exe:&trig_bpint3.exe
 echo trig_bpint_3.exe:&trig_bpint_3.exe
 echo trig_ssflags.exe:&trig_ssflags.exe
 echo trig_ssicebp.exe:&trig_ssicebp.exe
+echo trig_stackof.exe:&trig_stackof.exe
 echo.
 echo setting a SEH:
 echo set_tibself.exe:&set_tibself.exe
@@ -27,3 +28,4 @@ echo overwrite.exe:&overwrite.exe
 echo hwbp.exe:&hwbp.exe
 rem echo flow.exe:&flow.exe
 echo tf_step.exe:&tf_step.exe
+echo scank32:&scank32.exe
