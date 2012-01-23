@@ -1,0 +1,1 @@
+..\convert -delay 125 -page +0+0 *.png final.gif
