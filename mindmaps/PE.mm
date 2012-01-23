@@ -1,0 +1,111 @@
+<map version="0.8.1">
+<!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
+<node CREATED="1326397384945" ID="Freemind_Link_1776585091" MODIFIED="1326397388975" TEXT="PE">
+<node CREATED="1326397496305" ID="Freemind_Link_1420998454" MODIFIED="1326397499812" POSITION="right" TEXT="Data Directories">
+<node CREATED="1326397507760" ID="Freemind_Link_1603081172" MODIFIED="1326399898666" TEXT="exports"/>
+<node CREATED="1326397510303" ID="Freemind_Link_90551185" MODIFIED="1326399896516" TEXT="imports"/>
+<node CREATED="1326397516368" ID="Freemind_Link_1891913191" MODIFIED="1326397921324" TEXT="resources"/>
+<node CREATED="1326398549241" ID="Freemind_Link_1454372903" MODIFIED="1326398553164" TEXT="exception"/>
+<node CREATED="1326398555120" ID="Freemind_Link_846559013" MODIFIED="1326398573216" TEXT="security">
+<font NAME="SansSerif" SIZE="9"/>
+</node>
+<node CREATED="1326397519944" ID="Freemind_Link_367576781" MODIFIED="1326398018033" TEXT="relocations"/>
+<node CREATED="1326397523623" ID="Freemind_Link_556095540" MODIFIED="1326398529201" TEXT="debug">
+<font ITALIC="true" NAME="SansSerif" SIZE="12"/>
+</node>
+<node CREATED="1326397525760" ID="Freemind_Link_503961692" MODIFIED="1326398568844" TEXT="description">
+<edge WIDTH="thin"/>
+<font NAME="SansSerif" SIZE="9"/>
+</node>
+<node CREATED="1326398610433" ID="Freemind_Link_93653583" MODIFIED="1326398623135" TEXT="architecture">
+<font ITALIC="true" NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326397528447" ID="Freemind_Link_1987378330" MODIFIED="1326399894016" TEXT="Thread local storage">
+<edge WIDTH="thin"/>
+<font NAME="SansSerif" SIZE="12"/>
+</node>
+<node CREATED="1326397531350" ID="Freemind_Link_679159008" MODIFIED="1326397534693" TEXT="bound imports"/>
+<node CREATED="1326397541520" ID="Freemind_Link_1821303674" MODIFIED="1326398599324" TEXT="imports table"/>
+<node CREATED="1326397545376" ID="Freemind_Link_523742662" MODIFIED="1326397549616" TEXT="delay imports"/>
+<node CREATED="1326398582936" ID="Freemind_Link_1694478674" MODIFIED="1326398590089" TEXT="COM">
+<font ITALIC="true" NAME="SansSerif" SIZE="12"/>
+</node>
+<node CREATED="1326398586064" ID="Freemind_Link_1549233269" MODIFIED="1326398589417" TEXT="reserved">
+<font ITALIC="true" NAME="SansSerif" SIZE="12"/>
+</node>
+</node>
+<node CREATED="1326397551069" ID="Freemind_Link_880271225" MODIFIED="1326397553820" POSITION="right" TEXT="Section table">
+<node CREATED="1326397555505" ID="Freemind_Link_536012920" MODIFIED="1326398966914" TEXT="Name">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326397561081" ID="Freemind_Link_512920813" MODIFIED="1326397564332" TEXT="Virtual size"/>
+<node CREATED="1326397564608" ID="Freemind_Link_1134915399" MODIFIED="1326397570252" TEXT="SizeOfRawData"/>
+<node CREATED="1326397572000" ID="Freemind_Link_1717360224" MODIFIED="1326397576252" TEXT="PointerToRawData"/>
+<node CREATED="1326398786238" ID="Freemind_Link_1415704600" MODIFIED="1326399084043" TEXT="Pointer &amp; numbers to relocs &amp; line numbers">
+<font ITALIC="true" NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326397576671" ID="Freemind_Link_1484839550" MODIFIED="1326397579901" TEXT="Characteristics"/>
+</node>
+<node CREATED="1326397390079" ID="_" MODIFIED="1326397414365" POSITION="left" TEXT="DOS Header">
+<node CREATED="1326397824456" ID="Freemind_Link_1519523047" MODIFIED="1326399113330" TEXT="MZ"/>
+<node CREATED="1326397831536" ID="Freemind_Link_1878583868" MODIFIED="1326399231592" TEXT=" DOS stub">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326397854296" ID="Freemind_Link_1943396031" MODIFIED="1326398836844" TEXT="pointer to PE header)"/>
+</node>
+<node CREATED="1326397437704" ID="Freemind_Link_1736329916" MODIFIED="1326397440436" POSITION="left" TEXT="NT Headers">
+<node CREATED="1326397441152" ID="Freemind_Link_431381205" MODIFIED="1326397449140" TEXT="File header">
+<node CREATED="1326397455112" ID="Freemind_Link_742211317" MODIFIED="1326397601428" TEXT="Machine"/>
+<node CREATED="1326397458368" ID="Freemind_Link_1526217356" MODIFIED="1326397461948" TEXT="NumberOfSections"/>
+<node CREATED="1326397463729" ID="Freemind_Link_715208465" MODIFIED="1326398840496" TEXT="TimeDateStamp">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326399042776" ID="Freemind_Link_1482228352" MODIFIED="1326399087360" TEXT="Pointer &amp; numbers of Symbol">
+<font ITALIC="true" NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326397468792" ID="Freemind_Link_1593843497" MODIFIED="1326397473973" TEXT="SizeOfOptionalHeader"/>
+<node CREATED="1326399092432" ID="Freemind_Link_1224377273" MODIFIED="1326399097516" TEXT="Characteristics"/>
+</node>
+<node CREATED="1326397450272" ID="Freemind_Link_1467088312" MODIFIED="1326397453972" TEXT="Optional Header">
+<node CREATED="1326397594908" ID="Freemind_Link_1291226825" MODIFIED="1326397597608" TEXT="Magic"/>
+<node CREATED="1326398634464" ID="Freemind_Link_1506155616" MODIFIED="1326398666759" TEXT="Linker Version">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326398647552" ID="Freemind_Link_416386274" MODIFIED="1326398756652" TEXT="Size of Code, Data, Uninit Data">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326397604125" ID="Freemind_Link_1588881561" MODIFIED="1326398049762" TEXT="AddressOfEntryPoint"/>
+<node CREATED="1326398676120" ID="Freemind_Link_575627573" MODIFIED="1326398750821" TEXT="Base of code &amp; data">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326397619666" ID="Freemind_Link_1432231491" MODIFIED="1326397621780" TEXT="ImageBase"/>
+<node CREATED="1326397623344" ID="Freemind_Link_1136029263" MODIFIED="1326397629053" TEXT="Alignments"/>
+<node CREATED="1326398238088" ID="Freemind_Link_1963991821" MODIFIED="1326398944728" TEXT="Subsystem &amp; Image version">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326398704384" ID="Freemind_Link_785562741" MODIFIED="1326398712682" TEXT="Win32VersionValue">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326398246073" ID="Freemind_Link_1090134580" MODIFIED="1326398248977" TEXT="SizeOfImage"/>
+<node CREATED="1326398249335" ID="Freemind_Link_569521168" MODIFIED="1326398252796" TEXT="SizeOfHeaders"/>
+<node CREATED="1326398253576" ID="Freemind_Link_1497889749" MODIFIED="1326398953041" TEXT="Checksum">
+<font NAME="SansSerif" SIZE="11"/>
+</node>
+<node CREATED="1326398256145" ID="Freemind_Link_1813641971" MODIFIED="1326398258277" TEXT="Subsystem"/>
+<node CREATED="1326398724776" ID="Freemind_Link_988486439" MODIFIED="1326398948923" TEXT="Dll characteristics">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326398731648" ID="Freemind_Link_148368424" MODIFIED="1326398950011" TEXT="Stack &amp; Heap sizes">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326398765232" ID="Freemind_Link_1490952701" MODIFIED="1326398950905" TEXT="LoaderFlags">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+<node CREATED="1326398258561" ID="Freemind_Link_1837462834" MODIFIED="1326398269780" TEXT="NumberOfRvaAndSizes"/>
+</node>
+</node>
+<node CREATED="1326397392115" ID="Freemind_Link_144404185" MODIFIED="1326398968784" POSITION="left" TEXT="Rich header" VSHIFT="31">
+<font NAME="SansSerif" SIZE="10"/>
+</node>
+</node>
+</map>
