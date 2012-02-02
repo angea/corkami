@@ -1,6 +1,6 @@
-1
+ï»¿1
 00:00:05,075 --> 00:00:10,098
-Quel processeur bizarre - faire des misères au x86... et un peu de PE [Portable Executable]
+Quel processeur bizarre - faire des misÃ¨res au x86... et un peu de PE [Portable Executable]
 
 2
 00:00:10,098 --> 00:00:19,048
@@ -12,19 +12,19 @@ Je vais parler des opcodes, et un peu du format PE et de leurs bizarreries
 
 4
 00:00:28,025 --> 00:00:35,008
-Je fais du reverse depuis quelque temps. J'ai créé un projet appelé Corkami.
+Je fais du reverse depuis quelque temps. J'ai crÃ©Ã© un projet appelÃ© Corkami.
 
 5
 00:00:35,008 --> 00:00:42,039
-Dans le passé, j'ai participé à Mame, l'émulateur Arcade, et professionellement, analyste de virus,
+Dans le passÃ©, j'ai participÃ© Ã  Mame, l'Ã©mulateur Arcade, et professionellement, analyste de virus,
 
 6
 00:00:42,039 --> 00:00:48,018
-mais je suis ici à titre personnel, ce sont mes propres expériences à la maison.
+mais je suis ici Ã  titre personnel, ce sont mes propres expÃ©riences Ã  la maison.
 
 7
 00:00:48,018 --> 00:00:57,010
-Donc, je viens de mentionner Corkami. C'est le nom du projet de mon projet de reverse [rétro-ingénierie]
+Donc, je viens de mentionner Corkami. C'est le nom du projet de mon projet de reverse [rÃ©tro-ingÃ©nierie]
 
 8
 00:00:57,010 --> 00:01:03,073
@@ -36,19 +36,19 @@ Directement le pur jus.
 
 10
 00:01:06,057 --> 00:01:12,040
-J'essaie de le maintenir à jour, et util. J'ai créé des fiches pense-bêtes et d'autre documents
+J'essaie de le maintenir Ã  jour, et util. J'ai crÃ©Ã© des fiches pense-bÃªtes et d'autre documents
 
 11
 00:01:12,040 --> 00:01:15,081
-que j'utilise moi-même au boulot, au quotidien
+que j'utilise moi-mÃªme au boulot, au quotidien
 
 12
 00:01:15,081 --> 00:01:18,064
-mais c'est juste un loisir. je commence quand les enfants sont couchés
+mais c'est juste un loisir. je commence quand les enfants sont couchÃ©s
 
 13
 00:01:18,064 --> 00:01:23,020
-tard dans la nuit, donc ça n'a probablement pas le polish professionel
+tard dans la nuit, donc Ã§a n'a probablement pas le polish professionel
 
 14
 00:01:23,020 --> 00:01:25,028
@@ -56,19 +56,19 @@ que j'aimerais qu'il ait.
 
 15
 00:01:25,028 --> 00:01:30,058
-Actuellement, Corkami est un wiki et des pense-bêtes
+Actuellement, Corkami est un wiki et des pense-bÃªtes
 
 16
 00:01:30,058 --> 00:01:37,059
-et je me focalise sur la création de preuves de concepts [démonstration d'hypothèse, "proof of concept] [Tiens, salut Bob!]
+et je me focalise sur la crÃ©ation de preuves de concepts [dÃ©monstration d'hypothÃ¨se, "proof of concept] [Tiens, salut Bob!]
 
 17
 00:01:37,059 --> 00:01:42,088
-donc les binaires sont fait-main, d'habitude je n'utilise pas de compilateurs, je créé la structure du PE à la main
+donc les binaires sont fait-main, d'habitude je n'utilise pas de compilateurs, je crÃ©Ã© la structure du PE Ã  la main
 
 18
 00:01:42,088 --> 00:01:46,040
-pour que ce soit focalisé sur le point pertinent
+pour que ce soit focalisÃ© sur le point pertinent
 
 19
 00:01:46,040 --> 00:01:49,004
@@ -84,11 +84,11 @@ car je me concentre uniquement sur ce qui est important.
 
 22
 00:01:54,098 --> 00:01:58,028
-Les binaires sont directement téléchargables pour que vous puissiez
+Les binaires sont directement tÃ©lÃ©chargables pour que vous puissiez
 
 23
 00:01:58,028 --> 00:02:01,030
-tester avec votre débogueur, vos outils, vos connaissances,
+tester avec votre dÃ©bogueur, vos outils, vos connaissances,
 
 24
 00:02:01,030 --> 00:02:03,084
@@ -96,7 +96,7 @@ directement.
 
 25
 00:02:03,084 --> 00:02:07,068
-pour l'instant, je me suis concentré sur le PDF, l'assembleur et le format PE
+pour l'instant, je me suis concentrÃ© sur le PDF, l'assembleur et le format PE
 
 26
 00:02:07,068 --> 00:02:11,024
@@ -104,71 +104,71 @@ quelquest autres trucs, mais ce sont les sujets les plus approfondis
 
 27
 00:02:11,024 --> 00:02:15,008
-du site, et je partage tout ça avec une licence
+du site, et je partage tout Ã§a avec une licence
 
 28
 00:02:15,008 --> 00:02:19,084
-très permissive, BSD, donc vous pouvez réutiliser commerciallement
+trÃ¨s permissive, BSD, donc vous pouvez rÃ©utiliser commerciallement
 
 29
 00:02:19,084 --> 00:02:24,061
-Même les images sont en format ouvert.
+MÃªme les images sont en format ouvert.
 
 30
 00:02:24,061 --> 00:02:29,036
-Donc, la raison de cette présentation... il y a quelque temps,
+Donc, la raison de cette prÃ©sentation... il y a quelque temps,
 
 31
 00:02:29,036 --> 00:02:32,040
-J'étais jeune et innocent, et je pensais que les CPUs, fait de transistors,
+J'Ã©tais jeune et innocent, et je pensais que les CPUs, fait de transistors,
 
 32
 00:02:32,040 --> 00:02:38,045
-était parfaitement logique
+Ã©tait parfaitement logique
 
 33
 00:02:38,045 --> 00:02:41,061
-et ensuite, un virus m'a piégé... simplement,
+et ensuite, un virus m'a piÃ©gÃ©... simplement,
 
 34
 00:02:41,061 --> 00:02:46,059
-IDA était rendu inutile. Donc j'ai décidé de repartir à zéro
+IDA Ã©tait rendu inutile. Donc j'ai dÃ©cidÃ© de repartir Ã  zÃ©ro
 
 35
 00:02:46,059 --> 00:02:49,078
-et d'étudier l'assembleur et le PE du début.
+et d'Ã©tudier l'assembleur et le PE du dÃ©but.
 
 36
 00:02:49,078 --> 00:02:52,091
-j'ai écrit en chemin des documents, partagés sur Corkami
+j'ai Ã©crit en chemin des documents, partagÃ©s sur Corkami
 
 37
 00:02:52,091 --> 00:02:57,066
-et maintenant je vous présente le résultat plus ou moins final,
+et maintenant je vous prÃ©sente le rÃ©sultat plus ou moins final,
 
 38
 00:02:57,066 --> 00:03:01,063
-ou du moins quelques buts atteints. Si j'étais juste un gars qui a étudié l'assembleur
+ou du moins quelques buts atteints. Si j'Ã©tais juste un gars qui a Ã©tudiÃ© l'assembleur
 
 39
 00:03:01,063 --> 00:03:05,048
-je ne serais probablement pas en train de présenter ici,
+je ne serais probablement pas en train de prÃ©senter ici,
 
 40
 00:03:05,048 --> 00:03:10,058
-à moins d'avoir eu quelques résultats avec certains outils.
+Ã  moins d'avoir eu quelques rÃ©sultats avec certains outils.
 
 41
 00:03:10,058 --> 00:03:13,087
-Donc, pour résumér, j'ai trouvés des bugs dans tous les désassembleurs que j'ai essayé
+Donc, pour rÃ©sumÃ©r, j'ai trouvÃ©s des bugs dans tous les dÃ©sassembleurs que j'ai essayÃ©
 
 42
 00:03:13,087 --> 00:03:22,010
-et j'ai aussi obtenus quelques plantages. J'insiste que tous les auteurs ont été contactés
+et j'ai aussi obtenus quelques plantages. J'insiste que tous les auteurs ont Ã©tÃ© contactÃ©s
 
 43
 00:03:22,010 --> 00:03:26,009
-et que la plupart des problèmes ont déjà été corrigé,
+et que la plupart des problÃ¨mes ont dÃ©jÃ  Ã©tÃ© corrigÃ©,
 
 44
 00:03:26,009 --> 00:03:30,091
@@ -176,51 +176,51 @@ mais en tout cas, en version 6.1, il plante directement, mais dans la version 6.
 
 45
 00:03:30,091 --> 00:03:33,034
-c'est corrigé.
+c'est corrigÃ©.
 
 46
 00:03:33,034 --> 00:03:37,047
-et la derniere version de Hiew [Hacker's view] (enfin, pas la dernière publique)
+et la derniere version de Hiew [Hacker's view] (enfin, pas la derniÃ¨re publique)
 
 47
 00:03:37,047 --> 00:03:41,043
-corrige ça aussi.
+corrige Ã§a aussi.
 
 48
 00:03:41,043 --> 00:03:44,087
-Donc, pour cette présentation, je commencerais facile,
+Donc, pour cette prÃ©sentation, je commencerais facile,
 
 49
 00:03:44,087 --> 00:03:50,085
-je pars du principe que vous êtes tous habitués à l'assembleur ?
+je pars du principe que vous Ãªtes tous habituÃ©s Ã  l'assembleur ?
 
 50
 00:03:50,085 --> 00:03:57,035
-Oui. et vous êtes tous habitués, ou
+Oui. et vous Ãªtes tous habituÃ©s, ou
 
 51
 00:03:57,035 --> 00:04:02,092
-vous avez déjà rencontré des cas d'opcodes non documentés?
+vous avez dÃ©jÃ  rencontrÃ© des cas d'opcodes non documentÃ©s?
 
 52
 00:04:02,092 --> 00:04:06,017
-Genre vous faites confiance à IDA, point barre.
+Genre vous faites confiance Ã  IDA, point barre.
 
 53
 00:04:06,017 --> 00:04:10,056
-Est-ce habituel de voir quelque chose non géré par IDA ?
+Est-ce habituel de voir quelque chose non gÃ©rÃ© par IDA ?
 
 54
 00:04:10,056 --> 00:04:14,036
-Levez les bras... ok, pas tant que ça.
+Levez les bras... ok, pas tant que Ã§a.
 
 55
 00:04:14,036 --> 00:04:19,056
-Bon, après l'introduction en accéléré,
+Bon, aprÃ¨s l'introduction en accÃ©lÃ©rÃ©,
 
 56
 00:04:19,056 --> 00:04:25,036
-Je parlerais de quelques techniques, puis présenterai CoST, mon programme
+Je parlerais de quelques techniques, puis prÃ©senterai CoST, mon programme
 
 57
 00:04:25,036 --> 00:04:28,095
@@ -236,19 +236,19 @@ Donc, on compile un binaire, il y a de l'assembleur, il y a
 
 60
 00:04:37,092 --> 00:04:44,025
-un rapport, des points communs entre le code source et l'assembleur généré...
+un rapport, des points communs entre le code source et l'assembleur gÃ©nÃ©rÃ©...
 
 61
 00:04:44,025 --> 00:04:48,076
-et bien sûr, une relation entre langage machine et les opcodes
+et bien sÃ»r, une relation entre langage machine et les opcodes
 
 62
 00:04:48,076 --> 00:04:53,060
-ce qui est important est que l'assembleur est généré par le compilateur, mais ce qui reste
+ce qui est important est que l'assembleur est gÃ©nÃ©rÃ© par le compilateur, mais ce qui reste
 
 63
 00:04:56,068 --> 00:04:59,076
-dans le binaire, sont uniquement les opcodes, qui sont interprétés
+dans le binaire, sont uniquement les opcodes, qui sont interprÃ©tÃ©s
 
 64
 00:04:59,076 --> 00:05:03,034
@@ -264,19 +264,19 @@ ne savent pas ce qui va arriver. il le fait, tout simplement.
 
 67
 00:05:10,087 --> 00:05:16,016
-Et le problème, c'est que d'habitude, on ne lit pas les opcodes directement, mais le désassemblage
+Et le problÃ¨me, c'est que d'habitude, on ne lit pas les opcodes directement, mais le dÃ©sassemblage
 
 68
 00:05:16,016 --> 00:05:20,060
-donc si le désassemblage échoue, on est bloqué
+donc si le dÃ©sassemblage Ã©choue, on est bloquÃ©
 
 69
 00:05:20,060 --> 00:05:25,043
-on est aveugle, on ne sait pas ce qui va s'exécuter
+on est aveugle, on ne sait pas ce qui va s'exÃ©cuter
 
 70
 00:05:25,043 --> 00:05:28,009
-l'autre problème est comme les instructions sont de longueurs variables
+l'autre problÃ¨me est comme les instructions sont de longueurs variables
 
 71
 00:05:28,009 --> 00:05:30,032
@@ -284,11 +284,11 @@ on ne sait pas ou la suivante commence
 
 72
 00:05:30,032 --> 00:05:32,032
-donc même la suite est inconnue.
+donc mÃªme la suite est inconnue.
 
 73
 00:05:32,032 --> 00:05:40,017
-Donc, on créé une seule instruction non documentée dans un programme simple
+Donc, on crÃ©Ã© une seule instruction non documentÃ©e dans un programme simple
 
 74
 00:05:40,017 --> 00:05:48,063
@@ -296,7 +296,7 @@ on utilise le mot-clef 'emit' -- c'est Visual Studio 2010 ultimate --
 
 75
 00:05:48,063 --> 00:05:52,024
-et on obtient un octet non identifié au désassemblage
+et on obtient un octet non identifiÃ© au dÃ©sassemblage
 
 76
 00:05:52,024 --> 00:05:58,043
@@ -304,7 +304,7 @@ on a des juste points d'interrogations.
 
 77
 00:05:58,043 --> 00:06:01,076
-et donc, même si Visual Studio coûte plusieurs milliers d'euros
+et donc, mÃªme si Visual Studio coÃ»te plusieurs milliers d'euros
 
 78
 00:06:01,076 --> 00:06:05,001
@@ -320,19 +320,19 @@ circulez, il y a rien a voir... l'opcode D6... inconnu au bataillon
 
 81
 00:06:14,025 --> 00:06:17,091
-Microsoft n'a rien à dire, Intel non plus,
+Microsoft n'a rien Ã  dire, Intel non plus,
 
 82
 00:06:17,091 --> 00:06:21,013
-donc d'habitude, si vous essayez des choses comme ça, attendez-vous au pire.
+donc d'habitude, si vous essayez des choses comme Ã§a, attendez-vous au pire.
 
 83
 00:06:21,013 --> 00:06:26,056
-Donc, aucune information... en général, ça annonce un plantage...
+Donc, aucune information... en gÃ©nÃ©ral, Ã§a annonce un plantage...
 
 84
 00:06:26,056 --> 00:06:29,072
-mais dans ce cas particulier, aucun problème...
+mais dans ce cas particulier, aucun problÃ¨me...
 
 85
 00:06:29,072 --> 00:06:35,029
@@ -340,47 +340,47 @@ nous ne savons pas ce qui se passe, si on regarde les docs Intel et Microsoft, o
 
 86
 00:06:35,029 --> 00:06:41,028
-Mais le CPU a juste fait son boulot dans son coin. Ce qui s'est passé est qu'en fait
+Mais le CPU a juste fait son boulot dans son coin. Ce qui s'est passÃ© est qu'en fait
 
 87
 00:06:41,028 --> 00:06:49,013
-D6 est un opcode très simple, qui ne fait pas grand chose, mais pas documenté par Intel,
+D6 est un opcode trÃ¨s simple, qui ne fait pas grand chose, mais pas documentÃ© par Intel,
 
 88
 00:06:49,013 --> 00:06:53,096
-par contre, il l'est par AMD, et la plupart le sont aussi également, par AMD mais pas Intel
+par contre, il l'est par AMD, et la plupart le sont aussi Ã©galement, par AMD mais pas Intel
 
 89
 00:06:53,096 --> 00:06:58,019
-aucune idée pourquoi. si quelqu'un le sait...
+aucune idÃ©e pourquoi. si quelqu'un le sait...
 
 90
 00:06:58,019 --> 00:07:04,013
-c'est un opcode pourtant trivial, pourtant... 'y a rien à voir, continuez votre chemin'
+c'est un opcode pourtant trivial, pourtant... 'y a rien Ã  voir, continuez votre chemin'
 
 91
 00:07:04,013 --> 00:07:08,031
-Il est utilisé souvent... l'utilisation habituelle de tels opcodes sont les virus et les packeurs
+Il est utilisÃ© souvent... l'utilisation habituelle de tels opcodes sont les virus et les packeurs
 
 92
 00:07:08,031 --> 00:07:13,031
-pour éviter les analyses automatisées où trop facile.
+pour Ã©viter les analyses automatisÃ©es oÃ¹ trop facile.
 
 93
 00:07:13,031 --> 00:07:22,029
-Ce qui est ironique, c'est que si vous regardez la doc, elle est pleine de trous. mais le désassembleur d'Intel,
+Ce qui est ironique, c'est que si vous regardez la doc, elle est pleine de trous. mais le dÃ©sassembleur d'Intel,
 
 94
 00:07:22,029 --> 00:07:25,021
-Xed, qui est gratuit mais pas ouvert, gère tous ces opcodes sans problème...
+Xed, qui est gratuit mais pas ouvert, gÃ¨re tous ces opcodes sans problÃ¨me...
 
 95
 00:07:25,021 --> 00:07:35,057
-Alors que Microsoft, Visual Studio, et WinDBG, suivent la documentation aveuglément
+Alors que Microsoft, Visual Studio, et WinDBG, suivent la documentation aveuglÃ©ment
 
 96
 00:07:35,057 --> 00:07:43,007
-Donc vous obtiendrez des points d'interrogation alors qu'Intel sait très bien ce qui se passe
+Donc vous obtiendrez des points d'interrogation alors qu'Intel sait trÃ¨s bien ce qui se passe
 
 97
 00:07:43,007 --> 00:07:52,033
@@ -388,11 +388,11 @@ Donc vous obtiendrez des points d'interrogation alors qu'Intel sait très bien ce
 
 98
 00:07:52,033 --> 00:08:01,016
-donc, bien sûr, vous me direz que WinDbg est fait uniquement ce qui est généré
+donc, bien sÃ»r, vous me direz que WinDbg est fait uniquement ce qui est gÃ©nÃ©rÃ©
 
 99
 00:08:01,016 --> 00:08:08,008
-par les compilateurs Microsoft, mais ça exclut WinDBG comme outil d'analyse de virus:
+par les compilateurs Microsoft, mais Ã§a exclut WinDBG comme outil d'analyse de virus:
 
 100
 00:08:08,008 --> 00:08:17,060
@@ -400,15 +400,15 @@ vous rajoutez D6, trivial, et WinDbg est muet.
 
 101
 00:08:17,060 --> 00:08:25,059
-pas génial
+pas gÃ©nial
 
 102
 00:08:25,059 --> 00:08:32,075
-un autre problème est que toutes ses choses non documentées
+un autre problÃ¨me est que toutes ses choses non documentÃ©es
 
 103
 00:08:32,075 --> 00:08:37,063
-sont peut-être présentes, l'une dans un virus,
+sont peut-Ãªtre prÃ©sentes, l'une dans un virus,
 
 104
 00:08:37,063 --> 00:08:42,040
@@ -432,7 +432,7 @@ et vous dit qu'elle est enfouit dans MebRoot (un virus costaud)
 
 109
 00:08:55,087 --> 00:08:58,072
-donc vous êtes obligé de creuser pour voir juste la partie qui vous intéresse
+donc vous Ãªtes obligÃ© de creuser pour voir juste la partie qui vous intÃ©resse
 
 110
 00:08:58,072 --> 00:09:03,097
@@ -440,23 +440,23 @@ et en plus, on sait que c'est un virus, donc ca ne circule pas facilement,
 
 111
 00:09:03,097 --> 00:09:08,063
-et il y a plein de trucs dedans qui n'on rien à voir dedans,
+et il y a plein de trucs dedans qui n'on rien Ã  voir dedans,
 
 112
 00:09:08,063 --> 00:09:15,012
-avant ou après ce qui vous intéresse. Donc c'est le fossé que je veux remplir en fournissant
+avant ou aprÃ¨s ce qui vous intÃ©resse. Donc c'est le fossÃ© que je veux remplir en fournissant
 
 113
 00:09:15,012 --> 00:09:21,017
-un groupe de fichier à la fois simple et complet, et focalisé.
+un groupe de fichier Ã  la fois simple et complet, et focalisÃ©.
 
 114
 00:09:21,017 --> 00:09:27,079
-Donc, on commence. enfin, du vrai, quelques opcodes non documentés.
+Donc, on commence. enfin, du vrai, quelques opcodes non documentÃ©s.
 
 115
 00:09:27,079 --> 00:09:37,010
-Mais avant d'avoir commencé à étudier, je me suis demandé quelles étaient les vrais capacités
+Mais avant d'avoir commencÃ© Ã  Ã©tudier, je me suis demandÃ© quelles Ã©taient les vrais capacitÃ©s
 
 116
 00:09:37,010 --> 00:09:44,055
@@ -468,79 +468,79 @@ C'est un peu comme l'anglais: la plupart de la population mondiale comprend ces 
 
 118
 00:09:52,024 --> 00:09:57,072
-si vous avez déjà désassemblé quelque chose, vous êtes habitués à ces instructions
+si vous avez dÃ©jÃ  dÃ©sassemblÃ© quelque chose, vous Ãªtes habituÃ©s Ã  ces instructions
 
 119
 00:09:57,072 --> 00:10:04,032
-tous les compilateurs les utilisent. elles sont tellement répandues que si elles sont absentes,
+tous les compilateurs les utilisent. elles sont tellement rÃ©pandues que si elles sont absentes,
 
 120
 00:10:04,032 --> 00:10:08,068
-on se sent pris au dépourvu.
+on se sent pris au dÃ©pourvu.
 
 121
 00:10:08,068 --> 00:10:19,074
-mais les processeurs Intels datent des années 70. Donc,
+mais les processeurs Intels datent des annÃ©es 70. Donc,
 
 122
 00:10:19,074 --> 00:10:27,072
-comme l'anglais de Shakespeare, vous voyez que c'est de l'anglais... mais, ça veut dire quoi en fait ?
+comme l'anglais de Shakespeare, vous voyez que c'est de l'anglais... mais, Ã§a veut dire quoi en fait ?
 
 123
 00:10:27,072 --> 00:10:30,051
-d'ailleurs, j'ai déjà oublié
+d'ailleurs, j'ai dÃ©jÃ  oubliÃ©
 
 124
 00:10:30,051 --> 00:10:36,032
-ces instructions sont toutes gérées par tous nos processeurs, pourtant, on n'a plus l'habitude de les lire
+ces instructions sont toutes gÃ©rÃ©es par tous nos processeurs, pourtant, on n'a plus l'habitude de les lire
 
 125
 00:10:36,032 --> 00:10:41,098
-c'est plus que génant
+c'est plus que gÃ©nant
 
 126
 00:10:41,098 --> 00:10:46,084
-En fait, j'ai écrit un example qui n'utilisent que ces vieilles instructions, qui font vraiment quelque chose
+En fait, j'ai Ã©crit un example qui n'utilisent que ces vieilles instructions, qui font vraiment quelque chose
 
 127
 00:10:46,084 --> 00:10:53,015
-donc si vous vous sentez ici comme chez vous, je voudrais vous demander 'quel âge avez-vous ?'
+donc si vous vous sentez ici comme chez vous, je voudrais vous demander 'quel Ã¢ge avez-vous ?'
 
 128
 00:10:53,015 --> 00:10:59,072
-parce que même moi, j'ai l'habitude de PUSH/JUMP/CALLs, mais ça, euhh...
+parce que mÃªme moi, j'ai l'habitude de PUSH/JUMP/CALLs, mais Ã§a, euhh...
 
 129
 00:10:59,072 --> 00:11:05,084
-pourtant, ça marche même sur un i7, et c'est utilisable par les virus,
+pourtant, Ã§a marche mÃªme sur un i7, et c'est utilisable par les virus,
 
 130
 00:11:05,084 --> 00:11:13,098
-les packeurs, etc... pourtant, la plupart est complètement inutilisée de nos jours, bien que parfaitement
+les packeurs, etc... pourtant, la plupart est complÃ¨tement inutilisÃ©e de nos jours, bien que parfaitement
 
 131
 00:11:13,098 --> 00:11:15,097
-gérées par nos processeurs modernes.
+gÃ©rÃ©es par nos processeurs modernes.
 
 132
 00:11:15,097 --> 00:11:21,044
-Et, tel l'anglais, c'est une langue qui évolue, et les générations précedentes
+Et, tel l'anglais, c'est une langue qui Ã©volue, et les gÃ©nÃ©rations prÃ©cedentes
 
 133
 00:11:21,044 --> 00:11:27,072
-n'ont pas l'habitude des derniers mots à la mode.
+n'ont pas l'habitude des derniers mots Ã  la mode.
 
 134
 00:11:27,072 --> 00:11:35,020
-Ces instructions sont parfois présentes sur les processeurs les plus récent. en une seule instruction, on fait
+Ces instructions sont parfois prÃ©sentes sur les processeurs les plus rÃ©cent. en une seule instruction, on fait
 
 135
 00:11:35,020 --> 00:11:41,036
-un CRC32, on décrypte l'AES, on compare des chaînes, ou d'autres opérations complexes.
+un CRC32, on dÃ©crypte l'AES, on compare des chaÃ®nes, ou d'autres opÃ©rations complexes.
 
 136
 00:11:41,036 --> 00:11:47,067
-Donc, c'est possible sur un processeur moderne. pas tous, bien sûr.
+Donc, c'est possible sur un processeur moderne. pas tous, bien sÃ»r.
 
 137
 00:11:47,067 --> 00:11:54,063
@@ -548,23 +548,23 @@ une que j'aime bien est MOVBE -- move big endian -- parce que c'est le vilain pe
 
 138
 00:11:54,063 --> 00:12:01,087
-uniquement implémentée sur les processeurs Atom, donc comme ce netbook, qui la gère...
+uniquement implÃ©mentÃ©e sur les processeurs Atom, donc comme ce netbook, qui la gÃ¨re...
 
 139
 00:12:01,087 --> 00:12:09,038
-alors qu'un i7 64-bits ne l'a pas, même si lui aura CRC32, peut-être AES, etc...
+alors qu'un i7 64-bits ne l'a pas, mÃªme si lui aura CRC32, peut-Ãªtre AES, etc...
 
 140
 00:12:09,038 --> 00:12:12,054
-donc, tant pis pour la retro-compatibilité
+donc, tant pis pour la retro-compatibilitÃ©
 
 141
 00:12:12,054 --> 00:12:20,029
-à ma connaissance, il n'y existe aucun processeur qui gère à la fois CRC32 et MOVBE.
+Ã  ma connaissance, il n'y existe aucun processeur qui gÃ¨re Ã  la fois CRC32 et MOVBE.
 
 142
 00:12:20,029 --> 00:12:24,084
-De plus, MOVBE est un peu inutile car il fait la même chose que MOV et BSWAP réunit...
+De plus, MOVBE est un peu inutile car il fait la mÃªme chose que MOV et BSWAP rÃ©unit...
 
 143
 00:12:24,084 --> 00:12:32,004
@@ -576,7 +576,7 @@ Pourquoi ? quelqu'un sait?
 
 145
 00:12:35,025 --> 00:12:37,085
-[Auditeur:] "cette instruction est documentée ?"
+[Auditeur:] "cette instruction est documentÃ©e ?"
 
 146
 00:12:37,085 --> 00:12:38,078
@@ -584,11 +584,11 @@ oui
 
 147
 00:12:38,078 --> 00:12:42,086
-totallement documentée officiellement
+totallement documentÃ©e officiellement
 
 148
 00:12:42,086 --> 00:12:46,082
-[Auditeur:] "Mais, c'est un drapeur du processeur juste pour cette instruction, ou implicitement lié au
+[Auditeur:] "Mais, c'est un drapeur du processeur juste pour cette instruction, ou implicitement liÃ© au
 
 149
 00:12:46,082 --> 00:12:51,036
@@ -596,39 +596,39 @@ processeurs Atom ?
 
 150
 00:12:51,036 --> 00:12:58,039
-mmm, je ne sais pas. je verifie la valeur par CPUID, mais j'ai oublié la définition exacte.
+mmm, je ne sais pas. je verifie la valeur par CPUID, mais j'ai oubliÃ© la dÃ©finition exacte.
 
 151
 00:12:58,039 --> 00:13:07,055
-il y a tant d'informations données par CPUID que j'ai vite oublié.
+il y a tant d'informations donnÃ©es par CPUID que j'ai vite oubliÃ©.
 
 152
 00:13:07,055 --> 00:13:13,061
-Autre chose, spécifique à Windows, car je m'intéresse aux virus...
+Autre chose, spÃ©cifique Ã  Windows, car je m'intÃ©resse aux virus...
 
 153
 00:13:13,061 --> 00:13:22,052
-avant d'exécuter quoi que ce soit, je me demandais quelle était la valeur initiale de chaque registre
+avant d'exÃ©cuter quoi que ce soit, je me demandais quelle Ã©tait la valeur initiale de chaque registre
 
 154
 00:13:22,052 --> 00:13:28,072
-quand le programme démarre.
+quand le programme dÃ©marre.
 
 155
 00:13:28,072 --> 00:13:33,063
-et ça vous donne en fait de l'information fiable, qu'on retrouve utilisée par les virus
+et Ã§a vous donne en fait de l'information fiable, qu'on retrouve utilisÃ©e par les virus
 
 156
 00:13:33,063 --> 00:13:40,054
-donc par example, au demarrage, EAX vous dit si vous êtes sur un OS ancien (XP ou avant)
+donc par example, au demarrage, EAX vous dit si vous Ãªtes sur un OS ancien (XP ou avant)
 
 157
 00:13:40,054 --> 00:13:42,084
-ou plus récent, Vista ou 7.
+ou plus rÃ©cent, Vista ou 7.
 
 158
 00:13:42,084 --> 00:13:50,079
-de même, ce n'est pas utilisé par les virus à mon souvenir, mais si GS est nul, on est dans un OS 32 bits
+de mÃªme, ce n'est pas utilisÃ© par les virus Ã  mon souvenir, mais si GS est nul, on est dans un OS 32 bits
 
 159
 00:13:50,079 --> 00:13:54,029
@@ -636,19 +636,19 @@ sinon, sur un 64b.
 
 160
 00:13:54,029 --> 00:13:56,094
-J'utilise ça régulièrement, on le verra plus tard.
+J'utilise Ã§a rÃ©guliÃ¨rement, on le verra plus tard.
 
 161
 00:13:56,094 --> 00:14:04,032
-De même, la relation entre les registres n'est pas forcément évidente. il y en a beaucoup,
+De mÃªme, la relation entre les registres n'est pas forcÃ©ment Ã©vidente. il y en a beaucoup,
 
 162
 00:14:04,032 --> 00:14:10,077
-et j'ai été surpris qu'une instruction à virgule flottante (FPU) change le status (FST), les registres
+et j'ai Ã©tÃ© surpris qu'une instruction Ã  virgule flottante (FPU) change le status (FST), les registres
 
 163
 00:14:10,077 --> 00:14:18,051
-eux-mêmes (STx), les registres MMx aussi, mais en plus, toutes les documentations en ligne associent
+eux-mÃªmes (STx), les registres MMx aussi, mais en plus, toutes les documentations en ligne associent
 
 164
 00:14:18,051 --> 00:14:24,094
@@ -660,11 +660,11 @@ non pas MM0, mais MM7, dans l'autre sens.
 
 166
 00:14:31,039 --> 00:14:36,075
-donc après une instruction comme "load PI" [FLDPI] on regarde la valeur de MM7,
+donc aprÃ¨s une instruction comme "load PI" [FLDPI] on regarde la valeur de MM7,
 
 167
 00:14:36,075 --> 00:14:39,043
-ça peut-être utilisé comme astuce simple.
+Ã§a peut-Ãªtre utilisÃ© comme astuce simple.
 
 168
 00:14:39,043 --> 00:14:45,093
@@ -672,79 +672,79 @@ alors que toutes les documentations, wikipedia ou autre, se trompent.
 
 169
 00:14:45,093 --> 00:14:53,032
-quelque chose d'autre qui peut être utilisé comme anti-débogueur sous XP: le FPU modifie aussi CR0
+quelque chose d'autre qui peut Ãªtre utilisÃ© comme anti-dÃ©bogueur sous XP: le FPU modifie aussi CR0
 
 170
 00:14:53,032 --> 00:14:59,077
-donc ça fait une astuce anti-émulateur plutôt inattendue rien qu'avec le FPU.
+donc Ã§a fait une astuce anti-Ã©mulateur plutÃ´t inattendue rien qu'avec le FPU.
 
 171
 00:14:59,077 --> 00:15:09,001
-'store machine status word' [SMSW] est une instruction qui date du 286, quand le mode protégé était
+'store machine status word' [SMSW] est une instruction qui date du 286, quand le mode protÃ©gÃ© Ã©tait
 
 172
 00:15:09,001 --> 00:15:18,048
-récent et incomplet, qui permet de lire les valeurs de CR0, même depuis le mode utilisateur.
+rÃ©cent et incomplet, qui permet de lire les valeurs de CR0, mÃªme depuis le mode utilisateur.
 
 173
 00:15:18,048 --> 00:15:26,096
-alors que 'MOV CR0' est privilégiée
+alors que 'MOV CR0' est privilÃ©giÃ©e
 
 174
 00:15:26,096 --> 00:15:34,012
-pour une raison inconnue, le mot de poid fort est officiellement non défini.
+pour une raison inconnue, le mot de poid fort est officiellement non dÃ©fini.
 
 175
 00:15:34,012 --> 00:15:40,044
-donc à priori, on ne sait pas ce qu'il va contenir,
+donc Ã  priori, on ne sait pas ce qu'il va contenir,
 
 176
 00:15:40,044 --> 00:15:45,072
-mais en fait il s'agit bien du même mot de poid fort que CR0.
+mais en fait il s'agit bien du mÃªme mot de poid fort que CR0.
 
 177
 00:15:45,072 --> 00:15:52,091
-et, sous XP, après une instruction FPU, la valeur de CR0 est modifiée, mais reprend sa valeur initiale
+et, sous XP, aprÃ¨s une instruction FPU, la valeur de CR0 est modifiÃ©e, mais reprend sa valeur initiale
 
 178
 00:15:52,091 --> 00:16:00,033
-toute seule par la suite. donc juste avec SMSW, verifier le résultat, puis faire une opération FPU,
+toute seule par la suite. donc juste avec SMSW, verifier le rÃ©sultat, puis faire une opÃ©ration FPU,
 
 179
 00:16:00,033 --> 00:16:05,091
-alors SMSW donnera un résultat différent, mais ensuite, le résultat redeviendra comme à l'origine.
+alors SMSW donnera un rÃ©sultat diffÃ©rent, mais ensuite, le rÃ©sultat redeviendra comme Ã  l'origine.
 
 180
 00:16:05,091 --> 00:16:11,001
-un moyen élégant de faire des boucles en apparence infinies. une astuce complexe anti-émulateurs.
+un moyen Ã©lÃ©gant de faire des boucles en apparence infinies. une astuce complexe anti-Ã©mulateurs.
 
 181
 00:16:11,001 --> 00:16:18,087
-Une astuce similaire sous Windows 32b, où GS n'est pas stocké dans le CONTEXT, donc quand l'OS passe d'un
+Une astuce similaire sous Windows 32b, oÃ¹ GS n'est pas stockÃ© dans le CONTEXT, donc quand l'OS passe d'un
 
 182
 00:16:18,087 --> 00:16:25,068
-fil d'exécution à l'autre (thread-switch), GS est remis à zero. Donc, si on attend, quoi qu'on fasse,
+fil d'exÃ©cution Ã  l'autre (thread-switch), GS est remis Ã  zero. Donc, si on attend, quoi qu'on fasse,
 
 183
 00:16:25,068 --> 00:16:33,035
-GS change comme par enchantement. Mais si vous faites du pas à pas, c'est lent, donc l'OS change de fil,
+GS change comme par enchantement. Mais si vous faites du pas Ã  pas, c'est lent, donc l'OS change de fil,
 
 184
 00:16:33,035 --> 00:16:40,051
-et GS est perdu dès l'instruction suivante.
+et GS est perdu dÃ¨s l'instruction suivante.
 
 185
 00:16:40,051 --> 00:16:45,067
-De même, si on attend que GS devienne nul, on finira par sortir de la boucle.
+De mÃªme, si on attend que GS devienne nul, on finira par sortir de la boucle.
 
 186
 00:16:45,067 --> 00:16:53,012
-En tout cas, la première fois, ça défiait mon entendement... sans autres process ou autre, je ne comprenais
+En tout cas, la premiÃ¨re fois, Ã§a dÃ©fiait mon entendement... sans autres process ou autre, je ne comprenais
 
 187
 00:16:53,012 --> 00:16:58,072
-pas d'où ça venait. Au moins, mon example commence dès le début avec ça
+pas d'oÃ¹ Ã§a venait. Au moins, mon example commence dÃ¨s le dÃ©but avec Ã§a
 
 188
 00:16:58,072 --> 00:17:02,091
@@ -752,23 +752,23 @@ c'est plus pratique
 
 189
 00:17:02,091 --> 00:17:11,000
-une autre particularité, c'est que ça met du temps pour être remis à zéro. en faisant 2 boucles d'attentes,
+une autre particularitÃ©, c'est que Ã§a met du temps pour Ãªtre remis Ã  zÃ©ro. en faisant 2 boucles d'attentes,
 
 190
 00:17:11,000 --> 00:17:17,051
-et mesurant le temps entre les 2 (changement de fil), ça prend somme toute assez longtemps, comparé à une
+et mesurant le temps entre les 2 (changement de fil), Ã§a prend somme toute assez longtemps, comparÃ© Ã  une
 
 191
 00:17:17,051 --> 00:17:25,054
-exécution standard. ça fait un anti-émulation solide.
+exÃ©cution standard. Ã§a fait un anti-Ã©mulation solide.
 
 192
 00:17:25,054 --> 00:17:33,020
-Je pensais tout naturellement que NOP était parfait! NOP, c'est NOP, ça ne fait rien, donc, aucun problème !
+Je pensais tout naturellement que NOP Ã©tait parfait! NOP, c'est NOP, Ã§a ne fait rien, donc, aucun problÃ¨me !
 
 193
 00:17:33,020 --> 00:17:44,013
-Mais à l'origine, NOP est 'échange ?AX avec lui-même' (xchg ?ax, ?ax) mais c'est le cas pour le NOP encodé 0x90
+Mais Ã  l'origine, NOP est 'Ã©change ?AX avec lui-mÃªme' (xchg ?ax, ?ax) mais c'est le cas pour le NOP encodÃ© 0x90
 
 194
 00:17:44,013 --> 00:17:51,020
@@ -776,11 +776,11 @@ mais il y a un autre encodage de XCHG EAX, EAX, qui ne fait rien non plus en 32b
 
 195
 00:17:51,020 --> 00:17:54,064
-mais, à l'instar de toutes les instructions sur 32b en mode 64b
+mais, Ã  l'instar de toutes les instructions sur 32b en mode 64b
 
 196
 00:17:54,064 --> 00:17:58,075
-cette instruction remet à zéro le double mot de poid fort
+cette instruction remet Ã  zÃ©ro le double mot de poid fort
 
 197
 00:17:58,075 --> 00:18:02,075
@@ -792,11 +792,11 @@ bien qu'initialement il semblerait ne rien faire, de sa relation avec NOP
 
 199
 00:18:05,075 --> 00:18:10,020
-mais heureusement, le NOP 0x90, lui, ne fait toujours rien, un vrai fainéant ;)
+mais heureusement, le NOP 0x90, lui, ne fait toujours rien, un vrai fainÃ©ant ;)
 
 200
 00:18:10,020 --> 00:18:14,017
-Celui-ci est maintenant bien répandu,
+Celui-ci est maintenant bien rÃ©pandu,
 
 201
 00:18:14,017 --> 00:18:18,049
@@ -804,15 +804,15 @@ le HINT NOP est un NOP sur plusieurs octets
 
 202
 00:18:18,049 --> 00:18:23,041
-qui indique au processeur ce qui va être exécuté ou accédé ensuite
+qui indique au processeur ce qui va Ãªtre exÃ©cutÃ© ou accÃ©dÃ© ensuite
 
 203
 00:18:23,041 --> 00:18:24,051
-quelque soit l'adresse dans un HINT NOP en mémoire,
+quelque soit l'adresse dans un HINT NOP en mÃ©moire,
 
 204
 00:18:24,051 --> 00:18:26,026
-aucune exception n'est déclenchée
+aucune exception n'est dÃ©clenchÃ©e
 
 205
 00:18:26,026 --> 00:18:32,031
@@ -820,7 +820,7 @@ mais ...
 
 206
 00:18:32,031 --> 00:18:37,024
-autre chose, il est partiellement non documenté par Intel
+autre chose, il est partiellement non documentÃ© par Intel
 
 207
 00:18:37,024 --> 00:18:44,055
@@ -828,23 +828,23 @@ autre chose, il est partiellement non documenté par Intel
 
 208
 00:18:44,055 --> 00:18:48,040
-en outre, comme c'est une instruction sur plusieurs octets, avec des opérandes immédiates
+en outre, comme c'est une instruction sur plusieurs octets, avec des opÃ©randes immÃ©diates
 
 209
 00:18:48,040 --> 00:18:51,076
-si on met ces octets à la fin d'une page mémoire
+si on met ces octets Ã  la fin d'une page mÃ©moire
 
 210
 00:18:51,076 --> 00:18:55,001
-alors le processeur va vouloir lire l'encodage des opérandes,
+alors le processeur va vouloir lire l'encodage des opÃ©randes,
 
 211
 00:18:55,001 --> 00:18:56,064
-et ça va déclencher une exception
+et Ã§a va dÃ©clencher une exception
 
 212
 00:18:56,064 --> 00:19:01,040
-donc c'est un NOP qui peut déclencher une exception en bas de page
+donc c'est un NOP qui peut dÃ©clencher une exception en bas de page
 
 213
 00:19:01,040 --> 00:19:04,059
@@ -852,31 +852,31 @@ Merci, Intel
 
 214
 00:19:04,059 --> 00:19:07,008
-MOV également, je croyais...
+MOV Ã©galement, je croyais...
 
 215
 00:19:07,008 --> 00:19:11,040
-qu'il devrait être parfaitement logique
+qu'il devrait Ãªtre parfaitement logique
 
 216
 00:19:11,040 --> 00:19:16,009
-mais, même s'il est documenté, il y a des cas compliqués,
+mais, mÃªme s'il est documentÃ©, il y a des cas compliquÃ©s,
 
 217
 00:19:16,009 --> 00:19:19,076
-qui n'étaient pas parfaitement gérés dans tous les assembleurs que j'ai essayé
+qui n'Ã©taient pas parfaitement gÃ©rÃ©s dans tous les assembleurs que j'ai essayÃ©
 
 218
 00:19:19,076 --> 00:19:22,092
-sauf peut-être Xed
+sauf peut-Ãªtre Xed
 
 219
 00:19:22,092 --> 00:19:29,055
-on ne peut pas faire un MOV de ou vers CR0 en mémoire,
+on ne peut pas faire un MOV de ou vers CR0 en mÃ©moire,
 
 220
 00:19:29,055 --> 00:19:33,000
-la documentation dit que le Mod/RM est ignoré
+la documentation dit que le Mod/RM est ignorÃ©
 
 221
 00:19:33,000 --> 00:19:34,016
@@ -884,27 +884,27 @@ ce qui ne veut pas dire que l'instruction est invalide
 
 222
 00:19:34,016 --> 00:19:35,009
-simplement, considéré comme n'utilisant pas la mémoire
+simplement, considÃ©rÃ© comme n'utilisant pas la mÃ©moire
 
 223
 00:19:35,009 --> 00:19:36,079
-sinon, ça ferait un plantage
+sinon, Ã§a ferait un plantage
 
 224
 00:19:36,079 --> 00:19:39,051
-donc, voici l'équivalent
+donc, voici l'Ã©quivalent
 
 225
 00:19:39,051 --> 00:19:42,033
-ce qui mettait en tord tous les désassembleurs
+ce qui mettait en tord tous les dÃ©sassembleurs
 
 226
 00:19:42,033 --> 00:19:44,042
-jusque récemment
+jusque rÃ©cemment
 
 227
 00:19:44,042 --> 00:19:50,009
-MOVSXD est une instruction 64b, qui étend un registre
+MOVSXD est une instruction 64b, qui Ã©tend un registre
 
 228
 00:19:50,009 --> 00:19:55,040
@@ -912,7 +912,7 @@ donc, d'un registre vers un plus gros
 
 229
 00:19:55,040 --> 00:19:58,026
-mais sans préfixe REX - ce qui n'est pas encouragé,
+mais sans prÃ©fixe REX - ce qui n'est pas encouragÃ©,
 
 230
 00:19:58,026 --> 00:20:02,002
@@ -924,11 +924,11 @@ et dans l'autre sens,
 
 232
 00:20:04,035 --> 00:20:09,092
-MOV d'un selecteur à un registre 32b marche sans problème,
+MOV d'un selecteur Ã  un registre 32b marche sans problÃ¨me,
 
 233
 00:20:09,092 --> 00:20:13,024
-alors que beaucoup de désassembleurs afficheraient MOV AX, CS, ce qui semble logique
+alors que beaucoup de dÃ©sassembleurs afficheraient MOV AX, CS, ce qui semble logique
 
 234
 00:20:13,024 --> 00:20:16,009
@@ -936,7 +936,7 @@ niveau taille
 
 235
 00:20:16,009 --> 00:20:19,075
-mais en fait le mot de poid fort du registre cible est 'non défini'
+mais en fait le mot de poid fort du registre cible est 'non dÃ©fini'
 
 236
 00:20:19,075 --> 00:20:21,081
@@ -944,11 +944,11 @@ mais ici, pas de surprise amusante,
 
 237
 00:20:21,081 --> 00:20:25,024
-ce sont juste des zéros
+ce sont juste des zÃ©ros
 
 238
 00:20:25,024 --> 00:20:30,040
-donc c'est équivalent à MOV EAX, CS
+donc c'est Ã©quivalent Ã  MOV EAX, CS
 
 239
 00:20:30,040 --> 00:20:32,058
@@ -956,11 +956,11 @@ BSWAP est un de mes favoris
 
 240
 00:20:32,058 --> 00:20:35,016
-parce que je le compare à une administration:
+parce que je le compare Ã  une administration:
 
 241
 00:20:35,016 --> 00:20:38,025
-il est supposé passer d'un endianisme [endianness] à l' autre
+il est supposÃ© passer d'un endianisme [endianness] Ã  l' autre
 
 242
 00:20:38,025 --> 00:20:42,083
@@ -976,7 +976,7 @@ donc, c'est juste en 64b que tout se passe
 
 245
 00:20:50,041 --> 00:20:51,096
-comme prévu
+comme prÃ©vu
 
 246
 00:20:51,096 --> 00:20:55,096
@@ -984,19 +984,19 @@ en 32b, comme toutes les autres instruction 32b
 
 247
 00:20:55,096 --> 00:20:59,033
-le double mot de poid fort est mis à zéro...
+le double mot de poid fort est mis Ã  zÃ©ro...
 
 248
 00:20:59,033 --> 00:21:02,072
-et sur un mot, il est non défini officiellement,
+et sur un mot, il est non dÃ©fini officiellement,
 
 249
 00:21:02,072 --> 00:21:04,020
-mais il est pourtant utilisé couramment dans les virus et les packeurs
+mais il est pourtant utilisÃ© couramment dans les virus et les packeurs
 
 250
 00:21:04,072 --> 00:21:07,008
-car il remet simplement à zéro le registre,
+car il remet simplement Ã  zÃ©ro le registre,
 
 251
 00:21:07,008 --> 00:21:09,055
@@ -1004,7 +1004,7 @@ comme un simple XOR AX, AX
 
 252
 00:21:09,055 --> 00:21:14,051
-donc, devant un résultat si inexplicable, je comprends
+donc, devant un rÃ©sultat si inexplicable, je comprends
 
 253
 00:21:14,051 --> 00:21:18,072
@@ -1012,15 +1012,15 @@ qu'Intel ne veuille pas en parler
 
 254
 00:21:18,072 --> 00:21:20,092
-ça serait sûrement génant de devoir expliquer
+Ã§a serait sÃ»rement gÃ©nant de devoir expliquer
 
 255
 00:21:20,092 --> 00:21:24,072
-ce résultat plutôt comique.
+ce rÃ©sultat plutÃ´t comique.
 
 256
 00:21:24,072 --> 00:21:33,042
-BSWAP AX est aussi mal géré par WinDbg et les autres
+BSWAP AX est aussi mal gÃ©rÃ© par WinDbg et les autres
 
 257
 00:21:33,042 --> 00:21:35,068
@@ -1028,7 +1028,7 @@ on lira BSWAP EAX
 
 258
 00:21:35,068 --> 00:21:42,007
-alors que le registre est remis à zéro... génant
+alors que le registre est remis Ã  zÃ©ro... gÃ©nant
 
 259
 00:21:42,007 --> 00:21:47,040
@@ -1036,19 +1036,19 @@ tout le monde comprend ce code?
 
 260
 00:21:47,040 --> 00:21:53,001
-quelqu'un voit un piège possible?
+quelqu'un voit un piÃ¨ge possible?
 
 261
 00:21:53,001 --> 00:21:56,064
-l'adresse de <next> est empilée
+l'adresse de <next> est empilÃ©e
 
 262
 00:21:56,064 --> 00:22:00,040
-puis dépilée par RETN
+puis dÃ©pilÃ©e par RETN
 
 263
 00:22:00,040 --> 00:22:05,068
-donc, on saute vers une adresse immédiates
+donc, on saute vers une adresse immÃ©diates
 
 264
 00:22:05,068 --> 00:22:11,040
@@ -1056,19 +1056,19 @@ l'ordre d'execution ?
 
 265
 00:22:11,040 --> 00:22:18,000
-oui, l'exécution démarre ici
+oui, l'exÃ©cution dÃ©marre ici
 
 266
 00:22:18,000 --> 00:22:20,096
-non, rien à voir ici
+non, rien Ã  voir ici
 
 267
 00:22:20,096 --> 00:22:26,008
-voilà OllyDbg 1 - c'est corrigé dans le 2
+voilÃ  OllyDbg 1 - c'est corrigÃ© dans le 2
 
 268
 00:22:26,008 --> 00:22:28,026
-Olly essaie même d'être sympa et de vous dire
+Olly essaie mÃªme d'Ãªtre sympa et de vous dire
 
 269
 00:22:28,026 --> 00:22:30,055
@@ -1076,15 +1076,15 @@ via un commentaire automatique,
 
 270
 00:22:30,055 --> 00:22:33,059
-que RET sera utilisé comme saut vers <next>
+que RET sera utilisÃ© comme saut vers <next>
 
 271
 00:22:33,059 --> 00:22:36,034
-et, voyez le résultat, plutôt différent
+et, voyez le rÃ©sultat, plutÃ´t diffÃ©rent
 
 272
 00:22:36,034 --> 00:22:37,048
-donc, que c'est-il passé ?
+donc, que c'est-il passÃ© ?
 
 273
 00:22:37,048 --> 00:22:40,024
@@ -1104,23 +1104,23 @@ donc on ne saute pas vers 401008, mais 00001008
 
 277
 00:22:56,017 --> 00:22:58,072
-et dans mon exemple, la page nulle a été allouée
+et dans mon exemple, la page nulle a Ã©tÃ© allouÃ©e
 
 278
 00:22:58,072 --> 00:23:01,009
- et du code a été placé à 1008
+ et du code a Ã©tÃ© placÃ© Ã  1008
 
 279
 00:23:01,009 --> 00:23:06,002
-donc, ça ne retourne pas vers [<next>]
+donc, Ã§a ne retourne pas vers [<next>]
 
 280
 00:23:06,002 --> 00:23:10,085
-mais l'autre problème est que c'est aussi appelé un RETN
+mais l'autre problÃ¨me est que c'est aussi appelÃ© un RETN
 
 281
 00:23:10,085 --> 00:23:15,079
-bien que ce soit différent. les désassembleurs ont leur propre façon de l'afficher
+bien que ce soit diffÃ©rent. les dÃ©sassembleurs ont leur propre faÃ§on de l'afficher
 
 282
 00:23:15,079 --> 00:23:19,055
@@ -1128,7 +1128,7 @@ tel que 'small retn', 'ret.16', ou autre
 
 283
 00:23:19,055 --> 00:23:22,075
-mais officiellement, c'est la même instruction qu'un RETN standard.
+mais officiellement, c'est la mÃªme instruction qu'un RETN standard.
 
 284
 00:23:22,075 --> 00:23:28,066
@@ -1136,7 +1136,7 @@ donc, le dernier Hiew, et OllyDbg 1
 
 285
 00:23:28,066 --> 00:23:31,017
-peut-être pas le 2
+peut-Ãªtre pas le 2
 
 286
 00:23:31,017 --> 00:23:33,016
@@ -1144,15 +1144,15 @@ mais on peut se faire avoir
 
 287
 00:23:33,016 --> 00:23:41,024
-et le préfixe 66 a le même role avec CALLs, RETs, LOOPs, JMPs
+et le prÃ©fixe 66 a le mÃªme role avec CALLs, RETs, LOOPs, JMPs
 
 288
 00:23:41,024 --> 00:23:45,083
-toutes les instructions contrôlant le flux d'exécution
+toutes les instructions contrÃ´lant le flux d'exÃ©cution
 
 289
 00:23:45,083 --> 00:23:48,027
-je ne vais pas tout énumérer
+je ne vais pas tout Ã©numÃ©rer
 
 290
 00:23:48,027 --> 00:23:51,074
@@ -1160,11 +1160,11 @@ car sinon vous allez mourrir d'ennui
 
 291
 00:23:51,074 --> 00:23:55,041
-pour en savoir plus, j'ai créé une page sur Corkami [x86.corkami.com],
+pour en savoir plus, j'ai crÃ©Ã© une page sur Corkami [x86.corkami.com],
 
 292
 00:23:55,041 --> 00:24:00,075
-avec quelques graphiques et penses-bêtes
+avec quelques graphiques et penses-bÃªtes
 
 293
 00:24:00,075 --> 00:24:04,075
@@ -1172,15 +1172,15 @@ pour faciliter le boulot
 
 294
 00:24:04,075 --> 00:24:06,092
-bon, trop de théorie
+bon, trop de thÃ©orie
 
 295
 00:24:06,092 --> 00:24:11,088
-je n'aime pas lire sans avoir quelque chose à me mettre sous le débogueur,
+je n'aime pas lire sans avoir quelque chose Ã  me mettre sous le dÃ©bogueur,
 
 296
 00:24:11,088 --> 00:24:13,066
-donc j'ai créé CoST
+donc j'ai crÃ©Ã© CoST
 
 297
 00:24:13,066 --> 00:24:16,000
@@ -1192,11 +1192,11 @@ CoST est un unique binaire, sans option de ligne de commande
 
 299
 00:24:20,003 --> 00:24:25,050
-on l'exécute, il fait plein de tests
+on l'exÃ©cute, il fait plein de tests
 
 300
 00:24:25,050 --> 00:24:28,066
-le tout dans un PE compliqué
+le tout dans un PE compliquÃ©
 
 301
 00:24:28,066 --> 00:24:35,016
@@ -1208,7 +1208,7 @@ ou vos connaissances
 
 303
 00:24:36,044 --> 00:24:40,020
-mais, dans ce PE compliqué, il est casse-pied à déboguer
+mais, dans ce PE compliquÃ©, il est casse-pied Ã  dÃ©boguer
 
 304
 00:24:40,020 --> 00:24:42,073
@@ -1216,11 +1216,11 @@ donc j'ai fait aussi une version 'PE standard'
 
 305
 00:24:42,073 --> 00:24:47,042
-si on ne veut étudier que l'assembleur
+si on ne veut Ã©tudier que l'assembleur
 
 306
 00:24:47,042 --> 00:24:49,044
-sans difficultés
+sans difficultÃ©s
 
 307
 00:24:49,044 --> 00:24:57,088
@@ -1232,15 +1232,15 @@ les classiques, triviaux,
 
 309
 00:24:59,075 --> 00:25:03,096
-un peu plus compliqués, JMP to IP, IRET...
+un peu plus compliquÃ©s, JMP to IP, IRET...
 
 310
 00:25:03,096 --> 00:25:05,031
-les non documentés
+les non documentÃ©s
 
 311
 00:25:05,031 --> 00:25:10,041
-les spécifiques aux processuers, comme MOVBE, POPCNT, CRC32
+les spÃ©cifiques aux processuers, comme MOVBE, POPCNT, CRC32
 
 312
 00:25:10,041 --> 00:25:17,083
@@ -1248,11 +1248,11 @@ les detections d'OS et VM
 
 313
 00:25:17,083 --> 00:25:25,048
-comme le fameux 'red pill'... juste une instruction SLDT, on compare le résultat,
+comme le fameux 'red pill'... juste une instruction SLDT, on compare le rÃ©sultat,
 
 314
 00:25:25,048 --> 00:25:29,017
-et on baptise ça 'red pill'... sans commentaire...
+et on baptise Ã§a 'red pill'... sans commentaire...
 
 315
 00:25:29,017 --> 00:25:32,092
@@ -1268,27 +1268,27 @@ quelle exception vient de se produire,
 
 318
 00:25:38,064 --> 00:25:44,079
-ce qui permettrait de différencier un SE réel d'un émulateur.
+ce qui permettrait de diffÃ©rencier un SE rÃ©el d'un Ã©mulateur.
 
 319
 00:25:44,079 --> 00:25:50,030
-CoST est écrit en assembleur, donc rien de superflu
+CoST est Ã©crit en assembleur, donc rien de superflu
 
 320
 00:25:50,030 --> 00:25:52,075
-pas compilé, ni généré
+pas compilÃ©, ni gÃ©nÃ©rÃ©
 
 321
 00:25:52,075 --> 00:25:56,075
-mais pour le documenter un peu plus, j'ai ajouté des exports internes
+mais pour le documenter un peu plus, j'ai ajoutÃ© des exports internes
 
 322
 00:25:56,075 --> 00:26:00,000
-donc on peut aller facilement d'une section à l'autre
+donc on peut aller facilement d'une section Ã  l'autre
 
 323
 00:26:00,000 --> 00:26:05,088
-donc on se retrouvre facilement à la partie qui nous intéresse
+donc on se retrouvre facilement Ã  la partie qui nous intÃ©resse
 
 324
 00:26:05,088 --> 00:26:08,032
@@ -1296,23 +1296,23 @@ via les exports,
 
 325
 00:26:08,032 --> 00:26:13,079
-et je voulais pouvoir afficher un message de manière pratique
+et je voulais pouvoir afficher un message de maniÃ¨re pratique
 
 326
 00:26:13,079 --> 00:26:18,058
-sans que ça allonge trop le listing
+sans que Ã§a allonge trop le listing
 
 327
 00:26:18,058 --> 00:26:21,092
-je veux dire, devoir faire défiler l'écran parce qu'il est couvert d'appel à printf
+je veux dire, devoir faire dÃ©filer l'Ã©cran parce qu'il est couvert d'appel Ã  printf
 
 328
 00:26:21,092 --> 00:26:25,073
-donc j'au utilisé un Vectored Exception Handler, et une instruction-marqueur
+donc j'au utilisÃ© un Vectored Exception Handler, et une instruction-marqueur
 
 329
 00:26:25,073 --> 00:26:28,052
-donc plein de commentaires sont affichés,
+donc plein de commentaires sont affichÃ©s,
 
 330
 00:26:28,052 --> 00:26:30,035
@@ -1320,7 +1320,7 @@ directement dans le code
 
 331
 00:26:30,035 --> 00:26:34,088
-donc ça fait un code binaire documenté sans fichier de symboles de déboguages
+donc Ã§a fait un code binaire documentÃ© sans fichier de symboles de dÃ©boguages
 
 332
 00:26:34,088 --> 00:26:38,092
@@ -1328,19 +1328,19 @@ et vous avez vu, il n'y a pas beaucoup d'affichage
 
 333
 00:26:38,092 --> 00:26:41,092
-mais en fait, il y a beaucoup plus d'affichage de déboguage
+mais en fait, il y a beaucoup plus d'affichage de dÃ©boguage
 
 334
 00:26:41,092 --> 00:26:46,088
-une centaine au moins, qui indiquent même ce qui va se produire, etc
+une centaine au moins, qui indiquent mÃªme ce qui va se produire, etc
 
 335
 00:26:46,088 --> 00:26:49,070
-donc on est pas pris au dépourvu
+donc on est pas pris au dÃ©pourvu
 
 336
 00:26:49,070 --> 00:26:57,079
-on est guidé lors de l'analyse
+on est guidÃ© lors de l'analyse
 
 337
 00:26:57,079 --> 00:27:00,028
@@ -1348,7 +1348,7 @@ quelqu'un comprend de quoi il s'agit?
 
 338
 00:27:00,028 --> 00:27:02,083
-c'est un de mes préférés
+c'est un de mes prÃ©fÃ©rÃ©s
 
 339
 00:27:02,083 --> 00:27:06,011
@@ -1356,7 +1356,7 @@ on ne peut pas voir les opcodes
 
 340
 00:27:06,011 --> 00:27:17,070
-ah, il n'y a pas d'astuce à ce niveau là cette fois-ci ;)
+ah, il n'y a pas d'astuce Ã  ce niveau lÃ  cette fois-ci ;)
 
 341
 00:27:17,070 --> 00:27:19,070
@@ -1368,7 +1368,7 @@ on saute ici
 
 343
 00:27:21,003 --> 00:27:26,020
-et avec le RETF, j'ai empilé l'adresse de 'push_eip'
+et avec le RETF, j'ai empilÃ© l'adresse de 'push_eip'
 
 344
 00:27:26,020 --> 00:27:28,052
@@ -1380,11 +1380,11 @@ donc on va revenir de loin ici
 
 346
 00:27:31,000 --> 00:27:35,062
-donc on retourne à cette adresse avec un selecteur 33
+donc on retourne Ã  cette adresse avec un selecteur 33
 
 347
 00:27:35,062 --> 00:27:39,020
-qui est reservé au mode 64b, même pour un programme en 32b
+qui est reservÃ© au mode 64b, mÃªme pour un programme en 32b
 
 348
 00:27:39,020 --> 00:27:42,078
@@ -1400,11 +1400,11 @@ qu'on peut atteindre depuis un programme 32b
 
 351
 00:27:49,083 --> 00:27:56,031
-donc le code sera d'abord executé en mode 32b, avec le sélecteur standard,
+donc le code sera d'abord executÃ© en mode 32b, avec le sÃ©lecteur standard,
 
 352
 00:27:56,031 --> 00:28:01,096
-puis à nouveau, avec le sélecteur 33
+puis Ã  nouveau, avec le sÃ©lecteur 33
 
 353
 00:28:01,096 --> 00:28:04,037
@@ -1412,59 +1412,59 @@ en mode 64b
 
 354
 00:28:04,037 --> 00:28:08,036
-donc on a la même adresse, les mêmes opcodes,
+donc on a la mÃªme adresse, les mÃªmes opcodes,
 
 355
 00:28:08,036 --> 00:28:10,016
-mais le désassemblage sera différent
+mais le dÃ©sassemblage sera diffÃ©rent
 
 356
 00:28:10,016 --> 00:28:14,024
-et j'ai choisi des opcodes qui génèrent des instructions
+et j'ai choisi des opcodes qui gÃ©nÃ¨rent des instructions
 
 357
 00:28:14,024 --> 00:28:18,020
-spécifique à chaque mode
+spÃ©cifique Ã  chaque mode
 
 358
 00:28:18,020 --> 00:28:22,092
-donc, c'est déjà une belle s*loperie à désassembler,
+donc, c'est dÃ©jÃ  une belle s*loperie Ã  dÃ©sassembler,
 
 359
 00:28:22,092 --> 00:28:27,092
-car avec la même EIP, si on ne fait pas attention au sélecteur,
+car avec la mÃªme EIP, si on ne fait pas attention au sÃ©lecteur,
 
 360
 00:28:27,092 --> 00:28:29,011
-on est bloqué
+on est bloquÃ©
 
 361
 00:28:29,011 --> 00:28:46,068
-On peut déboguer un tel code - voir ma présentation à BerlinSides, transparent de démonstration 58
+On peut dÃ©boguer un tel code - voir ma prÃ©sentation Ã  BerlinSides, transparent de dÃ©monstration 58
 
 362
 00:28:46,068 --> 00:28:50,063
-Si on l'execute en passant par dessus, on retourne au sélecteur d'origine
+Si on l'execute en passant par dessus, on retourne au sÃ©lecteur d'origine
 
 363
 00:28:50,063 --> 00:28:52,055
-qui était sauvé par le PUSH CS
+qui Ã©tait sauvÃ© par le PUSH CS
 
 364
 00:28:52,055 --> 00:28:56,029
-donc on retourne à <end> avec le sélecteur initial
+donc on retourne Ã  <end> avec le sÃ©lecteur initial
 
 365
 00:28:56,029 --> 00:28:58,071
-l'exécution est rapide,
+l'exÃ©cution est rapide,
 
 366
 00:28:58,071 --> 00:29:00,079
-mais difficile à déboguer (uniquement avec WinDbg+wow64exts)
+mais difficile Ã  dÃ©boguer (uniquement avec WinDbg+wow64exts)
 
 367
 00:29:00,079 --> 00:29:03,077
-ça rend inutile les désassembleurs, et la plupart des débogueurs
+Ã§a rend inutile les dÃ©sassembleurs, et la plupart des dÃ©bogueurs
 
 368
 00:29:03,077 --> 00:29:04,092
@@ -1472,23 +1472,23 @@ pourtant, c'est si simple.
 
 369
 00:29:04,092 --> 00:29:07,035
-Voilà ce que donne CoST
+VoilÃ  ce que donne CoST
 
 370
 00:29:07,035 --> 00:29:10,069
-sous la dernière version de Hiew
+sous la derniÃ¨re version de Hiew
 
 371
 00:29:10,069 --> 00:29:13,031
-je pense que ce sera bientôt corrigé
+je pense que ce sera bientÃ´t corrigÃ©
 
 372
 00:29:13,031 --> 00:29:16,077
-c'est un HINT NOP non documenté par Intel
+c'est un HINT NOP non documentÃ© par Intel
 
 373
 00:29:16,077 --> 00:29:21,003
-et oublié par la plupart des désassembleurs
+et oubliÃ© par la plupart des dÃ©sassembleurs
 
 374
 00:29:21,003 --> 00:29:24,053
@@ -1500,15 +1500,15 @@ vous donnent des points d'interrogations
 
 376
 00:29:29,077 --> 00:29:34,070
-au début, je pensais m'arrêter là pour Hashdays
+au dÃ©but, je pensais m'arrÃªter lÃ  pour Hashdays
 
 377
 00:29:34,070 --> 00:29:39,064
-mais j'ai décidé de rajouter quelques astuces PE à CoST
+mais j'ai dÃ©cidÃ© de rajouter quelques astuces PE Ã  CoST
 
 378
 00:29:39,064 --> 00:29:43,029
-donc, en voici l'en-tête... MZ, puis du texte
+donc, en voici l'en-tÃªte... MZ, puis du texte
 
 379
 00:29:43,029 --> 00:29:44,045
@@ -1520,11 +1520,11 @@ et ensuite,
 
 381
 00:29:46,088 --> 00:29:51,079
-l'en-tête 'NT headers' - appelé 'PE' car il commence par ces lettres-là,
+l'en-tÃªte 'NT headers' - appelÃ© 'PE' car il commence par ces lettres-lÃ ,
 
 382
 00:29:51,079 --> 00:29:54,075
-et en fait à la fin du fichier
+et en fait Ã  la fin du fichier
 
 383
 00:29:54,075 --> 00:29:56,000
@@ -1532,7 +1532,7 @@ le 'pied-de-page PE'
 
 384
 00:29:56,000 --> 00:29:59,036
-et les valeurs de l'en-tête sont un peu extrême
+et les valeurs de l'en-tÃªte sont un peu extrÃªme
 
 385
 00:29:59,036 --> 00:30:01,035
@@ -1548,7 +1548,7 @@ donc voici ce qu'IDA 6.1 en pensait
 
 388
 00:30:07,011 --> 00:30:11,024
-ça lui apprendra à se fier aux valeurs
+Ã§a lui apprendra Ã  se fier aux valeurs
 
 389
 00:30:11,024 --> 00:30:15,098
@@ -1556,11 +1556,11 @@ mais, aussi bien dans CoST, on peut changer un registre, faire une comparaison, 
 
 390
 00:30:15,098 --> 00:30:17,005
-et enchaîner ainsi plein de tests,
+et enchaÃ®ner ainsi plein de tests,
 
 391
 00:30:17,005 --> 00:30:19,065
-aussi bien, côté PE, on n'a qu'un seul binaire, donc
+aussi bien, cÃ´tÃ© PE, on n'a qu'un seul binaire, donc
 
 392
 00:30:19,065 --> 00:30:21,068
@@ -1568,7 +1568,7 @@ un seul essai
 
 393
 00:30:21,068 --> 00:30:25,073
-donc même si CoST n'a pas de section, des TLS bizarres,....
+donc mÃªme si CoST n'a pas de section, des TLS bizarres,....
 
 394
 00:30:25,073 --> 00:30:27,079
@@ -1576,7 +1576,7 @@ il ne peut pas tout tester
 
 395
 00:30:27,079 --> 00:30:31,011
-donc, j'ai créé pour ça une autre page sur Corkami
+donc, j'ai crÃ©Ã© pour Ã§a une autre page sur Corkami
 
 396
 00:30:31,011 --> 00:30:37,024
@@ -1584,7 +1584,7 @@ avec comme d'habitudes, des examples, des graphiques,
 
 397
 00:30:37,024 --> 00:30:40,073
-elle n'est pas finie, mais déjà largement suffisante pour tester ou faire planter
+elle n'est pas finie, mais dÃ©jÃ  largement suffisante pour tester ou faire planter
 
 398
 00:30:40,073 --> 00:30:42,096
@@ -1592,11 +1592,11 @@ n'importe quel outil
 
 399
 00:30:42,096 --> 00:30:46,040
-j'ai déjà une centaine d'exemples,
+j'ai dÃ©jÃ  une centaine d'exemples,
 
 400
 00:30:46,040 --> 00:30:51,065
-qui mettent l'accent sur de nombreux aspects, avec parfois des résultats inattendus
+qui mettent l'accent sur de nombreux aspects, avec parfois des rÃ©sultats inattendus
 
 401
 00:30:51,065 --> 00:30:55,020
@@ -1608,23 +1608,23 @@ quand les alignements sont bas, on n'a pas besoin de section
 
 403
 00:31:00,007 --> 00:31:03,027
-ou la table peut être vide
+ou la table peut Ãªtre vide
 
 404
 00:31:03,027 --> 00:31:08,040
-donc, j'ai modifié SizeOfOptionalHeader pour qu'il pointe en espace mémoire virtuel
+donc, j'ai modifiÃ© SizeOfOptionalHeader pour qu'il pointe en espace mÃ©moire virtuel
 
 405
 00:31:08,040 --> 00:31:11,097
-donc la table des sections est en dehors du PE, pleines de zéros
+donc la table des sections est en dehors du PE, pleines de zÃ©ros
 
 406
 00:31:11,097 --> 00:31:16,028
-et Hiew n'aime pas ça. En conséquence, il ne pense même pas que c'est un PE
+et Hiew n'aime pas Ã§a. En consÃ©quence, il ne pense mÃªme pas que c'est un PE
 
 407
 00:31:16,028 --> 00:31:18,088
-alors que ça marche parfaitement, du moins sous XP
+alors que Ã§a marche parfaitement, du moins sous XP
 
 408
 00:31:18,088 --> 00:31:27,024
@@ -1640,7 +1640,7 @@ si on fait de l'art dans les Data Directories
 
 411
 00:31:34,027 --> 00:31:37,020
-vous pouvez commencer à vous inquieter
+vous pouvez commencer Ã  vous inquieter
 
 412
 00:31:37,020 --> 00:31:40,003
@@ -1648,15 +1648,15 @@ si vous avez un dessin plus joli, je suis preneur
 
 413
 00:31:40,003 --> 00:31:43,031
-donc, il s'agit du 'Dual PE header', présenté
+donc, il s'agit du 'Dual PE header', prÃ©sentÃ©
 
 414
 00:31:43,031 --> 00:31:46,016
-par Reversing Labs à la BlackHat
+par Reversing Labs Ã  la BlackHat
 
 415
 00:31:46,016 --> 00:31:50,031
-quelqu'un connaît ?
+quelqu'un connaÃ®t ?
 
 416
 00:31:50,031 --> 00:31:52,053
@@ -1664,23 +1664,23 @@ donc, on augmente SizeOfHeaders pour que
 
 417
 00:31:52,053 --> 00:31:59,068
-les en-têtes NT soient en fait assez loin,
+les en-tÃªtes NT soient en fait assez loin,
 
 418
 00:31:59,068 --> 00:32:04,007
-pour qu'il soit aligné avec les sections
+pour qu'il soit alignÃ© avec les sections
 
 419
 00:32:04,007 --> 00:32:05,053
-quand il se charge en mémoire
+quand il se charge en mÃ©moire
 
 420
 00:32:05,053 --> 00:32:08,007
-la première section sera chargée par dessus
+la premiÃ¨re section sera chargÃ©e par dessus
 
 421
 00:32:08,007 --> 00:32:13,052
-la première partie du OPTIONAL_HEADER est lue dans le fichier
+la premiÃ¨re partie du OPTIONAL_HEADER est lue dans le fichier
 
 422
 00:32:13,052 --> 00:32:16,054
@@ -1688,31 +1688,31 @@ donc, prise en compte pour charger le fichier
 
 423
 00:32:16,054 --> 00:32:20,096
-mais les Data Directories sont lus en mémoire
+mais les Data Directories sont lus en mÃ©moire
 
 424
 00:32:20,096 --> 00:32:25,003
-donc, d'abord l'OPTIONAL_HEADER est analysé, chargé en mémoire,
+donc, d'abord l'OPTIONAL_HEADER est analysÃ©, chargÃ© en mÃ©moire,
 
 425
 00:32:25,003 --> 00:32:29,036
-puis la section est dépliée sur la partie basse de l'en-tête
+puis la section est dÃ©pliÃ©e sur la partie basse de l'en-tÃªte
 
 426
 00:32:29,036 --> 00:32:31,088
-et les vrais Data directories qui étaient initialement au début de la section
+et les vrais Data directories qui Ã©taient initialement au dÃ©but de la section
 
 427
 00:32:31,088 --> 00:32:34,028
-vont être pris en compte,
+vont Ãªtre pris en compte,
 
 428
 00:32:34,028 --> 00:32:39,068
-donc tout ceci est du pipeau présent dans le fichier, à la suite de SizeOfOptionalHeader
+donc tout ceci est du pipeau prÃ©sent dans le fichier, Ã  la suite de SizeOfOptionalHeader
 
 429
 00:32:39,068 --> 00:32:45,007
-mais en mémoire, ce sera écrasé et ignoré
+mais en mÃ©moire, ce sera Ã©crasÃ© et ignorÃ©
 
 430
 00:32:45,007 --> 00:32:47,040
@@ -1720,7 +1720,7 @@ une autre bizarrerie est que les noms d'exports peuvent avoir n'importe quelle v
 
 431
 00:32:47,040 --> 00:32:51,007
-jusqu'au caractère zéro
+jusqu'au caractÃ¨re zÃ©ro
 
 432
 00:32:51,007 --> 00:32:53,072
@@ -1736,7 +1736,7 @@ Hiew les affichent directement
 
 435
 00:32:57,052 --> 00:32:59,038
-donc on peut insérer ses propres messages
+donc on peut insÃ©rer ses propres messages
 
 436
 00:32:59,038 --> 00:33:02,055
@@ -1748,7 +1748,7 @@ l'un d'entre eux est excessivement long,
 
 438
 00:33:05,088 --> 00:33:08,030
-idéal pour tester les dépassement de tampon [buffer overflow]
+idÃ©al pour tester les dÃ©passement de tampon [buffer overflow]
 
 439
 00:33:08,030 --> 00:33:10,053
@@ -1756,7 +1756,7 @@ dans votre outil favori
 
 440
 00:33:10,053 --> 00:33:14,029
-et il est également possible d'avoir un export avec un nom nul,
+et il est Ã©galement possible d'avoir un export avec un nom nul,
 
 441
 00:33:14,029 --> 00:33:16,038
@@ -1764,11 +1764,11 @@ on peut donc importer l'api nulle
 
 442
 00:33:16,038 --> 00:33:19,021
-sans problème
+sans problÃ¨me
 
 443
 00:33:19,021 --> 00:33:23,000
-j'ai aussi essayé les differentes possibilités,
+j'ai aussi essayÃ© les differentes possibilitÃ©s,
 
 444
 00:33:23,000 --> 00:33:26,048
@@ -1788,7 +1788,7 @@ avec le dernier OllyDbg 2 ce message surprenant
 
 448
 00:33:36,072 --> 00:33:38,025
-mais le fichier charge quand même
+mais le fichier charge quand mÃªme
 
 449
 00:33:38,025 --> 00:33:41,040
@@ -1800,15 +1800,15 @@ il reste du temps ?
 
 451
 00:33:45,026 --> 00:33:48,059
-un dernier... pas très visuel
+un dernier... pas trÃ¨s visuel
 
 452
 00:33:48,059 --> 00:33:52,068
-l'adresse AddressOfIndex du TLS est mise à zéro au chargement
+l'adresse AddressOfIndex du TLS est mise Ã  zÃ©ro au chargement
 
 453
 00:33:52,068 --> 00:33:59,027
-et le terminus [terminator] des imports n'a pas besoin d'être composé de 5 doubles mots nuls
+et le terminus [terminator] des imports n'a pas besoin d'Ãªtre composÃ© de 5 doubles mots nuls
 
 454
 00:33:59,027 --> 00:34:03,010
@@ -1816,7 +1816,7 @@ mais juste d'un seul, pour son AddressOfName
 
 455
 00:34:03,010 --> 00:34:05,093
-pour être considéré comme le terminus
+pour Ãªtre considÃ©rÃ© comme le terminus
 
 456
 00:34:05,093 --> 00:34:10,028
@@ -1824,35 +1824,35 @@ donc, si on fait pointer AddressOfIndex vers l'AddressOfName d'un descripteur d'
 
 457
 00:34:10,028 --> 00:34:15,026
-s'il est mis à zéro,
+s'il est mis Ã  zÃ©ro,
 
 458
 00:34:15,026 --> 00:34:16,067
-les imports seront tronqués
+les imports seront tronquÃ©s
 
 459
 00:34:16,067 --> 00:34:20,060
-et en fait, le comportement est différent sous XP ou 7
+et en fait, le comportement est diffÃ©rent sous XP ou 7
 
 460
 00:34:20,060 --> 00:34:25,085
-donc, sous XP, il est écrasé après que les imports soient chargés,
+donc, sous XP, il est Ã©crasÃ© aprÃ¨s que les imports soient chargÃ©s,
 
 461
 00:34:25,085 --> 00:34:28,027
-donc la table n'est pas tronquée
+donc la table n'est pas tronquÃ©e
 
 462
 00:34:28,027 --> 00:34:32,036
-alors que sous 7, il est écrasé avant les imports
+alors que sous 7, il est Ã©crasÃ© avant les imports
 
 463
 00:34:32,036 --> 00:34:35,032
-donc, pour le même PE, on a 2 comportements différents
+donc, pour le mÃªme PE, on a 2 comportements diffÃ©rents
 
 464
 00:34:35,032 --> 00:34:37,018
-sous deux versions de Windows différentes,
+sous deux versions de Windows diffÃ©rentes,
 
 465
 00:34:37,018 --> 00:34:43,048
@@ -1868,7 +1868,7 @@ ah, attendez, on a encore le temps?
 
 468
 00:34:56,051 --> 00:35:01,001
-je vais commencer la démonstration
+je vais commencer la dÃ©monstration
 
 469
 00:35:01,001 --> 00:35:23,088
@@ -1876,11 +1876,11 @@ pour vous montrer...
 
 470
 00:35:23,088 --> 00:35:26,008
-le style de PE que je créé d'habitude
+le style de PE que je crÃ©Ã© d'habitude
 
 471
 00:35:26,008 --> 00:35:29,010
-avec le minimum d'éléments définis
+avec le minimum d'Ã©lÃ©ments dÃ©finis
 
 472
 00:35:29,010 --> 00:35:31,010
@@ -1888,7 +1888,7 @@ c'est en fait un pilotes [driver]
 
 473
 00:35:31,010 --> 00:35:36,088
-même si j'ai utilisé des opcodes non documentés,
+mÃªme si j'ai utilisÃ© des opcodes non documentÃ©s,
 
 474
 00:35:36,088 --> 00:35:40,085
@@ -1896,7 +1896,7 @@ ce pilote marche, sans le vrac
 
 475
 00:35:40,085 --> 00:35:43,027
-habituel rajouté par le compilateurs
+habituel rajoutÃ© par le compilateurs
 
 476
 00:35:43,027 --> 00:35:47,092
@@ -1904,11 +1904,11 @@ donc, un exemple clair, simple
 
 477
 00:35:47,092 --> 00:35:51,046
-sans rien pour vous géner la vue
+sans rien pour vous gÃ©ner la vue
 
 478
 00:35:51,046 --> 00:35:52,088
-ou votre débogueur
+ou votre dÃ©bogueur
 
 479
 00:35:52,088 --> 00:36:02,061
@@ -1916,11 +1916,11 @@ donc, cet exemple regarde les valeurs de CR0
 
 480
 00:36:02,061 --> 00:36:07,053
-via SMSW, officiellement non défini sur un double mot
+via SMSW, officiellement non dÃ©fini sur un double mot
 
 481
 00:36:07,053 --> 00:36:10,000
-mais en fait donne la même valeur
+mais en fait donne la mÃªme valeur
 
 482
 00:36:10,000 --> 00:36:11,071
@@ -1932,27 +1932,27 @@ ensuite, MOV EAX, CR0 avec un 'mauvais' Mod/RM
 
 484
 00:36:16,059 --> 00:36:39,028
-sous le dernier Hiew, ce n'est en fait même pas désassemblé
+sous le dernier Hiew, ce n'est en fait mÃªme pas dÃ©sassemblÃ©
 
 485
 00:36:39,028 --> 00:36:43,071
-on espère que ça ne plante pas...
+on espÃ¨re que Ã§a ne plante pas...
 
 486
 00:36:43,071 --> 00:36:47,032
-donc, vous voyez, on obtient les mêmes valeurs
+donc, vous voyez, on obtient les mÃªmes valeurs
 
 487
 00:36:47,032 --> 00:36:55,069
-via le CR0 standard, l'invalide, et le non défini
+via le CR0 standard, l'invalide, et le non dÃ©fini
 
 488
 00:36:55,069 --> 00:36:57,059
-dont la partie de poid fort est non définie
+dont la partie de poid fort est non dÃ©finie
 
 489
 00:36:57,059 --> 00:37:00,071
-d'habitude, en langage Intel, non défini signifie 'mis à zéro',
+d'habitude, en langage Intel, non dÃ©fini signifie 'mis Ã  zÃ©ro',
 
 490
 00:37:00,071 --> 00:37:02,028
@@ -1960,7 +1960,7 @@ mais ici, on a bien CR0 entier
 
 491
 00:37:02,028 --> 00:37:03,063
-et ma machine n'a même pas plantée
+et ma machine n'a mÃªme pas plantÃ©e
 
 492
 00:37:03,063 --> 00:37:05,092
@@ -1968,19 +1968,19 @@ ce qui signifie que le pilote fonctionne correctement
 
 493
 00:37:05,092 --> 00:37:08,046
-donc vous pouvez étudier des petits pilotes
+donc vous pouvez Ã©tudier des petits pilotes
 
 494
 00:37:08,046 --> 00:37:12,045
-le premier exemple présenté aujourd'hui
+le premier exemple prÃ©sentÃ© aujourd'hui
 
 495
 00:37:12,045 --> 00:37:15,076
-était celui avec l'assembleur ancien
+Ã©tait celui avec l'assembleur ancien
 
 496
 00:37:15,076 --> 00:37:20,023
-quelqu'un connait le résultat final ?
+quelqu'un connait le rÃ©sultat final ?
 
 497
 00:37:20,023 --> 00:37:23,080
@@ -1988,7 +1988,7 @@ certaines instructions sont inutiles,
 
 498
 00:37:23,080 --> 00:37:28,029
-juste pour vérifier que le processeur les gère
+juste pour vÃ©rifier que le processeur les gÃ¨re
 
 499
 00:37:28,029 --> 00:37:30,088
@@ -1996,15 +1996,15 @@ mais d'autres modifient les registres
 
 500
 00:37:30,088 --> 00:37:37,071
-et ces instructions des années 70-80
+et ces instructions des annÃ©es 70-80
 
 501
 00:37:37,071 --> 00:37:43,088
-sont toujours gérées par les processeurs modernes
+sont toujours gÃ©rÃ©es par les processeurs modernes
 
 502
 00:37:43,088 --> 00:37:47,080
-un des exemples que j'ai crée teste
+un des exemples que j'ai crÃ©e teste
 
 503
 00:37:47,080 --> 00:37:50,044
@@ -2016,11 +2016,11 @@ donc on peut voir les valeurs possiblesm sous XP ou W7
 
 505
 00:37:56,015 --> 00:38:01,084
-à chaque fois [TLS, EntryPoint, DllMain], je sauve tous les registres
+Ã  chaque fois [TLS, EntryPoint, DllMain], je sauve tous les registres
 
 506
 00:38:01,084 --> 00:38:04,003
-et je compare à diverses valeurs possibles
+et je compare Ã  diverses valeurs possibles
 
 507
 00:38:04,003 --> 00:38:06,028
@@ -2028,7 +2028,7 @@ successivement
 
 508
 00:38:06,028 --> 00:38:10,071
-en fait, au TLS, on a beaucoup de contrôles de ces valeurs,
+en fait, au TLS, on a beaucoup de contrÃ´les de ces valeurs,
 
 509
 00:38:10,071 --> 00:38:16,077
@@ -2040,15 +2040,15 @@ en particulier, son adresse relative, sa taille, les callbacks...
 
 511
 00:38:20,021 --> 00:38:26,076
-pour plus de détail, voir le source...
+pour plus de dÃ©tail, voir le source...
 
 512
 00:38:26,076 --> 00:38:33,063
-ça vous permet d'imiter mieux un SE dans votre émulateur,
+Ã§a vous permet d'imiter mieux un SE dans votre Ã©mulateur,
 
 513
 00:38:33,063 --> 00:38:35,055
-si ça vous intéresse
+si Ã§a vous intÃ©resse
 
 514
 00:38:35,055 --> 00:38:41,062
@@ -2056,11 +2056,11 @@ on utilise SMSW, on compare la valeur
 
 515
 00:38:41,062 --> 00:38:46,045
-ensuite, après une opération FPU, on regarde si la valeur a changé
+ensuite, aprÃ¨s une opÃ©ration FPU, on regarde si la valeur a changÃ©
 
 516
 00:38:46,045 --> 00:38:48,080
-et si elle revient à sa valeur initiale.
+et si elle revient Ã  sa valeur initiale.
 
 517
 00:38:48,080 --> 00:38:52,053
@@ -2072,7 +2072,7 @@ est qu'en fait
 
 519
 00:38:54,076 --> 00:39:01,015
-ça se comporte différemment si on exécute le fichier normalement
+Ã§a se comporte diffÃ©remment si on exÃ©cute le fichier normalement
 
 520
 00:39:01,015 --> 00:39:04,061
@@ -2080,15 +2080,15 @@ ou avec une redirection
 
 521
 00:39:04,061 --> 00:39:08,046
-si on redirige, 'échec'
+si on redirige, 'Ã©chec'
 
 522
 00:39:08,046 --> 00:39:11,053
-sinon, ça marche normalement.
+sinon, Ã§a marche normalement.
 
 523
 00:39:11,053 --> 00:39:22,021
-pour vous montrer... on exécute, et on lance TYPE
+pour vous montrer... on exÃ©cute, et on lance TYPE
 
 524
 00:39:22,021 --> 00:39:24,071
@@ -2104,19 +2104,19 @@ si vous avez une explication, je suis preneur
 
 527
 00:39:30,066 --> 00:39:37,088
-tu as essayé de rediriger vers autre chose ?
+tu as essayÃ© de rediriger vers autre chose ?
 
 528
 00:39:37,088 --> 00:39:42,008
-non, je n'ai pas essayé
+non, je n'ai pas essayÃ©
 
 529
 00:39:42,008 --> 00:39:45,024
-donc, rediriger vers un autre périphérique?
+donc, rediriger vers un autre pÃ©riphÃ©rique?
 
 530
 00:39:45,024 --> 00:39:46,071
-mais, comment on récupère le résultat ?
+mais, comment on rÃ©cupÃ¨re le rÃ©sultat ?
 
 531
 00:39:46,071 --> 00:39:48,017
@@ -2124,7 +2124,7 @@ imprimante ?
 
 532
 00:39:48,017 --> 00:39:54,025
-je n'ai pas de périphérique COM
+je n'ai pas de pÃ©riphÃ©rique COM
 
 533
 00:39:54,025 --> 00:39:56,076
@@ -2132,7 +2132,7 @@ non, je ne sais pas
 
 534
 00:39:56,076 --> 00:39:59,092
-mais c'était surprenant, car je lançais tous mes tests...
+mais c'Ã©tait surprenant, car je lanÃ§ais tous mes tests...
 
 535
 00:39:59,092 --> 00:40:02,033
@@ -2140,7 +2140,7 @@ et d'un coup, 'ECHEC'...
 
 536
 00:40:02,033 --> 00:40:07,025
-alors qu'à la main, aucun problème.
+alors qu'Ã  la main, aucun problÃ¨me.
 
 537
 00:40:07,025 --> 00:40:09,071
@@ -2148,7 +2148,7 @@ l'astuce avec GS
 
 538
 00:40:09,071 --> 00:40:11,025
-très simple
+trÃ¨s simple
 
 539
 00:40:11,025 --> 00:40:19,065
@@ -2156,11 +2156,11 @@ et quelques affichages
 
 540
 00:40:19,065 --> 00:40:21,084
-je modifie GS, qui se remet à zéro
+je modifie GS, qui se remet Ã  zÃ©ro
 
 541
 00:40:21,084 --> 00:40:23,065
-puis j'attend le résultat,
+puis j'attend le rÃ©sultat,
 
 542
 00:40:23,065 --> 00:40:26,057
@@ -2168,7 +2168,7 @@ ensuite je fais 2 tests et je compare le temps entre
 
 543
 00:40:26,057 --> 00:40:30,003
-car ça ne doit pas arriver trop vite
+car Ã§a ne doit pas arriver trop vite
 
 544
 00:40:30,003 --> 00:40:37,025
@@ -2176,7 +2176,7 @@ NOPs
 
 545
 00:40:37,025 --> 00:40:39,059
-je teste les NOPs non documentés
+je teste les NOPs non documentÃ©s
 
 546
 00:40:39,059 --> 00:40:45,066
@@ -2192,7 +2192,7 @@ NOP standard
 
 549
 00:41:07,058 --> 00:41:15,071
-tous mes tests 64b sont fait dans des programmes 32b, car on peut les exécuter sur un OS normal
+tous mes tests 64b sont fait dans des programmes 32b, car on peut les exÃ©cuter sur un OS normal
 
 550
 00:41:15,071 --> 00:41:19,033
@@ -2200,7 +2200,7 @@ et ensuite je regarde GS pour voir si le mode 64b est disponible
 
 551
 00:41:19,033 --> 00:41:21,067
-dans ce cas, on obtiendrait un résultat différent
+dans ce cas, on obtiendrait un rÃ©sultat diffÃ©rent
 
 552
 00:41:21,067 --> 00:41:26,059
@@ -2216,11 +2216,11 @@ et ces results.
 
 555
 00:41:31,008 --> 00:41:35,017
-mais, pas si facile à déboguer
+mais, pas si facile Ã  dÃ©boguer
 
 556
 00:41:35,017 --> 00:41:39,048
-mais ici, pas de piège, donc on peut revenir facilement en 32b
+mais ici, pas de piÃ¨ge, donc on peut revenir facilement en 32b
 
 557
 00:41:39,048 --> 00:41:45,003
@@ -2244,7 +2244,7 @@ mais en fait - ici, c'est correct
 
 562
 00:42:03,077 --> 00:42:05,096
-et le TLS a alloué la page NULLE
+et le TLS a allouÃ© la page NULLE
 
 563
 00:42:05,096 --> 00:42:09,059
@@ -2252,15 +2252,15 @@ qui affiche 'ECHEC'
 
 564
 00:42:09,059 --> 00:42:15,036
-donc, comme mentionné auparavent, pas de façon standard de désassembler ça correctement
+donc, comme mentionnÃ© auparavent, pas de faÃ§on standard de dÃ©sassembler Ã§a correctement
 
 565
 00:42:15,036 --> 00:42:23,069
-je ne peux pas exécuter les 64K sections
+je ne peux pas exÃ©cuter les 64K sections
 
 566
 00:42:23,069 --> 00:42:27,076
-et en fait, cet exemple exécute tout le code (l'espace virtuel complet des 65535 sections)
+et en fait, cet exemple exÃ©cute tout le code (l'espace virtuel complet des 65535 sections)
 
 567
 00:42:27,076 --> 00:42:29,028
@@ -2268,23 +2268,23 @@ elles sont grosses,
 
 568
 00:42:29,028 --> 00:42:33,028
-et je modifie EAX pour que tous les 00 00 soient exécutés
+et je modifie EAX pour que tous les 00 00 soient exÃ©cutÃ©s
 
 569
 00:42:33,028 --> 00:42:35,070
-juste pour faire un printf à la fin
+juste pour faire un printf Ã  la fin
 
 570
 00:42:35,070 --> 00:42:39,007
-ça prend plusieurs secondes sur un i7
+Ã§a prend plusieurs secondes sur un i7
 
 571
 00:42:39,007 --> 00:42:43,008
-c'est assez amusant: on le lance, et même avec le cache,
+c'est assez amusant: on le lance, et mÃªme avec le cache,
 
 572
 00:42:43,008 --> 00:42:50,098
-et que le SE n'est pas occupé, ça prend un temps visible, juste pour un tas de 00
+et que le SE n'est pas occupÃ©, Ã§a prend un temps visible, juste pour un tas de 00
 
 573
 00:42:50,098 --> 00:43:00,055
@@ -2292,15 +2292,15 @@ les sections virtuelles... celui que le dernier Hiew ne voit pas comme un PE
 
 574
 00:43:00,055 --> 00:43:02,040
-enfin, bientôt corrigé
+enfin, bientÃ´t corrigÃ©
 
 575
 00:43:02,040 --> 00:43:08,067
-ah, je ne peux pas l'analyser car il ne pense même pas que c'est un PE
+ah, je ne peux pas l'analyser car il ne pense mÃªme pas que c'est un PE
 
 576
 00:43:08,067 --> 00:43:13,015
-mais, pour simplifier, OPTIONAL_HEADER pointe au delà 
+mais, pour simplifier, OPTIONAL_HEADER pointe au delÃ  
 
 577
 00:43:13,015 --> 00:43:14,048
@@ -2308,7 +2308,7 @@ du fichier
 
 578
 00:43:14,048 --> 00:43:17,008
-l'en-tête plié...
+l'en-tÃªte pliÃ©...
 
 579
 00:43:17,008 --> 00:43:18,063
@@ -2316,15 +2316,15 @@ quelques messages d'erreurs,
 
 580
 00:43:18,063 --> 00:43:21,007
-à cause des faux Data Directories
+Ã  cause des faux Data Directories
 
 581
 00:43:21,007 --> 00:43:30,023
-et les DD réels sont au début
+et les DD rÃ©els sont au dÃ©but
 
 582
 00:43:30,023 --> 00:43:33,011
-de la première section
+de la premiÃ¨re section
 
 583
 00:43:33,011 --> 00:43:42,048
@@ -2340,7 +2340,7 @@ et pour finir, celui avec TLS AddressOfIndex qui pointe...
 
 586
 00:44:02,040 --> 00:44:04,040
-donc, il sera écrasé au chargement
+donc, il sera Ã©crasÃ© au chargement
 
 587
 00:44:04,040 --> 00:44:11,092
@@ -2348,11 +2348,11 @@ et quand on le charge, il reconnait XP
 
 588
 00:44:11,092 --> 00:44:14,071
-à la façon dont les imports ont été chargés
+Ã  la faÃ§on dont les imports ont Ã©tÃ© chargÃ©s
 
 589
 00:44:14,071 --> 00:44:17,017
-et sous 7, on obtiendra un autre résultat.
+et sous 7, on obtiendra un autre rÃ©sultat.
 
 590
 00:44:17,017 --> 00:44:19,059
@@ -2360,19 +2360,19 @@ pour finir, les exports
 
 591
 00:44:19,059 --> 00:44:24,059
-certains ont des noms très longs
+certains ont des noms trÃ¨s longs
 
 592
 00:44:24,059 --> 00:44:30,050
-en fait, on remarque que j'écrase le désassemblage même
+en fait, on remarque que j'Ã©crase le dÃ©sassemblage mÃªme
 
 593
 00:44:30,050 --> 00:44:33,096
-donc je répète les faux opcodes et adresses
+donc je rÃ©pÃ¨te les faux opcodes et adresses
 
 594
 00:44:33,096 --> 00:44:37,059
-donc le désassembleur est perturbé
+donc le dÃ©sassembleur est perturbÃ©
 
 595
 00:44:37,059 --> 00:44:40,051
@@ -2380,7 +2380,7 @@ mais c'est juste visuel, pas vraiment grave
 
 596
 00:44:40,051 --> 00:44:43,018
-bien que ce soit un problème récent dans IDA
+bien que ce soit un problÃ¨me rÃ©cent dans IDA
 
 597
 00:44:43,018 --> 00:44:47,008
@@ -2388,7 +2388,7 @@ ou si on met un export au milieu d'une instruction
 
 598
 00:44:47,008 --> 00:44:49,076
-l'export aura priorité sur le désassemblage,
+l'export aura prioritÃ© sur le dÃ©sassemblage,
 
 599
 00:44:49,076 --> 00:44:52,011
@@ -2396,11 +2396,11 @@ et casse l'instruction en deux
 
 600
 00:44:52,011 --> 00:44:58,050
-il y a bien sûr un exemple pour ça sur Corkami
+il y a bien sÃ»r un exemple pour Ã§a sur Corkami
 
 601
 00:44:58,050 --> 00:45:05,010
-donc, voilà pour les démonstrations
+donc, voilÃ  pour les dÃ©monstrations
 
 602
 00:45:05,010 --> 00:45:10,016
@@ -2408,7 +2408,7 @@ Je voulais donc en savoir plus sur le x86 et le PE
 
 603
 00:45:10,016 --> 00:45:12,067
-qui sont loin d'être correctement documentés
+qui sont loin d'Ãªtre correctement documentÃ©s
 
 604
 00:45:12,067 --> 00:45:14,080
@@ -2432,15 +2432,15 @@ en publiant mes recherches librement
 
 609
 00:45:27,057 --> 00:45:31,080
-tel WinDbg, si vous suivez les documentations officielles à la lettre,
+tel WinDbg, si vous suivez les documentations officielles Ã  la lettre,
 
 610
 00:45:31,080 --> 00:45:36,017
-vous êtes voués à l'échec, surtout avec tous les virus et packeurs existants
+vous Ãªtes vouÃ©s Ã  l'Ã©chec, surtout avec tous les virus et packeurs existants
 
 611
 00:45:36,017 --> 00:45:40,063
-si vous êtes intéressés, ou que vous programmez un outil, un émulateur, un moteur...
+si vous Ãªtes intÃ©ressÃ©s, ou que vous programmez un outil, un Ã©mulateur, un moteur...
 
 612
 00:45:40,063 --> 00:45:44,057
@@ -2448,7 +2448,7 @@ vous savez que vous pouvez aller sur Corkami, lire les pages
 
 613
 00:45:44,057 --> 00:45:48,024
-télécharger les exemples, qui sont disponibles librement, à tout point de vue
+tÃ©lÃ©charger les exemples, qui sont disponibles librement, Ã  tout point de vue
 
 614
 00:45:48,024 --> 00:45:50,076
@@ -2460,7 +2460,7 @@ envoyez-moi une carte postale, ou un t-shirt croix rouge ;)
 
 616
 00:45:57,007 --> 00:46:01,076
-Merci à Peter Ferrie, et tous mes relecteurs et contributeurs
+Merci Ã  Peter Ferrie, et tous mes relecteurs et contributeurs
 
 617
 00:46:01,076 --> 00:46:03,066
@@ -2468,7 +2468,7 @@ vous avez des questions ?
 
 618
 00:46:03,066 --> 00:46:10,081
-tu les as testés sur des anti-virus ? tu devrais trouver une ch*ée de 0days
+tu les as testÃ©s sur des anti-virus ? tu devrais trouver une ch*Ã©e de 0days
 
 619
 00:46:10,081 --> 00:46:23,096
@@ -2476,19 +2476,19 @@ mouai, non, je ne saurais pas en faire des exploits...
 
 620
 00:46:23,096 --> 00:46:29,000
-tenir en échec les désassembleurs me suffit
+tenir en Ã©chec les dÃ©sassembleurs me suffit
 
 621
 00:46:29,000 --> 00:46:40,025
-j'ai trouvé un crash dans Xed d'Intel, ça me suffit
+j'ai trouvÃ© un crash dans Xed d'Intel, Ã§a me suffit
 
 622
 00:46:40,025 --> 00:46:45,000
-une autre question ? tout le monde a survécu ?
+une autre question ? tout le monde a survÃ©cu ?
 
 623
 00:46:45,000 --> 00:46:46,055
-c'était une super présentation, mec
+c'Ã©tait une super prÃ©sentation, mec
 
 624
 00:46:46,059 --> 00:46:48,023
