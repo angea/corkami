@@ -42,15 +42,19 @@ FILESIZE equ 2560
 bits 16
     push    cs
     pop     ds
-_
-    ; shrink image before allocating
+    mov     dx, dos_msg - dos_stub
+    mov     ah, 9 ; print
+    int     21h
+
+; shrink image before allocating ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov ah, 4ah
+    mov sp, stub_end - dos_stub
     mov bx, sp ;effective end of image
     add bx, 20fh ;it's relative to ds, not cs, round up to next paragraph
     shr bx, 4 ;convert to paragraphs
     int 21h
 _
-    ; allocate buffer
+; allocate buffer ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov     ah, 48h ; allocate
     mov     bx, (FILESIZE + 0fh) >> 4
     int     21h
@@ -64,8 +68,8 @@ _
     int     21h
     jc      end_
     mov     [hthis - dos_stub], ax
-_
-; create target;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; create target;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov     ah, 03ch ; create file
     mov     cx, 0 ; normal attributes
     mov     dx, new - dos_stub
@@ -73,49 +77,48 @@ _
     jc      end_
     mov     [hnew - dos_stub], ax
 _
-; read buffer;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    push ds
+; read buffer;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    push    ds
     mov     ah, 3fh ; reading
     mov     bx, [hthis - dos_stub]
     mov     ds, [hbuf - dos_stub]
     mov     dx, 0
     mov     cx, FILESIZE
     int     21h
-    jc end_
     pop ds
-_
+    jc end_
+
+; fix the PE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     push es
-    ; fix the PE
     mov     di, NT_SIGNATURE - IMAGEBASE
     mov     es, [hbuf - dos_stub]
     mov     al, 'P'
     stosb
     pop es
-    
 _
     mov     bx, [hnew - dos_stub]
-    push ds
+    push    ds
     mov     ah, 40h ; writing
     mov     ds, [hbuf - dos_stub]
     mov     dx, 0
     mov     cx, FILESIZE
     int     21h
-    jc end_
-    pop ds
-_
-; close target file ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    pop     ds
+    jc      end_
+
+; close target file ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov     ah, 3eh ; close file
     mov     bx, [hnew - dos_stub]
     int     21h
     jc end_
-_
+
     mov     ah, 3eh ; close file
     mov     bx, [hthis - dos_stub]
     int     21h
-    jc end_
-_
-    push ds
-    pop es
+    jc      end_
+
+    push    ds
+    pop     es
     mov     bx, block - dos_stub
     mov     word [bx + 4], ds
     mov     word [bx + 8], ds
@@ -124,24 +127,20 @@ _
     mov     al, 0 ; load & execute
     mov     dx, new - dos_stub ; file name
     ; mov cx, 0 ; children mode
-    int 21h
-    jc end_
-_
-print:
-    mov     dx, dos_msg - dos_stub
-    mov     ah, 9 ; print
     int     21h
+    jc      end_
 _
 end_:
-    mov ax, 4c01h
+    mov     ax, 4c01h
     int     21h
+
 hthis dw 0
 hnew dw 0
 hbuf dw 0
 
 thisfile db 'exe2pe.exe', 0
-new db 'new.exe', 0
-dos_msg db 'PE patched and executed', 0dh, 0dh, 0ah, '$'
+new db 'patched.exe', 0
+dos_msg db ' # patching PE', 0dh, 0dh, 0ah, '$'
 block dw 0, 80h, 0, 5ch, 0, 6ch, 0 ; peter's short block
 
     ;dw 0; segment of environment to copy for child process (copy caller's environment if 0000h)
@@ -150,7 +149,8 @@ block dw 0, 80h, 0, 5ch, 0, 6ch, 0 ; peter's short block
     ;dd 0; pointer to second FCB to be copied into child's PSP
     ;dd 0; (AL=01h) will hold subprogram's initial SS:SP on return
     ;dd 0; (AL=01h) will hold entry point (CS:IP) on return
-stub_end
+stub_end:
+
 align 16, db 0
 RichHeader:
 RichKey EQU 092033d19h
@@ -360,7 +360,7 @@ SECTION2OFFSET equ $ - Section1Start + SECTION1OFFSET
 SECTION data valign = SECTIONALIGN
 
 Section2Start:
-Msg db " * a 'compiled' PE", 0ah, 0
+Msg db " # PE executed", 0ah, 0
 
 SECTION2VS equ $ - Section2Start
 
