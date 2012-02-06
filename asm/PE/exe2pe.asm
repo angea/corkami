@@ -21,9 +21,9 @@ DOS_HEADER:
     .e_crlc        dw 0
     .e_cparhdr     dw (dos_stub - DOS_HEADER) >> 4 ; defines MZ stub entry point
     .e_minalloc    dw 0
-    .e_maxalloc    dw 0ffffh
+    .e_maxalloc    dw -1 ;0e0h
     .e_ss          dw 0
-    .e_sp          dw 0b8h
+    .e_sp          dw stub_end + 20h - dos_stub
     .e_csum        dw 0
     .e_ip          dw 0
     .e_cs          dw 0
@@ -40,26 +40,28 @@ align 010h, db 0
 dos_stub:
 FILESIZE equ 2560
 bits 16
+; init ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     push    cs
     pop     ds
+;   sp is already set via the DOS header
     mov     dx, dos_msg - dos_stub
     mov     ah, 9 ; print
     int     21h
 
-; shrink image before allocating ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    mov ah, 4ah
-    mov sp, stub_end - dos_stub
-    mov bx, sp ;effective end of image
-    add bx, 20fh ;it's relative to ds, not cs, round up to next paragraph
-    shr bx, 4 ;convert to paragraphs
-    int 21h
+; shrink image before allocating ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    mov     ah, 4ah ; reallocate
+    mov     sp, stub_end - dos_stub
+    mov     bx, sp ;effective end of image
+    add     bx, 20fh ;it's relative to ds, not cs, round up to next paragraph
+    shr     bx, 4 ;convert to paragraphs
+    int     21h
 _
-; allocate buffer ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; allocate buffer ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov     ah, 48h ; allocate
     mov     bx, (FILESIZE + 0fh) >> 4
     int     21h
-    jc end_
-    mov [hbuf - dos_stub], ax
+    jc      end_
+    mov     [hbuf - dos_stub], ax
 _
     ; open itself for reading
     mov     ah, 3dh ; opening
@@ -69,7 +71,7 @@ _
     jc      end_
     mov     [hthis - dos_stub], ax
 
-; create target;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; create target;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov     ah, 03ch ; create file
     mov     cx, 0 ; normal attributes
     mov     dx, new - dos_stub
@@ -77,7 +79,7 @@ _
     jc      end_
     mov     [hnew - dos_stub], ax
 _
-; read buffer;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; read buffer;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     push    ds
     mov     ah, 3fh ; reading
     mov     bx, [hthis - dos_stub]
@@ -85,16 +87,16 @@ _
     mov     dx, 0
     mov     cx, FILESIZE
     int     21h
-    pop ds
-    jc end_
+    pop     ds
+    jc      end_
 
-; fix the PE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    push es
+; fix the PE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    push    es
     mov     di, NT_SIGNATURE - IMAGEBASE
     mov     es, [hbuf - dos_stub]
     mov     al, 'P'
     stosb
-    pop es
+    pop     es
 _
     mov     bx, [hnew - dos_stub]
     push    ds
@@ -106,7 +108,7 @@ _
     pop     ds
     jc      end_
 
-; close target file ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; close target file ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     mov     ah, 3eh ; close file
     mov     bx, [hnew - dos_stub]
     int     21h
@@ -117,6 +119,7 @@ _
     int     21h
     jc      end_
 
+; executing PE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     push    ds
     pop     es
     mov     bx, block - dos_stub
@@ -139,19 +142,16 @@ hnew dw 0
 hbuf dw 0
 
 thisfile db 'exe2pe.exe', 0
-new db 'patched.exe', 0
-dos_msg db ' # patching PE', 0dh, 0dh, 0ah, '$'
-block dw 0, 80h, 0, 5ch, 0, 6ch, 0 ; peter's short block
-
-    ;dw 0; segment of environment to copy for child process (copy caller's environment if 0000h)
-    ;dd 0; pointer to command tail to be copied into child's PSP
-    ;dd 0; pointer to first FCB to be copied into child's PSP
-    ;dd 0; pointer to second FCB to be copied into child's PSP
-    ;dd 0; (AL=01h) will hold subprogram's initial SS:SP on return
-    ;dd 0; (AL=01h) will hold entry point (CS:IP) on return
+new db 'ep.exe', 0
+dos_msg db ' # patching PE (16b dos stub)', 0dh, 0dh, 0ah, '$'
+block:
+    dw 0, 80h ; command tail
+    dw 0, 5ch ; first fcb
+    dw 0, 6ch ; second fcb
+    dw 0 ; used when AL = 1
+align 16, db 0
 stub_end:
 
-align 16, db 0
 RichHeader:
 RichKey EQU 092033d19h
 dd "DanS" ^ RichKey     , 0 ^ RichKey, 0 ^ RichKey       , 0 ^ RichKey
@@ -360,7 +360,7 @@ SECTION2OFFSET equ $ - Section1Start + SECTION1OFFSET
 SECTION data valign = SECTIONALIGN
 
 Section2Start:
-Msg db " # PE executed", 0ah, 0
+Msg db " # PE executed (32b PE)", 0ah, 0
 
 SECTION2VS equ $ - Section2Start
 
