@@ -1,11 +1,11 @@
 // Hello World and various forms of string substitution
 
-// javac HelloWorld.java
-// java HelloWorld
+// javac substs.java
+// java substs
 
 // Ange Albertini, BSD Licence 2011
 
-public class HelloWorld
+public class substs
 {
   public static void main(String[] args)
   {
