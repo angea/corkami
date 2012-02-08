@@ -128,6 +128,7 @@ d490a8c436c0aa936209ca957667d63c00e41736 *tls_aoiOSDET.exe
 c415fbb5669cd68b1eb7fb2be282aed0f55c0446 *tls_obfuscation.exe
 140fc4723d0dcbf25429c5013901ecb1f7e297bf *tls_onthefly.exe
 7403b307dc1e978b76bdbfb98b3c0c168441c61f *tls_reloc.exe
+c0c49142efe5465137aae9c0a7cce74ccf04a116 *tls_virtEP.exe
 946d7ee8f1fbbc82995275ebdb6720d2e8030d14 *truncatedlast.exe
 07faec677f3f0f35c11224b8b61bcfb37bd84b03 *truncsectbl.exe
 c8da473fe7372a0312f6883dfd3488b8c14f0d95 *virtEP.exe
