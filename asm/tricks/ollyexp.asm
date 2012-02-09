@@ -44,7 +44,7 @@ iend
 
 DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd Exports_Directory - IMAGEBASE, 140h ; needs to be small enough
+    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd Exports_Directory - IMAGEBASE, 140h ; size required, needs to be small enough, but not null
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd import_descriptor - IMAGEBASE
 iend
 
@@ -70,14 +70,10 @@ EntryPoint:
     retn
 _c
 
-Msg db " * export bug in ollydbg", 0ah, 0
+Msg db " * export parsing crash in OllyDbg", 0ah, 0
 _d
 
-msvcrt.dll_iat:
-__imp__printf:
-    dd hnprintf - IMAGEBASE
-    dd 0
-_d
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 import_descriptor:
 ;msvcrt.dll_DESCRIPTOR:
@@ -88,6 +84,12 @@ import_descriptor:
     dd msvcrt.dll_iat - IMAGEBASE
 ; terminator
     times 5 dd 0
+_d
+
+msvcrt.dll_iat:
+__imp__printf:
+    dd hnprintf - IMAGEBASE
+    dd 0
 
 msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
@@ -96,8 +98,11 @@ msvcrt.dll_hintnames:
 hnprintf:
     dw 0
     db 'printf', 0
+_d
 
 msvcrt.dll db 'msvcrt.dll', 0
+_d
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Exports_Directory:
   Characteristics       dd 0
@@ -106,7 +111,7 @@ Exports_Directory:
   MinorVersion          dw 0
   Name                  dd 0
   Base                  dd 0
-  NumberOfFunctions     dd 40000000h ; shifted 4 times => 0
+  NumberOfFunctions     dd 40000000h ; shifted 2 times => 0
   NumberOfNames         dd 0
   AddressOfFunctions    dd blank - IMAGEBASE
   AddressOfNames        dd blank - IMAGEBASE
