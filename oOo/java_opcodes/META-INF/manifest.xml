@@ -7,6 +7,7 @@
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/"/>
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/"/>
