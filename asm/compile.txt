@@ -1,0 +1,11 @@
+required to generate ASM binaries:
+ * yasm - http://yasm.tortall.net/
+ * a standard make.exe - you can get one from http://sourceforge.net/projects/unxutils/
+and for a few samples:
+ * python 2.xx - http://www.python.org/download/releases/
+ * pefile - http://code.google.com/p/pefile/ (you just need http://pefile.googlecode.com/svn/trunk/pefile.py in the current directory)
+
+then go in /bin, and type 'make'
+
+but most samples can be generated directly just via calling yasm itself:
+/bin> yasm -o sample.exe ..\sample.asm
