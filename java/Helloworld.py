@@ -20,22 +20,22 @@ pool = ["",
     make_utf8("main"),
     make_utf8("V"),
     make_utf8("Code"),
-    make_utf8("Exceptions"),
     make_utf8("(Ljava/lang/String;)V"),
     make_utf8("([Ljava/lang/String;)V"),
     make_utf8("out"),
     make_utf8("Ljava/io/PrintStream;"),
-    make_nat(11, 12),
+    make_nat(10, 11),
     make_utf8("java/lang/System"),
-    make_class(14),
-    make_fieldref(15, 13),
+    make_class(13),
+    make_fieldref(14, 12),
     make_utf8("Hello World !"),
-    make_string(17),
+    make_string(16),
     make_utf8("println"),
-    make_nat(19, 9),
+    make_nat(18, 8),
     make_utf8("java/io/PrintStream"),
-    make_class(21),
-    make_methodref(22, 20),
+    make_class(20),
+    make_methodref(21, 19),
+    #make_utf8("Exceptions"),
     ]
 
 access_flags = 1 # 1 = public
@@ -46,9 +46,9 @@ interfaces = []
 fields = []
 
 code = "".join([
-    GETSTATIC, struct.pack(">H", 16),
-    LDC, struct.pack(">B", 18),             # ldc String 18
-    INVOKEVIRTUAL, struct.pack(">H", 23),
+    GETSTATIC, struct.pack(">H", 15),
+    LDC, struct.pack(">B", 17),             # ldc String 18
+    INVOKEVIRTUAL, struct.pack(">H", 22),
     RETURN,
     ])
 
@@ -64,7 +64,7 @@ u4length("".join([
 ])
 
 attribute_exceptions = "".join([
-struct.pack(">H", 8), # exceptions
+struct.pack(">H", 23), # exceptions
 u4length(
     u2larray([]) # exceptions
     ),
@@ -72,11 +72,11 @@ u4length(
 
 method_attributes = [
 attribute_code,
-attribute_exceptions,
+#attribute_exceptions,
 ]
 main_method = "".join([struct.pack(">H", 9),                 # flag: public, static
     struct.pack(">H", 5),   # name: main
-    struct.pack(">H", 10),  # return type: ([Ljava/lang/String;)V
+    struct.pack(">H", 9),  # return type: ([Ljava/lang/String;)V
     u2larray(method_attributes),
     ])
 
