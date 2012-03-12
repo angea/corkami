@@ -63,17 +63,10 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
-    call [__imp__export]
-    push 0
-    call [__imp__ExitProcess]
+	retn
 _c
 
 Import_Descriptor:
-kernel32.dll_DESCRIPTOR:
-    dd kernel32.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd kernel32.dll - IMAGEBASE
-    dd kernel32.dll_iat - IMAGEBASE
 dll.dll_DESCRIPTOR:
     dd dll.dll_hintnames - IMAGEBASE
     dd 0, 0
@@ -83,19 +76,9 @@ dll.dll_DESCRIPTOR:
     dd 0, 0, 0, 0, 0
 _d
 
-kernel32.dll_hintnames:
-    dd hnExitProcess - IMAGEBASE
-    dd 0
-_d
-
 dll.dll_hintnames:
     dd hndllexport - IMAGEBASE
     dd 0
-_d
-
-hnExitProcess:
-    dw 0
-    db 'ExitProcess', 0
 _d
 
 hndllexport:
@@ -103,18 +86,12 @@ hndllexport:
     db 'export', 0
 _d
 
-kernel32.dll_iat:
-__imp__ExitProcess:
-    dd hnExitProcess - IMAGEBASE
-    dd 0
-_d
 dll.dll_iat:
 __imp__export:
     dd hndllexport - IMAGEBASE
     dd 0
 _d
 
-kernel32.dll db 'kernel32.dll', 0
 dll.dll db 'nothing.dll', 0
 _d
 

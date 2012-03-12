@@ -51,13 +51,13 @@ Image_Tls_Directory32:
     EndAddressOfRawData   dd 0
     AddressOfIndex        dd StartAddressOfRawData
     AddressOfCallBacks    dd SizeOfZeroFill
-    SizeOfZeroFill        dd EntryPoint
+    SizeOfZeroFill        dd TLS
     Characteristics       dd 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-EntryPoint:
 __exp__Export:
+	hlt
+TLS:
     call LoadImports
     push Msg
     call [ddprintf]
