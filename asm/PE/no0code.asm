@@ -13,10 +13,11 @@ dd nt_header - IMAGEBASE
     db 90h
 EntryPoint:
 bits 32
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;same as "incbin 'w32-exec-calc-shellcode.bin'"  from skylined but with a retn opcode to avoid crash
     xor edx, edx
     push    edx
-    push    'MZ  ' ; executing mz.exe instead of calc.exe
+    push    'SC  ' ; executing SC.exe instead of calc.exe
     mov     esi, esp
     push    edx
     push    esi
@@ -54,8 +55,8 @@ find_winexec_x86:
     add esp, 2 * 4
     retn
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 times 01010000h db ' '
 align 0010101h
 FILEALIGN equ 4h
