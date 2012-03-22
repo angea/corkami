@@ -3,6 +3,9 @@
 
 %include 'consts.inc'
 
-db 'MZPE'
-times 3ch - 4 db 0
-db 2
+istruc IMAGE_DOS_HEADER
+    at IMAGE_DOS_HEADER.e_magic, db 'MZ'
+NT_SIGNATURE:
+	db 'PE'
+    at IMAGE_DOS_HEADER.e_lfanew, dd NT_SIGNATURE
+iend
