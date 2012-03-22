@@ -71,6 +71,7 @@ EntryPoint:
     call [__imp__LoadLibraryExA]
 _
 	and eax, 0ffff0000h
+	add eax, 6
 	push eax
     call [__imp__printf]
 _

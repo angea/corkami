@@ -27,7 +27,7 @@ endstruc
 istruc IMAGE_DOS_HEADER
     at IMAGE_DOS_HEADER.e_magic, db 'MZ'
 
-NT_SIGNATURE db 'PE'
-
+NT_SIGNATURE db 'PE', 0, 0
+db ' * tiny data PE (61 bytes)', 0dh, 0ah, 0
     at IMAGE_DOS_HEADER.e_lfanew, db NT_SIGNATURE
 iend
