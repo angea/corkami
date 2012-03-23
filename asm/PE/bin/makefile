@@ -34,7 +34,7 @@ delay: delayimports.exe delaycorrupt.exe
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 
 resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe \
-    resource_string.exe
+    resource_string.exe d_resource-ld.exe d_resource.dll
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impbyord.exe \
     imports_badterm.exe manyimportsW7.exe imports_vterm.exe imports_nothunk.exe \
