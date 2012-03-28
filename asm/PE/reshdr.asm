@@ -5,7 +5,7 @@
 %include 'consts.inc'
 
 IMAGEBASE equ 400000h
-IMAGE_RESOURCE_DATA_IS_DIRECTORY equ 80000000h
+
 SOME_TYPE equ 315h
 org IMAGEBASE
 bits 32

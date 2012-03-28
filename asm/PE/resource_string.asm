@@ -1,13 +1,10 @@
 ; a PE with a string resource
 
-;TODO: make it work with > 15 ids
-
 ; Ange Albertini, BSD LICENCE 2012
 
 %include 'consts.inc'
 
 IMAGEBASE equ 400000h
-IMAGE_RESOURCE_DATA_IS_DIRECTORY equ 80000000h
 
 org IMAGEBASE
 bits 32
@@ -64,11 +61,10 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
-EntryPoint:
-uID equ 15 ; >16 not working yet... 
-base equ uID / 16 ; not working yet
-delta equ uID % 16
+uID equ 150
+RT_STRING equ 6
 
+EntryPoint:
     push strlen
     push buffer
     push uID
@@ -155,7 +151,7 @@ istruc IMAGE_RESOURCE_DIRECTORY
     at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
 iend
 istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd 6    ; .. resource type of that directory
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd RT_STRING ; .. resource type of that directory
     at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type - Directory_Entry_Resource)
 iend
 
@@ -164,10 +160,8 @@ istruc IMAGE_RESOURCE_DIRECTORY
     at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
 iend
 
-times base dd 0, 0
-
 istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
-    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd 1 ; name of the underneath resource
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd (uID / 16) + 1 ; name of the underneath resource
     at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_language - Directory_Entry_Resource)
 iend
 
@@ -186,7 +180,7 @@ istruc IMAGE_RESOURCE_DATA_ENTRY
 iend
 
 resource_data:
-times delta dw 0 ; a null string is the same as no string
+times (uID % 16) dw 0 ; a null string is the same as no string
 
 dw strlen
 stringresource db ' * PE with string resources', 0ah

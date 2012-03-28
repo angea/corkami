@@ -4,8 +4,6 @@
 
 %include 'consts.inc'
 
-IMAGE_RESOURCE_DATA_IS_DIRECTORY equ 80000000h
-
 SOME_TYPE equ 315h
 SOME_NAME equ 7354h
 

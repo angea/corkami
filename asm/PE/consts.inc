@@ -1,4 +1,6 @@
 %define PREFIX_OPERANDSIZE db 66h
+
+IMAGE_RESOURCE_DATA_IS_DIRECTORY equ 80000000h
 PAGE_READWRITE equ 4
 ExceptionContinueExecution equ 0
 
