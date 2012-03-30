@@ -1,7 +1,6 @@
-; ollydbg export parsing bug
-; from http://waleedassar.blogspot.com/2012/02/ollydbg-export-table-parsing-integer.html
+; a 'normal' PE (fishy, I know)
 
-; Ange Albertini, BSD LICENCE 2012
+; Ange Albertini, BSD LICENCE 2009-2011
 
 %include 'consts.inc'
 
@@ -42,10 +41,10 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
 iend
 
-DataDirectory:
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ExportsVA,  dd Exports_Directory - IMAGEBASE, 140h ; size required, needs to be small enough, but not null
-    at IMAGE_DATA_DIRECTORY_16.ImportsVA,  dd import_descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA,      dd Import_Descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ResourceVA,     dd Directory_Entry_Resource - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ResourceSize,   dd 0fffffff7h
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -58,7 +57,6 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
-
 SIZEOFHEADERS equ $ - IMAGEBASE
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
@@ -67,57 +65,63 @@ EntryPoint:
     push Msg
     call [__imp__printf]
     add esp, 1 * 4
-    retn
+_
+    push 0
+    call [__imp__ExitProcess]
 _c
 
-Msg db " * Anti-OllyDbg: export parsing crash", 0ah, 0
+Msg db " * anti-OllyDbg - a PE with bogus resource size", 0ah, 0
 _d
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-import_descriptor:
+Import_Descriptor:
+;kernel32.dll_DESCRIPTOR:
+    dd kernel32.dll_hintnames - IMAGEBASE
+    dd 0, 0
+    dd kernel32.dll - IMAGEBASE
+    dd kernel32.dll_iat - IMAGEBASE
 ;msvcrt.dll_DESCRIPTOR:
     dd msvcrt.dll_hintnames - IMAGEBASE
-    dd 0
-    dd 0
+    dd 0, 0
     dd msvcrt.dll - IMAGEBASE
     dd msvcrt.dll_iat - IMAGEBASE
-; terminator
-    times 5 dd 0
+;terminator
+    dd 0, 0, 0, 0, 0
 _d
 
-msvcrt.dll_iat:
-__imp__printf:
-    dd hnprintf - IMAGEBASE
+kernel32.dll_hintnames:
+    dd hnExitProcess - IMAGEBASE
     dd 0
-
 msvcrt.dll_hintnames:
     dd hnprintf - IMAGEBASE
     dd 0
+_d
 
+hnExitProcess:
+    dw 0
+    db 'ExitProcess', 0
 hnprintf:
     dw 0
     db 'printf', 0
 _d
 
+kernel32.dll_iat:
+__imp__ExitProcess:
+    dd hnExitProcess - IMAGEBASE
+    dd 0
+
+msvcrt.dll_iat:
+__imp__printf:
+    dd hnprintf - IMAGEBASE
+    dd 0
+_d
+
+kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Exports_Directory:
-  Characteristics       dd 0
-  TimeDateStamp         dd 0
-  MajorVersion          dw 0
-  MinorVersion          dw 0
-  Name                  dd 0
-  Base                  dd 0
-  NumberOfFunctions     dd 40000000h ; shifted 2 times => 0
-  NumberOfNames         dd 0
-  AddressOfFunctions    dd blank - IMAGEBASE
-  AddressOfNames        dd blank - IMAGEBASE
-  AddressOfNameOrdinals dd blank - IMAGEBASE
-_d
-
-blank dd 0
+Directory_Entry_Resource:
+istruc IMAGE_RESOURCE_DIRECTORY
+    at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 0
+iend
 
 align FILEALIGN, db 0

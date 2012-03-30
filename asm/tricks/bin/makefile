@@ -1,6 +1,6 @@
 all: common XP W7 64b olly
 
-olly: ollyexp.exe
+olly: ollyexp.exe ollyres.exe
 
 common: opengl.exe
 

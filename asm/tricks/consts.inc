@@ -228,3 +228,12 @@ IMAGE_REL_BASED_HIGHLOW equ 3
 CR equ 0dh
 EOF equ 1ah
 LF equ 0ah
+
+struc IMAGE_RESOURCE_DIRECTORY
+ .Characteristics         resd 1
+ .TimeDateStamp           resd 1
+ .MajorVersion            resw 1
+ .MinorVersion            resw 1
+ .NumberOfNamedEntries    resw 1
+ .NumberOfIdEntries       resw 1
+endstruc
