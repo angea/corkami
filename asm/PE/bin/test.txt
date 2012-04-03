@@ -4,7 +4,8 @@ compiled.exe:
  * a 'compiled' PE
 truncsectbl.exe:
  * truncated section table
-bigalign.exe
+bigalign.exe:
+ * big alignments (10000h/20000000h)
 
 PE with many sections:
 96emptysections.exe:
@@ -34,8 +35,12 @@ tls_exiting.exe:
 tls_noEP.exe:
  * Exiting TLS with no EP:
   # 1st TLS call, ExitProcess() called
+tls_virtEP.exe:
+ * virtual entrypoint executed
 tls_reloc.exe:
  * relocated TLS
+tls_k32.exe:
+ * ignored TLS (only imports to kernel32)
 
 Exports:
 exportobf.exe:
@@ -64,6 +69,10 @@ impbyord.exe:
  * imports resolving to its own exports
 imports_iatindesc.exe:
  * IAT inside descriptors
+imports_tiny.exe:
+ * tiny imports
+imports_virtdesc.exe:
+ * virtual 1st import descriptor
 
 DLL loading:
  * statically loaded DLL and export call
@@ -118,6 +127,8 @@ tiny.exe:
 ImageBase:
 ibkernel.exe:
  * kernel range IMAGEBASE (and relocations)
+ibreloc.exe:
+ * relocated ImageBase (only affects EntryPoint)
 ibkmanual.exe:
  * kernel range IMAGEBASE (with manual relocations)
 bigib.exe:
@@ -182,6 +193,8 @@ reshdr.exe:
  * resource stored in header and shuffled resource structure
 resourceloop.exe:
  * recursive resources directory
+resource_string.exe:
+ * PE with string resources
 
 delay imports:
 delayimports.exe:
@@ -191,3 +204,22 @@ delaycorrupt.exe:
 register corruptions:
 fakeregs.exe:
  * corrupted registers on TLS and Exit return
+winver.exe:
+ * a PE overriding OS values: OS Ver 31.41.5926 PlatformID 3
+
+
+data PEs:
+d_tiny-ld.exe:
+ * tiny data PE (61 bytes)
+d_nonnull-ld.exe:
+ * executed by shellcode call
+d_resource-ld.exe:
+ * resource-only data PE
+maxvals.exe:
+ * a PE with a maximal values in the headers
+
+misc:
+no_dd.exe:
+ * a PE with no DataDirectory (loading imports manually)
+nothing-ld.exe:
+

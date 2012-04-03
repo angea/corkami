@@ -2,7 +2,7 @@
 echo normal.exe:& normal.exe
 echo compiled.exe:& compiled.exe
 echo truncsectbl.exe:& truncsectbl.exe
-echo bigalign.exe
+echo bigalign.exe:& bigalign.exe
 echo.
 echo PE with many sections:
 echo 96emptysections.exe:& 96emptysections.exe
@@ -16,7 +16,9 @@ echo tls_obfuscation.exe:& tls_obfuscation.exe
 echo tls_aoi.exe:& tls_aoi.exe
 echo tls_exiting.exe:& tls_exiting.exe
 echo tls_noEP.exe:& tls_noEP.exe
+echo tls_virtEP.exe:& tls_virtEP.exe
 echo tls_reloc.exe:& tls_reloc.exe
+echo tls_k32.exe:& tls_k32.exe
 echo.
 echo Exports:
 echo exportobf.exe:& exportobf.exe
@@ -33,6 +35,8 @@ echo imports_nothunk.exe:& imports_nothunk.exe
 echo importshint.exe:& importshint.exe
 echo impbyord.exe:& impbyord.exe
 echo imports_iatindesc.exe:& imports_iatindesc.exe
+echo imports_tiny.exe:& imports_tiny.exe
+echo imports_virtdesc.exe:& imports_virtdesc.exe
 echo.
 echo DLL loading:
 echo  * statically loaded DLL and export call
@@ -96,13 +100,26 @@ echo resource2.exe:& resource2.exe
 echo namedresource.exe:& namedresource.exe
 echo reshdr.exe:& reshdr.exe
 echo resourceloop.exe:& resourceloop.exe
+echo resource_string.exe:& resource_string.exe
 echo.
 echo delay imports:
 echo delayimports.exe:& delayimports.exe
 echo delaycorrupt.exe:& delaycorrupt.exe
 echo register corruptions:
 echo fakeregs.exe:& fakeregs.exe
+echo.
+echo winver.exe:& winver.exe
+echo.
+echo data PEs:
+echo d_tiny-ld.exe:& d_tiny-ld.exe
+echo d_nonnull-ld.exe:& d_nonnull-ld.exe
+echo d_resource-ld.exe:& d_resource-ld.exe
+echo maxvals.exe:& maxvals.exe
+echo.
+echo misc:
+echo no_dd.exe:& no_dd.exe
+echo nothing-ld.exe:& nothing-ld.exe
+echo.
 rem dll-webdavld.exe disabled until found a suitable host
-rem pdf.exe disabled because of the non-console output
+rem pdf.exe / pdf_zip_pe.exe disabled because of the non-console output
 rem quine.exe disabled because creates an extra window
-rem driver.sys disabled because, well, it's a driver :D
