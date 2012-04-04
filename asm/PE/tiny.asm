@@ -22,7 +22,7 @@ istruc IMAGE_FILE_HEADER
     at IMAGE_FILE_HEADER.Machine,               dw IMAGE_FILE_MACHINE_I386
     at IMAGE_FILE_HEADER.TimeDateStamp
 msvcrt.dll  db 'msvcrt.dll', 0 ; keeping the extension in case it'd work under W2K
-    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
+    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE ; | IMAGE_FILE_32BIT_MACHINE
 
 iend
 

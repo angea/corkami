@@ -49,6 +49,7 @@ echo dllord-ld.exe:& dllord-ld.exe
 echo dllnoreloc-ld.exe:& dllnoreloc-ld.exe
 echo dllnoexp-dynld.exe:& dllnoexp-dynld.exe
 echo ownexports.exe:& ownexports.exe
+echo dllnomain-ld.exe:& dllnomain-ld.exe
 echo.
 echo export forwarding:
 echo dllfw-ld.exe:& dllfw-ld.exe
