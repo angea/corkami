@@ -28,7 +28,7 @@ istruc IMAGE_FILE_HEADER
                 at IMAGE_FILE_HEADER.PointerToSymbolTable , dd -1
                 at IMAGE_FILE_HEADER.NumberOfSymbols      , dd -1
     at IMAGE_FILE_HEADER.SizeOfOptionalHeader,  dw SIZEOFOPTIONALHEADER
-    at IMAGE_FILE_HEADER.Characteristics,       dw IMAGE_FILE_EXECUTABLE_IMAGE | IMAGE_FILE_32BIT_MACHINE
+    at IMAGE_FILE_HEADER.Characteristics,       dw 0DFFFh
 iend
 
 OptionalHeader:

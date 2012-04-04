@@ -40,6 +40,8 @@ a9a2c41e5a53a90dc7ebd8f3472bbdf0271c8d00 *dllfwloop-ld.exe
 d4ad97d67014493438e83be7f1980e4ebdd940a1 *dllnoexp.dll
 e244f708990be4fbd1c7439251a2ecb6ee0aa0f3 *dllnoexp-dynld.exe
 dbf0f3ef5d99ee3000cedb9229c81124b5b5506f *dllnomain.dll
+fadd22ff720014b8ff484272174398f6f8855035 *dllnomain2.dll
+599112b9231b6f642254918640b50ccfb372f02b *dllnomain2-dynld.exe
 1244ca46a7cd3013a4d3700e8747bd09ac0d96dd *dllnomain-ld.exe
 d73b22d0eeb508fcc67229c9d6fd6479d7539140 *dllnoreloc.dll
 5919344865045f91de2dd3e37ce9dc877565bd93 *dllnoreloc-ld.exe
@@ -88,7 +90,7 @@ dc3977014027d86539bd6986b857c51da5a0ac5c *importshint.exe
 596f786f7294d463c167a4705af3370040d812f6 *maxsec_lowaligW7.exe
 d8e4499216c621da090a133bf4b6769c240651d7 *maxsecW7.exe
 97fab3bffc7060300b0ecdac66233d31323064ee *maxsecXP.exe
-1ca427c48129742ac9c3f6ec587f4cab734798cc *maxvals.exe
+a84b322a84baffccefef67d74665495f3e9c4084 *maxvals.exe
 7e85a926af52f015c51b04a1af70601dd6db8415 *multiss.exe
 6b8244baa5444c1b513fcfbf13f3b0348c2357ea *multiss_con.exe
 4f53954ef782d356ff15018b339326007c631612 *multiss_drv.sys

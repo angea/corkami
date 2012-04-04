@@ -109,6 +109,8 @@ ownexports.exe:
  * imports resolving to its own exports
 dllnomain-ld.exe:
   # staticly-loaded DLL with no DLLMain
+dllnomain2-dynld.exe:
+  # dynamically-loaded DLL with no DLLMain
 
 export forwarding:
 dllfw-ld.exe:
@@ -212,11 +214,9 @@ winver.exe:
 
 data PEs:
 d_tiny-ld.exe:
- * tiny data PE (61 bytes)
-
+ * tiny data PE (61 bytes)
 d_nonnull-ld.exe:
- * executed by shellcode call
-
+ * executed by shellcode call
 d_resource-ld.exe:
  * resource-only data PE
 maxvals.exe:
