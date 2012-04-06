@@ -331,3 +331,21 @@ struc TRUNC_OPTIONAL_HEADER32
   .Subsystem                    resb 1  ; truncated as a byte
   ; no more data
 endstruc
+
+struc VS_FIXEDFILEINFO
+  .dwSignature           resd 1
+  .dwStrucVersion        resd 1
+  .dwFileVersionMS       resd 1
+  .dwFileVersionLS       resd 1
+  .dwProductVersionMS    resd 1
+  .dwProductVersionLS    resd 1
+  .dwFileFlagsMask       resd 1
+  .dwFileFlags           resd 1
+  .dwFileOS              resd 1
+  .dwFileType            resd 1
+  .dwFileSubtype         resd 1
+  .dwFileDateMS          resd 1
+  .dwFileDateLS          resd 1
+endstruc
+
+RT_VERSION 		equ 16
