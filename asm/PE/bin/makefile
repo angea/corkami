@@ -30,7 +30,7 @@ bound: dllbound.dll dllbound-ld.exe dllbound-redirld.exe
 tls: tls.exe tls_obfuscation.exe tls_import.exe mz.exe tls_onthefly.exe tls_aoi.exe \
     tls_aoiOSDET.exe tls_exiting.exe tls_noEP.exe tls_reloc.exe tls_k32.exe tls_virtEP.exe
 
-delay: delayimports.exe delaycorrupt.exe
+delay: delayimports.exe delaycorrupt.exe delayfake.exe
 
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 

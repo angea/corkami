@@ -205,6 +205,9 @@ delayimports.exe:
  * delay imports
 delaycorrupt.exe:
  * delay imports with empty values
+delayfake.exe:
+ * fake delay imports data obfuscation
+
 register corruptions:
 fakeregs.exe:
  * corrupted registers on TLS and Exit return
@@ -214,9 +217,11 @@ winver.exe:
 
 data PEs:
 d_tiny-ld.exe:
- * tiny data PE (61 bytes)
+ * tiny data PE (61 bytes)
+
 d_nonnull-ld.exe:
- * executed by shellcode call
+ * executed by shellcode call
+
 d_resource-ld.exe:
  * resource-only data PE
 maxvals.exe:

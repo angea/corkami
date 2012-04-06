@@ -107,6 +107,8 @@ echo.
 echo delay imports:
 echo delayimports.exe:& delayimports.exe
 echo delaycorrupt.exe:& delaycorrupt.exe
+echo delayfake.exe:& delayfake.exe
+echo.
 echo register corruptions:
 echo fakeregs.exe:& fakeregs.exe
 echo.

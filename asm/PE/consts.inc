@@ -293,3 +293,41 @@ struc IMAGE_RESOURCE_DATA_ENTRY
     .CodePage     resd 1
     .Reserved     resd 1
 endstruc
+
+struc _IMAGE_DELAY_IMPORT_DESCRIPTOR
+    .grAttrs       resd 1  ; attributes
+    .rvaDLLName    resd 1  ; RVA to dll name
+    .rvaHmod       resd 1  ; RVA of module handle
+    .rvaIAT        resd 1  ; RVA of the IAT
+    .rvaINT        resd 1  ; RVA of the INT
+    .rvaBoundIAT   resd 1  ; RVA of the optional bound IAT
+    .rvaUnloadIAT  resd 1  ; RVA of optional copy of original IAT
+    .dwTimeStamp   resd 1  ; 0 if not bound
+endstruc
+
+struc TRUNC_OPTIONAL_HEADER32
+  .Magic                        resw 1
+  .MajorLinkerVersion           resb 1
+  .MinorLinkerVersion           resb 1
+  .SizeOfCode                   resd 1
+  .SizeOfInitializedData        resd 1
+  .SizeOfUninitializedData      resd 1
+  .AddressOfEntryPoint          resd 1
+  .BaseOfCode                   resd 1
+  .BaseOfData                   resd 1
+  .ImageBase                    resd 1
+  .SectionAlignment             resd 1
+  .FileAlignment                resd 1
+  .MajorOperatingSystemVersion  resw 1
+  .MinorOperatingSystemVersion  resw 1
+  .MajorImageVersion            resw 1
+  .MinorImageVersion            resw 1
+  .MajorSubsystemVersion        resw 1
+  .MinorSubsystemVersion        resw 1
+  .Win32VersionValue            resd 1
+  .SizeOfImage                  resd 1
+  .SizeOfHeaders                resd 1
+  .CheckSum                     resd 1
+  .Subsystem                    resb 1  ; truncated as a byte
+  ; no more data
+endstruc

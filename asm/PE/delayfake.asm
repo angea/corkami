@@ -73,8 +73,10 @@ DelayImportLoad:
     call [__imp__ExitProcess]
 _c
 
-Msg db " * delay imports", 0ah, 0
+Msg db " * fake delay imports data obfuscation", 0ah, 0
 _d
+
+fakedll db 'fake.dll', 0
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
@@ -128,15 +130,14 @@ msvcrt_int:
 _d
 hnprintf:
     dw 0
-    db 'printf',0
+    db 'fake',0
 
 kernel32.dll db 'kernel32.dll', 0
-msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 delay_imports:
 istruc _IMAGE_DELAY_IMPORT_DESCRIPTOR
-    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaDLLName,   dd msvcrt.dll
+    at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaDLLName,   dd fakedll
     at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaIAT,       dd delay_iat - IMAGEBASE
     at _IMAGE_DELAY_IMPORT_DESCRIPTOR.rvaINT,       dd msvcrt_int
 iend
@@ -149,10 +150,14 @@ __imp__printf:
     dd 0
 _d
 
+printf db 'printf', 0
+msvcrt.dll db 'msvcrt.dll', 0
+_d
+
 __delay__printf:
     push msvcrt.dll
     call [__imp__LoadLibraryA]
-    push hnprintf + 2
+    push printf
     push eax
     call [__imp__GetProcAddress]
     push eax
