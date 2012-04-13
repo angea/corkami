@@ -349,3 +349,31 @@ struc VS_FIXEDFILEINFO
 endstruc
 
 RT_VERSION 		equ 16
+
+; widechar string macro
+%macro WIDE 1
+%assign %%__i 1
+%strlen %%__len %1
+%rep %%__len
+	%substr %%__c %1 %%__i
+		db %%__c
+		db 0
+	%assign %%__i %%__i + 1
+%endrep
+	db 0, 0
+%endmacro
+
+
+%macro __string 2
+%%string:
+dw %%SLEN
+dw %%VALLEN / 2 ; dammit !
+dw 1 ; text type
+WIDE %1
+	align 4, db 0
+%%val:
+	WIDE %2
+	%%VALLEN equ $ - %%val
+	align 4, db 0
+%%SLEN equ $ - %%string
+%endmacro
