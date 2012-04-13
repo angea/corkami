@@ -19,6 +19,7 @@ ef606030706c987fd7bc0de13d84128aa480b6c9 *d_nonnull.dll
 83bed09504a92aeac2c0f9f494314ee090d8b451 *d_tiny.dll
 a63281031607e290bdff10524d990501dd7618f5 *d_tiny-ld.exe
 5c3cfdce157d8c515ed212e2958ee733911133a2 *delaycorrupt.exe
+aef165cce96f33b9d1c5520a48e9a6e55ba3e790 *delayfake.exe
 ee509d34e50dd24392424405039df04f089aa730 *delayimports.exe
 8dad2c77a7e24e12a36baaed8b26287762bfc497 *dll.dll
 28aea3143b3b300ec45c7600cb04a9529f3b892b *dllbound.dll
@@ -144,6 +145,9 @@ c415fbb5669cd68b1eb7fb2be282aed0f55c0446 *tls_obfuscation.exe
 c0c49142efe5465137aae9c0a7cce74ccf04a116 *tls_virtEP.exe
 946d7ee8f1fbbc82995275ebdb6720d2e8030d14 *truncatedlast.exe
 07faec677f3f0f35c11224b8b61bcfb37bd84b03 *truncsectbl.exe
+7a6b3b1dcde1facb9fb01d1cb8ed81ab03f5311e *version_cust.exe
+80ffe9a8ceeff0b00fe08df2a9e01ed87a3ad1e8 *version_mini.exe
+ab4b504d2d59eb2925f2bf92a572271702ccbe4b *version_std.exe
 c8da473fe7372a0312f6883dfd3488b8c14f0d95 *virtEP.exe
 eca64e5e5f65a33962aeb27a1c1c1bade95ecc7a *virtgap.exe
 cbbd4253428916376536687e5403a970c1475511 *virtrelocXP.exe
