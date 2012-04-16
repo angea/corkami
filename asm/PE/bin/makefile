@@ -41,8 +41,9 @@ version: version_mini.exe version_std.exe version_cust.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impbyord.exe \
     imports_badterm.exe manyimportsW7.exe imports_vterm.exe imports_nothunk.exe \
-    imports_iatindesc.exe imports_tiny.exe imports_virtdesc.exe importshint.exe nothing.dll \
-	nothing-ld.exe d_tiny.dll d_tiny-ld.exe d_nonnull.dll d_nonnull-ld.exe sc.exe
+    imports_iatindesc.exe imports_tinyXP.exe imports_virtdesc.exe importshint.exe nothing.dll \
+	nothing-ld.exe d_tiny.dll d_tiny-ld.exe d_nonnull.dll d_nonnull-ld.exe sc.exe \
+	imports_tinyW7.exe 
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
     tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe \

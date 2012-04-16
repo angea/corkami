@@ -4,7 +4,7 @@
 
 %include 'consts.inc'
 
-IMAGEBASE equ 0fffffffffff0000h
+IMAGEBASE equ 0ffffffffffff0000h
 org IMAGEBASE
 bits 64
 

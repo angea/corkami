@@ -35,7 +35,6 @@ echo imports_nothunk.exe:& imports_nothunk.exe
 echo importshint.exe:& importshint.exe
 echo impbyord.exe:& impbyord.exe
 echo imports_iatindesc.exe:& imports_iatindesc.exe
-echo imports_tiny.exe:& imports_tiny.exe
 echo imports_virtdesc.exe:& imports_virtdesc.exe
 echo.
 echo DLL loading:

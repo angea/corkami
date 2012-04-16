@@ -80,7 +80,7 @@ iend
 
 message db " * executed by shellcode call", 0dh, 0ah, 0
 
-times 268 - 266 db 0
+times 268 - 260 db 0
 SIZEOFIMAGE equ 268
 
 struc IMAGE_DATA_DIRECTORY_13

@@ -69,8 +69,6 @@ impbyord.exe:
  * imports resolving to its own exports
 imports_iatindesc.exe:
  * IAT inside descriptors
-imports_tiny.exe:
- * tiny imports
 imports_virtdesc.exe:
  * virtual 1st import descriptor
 

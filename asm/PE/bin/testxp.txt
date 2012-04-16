@@ -19,6 +19,8 @@ tinydllXP-ld.exe:
   # dll loaded
 reloccryptXP.exe:
  * decryption via relocations (from null imagebase, XP only)
+imports_tinyXP.exe:
+ * tiny imports
 
 DOS:
 dosZMXP.exe:
