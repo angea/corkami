@@ -50,6 +50,8 @@ echo dllnoexp-dynld.exe:& dllnoexp-dynld.exe
 echo ownexports.exe:& ownexports.exe
 echo dllnomain-ld.exe:& dllnomain-ld.exe
 echo dllnomain2-dynld.exe:& dllnomain2-dynld.exe
+echo dllnullep-dynld.exe:& dllnullep-dynld.exe
+echo dllnullep-ld.exe:& dllnullep-dynld.exe
 echo.
 echo export forwarding:
 echo dllfw-ld.exe:& dllfw-ld.exe

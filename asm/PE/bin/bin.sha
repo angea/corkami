@@ -46,6 +46,9 @@ fadd22ff720014b8ff484272174398f6f8855035 *dllnomain2.dll
 1244ca46a7cd3013a4d3700e8747bd09ac0d96dd *dllnomain-ld.exe
 d73b22d0eeb508fcc67229c9d6fd6479d7539140 *dllnoreloc.dll
 5919344865045f91de2dd3e37ce9dc877565bd93 *dllnoreloc-ld.exe
+cd8597ecd16fd27c4085e5a26cfc1b6f1bbbfc55 *dllnullep.dll
+d984246bcad10a614dc1e2045ad143676d18f930 *dllnullep-dynld.exe
+e35ffb89973ef6ab7401a8776ce6eaacde041e8e *dllnullep-ld.exe
 0fa99fb6322e72ac9b31753609d81a5a6e77d208 *dllord.dll
 686bdd8d553067ffea64b85fb4d611284d323848 *dllord-ld.exe
 4e8f79062be25315e0b636b7463f3d2f64503566 *dll-webdavld.exe
@@ -80,6 +83,7 @@ ac8dc5892735cbb68b85186412f51b59c1982d18 *imports_apimsW7.exe
 8651f8fb0a1eccc4e9aeabe153b44ef434132501 *imports_badterm.exe
 47ecc22e0b62b00476fc5a68f48dc9dfd7e10aa0 *imports_iatindesc.exe
 ca75d3f7efb6b18d6bf0c3bd8e896c81e7539d74 *imports_mixed.exe
+c1aaaed08f8f8c0945c768464123d8d1abb19f50 *imports_multidesc.exe
 79189e97c5e779eb022ac37267fba86a41810ef4 *imports_noext.exe
 0641c6531625d1f5e93d04f31808f915404d9043 *imports_noint.exe
 ab309b67e3872a3c4e092090078f4d42994de645 *imports_nothunk.exe

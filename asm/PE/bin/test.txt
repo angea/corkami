@@ -109,6 +109,10 @@ dllnomain-ld.exe:
   # staticly-loaded DLL with no DLLMain
 dllnomain2-dynld.exe:
   # dynamically-loaded DLL with no DLLMain
+dllnullep-dynld.exe:
+ * a DLL with a null entrypoint
+dllnullep-ld.exe:
+ * a DLL with a null entrypoint
 
 export forwarding:
 dllfw-ld.exe:
