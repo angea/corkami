@@ -1,0 +1,17 @@
+InfoKey: Title
+InfoValue: PE 101 - a windows executable walkthrough
+InfoKey: Subject
+InfoValue: Introduction to the Portable Executable file format
+InfoKey: Author
+InfoValue: Ange Albertini - http://corkami.com
+InfoKey: Keywords
+InfoValue: portable executable, walkthrough, windows, binary, executable, file format, coff
+InfoKey: Creator
+InfoValue: Inkscape
+InfoKey: Producer
+InfoValue: Cairo
+InfoKey: CreationDate
+InfoValue: D:20120408235921Z
+
+InfoKey: ModDate
+InfoValue: D:20120426031415Z
