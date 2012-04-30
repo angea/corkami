@@ -12,7 +12,8 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
     dll-webdavld.exe dupsec.exe secinsec.exe bigib.exe dllnomain.dll dllnomain-ld.exe \
-	dllnomain2.dll dllnomain2-dynld.exe dllnullep.dll dllnullep-ld.exe dllnullep-dynld.exe
+	dllnomain2.dll dllnomain2-dynld.exe dllnullep.dll dllnullep-ld.exe dllnullep-dynld.exe \
+	dllnegep.dll dllnegep-ld.exe
 
 relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe fakerelocs.exe
 
@@ -44,13 +45,14 @@ imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impby
     imports_iatindesc.exe imports_virtdesc.exe importshint.exe nothing.dll \
 	nothing-ld.exe d_tiny.dll d_tiny-ld.exe d_nonnull.dll d_nonnull-ld.exe sc.exe \
 
+
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
     tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe \
     dosZMXP.exe driver.sys tinydrivXP.sys virtrelocXP.exe exe2pe.exe imports_tinyXP.exe
 
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
     appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe imports_apimsW7.exe \
-    ibrelocW7.exe ibknoreloc64.exe imports_tinyW7.exe manyimportsW7.exe
+    ibrelocW7.exe ibknoreloc64.exe imports_tinyW7.exe manyimportsW7.exe imports_relocW7.exe
 
 multiss_gui.exe: multiss.exe
 	c:\python26\python multiss.py
