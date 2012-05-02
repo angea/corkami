@@ -5,7 +5,7 @@ InfoValue: Introduction to the Portable Executable file format
 InfoKey: Author
 InfoValue: Ange Albertini - http://corkami.com
 InfoKey: Keywords
-InfoValue: portable executable, walkthrough, windows, binary, executable, file format, coff
+InfoValue: portable executable, coff, introduction, walkthrough, windows, binary, executable, file format
 InfoKey: Creator
 InfoValue: Inkscape
 InfoKey: Producer
@@ -14,4 +14,4 @@ InfoKey: CreationDate
 InfoValue: D:20120408235921Z
 
 InfoKey: ModDate
-InfoValue: D:20120426031415Z
+InfoValue: D:20120502031415Z
