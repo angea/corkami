@@ -27,15 +27,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.42402406"
-     inkscape:cx="1031.0947"
-     inkscape:cy="750.16048"
+     inkscape:zoom="1.5038533"
+     inkscape:cx="1666.648"
+     inkscape:cy="926.35127"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
-     showguides="false"
+     showguides="true"
      inkscape:guide-bbox="true"
      inkscape:snap-global="true"
      inkscape:snap-object-midpoints="false"
@@ -69,14 +69,6 @@
        visible="true"
        enabled="true"
        snapvisiblegridlinesonly="true" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="1476.8647,435.97273"
-       id="guide4513" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="1316.7671,371.10337"
-       id="guide4519" />
   </sodipodi:namedview>
   <title
      id="title3725">PE 101 - a windows executable walkthrough</title>
@@ -3513,12 +3505,12 @@
          x="2341.0664"
          y="-1485.8085"
          id="tspan5172-5"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">processor: ARM/MIPS/Intel...?</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">processor: ARM/MIPS/Intel/...</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1473.3085"
          id="tspan5174-7"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">how many sections?</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">number of sections</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1460.8085"
@@ -3544,7 +3536,7 @@
          sodipodi:role="line"
          x="2341.0664"
          y="-1414.3085"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">32 or 64 bits?</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">32 bits/64 bits</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1401.8085"
@@ -3569,7 +3561,7 @@
          x="2341.0664"
          y="-1351.8085"
          id="tspan5194-4-6-1"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">which Windows can run it ?</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">which Windows can run it?</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1339.3085"
@@ -3584,12 +3576,12 @@
          x="2341.0664"
          y="-1314.3085"
          id="tspan5200-1-0-5"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">driver/graphical/command line... ?</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">driver/graphical/command line/...</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1301.8085"
          id="tspan5202-6-5-3"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">how many data directories?</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">number of data directories</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1289.3085"
@@ -4342,23 +4334,23 @@
        id="text5016"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan5018"
          x="2069.6409"
-         y="-1128.4669"><tspan
+         y="-1128.4669"
+         id="tspan5020">For each section, a <tspan
    style="fill:#008080"
-   id="tspan5022">SizeofRawData</tspan>-sized blocks read from the file at <tspan
+   id="tspan5022">SizeofRawData</tspan> sized block is read from the file at <tspan
    style="fill:#000080"
-   id="tspan5024">PointerToRawData</tspan> offset</tspan><tspan
+   id="tspan5024">PointerToRawData</tspan> offset.</tspan><tspan
          sodipodi:role="line"
          x="2069.6409"
          y="-1115.9669"
-         id="tspan5020">will be loaded in memory at address <tspan
+         id="tspan5412">It will be loaded in memory at address <tspan
    style="fill:#000080"
    id="tspan5028">ImageBase</tspan> + <tspan
    style="fill:#008000"
    id="tspan5026">VirtualAddress</tspan> in a <tspan
    style="fill:#808000"
-   id="tspan5032">VirtualSize</tspan>-sized block, with specific <tspan
+   id="tspan5032">VirtualSize</tspan> sized block, with specific <tspan
    style="fill:#800080"
    id="tspan5034">characteristics</tspan>.</tspan></text>
     <text
@@ -5092,23 +5084,23 @@
        sodipodi:linespacing="125%"
        id="text4529"
        y="-1195.6145"
-       x="2277.9641"
+       x="2273.9641"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R Bold"
        xml:space="preserve"><tspan
          y="-1195.6145"
-         x="2277.9641"
+         x="2273.9641"
          id="tspan4531"
          sodipodi:role="line">*</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R Bold"
-       x="2187.9641"
+       x="2183.9641"
        y="-1195.6145"
        id="text4550"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4552"
-         x="2187.9641"
+         x="2183.9641"
          y="-1195.6145">*</tspan></text>
     <text
        sodipodi:linespacing="125%"
@@ -6815,12 +6807,12 @@
          x="2015.7201"
          y="-481.58148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         id="tspan4517">on disk, it is a copy of the IAT</tspan><tspan
+         id="tspan4517">On file it is a copy of the IAT</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-469.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         id="tspan4482">after loading, it points to the imported APIs</tspan><tspan
+         id="tspan4482">After loading it points to the imported APIs</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-456.58148"
@@ -7019,8 +7011,8 @@
    style="fill:#808080"
    id="tspan5491-0">40</tspan>3000</tspan></text>
     <path
-       transform="matrix(0.105845,0,0,0.105845,2347.1158,-1709.5304)"
-       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
+       transform="matrix(0.105845,0,0,0.105845,2341.1158,-1709.5304)"
+       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7032,12 +7024,12 @@
        sodipodi:linespacing="125%"
        id="text3792-7-0-9"
        y="-1572.8337"
-       x="2408.3835"
+       x="2402.3835"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
        xml:space="preserve"><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
          y="-1572.8337"
-         x="2408.3835"
+         x="2402.3835"
          id="tspan3794-4-7-5"
          sodipodi:role="line">2</tspan></text>
     <path
@@ -7858,18 +7850,18 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
-       transform="matrix(0.103151,0,0,0.103151,2380.1158,-1535.1624)" />
+       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       transform="matrix(0.103151,0,0,0.103151,2374.1158,-1535.1624)" />
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
-       x="2439.6318"
+       x="2433.6318"
        y="-1402.2089"
        id="text6055"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6057"
-         x="2439.6318"
+         x="2433.6318"
          y="-1402.2089"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">4</tspan></text>
     <path
@@ -8000,7 +7992,9 @@
          y="-568.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4509">Code´s addresses are <tspan
+         id="tspan4509">Code<tspan
+   style="-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+   id="tspan5400">´</tspan>s addresses are <tspan
    style="font-style:italic"
    id="tspan4511">not</tspan> relative.</tspan><tspan
          id="tspan4426"
@@ -8057,7 +8051,7 @@
          sodipodi:role="line"
          x="2015.7201"
          y="-693.32721"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana">starts with 'MZ' (initials of Mark Zbikowski, MS-DOS developer)</tspan><tspan
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana">Starts with 'MZ' (initials of Mark Zbikowski, MS-DOS developer)</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-680.82721"
@@ -8091,12 +8085,12 @@
          y="-637.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4497">optional only for non-standard PEs</tspan><tspan
+         id="tspan4497">Optional only for non-standard PEs </tspan><tspan
          id="tspan4447"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          y="-624.82721"
          x="2015.7201"
-         sodipodi:role="line">required for executables</tspan></text>
+         sodipodi:role="line">but required for executables</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4472"
@@ -8117,7 +8111,7 @@
          y="-665.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4478">starts with 'PE' (Portable Executable)</tspan><tspan
+         id="tspan4478">Starts with 'PE' (Portable Executable)</tspan><tspan
          id="tspan4480"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          y="-652.82721"
@@ -8150,7 +8144,7 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          id="tspan4504"><tspan
            style="font-size:10px;font-weight:normal;fill:#000000;-inkscape-font-specification:Verdana"
-           id="tspan4506">not required, only provides a speed-up, by reducing look-up</tspan></tspan><tspan
+           id="tspan4506">not required but provides a speed-up by reducing look-up</tspan></tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-415.08148"
@@ -8185,24 +8179,24 @@
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       x="2245.2649"
+       x="2241.2649"
        y="-1295.4485"
        id="text4521"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="2245.2649"
+         x="2241.2649"
          y="-1295.4485"
          id="tspan4523">RVA</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4554"
        y="-1295.4485"
-       x="2155.2649"
+       x="2151.2649"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"><tspan
          id="tspan4556"
          y="-1295.4485"
-         x="2155.2649"
+         x="2151.2649"
          sodipodi:role="line">RVA</tspan></text>
     <text
        sodipodi:linespacing="125%"
@@ -8214,6 +8208,6 @@
          id="tspan3840-1-6-8-2-4-5-7-7"
          y="-886.61871"
          x="2288.5762"
-         sodipodi:role="line">all addresses here are RVAs.</tspan></text>
+         sodipodi:role="line">All addresses here are RVAs.</tspan></text>
   </g>
 </svg>
