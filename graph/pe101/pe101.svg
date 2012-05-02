@@ -17,9 +17,9 @@
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="pe101.svg"
-   inkscape:export-filename="d:\_nc10\sources\corkami\trunk\graph\pe101\pe101-rc1.png"
-   inkscape:export-xdpi="199.97723"
-   inkscape:export-ydpi="199.97723">
+   inkscape:export-filename="d:\_nc10\sources\corkami\trunk\graph\pe101\pe101-preview.png"
+   inkscape:export-xdpi="37.413887"
+   inkscape:export-ydpi="37.413887">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -27,11 +27,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5038533"
-     inkscape:cx="1666.648"
-     inkscape:cy="926.35127"
+     inkscape:zoom="0.42194552"
+     inkscape:cx="1031.0947"
+     inkscape:cy="750.16048"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
@@ -2021,7 +2021,7 @@
            style="fill:#808080"
            id="tspan6657">  user32.dll         </tspan><tspan
            id="tspan4736"
-           style="fill:#ff00ff">0/MessageBoxA</tspan></tspan><tspan
+           style="fill:#ff00ff">0,MessageBoxA</tspan></tspan><tspan
          sodipodi:role="line"
          x="2079.6003"
          y="-818.19757"
@@ -4891,7 +4891,7 @@
      style="fill:#4d4d4d"
      id="tspan4750">  kernel32.dll       </tspan></tspan><tspan
    id="tspan4726"
-   style="fill:#800080">0/ExitProcess</tspan></tspan><tspan
+   style="fill:#800080">0,ExitProcess</tspan></tspan><tspan
          id="tspan4545"
          style="font-size:10px;fill:#008000"
          y="-887.69757"
@@ -6704,24 +6704,24 @@
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1-8-8"
        y="-1007.7316"
-       x="2260.3586"
+       x="2259.0537"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"><tspan
          id="tspan3840-1-6-8-7-8-7"
          y="-1007.7316"
-         x="2260.3586"
-         sodipodi:role="line">Hint/Name</tspan></text>
+         x="2259.0537"
+         sodipodi:role="line">Hint,Name</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1-8-8-5"
        y="-939.73169"
-       x="2260.3586"
+       x="2259.3147"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"><tspan
          id="tspan3840-1-6-8-7-8-7-1"
          y="-939.73169"
-         x="2260.3586"
-         sodipodi:role="line">Hint/Name</tspan></text>
+         x="2259.3147"
+         sodipodi:role="line">Hint,Name</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1-8-2"
@@ -8020,7 +8020,7 @@
          y="-522.08148"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4484">Null-terminated list of pointers to Hint/Names</tspan><tspan
+         id="tspan4484">Null-terminated list of pointers to Hint,Names</tspan><tspan
          id="tspan4450"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          y="-509.58148"
