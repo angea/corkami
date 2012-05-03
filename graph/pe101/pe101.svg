@@ -15,11 +15,11 @@
    height="1488.189"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.1 "
    sodipodi:docname="pe101.svg"
-   inkscape:export-filename="d:\_nc10\sources\corkami\trunk\graph\pe101\pe101-preview.png"
-   inkscape:export-xdpi="37.413887"
-   inkscape:export-ydpi="37.413887">
+   inkscape:export-filename="d:\pe101-v1.png"
+   inkscape:export-xdpi="200"
+   inkscape:export-ydpi="200">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.42194552"
-     inkscape:cx="1031.0947"
-     inkscape:cy="750.16048"
+     inkscape:zoom="0.42285822"
+     inkscape:cx="1052.3622"
+     inkscape:cy="744.09448"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -3315,7 +3315,7 @@
          x="2067.6003"
          y="-1351.8085"
          id="tspan5194-4-6"
-         style="font-size:10px;fill:#808000"> MajorSubsystemVersion  4</tspan><tspan
+         style="font-size:10px;fill:#808000"> MajorSubsystemVersion  4 [NT 4 or later]</tspan><tspan
          sodipodi:role="line"
          x="2067.6003"
          y="-1339.3085"
@@ -3546,7 +3546,7 @@
          x="2341.0664"
          y="-1389.3085"
          id="tspan5188-9-0-1"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">address where it should be mapped in memory</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">address where the file should be mapped in memory</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1376.8085"
@@ -3561,7 +3561,7 @@
          x="2341.0664"
          y="-1351.8085"
          id="tspan5194-4-6-1"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">which Windows can run it?</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">required version of Windows</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1339.3085"
@@ -5847,9 +5847,9 @@
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-81-0"
-       width="165.8591"
+       width="170.33084"
        height="54.927105"
-       x="1028.0791"
+       x="1025.8433"
        y="-1158.0764" />
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -5918,41 +5918,37 @@
            y="-1249.5541"
            style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">defines how the file is loaded in memory</tspan></text>
     </g>
-    <g
-       id="g4478"
-       transform="translate(0,9.3799191)">
-      <rect
-         style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect3735-5-3-0-28"
-         width="240.36328"
-         height="35.444019"
-         x="1292.6094"
-         y="-1417.038" />
-      <text
-         xml:space="preserve"
-         style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+    <rect
+       y="-1407.6581"
+       x="1334.2816"
+       height="35.444019"
+       width="157.01886"
+       id="rect3735-5-3-0-28"
+       style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-3-5-1"
+       y="-1387.8004"
+       x="1411.963"
+       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
+         y="-1387.8004"
          x="1411.963"
-         y="-1397.1803"
-         id="text4620-7-3-5-1"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-3-7-5"
-           x="1411.963"
-           y="-1397.1803"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">optional header</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="text4620-7-32-1-9-5-3"
-         y="-1385.5399"
+         id="tspan4622-7-3-7-5"
+         sodipodi:role="line">optional header</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="1413.2081"
+       y="-1376.16"
+       id="text4620-7-32-1-9-5-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
          x="1413.2081"
-         style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           id="tspan10363-8"
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
-           y="-1385.5399"
-           x="1413.2081"
-           sodipodi:role="line">executable information</tspan></text>
-    </g>
+         y="-1376.16"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
+         id="tspan10363-8">executable information</tspan></text>
     <rect
        y="-1460.2012"
        x="1271.6106"
@@ -5960,40 +5956,37 @@
        width="282.005"
        id="rect3735-5-3-7"
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <g
-       id="g5282">
-      <rect
-         style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect3735-5-3-2"
-         width="107.06635"
-         height="30.654737"
-         x="1359.08"
-         y="-1459.5908" />
-      <text
-         xml:space="preserve"
-         style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1411.7538"
+    <rect
+       y="-1459.5908"
+       x="1356.0765"
+       height="30.654737"
+       width="113.07316"
+       id="rect3735-5-3-2"
+       style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-3-5-2-0-6"
+       y="-1441.1804"
+       x="1411.7538"
+       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1441.1804"
-         id="text4620-7-3-5-2-0-6"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-3-7-3-2-1"
-           x="1411.7538"
-           y="-1441.1804"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">PE header</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:11.88888073px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1412.619"
+         x="1411.7538"
+         id="tspan4622-7-3-7-3-2-1"
+         sodipodi:role="line">PE header</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-32-1-9-6-6-1"
+       y="-1431.54"
+       x="1412.619"
+       style="font-size:11.88888073px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1431.54"
-         id="text4620-7-32-1-9-6-6-1"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-1-3-8-7-0-1"
-           x="1412.619"
-           y="-1431.54"
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">tells it's a 'modern' binary</tspan></text>
-    </g>
+         x="1412.619"
+         id="tspan4622-7-1-3-8-7-0-1"
+         sodipodi:role="line">shows it's a 'modern' binary</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-9"
@@ -6034,109 +6027,99 @@
            y="-1188.931"
            style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">header</tspan></text>
     </g>
-    <g
-       id="g5233">
-      <rect
-         y="-1184.936"
-         x="1377.8453"
-         height="29"
-         width="70.035789"
-         id="rect3735-1-6"
-         style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999982;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <text
-         xml:space="preserve"
-         style="font-size:11.88888073px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1413.1016"
+    <rect
+       style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999982;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3735-1-6"
+       width="76.042595"
+       height="29"
+       x="1374.8419"
+       y="-1184.936" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-32"
+       y="-1159.8195"
+       x="1413.1016"
+       style="font-size:11.88888073px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1159.8195"
-         id="text4620-7-32"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-1"
-           x="1413.1016"
-           y="-1159.8195"
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">what is executed</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1412.8242"
+         x="1413.1016"
+         id="tspan4622-7-1"
+         sodipodi:role="line">what is executed</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7"
+       y="-1168.1912"
+       x="1412.8242"
+       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1168.1912"
-         id="text4620-7"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7"
-           x="1412.8242"
-           y="-1168.1912"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">code</tspan></text>
-    </g>
-    <g
-       id="g5245">
-      <rect
-         y="-1112.436"
-         x="1306.3632"
-         height="34"
-         width="213"
-         id="rect3735-1-7-8"
-         style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <text
-         xml:space="preserve"
-         style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1412.7714"
+         x="1412.8242"
+         id="tspan4622-7"
+         sodipodi:role="line">code</tspan></text>
+    <rect
+       style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3735-1-7-8"
+       width="213"
+       height="34"
+       x="1306.3632"
+       y="-1112.436" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-32-1"
+       y="-1082.3403"
+       x="1412.7714"
+       style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1082.3403"
-         id="text4620-7-32-1"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-1-3"
-           x="1412.7714"
-           y="-1082.3403"
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">link between the executable and (Windows) libraries</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1412.6337"
+         x="1412.7714"
+         id="tspan4622-7-1-3"
+         sodipodi:role="line">link between the executable and (Windows) libraries</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-3"
+       y="-1095.5475"
+       x="1412.6337"
+       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1095.5475"
-         id="text4620-7-3"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-3"
-           x="1412.6337"
-           y="-1095.5475"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">imports</tspan></text>
-    </g>
-    <g
-       id="g5257"
-       transform="translate(0.37683105,0)">
-      <rect
-         y="-1035.936"
-         x="1352.4863"
-         height="30"
-         width="120"
-         id="rect3735-1-7-7-5"
-         style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <text
-         xml:space="preserve"
-         style="font-size:11.88888073px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1412.3496"
+         x="1412.6337"
+         id="tspan4622-7-3"
+         sodipodi:role="line">imports</tspan></text>
+    <rect
+       style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3735-1-7-7-5"
+       width="120"
+       height="30"
+       x="1352.8632"
+       y="-1035.936" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-32-5"
+       y="-1009.251"
+       x="1412.7264"
+       style="font-size:11.88888073px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1009.251"
-         id="text4620-7-32-5"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-1-7"
-           x="1412.3496"
-           y="-1009.251"
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">information used by the code</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1412.418"
+         x="1412.7264"
+         id="tspan4622-7-1-7"
+         sodipodi:role="line">information used by the code</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-7"
+       y="-1017.6226"
+       x="1412.7948"
+       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
          y="-1017.6226"
-         id="text4620-7-7"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-0"
-           x="1412.418"
-           y="-1017.6226"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">data</tspan></text>
-    </g>
+         x="1412.7948"
+         id="tspan4622-7-0"
+         sodipodi:role="line">data</tspan></text>
     <flowRoot
        transform="translate(0,-1434.6193)"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
@@ -6204,41 +6187,37 @@
        width="282.005"
        id="rect3735-5-3-0-2-7"
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <g
-       id="g5089"
-       transform="translate(213.79106,-340.16245)">
-      <rect
-         style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect3735-5-3-0-2-0"
-         width="189.73996"
-         height="31.199213"
-         x="1104.13"
-         y="-1003.7736" />
-      <text
-         xml:space="preserve"
-         style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1199.2389"
-         y="-977.37744"
-         id="text4620-7-32-1-9-6"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-1-3-8-7"
-           x="1199.2389"
-           y="-977.37744"
-           style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">pointers to extra structures (exports, imports,...)</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="1199.2833"
-         y="-987.01782"
-         id="text4620-7-3-5-2"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-7-3-7-3"
-           x="1199.2833"
-           y="-987.01782"
-           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">data directories</tspan></text>
-    </g>
+    <rect
+       y="-1343.936"
+       x="1315.6685"
+       height="31.199213"
+       width="194.24507"
+       id="rect3735-5-3-0-2-0"
+       style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-32-1-9-6"
+       y="-1317.5399"
+       x="1413.0299"
+       style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
+         y="-1317.5399"
+         x="1413.0299"
+         id="tspan4622-7-1-3-8-7"
+         sodipodi:role="line">pointers to extra structures (exports, imports,...)</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4620-7-3-5-2"
+       y="-1327.1803"
+       x="1413.0743"
+       style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
+         y="-1327.1803"
+         x="1413.0743"
+         id="tspan4622-7-3-7-3"
+         sodipodi:role="line">data directories</tspan></text>
     <rect
        y="-1304.436"
        x="1271.6106"
@@ -6290,7 +6269,7 @@
          y="-1467.54"
          x="1413.0348"
          id="tspan4622-7-1-3-8-7-0"
-         sodipodi:role="line">tells it's a binary</tspan></text>
+         sodipodi:role="line">shows it's a binary</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-8-4-0"
@@ -6797,7 +6776,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          id="tspan4438"><tspan
    id="tspan4466"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff0000;font-family:Verdana;-inkscape-font-specification:Verdana Bold">IAT</tspan> Imports Address Table</tspan><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff0000;font-family:Verdana;-inkscape-font-specification:Verdana Bold">IAT</tspan> Import Address Table</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-494.08148"
@@ -6807,7 +6786,7 @@
          x="2015.7201"
          y="-481.58148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         id="tspan4517">On file it is a copy of the IAT</tspan><tspan
+         id="tspan4517">On file it is a copy of the INT</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-469.08148"
@@ -7012,7 +6991,7 @@
    id="tspan5491-0">40</tspan>3000</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2341.1158,-1709.5304)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7750,7 +7729,7 @@
          y="-599.60858"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan5839">      it is loaded in memory</tspan><tspan
+         id="tspan5839">      this DLL is loaded in memory</tspan><tspan
          id="tspan5814"
          y="-587.07849"
          x="1461.5493"
@@ -7850,7 +7829,7 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        transform="matrix(0.103151,0,0,0.103151,2374.1158,-1535.1624)" />
     <text
        xml:space="preserve"
@@ -7967,39 +7946,37 @@
     <text
        sodipodi:linespacing="125%"
        id="text4420"
-       y="-605.82721"
+       y="-619.82721"
        x="2015.7201"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R Bold"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
-         y="-605.82721"
+         y="-619.82721"
          x="2015.7201"
          id="tspan4422"
          sodipodi:role="line">RVA<tspan
    id="tspan4424"
    style="font-size:10px;font-weight:normal;fill:#000000;-inkscape-font-specification:Verdana"> Relative Virtual Address</tspan></tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         y="-593.32721"
+         y="-607.32721"
          x="2015.7201"
          sodipodi:role="line"
          id="tspan4430">Address relative to ImageBase  (at ImageBase, RVA = 0)</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         y="-580.82721"
+         y="-594.82721"
          x="2015.7201"
          sodipodi:role="line"
          id="tspan4470">Almost all addresses of the headers are RVAs</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         y="-568.32721"
+         y="-582.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4509">Code<tspan
-   style="-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
-   id="tspan5400">´</tspan>s addresses are <tspan
+         id="tspan4509">In code, addresses are <tspan
    style="font-style:italic"
    id="tspan4511">not</tspan> relative.</tspan><tspan
          id="tspan4426"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
-         y="-555.82721"
+         y="-569.82721"
          x="2015.7201"
          sodipodi:role="line" /></text>
     <text
@@ -8015,12 +7992,12 @@
          x="2015.7201"
          sodipodi:role="line"><tspan
    id="tspan4463"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff0000;font-family:Verdana;-inkscape-font-specification:Verdana Bold">INT </tspan>Imports Names Table</tspan><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff0000;font-family:Verdana;-inkscape-font-specification:Verdana Bold">INT </tspan>Import Name Table</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          y="-522.08148"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4484">Null-terminated list of pointers to Hint,Names</tspan><tspan
+         id="tspan4484">Null-terminated list of pointers to Hint, Name structures</tspan><tspan
          id="tspan4450"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          y="-509.58148"
@@ -8051,7 +8028,9 @@
          sodipodi:role="line"
          x="2015.7201"
          y="-693.32721"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana">Starts with 'MZ' (initials of Mark Zbikowski, MS-DOS developer)</tspan><tspan
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana">Starts with 'MZ' (initials of <tspan
+   style="font-style:italic"
+   id="tspan4510">Mark Zbikowski</tspan> MS-DOS developer)</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-680.82721"
@@ -8081,16 +8060,11 @@
    style="font-size:10px;font-weight:normal;fill:#000000;-inkscape-font-specification:Verdana"><tspan
    style="font-style:italic"
    id="tspan4464"> aka</tspan> IMAGE_OPTIONAL_HEADER</tspan></tspan><tspan
+         id="tspan4447"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          y="-637.32721"
          x="2015.7201"
-         sodipodi:role="line"
-         id="tspan4497">Optional only for non-standard PEs </tspan><tspan
-         id="tspan4447"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         y="-624.82721"
-         x="2015.7201"
-         sodipodi:role="line">but required for executables</tspan></text>
+         sodipodi:role="line">Optional only for non-standard PEs but required for executables</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4472"
@@ -8137,14 +8111,14 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          id="tspan4496"><tspan
            style="font-size:10px;font-weight:normal;fill:#000000;-inkscape-font-specification:Verdana"
-           id="tspan4498">index in the exports table of a DLL to be imported</tspan></tspan><tspan
+           id="tspan4498">Index in the exports table of a DLL to be imported</tspan></tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-427.58148"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          id="tspan4504"><tspan
            style="font-size:10px;font-weight:normal;fill:#000000;-inkscape-font-specification:Verdana"
-           id="tspan4506">not required but provides a speed-up by reducing look-up</tspan></tspan><tspan
+           id="tspan4506">Not required but provides a speed-up by reducing look-up</tspan></tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-415.08148"
@@ -8163,18 +8137,18 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          id="tspan4494" /></text>
     <g
-       transform="matrix(0,-2.0041339,2.2482903,0,3583.0302,1511.4121)"
+       transform="matrix(0,-2.0041339,1.0635321,0,2838.264,1505.4121)"
        id="g4508">
       <path
          inkscape:connector-curvature="0"
          id="path4510"
          d="m 1031.453,-703.0311 0,74.37327"
-         style="fill:none;stroke:url(#linearGradient4514);stroke-width:0.47109708px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+         style="fill:none;stroke:url(#linearGradient4514);stroke-width:0.68495381px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
       <path
          inkscape:connector-curvature="0"
          id="path4512"
          d="m 1031.453,-554.21479 0,-74.37336"
-         style="fill:none;stroke:url(#linearGradient4516);stroke-width:0.47109708px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+         style="fill:none;stroke:url(#linearGradient4516);stroke-width:0.68495381px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
     </g>
     <text
        xml:space="preserve"
@@ -8209,5 +8183,16 @@
          y="-886.61871"
          x="2288.5762"
          sodipodi:role="line">All addresses here are RVAs.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       x="2595.7065"
+       y="-805.83765"
+       id="text4470"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="2595.7065"
+         y="-805.83765"
+         id="tspan4472">version 1, 3rd May 2012</tspan></text>
   </g>
 </svg>
