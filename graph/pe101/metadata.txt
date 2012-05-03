@@ -1,5 +1,5 @@
 InfoKey: Title
-InfoValue: PE 101 - a windows executable walkthrough
+InfoValue: PE 101 - a windows executable walkthrough (version 1)
 InfoKey: Subject
 InfoValue: Introduction to the Portable Executable file format
 InfoKey: Author
@@ -14,4 +14,4 @@ InfoKey: CreationDate
 InfoValue: D:20120408235921Z
 
 InfoKey: ModDate
-InfoValue: D:20120502031415Z
+InfoValue: D:20120503031415Z
