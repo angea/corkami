@@ -37,7 +37,7 @@
      showborder="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:snap-global="true"
+     inkscape:snap-global="false"
      inkscape:snap-object-midpoints="false"
      inkscape:snap-bbox-midpoints="true"
      inkscape:bbox-paths="false"
@@ -71,7 +71,7 @@
        snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <title
-     id="title3725">PE 101 - a windows executable walkthrough</title>
+     id="title3725">PE 101 - Plik PE krok po kroku</title>
   <defs
      id="defs4">
     <pattern
@@ -1466,7 +1466,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>PE 101 - a windows executable walkthrough</dc:title>
+        <dc:title>PE 101 - Plik PE krok po kroku</dc:title>
         <dc:creator>
           <cc:Agent>
             <dc:title>Ange Albertini</dc:title>
@@ -1488,6 +1488,11 @@
         </dc:rights>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Adam Błaszczyk</dc:title>
+          </cc:Agent>
+        </dc:contributor>
       </cc:Work>
       <cc:License
          rdf:about="http://creativecommons.org/licenses/by/3.0/">
@@ -1589,7 +1594,7 @@
          sodipodi:role="line"
          id="tspan4806"
          x="89.028473"
-         y="136.55322">PE pod lupą</tspan></text>
+         y="136.55322">Struktura pliku PE</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Verdana;-inkscape-font-specification:Verdana"
@@ -1742,7 +1747,7 @@
          y="138.55322"
          x="91.028473"
          id="tspan6085"
-         sodipodi:role="line">PE pod lupą</tspan></text>
+         sodipodi:role="line">Struktura pliku PE</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text6095"
@@ -3481,7 +3486,7 @@
          sodipodi:role="line"
          x="2340.6123"
          y="-1548.3085"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">stała sygnatura</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">stała sygnatura 'MZ'</tspan><tspan
          sodipodi:role="line"
          x="2340.6123"
          y="-1535.8085"
@@ -3502,7 +3507,7 @@
          sodipodi:role="line"
          x="2341.0664"
          y="-1498.3085"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">stała sygnatura</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">stała sygnatura 'PE'</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1485.8085"
@@ -3538,7 +3543,7 @@
          sodipodi:role="line"
          x="2341.0664"
          y="-1414.3085"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">32 bits/64 bits</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">32 bity/64 bity</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1401.8085"
@@ -3548,9 +3553,9 @@
          x="2341.0664"
          y="-1389.3085"
          id="tspan5188-9-0-1"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">adres (bazowy) w pamięci, <tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">adres (bazowy) w pamięci<tspan
    style="font-size:8px"
-   id="tspan4479">pod który program ma zostać załadowany</tspan></tspan><tspan
+   id="tspan4479" /></tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1376.8085"
@@ -3718,12 +3723,12 @@
          sodipodi:role="line"
          x="469.65759"
          y="1360.2239"
-         id="tspan5117">Relative</tspan><tspan
+         id="tspan5117">Relatywny</tspan><tspan
          sodipodi:role="line"
          x="469.65759"
          y="1367.7239"
          id="tspan5121"
-         style="fill:#808080">Virtual Address</tspan></text>
+         style="fill:#808080">Adres Wirtualny</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
@@ -4342,19 +4347,19 @@
          y="-1128.4669"
          id="tspan4503">Dla każdej sekcji blok o rozmiarze <tspan
    style="fill:#008080"
-   id="tspan4520">RozmiarDanychWPliku</tspan> jest odczytywany z pliku z pozycji <tspan
+   id="tspan4520">SizeOfRawData</tspan> jest odczytywany z pliku z pozycji <tspan
    style="fill:#000080"
-   id="tspan4522">PozycjaDanychWPliku</tspan> i zostaje załadowany do pamięci</tspan><tspan
+   id="tspan4522">PointerToRawData</tspan> i zostaje załadowany do pamięci</tspan><tspan
          sodipodi:role="line"
          x="2069.6409"
          y="-1118.4669"
          id="tspan4507">pod adresem wskazywanym przez wartość <tspan
    style="fill:#008000"
-   id="tspan4516">AdresWPamięci</tspan>, o rozmiarze <tspan
+   id="tspan4516">VirtualAddress</tspan>, o rozmiarze <tspan
    style="fill:#808000"
-   id="tspan4512">RozmiarWPamięci</tspan> i z atrybutami <tspan
+   id="tspan4512">VirtualSize</tspan> i z atrybutami <tspan
    style="fill:#800080"
-   id="tspan4524">charakterystyka</tspan>.</tspan></text>
+   id="tspan4524">Characteristics</tspan>.</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
@@ -4934,7 +4939,7 @@
          x="2330.9353"
          y="-893.69757"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Sans;-inkscape-font-specification:Sans"
-         id="tspan4911">after loading,</tspan><tspan
+         id="tspan4911">po załadowaniu</tspan><tspan
          sodipodi:role="line"
          x="2330.9353"
          y="-881.19757"
@@ -4943,9 +4948,9 @@
    style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#cccccc;font-family:Sans;-inkscape-font-specification:Sans"
    id="tspan4953">40</tspan><tspan
    style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000080;font-family:Sans;-inkscape-font-specification:Sans"
-   id="tspan4935">2068</tspan> wskazuje na funkcję <tspan
+   id="tspan4935">2068</tspan> funkcja <tspan
    style="fill:#800080"
-   id="tspan4493">ExitProcess</tspan> wewnątrz <tspan
+   id="tspan4493">ExitProcess</tspan> z <tspan
    style="fill:#4d4d4d"
    id="tspan4495">kernel32.dll</tspan></tspan><tspan
          sodipodi:role="line"
@@ -4956,9 +4961,9 @@
    style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#cccccc;font-family:Sans;-inkscape-font-specification:Sans"
    id="tspan4947">40</tspan><tspan
    style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0000ff;font-family:Sans;-inkscape-font-specification:Sans"
-   id="tspan4945">2070</tspan> wskazuje na funkcję <tspan
+   id="tspan4945">2070</tspan> funkcja <tspan
    style="fill:#ff00ff"
-   id="tspan4491">MessageBoxA</tspan> wewnątrz <tspan
+   id="tspan4491">MessageBoxA</tspan> z <tspan
    style="fill:#808080"
    id="tspan4497">user32.dll</tspan></tspan></text>
     <text
@@ -5841,9 +5846,9 @@
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-81-0"
-       width="170.33084"
+       width="178.54135"
        height="54.927105"
-       x="1025.8433"
+       x="1021.738"
        y="-1158.0764" />
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -5976,7 +5981,7 @@
          y="-1431.54"
          x="1412.619"
          id="tspan4622-7-1-3-8-7-0-1"
-         sodipodi:role="line">'nowy' plik binarny</tspan></text>
+         sodipodi:role="line">'nowy' plik binarny (PE)</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-9"
@@ -6020,9 +6025,9 @@
     <rect
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999982;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-1-6"
-       width="86.614388"
+       width="157.4301"
        height="29"
-       x="1369.556"
+       x="1334.1482"
        y="-1184.936" />
     <text
        sodipodi:linespacing="125%"
@@ -6035,7 +6040,7 @@
          y="-1159.8195"
          x="1413.1016"
          id="tspan4622-7-1"
-         sodipodi:role="line">co jest wykonywane</tspan></text>
+         sodipodi:role="line">wykonywany program (kod maszynowy)</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-7"
@@ -6121,34 +6126,30 @@
            height="335.86832"
            width="28.854666"
            id="rect4695" /></flowRegion><flowPara
-         id="flowPara4697" /></flowRoot>    <g
-       transform="translate(271.82518,-95.01245)"
-       id="g7845">
-      <text
-         xml:space="preserve"
-         style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="839.84277"
-         y="-1029.8441"
-         id="text4620-98"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan4622-9"
-           x="839.84277"
-           y="-1029.8441"
-           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">sections</tspan></text>
-      <text
-         sodipodi:linespacing="125%"
-         id="text4620-3-7"
-         y="-1012.8529"
-         x="842.97662"
-         style="font-size:71.27302551px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         xml:space="preserve"><tspan
-           style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
-           y="-1012.8529"
-           x="842.97662"
-           id="tspan4622-4-2"
-           sodipodi:role="line">zawartość pliku wykonywalnego</tspan></text>
-    </g>
+         id="flowPara4697" /></flowRoot>    <text
+       sodipodi:linespacing="125%"
+       id="text4620-98"
+       y="-1124.8566"
+       x="1111.2919"
+       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       xml:space="preserve"><tspan
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold"
+         y="-1124.8566"
+         x="1111.2919"
+         id="tspan4622-9"
+         sodipodi:role="line">sekcje</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:71.27302551px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
+       x="1111.1161"
+       y="-1107.8654"
+       id="text4620-3-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4622-4-2"
+         x="1111.1161"
+         y="-1107.8654"
+         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">zawartość pliku wykonywalnego</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-11"
@@ -6207,7 +6208,7 @@
          y="-1327.1803"
          x="1413.0743"
          id="tspan4622-7-3-7-3"
-         sodipodi:role="line">data directories</tspan></text>
+         sodipodi:role="line">katalogi danych</tspan></text>
     <rect
        y="-1304.436"
        x="1271.6106"
@@ -6287,21 +6288,21 @@
          id="tspan3840-1-6-8"
          y="-1182.7394"
          x="2174.7681"
-         sodipodi:role="line">Kod w assemblerze x86</tspan></text>
+         sodipodi:role="line">Kod (assembler x86)</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-9"
-       y="-1182.8435"
+       y="-1182.1274"
        x="2436.2227"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"><tspan
          id="tspan3840-1-6-8-2"
-         y="-1182.8435"
+         y="-1182.1274"
          x="2436.2227"
          sodipodi:role="line">Równoważny kod w C</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2355.1158,-1697.0174)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6323,7 +6324,7 @@
          sodipodi:role="line">2</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2374.1158,-1635.1624)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6612,7 +6613,7 @@
          id="tspan3840-1-6-8-2-4-5-7"
          y="-808.65826"
          x="1631.6998"
-         sodipodi:role="line">Jest to cały plik, ale większość plików PE posiada więcej elementów składowych (tu: uproszczone, dla celów prezentacji).</tspan></text>
+         sodipodi:role="line">Większość plików PE posiada więcej elementów składowych (opis jest tu uproszczony, dla celów prezentacji).</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1-8"
@@ -6668,7 +6669,7 @@
          sodipodi:role="line"
          id="tspan4728-4"
          x="1477.1803"
-         y="-486.84656">Hint,&quot;Nazwa name&quot;</tspan></text>
+         y="-486.84656">Hint,Name</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1-8-8"
@@ -6776,12 +6777,12 @@
          x="2015.7201"
          y="-481.58148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         id="tspan4517">W tym pliku jest to kopia INT</tspan><tspan
+         id="tspan4517">W tym pliku jest to kopia tablicy INT</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-469.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
-         id="tspan4418">Po załadowaniu wskazuje na zaimportowane funckcje API</tspan></text>
+         id="tspan4418">Po załadowaniu wskazuje na zaimportowane funkcje API</tspan></text>
     <image
        y="-1552.5596"
        x="810.78705"
@@ -6839,7 +6840,7 @@
          id="tspan3840-1-6-8-9"
          y="-1672.4209"
          x="1774.0908"
-         sodipodi:role="line">Dane w postaci heksadecymalnej</tspan></text>
+         sodipodi:role="line">Dane heksadecymalne</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-0-4"
@@ -6850,17 +6851,17 @@
          id="tspan3840-1-6-8-9-8"
          y="-1672.4209"
          x="1971.4559"
-         sodipodi:role="line">Dane w posatci ASCII</tspan></text>
+         sodipodi:role="line">ASCII</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-0-4-8"
        y="-1672.4209"
-       x="2108.8433"
+       x="2098.8433"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"><tspan
          id="tspan3840-1-6-8-9-8-2"
          y="-1672.4209"
-         x="2108.8433"
+         x="2098.8433"
          sodipodi:role="line">Pola</tspan></text>
     <text
        sodipodi:linespacing="125%"
@@ -6883,7 +6884,7 @@
          id="tspan3840-1-6-8-9-8-2-5-1"
          y="-1672.4209"
          x="2450.9297"
-         sodipodi:role="line">Wyjaśnienie</tspan></text>
+         sodipodi:role="line">Opis</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1"
@@ -6971,7 +6972,7 @@
    id="tspan5491-0">40</tspan>3000</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2309.1158,-1709.5304)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6993,7 +6994,7 @@
          sodipodi:role="line">2</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2341.1158,-1772.1354)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7488,7 +7489,7 @@
          sodipodi:role="line"
          x="2436.1875"
          y="-1054.1318"
-         id="tspan4966">Rezultaty</tspan></text>
+         id="tspan4966">Opis</tspan></text>
     <path
        style="fill:none;stroke:url(#linearGradient5838);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 2291.453,-1043.0311 0,74.37327"
@@ -7562,7 +7563,7 @@
          y="-576.92963"
          x="861.40704"
          id="tspan5594"
-         sodipodi:role="line">Sections table</tspan></text>
+         sodipodi:role="line">Tablica sekcji</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
@@ -7574,10 +7575,10 @@
          x="861.54932"
          y="-562.79608"
          style="font-size:10px;font-style:normal;-inkscape-font-specification:Sans Oblique"
-         id="tspan5636">Sections table is parsed</tspan><tspan
+         id="tspan5636">Tablica sekcji jest parsowana</tspan><tspan
          sodipodi:role="line"
          x="861.54932"
-         y="-551.94318"
+         y="-553.62036"
          style="font-size:6px;font-style:normal;-inkscape-font-specification:Sans Oblique"
          id="tspan5697">    (Jest ulokowany pod adresem: offset (<tspan
    style="font-size:6px;font-style:italic"
@@ -7586,22 +7587,24 @@
    style="font-size:6px;font-style:italic">SizeOfOptionalHeader)</tspan></tspan><tspan
          sodipodi:role="line"
          x="861.54932"
-         y="-540.26709"
+         y="-542.77435"
          style="font-size:10px;font-style:normal;-inkscape-font-specification:Sans Oblique"
-         id="tspan5638">Zawiera /NumberOfSections/ elementów</tspan><tspan
+         id="tspan5638">Zawiera <tspan
+   style="font-style:italic"
+   id="tspan4455">NumberOfSections</tspan> elementów</tspan><tspan
          id="tspan5618"
          sodipodi:role="line"
          x="861.54932"
-         y="-529.43823"
+         y="-531.9455"
          style="font-size:8px;font-style:normal;-inkscape-font-specification:Sans Oblique">Jest sprawdzane pod kątem</tspan><tspan
          sodipodi:role="line"
          x="861.54932"
-         y="-519.43823"
+         y="-521.9455"
          style="font-size:8px;font-style:normal;-inkscape-font-specification:Sans Oblique"
          id="tspan4650">   poprawności z wyrównaniami pamięci (alignment)</tspan><tspan
          sodipodi:role="line"
          x="861.54932"
-         y="-509.43823"
+         y="-511.94547"
          style="font-size:8px;font-style:normal;-inkscape-font-specification:Sans Oblique"
          id="tspan4648" /></text>
     <text
@@ -7626,15 +7629,15 @@
          id="tspan5739"
          sodipodi:role="line"
          x="1161.5493"
-         y="-674.79608">the file is mapped in memory according to:</tspan><tspan
+         y="-674.79608">plik jest mapowany do pamięci:</tspan><tspan
          sodipodi:role="line"
          x="1161.5493"
          y="-662.29608"
-         id="tspan5779">    AdresBazowyProgramu</tspan><tspan
+         id="tspan5779">    Pod adresem bazowym ImageBase</tspan><tspan
          sodipodi:role="line"
          x="1161.5493"
          y="-649.79608"
-         id="tspan4654">    Rozmiar Nagłówków</tspan><tspan
+         id="tspan4654">    Nagłówki o rozmiarze HeaderSize</tspan><tspan
          sodipodi:role="line"
          x="1161.5493"
          y="-637.29608"
@@ -7651,7 +7654,7 @@
          id="tspan5804"
          x="1461.407"
          y="-690.02277"
-         style="font-size:20px">Imports</tspan></text>
+         style="font-size:20px">Tablica importów</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text5806"
@@ -7664,17 +7667,18 @@
          sodipodi:role="line"
          id="tspan5808"><tspan
    style="font-style:italic"
-   id="tspan5820">KatalogiDanych</tspan> są parsowane</tspan><tspan
+   id="tspan5820">Katalogi danych</tspan> są parsowane</tspan><tspan
          y="-662.25983"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan5822">  są one umieszczone za <tspan
-   style="font-style:italic"
-   id="tspan5824">OptionalHeader</tspan></tspan><tspan
+         id="tspan5822"
+         style="font-size:9px">  są one umieszczone za <tspan
+   style="font-style:italic;font-size:9px"
+   id="tspan5824">Nagłówkiem opcjonalnym</tspan></tspan><tspan
          y="-649.72357"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan5827">  ich liczba<tspan
+         id="tspan5827">  ich liczba to<tspan
    style="font-style:italic"
    id="tspan5829"> NumOfRVAAndSizes</tspan></tspan><tspan
          y="-637.18732"
@@ -7682,7 +7686,7 @@
          sodipodi:role="line"
          id="tspan5831"><tspan
    style="font-style:italic"
-   id="tspan6009">  iImporty</tspan> są zawsze na pozycji #2</tspan><tspan
+   id="tspan6009">  Tablica importów</tspan> jest zawsze na pozycji #2</tspan><tspan
          y="-624.65106"
          x="1461.5493"
          sodipodi:role="line"
@@ -7692,7 +7696,7 @@
          id="tspan5818"
          y="-612.14484"
          x="1461.5493"
-         sodipodi:role="line">   każdy opis określa jedną bibliotekę DLL</tspan><tspan
+         sodipodi:role="line">   każdy rekord opisuje jedną bibliotekę DLL</tspan><tspan
          y="-599.64484"
          x="1461.5493"
          sodipodi:role="line"
@@ -7710,7 +7714,7 @@
          x="1461.5493"
          sodipodi:role="line"
          id="tspan4712"
-         style="font-size:8px">          dla każdej funkcji API w bibliotece DLL</tspan><tspan
+         style="font-size:8px">          dla każdej funkcji API 'name' w bibliotece DLL</tspan><tspan
          y="-568.78699"
          x="1461.5493"
          sodipodi:role="line"
@@ -7743,9 +7747,9 @@
          sodipodi:role="line"
          x="1709.5493"
          y="-674.79608"
-         id="tspan6007">Kod jest wykonywany od <tspan
+         id="tspan6007">Kod jest wykonywany od adresu <tspan
    style="font-style:italic"
-   id="tspan4746">PoczątkuKodu</tspan></tspan><tspan
+   id="tspan4746">EntryPoint</tspan></tspan><tspan
          sodipodi:role="line"
          x="1709.5493"
          y="-662.28986"
@@ -7805,7 +7809,7 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        transform="matrix(0.103151,0,0,0.103151,2368.1158,-1535.1624)" />
     <text
        xml:space="preserve"
@@ -7821,7 +7825,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">4</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2396.1158,-1492.815)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7843,7 +7847,7 @@
          sodipodi:role="line">4</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2440.8106,-1559.8572)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7871,7 +7875,7 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        transform="matrix(0.105845,0,0,0.105845,2339.8106,-1600.67)" />
     <text
        xml:space="preserve"
@@ -7887,7 +7891,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">2</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2359.8106,-1613.0174)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7937,7 +7941,9 @@
          y="-607.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4430">Address relative to ImageBase  (at ImageBase, RVA = 0)</tspan><tspan
+         id="tspan4430">Address relatywny do <tspan
+   style="font-style:italic"
+   id="tspan4457">ImageBase</tspan> (ImageBase ma adres RVA = 0)</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          y="-594.82721"
          x="2015.7201"
@@ -7973,7 +7979,7 @@
          y="-522.08148"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4484">Tablica wskąźników na strukturę składającą się z pól Hint i Nazwa</tspan><tspan
+         id="tspan4484">Tablica wskaźników na strukturę składającą się z pól Hint i Name</tspan><tspan
          id="tspan4450"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
          y="-509.58148"
@@ -8040,7 +8046,7 @@
          style="font-size:7px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          y="-640.00482"
          x="2015.7201"
-         sodipodi:role="line">Opcjonalny tylko dla niestandardowych plików PEs i jest niezbędny dla plików wykonywalnych</tspan></text>
+         sodipodi:role="line">Opcjonalny tylko dla niestandardowych plików PE i jest niezbędny dla plików wykonywalnych</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4472"
@@ -8056,7 +8062,7 @@
    id="tspan4476"
    style="font-size:10px;font-weight:normal;fill:#000000;-inkscape-font-specification:Verdana"><tspan
    style="font-style:italic"
-   id="tspan4461"> czyli</tspan> IMAGE_FILE_HEADERS / COFF file header</tspan></tspan><tspan
+   id="tspan4461"> czyli</tspan> IMAGE_FILE_HEADERS / COFF </tspan></tspan><tspan
          style="font-size:7px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          y="-665.32721"
          x="2015.7201"
@@ -8146,21 +8152,21 @@
          sodipodi:role="line"
          x="2595.7065"
          y="-805.83765"
-         id="tspan4472">version 1, 3rd May 2012</tspan></text>
+         id="tspan4472">wersja 1.00PL, 23 Maj 2012</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
-       x="1460.2004"
-       y="-501.19431"
+       x="1473.3396"
+       y="-498.99469"
        id="text4571"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4573"
-         x="1460.2004"
-         y="-501.19431">Informacja</tspan><tspan
+         x="1473.3396"
+         y="-498.99469">Informacja</tspan><tspan
          sodipodi:role="line"
-         x="1460.2004"
-         y="-496.19431"
+         x="1473.3396"
+         y="-493.99469"
          id="tspan4575">pomocnicza</tspan></text>
     <text
        xml:space="preserve"
@@ -8172,6 +8178,6 @@
          sodipodi:role="line"
          id="tspan4787"
          x="733.2655"
-         y="-809.41309">Translated by Adam Blaszczyk</tspan></text>
+         y="-809.41309">Tłumaczenie: Adam Błaszczyk</tspan></text>
   </g>
 </svg>
