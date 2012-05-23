@@ -17,7 +17,7 @@
    version="1.1"
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="pe101de.svg"
-   inkscape:export-filename="d:\pe101-v1DE.png"
+   inkscape:export-filename="d:\PE101-v1DE.png"
    inkscape:export-xdpi="200"
    inkscape:export-ydpi="200">
   <sodipodi:namedview
@@ -27,11 +27,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.44377028"
-     inkscape:cx="1031.0947"
-     inkscape:cy="750.16048"
+     inkscape:zoom="0.55589227"
+     inkscape:cx="1052.3622"
+     inkscape:cy="744.09448"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer5"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
@@ -1809,9 +1809,9 @@
        style="color:#000000;fill:#ffffff;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect5289"
        width="280.39926"
-       height="251.20682"
+       height="257.27475"
        x="1165.8789"
-       y="-516.92969" />
+       y="-522.99762" />
     <path
        inkscape:connector-curvature="0"
        id="path8507"
@@ -3518,12 +3518,12 @@
          x="2341.0664"
          y="-1473.3085"
          id="tspan5174-7"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">Anzahl an Sectionen</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">Anzahl an Sektionen</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1460.8085"
          id="tspan5176-1"
-         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">Relatives Offset der Sektiontabelle</tspan><tspan
+         style="font-size:10px;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial">Relatives Offset der Sektionstabelle</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1448.3085"
@@ -3733,7 +3733,7 @@
          x="469.65759"
          y="1367.7239"
          id="tspan5121"
-         style="fill:#808080">Virtual Address</tspan></text>
+         style="fill:#808080">virtuelle Addresse</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
@@ -5857,9 +5857,9 @@
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-81-0"
-       width="170.33084"
+       width="197.20238"
        height="54.927105"
-       x="1025.8433"
+       x="1012.4075"
        y="-1158.0764" />
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6031,7 +6031,7 @@
            id="tspan4622"
            x="839.84277"
            y="-1188.931"
-           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">header</tspan></text>
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">Header</tspan></text>
     </g>
     <rect
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999982;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6151,7 +6151,7 @@
            id="tspan4622-9"
            x="839.84277"
            y="-1029.8441"
-           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">sections</tspan></text>
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial;-inkscape-font-specification:Arial Bold">Sektionen</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text4620-3-7"
@@ -7678,7 +7678,7 @@
          sodipodi:role="line"
          x="1161.5493"
          y="-637.22357"
-         id="tspan5783">   der Tabelle der Sections</tspan></text>
+         id="tspan5783">   der Sektionstabelle</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
@@ -7701,7 +7701,7 @@
          y="-674.79608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan5808">DataDirectories werden geparst</tspan><tspan
+         id="tspan5808">Data Directories werden geparst</tspan><tspan
          y="-662.26605"
          x="1461.5493"
          sodipodi:role="line"
@@ -7710,7 +7710,7 @@
          y="-649.76605"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan5827">  ihre Anzahl is <tspan
+         id="tspan5827">  ihre Anzahl ist <tspan
    style="font-style:italic"
    id="tspan5829">NumOfRVAAndSizes</tspan></tspan><tspan
          y="-637.22974"
@@ -7968,7 +7968,7 @@
          y="-607.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4430">Adresse relativ zur ImageBase (bei ImageBase, RVA = 0)</tspan><tspan
+         id="tspan4430">Adresse relativ zur ImageBase (ImageBase hat RVA = 0)</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana"
          y="-594.82721"
          x="2015.7201"
@@ -8035,7 +8035,7 @@
          sodipodi:role="line"
          x="2015.7201"
          y="-693.32721"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana">Beginnt mit „MZ“ (Initialien von <tspan
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Verdana;-inkscape-font-specification:Verdana">Beginnt mit „MZ“ (Initialen von <tspan
    style="font-style:italic"
    id="tspan4557">Mark Zbikowski</tspan>, <tspan
    style="font-size:9px"
@@ -8209,7 +8209,7 @@
          sodipodi:role="line"
          x="2595.7065"
          y="-805.83765"
-         id="tspan4472">version 1DE, 22. Mai 2012</tspan></text>
+         id="tspan4472">version 1.0 DE, 23. Mai 2012</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
