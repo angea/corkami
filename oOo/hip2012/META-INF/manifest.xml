@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">
+ <manifest:file-entry manifest:media-type="application/vnd.oasis.opendocument.presentation" manifest:version="1.2" manifest:full-path="/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/statusbar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/current.xml"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/accelerator/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/floater/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/popupmenu/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/progressbar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolpanel/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/menubar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/toolbar/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/Bitmaps/"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/"/>
+ <manifest:file-entry manifest:media-type="application/vnd.sun.xml.ui.configuration" manifest:full-path="Configurations2/"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000018E000000BDEAFA56C2.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001F2000000BA5A643C61.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000018B000001901C09CEBF.jpg"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001D700000155ACC788FF.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000026E000001D4DF5AAAFE.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000026A00000115A480F231.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000293000002630D2596E6.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000001AE0000012CE2ED1DA2.jpg"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/1000000000000403000002FD351079D9.jpg"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000030C0000028A3BF63618.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001F3000000F63A031AB3.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000028B00000203DD83AC18.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000018800000050CDED427E.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100002010000041A0000007EA414A93F.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000003A50000020A0F2E5C94.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000000580000001FED1EC38A.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000011B000000DAE0D1A97F.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000000F3000000D40525473A.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000004F800000153833DA1C5.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000210000000E7228FF7A4.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000001A7000000FBFD9B0FF9.jpg"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000001930000012C94359AFD.jpg"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000036B000002FD33AFCCF9.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001E40000015B45E482BF.png"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Pictures/"/>
+ <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="content.xml"/>
+ <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="styles.xml"/>
+ <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="meta.xml"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Thumbnails/thumbnail.png"/>
+ <manifest:file-entry manifest:media-type="" manifest:full-path="Thumbnails/"/>
+ <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="settings.xml"/>
+</manifest:manifest>
