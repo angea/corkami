@@ -14,6 +14,7 @@
  <manifest:file-entry manifest:media-type="" manifest:full-path="Configurations2/images/"/>
  <manifest:file-entry manifest:media-type="application/vnd.sun.xml.ui.configuration" manifest:full-path="Configurations2/"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000018E000000BDEAFA56C2.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100002010000054100000349E57E215E.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001F2000000BA5A643C61.png"/>
  <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000018B000001901C09CEBF.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001D700000155ACC788FF.png"/>
