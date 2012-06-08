@@ -1,8 +1,5 @@
 %include 'consts.inc'
 
-org 7c00h
-bits 16
-
 STROFF equ NEWBASE + 100h
 
 start:
@@ -23,10 +20,10 @@ start:
 next:
     sti
     mov cx, 4
-    mov bp, bios - start + NEWBASE
+    mov bp, PARTITIONS - start + NEWBASE
 
 loc_7C23:
-    cmp byte [bp + 0], 0
+    cmp byte [bp + 0], NONBOOTABLE
     jl loc_7C34
 
     jnz loc_7D3B
@@ -228,10 +225,27 @@ lpnoos:
     db    0
     db    0
 
-bios:
-    db 080h, 020h, 021h, 000h, 007h, 0dfh, 013h, 00ch, 000h, 008h, 000h, 000h, 000h, 020h, 003h, 000h, 000h, 0dfh, 014h, 00ch, 007h, 0feh, 0ffh, 0ffh
+PARTITIONS:
+istruc PARTITION ; #1
+	at PARTITION.state,       db BOOTABLE
+	at PARTITION.CHSfirst,    db 020h, 021h, 000h,
+	at PARTITION.type,        db NTFS
+	at PARTITION.CHSlast,     db 0dfh, 013h, 00ch
+	at PARTITION.StartSector, dd 800h
+	at PARTITION.Size,        dd 32000h
+iend
 
-align 1feh, db 0
+istruc PARTITION ; #2
+	at PARTITION.state,       db NONBOOTABLE
+	at PARTITION.CHSfirst,    db 0dfh, 014h, 00ch
+	at PARTITION.type,        db NTFS 
+    at PARTITION.CHSlast,     db 0feh, 0ffh, 0ffh
+iend
+istruc PARTITION ; #3
+iend
+istruc PARTITION ; #4
+iend
+
 marker dw MARKER
 
 ;CHECKSUM 9d5458d36a14f55d0796b037af42daa6
