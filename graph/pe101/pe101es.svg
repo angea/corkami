@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5890584"
-     inkscape:cx="1031.0947"
-     inkscape:cy="750.16048"
+     inkscape:zoom="4.0541078"
+     inkscape:cx="1914.4852"
+     inkscape:cy="541.76713"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -4943,7 +4943,7 @@
    style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#cccccc;font-family:Sans;-inkscape-font-specification:Sans"
    id="tspan4953">40</tspan><tspan
    style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000080;font-family:Sans;-inkscape-font-specification:Sans"
-   id="tspan4935">2068</tspan> apuntara a <tspan
+   id="tspan4935">2068</tspan> apuntará a <tspan
    style="fill:#800080"
    id="tspan4660">ExitProcess</tspan> de <tspan
    style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4d4d4d;font-family:Sans;-inkscape-font-specification:Sans"
@@ -4956,7 +4956,7 @@
    style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#cccccc;font-family:Sans;-inkscape-font-specification:Sans"
    id="tspan4947">40</tspan><tspan
    style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0000ff;font-family:Sans;-inkscape-font-specification:Sans"
-   id="tspan4945">2070</tspan> apuntara a <tspan
+   id="tspan4945">2070</tspan> apuntará a <tspan
    style="fill:#ff00ff"
    id="tspan4662">MessageBoxA</tspan> de <tspan
    style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Sans;-inkscape-font-specification:Sans"
@@ -8167,6 +8167,6 @@
          sodipodi:role="line"
          x="2595.7065"
          y="-805.83765"
-         id="tspan4472">versión 1 ES, 5 de Junio del 2012</tspan></text>
+         id="tspan4472">versión 1 ES, 6 de Junio del 2012</tspan></text>
   </g>
 </svg>
