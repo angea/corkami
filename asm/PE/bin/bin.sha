@@ -1,3 +1,4 @@
+5e1e555a5a17ec83b7effd98a5d7f62df298fd1c *4kread.exe
 072adf2d6cb8104a44e8aef76ac846d5f4f45558 *65535sects.exe
 ad7080e554a225c60191f746a2f30317a91efc0e *96emptysections.exe
 d3053b1745a8e3997c77c7cfe075dc7243bb2ca6 *96workingsections.exe
@@ -87,6 +88,7 @@ c1aaaed08f8f8c0945c768464123d8d1abb19f50 *imports_multidesc.exe
 79189e97c5e779eb022ac37267fba86a41810ef4 *imports_noext.exe
 0641c6531625d1f5e93d04f31808f915404d9043 *imports_noint.exe
 ab309b67e3872a3c4e092090078f4d42994de645 *imports_nothunk.exe
+fc7224ebc1990535356289b8fee5acdd36074700 *imports_relocW7.exe
 ba73e31c739e8cd238e2a35fbac61b525112a1c9 *imports_tinyW7.exe
 967fc9a98006927047fabd2c39f576dedcbb45d1 *imports_tinyXP.exe
 17cf7ce88241b06ff89a7278a0199787d9574afa *imports_virtdesc.exe
