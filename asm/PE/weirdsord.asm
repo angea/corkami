@@ -1,4 +1,5 @@
-; a PE where only 1K is read from the section
+; a PE where 4K is read from the section for no apparent reason
+; pointed out by Peter Ferrie
 
 ; Ange Albertini, BSD LICENCE 2012
 
@@ -61,21 +62,26 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 
 align 200h, db 0
 EntryPoint:
-    mov eax, ebx
-    jmp zeroes
-next:
-    pop eax
-    cmp eax, caller + DELTA
-    jnz nomsg
+    mov esi, end_ + DELTA
+    lodsd
+    cmp eax, " END"
+    jnz no_msg
+_
+    lodsd
+    cmp eax, "FAKE"
+    jz no_msg
+
     push Msg + DELTA
     call [__imp__printf + DELTA]
     add esp, 1 * 4
 _
-nomsg:
+no_msg:
     push 0
     call [__imp__ExitProcess + DELTA]
 _c
-Msg db " * a PE with unexpected read size", 0ah, 0
+
+Msg db " * a PE with weird SORD (expected size found)", 0ah, 0
+_d
 
 Import_Descriptor:
 ;kernel32.dll_DESCRIPTOR:
@@ -122,11 +128,8 @@ _d
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
-
-zeroes:
-align 2, db 90h
-    times 772h dw 0
-    call next
-caller:
-db "end -> "
-db " <- will not be in the mapped image"
+times $ + 1000h - 240h - 4 - EntryPoint db 0
+end_:
+db " END"
+db "FAKE"
+times 5 dd 0

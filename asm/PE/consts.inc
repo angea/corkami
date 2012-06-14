@@ -349,6 +349,31 @@ struc VS_FIXEDFILEINFO
 endstruc
 
 RT_VERSION 		equ 16
+RT_MANIFEST equ 24
+CREATEPROCESS_MANIFEST_RESOURCE_ID EQU 1
+ISOLATIONAWARE_MANIFEST_RESOURCE_ID EQU 2
+ISOLATIONAWARE_NOSTATICIMPORT_MANIFEST_RESOURCE_ID EQU 3
+
+
+struc ACTCTX                       ; typedef struct tagACTCTX {
+.cbSize resd 1                     ;   ULONG   cbSize;
+.dwFlags resd 1                    ;   DWORD   dwFlags;
+.lpSource resd 1                   ;   LPCWSTR lpSource;
+.wProcessorArchitecture resw 1     ;   USHORT  wProcessorArchitecture;
+.wLangId resw 1                    ;   LANGID  wLangId;
+.lpAssemblyDirectory resd 1        ;   LPCTSTR lpAssemblyDirectory;
+.lpResourceName resd 1             ;   LPCTSTR lpResourceName;
+.lpApplicationName resd 1          ;   LPCTSTR lpApplicationName;
+.hModule resd 1                    ;   HMODULE hModule;
+endstruc                           ; } ACTCTX, *PACTCTX;
+
+ACTCTX_FLAG_PROCESSOR_ARCHITECTURE_VALID equ 1
+ACTCTX_FLAG_LANGID_VALID equ 2
+ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID equ 4
+ACTCTX_FLAG_RESOURCE_NAME_VALID equ 8
+ACTCTX_FLAG_SET_PROCESS_DEFAULT equ 16
+ACTCTX_FLAG_APPLICATION_NAME_VALID equ 32
+ACTCTX_FLAG_HMODULE_VALID equ 128
 
 ; widechar string macro
 %macro WIDE 1

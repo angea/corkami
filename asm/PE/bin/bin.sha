@@ -1,4 +1,3 @@
-5e1e555a5a17ec83b7effd98a5d7f62df298fd1c *4kread.exe
 072adf2d6cb8104a44e8aef76ac846d5f4f45558 *65535sects.exe
 ad7080e554a225c60191f746a2f30317a91efc0e *96emptysections.exe
 d3053b1745a8e3997c77c7cfe075dc7243bb2ca6 *96workingsections.exe
@@ -39,6 +38,8 @@ d91f39d5fc8329d81035e4e9ea6d48c07cb1cfaf *dllfw-ld.exe
 097859e755e97314ce47614ae452067ea9059cc7 *dllfwloop.dll
 a9a2c41e5a53a90dc7ebd8f3472bbdf0271c8d00 *dllfwloop-ld.exe
 4b9e0869f52a4db3d9b05ebf534e53c86e1d9bac *dll-ld.exe
+1b756d444b2c75977bfcaa08d34d29fc61dadaa7 *dllnegep.dll
+512db25b52fa75dd161e4fd5955fcec17ee0cf1d *dllnegep-ld.exe
 d4ad97d67014493438e83be7f1980e4ebdd940a1 *dllnoexp.dll
 e244f708990be4fbd1c7439251a2ecb6ee0aa0f3 *dllnoexp-dynld.exe
 dbf0f3ef5d99ee3000cedb9229c81124b5b5506f *dllnomain.dll
@@ -94,6 +95,7 @@ ba73e31c739e8cd238e2a35fbac61b525112a1c9 *imports_tinyW7.exe
 17cf7ce88241b06ff89a7278a0199787d9574afa *imports_virtdesc.exe
 bcb7a3e77e416d9527892a2941ce02864ff626e7 *imports_vterm.exe
 dc3977014027d86539bd6986b857c51da5a0ac5c *importshint.exe
+1a509f315885f2b1f827671732901fe1706f781c *manifest.exe
 58596114b8cd3d9fdf3ed4dca000b3ff64dbba3d *manyimportsW7.exe
 596f786f7294d463c167a4705af3370040d812f6 *maxsec_lowaligW7.exe
 d8e4499216c621da090a133bf4b6769c240651d7 *maxsecW7.exe
@@ -159,4 +161,5 @@ c8da473fe7372a0312f6883dfd3488b8c14f0d95 *virtEP.exe
 eca64e5e5f65a33962aeb27a1c1c1bade95ecc7a *virtgap.exe
 cbbd4253428916376536687e5403a970c1475511 *virtrelocXP.exe
 a9114adbb4228006eb7896aac0fb4f41f6b6ef0c *virtsectblXP.exe
+aaaa4d0326749c1d79cd06fa6bf5ddcd45e0e269 *weirdsord.exe
 c79d17b3014ab4a5c82be8c6bcd9d8ba8ca7f425 *winver.exe

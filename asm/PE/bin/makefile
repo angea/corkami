@@ -12,15 +12,15 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllemptyexp-ld.exe dllord.dll dllord-ld.exe dll-dynunicld.exe dllnoreloc.dll dllnoreloc-ld.exe \
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
     dll-webdavld.exe dupsec.exe secinsec.exe bigib.exe dllnomain.dll dllnomain-ld.exe \
-	dllnomain2.dll dllnomain2-dynld.exe dllnullep.dll dllnullep-ld.exe dllnullep-dynld.exe \
-	dllnegep.dll dllnegep-ld.exe
+    dllnomain2.dll dllnomain2-dynld.exe dllnullep.dll dllnullep-ld.exe dllnullep-dynld.exe \
+    dllnegep.dll dllnegep-ld.exe
 
 relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe fakerelocs.exe
 
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
     quine.exe bigalign.exe foldedhdr.exe compiled.exe duphead.exe \
     no0code.exe fakeregs.exe fakeregslib.dll gui.exe multiss.exe multiss_gui.exe no_dd.exe \
-    maxvals.exe pdf_zip_pe.exe winver.exe 4kread.exe
+    maxvals.exe pdf_zip_pe.exe winver.exe weirdsord.exe manifest.exe
 
 down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
 
