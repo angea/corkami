@@ -1,11 +1,11 @@
-; a PE with a huge virtual gap between physical section
+; a PE with a checked broken MANIFEST resource
 
-; Ange Albertini, BSD LICENCE 2009-2011
+; Ange Albertini, BSD LICENCE 2012
 
 %include 'consts.inc'
 
-EXTRAVIRTUALSPACE equ 10000h ; 74880h is highest possible but fails my machine.
 IMAGEBASE equ 400000h
+
 org IMAGEBASE
 bits 32
 
@@ -36,7 +36,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd (EXTRAVIRTUALSPACE + 3) * SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -44,6 +44,7 @@ iend
 
 istruc IMAGE_DATA_DIRECTORY_16
     at IMAGE_DATA_DIRECTORY_16.ImportsVA,   dd Import_Descriptor - IMAGEBASE
+    at IMAGE_DATA_DIRECTORY_16.ResourceVA, dd Directory_Entry_Resource - IMAGEBASE
 iend
 
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
@@ -55,25 +56,22 @@ istruc IMAGE_SECTION_HEADER
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
-istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd EXTRAVIRTUALSPACE * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd 2 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 0
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 0
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE
-iend
-istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.VirtualAddress,   dd (EXTRAVIRTUALSPACE + 2) * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd FILEALIGN
-    at IMAGE_SECTION_HEADER.PointerToRawData, dd 2 * FILEALIGN
-    at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE
-iend
 NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 SIZEOFHEADERS equ $ - IMAGEBASE
 
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
-Msg db " * virtual gap between code sections", 0ah, 0
+
+EntryPoint:
+    push msg
+    call [__imp__printf]
+    add esp, 1 * 4
+
+no_msg:
+    push 0
+    call [__imp__ExitProcess]
+_c
+
+msg db " * a PE with an incorrect manifest type (ignored)", 0
 _d
 
 Import_Descriptor:
@@ -121,17 +119,46 @@ _d
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
 _d
-EntryPoint:
-    mov eax, ebx
 
-align FILEALIGN, db 0
-times FILEALIGN - 20h db 0
-    push Msg
-    call [__imp__printf]
-    add esp, 1 * 4
-_
-    push 0
-    call [__imp__ExitProcess]
-_c
+MYMAN equ 3 ; incorrect - this file wouldn't run if it's set to 1 or 2
+LANGUAGE equ 0
+
+Directory_Entry_Resource:
+; root directory
+istruc IMAGE_RESOURCE_DIRECTORY
+    at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
+iend
+istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd RT_MANIFEST    ; .. resource type of that directory
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_type - Directory_Entry_Resource)
+iend
+
+resource_directory_type:
+istruc IMAGE_RESOURCE_DIRECTORY
+    at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
+iend
+istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd MYMAN
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd IMAGE_RESOURCE_DATA_IS_DIRECTORY | (resource_directory_language - Directory_Entry_Resource)
+iend
+
+resource_directory_language:
+istruc IMAGE_RESOURCE_DIRECTORY
+    at IMAGE_RESOURCE_DIRECTORY.NumberOfIdEntries, dw 1
+iend
+istruc IMAGE_RESOURCE_DIRECTORY_ENTRY
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.NameID, dd LANGUAGE ; name of the underneath resource
+    at IMAGE_RESOURCE_DIRECTORY_ENTRY.OffsetToData, dd resource_entry - Directory_Entry_Resource
+iend
+
+resource_entry:
+istruc IMAGE_RESOURCE_DATA_ENTRY
+    at IMAGE_RESOURCE_DATA_ENTRY.OffsetToData, dd resource_data - IMAGEBASE
+    at IMAGE_RESOURCE_DATA_ENTRY.Size1, dd RESOURCE_SIZE
+iend
+
+resource_data:
+db "<assembly xmlns='urn:schemas-microsoft-com:asm.v1' manifestVersion='1.0'>" ; broken end
+RESOURCE_SIZE equ $ - resource_data
 
 align FILEALIGN, db 0

@@ -20,7 +20,7 @@ relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe fakerelocs.exe
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
     quine.exe bigalign.exe foldedhdr.exe compiled.exe duphead.exe \
     no0code.exe fakeregs.exe fakeregslib.dll gui.exe multiss.exe multiss_gui.exe no_dd.exe \
-    maxvals.exe pdf_zip_pe.exe winver.exe weirdsord.exe manifest.exe
+    maxvals.exe pdf_zip_pe.exe winver.exe weirdsord.exe
 
 down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
 
@@ -35,9 +35,10 @@ delay: delayimports.exe delaycorrupt.exe delayfake.exe
 
 gaps: appendeddata.exe hiddenappdata1.exe hiddenappdata2.exe slackspace.exe virtgap.exe
 
-resource: resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe \
+resource: manifest resource.exe resource2.exe reshdr.exe namedresource.exe resourceloop.exe \
     resource_string.exe d_resource-ld.exe d_resource.dll version
 
+manifest: manifest.exe manifest_bsod.exe manifest_broken.exe
 version: version_mini.exe version_std.exe version_cust.exe
 
 imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impbyord.exe \
