@@ -28,10 +28,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.28222222"
-     inkscape:cx="558.07085"
+     inkscape:cx="1052.3622"
      inkscape:cy="744.09448"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
@@ -3490,7 +3490,7 @@
          x="2341.0664"
          y="-1485.8085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4459">процессор: ARM/MIPS/Intel/…</tspan><tspan
+         id="tspan4459">тип процессора: ARM/MIPS/Intel/…</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1473.3085"
@@ -5932,9 +5932,9 @@
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        y="-1459.5908"
-       x="1308.9091"
+       x="1308.2848"
        height="30.654737"
-       width="207.4081"
+       width="208.65669"
        id="rect3735-5-3-2"
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
@@ -5960,7 +5960,7 @@
          y="-1431.54"
          x="1412.619"
          id="tspan4622-7-1-3-8-7-0-1"
-         sodipodi:role="line">показывает что это &quot;современный&quot; двоичный формат</tspan></text>
+         sodipodi:role="line">показывает, что это &quot;современный&quot; двоичный формат</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-9"
@@ -6254,7 +6254,7 @@
          y="-1467.54"
          x="1413.0348"
          id="tspan4622-7-1-3-8-7-0"
-         sodipodi:role="line">показывает что это двоичный формат</tspan></text>
+         sodipodi:role="line">показывает, что это двоичный формат</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-8-4-0"
@@ -6286,7 +6286,7 @@
          sodipodi:role="line">Эквивалентный код на C</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2487.1158,-1697.0174)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6769,9 +6769,11 @@
          x="2015.7201"
          y="-494.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4973">Список указателей импортируемых имен функций <tspan
+         id="tspan4973">Список указателей на стуктуры «<tspan
+   style="font-size:9px"
+   id="tspan4460">Hint, Имя функции</tspan>»<tspan
    style="font-size:6px"
-   id="tspan4650">(заканчивается нулевым элементом)</tspan></tspan><tspan
+   id="tspan4458"> (заканчивается нулевым элементом)</tspan></tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-481.58148"
@@ -6876,7 +6878,11 @@
          id="tspan3840-1-6-8-9-8-2-5"
          y="-1672.4209"
          x="2231.9336"
-         sodipodi:role="line">Пояснение</tspan></text>
+         sodipodi:role="line">Значение полей</tspan><tspan
+         y="-1657.4209"
+         x="2231.9336"
+         sodipodi:role="line"
+         id="tspan4450" /></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-0-4-8-4-5"
@@ -7707,7 +7713,7 @@
          y="-589.79608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4870">   разбор IAT и INT происходит параллельно</tspan><tspan
+         id="tspan4870">   разбор IAT и INT происходят одновременно</tspan><tspan
          y="-577.29608"
          x="1461.5493"
          sodipodi:role="line"
@@ -7746,12 +7752,12 @@
          sodipodi:role="line"
          x="1709.5493"
          y="-674.79608"
-         id="tspan5116">Выполнение начинается с точки входа (<tspan
+         id="tspan4453">Исполнение начинается с точки входа (<tspan
    style="font-size:8px;font-style:oblique;-inkscape-font-specification:Arial Unicode MS Oblique"
    id="tspan4894">EntryPoint</tspan>)</tspan><tspan
          sodipodi:role="line"
          x="1709.5493"
-         y="-662.29608"
+         y="-663.54608"
          id="tspan4888">вызовы API функций в коде происходят через IAT</tspan></text>
     <g
        id="g6025"
@@ -7803,7 +7809,7 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        transform="matrix(0.103151,0,0,0.103151,2406.1158,-1535.1624)" />
     <text
        xml:space="preserve"
@@ -7819,7 +7825,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">4</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2380.1158,-1492.815)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7841,7 +7847,7 @@
          sodipodi:role="line">4</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2372.8106,-1559.8572)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7885,7 +7891,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">2</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2513.8106,-1613.0174)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7964,14 +7970,12 @@
          x="2015.7201"
          sodipodi:role="line"><tspan
    style="font-weight:bold;fill:#ff0000;-inkscape-font-specification:Arial Unicode MS Bold"
-   id="tspan4988">INT</tspan> Import Name Table                              <tspan
-   style="font-size:8px"
-   id="tspan4646">(заканчивается нулевым элементом)</tspan></tspan><tspan
+   id="tspan4988">INT</tspan> Import Name Table</tspan><tspan
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-523.78003"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4959">Список строк заканчивающихся NULL указывающих на структуры «Hint, Имя функции»</tspan></text>
+         id="tspan4959">Список указателей на стуктуры «Hint, Имя функции» (заканчивается нулевым элементом)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
