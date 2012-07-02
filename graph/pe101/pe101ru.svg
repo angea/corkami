@@ -27,11 +27,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.0450989"
-     inkscape:cx="1545.6581"
-     inkscape:cy="893.43659"
+     inkscape:zoom="0.28222222"
+     inkscape:cx="558.07085"
+     inkscape:cy="744.09448"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
@@ -71,7 +71,7 @@
        snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <title
-     id="title3725">PE 101 пошаговое руководство к исполняемым файлам в Windows</title>
+     id="title3725">PE 101 пошаговое руководство к исполняемым файлам (EXE) Windows</title>
   <defs
      id="defs4">
     <pattern
@@ -1466,7 +1466,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>PE 101 пошаговое руководство к исполняемым файлам в Windows</dc:title>
+        <dc:title>PE 101 пошаговое руководство к исполняемым файлам (EXE) Windows</dc:title>
         <dc:creator>
           <cc:Agent>
             <dc:title>Ange Albertini</dc:title>
@@ -3315,7 +3315,7 @@
          x="2067.6003"
          y="-1351.8085"
          id="tspan5194-4-6"
-         style="font-size:10px;fill:#808000"> MajorSubsystemVersion  4 [NT 4 or later]</tspan><tspan
+         style="font-size:10px;fill:#808000"> MajorSubsystemVersion  4 [позднее NT4]</tspan><tspan
          sodipodi:role="line"
          x="2067.6003"
          y="-1339.3085"
@@ -3500,7 +3500,7 @@
          x="2341.0664"
          y="-1460.8085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4464">относительное смещение таблицы секций</tspan><tspan
+         id="tspan4464">относительное смещение (RVA) таблицы секций</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1448.3085"
@@ -3521,56 +3521,59 @@
          x="2341.0664"
          y="-1401.8085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4536">с откуда начинается выполнение</tspan><tspan
+         id="tspan4555">RVA точки входа в программу</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
          y="-1389.3085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4538">адрес в памяти, куда следует проецировать файл</tspan><tspan
+         id="tspan4515">предпочтительный адрес<tspan
+   style="font-size:8px"
+   id="tspan4559"> в памяти, куда следует проецировать файл</tspan></tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
-         y="-1376.8085"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4540">адрес начала секций в памяти <tspan
+         y="-1378.507"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
+         id="tspan4517"><tspan
+   style="font-size:10px"
+   id="tspan4553">адреса</tspan> начало секций в памяти будут <tspan
    style="font-size:7px"
-   id="tspan4557">будет выравниваться на это значение</tspan></tspan><tspan
+   id="tspan4570">выравниваться на это значение</tspan></tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
-         y="-1364.3085"
+         y="-1366.8085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4542">смещение начала секций в файле <tspan
-   style="font-size:6px"
-   id="tspan4559">будет выравниваться на это значение</tspan></tspan><tspan
+         id="tspan4519">смещение<tspan
+   style="font-size:8px"
+   id="tspan4557"> начало секций в файле будет</tspan><tspan
+   id="tspan4568"
+   style="font-size:7px"> выравниваться на это значение</tspan></tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
-         y="-1351.8085"
+         y="-1354.3085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4544">необходимая версия Windows</tspan><tspan
+         id="tspan4521">необходимая версия Windows</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
-         y="-1339.3085"
+         y="-1341.8085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4546">необходимый объем памяти для всего файла</tspan><tspan
+         id="tspan4524">необходимый <tspan
+   style="font-size:8px"
+   id="tspan4572">объем памяти для загрузки всего файла в память</tspan></tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
-         y="-1326.8085"
+         y="-1329.3085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4548">общий размер заголовков</tspan><tspan
+         id="tspan4526">размер всех заголовков</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
-         y="-1314.3085"
+         y="-1316.8085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4550">драйвер/GUI/консоль/…</tspan><tspan
+         id="tspan4528">тип подсистемы: драйвер/GUI/консоль/…</tspan><tspan
          sodipodi:role="line"
          x="2341.0664"
-         y="-1301.8085"
+         y="-1304.3085"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4553">количество директорий данных</tspan><tspan
-         sodipodi:role="line"
-         x="2341.0664"
-         y="-1289.3085"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4555" /></text>
+         id="tspan4532">количество директорий данных</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-weight:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -5067,27 +5070,27 @@
          sodipodi:role="line"
          x="2071.6409"
          y="-1136.4669"
-         id="tspan4561">Для каждой секции из файла считывается блок размером <tspan
+         id="tspan4585">Для каждой секции из файла считывается блок размером <tspan
    style="fill:#008080"
-   id="tspan4586">SizeofRawData</tspan> по смещению <tspan
+   id="tspan4591">SizeofRawData</tspan> по смещению <tspan
    style="fill:#000080"
-   id="tspan4588">PointerToRawData</tspan>. </tspan><tspan
+   id="tspan4593">PointerToRawData</tspan>. </tspan><tspan
          sodipodi:role="line"
          x="2071.6409"
          y="-1126.4669"
-         id="tspan4563">Этот блок будет загружен в память по адресу <tspan
+         id="tspan4587"> Этот блок будет загружен в память по адресу <tspan
    style="fill:#000080"
-   id="tspan4590">ImageBase</tspan> + <tspan
+   id="tspan4597">ImageBase</tspan> + <tspan
    style="fill:#008000"
-   id="tspan4592">VirtualAddress</tspan> с различными <tspan
+   id="tspan4595">VirtualAddress</tspan> с различными <tspan
    style="fill:#800080"
-   id="tspan4630">характеристиками</tspan>,</tspan><tspan
+   id="tspan4599">характеристиками</tspan>,</tspan><tspan
          sodipodi:role="line"
          x="2071.6409"
          y="-1116.4669"
-         id="tspan4565">размер этого блока в памяти будет равен <tspan
+         id="tspan4589">размер этого блока в памяти будет равен <tspan
    style="fill:#808000"
-   id="tspan4594">VirtualSize</tspan> в память по адресу.</tspan></text>
+   id="tspan4601">VirtualSize</tspan>.</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -5829,9 +5832,9 @@
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-0"
-       width="196.31911"
+       width="154.74431"
        height="57.211025"
-       x="1012.1274"
+       x="1032.9148"
        y="-1320.7186" />
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -5929,9 +5932,9 @@
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        y="-1459.5908"
-       x="1313.3635"
+       x="1308.9091"
        height="30.654737"
-       width="198.49921"
+       width="207.4081"
        id="rect3735-5-3-2"
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
@@ -5957,7 +5960,7 @@
          y="-1431.54"
          x="1412.619"
          id="tspan4622-7-1-3-8-7-0-1"
-         sodipodi:role="line">означает что это &quot;современный&quot; двоичный формат</tspan></text>
+         sodipodi:role="line">показывает что это &quot;современный&quot; двоичный формат</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-9"
@@ -5984,7 +5987,12 @@
            id="tspan4622-4"
            x="842.97662"
            y="-1168.931"
-           style="font-size:9px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">технические детали об исполняемом файле</tspan></text>
+           style="font-size:9px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">технические детали о EXE файле</tspan><tspan
+           sodipodi:role="line"
+           x="842.97662"
+           y="-1157.681"
+           style="font-size:9px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
+           id="tspan4442" /></text>
       <text
          xml:space="preserve"
          style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
@@ -6001,9 +6009,9 @@
     <rect
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999982;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-1-6"
-       width="105.12027"
+       width="110.31712"
        height="29"
-       x="1360.3031"
+       x="1357.7047"
        y="-1184.936" />
     <text
        sodipodi:linespacing="125%"
@@ -6016,7 +6024,7 @@
          y="-1159.8195"
          x="1413.1016"
          id="tspan4622-7-1"
-         sodipodi:role="line">что будет исполняться</tspan></text>
+         sodipodi:role="line">то, что будет исполняться</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-7"
@@ -6032,9 +6040,9 @@
     <rect
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-1-7-8"
-       width="163.58553"
+       width="222.23569"
        height="44.604965"
-       x="1331.0704"
+       x="1301.7454"
        y="-1112.436" />
     <text
        sodipodi:linespacing="125%"
@@ -6047,7 +6055,7 @@
          y="-1082.3403"
          x="1412.7714"
          id="tspan4622-7-1-3"
-         sodipodi:role="line">связь между исполняемым файлом (EXE)</tspan><tspan
+         sodipodi:role="line">осуществляет  связь между исполняемым файлом (EXE)</tspan><tspan
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
          y="-1072.3403"
          x="1412.7714"
@@ -6130,7 +6138,12 @@
          id="tspan4622-4-2"
          x="1110.9872"
          y="-1107.8654"
-         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">-----</tspan></text>
+         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">начинка EXE файла</tspan><tspan
+         sodipodi:role="line"
+         x="1110.9872"
+         y="-1094.1154"
+         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
+         id="tspan4444" /></text>
     <rect
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-11"
@@ -6241,7 +6254,7 @@
          y="-1467.54"
          x="1413.0348"
          id="tspan4622-7-1-3-8-7-0"
-         sodipodi:role="line">означает что это двоичный формат</tspan></text>
+         sodipodi:role="line">показывает что это двоичный формат</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-8-4-0"
@@ -6259,7 +6272,7 @@
          id="tspan3840-1-6-8"
          y="-1182.7394"
          x="2174.7681"
-         sodipodi:role="line">ассемблер x86</tspan></text>
+         sodipodi:role="line">Ассемблер x86</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-9"
@@ -6272,8 +6285,8 @@
          x="2436.2227"
          sodipodi:role="line">Эквивалентный код на C</tspan></text>
     <path
-       transform="matrix(0.105845,0,0,0.105845,2457.1158,-1697.0174)"
-       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
+       transform="matrix(0.105845,0,0,0.105845,2487.1158,-1697.0174)"
+       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6285,12 +6298,12 @@
        sodipodi:linespacing="125%"
        id="text3792-7-0"
        y="-1560.3207"
-       x="2518.3835"
+       x="2548.3835"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
        xml:space="preserve"><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
          y="-1560.3207"
-         x="2518.3835"
+         x="2548.3835"
          id="tspan3794-4-7"
          sodipodi:role="line">2</tspan></text>
     <path
@@ -6348,7 +6361,7 @@
          id="tspan6113"
          x="874.86713"
          y="-1706.0099"
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS">пошаговое руководство к исполняемым файлам в Windows (EXE)</tspan></text>
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS">пошаговое руководство к исполняемым файлам (EXE) Windows</tspan></text>
     <text
        transform="scale(1.014333,0.98586954)"
        sodipodi:linespacing="125%"
@@ -6597,7 +6610,7 @@
          id="tspan3840-1-6-8-2-4-5-7"
          y="-808.65826"
          x="1631.6998"
-         sodipodi:role="line">Это полноценный PE-файл, однако, большинство PE-файлов содержат большее количество элементов. Для простоты объяснения</tspan></text>
+         sodipodi:role="line">Это полноценный PE-файл, однако, большинство PE-файлов содержат большее количество элементов. Для простоты объяснения опущены.</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1-8"
@@ -6756,7 +6769,9 @@
          x="2015.7201"
          y="-494.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4973">Список указателей импортируемых имен функций (ASCIIZ-строки)</tspan><tspan
+         id="tspan4973">Список указателей импортируемых имен функций <tspan
+   style="font-size:6px"
+   id="tspan4650">(заканчивается нулевым элементом)</tspan></tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-481.58148"
@@ -6766,7 +6781,7 @@
          x="2015.7201"
          y="-469.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4977">После загрузки она указывает на импортируемые функции API</tspan></text>
+         id="tspan4977">После загрузки она содержит адреса импортируемых API функций</tspan></text>
     <image
        y="-1552.5596"
        x="810.78705"
@@ -6846,7 +6861,11 @@
          id="tspan3840-1-6-8-9-8-2"
          y="-1672.4209"
          x="2108.8433"
-         sodipodi:role="line">Поля</tspan></text>
+         sodipodi:role="line">Поля в структурах</tspan><tspan
+         y="-1657.4209"
+         x="2108.8433"
+         sodipodi:role="line"
+         id="tspan4446" /></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-0-4-8-4"
@@ -6857,7 +6876,7 @@
          id="tspan3840-1-6-8-9-8-2-5"
          y="-1672.4209"
          x="2231.9336"
-         sodipodi:role="line">Значения</tspan></text>
+         sodipodi:role="line">Пояснение</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-0-4-8-4-5"
@@ -6868,7 +6887,7 @@
          id="tspan3840-1-6-8-9-8-2-5-1"
          y="-1672.4209"
          x="2450.9297"
-         sodipodi:role="line">Объяснение</tspan></text>
+         sodipodi:role="line">Пояснение</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-1"
@@ -6890,7 +6909,7 @@
          sodipodi:role="line"
          id="tspan4923"
          x="1635.1157"
-         y="-1147.3612">위치(Offset):0x200/R<tspan
+         y="-1147.3612">Смещение:0x200/R<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
    id="tspan5493">VA</tspan>:0x<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -6905,7 +6924,7 @@
          sodipodi:role="line"
          id="tspan4923-7-1"
          x="1775.1157"
-         y="-1324.3484">위치(Offset):0x138</tspan></text>
+         y="-1324.3484">Смещение:0x138</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-9-4"
@@ -6916,7 +6935,7 @@
          id="tspan3840-1-6-8-2-2"
          y="-1308.8311"
          x="2291.8284"
-         sodipodi:role="line">Таблица секций</tspan></text>
+         sodipodi:role="line">Таблица секций (Sections table)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -6927,7 +6946,7 @@
          sodipodi:role="line"
          id="tspan4923-7-1-8-7-0"
          x="1635.1157"
-         y="-1591.5659">위치(Offset):0x40</tspan></text>
+         y="-1591.5659">Смещение:0x40</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -6938,7 +6957,7 @@
          sodipodi:role="line"
          id="tspan4923-7-1-8-7-0-0"
          x="1776.5188"
-         y="-1507.6781">위치(Offset):0x58</tspan></text>
+         y="-1507.6781">Смещение:0x58</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -6949,7 +6968,7 @@
          sodipodi:role="line"
          id="tspan4923-7-8"
          x="1635.1157"
-         y="-863.36121">위치(Offset):0x600/R<tspan
+         y="-863.36121">Смещение:0x600/R<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
    id="tspan5489-2">VA</tspan>:0x<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -7128,7 +7147,7 @@
          sodipodi:role="line"
          id="tspan4923-7"
          x="1635.1157"
-         y="-1040.5481">위치(Offset):0x400/R<tspan
+         y="-1040.5481">Смещение:0x400/R<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
    id="tspan5489">VA</tspan>:0x<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -7310,7 +7329,7 @@
          y="-1708.0099"
          x="872.86713"
          id="tspan4622-5-7"
-         sodipodi:role="line">пошаговое руководство к исполняемым файлам в Windows (EXE)</tspan></text>
+         sodipodi:role="line">пошаговое руководство к исполняемым файлам (EXE) Windows</tspan></text>
     <path
        style="fill:none;stroke:url(#linearGradient6317);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 2172.453,-1519.8876 0,59.2369"
@@ -7457,7 +7476,7 @@
          y="-1638.7444"
          x="1635.1157"
          id="tspan4285"
-         sodipodi:role="line">위치(Offset):0x30</tspan></text>
+         sodipodi:role="line">Смещение:0x30</tspan></text>
     <path
        style="opacity:0.98999999;fill:none;stroke:url(#linearGradient4962);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 2291.453,-1053.1843 0,-8.1234"
@@ -7696,11 +7715,11 @@
          y="-564.79608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4874">    записывается адрес API функции</tspan><tspan
+         id="tspan4634">    записывается адрес этой функции в</tspan><tspan
          y="-552.29608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4906">    в соответствующую запись IAT</tspan><tspan
+         id="tspan4636">    соответствующую запись в IAT</tspan><tspan
          y="-539.79608"
          x="1461.5493"
          sodipodi:role="line"
@@ -7716,7 +7735,7 @@
          y="-690.07941"
          x="1709.407"
          id="tspan5857"
-         sodipodi:role="line">Выполнение</tspan></text>
+         sodipodi:role="line">Запуск</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -7784,23 +7803,23 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
-       transform="matrix(0.103151,0,0,0.103151,2410.1158,-1535.1624)" />
+       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       transform="matrix(0.103151,0,0,0.103151,2406.1158,-1535.1624)" />
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
-       x="2469.6318"
+       x="2465.6318"
        y="-1402.2089"
        id="text6055"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6057"
-         x="2469.6318"
+         x="2465.6318"
          y="-1402.2089"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">4</tspan></text>
     <path
-       transform="matrix(0.103151,0,0,0.103151,2384.1158,-1492.815)"
-       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
+       transform="matrix(0.103151,0,0,0.103151,2380.1158,-1492.815)"
+       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7812,17 +7831,17 @@
        sodipodi:linespacing="125%"
        id="text6061"
        y="-1359.8615"
-       x="2443.6318"
+       x="2439.6318"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
        xml:space="preserve"><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
          y="-1359.8615"
-         x="2443.6318"
+         x="2439.6318"
          id="tspan6063"
          sodipodi:role="line">4</tspan></text>
     <path
-       transform="matrix(0.103151,0,0,0.103151,2384.8106,-1559.8572)"
-       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
+       transform="matrix(0.103151,0,0,0.103151,2372.8106,-1559.8572)"
+       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7834,12 +7853,12 @@
        sodipodi:linespacing="125%"
        id="text6067"
        y="-1426.9037"
-       x="2444.3267"
+       x="2432.3267"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
        xml:space="preserve"><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
          y="-1426.9037"
-         x="2444.3267"
+         x="2432.3267"
          id="tspan6069"
          sodipodi:role="line">3</tspan></text>
     <path
@@ -7865,8 +7884,8 @@
          y="-1463.9733"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">2</tspan></text>
     <path
-       transform="matrix(0.105845,0,0,0.105845,2523.8106,-1613.0174)"
-       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
+       transform="matrix(0.105845,0,0,0.105845,2513.8106,-1613.0174)"
+       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7878,12 +7897,12 @@
        sodipodi:linespacing="125%"
        id="text6085"
        y="-1476.3207"
-       x="2585.0784"
+       x="2575.0784"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
        xml:space="preserve"><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
          y="-1476.3207"
-         x="2585.0784"
+         x="2575.0784"
          id="tspan6087"
          sodipodi:role="line">2</tspan></text>
     <path
@@ -7916,7 +7935,7 @@
          y="-607.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4947">Адрес относительный от ImageBase (RVA = 0 при адресе = ImageBase)</tspan><tspan
+         id="tspan4947">Относительный адрес от ImageBase (RVA = 0 при адресе = ImageBase)</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-594.82721"
          x="2015.7201"
@@ -7945,9 +7964,11 @@
          x="2015.7201"
          sodipodi:role="line"><tspan
    style="font-weight:bold;fill:#ff0000;-inkscape-font-specification:Arial Unicode MS Bold"
-   id="tspan4988">INT</tspan> Import Name Table</tspan><tspan
+   id="tspan4988">INT</tspan> Import Name Table                              <tspan
+   style="font-size:8px"
+   id="tspan4646">(заканчивается нулевым элементом)</tspan></tspan><tspan
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         y="-522.08148"
+         y="-523.78003"
          x="2015.7201"
          sodipodi:role="line"
          id="tspan4959">Список строк заканчивающихся NULL указывающих на структуры «Hint, Имя функции»</tspan></text>
@@ -7969,7 +7990,9 @@
          x="2015.7201"
          y="-693.32721"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4912">Начинается с &quot;MZ&quot; (инициалы MS DOS программиста Mark Zbikowski)</tspan></text>
+         id="tspan4912">Начинается с &quot;MZ&quot; (инициалы MS DOS программиста <tspan
+   style="font-style:italic"
+   id="tspan4644">Mark Zbikowski</tspan>)</tspan></text>
     <image
        y="-1743.1216"
        x="2111.0396"
@@ -8039,7 +8062,7 @@
          x="2015.7201"
          y="-440.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4984">Индекс в таблице экспорта DLL, которая импортируется</tspan><tspan
+         id="tspan4984">Индекс в таблице экспорта импортируемой DLL</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-427.58148"
@@ -8102,7 +8125,7 @@
          sodipodi:role="line"
          x="2595.7065"
          y="-805.83765"
-         id="tspan4472">версия  1, 3rd May 2012</tspan></text>
+         id="tspan4472">версия  1.00 RU, 01.07.2012</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
