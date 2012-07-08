@@ -133,14 +133,14 @@ tiny.exe:
 ImageBase:
 ibkernel.exe:
  * kernel range IMAGEBASE (and relocations)
-ibreloc.exe:
- * relocated ImageBase (only affects EntryPoint)
 ibkmanual.exe:
  * kernel range IMAGEBASE (with manual relocations)
 bigib.exe:
  * ImageBase is 7efd0000h, and no relocations
 reloccrypt.exe:
  * decryption via relocations
+fakerelocs.exe:
+ * a PE with corrupted fake relocations
 
 EntryPoint:
 nullEP.exe:
@@ -213,24 +213,26 @@ delayfake.exe:
 register corruptions:
 fakeregs.exe:
  * corrupted registers on TLS and Exit return
-winver.exe:
- * a PE overriding OS values: OS Ver 31.41.5926 PlatformID 3
-
-
 data PEs:
 d_tiny-ld.exe:
- * tiny data PE (61 bytes)
-
+ * tiny data PE (61 bytes)
 d_nonnull-ld.exe:
- * executed by shellcode call
-
+ * executed by shellcode call
 d_resource-ld.exe:
  * resource-only data PE
 maxvals.exe:
  * a PE with a maximal values in the headers
 
-misc:
+manifest:
+manifest.exe:
+ * a PE with a minimal MANIFEST resource (CreateActCtx successfull)manifest_bsod.exe:
+ * a PE with a XP SP2 crash MANIFEST resource (CreateActCtx successfull)manifest_broken.exe:
+ * a PE with an incorrect manifest type (ignored)misc:
 no_dd.exe:
  * a PE with no DataDirectory (loading imports manually)
-nothing-ld.exe:
+winver.exe:
+ * a PE overriding OS values: OS Ver 31.41.5926 PlatformID 3
+
+weirdsord.exe:
+ * a PE with weird SORD (expected size found)
 

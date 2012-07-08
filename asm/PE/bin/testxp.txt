@@ -1,3 +1,5 @@
+ibreloc.exe:
+ * relocated ImageBase (only affects EntryPoint)
 ibnullXP.exe:
  * null IMAGEBASE with relocations (XP only)
 dllbound-redirldXP.exe:
@@ -21,6 +23,8 @@ reloccryptXP.exe:
  * decryption via relocations (from null imagebase, XP only)
 imports_tinyXP.exe:
  * tiny imports
+multiss_con.exe:
+ * multisystem PE (console)nothing-ld.exe:
 
 DOS:
 dosZMXP.exe:

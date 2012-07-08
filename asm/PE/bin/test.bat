@@ -52,6 +52,9 @@ echo dllnomain-ld.exe:& dllnomain-ld.exe
 echo dllnomain2-dynld.exe:& dllnomain2-dynld.exe
 echo dllnullep-dynld.exe:& dllnullep-dynld.exe
 echo dllnullep-ld.exe:& dllnullep-dynld.exe
+rem BROKEN for now
+rem echo dllnegep-ld.exe:& dllnegep-ld.exe 
+
 echo.
 echo export forwarding:
 echo dllfw-ld.exe:& dllfw-ld.exe
@@ -66,10 +69,10 @@ echo tiny.exe:& tiny.exe
 echo.
 echo ImageBase:
 echo ibkernel.exe:& ibkernel.exe
-echo ibreloc.exe:& ibreloc.exe
 echo ibkmanual.exe:& ibkmanual.exe
 echo bigib.exe:& bigib.exe
 echo reloccrypt.exe:& reloccrypt.exe
+echo fakerelocs.exe:& fakerelocs.exe
 echo.
 echo EntryPoint:
 echo nullEP.exe:& nullEP.exe
@@ -113,18 +116,23 @@ echo.
 echo register corruptions:
 echo fakeregs.exe:& fakeregs.exe
 echo.
-echo winver.exe:& winver.exe
-echo.
 echo data PEs:
 echo d_tiny-ld.exe:& d_tiny-ld.exe
 echo d_nonnull-ld.exe:& d_nonnull-ld.exe
 echo d_resource-ld.exe:& d_resource-ld.exe
 echo maxvals.exe:& maxvals.exe
 echo.
+echo manifest:
+echo manifest.exe:& manifest.exe
+echo manifest_bsod.exe:& manifest_bsod.exe
+echo manifest_broken.exe:& manifest_broken.exe
+
 echo misc:
 echo no_dd.exe:& no_dd.exe
-echo nothing-ld.exe:& nothing-ld.exe
+echo winver.exe:& winver.exe
+echo weirdsord.exe:& weirdsord.exe
 echo.
+rem echo multiss_gui.exe:& multiss_con.exe
 rem dll-webdavld.exe disabled until found a suitable host
 rem pdf.exe / pdf_zip_pe.exe disabled because of the non-console output
 rem quine.exe disabled because creates an extra window
