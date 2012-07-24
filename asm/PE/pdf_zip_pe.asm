@@ -1,6 +1,8 @@
 ; a PE that contains a PDF and a ZIP containing the same PDF
 ; the file fully works as a PDF document, a PE executable, and a ZIP archive, without any modification
 ; (the PDF is acrobat reader-only compatible)
+; with python on the top of the file
+; and html+javascript at the bottom of the file
 
 ; ie, file formats starting beyond offset 0 are a bad idea
 
@@ -12,7 +14,7 @@ IMAGEBASE equ 400000h
 org IMAGEBASE
 
 db 'MZ'
-; python
+; python ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 db '=1;print("Hello World! [python]")'
 db 26 ; EOF
 
@@ -149,5 +151,5 @@ _d
 
 SIZEOFIMAGE equ $ - IMAGEBASE
 
-; html starts here 
+; html starts here ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 db "<html><body><style>body { visibility:hidden;} .n { visibility: visible; position: absolute; padding: 0 1ex 0 1ex; margin: 0; top: 0; left: 0; } h1 { margin-top: 0.4ex; margin-bottom: 0.8ex; }</style><div class=n><script type='text/javascript'>alert('Hello World! [JavaScript]');</script><!--"
