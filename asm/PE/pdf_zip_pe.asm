@@ -12,8 +12,11 @@ IMAGEBASE equ 400000h
 org IMAGEBASE
 
 db 'MZ'
+; python
+db '=1;print("Hello World! [python]")'
+db 26 ; EOF
 
-align 32h, db 0 ; so that ZIP's LASTMOD overlaps PE's e_lfanew
+times 30h - 34 db 0 ; so that ZIP's LASTMOD overlaps PE's e_lfanew
 
 ; ZIP start ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -106,78 +109,45 @@ iend
 
 bits 32
 EntryPoint:
-    push 1
-    push zipfile
-    push thisfile
-    call [__imp__CopyFile]
-    push 0
-    push 0
-    push 0
-    push zipfile
-    push 0
-    push 0
-    call [__imp__ShellExecute]
-    push 1
-    push pdffile
-    push thisfile
-    call [__imp__CopyFile]
-    push 0
-    push 0
-    push 0
-    push pdffile
-    push 0
-    push 0
-    call [__imp__ShellExecute]
+    push msg
+    call [__imp__printf]
+    add esp, 1 * 4
     retn
-thisfile db 'pdf_zip_pe.exe', 0
-zipfile  db 'pdf_zip_pe.zip', 0
-pdffile  db 'pdf_zip_pe.pdf', 0
+
+msg  db 'Hello World! [PE]', 0
 
 Import_Descriptor:
-;shell32.dll_DESCRIPTOR
-    dd shell32.dll_hintnames - IMAGEBASE
+;msvcrt.dll_DESCRIPTOR
+    dd msvcrt.dll_hintnames - IMAGEBASE
     dd 0, 0
-    dd shell32.dll - IMAGEBASE
-    dd shell32.dll_iat - IMAGEBASE
-;kernel32.dll_DESCRIPTOR
-    dd kernel32.dll_hintnames - IMAGEBASE
-    dd 0, 0
-    dd kernel32.dll - IMAGEBASE
-    dd kernel32.dll_iat - IMAGEBASE
+    dd msvcrt.dll - IMAGEBASE
+    dd msvcrt.dll_iat - IMAGEBASE
 ;terminator
     dd 0, 0, 0, 0, 0
 
-hnShellExecute:
+hnprintf:
     dw 0
-    db 'ShellExecuteA', 0
-hnCopyFile:
-    dw 0
-    db 'CopyFileA', 0
-_d
+    db 'printf', 0
+
 
 ImportsAddressTable:
-shell32.dll_iat:
-__imp__ShellExecute:
-    dd hnShellExecute - IMAGEBASE
-    dd 0
-kernel32.dll_iat:
-__imp__CopyFile:
-    dd hnCopyFile - IMAGEBASE
+msvcrt.dll_iat:
+__imp__printf:
+    dd hnprintf - IMAGEBASE
     dd 0
 _d
 
-shell32.dll_hintnames:
-    dd hnShellExecute - IMAGEBASE
-    dd 0
-kernel32.dll_hintnames:
-    dd hnCopyFile - IMAGEBASE
+msvcrt.dll_hintnames:
+    dd hnprintf - IMAGEBASE
     dd 0
 _d
 
 IMPORTSADDRESSTABLESIZE equ $ - ImportsAddressTable
 
-shell32.dll  db 'shell32.dll',0
-kernel32.dll db 'kernel32.dll',0
+msvcrt.dll  db 'msvcrt.dll',0
 _d
 
 SIZEOFIMAGE equ $ - IMAGEBASE
+
+; html starts here 
+db "<html><body><style>body { visibility:hidden;} .n { visibility: visible; position: absolute; padding: 0 1ex 0 1ex; margin: 0; top: 0; left: 0; } h1 { margin-top: 0.4ex; margin-bottom: 0.8ex; }</style><div class=n><script type='text/javascript'>alert('Hello World! [JavaScript]');</script><!--"
