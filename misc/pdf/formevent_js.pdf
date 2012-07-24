@@ -1,20 +1,23 @@
-%PDF-1.
+% a PDF file using an XFA
+% most whitespace can be removed (truncated to 570 bytes or so...)
+% Ange Albertini BSD Licence 2012
 
-1 0 obj
-<</Type/EmbeddedFile>>
+%PDF-1. % can be truncated to %PDF-\0
+
+1 0 obj <<>>
 stream
 <xdp:xdp xmlns:xdp="http://ns.adobe.com/xdp/">
 <config><present><pdf>
     <interactive>1</interactive>
 </pdf></present></config>
 
-<template xmlns="http://www.xfa.org/schema/xfa-template/2.5/">
-    <subform name="unused">
-    <pageSet/>
+<template>
+    <subform name="_">
+		<pageSet/>
         <field id="Hello World!">
             <event activity="initialize">
                 <script contentType='application/x-javascript'>
-                app.alert(this.id);
+					app.alert(this.id);
                 </script>
             </event>
         </field>
@@ -24,23 +27,21 @@ stream
 endstream
 endobj
 
-trailer
-<<
-/Root <<
-    /AcroForm <<
-        /Fields [<<
-            /T (0)
-                /Kids [<<
-                    /Type /Annot
-                    /Subtype /Widget
-                    /Rect [0]
-                    /T (0)
-                    /FT/Btn
-            >>]
-        >>]
-        /XFA 1 0 R
-    >>
-        /Pages <</Count 1>>
-        /Type/Catalog
+trailer <<
+	/Root <<
+		/AcroForm <<
+			/Fields [<<
+				/T (0)
+				/Kids [<<
+					/Subtype /Widget
+					/Rect []
+					/T ()
+					/FT /Btn
+				>>]
+			>>]
+			/XFA 1 0 R
+		>>
+		/Pages <<>>
     >>
 >>
+
