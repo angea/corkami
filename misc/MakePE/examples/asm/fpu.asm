@@ -1,49 +1,85 @@
-; simple fibonacci number calculator, in FPU
-; taking advantage of the barrel to avoid transferring data
+; simple fibonacci number calculator, only in FPU
+; Ange Albertini, BSD Licence, 2009-2012
 
 %include '../../onesec.hdr'
-res dt 0
+
+%macro push_ 1
+        fild dword [esp_]       ; sub esp, 4
+        fild dword [_4]
+        fsubp st1
+        fistp dword [esp_]
+
+        push dword [esp_]       ; mov [esp], %1
+        pop esp
+        mov dword [esp], %1
+%endmacro
+
+%macro call_ 1
+        push_ %%next
+        push_ %1
+        ret
+        %%next:
+%endmacro
+
 EntryPoint:
-    mov ecx, 46
-        ; version with counter in FPU, far less elegant
-        ; loosing the auto-rotate ability of the barrel :(
-
-        ;_46 dd 46
-
+    mov [esp_], esp
     finit
-        ;    fild dword [_46]
+    fild dword [_46]
     fldz
     fld1
-    fwait
 
 _loop:
-    fld st1                                 ;    _3 = _2 + _1
-    fadd st1                                ;    _2, _1 = _2, _3 combined
-    ffree st2
+    fxch st1
+    fadd st0, st1
 
-        ;    ; decrease counter
-        ;    fld1
-        ;    fsubp st4
-        ;    fnop
-        
-        ;    ; now needs to copy st3 in st2, ugly !
-        ;    fld st3
-        ;    ffree st4
-        ;    fxch st3
-        ;    ffree st0
-        ;    fincstp
+    fld1
+    fsubp st3
 
-    dec ecx
+    fldz
+    fcomip st3
+    
     jnz _loop
 
 _exit:
-    fstp tword [res]
-    mov ecx, [res + 4]
-    cmp ecx, 2971215073 ; 46th fibonacci number
+    fild qword [true]
+    fcomip st1
     jnz bad
 
     jmp good
-%include '..\goodbad.inc'
+_c
+
+bad:
+    push_ MB_ICONERROR   ; UINT uType
+    push_ error          ; LPCTSTR lpCaption
+    push_ errormsg       ; LPCTSTR lpText
+    push_ 0              ; HWND hWnd
+    call_ MessageBoxA
+    push_ 042h
+    call_ ExitProcess    ; UINT uExitCode
+_c
+
+good:
+    push_ MB_ICONINFORMATION ; UINT uType
+    push_ success            ; LPCTSTR lpCaption
+    push_ successmsg         ; LPCTSTR lpText
+    push_ 0                  ; HWND hWnd
+    call_ MessageBoxA
+    push_ 0
+    call_ ExitProcess        ; UINT uExitCode
+_c
+
+error db "Bad", 0
+errormsg db "Something went wrong...", 0
+success db "Good", 0
+successmsg db "Expected behaviour occured...", 0
+_d
+
+res dt 0
+_46 dd 46
+_4 dd 4
+esp_ dd 0
+true dq 2971215073
+_d
 
 ;%IMPORT user32.dll!MessageBoxA
 ;%IMPORT kernel32.dll!ExitProcess
@@ -52,5 +88,3 @@ _exit:
 
 SECTION0SIZE equ $ - Section0Start
 SIZEOFIMAGE equ $ - IMAGEBASE
-
-; Ange Albertini, Creative Commons BY, 2009-2010
