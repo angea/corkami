@@ -77,18 +77,20 @@ _dw 3          ; major version
 _dw 2dh        ; minor version
 
 _dw 22        ;constant pool count
+; this class
   classref 2                           ; 01
       utf8 'corkamix'                  ; 02
-
+; super class
   classref 4                           ; 03
       utf8 'java/lang/Object'          ; 04
-
+; method name
   utf8 'main'                          ; 05
-
+; method type
   utf8 '([Ljava/lang/String;)V'        ; 06
-
+; attribute name
   utf8 'Code'                          ; 07
 
+; getstatic
   fieldref 9, 11                       ; 08
       classref 10                      ; 09
           utf8 'java/lang/System'      ; 10
