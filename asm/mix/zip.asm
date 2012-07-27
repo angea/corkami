@@ -129,4 +129,4 @@ end_central_directory:
     total_number_disk2 dw 3
     dd end_central_directory - central_directory;size
     dd central_directory - header ;offset
-    dw 296 ; comment_length
+    dw 0 ; comment_length
