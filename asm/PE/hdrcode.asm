@@ -1,4 +1,4 @@
-; a PE were the header is completely executed (to calculate a fibonacci number via FPU)
+; a PE which header is completely executed (to calculate a fibonacci number via FPU)
 
 ; with the help of Peter Ferrie's "Maximum Possible Code Execution" http://pferrie.host22.com/misc/pehdr.htm
 
