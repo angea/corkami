@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5890584"
-     inkscape:cx="1031.0947"
-     inkscape:cy="750.16048"
+     inkscape:zoom="0.55589227"
+     inkscape:cx="801.41428"
+     inkscape:cy="744.09448"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -1488,6 +1488,7 @@
         </dc:rights>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
+        <dc:language>한국어</dc:language>
       </cc:Work>
       <cc:License
          rdf:about="http://creativecommons.org/licenses/by/3.0/">
@@ -5814,16 +5815,16 @@
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-81-0"
-       width="126.44002"
+       width="84.393639"
        height="54.927105"
-       x="1047.7887"
+       x="1068.8119"
        y="-1158.0764" />
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-0"
-       width="196.31911"
+       width="106.56626"
        height="57.211025"
-       x="1012.1274"
+       x="1057.0038"
        y="-1320.7186" />
     <rect
        style="opacity:0.6;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -5967,7 +5968,7 @@
        id="g7818">
       <text
          xml:space="preserve"
-         style="font-size:71.27302550999999700px;font-style:normal;font-weight:bold;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold;font-stretch:normal;font-variant:normal"
+         style="font-size:71.27302551px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
          x="842.97662"
          y="-1168.931"
          id="text4620-3"
@@ -5976,10 +5977,10 @@
            id="tspan4622-4"
            x="842.97662"
            y="-1168.931"
-           style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">실행파일의 자세한정보</tspan></text>
+           style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">실행파일의 주요정보</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:32px;font-style:normal;font-weight:bold;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold;font-stretch:normal;font-variant:normal"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
          x="839.84277"
          y="-1188.931"
          id="text4620"
@@ -5988,7 +5989,7 @@
            id="tspan4622"
            x="839.84277"
            y="-1188.931"
-           style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">헤더(header)</tspan></text>
+           style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">헤더</tspan></text>
     </g>
     <rect
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999982;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6020,14 +6021,14 @@
          y="-1168.1912"
          x="1412.8242"
          id="tspan4622-7"
-         sodipodi:role="line">코드(Code)</tspan></text>
+         sodipodi:role="line">코드 영역</tspan></text>
     <rect
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-1-7-8"
        width="150.45557"
-       height="34"
+       height="38.042919"
        x="1337.6354"
-       y="-1112.436" />
+       y="-1116.479" />
     <text
        sodipodi:linespacing="125%"
        id="text4620-7-32-1"
@@ -6051,7 +6052,7 @@
          y="-1095.5475"
          x="1412.6337"
          id="tspan4622-7-3"
-         sodipodi:role="line">임포트(Imports)</tspan></text>
+         sodipodi:role="line">임포트 영역</tspan></text>
     <rect
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-1-7-7-5"
@@ -6082,7 +6083,7 @@
          y="-1017.6226"
          x="1412.7948"
          id="tspan4622-7-0"
-         sodipodi:role="line">데이타(Data)</tspan></text>
+         sodipodi:role="line">데이타 영역</tspan></text>
     <flowRoot
        transform="translate(0,-1434.6193)"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
@@ -6099,16 +6100,16 @@
        id="text4620-98"
        y="-1124.8566"
        x="1111.5165"
-       style="font-size:32px;font-style:normal;font-weight:bold;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold;font-stretch:normal;font-variant:normal"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
        xml:space="preserve"><tspan
          style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
          y="-1124.8566"
          x="1111.5165"
          id="tspan4622-9"
-         sodipodi:role="line">sections</tspan></text>
+         sodipodi:role="line">섹션</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:71.27302550999999700px;font-style:normal;font-weight:bold;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold;font-stretch:normal;font-variant:normal"
+       style="font-size:71.27302551px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold"
        x="1110.9872"
        y="-1107.8654"
        id="text4620-3-7"
@@ -6117,7 +6118,7 @@
          id="tspan4622-4-2"
          x="1110.9872"
          y="-1107.8654"
-         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">실행할때 사용되는 영역</tspan></text>
+         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS Bold">실행파일의 내용</tspan></text>
     <rect
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-11"
@@ -6148,9 +6149,9 @@
        style="color:#000000;fill:none;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        y="-1343.936"
-       x="1336.5166"
+       x="1334.0908"
        height="31.199213"
-       width="152.54878"
+       width="157.40028"
        id="rect3735-5-3-0-2-0"
        style="opacity:0.75;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
@@ -6729,17 +6730,17 @@
          x="2015.7201"
          y="-494.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4515">주소들은 NULL(0) 로 끝납니다.</tspan><tspan
+         id="tspan4515">Null 로 끝나는 리스트를 가리킴</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-481.58148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4517">On file it is a copy of the INT</tspan><tspan
+         id="tspan4517">INT의 복사본</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-469.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4418">After loading it points to the imported APIs</tspan></text>
+         id="tspan4418">로딩후, 이곳은 임포트 API 를 가리키게 됩니다.</tspan></text>
     <image
        y="-1552.5596"
        x="810.78705"
@@ -7537,7 +7538,7 @@
          x="861.54932"
          y="-551.99463"
          style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4782">    이곳의 위치 계산 : <tspan
+         id="tspan4782">    이곳의 위치 계산: <tspan
    style="font-size:6px"
    id="tspan4807">OptionalHeader</tspan> 의 시작위치 + <tspan
    style="font-size:6px"
@@ -7627,19 +7628,15 @@
          y="-662.29608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4870"> 데이타 디렉토리는 <tspan
-   style="font-size:8px"
-   id="tspan5103">Optional Header</tspan> 다음에 위치</tspan><tspan
+         id="tspan4886"> 데이타 디렉토리는 Optional Header 다음에 위치</tspan><tspan
          y="-649.79608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4878"> 데이타 디렉토리의 갯수는 <tspan
-   style="font-size:6px"
-   id="tspan5105">NumOfRVAAndSizes</tspan> 와 같다</tspan><tspan
+         id="tspan5899"> 그값은 RVA 와 Size 이다.</tspan><tspan
          y="-637.29608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4886"> 임포트 영역은 항상 두번째 구조체 값이다.</tspan><tspan
+         id="tspan5901"> 임포트 영역은 항상 두번째 항목입니다.</tspan><tspan
          y="-624.79608"
          x="1461.5493"
          sodipodi:role="line"
@@ -7647,25 +7644,23 @@
          y="-612.29608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4906">    각각의 디스크립터는 특정 DLL 이름을 가진다</tspan><tspan
+         id="tspan4906">    각 지시자(descriptor)는 명시된 DLL 이름.</tspan><tspan
          y="-599.79608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4914">     이 DLL 이 메모리에 로드될시</tspan><tspan
+         id="tspan4914">     명시된 DLL 이 메모리에 로드될시</tspan><tspan
          y="-587.29608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4926">      IAT 와 INT 가 정확하게 분석될때 </tspan><tspan
+         id="tspan4926">      IAT 와 INT 가 함께 분석이 됩니다.</tspan><tspan
          y="-574.79608"
          x="1461.5493"
          sodipodi:role="line"
-         id="tspan4934">        각 API 는 INT(<tspan
-   style="font-size:8px"
-   id="tspan4989">ImportNameTable</tspan>) 에 존재</tspan><tspan
+         id="tspan4934">        INT(ImportNameTable)에 각각의 API 포함</tspan><tspan
          id="tspan5818"
          y="-562.29608"
          x="1461.5493"
-         sodipodi:role="line">        이 주소는 IAT</tspan></text>
+         sodipodi:role="line">        이 주소는 IAT 영역에 기록되게 됩니다.</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text5855"
@@ -7877,17 +7872,17 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-607.32721"
          x="2015.7201"
-         sodipodi:role="line">주소는 ImageBase 와 연관됩니다.( ImageBase 는 RVA 값 0 )</tspan><tspan
+         sodipodi:role="line">주소는 ImageBase 와 연관됩니다.(ImageBase 는 RVA 값 0)</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-594.82721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan5199"> 헤더에 존재 하는 거의 모든 주소는 코드의 RVA 입니다.</tspan><tspan
+         id="tspan5199">헤더에 존재 하는 거의 모든 주소는 코드의 RVA 입니다.</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-582.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan5205"> 코드안에서 주소는 연관되지 않습니다.</tspan></text>
+         id="tspan5205">코드안에서 주소는 연관되지 않습니다.</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4442"
@@ -7908,7 +7903,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-522.08148"
          x="2015.7201"
-         sodipodi:role="line">Null 로 끝나는 주소리스트는 Hint/Name 구조체를 가리킵니다.</tspan></text>
+         sodipodi:role="line">Null 로 끝나는 리스트는 Hint/Name 구조체를 가리킵니다.</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;display:inline;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -7996,12 +7991,12 @@
          x="2015.7201"
          y="-440.08148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4496">Index in the exports table of a DLL to be imported</tspan><tspan
+         id="tspan4496">DLL 의 익스포트 테이블에 포함되어 있는 인덱스</tspan><tspan
          sodipodi:role="line"
          x="2015.7201"
          y="-427.58148"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4494">Not required but provides a speed-up by reducing look-up</tspan></text>
+         id="tspan4494">꼭 필요하지는 않지만, 제공될경우 검색속도가 향상됩니다.</tspan></text>
     <g
        transform="matrix(0,-2.0041339,1.0635321,0,2838.264,1505.4121)"
        id="g4508">
@@ -8059,7 +8054,7 @@
          sodipodi:role="line"
          x="2595.7065"
          y="-805.83765"
-         id="tspan4472">version 1, 3rd May 2012</tspan></text>
+         id="tspan4472">version 1 KO, August 2012</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
@@ -8071,5 +8066,17 @@
          id="tspan4522"
          x="736.07245"
          y="-813.21198"> 우</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
+       x="740.71307"
+       y="-813.39948"
+       id="text4567"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4569"
+         x="740.71307"
+         y="-813.39948"
+         style="-inkscape-font-specification:Arial Unicode MS;font-family:Arial Unicode MS;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">translated by &lt;Daniel, Choi&gt;</tspan></text>
   </g>
 </svg>
