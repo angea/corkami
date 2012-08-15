@@ -28,10 +28,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.55589227"
-     inkscape:cx="801.41428"
+     inkscape:cx="1052.3622"
      inkscape:cy="744.09448"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
@@ -55,10 +55,10 @@
      inkscape:snap-intersection-paths="true"
      inkscape:snap-to-guides="true"
      inkscape:snap-grids="false"
-     inkscape:window-width="643"
-     inkscape:window-height="724"
-     inkscape:window-x="48"
-     inkscape:window-y="823"
+     inkscape:window-width="1123"
+     inkscape:window-height="778"
+     inkscape:window-x="67"
+     inkscape:window-y="39"
      inkscape:window-maximized="0"
      width="2084.72px"
      inkscape:showpageshadow="false">
@@ -3465,7 +3465,7 @@
          sodipodi:role="line"
          x="2340.6123"
          y="-1548.3085"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS">고정 시그니쳐2(MZ)</tspan><tspan
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS">고정 시그니쳐(MZ)</tspan><tspan
          sodipodi:role="line"
          x="2340.6123"
          y="-1535.8085"
@@ -4823,7 +4823,7 @@
          id="tspan4358"
          y="-937.69757"
          x="2073.6003"
-         sodipodi:role="line">디스크립터</tspan></text>
+         sodipodi:role="line">디스크립터(descriptors)</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot4521"
@@ -7554,12 +7554,12 @@
          x="861.54932"
          y="-530.29608"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4788">    it is checked for validity with alignments:</tspan><tspan
+         id="tspan4788">    유효한 경계(Alignment)인지 검사.:</tspan><tspan
          sodipodi:role="line"
          x="861.54932"
          y="-517.79608"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-         id="tspan4790">        FileAlignments and SectionAlignments</tspan><tspan
+         id="tspan4790">        FileAlignments,  SectionAlignments</tspan><tspan
          id="tspan5618"
          sodipodi:role="line"
          x="861.54932"
@@ -8077,6 +8077,16 @@
          id="tspan4569"
          x="740.71307"
          y="-813.39948"
-         style="-inkscape-font-specification:Arial Unicode MS;font-family:Arial Unicode MS;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">translated by &lt;Daniel, Choi&gt;</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS">번역 &lt;Daniel, Choi&gt;</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="21.586916"
+       y="330.59058"
+       id="text8836"
+       sodipodi:linespacing="125%"
+       transform="translate(638.95303,-1786.9128)"><tspan
+         sodipodi:role="line"
+         id="tspan8838" /></text>
   </g>
 </svg>
