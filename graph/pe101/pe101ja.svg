@@ -28,7 +28,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5890584"
-     inkscape:cx="794.27608"
+     inkscape:cx="1031.0947"
      inkscape:cy="750.16048"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
@@ -1679,7 +1679,7 @@
        id="rect3735-5-8-8"
        style="color:#000000;fill:#ffffff;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <path
-       transform="matrix(0.105845,0,0,0.105845,1823.4402,161.33541)"
+       transform="matrix(0.105845,0,0,0.105845,1759.4402,161.33541)"
        d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
@@ -1692,12 +1692,12 @@
        sodipodi:linespacing="125%"
        id="text3792-7-0-9-0"
        y="298.03201"
-       x="1884.7079"
+       x="1820.7079"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial;-inkscape-font-specification:Arial"
        xml:space="preserve"><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial"
          y="298.03201"
-         x="1884.7079"
+         x="1820.7079"
          id="tspan3794-4-7-5-7"
          sodipodi:role="line">3</tspan></text>
     <rect
@@ -6872,7 +6872,7 @@
          sodipodi:role="line"
          id="tspan4923"
          x="1635.1157"
-         y="-1147.3612">위치(Offset):0x200/R<tspan
+         y="-1147.3612">オフセット:0x200/R<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
    id="tspan5493">VA</tspan>:0x<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -6887,7 +6887,7 @@
          sodipodi:role="line"
          id="tspan4923-7-1"
          x="1775.1157"
-         y="-1324.3484">위치(Offset):0x138</tspan></text>
+         y="-1324.3484">オフセット:0x138</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3800-0-4-5-5-9-4"
@@ -6909,7 +6909,7 @@
          sodipodi:role="line"
          id="tspan4923-7-1-8-7-0"
          x="1635.1157"
-         y="-1591.5659">위치(Offset):0x40</tspan></text>
+         y="-1591.5659">オフセット:0x40</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -6920,7 +6920,7 @@
          sodipodi:role="line"
          id="tspan4923-7-1-8-7-0-0"
          x="1776.5188"
-         y="-1507.6781">위치(Offset):0x58</tspan></text>
+         y="-1507.6781">オフセット:0x58</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -6931,7 +6931,7 @@
          sodipodi:role="line"
          id="tspan4923-7-8"
          x="1635.1157"
-         y="-863.36121">위치(Offset):0x600/R<tspan
+         y="-863.36121">オフセット:0x600/R<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
    id="tspan5489-2">VA</tspan>:0x<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -7110,7 +7110,7 @@
          sodipodi:role="line"
          id="tspan4923-7"
          x="1635.1157"
-         y="-1040.5481">위치(Offset):0x400/R<tspan
+         y="-1040.5481">オフセット:0x400/R<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
    id="tspan5489">VA</tspan>:0x<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -7439,7 +7439,7 @@
          y="-1638.7444"
          x="1635.1157"
          id="tspan4285"
-         sodipodi:role="line">위치(Offset):0x30</tspan></text>
+         sodipodi:role="line">オフセット:0x30</tspan></text>
     <path
        style="opacity:0.98999999;fill:none;stroke:url(#linearGradient4962);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 2291.453,-1053.1843 0,-8.1234"
@@ -7976,13 +7976,13 @@
          x="2015.7201"
          sodipodi:role="line"
          id="tspan5167"><tspan
-   style="fill:#ff0000;font-weight:bold;-inkscape-font-specification:Arial Unicode MS Bold"
+   style="font-weight:bold;fill:#ff0000;-inkscape-font-specification:Arial Unicode MS Bold"
    id="tspan5023">オプショナルヘッダー</tspan>は IMAGE_OPTIONAL_HEADER とも呼ばれる</tspan><tspan
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-637.32721"
          x="2015.7201"
          sodipodi:role="line"
-         id="tspan4934">Optional only for non-standard PEs but required for executables</tspan></text>
+         id="tspan4934">名前どおりのオプションというわけではなく、必須ヘッダーである</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4472"
@@ -8077,7 +8077,7 @@
          sodipodi:role="line">すべて、相対アドレスで記述されている。</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
        x="2595.7065"
        y="-805.83765"
        id="text4470"
@@ -8085,7 +8085,7 @@
          sodipodi:role="line"
          x="2595.7065"
          y="-805.83765"
-         id="tspan4472">version 1, 3rd May 2012</tspan></text>
+         id="tspan4472">バージョン 1 JP, 平成24年8月15日</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
@@ -8096,6 +8096,6 @@
          sodipodi:role="line"
          id="tspan4522"
          x="736.07245"
-         y="-813.21198"> translated by 板橋一正</tspan></text>
+         y="-813.21198">翻訳者 板橋一正</tspan></text>
   </g>
 </svg>
