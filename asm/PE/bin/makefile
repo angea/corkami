@@ -13,7 +13,7 @@ dll: dll.dll dll-ld.exe dll-dynld.exe dllweirdexp.dll dllweirdexp-ld.exe dllempt
     dllnoexp.dll dllnoexp-dynld.exe dllfw.dll dllfw-ld.exe dllfwloop.dll dllfwloop-ld.exe \
     dll-webdavld.exe dupsec.exe secinsec.exe bigib.exe dllnomain.dll dllnomain-ld.exe \
     dllnomain2.dll dllnomain2-dynld.exe dllnullep.dll dllnullep-ld.exe dllnullep-dynld.exe \
-    dllnegep.dll dllnegep-ld.exe
+    dllnegep.dll dllnegep-ld.exe ctxt.dll ctxt-ld.exe
 
 relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe fakerelocs.exe
 
