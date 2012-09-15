@@ -51,27 +51,36 @@ IMAGE_THUNK_DATA64 = ('IMAGE_THUNK_DATA64',
 ###############################################################################
 
 def print_header(h, copy=""):
-        name = h[0]
-        labels = ['<top> %s \\n' % name] # visually, it should be the same
+	name = h[0]
+	labels = ['<top> %s \\n' % name] # visually, it should be the same
 
-        name = name + copy
-        print "%s [" % (name)
-        print 'label =',
-        for l in h[1]:
-                fields = l.split(",")
-                size, field = fields[0], ",".join(fields[1:])
-                #print "\t%s" % l
-#                labels += ["<%s_%s> +%02x %s \\l" % (name.replace(" ", "_"), field.replace(" ", "_"), int(size), field)]
-                labels += ["<%s> +%02x %s \\l" % (field.replace(" ", "_"), int(size), field)]
-        labels = '"%s"' % ("|\\\n".join(labels))
-        print labels
-        print "];"
-        print
+	name = name + copy
+	print "%s [" % (name)
+	print 'label =',
+	for l in h[1]:
+			fields = l.split(",")
+			size, field = fields[0], ",".join(fields[1:])
+			#print "\t%s" % l
+			#labels += ["<%s_%s> +%02x %s \\l" % (name.replace(" ", "_"), field.replace(" ", "_"), int(size), field)]
+			labels += ["<%s> +%02x %s \\l" % (field.replace(" ", "_"), int(size), field)]
+	labels = '"%s"' % ("|\\\n".join(labels))
+	print labels
+	print "];"
+	print
 
-def print_cluster(name):
-        print "subgraph cluster_%s {" % name.replace(" ", "_")
-        print 'style = "dashed";'
-        print 'label = "%s";' % name
+def start_cluster(name):
+	print "subgraph cluster_%s {" % name.replace(" ", "_")
+	print 'style = "dashed";'
+	print 'label = "%s";' % name
+
+def end_cluster():
+	print "}"
+
+def transition(src_block, src_element, target_block, target_element=None, style=None):
+	target_element = "" if target_element is None else ":<%s>" % target_element
+	style = "" if style is None else "[%s]" % style
+	src_element = ":" + src_element if src_element != "" else src_element
+	print '%s%s -> %s%s %s;' % (src_block, src_element, target_block, target_element, style)
 
 ###############################################################################
 
@@ -89,11 +98,11 @@ edge [
 
 ###############################################################################
 
-print_cluster("a Portable Executable file")
+start_cluster("a Portable Executable file")
 
 ###############################################################################
 
-print_cluster("DOS header")
+start_cluster("DOS header")
 
 IMAGE_DOS_HEADER = ('IMAGE_DOS_HEADER',(
 	'2,e_magic',
@@ -118,16 +127,17 @@ IMAGE_DOS_HEADER = ('IMAGE_DOS_HEADER',(
 
 print_header(IMAGE_DOS_HEADER)
 
-print '"OFFSET: 0" -> IMAGE_DOS_HEADER:top[contraint = false];'
 print 'MZ [shape = "none", label="Signature: \'MZ\'"];'
-print 'IMAGE_DOS_HEADER:e_magic -> MZ;'
-print "}" # dos header
+
+transition('"OFFSET: 0"', "", "IMAGE_DOS_HEADER", "top")
+transition('IMAGE_DOS_HEADER', 'e_magic', 'MZ')
+end_cluster() # dos header
 
 ###############################################################################
 
-print_cluster("PE Header")
+start_cluster("PE Header")
 
-print_cluster("NT Headers")
+start_cluster("NT Headers")
 #print "subgraph cluster_hack {"
 #print 'style = "invis"'
 
@@ -144,7 +154,7 @@ IMAGE_FILE_HEADER = ('IMAGE_FILE_HEADER',(
 	'2,Characteristics'))
 
 print_header(IMAGE_FILE_HEADER)
-print 'IMAGE_NT_HEADERS -> IMAGE_FILE_HEADER<top> [label="followed by", weight = 1000];'
+transition('IMAGE_NT_HEADERS', '', 'IMAGE_FILE_HEADER', 'top', 'label="followed by", weight = 1000')
 
 machine_types = [
         ('IMAGE_FILE_MACHINE_UNKNOWN',  0x0000),
@@ -235,18 +245,16 @@ IMAGE_OPTIONAL_HEADER64 = ('IMAGE_OPTIONAL_HEADER64', (
 print_header(IMAGE_OPTIONAL_HEADER)
 print '{rank = same; IMAGE_OPTIONAL_HEADER;IMAGE_NT_HEADERS;IMAGE_FILE_HEADER;}'
 
-print 'IMAGE_FILE_HEADER -> IMAGE_OPTIONAL_HEADER:top[label="followed by"];'
-
+transition('IMAGE_FILE_HEADER', '', 'IMAGE_OPTIONAL_HEADER', 'top', 'label="followed by"')
 print 'IMAGE_NT_HEADERS:Signature -> "SIGNATURE: PE\\\\0\\\\0";'
 
-print 'IMAGE_DOS_HEADER:e_lfanew -> IMAGE_NT_HEADERS:top[label="offset", weight=1000];'
+transition('IMAGE_DOS_HEADER', 'e_lfanew', 'IMAGE_NT_HEADERS', 'top', 'label="offset", weight=1000')
 
-
-print "}" # nt headers
+end_cluster() # nt headers
 
 ###############################################################################
 
-print_cluster("Data directory")
+start_cluster("Data directory")
 
 dds = ('Data_directories',(
         '8,IMAGE_DIRECTORY_ENTRY_EXPORT',
@@ -277,7 +285,7 @@ print_header(IMAGE_DATA_DIRECTORY)
 
 print 'IMAGE_OPTIONAL_HEADER:NumberOfRvaAndSizes -> Data_directories[label="counter"];'
 
-print_cluster("exports")
+start_cluster("exports")
 IMAGE_EXPORT_DIRECTORY =  ('IMAGE_EXPORT_DIRECTORY', (
 	'4,Characteristics',
 	'4,TimeDateStamp',
@@ -292,12 +300,12 @@ IMAGE_EXPORT_DIRECTORY =  ('IMAGE_EXPORT_DIRECTORY', (
 	'4,AddressOfNameOrdinals'))
 
 print_header(IMAGE_EXPORT_DIRECTORY)
-print "}" # exports
+end_cluster() # exports
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_EXPORT -> IMAGE_EXPORT_DIRECTORY;'
 
 ###############################################################################
 
-print_cluster("imports")
+start_cluster("imports")
 IMAGE_IMPORT_DESCRIPTOR =  ('IMAGE_IMPORT_DESCRIPTOR', (
 	'4,OriginalFirstThunk,Characteristics',
 	'4,TimeDateStamp',
@@ -306,12 +314,12 @@ IMAGE_IMPORT_DESCRIPTOR =  ('IMAGE_IMPORT_DESCRIPTOR', (
 	'4,FirstThunk'))
 
 print_header(IMAGE_IMPORT_DESCRIPTOR)
-print "}" # imports
+end_cluster() # imports
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_IMPORT -> IMAGE_IMPORT_DESCRIPTOR;'
 
 ###############################################################################
 
-print_cluster("resources")
+start_cluster("resources")
 IMAGE_RESOURCE_DIRECTORY = ('IMAGE_RESOURCE_DIRECTORY', (
 	'4,Characteristics',
 	'4,TimeDateStamp',
@@ -337,34 +345,34 @@ print 'IMAGE_RESOURCE_DIRECTORY -> IMAGE_RESOURCE_DIRECTORY_ENTRY:top[label="fol
 print 'IMAGE_RESOURCE_DIRECTORY_ENTRY:OffsetToData->IMAGE_RESOURCE_DIRECTORY;'
 print 'IMAGE_RESOURCE_DIRECTORY_ENTRY:OffsetToData->IMAGE_RESOURCE_DATA_ENTRY;'
 print '{rank = same; IMAGE_RESOURCE_DIRECTORY;IMAGE_RESOURCE_DIRECTORY_ENTRY;}'
-print_cluster("resources standard structure")
+start_cluster("resources standard structure")
 
-print_cluster("root level")
+start_cluster("root level")
 print_header(IMAGE_RESOURCE_DIRECTORY, "1")
 print_header(IMAGE_RESOURCE_DIRECTORY_ENTRY, "1")
-print "}" # root
+end_cluster() # root
 
-print_cluster("type level")
+start_cluster("type level")
 print_header(IMAGE_RESOURCE_DIRECTORY, "2")
 print_header(IMAGE_RESOURCE_DIRECTORY_ENTRY, "2")
 print "IMAGE_RESOURCE_DIRECTORY_ENTRY1:OffsetToData -> IMAGE_RESOURCE_DIRECTORY2:top;"
-print "}" # type
+end_cluster() # type
 
-print_cluster("language level")
+start_cluster("language level")
 print_header(IMAGE_RESOURCE_DIRECTORY, "3")
 print_header(IMAGE_RESOURCE_DIRECTORY_ENTRY, "3")
 print "IMAGE_RESOURCE_DIRECTORY_ENTRY2:OffsetToData -> IMAGE_RESOURCE_DIRECTORY3:top;"
-print "}" # language
+end_cluster() # language
 
-print_cluster("resource data")
+start_cluster("resource data")
 print_header(IMAGE_RESOURCE_DATA_ENTRY, "1")
 print "IMAGE_RESOURCE_DIRECTORY_ENTRY3:OffsetToData -> IMAGE_RESOURCE_DATA_ENTRY1:top;"
 print "IMAGE_RESOURCE_DATA_ENTRY1:OffsetToData -> Data;"
 print "IMAGE_RESOURCE_DATA_ENTRY1:Size -> Data;"
-print "}" # data
+end_cluster() # data
 
-print "}" # resources' standard structure
-print "}" # resources
+end_cluster() # resources' standard structure
+end_cluster() # resources
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_RESOURCE -> IMAGE_RESOURCE_DIRECTORY;'
 
 ###############################################################################
@@ -375,12 +383,11 @@ print 'Data_directories:IMAGE_DIRECTORY_ENTRY_EXCEPTION -> "IMAGE_DIRECTORY_ENTR
 
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_SECURITY -> "IMAGE_DIRECTORY_ENTRY_SECURITY";'
 
-
 print_header(IMAGE_THUNK_DATA)
 
 ###############################################################################
 
-print_cluster("relocations")
+start_cluster("relocations")
 IMAGE_BASE_RELOCATION = ('IMAGE_BASE_RELOCATION',(
 	'4,VirtualAddress',
 	'4,SizeOfBlock') )
@@ -396,7 +403,7 @@ print 'IMAGE_BASE_RELOCATION->IMAGE_BASE_RELOCATION_ENTRY:top[label="follows"];'
 
 ###############################################################################
 
-print_cluster("debug")
+start_cluster("debug")
 IMAGE_DEBUG_DIRECTORY = ('IMAGE_DEBUG_DIRECTORY',(
 	'4,Characteristics',
 	'4,TimeDateStamp',
@@ -423,7 +430,7 @@ print 'Data_directories:IMAGE_DIRECTORY_ENTRY_GLOBALPTR -> "IMAGE_DIRECTORY_ENTR
 
 ###############################################################################
 
-print_cluster("Thread Local Storage")
+start_cluster("Thread Local Storage")
 IMAGE_TLS_DIRECTORY = ('IMAGE_TLS_DIRECTORY',(
 	'4,StartAddressOfRawData',
 	'4,EndAddressOfRawData',
@@ -444,11 +451,11 @@ print """TLS_Callbacks [label = "<top>CALLBACKS | callback1 (VA) \l| ...\l"];"""
 print_header(IMAGE_TLS_DIRECTORY)
 print 'IMAGE_TLS_DIRECTORY:AddressOfCallBacks -> TLS_Callbacks;'
 print 'IMAGE_TLS_DIRECTORY:AddressOfIndex -> "Pointer overwritten by index of current callback (0, 1, ...)";'
-print "}" # TLS
+end_cluster() # TLS
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_TLS -> IMAGE_TLS_DIRECTORY;'
 
 ###############################################################################
-print_cluster("Load Config")
+start_cluster("Load Config")
 
 IMAGE_LOAD_CONFIG_DIRECTORY = ('IMAGE_LOAD_CONFIG_DIRECTORY', (
 	'4,Size',
@@ -501,7 +508,7 @@ print 'Data_directories:IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG -> IMAGE_LOAD_CONFIG_D
 
 ###############################################################################
 
-print_cluster("bound imports")
+start_cluster("bound imports")
 
 IMAGE_BOUND_FORWARDER_REF = ('IMAGE_BOUND_FORWARDER_REF',(
 	'4,TimeDateStamp',
@@ -515,7 +522,7 @@ IMAGE_BOUND_IMPORT_DESCRIPTOR = ('IMAGE_BOUND_IMPORT_DESCRIPTOR', (
 	'2,NumberOfModuleForwarderRefs'))
 print_header(IMAGE_BOUND_IMPORT_DESCRIPTOR)
 print 'IMAGE_BOUND_IMPORT_DESCRIPTOR -> IMAGE_BOUND_FORWARDER_REF [label = "follows"];'
-print "}" # bound
+end_cluster() # bound
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT -> IMAGE_BOUND_IMPORT_DESCRIPTOR;'
 
 ###############################################################################
@@ -523,7 +530,7 @@ print 'Data_directories:IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT -> IMAGE_BOUND_IMPORT
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_IAT -> "IAT";'
 
 ###############################################################################
-print_cluster("delay imports")
+start_cluster("delay imports")
 
 IMAGE_DELAY_IMPORT_DESCRIPTOR = ('IMAGE_DELAY_IMPORT_DESCRIPTOR',(
 	'4,grAttrs',
@@ -536,7 +543,7 @@ IMAGE_DELAY_IMPORT_DESCRIPTOR = ('IMAGE_DELAY_IMPORT_DESCRIPTOR',(
 	'4,dwTimeStamp'))
 
 print_header(IMAGE_DELAY_IMPORT_DESCRIPTOR)
-print "}" # delay imports
+end_cluster() # delay imports
 print 'Data_directories:IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT -> IMAGE_DELAY_IMPORT_DESCRIPTOR;'
 
 ###############################################################################
@@ -549,11 +556,11 @@ print 'Data_directories:IMAGE_DIRECTORY_ENTRY_RESERVED -> "reserved";'
 
 ###############################################################################
 
-print "}" # DDs
+end_cluster() # DDs
 
 ###############################################################################
 
-print_cluster("section table")
+start_cluster("section table")
 
 IMAGE_SECTION_HEADER = ('IMAGE_SECTION_HEADER', (
         '8,Name',
@@ -571,14 +578,14 @@ print_header(IMAGE_SECTION_HEADER)
 
 print 'IMAGE_FILE_HEADER:NumberOfSections -> IMAGE_SECTION_HEADER:top[label="counter"];'
 print 'IMAGE_FILE_HEADER:SizeOfOptionalHeader -> IMAGE_SECTION_HEADER:top[label="relative offset"];'
-print "}" # sections
+end_cluster() # sections
 
 ###############################################################################
 
 print 'IMAGE_OPTIONAL_HEADER -> Data_directories:top[label="follows"];'
 
-print "}" # DDs
+end_cluster() # DDs
 
-print "}" # PE header
+end_cluster() # PE header
 
-print "}" # PE file
+end_cluster() # PE file
