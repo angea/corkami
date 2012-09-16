@@ -27,11 +27,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.55589227"
-     inkscape:cx="1052.3622"
-     inkscape:cy="744.09448"
+     inkscape:zoom="0.47806635"
+     inkscape:cx="696.41312"
+     inkscape:cy="248.13811"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
@@ -6258,7 +6258,7 @@
          sodipodi:role="line">الكود المكافيء بلغة C</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2347.1158,-1697.0174)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6280,7 +6280,7 @@
          sodipodi:role="line">2</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2414.1158,-1635.1624)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6389,7 +6389,7 @@
     <g
        style="display:inline"
        id="g5509"
-       transform="translate(-595.9437,853.98452)">
+       transform="translate(-351.9437,853.98452)">
       <path
          sodipodi:type="arc"
          style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11.89999962;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6458,7 +6458,7 @@
     <g
        style="display:inline"
        id="g5514"
-       transform="translate(-596.9437,938.51395)">
+       transform="translate(-354.9437,938.51395)">
       <path
          sodipodi:type="arc"
          style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11.89999962;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6485,7 +6485,7 @@
     <g
        style="display:inline"
        id="g5504"
-       transform="translate(-296.94368,881.13085)">
+       transform="translate(-44.94368,881.13085)">
       <path
          sodipodi:type="arc"
          style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11.89999962;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6512,7 +6512,7 @@
     <g
        style="display:inline"
        id="g5519"
-       transform="translate(5.05632,800.51396)">
+       transform="translate(219.05632,800.51396)">
       <path
          sodipodi:type="arc"
          style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11.89999962;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6539,7 +6539,7 @@
     <g
        style="display:inline"
        id="g5524"
-       transform="translate(251.05632,772.514)">
+       transform="translate(445.05632,772.514)">
       <path
          sodipodi:type="arc"
          style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:11.89999962;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -6932,7 +6932,7 @@
    id="tspan5491-0">40</tspan>3000</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2417.1158,-1709.5304)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -6954,7 +6954,7 @@
          sodipodi:role="line">2</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2373.1158,-1772.1354)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7503,25 +7503,25 @@
     <text
        xml:space="preserve"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-       x="861.40704"
+       x="999.40704"
        y="-690.27802"
        id="text5568"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5570"
-         x="861.40704"
+         x="999.40704"
          y="-690.27802"
          style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS">الترويسات</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text5592"
        y="-576.92963"
-       x="861.40704"
+       x="965.40704"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
        xml:space="preserve"><tspan
          style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-576.92963"
-         x="861.40704"
+         x="965.40704"
          id="tspan5594"
          sodipodi:role="line">جدول الأقسام</tspan></text>
     <text
@@ -7564,47 +7564,47 @@
        sodipodi:linespacing="125%"
        id="text5666"
        y="-690.02277"
-       x="1161.407"
+       x="1335.407"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
        xml:space="preserve"><tspan
          style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-690.02277"
-         x="1161.407"
+         x="1335.407"
          sodipodi:role="line"
          id="tspan4732">الوضع</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-       x="1373.4487"
+       x="1411.4487"
        y="-674.79608"
        id="text5713"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="1373.4487"
+         x="1411.4487"
          y="-674.79608"
          id="tspan4788">يوضع الملف في الذاكره طبقاً لــ :</tspan><tspan
          sodipodi:role="line"
-         x="1373.4487"
+         x="1411.4487"
          y="-662.29608"
          id="tspan4672">نقطة البدايه ImageBase</tspan><tspan
          sodipodi:role="line"
-         x="1373.4487"
+         x="1411.4487"
          y="-649.79608"
          id="tspan4674">حجم الترويسات SizeOfHeaders</tspan><tspan
          sodipodi:role="line"
-         x="1373.4487"
+         x="1411.4487"
          y="-637.29608"
          id="tspan4676">جدول الأقسام</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-       x="1461.407"
+       x="1557.407"
        y="-690.02277"
        id="text5802"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5804"
-         x="1461.407"
+         x="1557.407"
          y="-690.02277"
          style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS">المستوردات</tspan></text>
     <text
@@ -7656,29 +7656,29 @@
        sodipodi:linespacing="125%"
        id="text5855"
        y="-690.07941"
-       x="1709.407"
+       x="1837.407"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
        xml:space="preserve"><tspan
          style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
          y="-690.07941"
-         x="1709.407"
+         x="1837.407"
          id="tspan5857"
          sodipodi:role="line">تنفيذ</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:9px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial Unicode MS;-inkscape-font-specification:Arial Unicode MS"
-       x="1921.4624"
+       x="1901.4624"
        y="-674.79608"
        id="text5859"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="1921.4624"
+         x="1901.4624"
          y="-674.79608"
          id="tspan4914">يتم استدعاء الكود عند نقطة بداية التنفيذ <tspan
    style="font-style:oblique;-inkscape-font-specification:Arial Unicode MS Oblique"
    id="tspan4844">EntryPoint</tspan></tspan><tspan
          sodipodi:role="line"
-         x="1921.4624"
+         x="1901.4624"
          y="-663.54608"
          id="tspan4842">من خلال الــ IAT يتمكن الكود من الوصول لدوال الــ API</tspan></text>
     <g
@@ -7731,7 +7731,7 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        transform="matrix(0.103151,0,0,0.103151,2392.1158,-1535.1624)" />
     <text
        xml:space="preserve"
@@ -7747,7 +7747,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">4</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2324.1158,-1492.815)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7769,7 +7769,7 @@
          sodipodi:role="line">4</tspan></text>
     <path
        transform="matrix(0.103151,0,0,0.103151,2378.8106,-1559.8572)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
@@ -7797,7 +7797,7 @@
        sodipodi:cy="1257.5267"
        sodipodi:rx="51.545567"
        sodipodi:ry="51.545567"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        transform="matrix(0.105845,0,0,0.105845,2359.8106,-1600.67)" />
     <text
        xml:space="preserve"
@@ -7813,7 +7813,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">2</tspan></text>
     <path
        transform="matrix(0.105845,0,0,0.105845,2357.8106,-1613.0174)"
-       d="m 655.55387,1257.5267 a 51.545567,51.545567 0 1 1 -103.09114,0 51.545567,51.545567 0 1 1 103.09114,0 z"
+       d="m 655.55387,1257.5267 c 0,28.4679 -23.07774,51.5456 -51.54557,51.5456 -28.46783,0 -51.54557,-23.0777 -51.54557,-51.5456 0,-28.4678 23.07774,-51.5455 51.54557,-51.5455 28.46783,0 51.54557,23.0777 51.54557,51.5455 z"
        sodipodi:ry="51.545567"
        sodipodi:rx="51.545567"
        sodipodi:cy="1257.5267"
