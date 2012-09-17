@@ -31,7 +31,7 @@
      inkscape:cx="1052.3622"
      inkscape:cy="744.09448"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="false"
@@ -5251,11 +5251,11 @@
        sodipodi:linespacing="125%"
        id="text4529"
        y="-1195.6145"
-       x="1028.3688"
+       x="1032.3688"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R Bold"
        xml:space="preserve"><tspan
          y="-1195.6145"
-         x="1028.3688"
+         x="1032.3688"
          id="tspan4531"
          sodipodi:role="line">*</tspan></text>
     <text
@@ -5290,16 +5290,16 @@
          id="tspan3840-1-6-8-2-4-5"
          y="-1195.1782"
          x="1117.4058"
-         sodipodi:role="line">جدول الأقسام</tspan></text>
+         sodipodi:role="line">الحجم الفيزيائي</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       x="1028.3706"
+       x="1032.3706"
        y="-1195.1782"
        id="text4521"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="1028.3706"
+         x="1032.3706"
          y="-1195.1782"
          id="tspan4523">RVA</tspan></text>
     <text
