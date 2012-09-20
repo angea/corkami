@@ -3,8 +3,8 @@
 
 \setauthor[M.~Albertini]{Ange Albertini\\
   \email{ange.albertini@gmail.com}}
+\institute{Corkami.com}
 
-%\institute{Corkami}
 
 \maketitle
 \index{Ange, M.}
@@ -72,18 +72,258 @@ db 26 ; EOF
   \label{fig:albertini:pythonnotepad}
 \end{figure}
 
+\subsection{création d'une page HTML dans un exécutable}
+
+Le laxisme omniprésent dans les pages HTML fait qu'au final, les navigateurs se contente d'ignorer un peu tout, quand bien même ce serait du binaire pure, au cas où un tag $<HTML>$ finirait par être présent.
+
+Ansi, le simple fait de rajouter à la fin d'un exécutable du code HTML va en faire une page web fonctionnelle, pour peu qu'on renomme l'extension du fichier, comme le montre la figure~\ref{fig:albertini:htmlnotepad}.
+
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{albertini/img/htmlnotepad}
   \caption{le bloc-note Windows avec une page HTML ajoutée à la fin}
-  \label{fig:albertini:pythonnotepad}
+  \label{fig:albertini:htmlnotepad}
 \end{figure}
+
+parasites visuels dûs aux binaire~$\Rightarrow$~jouer sur les CSS pour rendre le code invisible
+
+rajouter quelque chose après la page HTML~$\Rightarrow$~ouverture d'un bloc de commentaire non fermé
+
+\subsection{concaténation d'un PDF et d'un exécutable}
+
+La documentation officielle d'Adobe stipule que la première ligne d'un PDF doit être sa signature.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/pdfsigtheory}
+  \caption{Documentation officielle imposant la signature d'un PDF à la première ligne}
+  \label{fig:albertini:pdfsigtheory}
+\end{figure}
+
+En pratique, il n'en n'est rien, il est juste requis qu'une signature valide soit présente dans les 1024 ($0x400$) premiers octets.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/pdfsigpractice}
+  \caption{un PDF reconnu par Adobe dont la signature est à la fin des 1024 premiers octets}
+  \label{fig:albertini:pdfsigpractice}
+\end{figure}
+
+On peut donc, dans un premier temps, rajouter à la fin d'un petit exécutable un PDF dans son intégralité, et les 2 fonctionneront encore comme on s'y attend.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/tinyPEPDF}
+  \caption{un PDF greffé à la fin d'un petit exécutable}
+  \label{fig:albertini:tinyPEPDF}
+\end{figure}
+
+\begin{itemize}
+\item gros PE $\Rightarrow$ rajouter la signature PDF dans l'en-tête PE
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{albertini/img/pdfnotepad}
   \caption{le bloc-note Windows avec un fichier PDF ajouté à la fin}
   \label{fig:albertini:pythonnotepad}
+\end{figure}
+
+
+\item eviter le contenu du PE d'être interprété $\Rightarrow$ créer un objet PDF fictif
+\end{itemize}
+
+\subsection{un ZIP dans un exécutable}
+le format ZIP n'impose rien quant au début du fichier.
+en revanche, il doit terminer strictement le fichier.
+
+un JAR n'est qu'une archive pour une ou plusieurs classes Java (extension .CLASS), et d'un $manifest$.
+
+si on rajoute un seul octet à la fin d'un Zip utilisé comme JAR, Java ne reconnait plus ce fichier comme valide.
+
+Au contraire, si l'interpreteur python détecte la présence d'un ZIP, il va traiter le fichier comme un {\em python egg}, donc n'interprétera plus le fichier à son début comme un script.
+
+le format .JAR et .PY sont donc exclusivement opposés.
+
+
+\subsection{recapitulons}
+\begin{itemize}
+\item un PE
+\item une signature PDF dans ses $1024 - 6$ premier octets
+\item concaténer le PDF au PE
+\item concaténer la page HTML
+\item concaténer le ZIP
+\end{itemize}
+
+\section{compliquons un peu}
+faisons tout à la main, pour garder le contrôle.
+
+toutes les structures crées à partir de zéro, en assembleur.
+
+un fichier Zip sans compression stocke le fichier original tel quel, ce qui nous permet de générer le fichier zippé sans la moindre retouche nécessaire.
+
+\subsection{un PE fait main}
+\begin{itemize}
+\item peu d'éléments définis
+
+seulement 18 éléments définis dans l'en-tête, toutes structures confondues. par rapport à 40 dans un exécutable $Hello World$ compilé en assembleur standard.
+
+\item pas de sections
+
+Quand un exécutable utilise des alignements faibles, tout l'exécutable est chargé en mémoire indépendamment de la table des sections. il devient dans ce cas possible de ne pas définir de section du tout $NumberOfSections = 0$, et de ne pas avoir de table de section $SizeOfOptionalHeader = 0$
+
+\item du code non documenté
+
+que les assembleurs standards ne peuvent même pas encoder.
+
+{\em SetALC}
+
+{\em nop} multi octets
+
+absent de la documentation Intel, mais présent dans la documentation AMD.
+
+ça donne des inconnues dans tous les outils Microsoft.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/corkamix_windbg}
+  \caption{WinDbg montre plusieurs instructions inconnues}
+  \label{fig:albertini:corkamix_windbg}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/undoc_setalc}
+  \caption{la documentation officielle n'indique rien pour l'octet $D6$}
+  \label{fig:albertini:undoc_setalc}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/undoc_nop}
+  \caption{la documentation Intel ne mentionne NOP que pour les octets $0F 1F$}
+  \label{fig:albertini:undoc_nop}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/nop_amd}
+  \caption{le NOP de plusieurs octets est complètement documenté par AMD}
+  \label{fig:albertini:nop_amd}
+\end{figure}
+
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/salc_amd}
+  \caption{SetALC est documenté par AMD}
+  \label{fig:albertini:salc_amd}
+\end{figure}
+
+\item une table d'import très compacte
+
+la liste des descripteur se termine quand Name ou IAT sont nuls.
+
+on intègre l'IAT, très petite, dans le descripteur lui même.
+
+on intègre les noms tronqués de DLL dans le terminateur, ainsi que le ??? hint/name.
+
+une telle structure fortement réduite n'est gérée par aucun outil commercial à l'heure actuelle, Hiew et IDA compris.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/imports_error}
+  \caption{une structure d'imports non gérée par Hiew ou IDA}
+  \label{fig:albertini:imports_error}
+\end{figure}
+
+ces astuces font que les outils les plus avancés échouent à analyser le PE parfaitement.
+
+\end{itemize}
+
+\subsection{un PDF très compact}
+on tronque la signature
+
+pas de signature de fin $\%\%EOF$
+
+on supprime toute référence à une longueur
+
+aucun paramètre pour la $stream$
+
+plus de $xref$
+
+plus de $endobj$
+
+le trailer est réduit à son strict minimum
+\begin{lstlisting}[language={},caption={un PDF réduit au minimum},label={lst:albertini:reducedPDF}]
+%PDF- 1 0 obj<</Kids[<</Parent 1 0 R/Contents[2 0 R]>>]/Resources<<>>>>2 0 obj<<>>stream
+BT/default 99 Tf 1 0 0 1 1 715 Tm(Hello World!)Tj ET
+endstream
+endobj
+trailer<</Root<</Pages 1 0 R>>>>
+\end{lstlisting}
+
+\begin{lstlisting}[language={},caption={un PDF valide de 36 octets},label={lst:albertini:tinypdf}]
+%PDF- trailer<</Root<</Pages<<>>>>>>
+\end{lstlisting}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/undocumentedPDF}
+  \caption{notre PDF documenté n'est pas géré par un lecteur plus rigoureux qu'Acrobat}
+  \label{fig:albertini:undocumentedPDF}
+\end{figure}
+
+
+\subsection{une structure ZIP incorrecte}
+
+Java ne prend pas en compte les CRCs du format ZIP, ne pas les générer nous donne un ZIP à priori invalide mais parfaitement fonctionnel via Java
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/wrong_crcs}
+  \caption{Java passe outre les CRCs invalides}
+  \label{fig:albertini:wrong_crcs}
+\end{figure}
+
+\subsection{mélangeons le tout}
+on peut donc concaténer chaque structure.
+
+par exemple, la partie principale du PDF sera intégré à la classe Java, dans sa {\em ConstantPool}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/pdfpool}
+  \caption{une classe Java contenant du PDF}
+  \label{fig:albertini:pdfpool}
+\end{figure}
+
+\section{un patchwork binaire}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/corkamix}
+  \caption{un joli patchwork}
+  \label{fig:albertini:corkamix}
+\end{figure}
+
+Signature initiale: PE
+
+récapitulons tous les formats inclus:
+\begin{itemize}
+\item[exécutable] PE
+\item[exécutable] Java
+\item[script] python (si le Java est désactivé)
+\item[script] JavaScript
+\item[document] PDF
+\item[archive] ZIP
+\item[document] HTML
+\end{itemize}
+
+on peut rajouter de nombreux formats dans le fichier Zip lui-même, mais ça ne présente aucun challenge particulier.
+
+ça pose donc beaucoup de problèmes - VirusTotal ne l'identifie que comme PDF.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/corkamix-vt}
+  \caption{un exécutable identifié uniquement comme PDF}
+  \label{fig:albertini:corkamix-vt}
 \end{figure}
 
 \bibliography{albertini/biblio}
