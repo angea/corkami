@@ -140,12 +140,12 @@ hnMessageBoxA:
 
 kernel32_iat:
 __imp__ExitProcess:
-    dd hnExitProcess - IMAGEBASE
-    dd 0
+    dq hnExitProcess - IMAGEBASE
+    dq 0
 user32_iat:
 __imp__MessageBoxA:
-    dd hnMessageBoxA - IMAGEBASE
-    dd 0
+    dq hnMessageBoxA - IMAGEBASE
+    dq 0
 
 kernel32 db 'kernel32.dll', 0
 user32 db 'user32.dll', 0
