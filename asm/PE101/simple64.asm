@@ -97,10 +97,11 @@ section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
     sub rsp, 5 * 8
-    mov ecx, 0
-    mov edx, Title_ + DATADELTA
-    mov r8d, Caption + DATADELTA
+	
     mov r9d, 0
+    mov r8d, Title_ + DATADELTA
+    mov edx, Caption + DATADELTA
+    mov ecx, 0
     call [__imp__MessageBoxA]
 
     mov ecx, 0
