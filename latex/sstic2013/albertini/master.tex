@@ -162,10 +162,18 @@ toutes les structures crées à partir de zéro, en assembleur.
 un fichier Zip sans compression stocke le fichier original tel quel, ce qui nous permet de générer le fichier zippé sans la moindre retouche nécessaire.
 
 \subsection{un PE fait main}
+pour avoir un contrôle total de la génération du PE, il est entièrement généré en assembleur, pour son code et ses données bien sûr, mais également pour sa structure complète.
+
 \begin{itemize}
 \item peu d'éléments définis
 
 seulement 18 éléments définis dans l'en-tête, toutes structures confondues. par rapport à 40 dans un exécutable $Hello World$ compilé en assembleur standard.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/empty_pe_header}
+  \caption{comparaison d'en-têtes PE}
+  \label{fig:albertini:empty_pe_header}
+\end{figure}
 
 \item pas de sections
 
@@ -177,7 +185,7 @@ que les assembleurs standards ne peuvent même pas encoder.
 
 {\em SetALC}
 
-{\em nop} multi octets
+{\em nop} multi-octets
 
 absent de la documentation Intel, mais présent dans la documentation AMD.
 
@@ -238,6 +246,100 @@ une telle structure fortement réduite n'est gérée par aucun outil commercial 
 ces astuces font que les outils les plus avancés échouent à analyser le PE parfaitement.
 
 \end{itemize}
+
+\subsection{un CLASS Java au régime}
+en utilisant le source Java minimal, en supprimant
+
+\begin{lstlisting}[language={java},caption={un Hello World minimal en Java},label={lst:albertini:hwjava}]
+ public class HelloWorld
+{
+  public static void main(String[] args)
+  {
+    System.out.println("Hello World!");
+  }
+}
+\end{lstlisting}
+
+on obtient un fichier CLASS de 426 octets.
+\begin{itemize}
+\item 2 méthode dont une superflue
+\item un attribut de classe {\em SourceFile} non indispensable
+\item les attributs de {\em Code} ont tous un attribut {\em LineNumberTable}, lui non plus non requis.
+\end{itemize}
+
+en supprimant toutes les constantes associés à ces éléments non requis, on peut gagner de la place.
+
+Même pour quelque chose d'aussi simple qu'un simple affichage de chaîne, on peut bien réduire le fichier.
+
+en utilisant les options de compilations, on éradique les attributs {\em SourceFile} et {\em LineNumberTable}.
+
+on obtient un fichier de 341 octets.
+
+en utilisant Jasmin, l'assembleur pour Java, on peut réduire le fichier en fusionnant les méthodes et en renommant l'unique restante en 'main', ce qui nous fera de l'espace économisé. En revanche, Jasmin semble toujours rajouter un attribut {\em SourceFile}.
+
+\begin{lstlisting}[language={java},caption={un Hello World minimal en Jasmin},label={lst:albertini:hwjasmin}]
+.class public HelloWorld
+.super java/lang/Object
+
+.method public static main([Ljava/lang/String;)V
+   .limit stack 2   ; up to two items can be pushed
+
+   getstatic java/lang/System/out Ljava/io/PrintStream;
+   ldc "Hello World!"
+   invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
+   return
+.end method
+\end{lstlisting}
+
+on se retrouve bloqué, et comme on n'est jamais aussi bien servi que par soit-même, autant tout réécrire en assembleur.
+JVM étant basé sur la pile, l'encodage des opérations des très simple. on peut donc le réimplémenter soit-même via des macros.
+\begin{lstlisting}[language={java},caption={un Hello World minimal en Java},label={lst:albertini:asmjavamacros}]
+%macro GETSTATIC 1
+        db 0b2h
+            _dw %1
+%endmacro
+
+[...]
+%macro fieldref 2
+        db 9
+        _dw %1
+        _dw %2
+%endmacro
+\end{lstlisting}
+
+la structure d'une classe Java n'étant ni compactée ni basé sur des longueurs variables, on peut facilement implémenter un à un chaque champ requis
+\begin{lstlisting}[language={java},caption={un Hello World minimal en Java},label={lst:albertini:asmjavafields}]
+_dd 0CAFEBABEh ; signature
+_dw 3          ; major version
+_dw 2dh        ; minor version
+[...]
+_dw 22        ;constant pool count
+
+; getstatic
+  fieldref 9, 11                       ; 08
+      classref 10                      ; 09
+          utf8 'java/lang/System'      ; 10
+      nat 12, 13                       ; 11
+          utf8 'out'                   ; 12
+          utf8 'Ljava/io/PrintStream;' ; 13
+[...]
+\end{lstlisting}
+
+ansi que son {\em bytecode}
+\begin{lstlisting}[language={java},caption={un Hello World minimal en Java},label={lst:albertini:asmjavafields}]
+[...]
+_dd 9 ; length of bytecode
+    GETSTATIC 8
+    LDC 14
+    INVOKEVIRTUAL 16
+    RETURN
+_dw 0 ; exceptions_count
+[...]
+\end{lstlisting}
+
+nous voilà donc en contrôle total de la structure du fichier final, au niveau code comme donnée.
+
+on obtient donc un fichier CLASS de 283 octets, avec une {\em constant pool} de 21 objets (parfaitement ordonnée qui plus est).
 
 \subsection{un PDF très compact}
 on tronque la signature
