@@ -56,13 +56,17 @@ SIZEOFHEADERS equ $ - IMAGEBASE
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
 EntryPoint:
+    call $ + 5
+base:
+    pop ebp
     call LoadImports
-    push Msg
-    call [ddprintf]
+    lea eax, [ebp - base + Msg]
+    push eax
+    call [ebp + ddprintf - base]
     add esp, 1 * 4
 _
     push 0
-    call [ddExitProcess]
+    call [ebp + ddExitProcess - base]
 _c
 
 Msg db " * a PE with no DataDirectory (loading imports manually)", 0ah, 0
@@ -87,28 +91,29 @@ LoadImports:
 ;   mov eax, [esp + 4]
 ;   and eax, 0fff00000h
 
-    mov [hKernel32], eax
+    mov [ebp + hKernel32 - base], eax
 
-    mov eax, [hKernel32]
+    mov eax, [ebp + hKernel32 - base]
     mov ebx, LOADLIBRARYA
     call GetProcAddress_Hash
-    mov [ddLoadLibrary], ebx
+    mov [ebp + ddLoadLibrary - base], ebx
 
-    mov eax, [hKernel32]
+    mov eax, [ebp + hKernel32 - base]
     mov ebx, EXITPROCESS
     call GetProcAddress_Hash
-    mov [ddExitProcess], ebx
+    mov [ebp + ddExitProcess - base], ebx
 
-    push szmsvcrt
-    call [ddLoadLibrary]
+    lea eax, [szmsvcrt + ebp - base]
+    push eax
+    call [ebp + ddLoadLibrary - base]
     mov ebx, PRINTF
     call GetProcAddress_Hash
-    mov [ddprintf], ebx
+    mov [ebp + ddprintf - base], ebx
 
     retn
 _c
 
-szmsvcrt db "msvcrt.dll", 0
+szmsvcrt db "msvcrt", 0
 _d
 
 ddprintf dd 0
@@ -126,25 +131,29 @@ Exports__AddressOfFunctions EQU 01ch
 Exports__AddressOfNames     EQU 020h
 Exports__AddressOfNamesOrdinal EQU 024h
 
+checksum dd 0
+ImageBase dd 0
+char db 0
+ExportDirectory dd 0
 
 GetProcAddress_Hash:
-    mov [ImageBase], eax
-    mov [checksum], ebx
-    mov ebp, [ImageBase]
-    ; ebp = PE start / ImageBase
-    mov edx, [ebp + DOS_HEADER__e_lfanew] ; e_lfanew = RVA of NT_SIGNATURE
-    add edx, [ImageBase]    ; RVA to VA
+    mov [ebp + ImageBase - base], eax
+    mov [ebp + checksum - base], ebx
+    mov ecx, [ebp + ImageBase - base]
+    ; ecx = PE start / ImageBase
+    mov edx, [ecx + DOS_HEADER__e_lfanew] ; e_lfanew = RVA of NT_SIGNATURE
+    add edx, [ebp + ImageBase - base]    ; RVA to VA
         ; => eax = NT_SIGNATURE VA
 
     mov edx, [edx + NT_SIGNATURE__IMAGE_DIRECTORY_ENTRY_EXPORT__RVA]  ; IMAGE_DIRECTORY_ENTRY_EXPORT (.RVA) - NT_SIGNATURE
-    add edx, [ImageBase]    ; RVA to VA
+    add edx, [ebp + ImageBase - base]    ; RVA to VA
         ; => edx = IMAGE_DIRECTORY_ENTRY_EXPORT VA
-    mov [ExportDirectory], edx
+    mov [ebp + ExportDirectory - base], edx
 
     mov ecx, [edx + Exports__NumberOfNames] ; NumberOfNames
 
     mov ebx, [edx + Exports__AddressOfNames] ; AddressOfNames
-    add ebx, [ImageBase]    ; RVA to VA
+    add ebx, [ebp + ImageBase - base]    ; RVA to VA
 _
 next_name:
     test ecx, ecx
@@ -152,7 +161,7 @@ next_name:
     dec ecx
 
     mov esi, [ebx + ecx * 4]
-    add esi, [ImageBase] ; RVA to VA
+    add esi, [ebp + ImageBase - base] ; RVA to VA
 
     mov edi, 0
 _
@@ -166,18 +175,18 @@ checksum_loop:
     test al, al
     jnz checksum_loop
 
-    cmp edi, [checksum]
+    cmp edi, [ebp + checksum - base]
     jnz next_name
 
     mov ebx, [edx + Exports__AddressOfNamesOrdinal] ; AddressOfNamesOrdinal RVA
-    add ebx, [ImageBase]
+    add ebx, [ebp + ImageBase - base]
 
     mov cx, [ebx + ecx * 2]
 
     mov ebx, [edx + Exports__AddressOfFunctions] ; AddressOfFunctions RVA
-    add ebx, [ImageBase]
+    add ebx, [ebp + ImageBase - base]
     mov ebx, [ebx + ecx * 4] ; Functions RVA
-    add ebx, [ImageBase]
+    add ebx, [ebp + ImageBase - base]
 
     jmp _end
 _
@@ -187,10 +196,5 @@ _
 _end:
     retn
 _c
-
-checksum dd 0
-ImageBase dd 0
-char db 0
-ExportDirectory dd 0
 
 align FILEALIGN, db 0
