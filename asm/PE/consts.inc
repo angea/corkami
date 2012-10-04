@@ -402,3 +402,11 @@ WIDE %1
 	align 4, db 0
 %%SLEN equ $ - %%string
 %endmacro
+
+struc IMPORT_IMAGE_DESCRIPTOR
+    .INT            resd 1
+    .TimeStamp      resd 1
+    .ForwarderChain resd 1
+    .DllName        resd 1
+    .IAT            resd 1
+endstruc
