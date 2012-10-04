@@ -43,7 +43,7 @@ bits 32
 
 PE_Header
 istruc IMAGE_NT_HEADERS
-  at IMAGE_NT_HEADERS.Signature , db 'PE', 0, 0   ; Signature
+  at IMAGE_NT_HEADERS.Signature , db 'PE', 0, 0
 iend
 istruc IMAGE_FILE_HEADER
   at IMAGE_FILE_HEADER.Machine              , dw IMAGE_FILE_MACHINE_I386
@@ -463,7 +463,6 @@ RES_LENGTH equ $ - resource_start
 
 align 200h, db 0
 
-IMAGE_REL_BASED_ABSOLUTE equ 0
 Relocs
     block_start:
     dd 2000h ; rva

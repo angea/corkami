@@ -2,7 +2,7 @@ all: common XP W7
 
 beta: no_dd64.exe
 
-common: exports imports dll gaps tls bound entrypoint down many misc resource delay relocs
+common: exports imports dll gaps tls bound entrypoint down many misc resource delay relocs dotnet
 
 exports: ownexports.exe ownexports2.exe exportsdata.exe exportobf.exe exports_doc.exe
 
@@ -54,6 +54,8 @@ XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tiny
 W7: tinyW7.exe tinyW7x64.exe tinyW7_3264.exe maxsec_lowaligW7.exe nosectionW7.exe maxsecW7.exe \
     appsectableW7.exe apphdrW7.exe foldedhdrW7.exe normal64.exe 65535sects.exe imports_apimsW7.exe \
     ibrelocW7.exe ibknoreloc64.exe imports_tinyW7.exe manyimportsW7.exe imports_relocW7.exe
+
+dotnet: tinynet.exe dotnet20.exe
 
 multiss_gui.exe: multiss.exe
 	c:\python26\python multiss.py
