@@ -66,19 +66,13 @@ SectionSart:
 _CorExeMain db" #"
     align 8, db 0
 Cor20:
-    .size                    dd COR20SIZE
-    .major                   dw 2
-    .minor                   dw 5
-    .MetaDataRVA             dd Metadata - CODEDELTA - IMAGEBASE, Metadata_end - Metadata
-    .Flags                   dd COMIMAGE_FLAGS_ILONLY
-    .EntryPointToken         dd 6000001h
-    .Resources               dd 0,0
-    .StrongNameSignature     dd 0,0
-    .CodeManagerTable        dd 0,0
-    .VTableFixups            dd 0,0
-    .ExportAddressTableJumps dd 0,0
-    .ManagedNativeHeader     dd 0,0
-
+istruc IMAGE_COR20_HEADER
+    at IMAGE_COR20_HEADER.cb                  , dd COR20SIZE
+    at IMAGE_COR20_HEADER.MajorRuntimeVersion , dw 2, 5
+    at IMAGE_COR20_HEADER.MetaData            , dd Metadata - CODEDELTA - IMAGEBASE, Metadata_end - Metadata
+    at IMAGE_COR20_HEADER.Flags               , dd COMIMAGE_FLAGS_ILONLY
+    at IMAGE_COR20_HEADER.EntryPointToken     , dd 6000001h
+iend
 COR20SIZE equ $ - Cor20
 
 Metadata:
@@ -170,13 +164,13 @@ iend
 
 istruc Method
     at Method.RVA       , dd Method1 - CODEDELTA - IMAGEBASE
-    at Method.Flags_1   , dw 96h
+    at Method.Flags     , dw 96h
     at Method.Name      , dw Strings - String_start
     at Method.Signature , dw 0ah
 iend
 istruc Method
     at Method.RVA       , dd Method2 - CODEDELTA - IMAGEBASE
-    at Method.Flags_1   , dw 1886h
+    at Method.Flags     , dw 1886h
     at Method.Name      , dw a_ctor -  String_start
     at Method.Signature , dw 0eh
 iend
@@ -207,9 +201,10 @@ istruc Assembly
     at Assembly.Name      , dw aMscorlib - String_start
 iend
 ; AssemblyRef
-dw 2, 0, 0, 0
-dd 0
-dw 0, aMscorlib - String_start, 0, 0
+istruc AssemblyRef
+	at AssemblyRef.MajorVersion , dw 2
+	at AssemblyRef.Name         , dw aMscorlib - String_start
+iend
 METALEN equ $ - MetaStream
 
 String_start:
@@ -233,12 +228,16 @@ aA_net2_0Pe:
 USLEN equ $ - US
 
 blob_start db 0, 8
-    publickeytoken db 0B7h, 7Ah, 5Ch, 56h, 19h, 34h, 0E0h, 89h,
-    db 3,0,0
-            db 1, 3, 20h, 0, 1, 4, 20h, 1, 1, 8, 4, 0, 1, 1
-            db 0Eh, 8, 1, 0, 8, 0,0,0,0,0, 1Eh, 1, 0, 1, 0, 54h, 2
-    aWrapnonexceptionthrows db 1,'W'
-    db 1
+	b_publickeytoken db 0B7h, 7Ah, 5Ch, 56h, 19h, 34h, 0E0h, 89h,
+	b_main db 3,0,0, 1
+	b_ctor db 3, 20h, 0, 1
+	b_mem1 db 4, 20h, 1, 1, 8
+	test17 db 4, 0, 1, 1
+				db 0Eh, 
+	test1c db 8, 1, 0, 8, 0,0,0,0,0
+	test25 db 1Eh, 1, 0, 1, 0, 54h, 2
+		aWrapnonexceptionthrows db 1,'W'
+		db 1
 blob_end
 
 Metadata_end

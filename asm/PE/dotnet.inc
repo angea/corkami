@@ -56,7 +56,7 @@ endstruc
 struc Method
     .RVA       resd 1
     .ImplFlags resw 1
-    .Flags_1   resw 1
+    .Flags     resw 1
     .Name      resw 1
     .Signature resw 1
     .ParamList resw 1
@@ -84,6 +84,18 @@ struc Assembly
     .PublicKey      resw 1
     .Name           resw 1
     .Culture        resw 1
+endstruc
+
+struc AssemblyRef
+	.MajorVersion     resw 1
+	.MinorVersion     resw 1
+	.BuildNumber      resw 1
+	.RevisionNumber   resw 1
+	.Flags            resd 1
+	.PublicKeyOrToken resw 1
+	.Name             resw 1
+	.Culture          resw 1
+	.HashValue        resw 1
 endstruc
 
 struc Tables
