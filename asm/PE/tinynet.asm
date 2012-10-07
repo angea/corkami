@@ -45,26 +45,23 @@ istruc IMAGE_OPTIONAL_HEADER32
 iend
 
 istruc IMAGE_DATA_DIRECTORY_16
-    at IMAGE_DATA_DIRECTORY_16.ImportsVA, dd Imports - CODEDELTA - IMAGEBASE, IMPORTS_SIZE
+    at IMAGE_DATA_DIRECTORY_16.ImportsVA, dd Imports - CODEDELTA - IMAGEBASE, 28h
     at IMAGE_DATA_DIRECTORY_16.FixupsVA,  dd Relocs - CODEDELTA - IMAGEBASE, RELOCS_SIZE
     at IMAGE_DATA_DIRECTORY_16.COM,       dd Cor20 - CODEDELTA - IMAGEBASE, COR20SIZE
 iend
 
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.Name             , db '.text'
     at IMAGE_SECTION_HEADER.VirtualSize      , dd SECTIONSIZE
-    at IMAGE_SECTION_HEADER.VirtualAddress   , dd _CorExeMain - CODEDELTA - IMAGEBASE
+    at IMAGE_SECTION_HEADER.VirtualAddress   , dd SECALIGN
     at IMAGE_SECTION_HEADER.SizeOfRawData    , dd SECTIONSIZE
     at IMAGE_SECTION_HEADER.PointerToRawData , dd SectionSart - IMAGEBASE
-    at IMAGE_SECTION_HEADER.Characteristics  , dd 62000060h
+    at IMAGE_SECTION_HEADER.Characteristics  , dd 40000000h
 iend
 
 align FILEALIGN, db 0
 SIZEOFHEADERS equ $ - IMAGEBASE
 
 SectionSart:
-_CorExeMain db" #"
-    align 8, db 0
 Cor20:
 istruc IMAGE_COR20_HEADER
     at IMAGE_COR20_HEADER.cb                  , dd COR20SIZE
@@ -200,14 +197,14 @@ istruc Assembly
     at Assembly.HashAlgId , dd 8004h
     at Assembly.Name      , dw aMscorlib - String_start
 iend
-; AssemblyRef
+
 istruc AssemblyRef
 	at AssemblyRef.MajorVersion , dw 2
 	at AssemblyRef.Name         , dw aMscorlib - String_start
 iend
 METALEN equ $ - MetaStream
 
-String_start:
+String_start: ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Strings   db 0
 aMscorlib db 'mscorlib',0
 aSystem   db 'System',0
@@ -221,19 +218,20 @@ aWriteline    db 'WriteLine',0
 
 STRING_SIZE equ $ - String_start
 
-US
+US ; USER STRINGS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 dw 2200h
 aA_net2_0Pe:
         WIDE " * a tiny .NET PE"
 USLEN equ $ - US
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 blob_start db 0, 8
 	b_publickeytoken db 0B7h, 7Ah, 5Ch, 56h, 19h, 34h, 0E0h, 89h,
 	b_main db 3,0,0, 1
 	b_ctor db 3, 20h, 0, 1
 	b_mem1 db 4, 20h, 1, 1, 8
 	test17 db 4, 0, 1, 1
-				db 0Eh, 
+				db 0Eh,
 	test1c db 8, 1, 0, 8, 0,0,0,0,0
 	test25 db 1Eh, 1, 0, 1, 0, 54h, 2
 		aWrapnonexceptionthrows db 1,'W'
@@ -242,7 +240,7 @@ blob_end
 
 Metadata_end
 
-Imports:
+Imports: ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 istruc IMPORT_IMAGE_DESCRIPTOR
     at IMPORT_IMAGE_DESCRIPTOR.INT,     dd mscoreeINT - CODEDELTA - IMAGEBASE
     at IMPORT_IMAGE_DESCRIPTOR.DllName, dd aMscoree_dll - CODEDELTA - IMAGEBASE
@@ -253,7 +251,6 @@ iend
 
 mscoreeINT dd hn_CoreExeMain - IMAGEBASE - CODEDELTA
     dd 0
-align 16, db 0
 
 hn_CoreExeMain:
     dw 0
@@ -261,6 +258,7 @@ hn_CoreExeMain:
 
 aMscoree_dll db 'mscoree.dll',0
 IMPORTS_SIZE EQU $ - Imports
+_CorExeMain dd ""
 
 Relocs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     block_start:
