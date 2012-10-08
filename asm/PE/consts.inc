@@ -411,3 +411,25 @@ struc IMPORT_IMAGE_DESCRIPTOR
     .DllName        resd 1
     .IAT            resd 1
 endstruc
+
+struc RUNTIME_FUNCTION
+    .FunctionStart resd 1
+    .FunctionEnd   resd 1
+    .UnwindInfo    resd 1
+endstruc
+
+struc UNWIND_INFO
+    .Ver3_Flags     resb 1 ; versions and flags
+    .PrologSize     resb 1
+    .CntUnwindCodes resb 1
+    .FrReg_FrRegOff resb 1 ; frame register and offsets
+    ; dd ExceptionHandler or FunctionEntry
+    ; ExceptionData
+endstruc
+
+struc UNWIND_CODE
+    .PrologOff     resb 1
+    .OpCode_OpInfo resb 1 ; operation code and info
+endstruc
+
+UNW_FLAG_EHANDLER equ 1
