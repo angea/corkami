@@ -433,3 +433,20 @@ struc UNWIND_CODE
 endstruc
 
 UNW_FLAG_EHANDLER equ 1
+
+struc IMAGE_DEBUG_DIRECTORY
+    .Characteristics  resd 1
+    .TimeDateStamp    resd 1
+    .MajorVersion     resw 1
+    .MinorVersion     resw 1
+    .Type             resd 1
+    .SizeOfData       resd 1
+    .AddressOfRawData resd 1
+    .PointerToRawData resd 1
+endstruc
+
+IMAGE_DEBUG_TYPE_COFF equ 1
+IMAGE_DEBUG_TYPE_CODEVIEW equ 2
+IMAGE_DEBUG_TYPE_MISC equ 4
+
+SYMOPT_DEBUG equ 080000000h
