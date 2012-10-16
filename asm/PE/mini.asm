@@ -31,7 +31,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,         dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion, dw 4
     at IMAGE_OPTIONAL_HEADER32.SizeOfImage,           dd SIZEOFIMAGE
-	at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,         dd SIZEOFIMAGE - 1 ; required for XP
+    at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,         dd SIZEOFIMAGE - 1 ; required for XP
     at IMAGE_OPTIONAL_HEADER32.Subsystem,             dw IMAGE_SUBSYSTEM_WINDOWS_CUI
 iend
 istruc IMAGE_DATA_DIRECTORY_16

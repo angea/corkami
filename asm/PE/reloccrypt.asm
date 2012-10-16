@@ -137,6 +137,7 @@ hnExitProcess:
 hnprintf:
     dw 0
     db 'printf', 0
+dummy dq 0
 _d
 
 kernel32.dll_iat:
@@ -155,21 +156,39 @@ msvcrt.dll db 'msvcrt.dll', 0
 _d
 
 Directory_Entry_Basereloc:
+
+block_start_do_nothing: ; does nothing
+    .VirtualAddress dd VDELTA + EntryPoint - IMAGEBASE
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK_DO_NOTHING
+    dw IMAGE_REL_BASED_ABSOLUTE << 12
+    dw IMAGE_REL_BASED_LOW      << 12
+    dw IMAGE_REL_BASED_SECTION  << 12
+    dw IMAGE_REL_BASED_REL32    << 12
+BASE_RELOC_SIZE_OF_BLOCK_DO_NOTHING equ $ - block_start_do_nothing
+
+block_start_dummy: ; does something on a dummy entry
+    .VirtualAddress dd VDELTA + dummy - IMAGEBASE
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK_DUMMY
+    dw IMAGE_REL_BASED_ABSOLUTE     << 12
+    dw IMAGE_REL_BASED_HIGH         << 12
+    dw IMAGE_REL_BASED_LOW          << 12
+    dw IMAGE_REL_BASED_HIGHLOW      << 12
+    dw IMAGE_REL_BASED_HIGHADJ      << 12, 8 << 12
+    dw IMAGE_REL_BASED_MIPS_JMPADDR << 12
+    dw IMAGE_REL_BASED_SECTION      << 12
+    dw IMAGE_REL_BASED_REL32        << 12
+    dw IMAGE_REL_BASED_IA64_IMM64   << 12
+    dw IMAGE_REL_BASED_DIR64        << 12
+BASE_RELOC_SIZE_OF_BLOCK_DUMMY equ $ - block_start_dummy
+
 ; this block will fix the SizeOfBlock of the next block
 block_start:
     .VirtualAddress dd VDELTA + relocated_reloc - IMAGEBASE
     .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK
     dw (IMAGE_REL_BASED_HIGHLOW << 12) ; + 10000h
-    dw (IMAGE_REL_BASED_ABSOLUTE << 12)
     dw (IMAGE_REL_BASED_HIGHLOW << 12) ; + 10000h
-    dw (IMAGE_REL_BASED_HIGHADJ << 12)
     dw (IMAGE_REL_BASED_HIGH    << 12) ; + 00001h
-    dw (IMAGE_REL_BASED_LOW     << 12) ; + 0
-    dw (IMAGE_REL_BASED_SECTION << 12)
-    dw (IMAGE_REL_BASED_REL32 << 12)
     dw (IMAGE_REL_BASED_MIPS_JMPADDR << 12)
-;dw (IMAGE_REL_BASED_IA64_IMM64 << 12)
-;dw (IMAGE_REL_BASED_DIR64 << 12)
 BASE_RELOC_SIZE_OF_BLOCK equ $ - block_start
 
 ;this block is actually the genuine relocations
@@ -194,7 +213,7 @@ BASE_RELOC_SIZE_OF_BLOCK%1 equ $ - block_start%1
 ;these blocks are the ones to implement the decryption
 cryptblock crypt168, 068h
 cryptblock crypt2ff, 0feh
-cryptblock crypt315, 015h 
+cryptblock crypt315, 015h
 cryptblock crypt483, 083h
 cryptblock crypt5c4, 0c4h
 cryptblock crypt604, 004h
