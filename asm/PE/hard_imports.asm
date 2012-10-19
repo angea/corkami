@@ -1,6 +1,6 @@
 ; a PE that calls imports by comparing kernel32 timestamp with known list
 
-; inspired by Gynvael Coldwind
+; inspired by Gynvael Coldwind's http://gynvael.coldwind.pl/n/windows_ret_addr
 
 ; Ange Albertini, BSD LICENCE 2012
 
@@ -90,7 +90,7 @@ scan_stamps
     cmp eax, ebx
     jg end_
     je found
-    add ecx, 6 * 4
+    add ecx, 3 * 4
     jmp scan_stamps
 
 found
@@ -117,7 +117,7 @@ found
     add esp, 1 * 4
 
 end_
-    retn
+    retn ; lazy :p
 _c
 
 Msg db " * a PE using hardcoded imports calls", 0ah, 0
@@ -127,14 +127,15 @@ _d
 
 K32IB dd 0
 
+; kernel32's timestamp, LoadLibraryA's RVA, GetProcAddress's RVA
 table
     dd 03d6dfa28h, 01d961h, 01b332h
     dd 04802a12ch, 001d7bh, 00ae30h
-	dd 049c4f482h, 001d7bh, 00ae40h
+    dd 049c4f482h, 001d7bh, 00ae40h
     dd 04a5bdaadh, 052864h, 051837h
     dd 04e211318h, 0149a7h, 011222h
-	dd 0503275b9h, 04dc65h, 04cc94h
-	dd 050327671h, 0149bfh, 011222h
+    dd 0503275b9h, 04dc65h, 04cc94h
+    dd 050327671h, 0149bfh, 011222h
     dd 0
 
 align FILEALIGN, db 0
