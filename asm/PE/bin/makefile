@@ -20,7 +20,8 @@ relocs: ibkernel.exe reloccrypt.exe ibkmanual.exe ibreloc.exe fakerelocs.exe
 misc: normal.exe truncatedlast.exe pdf.exe tiny.exe bigsec.exe shuffledsect.exe truncsectbl.exe \
     quine.exe bigalign.exe foldedhdr.exe compiled.exe duphead.exe \
     no0code.exe fakeregs.exe fakeregslib.dll gui.exe multiss.exe multiss_gui.exe no_dd.exe \
-    maxvals.exe pdf_zip_pe.exe winver.exe weirdsord.exe hdrcode.exe mini.exe
+    maxvals.exe pdf_zip_pe.exe winver.exe weirdsord.exe hdrcode.exe mini.exe \
+	dump_imports.exe
 
 down: appendedsecttbl.exe appendedhdr.exe footer.exe bottomsecttbl.exe
 
@@ -45,7 +46,7 @@ imports: imports.exe imports_noint.exe imports_noext.exe imports_mixed.exe impby
     imports_badterm.exe imports_vterm.exe imports_nothunk.exe imports_multidesc.exe \
     imports_iatindesc.exe imports_virtdesc.exe importshint.exe nothing.dll \
 	nothing-ld.exe d_tiny.dll d_tiny-ld.exe d_nonnull.dll d_nonnull-ld.exe sc.exe \
-
+	hard_imports.exe
 
 XP: tinyXP.exe maxsecXP.exe nosectionXP.exe nullSOH-XP.exe virtsectblXP.exe tinydllXP.dll \
     tinydllXP-ld.exe ibnullXP.exe dllbound-redirldXP.exe dllbound2.dll reloccryptXP.exe \
