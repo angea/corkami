@@ -129,6 +129,13 @@ K32IB dd 0
 
 ; kernel32's timestamp, LoadLibraryA's RVA, GetProcAddress's RVA
 table
+    dd 02c4865a0h, 010930h, 010f60h
+    dd 02e67e68dh, 0109deh, 0110cbh
+    dd 02ff48837h, 007433h, 006c18h
+    dd 0320c1ca0h, 007577h, 006d5ch
+    dd 03546abb0h, 0076d4h, 006dach
+    dd 0371fc2b3h, 0076d0h, 006da8h
+    dd 0393f3c0eh, 0076a8h, 006d80h
     dd 03d6dfa28h, 01d961h, 01b332h
     dd 04802a12ch, 001d7bh, 00ae30h
     dd 049c4f482h, 001d7bh, 00ae40h
@@ -139,3 +146,18 @@ table
     dd 0
 
 align FILEALIGN, db 0
+
+; python script to dump data manually
+
+; import sys, glob, pefile
+; fn = "c:\\windows\\system32\\kernel32.dll" if len(sys.argv) == 1 else sys.argv[1]
+
+; for f in glob.glob(fn):
+; 	print f
+; 	pe = pefile.PE(f)
+; 	for sym in pe.DIRECTORY_ENTRY_EXPORT.symbols:
+; 		if sym.name == "GetProcAddress":
+; 			GPA = sym.address
+; 		if sym.name == "LoadLibraryA":
+; 			LLA = sym.address
+; 	print "    dd 0%08xh, 0%05xh, 0%05xh" % (pe.FILE_HEADER.TimeDateStamp, LLA, GPA)
