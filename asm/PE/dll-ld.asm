@@ -114,8 +114,8 @@ __imp__export:
     dd 0
 _d
 
-kernel32.dll db 'kernel32.dll', 0
-dll.dll db 'dll.dll', 0
+kernel32.dll db 'kernel32.dll....', 0
+dll.dll db 'dll.dll....', 0
 _d
 
 align FILEALIGN, db 0
