@@ -1,4 +1,4 @@
-; imports with a DLL with missing thunks in the tables
+; imports with a bogus DLL with missing thunks in the tables
 
 ; Ange Albertini, BSD LICENCE 2009-2011
 
@@ -35,7 +35,7 @@ istruc IMAGE_OPTIONAL_HEADER32
     at IMAGE_OPTIONAL_HEADER32.SectionAlignment,          dd SECTIONALIGN
     at IMAGE_OPTIONAL_HEADER32.FileAlignment,             dd FILEALIGN
     at IMAGE_OPTIONAL_HEADER32.MajorSubsystemVersion,     dw 4
-    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 2 * SECTIONALIGN
+    at IMAGE_OPTIONAL_HEADER32.SizeOfImage,               dd 12000h
     at IMAGE_OPTIONAL_HEADER32.SizeOfHeaders,             dd SIZEOFHEADERS
     at IMAGE_OPTIONAL_HEADER32.Subsystem,                 dw IMAGE_SUBSYSTEM_WINDOWS_CUI
     at IMAGE_OPTIONAL_HEADER32.NumberOfRvaAndSizes,       dd 16
@@ -49,9 +49,9 @@ iend
 SIZEOFOPTIONALHEADER equ $ - OptionalHeader
 SectionHeader:
 istruc IMAGE_SECTION_HEADER
-    at IMAGE_SECTION_HEADER.VirtualSize,      dd 1 * SECTIONALIGN
+    at IMAGE_SECTION_HEADER.VirtualSize,      dd 11000h
     at IMAGE_SECTION_HEADER.VirtualAddress,   dd 1 * SECTIONALIGN
-    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 1 * FILEALIGN
+    at IMAGE_SECTION_HEADER.SizeOfRawData,    dd 10200h
     at IMAGE_SECTION_HEADER.PointerToRawData, dd 1 * FILEALIGN
     at IMAGE_SECTION_HEADER.Characteristics,  dd IMAGE_SCN_MEM_EXECUTE | IMAGE_SCN_MEM_WRITE
 iend
@@ -69,7 +69,6 @@ EntryPoint:
     call [__imp__ExitProcess]
 _c
 
-
 message db " * imports with missing thunks", 0ah, 0
 _d
 
@@ -79,11 +78,11 @@ Import_Descriptor:
     dd 0, 0
     dd kernel32.dll - IMAGEBASE
     dd kernel32.dll_iat - IMAGEBASE
-;gdi32.dll_DESCRIPTOR:
-    dd gdi32.dll_hintnames - IMAGEBASE
+;bogus.dll_DESCRIPTOR:
+    dd 0
     dd 0, 0
-    dd gdi32.dll - IMAGEBASE
-    dd gdi32.dll_iat - IMAGEBASE
+    dd bogus.dll - IMAGEBASE
+    dd bogus.dll_iat - IMAGEBASE
 ;msvcrt.dll_DESCRIPTOR:
     dd 0
     dd 0, 0
@@ -91,11 +90,6 @@ Import_Descriptor:
     dd msvcrt.dll_iat - IMAGEBASE
 ;terminator
     dd 0, 0, 0, 0, 0
-_d
-
-gdi32.dll_hintnames:
-;    dd hnEngQueryEMFInfo - IMAGEBASE
-    dd 0
 _d
 
 hnExitProcess:
@@ -118,14 +112,15 @@ msvcrt.dll_iat:
 __imp__printf:
     dd hnprintf - IMAGEBASE
     dd 0
-gdi32.dll_iat:
-;    dd hnEngQueryEMFInfo - IMAGEBASE
+bogus.dll_iat:
     dd 0
 _d
 
 kernel32.dll db 'kernel32.dll', 0
 msvcrt.dll db 'msvcrt.dll', 0
-gdi32.dll db 'gdi32.dll', 0
+bogus.dll
+times 65536 db ' '
+db 0
 _d
 
 align FILEALIGN, db 0
