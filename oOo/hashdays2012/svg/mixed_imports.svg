@@ -305,9 +305,9 @@
          style="font-size:12px"
          y="747.46967"
          x="342.28549"
-         sodipodi:role="line">msvcrt<tspan
+         sodipodi:role="line">´msvcrt<tspan
    style="fill:#ff0000"
-   id="tspan3106">.dll</tspan></tspan><tspan
+   id="tspan3037">.dll</tspan>´,0</tspan><tspan
          style="font-size:11px"
          y="761.55499"
          x="342.28549"
@@ -343,7 +343,7 @@
        style="color:#000000;fill:none;stroke:#808000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <path
        style="color:#000000;fill:none;stroke:#00ff00;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow2Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 417.00509,693.55648 105.34175,0 0,50.69908 -103.1944,0"
+       d="m 417.00509,693.55648 105.34175,0 0,49.40715 -75.1944,0"
        id="path3110"
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0" />
