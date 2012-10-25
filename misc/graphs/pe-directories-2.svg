@@ -1215,15 +1215,15 @@
       <text
          xml:space="preserve"
          style="font-size:12px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
-         x="628.07983"
-         y="-1041.9294"
+         x="-627.42242"
+         y="1036.4646"
          id="text3285"
-         transform="matrix(0,1,-1,0,0,0)"><tspan
+         transform="matrix(0,-1,1,0,0,0)"><tspan
            sodipodi:role="line"
            id="tspan3287"
-           x="628.07983"
-           y="-1041.9294"
-           style="font-size:6px">Size</tspan></text>
+           x="-627.42242"
+           y="1036.4646"
+           style="font-size:6px">Size1</tspan></text>
       <path
          sodipodi:nodetypes="cc"
          style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.00000002, 2.00000002;stroke-dashoffset:0;marker-start:url(#Arrow1Sstart);marker-end:url(#Arrow1Send)"
