@@ -61,6 +61,7 @@ e35ffb89973ef6ab7401a8776ce6eaacde041e8e *dllnullep-ld.exe
 b4ef15311904219cda7a55cebc7321dc99ca7931 *dosZMXP.exe
 d7011cabc0125d850f2418dd8ca0973bda0f85ac *dotnet20.exe
 e85254ed6c66db30570735b0a4f7d178d456b181 *driver.sys
+75b7ab2b2d880c9036bf15d79ea12b8698c7fd21 *dump_imports.exe
 35c8cfb7d07a165e4bab7902135c21c9d83c709c *duphead.exe
 67336d2237b1518c4c8e691ede4c47540eb8d247 *dupsec.exe
 e36b890b2b194dcd7800ebe1767c8cc767c020d5 *exceptions.exe
@@ -75,6 +76,7 @@ cd83dc8a29063be6b5b532d394a45215e19b9c44 *fakerelocs.exe
 68230facbdc3691f896d004b55c36f77cb76a063 *foldedhdrW7.exe
 26d5fb40466ca9c7f8f588afebad23e7c2529d5e *footer.exe
 1458adaf773bf72e49f16cad9ba122f15b30ba57 *gui.exe
+d6fdf26b394f1991799b2a37319950538b95f9ce *hard_imports.exe
 4db7b36f63d5eeda26c750951711d179e92d0007 *hdrcode.exe
 719c8d65085c7ad8cf96638e08550a50dc659318 *hiddenappdata1.exe
 f4421d2d04508d0dfc2df9e755eea0599852864e *hiddenappdata2.exe
@@ -93,12 +95,13 @@ ca75d3f7efb6b18d6bf0c3bd8e896c81e7539d74 *imports_mixed.exe
 c1aaaed08f8f8c0945c768464123d8d1abb19f50 *imports_multidesc.exe
 79189e97c5e779eb022ac37267fba86a41810ef4 *imports_noext.exe
 0641c6531625d1f5e93d04f31808f915404d9043 *imports_noint.exe
-ab309b67e3872a3c4e092090078f4d42994de645 *imports_nothunk.exe
+ca6475e2a733e5c2b1bcb572925e559aa6e8a090 *imports_nothunk.exe
 fc7224ebc1990535356289b8fee5acdd36074700 *imports_relocW7.exe
 ba73e31c739e8cd238e2a35fbac61b525112a1c9 *imports_tinyW7.exe
 967fc9a98006927047fabd2c39f576dedcbb45d1 *imports_tinyXP.exe
 17cf7ce88241b06ff89a7278a0199787d9574afa *imports_virtdesc.exe
 bcb7a3e77e416d9527892a2941ce02864ff626e7 *imports_vterm.exe
+d3d000035fe2a65a66f7c22d80719aad7781a5fd *importsdotXP.exe
 dc3977014027d86539bd6986b857c51da5a0ac5c *importshint.exe
 1a509f315885f2b1f827671732901fe1706f781c *manifest.exe
 41c54f56a0b092dcdb466902d2eaab56e57c186d *manifest_broken.exe
@@ -115,7 +118,7 @@ b394bd7a3915c6d131b9974c34ceae55881e1c57 *mini.exe
 8bf633f2e0a36f96bf539b25d8b3c9995220cd9c *multiss_gui.exe
 4b2cfe4f3869fdea0bda9624fbfa20341a3b543a *mz.exe
 cfeb2cd053b1e5a470bccbf1190cb26f10f42d60 *namedresource.exe
-cafda59cfa3002e28824356b1e8d0ad15ca3bd8c *no_dd.exe
+8faafc7441c8668c7519adf5f085fb6584812404 *no_dd.exe
 de5c6fef019dfb8332d4c736c45632091841b722 *no0code.exe
 8f06da531f9c18b60c14d67a2067d4a0f0618374 *normal.exe
 e55f71b59d363072038c2a0a9c76d0573d88b1d9 *normal64.exe
@@ -130,7 +133,7 @@ fc88d459552a7aa323ca30e4a5ae460a786c5def *ownexports2.exe
 ea42e2179a8e43b2f450b49d1927e46dad6106d3 *pdf.exe
 5db0304aa5045b7c16e436b6ab86a9233691ccec *pdf_zip_pe.exe
 89f09855527f9ce55e3906f9d5496486ad5cbf7a *quine.exe
-1dc4918597f342a5d4c771eccd8a1c545a6dc53f *reloccrypt.exe
+4e39951423d3d774210e3006e67d005787cfbabd *reloccrypt.exe
 722b2dce27eeba8061f4b4bf5adf0b9b57121997 *reloccryptXP.exe
 0f5f36845cb537c53251ab127c2b934a7c1dbae3 *reshdr.exe
 ada1a47f2a9bdaccdbef24e54fe26c6ed0cd4817 *resource.exe
