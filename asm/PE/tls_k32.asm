@@ -60,24 +60,31 @@ NUMBEROFSECTIONS equ ($ - SectionHeader) / IMAGE_SECTION_HEADER_size
 
 SIZEOFHEADERS equ $ - IMAGEBASE
 
+;------------------------------------------------------------------------------
+
 section progbits vstart=IMAGEBASE + SECTIONALIGN align=FILEALIGN
 
-tls:
-    mov dword [Msg], MsgError
-    retn
-
 EntryPoint:
-    call loadimports
-_    
-    push dword [Msg]
-    call eax
-    add esp, 1 * 4
-_
-    push 0
-    call [__imp__ExitProcess]
+    inc dword [EPcounter]
+    retn
 _c
 
-loadimports:    
+tls:
+    inc dword [TLScounter]
+    cmp dword [TLScounter], 1
+    jb do_nothing
+
+    push dword [TLScounter]
+    push dword [EPcounter]
+    push Msg
+    call loadimports
+    call eax
+    add esp, 3 * 4
+do_nothing:
+    retn
+_c
+
+loadimports:
     push msvcrt.dll
     call [__imp__LoadLibraryA]
     push szprintf
@@ -85,10 +92,13 @@ loadimports:
     call [__imp__GetProcAddress]
     retn
 _c
-    
-Msg dd MsgCorrect
-MsgCorrect db " * ignored TLS (only imports to kernel32)", 0ah, 0
-MsgError db "ERROR - TLS *was* executed", 0ah, 0
+
+;------------------------------------------------------------------------------
+
+TLScounter dd 0
+EPcounter dd 0
+
+Msg db " * TLS with only kernel32 import (%i EP execution, %i TLS execution(s))", 0ah, 0
 
 msvcrt.dll db 'msvcrt.dll', 0
 szprintf db 'printf', 0
@@ -106,15 +116,9 @@ Import_Descriptor:
 _d
 
 kernel32.dll_hintnames:
-    dd hnExitProcess - IMAGEBASE
     dd hnLoadLibraryA - IMAGEBASE
     dd hnGetProcAddress - IMAGEBASE
     dd 0
-_d
-
-hnExitProcess:
-    dw 0
-    db 'ExitProcess', 0
 _d
 
 hnLoadLibraryA:
@@ -128,8 +132,6 @@ hnGetProcAddress:
 _d
 
 kernel32.dll_iat:
-__imp__ExitProcess:
-    dd hnExitProcess - IMAGEBASE
 __imp__LoadLibraryA:
     dd hnLoadLibraryA - IMAGEBASE
 __imp__GetProcAddress:
