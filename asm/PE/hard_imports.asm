@@ -141,6 +141,7 @@ table
     dd 049c4f482h, 001d7bh, 00ae40h
     dd 04a5bdaadh, 052864h, 051837h
     dd 04e211318h, 0149a7h, 011222h
+    dd 05010a83ah, 0028ach, 001d30h
     dd 0503275b9h, 04dc65h, 04cc94h
     dd 050327671h, 0149bfh, 011222h
     dd 0
