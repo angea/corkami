@@ -10,10 +10,12 @@
 \index{Ange, M.}
 
 \begin{abstract}
-	De l'exploitation à l'infection, les {\it malwares} modernes utilisent de nombreux formats de fichier binaires.
-        Il est crucial de pouvoir correctement les identifier et les analyser, si possible de manière automatique.
-        À priori clairement différenciés, il est malheureusement possible de combiner certains d'entre eux dans un seul et même fichier.
-        À des fins de démonstration, un tel binaire {\it polyglotte} a été crée, en incluant plusieurs caractéristiques non documentées de chaque format concerné.
+De l'exploitation à l'infection, les {\it malwares} modernes utilisent de nombreux formats de fichier binaires.
+Il est crucial de pouvoir correctement les identifier et les analyser, si possible de manière automatique.
+À priori clairement différenciés, il est malheureusement possible de combiner certains d'entre eux dans un seul et même fichier.
+Un tel binaire {\it polyglotte} a donc dans un premier temps été crée. 
+Ensuite, plusieurs caractéristiques non documentées de chaque format concerné ont été rajoutées, pour mettre en évidence l'importance du problème entre les limites des documentations officielles, et la réalité (du monde des virus).
+Les conséquences sur le fonctionnement des outils de sécurités sont finalement mises en évidence, avec ce que ça implique pour l'utilisateur final.
 \end{abstract}
 
 
@@ -21,12 +23,12 @@
 
 \subsection{État de l'art}
 
-Un fichier polyglotte est un seul et meme fichier fonctionnant comme on s'y attend avec plusieurs languages differents.  Un des plus simple d'entre eux, représenté David Kendall Polyglot figure~\ref{lst:albertini:polyglot}, fonctionne en Ruby, Perl, PHP, ksh, Scheme, Lisp, Clojure, Plan. Les {\it polyglottes} peuvent aller beaucoup plus loin, jouant sur les différences d'interprétation et de {\it pré-processing} de chaque language inclu.
+Un fichier polyglotte est un seul et meme fichier fonctionnant comme on s'y attend avec plusieurs languages différents.  Un des plus simple d'entre eux, représenté par le Polyglot de David Kendall figure~\ref{lst:albertini:polyglot}, fonctionne en Ruby, Perl, PHP, ksh, Scheme, Lisp, Clojure, Plan. Les {\it polyglottes} peuvent aller beaucoup plus loin, jouant sur les différences d'interprétation et de {\it pré-processing} de chaque language inclu.
 
 \begin{lstlisting}[language={},caption={un programme polyglotte simple},label={lst:albertini:polyglot}]
  (print "Hello, world!\n");
 \end{lstlisting}
-Cependant, les formats de fichiers binaires sont, eux, rarement compatible, car exclusifs: en effet, la majeure partie d'entre eux doivent nécessairement débuter par une {\it signature} dite 'nombre magique', à chaque fois différente, à de rares exceptions près (tel que CAFEBABE pour le format Mach-O universel et les classes JAVA).
+Cependant, les formats de fichiers binaires sont, eux, rarement compatibles, car exclusifs: en effet, la majeure partie d'entre eux doivent nécessairement débuter par une {\it signature} dite 'nombre magique', à chaque fois différente, à de rares exceptions près (tel {\em CAFEBABE}, pour le format Mach-O universel et les classes JAVA).
 
 Il ne semble donc pas possible de combiner des formats binaires en général. Cependant, il y a quelques exceptions. Et hélàs - ce n'est pas une coincidence - il s'agit des formats parmi les plus utilisés ces dernières années pour la prolifération de {\it malware}.
 
@@ -238,7 +240,7 @@ une telle structure fortement réduite n'est gérée par aucun outil commercial 
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{albertini/img/imports_error}
+  \includegraphics[width=0.5\textwidth]{albertini/img/imports_error}
   \caption{une structure d'imports non gérée par Hiew ou IDA}
   \label{fig:albertini:imports_error}
 \end{figure}
@@ -397,7 +399,7 @@ par exemple, la partie principale du PDF sera intégré à la classe Java, dans 
   \label{fig:albertini:pdfpool}
 \end{figure}
 
-\section{un patchwork binaire}
+\subsection{un patchwork binaire}
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{albertini/img/corkamix}
@@ -428,6 +430,40 @@ on peut rajouter de nombreux formats dans le fichier Zip lui-même, mais ça ne 
   \label{fig:albertini:corkamix-vt}
 \end{figure}
 
+\section{conséquences pour la sécurité}
+Tels des marques de lessives, les outils de sécurité sont comparés selon de trop simples critères: vitesse d'analyse et taux de détection d'un même ensemble empirique d'exécutables.
+
+Tout outil d'analyse commercial grand-public a donc la lourde responsabilité de ne pas trop s'attarder sur un fichier particulier. En conséquence, il est crucial que le moteur de celui-ci détecte au plus tôt, et efficacement, le type du fichier analysé.
+
+On peut donc imaginer le début de l'exécution d'un tel outil comme une grosse gare de triage: il n'est donc pas surprenant qu'un fichier, une fois détecté comme un seul type de format (comme le montre la figure \ref{fig:albertini:corkamix-vt}), sera analysé comme tel, et donc ne sera pas réanalysé par la suite comme étant d'un autre format.
+
+Quand bien même il le serait, l'outil ne vas pouvoir se permettre de réanalyser totalement le fichier comme étant d'un autre format, car il va au bout d'un moment couper l'analyse, pour ne pas s'attarder trop longtemps sur un fichier unique.
+
+Une première démarche est donc de légitimement feindre un format de fichier, faisant que l'outil ciblé analysera se fichier comme tel, puis, ne trouvant rien de malveillant dans ce format particulier, déclarera le fichier comme sain.
+Ça peut donc se faire simplement en commençant un fichier par la signature {\em PE},
+puis en continuant le fichier comme un fichier {\em HTML} ou {\em PDF}.
+
+Une deuxième démarche consiste à inclure un maximum de format, pour que, quelque soit l'ordre d'analyse de l'outil, il atteigne sa limite imposée de temps/cycles, et ainsi qu'il abandonne avant d'avoir pu déterminer si le fichier est sain ou non.
+
+Une autre possibilité est que le fichier cause des problèmes au moteur de l'outil, et qu'il échoue directement.
+
+La première priorité pour l'outil est de déterminer au plus tôt qu'il y a une combinaison inhabituelle de formats binaires dans un seul fichier, ce qui augmente la suspicion. Si cette combinaison ne concerne aucun cas légitime, le fichier peut être classé comme malveillant selon cet unique critère. Malheureusement, cette combinaisons de formats peut être perçue comme un avantage technique par des développeurs peu renseignés, et, bien que déconseillée en pratique, peut être rencontrée dans la nature.
+
+D'autre part, tous les navigateurs modernes analysent l'intégralité d'un fichier pour son contenu Web, même s'il est hors norme: par exemple, un fichier constitué d'un exécutable {\em PE} de $27 Mo$ suivi d'une page Web fonctionnera toujours dans les 2 formats. Un outil de sécurité grand public se devra de se limiter {\it à priori} aux premiers méga-octets, pour optimiser sa performance.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/PE_HTML_27mb}
+  \caption{une page HTML à la suite d'un PE de 27Mo}
+  \label{fig:albertini:PE_HTML_27mb}
+\end{figure}
+
+\section{conclusion}
+Après avoir vu que la combinaisons de formats binaires dans un seul fichier et possible, et vu en détail ses conséquences possibles sur la détection de code malveillant, on voit donc que ce mélange possible de formats binaires ne simplifie pas du tout l'analyse automatisée - voire même manuelle - de fichiers binaires, et complique bien la tâche.
+
+Il semble donc indispensable de ne créer que des standards déterminés par une signature unique au début du fichier.
+
+Il ne semble pas déraisonnable d'aller plus loin, et de rejeter tout nouveau format de fichier conçu autrement.
 \bibliography{albertini/biblio}
 
 %%% Local Variables:
