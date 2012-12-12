@@ -2,28 +2,28 @@
 
 1 0 obj
 <<
-% count required
+% count required (not for adobe)
 	/Count 1
 	/Kids [ <<
-        /Contents 2 0 R
-        /Resources <<
-            /Font <<
-                /F <<
-                    /BaseFont /Arial
-                >>
-            >>
-        >>
-    >> ]
+		/Contents 2 0 R
+		/Resources <<
+			% font not required for adobe
+			/Font <<
+				/F <<
+					/BaseFont /Arial
+				>>
+			>>
+		>>
+	>> ]
 >>
 % no endobj necessary
 
 2 0 obj
-%empty dictionary required
 <<>>
 stream
 BT
 /F 100
-% no Tf parameter required
+% no Tf parameter required (required for Adobe)
 Tf
 Tr(Hello World!)Tj
 ET
@@ -32,6 +32,6 @@ endstream
 trailer
 <<
 	/Root <<
-        /Pages 1 0 R
-    >>
+		/Pages 1 0 R
+	>>
 >>

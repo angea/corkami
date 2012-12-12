@@ -23,8 +23,8 @@ endobj
 	/Resources <<
 		/Font <<
 			/F1 <<
-	/BaseFont /Arial
->>
+				/BaseFont /Arial
+			>>
 		>>
 	>>
 >>
@@ -43,5 +43,6 @@ endobj
 
 trailer
 <<
+    %extra object required
 	/Root 1 0 R
 >>
