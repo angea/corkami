@@ -1,0 +1,37 @@
+%no signature at all!
+
+1 0 obj
+<<
+% count required
+	/Count 1
+	/Kids [ <<
+        /Contents 2 0 R
+        /Resources <<
+            /Font <<
+                /F <<
+                    /BaseFont /Arial
+                >>
+            >>
+        >>
+    >> ]
+>>
+% no endobj necessary
+
+2 0 obj
+%empty dictionary required
+<<>>
+stream
+BT
+/F 100
+% no Tf parameter required
+Tf
+Tr(Hello World!)Tj
+ET
+endstream
+
+trailer
+<<
+	/Root <<
+        /Pages 1 0 R
+    >>
+>>
