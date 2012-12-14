@@ -1,8 +1,5 @@
 %include 'consts.inc'
 
-org 7c00h
-bits 16
-
 start:
     xor ax, ax                              ;ORIGINAL 33 c0
     mov ss, ax

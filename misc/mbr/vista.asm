@@ -1,8 +1,5 @@
 %include 'consts.inc'
 
-org 7c00h
-bits 16
-
 STROFF equ NEWBASE + 100h
 
 start:
