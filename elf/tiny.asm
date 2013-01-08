@@ -28,5 +28,4 @@ main:
                             ; e_shentsize
                             ; e_shnum
                             ; e_shstrndx
-
 FILESIZE equ $ - ehdr
