@@ -1,93 +1,125 @@
-; broken .COM register dumper
+; .COM register dumper
 
-; Ange Albertini, BSD Licence, 2012
+; Ange Albertini, BSD Licence, 2012-2013
 
-IMAGE_SCN_CNT_CODE               equ 000000020h
-IMAGE_SCN_CNT_INITIALIZED_DATA   equ 000000040h
+org 100h
 
-%include 'consts.inc'
-%define iround(n, r) (((n + (r - 1)) / r) * r)
-
-IMAGEBASE equ 4000000h
-org IMAGEBASE
-
-SECTIONALIGN EQU 1000h
-FILEALIGN EQU 200h
-
-DOS_HEADER:
-    .e_magic       dw 'MZ'
-    .e_cblp        dw 090h
-    .e_cp          dw 1
-    .e_crlc        dw 0
-    .e_cparhdr     dw (dos_stub - DOS_HEADER) >> 4 ; defines MZ stub entry point
-    .e_minalloc    dw 0
-    .e_maxalloc    dw 0
-    .e_ss          dw 0
-    .e_sp          dw 0
-    .e_csum        dw 0
-    .e_ip          dw 0
-    .e_cs          dw 0
-    .e_lfarlc      dw 040h
-    .e_ovno        dw 0
-    .e_res         dw 0,0,0,0
-    .e_oemid       dw 0
-    .e_oeminfo     dw 0
-    .e_res2        times 10 dw 0
-        align 03ch, db 0    ; in case we change things in DOS_HEADER
-    .e_lfanew      dd 0
-
-align 010h, db 0
-dos_stub:
-bits 16
-    mov word [old_sp - dos_stub], sp
-    mov sp, stub_end - dos_stub
+%macro printstr 1
     pusha
-    pushf
-    push    cs
-    pop     ds
-;    mov     dx, dos_msg - dos_stub
-;    mov     ah, 9 ; print
-;    int     21h
-;Flags || || EDI || ESI || EBP || ESP || EBX || EDX || ECX || EAX ||", 0ah, "||||||||||||||||||||||||||", 0ah, 0
-
-next_reg:
-    pusha
-    mov dx, ' '
-    mov ah, 2
+    mov dx, %1
+    mov ah, 9
     int 21h
     popa
+%endmacro
 
-    pop bx
-    mov cx, 4
-nextnibble:
-    rol bx, 4
-    mov dx, bx
-    and dx, 7
-    cmp dx, 9
-    jg hex_char
+    pusha
+    pushf
 
-    add dx, '0'
-    jmp printchar
+    printstr header
+    printstr general
 
-hex_char:
-    add dx, 'A'
-printchar
+    mov cx, 9
 
-    mov ah, 2
-    int 21h
+printregloop:
+    printstr pipes
+    pop ax
+    call print16
+    loop printregloop
 
+    printstr pipes
+    printstr return
+    printstr return
 
-    dec cx
-    jnz nextnibble
+    printstr segments
 
-    dec word [counter - dos_stub]
-    jnz next_reg
+    printstr pipes
+    push cs
+    pop ax
+    call print16
 
-    mov     ax, 4c01h
-    int     21h
-counter dw 9
-old_sp dw 0
+    printstr pipes
+    push ds
+    pop ax
+    call print16
 
-dos_msg db ' # patching PE (16b dos stub)', 0dh, 0dh, 0ah, '$'
-align 16, db 0
-stub_end:
+    printstr pipes
+    push es
+    pop ax
+    call print16
+
+    printstr pipes
+    push fs
+    pop ax
+    call print16
+
+    printstr pipes
+    push ss
+    pop ax
+    call print16
+
+    printstr pipes
+    push gs
+    pop ax
+    call print16
+
+    printstr pipes
+    printstr return
+
+    int 20h
+
+align 10h int3
+
+printhexnibble:
+    push ax
+    and al, 0fh
+    cmp al, 9
+    jg alpha
+digit:
+    add al, '0'
+    jmp print
+alpha:
+    add al, 'a' - 10
+
+print:
+    ;mov ah, 0eh
+    ;int 10h
+    int 29h
+    pop ax
+    retn
+
+print8:
+    ror al, 4
+    call printhexnibble
+    ror al, 4
+    call printhexnibble
+    retn
+
+print16:
+    push ax
+    ror ax, 8
+    call print8
+    ror ax, 8
+    call print8
+    pop ax
+    retn
+
+align 10h db 0
+
+return: db 0ah, "$"
+
+pipes:
+    db "|| "
+    db "$"
+
+header:
+    db "Register dumper DOS 0.1b - Ange Albertini - BSD Licence 2013", 0ah, 0ah, "$"
+
+general:
+    db " * general registers", 0ah
+    db "|| Flags || || DI || SI || BP || SP || BX || DX || CX || AX ||", 0ah
+    db "$"
+
+segments:
+    db "* selectors", 0ah
+    db "|| CS || DS || ES || FS || SS || GS ||", 0ah
+    db "$"
