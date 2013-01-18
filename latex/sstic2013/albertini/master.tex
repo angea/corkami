@@ -1,4 +1,4 @@
-\settitle[CorkaMIX]{CorkaMIX : création d'un polyglotte binaire}
+\settitle[CorkaMIX]{CorkaMIX : polyglottes binaires et implications}
 
 
 \setauthor[M.~Albertini]{Ange Albertini\\
@@ -13,7 +13,7 @@
 De l'exploitation à l'infection, les {\it malwares} modernes utilisent de nombreux formats de fichier binaires.
 Il est crucial de pouvoir correctement les identifier et les analyser, si possible de manière automatique.
 À priori clairement différenciés, il est malheureusement possible de combiner certains d'entre eux dans un seul et même fichier.
-Un tel binaire {\it polyglotte} a donc dans un premier temps été crée. 
+De tels binaires {\it polyglottes} ont donc dans un premier temps été crée. 
 Ensuite, plusieurs caractéristiques non documentées de chaque format concerné ont été rajoutées, pour mettre en évidence l'importance du problème entre les limites des documentations officielles, et la réalité (du monde des virus).
 Les conséquences sur le fonctionnement des outils de sécurités sont finalement mises en évidence, avec ce que ça implique pour l'utilisateur final.
 \end{abstract}
@@ -429,6 +429,40 @@ on peut rajouter de nombreux formats dans le fichier Zip lui-même, mais ça ne 
   \caption{un exécutable identifié uniquement comme PDF}
   \label{fig:albertini:corkamix-vt}
 \end{figure}
+
+\subsection{autres systèmes d'exploitations}
+
+Un esprit moqueur serait tenté de se contenter de blamer Microsoft et Adobe pour leur laxisme, et d'accepter ainsi n'importe quel format binaire.
+
+\subsubsection{Linux}
+
+En regardant le format PDF dans un premier temps, on s'aperçoit que les visualisateurs PDF standard sous Linux, bien que n'acceptant pas le PDF particulier généré précedemment, n'en sont pas pour autant très rigoureux.
+
+En effet, en creusant un peu, on s'aperçoit que de nombreux outils PDF tels qu'Evince ou l'outil standard d'Ubuntu, acceptent un PDF ne contenant même pas une signature $\%PDF$, meme partielle,ce qu'Adobe Reader refusera immediatement.
+
+le format binaire Linux, {\it Executable File Format}, n'impose rien de particulier concernant le fichier lui-meme. Creer un tel polyglotte basé sur un ELF plutot qu'un PE ne présente alors pas de difficulté particuliere.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/corkaminux}
+  \caption{un polyglotte binaire sous Linux}
+  \label{fig:albertini:corkaminux}
+\end{figure}
+
+\subsubsection{OS X}
+
+Les visualisateurs standards OS X et iOS sont eux, beaucoup plus stricts.
+
+Ils refusent toute signature incomplete ou absente. Les seules malformations théoriques acceptées sont l'absence de $xref$, longueurs de flux ($stream /length$), et signature de fin de fichier $\%EOF$.
+
+Le format binaire d'OS X, le Mach-O (pour Mach Object) ne présente pas, à l'instar du format ELF, aucune difficulté particulière une fois qu'on en a la maitrise de leur structure binaire.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{albertini/img/corkamosx}
+  \caption{un polyglotte binaire sous OS X}
+  \label{fig:albertini:corkamosx}
+\end{figure}
+
 
 \section{conséquences pour la sécurité}
 Tels des marques de lessives, les outils de sécurité sont comparés selon de trop simples critères: vitesse d'analyse et taux de détection d'un même ensemble empirique d'exécutables.
