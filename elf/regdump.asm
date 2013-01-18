@@ -5,36 +5,35 @@
 BITS 32
 ELFBASE equ 08048000h
 
+%include 'consts.inc'
+
 ; position independant
 
 ehdr: ; Elf32_Ehdr
-    db 7fh, "ELF", 1, 1, 1, 0  ; e_ident
-        times 8 db 0
-    dw 2                       ; e_type
-    dw 3                       ; e_machine
-    dd 1                       ; e_version
-    dd main - ehdr + ELFBASE ; e_entry
-    dd phdr - ehdr             ; e_phoff
-    dd 0                       ; e_shoff
-    dd 0                       ; e_flags
-    dw EHDRSIZE                ; e_ehsize
-    dw PHDRSIZE                ; e_phentsize
-    dw 1                       ; e_phnum
-    dw 0                       ; e_shentsize
-    dw 0                       ; e_shnum
-    dw 0                       ; e_shstrndx
-        EHDRSIZE equ $ - ehdr
+istruc Elf32_Ehdr
+    at Elf32_Ehdr.e_ident,     db 07Fh, "ELF", 1, 1, 1
+    at Elf32_Ehdr.e_type,      db ET_EXEC
+    at Elf32_Ehdr.e_machine,   db EM_386
+    at Elf32_Ehdr.e_version,   db EV_CURRENT
+    at Elf32_Ehdr.e_entry,     dd main - ehdr + ELFBASE
+    at Elf32_Ehdr.e_phoff,     dd phdr - ehdr
+    at Elf32_Ehdr.e_ehsize,    dw EHDRSIZE
+    at Elf32_Ehdr.e_phentsize, dw PHDRSIZE
+    at Elf32_Ehdr.e_phnum,     dw 1
+iend
+EHDRSIZE equ $ - ehdr
 
 phdr: ; Elf32_Phdr
-    dd 1        ; p_type
-    dd 0        ; p_offset
-    dd ELFBASE  ; p_vaddr
-    dd ELFBASE  ; p_paddr
-    dd FILESIZE ; p_filesz
-    dd FILESIZE ; p_memsz
-    dd 6        ; p_flags
-    dd 1000h    ; p_align
-    PHDRSIZE equ $ - phdr
+istruc Elf32_Phdr
+    at Elf32_Phdr.p_type,   dd PT_LOAD
+    at Elf32_Phdr.p_vaddr,  dd ELFBASE
+    at Elf32_Phdr.p_paddr,  dd ELFBASE
+    at Elf32_Phdr.p_filesz, dd FILESIZE
+    at Elf32_Phdr.p_memsz,  dd FILESIZE
+    at Elf32_Phdr.p_flags,  dd PF_R + PF_W
+    at Elf32_Phdr.p_align,  dd 1000h
+iend 
+PHDRSIZE equ $ - phdr
 
 %macro printstr 2
     pusha

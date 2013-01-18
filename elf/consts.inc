@@ -1,7 +1,9 @@
 EI_NIDENT equ 16
 
 ET_EXEC equ 2
+
 EM_386 equ 3
+
 EV_CURRENT equ 1
 
 struc Elf32_Ehdr
@@ -22,8 +24,10 @@ struc Elf32_Ehdr
 endstruc
 
 PT_LOAD equ 1
-PF_R equ 4
+
 PF_X equ 1
+PF_W equ 2
+PF_R equ 4
 
 struc Elf32_Phdr
     .p_type   resd 1
@@ -58,4 +62,5 @@ endstruc
 
 SC_EXIT equ 1
 SC_WRITE equ 4
+
 STDOUT equ 1
