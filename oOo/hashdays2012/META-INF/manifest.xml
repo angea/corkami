@@ -38,6 +38,7 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001C6000000ED88C70717.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000031D00000196442DCB49.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000003DC000001545F47A08B.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000003000000040061FA73A1.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000047E00000406B33E765D.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000004930000026783774170.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001790000020392537315.png"/>
@@ -45,13 +46,16 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000026E000001D4DF5AAAFE.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000126000000575F735952.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002A50000006CFA3AD730.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000040000000300B5867A1F.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000493000001960122D56F.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000000CB0000036DA980CE8E.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000003DA00000150D6F2966F.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000003000000040025580BE4.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000293000002630D2596E6.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002C4000000950A4A2E91.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000000BD00000099B9F92F18.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000048B00000365ABCEEE75.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000040000000300EF12D831.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000017200000082FEA0CB36.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000020100000410000001D058B6368A.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000027400000049AA211256.png"/>
@@ -59,7 +63,6 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000004CF000003036CE699EF.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000036E0000034D197DAC73.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000030C0000028A3BF63618.png"/>
- <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000300000004004EA60AA1.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000004930000019EC4A4E233.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100002010000045600000186D31F9932.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000020100000172000000E431025287.png"/>
@@ -70,6 +73,7 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100002010000026E000000EA31732480.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000050E0000038219BC1442.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100002010000032200000118CB71C1C3.png"/>
+ <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/100000000000059D00000499AEE5C82B.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000008500000077DC0B4D81.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002FA00000136A69D48FB.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000003EC0000016E6997DBB9.png"/>
@@ -88,7 +92,6 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002520000034D2D12ADE3.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000000580000001FED1EC38A.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002E000000109E2A7102F.png"/>
- <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000040000000300316B628B.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000001A40000009C5F0B4D9D.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000027A00000099D08C3FB6.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000181000001471F246459.png"/>
@@ -104,7 +107,6 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000000F3000000D40525473A.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002750000006BB86019EE.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002A50000034DD9E5CFE0.png"/>
- <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000040000000300AA71C0E0.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001A7000000B3A55D210C.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000001D80000012ECB50E7B6.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000149000000EDB8525AF6.png"/>
@@ -112,7 +114,6 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000196000000B3F85AF27B.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002EA00000082548C9877.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000001E6000000EC608D9109.png"/>
- <manifest:file-entry manifest:media-type="image/jpeg" manifest:full-path="Pictures/10000000000003000000040000516425.jpg"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000020100000424000001D03BFCE0E9.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000381000002975DF5333D.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100002010000026600000100C5B6BF14.png"/>
@@ -128,10 +129,10 @@
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000036B000002FD33AFCCF9.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000038200000273B32D808C.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000026E0000014E18C4FBE0.png"/>
- <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000007EE0000049984C8EC6C.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/1000000000000285000000B1BFC39202.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000201000003F600000180D1BA268B.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000200000000170000001F7CAC9796.png"/>
+ <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000024200000499E41EF0AE.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000021F000000D5176AB851.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/10000000000002D5000001651F9D1972.png"/>
  <manifest:file-entry manifest:media-type="image/png" manifest:full-path="Pictures/100000000000034D0000012C4972AA2D.png"/>
