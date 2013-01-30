@@ -1,5 +1,6 @@
 1 ' a maze generation program in GW-BASIC [1988] (it used to be a one-liner)
 2 ' Ange Albertini, BSD Licence 2013
+3 ' load with LOAD"LABY.BAS" then RUN
 10 SCREEN(9):CLS ' screen init
 20 RANDOMIZE TIMER ' seed init
 21 W = 32 : H = 32 : mycol = 15: COLOR mycol
