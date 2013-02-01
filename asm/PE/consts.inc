@@ -450,3 +450,33 @@ IMAGE_DEBUG_TYPE_CODEVIEW equ 2
 IMAGE_DEBUG_TYPE_MISC equ 4
 
 SYMOPT_DEBUG equ 080000000h
+
+struc IMAGE_EXPORT_DIRECTORY
+    .Characteristics       resd 1
+    .TimeDateStamp         resd 1
+    .MajorVersion          resw 1
+    .MinorVersion          resw 1
+    .nName                 resd 1
+    .nBase                 resd 1
+    .NumberOfFunctions     resd 1
+    .NumberOfNames         resd 1
+    .AddressOfFunctions    resd 1
+    .AddressOfNames        resd 1
+    .AddressOfNameOrdinals resd 1
+endstruc
+
+struc IMAGE_IMPORT_DESCRIPTOR
+    .OriginalFirstThunk resd 1 ; Characteristics
+    .TimeDateStamp      resd 1
+    .ForwarderChain     resd 1
+    .Name1              resd 1
+    .FirstThunk         resd 1
+endstruc
+
+%macro _import_descriptor 1
+istruc IMAGE_IMPORT_DESCRIPTOR
+    at IMAGE_IMPORT_DESCRIPTOR.OriginalFirstThunk, dd %1_hintnames - IMAGEBASE
+    at IMAGE_IMPORT_DESCRIPTOR.Name1             , dd %1 - IMAGEBASE
+    at IMAGE_IMPORT_DESCRIPTOR.FirstThunk        , dd %1_iat - IMAGEBASE
+iend
+%endmacro

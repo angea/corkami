@@ -4,7 +4,7 @@ beta: no_dd64.exe debug.exe
 
 common: exports imports dll gaps tls bound entrypoint down many misc resource delay relocs dotnet
 
-exports: ownexports.exe ownexports2.exe exportsdata.exe exportobf.exe exports_doc.exe
+exports: ownexports.exe ownexports2.exe exportsdata.exe exportobf.exe exports_doc.exe exports_order.exe
 
 many: 96emptysections.exe 96workingsections.exe bigSoRD.exe
 
