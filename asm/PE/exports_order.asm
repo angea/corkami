@@ -4,7 +4,7 @@
 
 ; Explanation:
 
-; exports appearance in AddressOfName should be alphabetically sorted: A < B < ...a < b ...
+; exports appearance in AddressOfNames should be alphabetically sorted: A < B < ...a < b ...
 ; here, the table is, in this order: export, zz, export2
 ; resolving manually 'export' will work because it's first.
 ; resolving manually 'export2' will fail because it's after 'zz', thus the loader
@@ -91,7 +91,7 @@ export_add:
     push a_export2
     mov eax, [h]
     push eax
-    call [__imp__GetProcAddress] ; we assume EAX==0 becase it should fail
+    call [__imp__GetProcAddress] ; we assume EAX==0 because it should fail
     add eax, end_ - 07fh         ; expected error code: 7fh
     mov ebx, [fs:18h]
     add eax, [ebx + 34h]
