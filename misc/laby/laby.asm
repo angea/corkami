@@ -17,13 +17,10 @@ MODE_320_200 equ 13h
 PORT_TIMER equ 40h
 
 INT_VIDEO equ 10h
-INT_KEYPRESS equ 16h
-INT_EXIT equ 20h
+;INT_KEYPRESS equ 16h
+;INT_EXIT equ 20h
 
 W equ 64
-
-COUNTER equ 2 * W + 3
-SEED equ COUNTER + 2
 
 COLOR_BLACK equ 0
 COLOR_WHITE equ 15
@@ -42,23 +39,20 @@ start:
     ; pop ds
     ; mov ax,[46ch]
 
+    mov bp, ax ; bp = seed
+
 ; point segments to video buffer
     push VIDEOBUFFER
     pop es
     push es
     pop ds
 
-;variable initialization on video buffer to save code
-    mov [SEED], ax
-    mov word [COUNTER], (W - 1) * (W - 1) - 1
-
 ; drawing the 4 external walls
 
     ; top
     xor di, di
     mov al, COLOR_WHITE
-    push 2 * W + 1
-    pop dx
+    mov dx, 2 * W + 1
     mov cx, dx
     rep stosb
 
@@ -76,8 +70,7 @@ wall_loop:
     add di, 2 * W - 1
     stosb
     add di, SCREENWIDTH - (2 * W + 1)
-    dec cx
-    jnz wall_loop
+    loop wall_loop
 
 
 ; drawing start and end points
@@ -91,6 +84,8 @@ wall_loop:
     mov di, 2 * W - 1 + (2 * W - 2) * SCREENWIDTH
     stosb
 
+    ; cx = counter of remaining transitions to draw
+    mov cx, (W - 1) * (W - 1) - 1
 
 ; main algo loop
 pick_a_point:
@@ -99,18 +94,18 @@ pick_a_point:
 
     call random
     shl ax, 1
-    add ax, 2
-    mov si, ax      ; X
+    xchg si, ax
+    lodsw           ; X
 
     call random
     shl ax, 1
     add ax, 2
     mov dx, SCREENWIDTH
     mul dx
-    add si, ax      ; Y
+    xchg bx, ax     ; Y
 
-    ; si now points to the start pixel in video
-    cmp byte [si], COLOR_WHITE
+    ; bx+si now points to the start pixel in video
+    cmp byte [bx + si], COLOR_WHITE
     jnz pick_a_point
 
     ; now we pick a random direction to scan
@@ -118,12 +113,14 @@ pick_a_point:
     mov dx, SCREENWIDTH ; default, vertical scan
     test al, 1h
     jnz V
+
     mov dx, 1 ; horizontal
 V:
 
     ; positive or negative progression ?
     test al, 2h
     jnz P
+
     neg dx ; negative
 P:
 
@@ -131,20 +128,17 @@ P:
     add si, dx
     add si, dx
 
-    cmp byte [si], COLOR_BLACK
+    cmp byte [bx + si], COLOR_BLACK
     jnz pick_a_point
 
     ; draw the 2 pixels line between both dots
-    mov byte [si], COLOR_WHITE
+    mov byte [bx + si], COLOR_WHITE
     sub si, dx
-    mov byte [si], COLOR_WHITE
+    mov byte [bx + si], COLOR_WHITE
 
-    dec word [COUNTER]
-    jnz pick_a_point
+    loop pick_a_point
 
 ; end
-
-;    mov dword [SEED], 0 ; graphical clean-up  - not necessary
 
 ;    ; pause - not necessary
 ;    xor ax, ax
@@ -153,24 +147,22 @@ P:
 ;    int INT_EXIT ; exit
     retn    ; saving one byte
 
-
 ; worst part of it - getting a correct RNG in 16b...
 random:
-    mov	ax, [SEED]
-    mov	dx, 8405h
-    mul	dx
+    mov ax, bp
+    mov dx, 8405h
+    mul dx
     inc ax
 
-    cmp word [SEED], ax
+    cmp bp, ax
     jnz keep_seed
     mov ah, dl
-;    inc ax
 
 keep_seed:
-    mov	word [SEED], ax
+    mov bp, ax
     mov ax, dx
 
-    mov dx, 2 * W - 6 ; not sure why - 6 yet  --  entropy-related?
+    mov dx, 2 * W - 6 ; not sure why '- 6' yet  --  entropy-related?
     mul dx
     mov ax, dx
     retn
