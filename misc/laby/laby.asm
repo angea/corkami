@@ -72,7 +72,6 @@ wall_loop:
     add di, SCREENWIDTH - (2 * W + 1)
     loop wall_loop
 
-
 ; drawing start and end points
     mov di, 1 + 2 * SCREENWIDTH
     stosb
@@ -93,13 +92,9 @@ pick_a_point:
     ; we pick a pixel on even coordinates
 
     call random
-    shl ax, 1
-    xchg si, ax
-    lodsw           ; X
+    xchg ax, si      ; X
 
     call random
-    shl ax, 1
-    add ax, 2
     mov dx, SCREENWIDTH
     mul dx
     xchg bx, ax     ; Y
@@ -110,15 +105,17 @@ pick_a_point:
 
     ; now we pick a random direction to scan
     call random
+    
+    ; horizontal or vertical ?
     mov dx, SCREENWIDTH ; default, vertical scan
-    test al, 1h
+    test al, 2h
     jnz V
 
     mov dx, 1 ; horizontal
 V:
 
     ; positive or negative progression ?
-    test al, 2h
+    test al, 4h
     jnz P
 
     neg dx ; negative
@@ -159,10 +156,14 @@ random:
     mov ah, dl
 
 keep_seed:
-    mov bp, ax
+    xchg ax, bp
     mov ax, dx
 
     mov dx, 2 * W - 6 ; not sure why '- 6' yet  --  entropy-related?
     mul dx
-    mov ax, dx
+    xchg dx, ax
+    
+    ; common to all random calls
+    shl ax, 1
+    add ax, 2
     retn
