@@ -1,24 +1,22 @@
 ; a one-solution maze generator
 ; 16b .COM in x86 assembler
 
-; TODO: the RNG is quite bloated, yet seems not very random.
+; thanks to herm1t, Solar Designer, qkumba
 
 ; Ange Albertini BSD licence 2013
 
 bits 16
 
 org 100h
-SCREENWIDTH equ 320
-
-VIDEOBUFFER equ 0A000h
 
 MODE_320_200 equ 13h
+INT_VIDEO equ 10h
 
 PORT_TIMER equ 40h
 
-INT_VIDEO equ 10h
-;INT_KEYPRESS equ 16h
-;INT_EXIT equ 20h
+VIDEOBUFFER equ 0A000h
+
+SCREENWIDTH equ 320
 
 W equ 64
 
@@ -27,19 +25,18 @@ COLOR_WHITE equ 15
 
 start:
 ; graphical mode initialization
-    ; mov ah, 0 ; unneeded
     mov al, MODE_320_200
     int INT_VIDEO
 
 ; seed initialization
 
-    in ax, 40h ; thx herm1t
+    in ax, 40h
 
-    ; push 0            ; alternative - thx solar designer
+    ; push 0
     ; pop ds
     ; mov ax,[46ch]
 
-    mov bp, ax ; bp = seed
+    xchg ax, bp ; bp = seed
 
 ; point segments to video buffer
     push VIDEOBUFFER
@@ -95,7 +92,7 @@ pick_a_point:
     xchg ax, si      ; X
 
     call random
-    mov dx, SCREENWIDTH
+    ;mov dx, SCREENWIDTH
     mul dx
     xchg bx, ax     ; Y
 
@@ -105,13 +102,15 @@ pick_a_point:
 
     ; now we pick a random direction to scan
     call random
-    
+
     ; horizontal or vertical ?
-    mov dx, SCREENWIDTH ; default, vertical scan
+    ; default, vertical scan
     test al, 2h
     jnz V
 
-    mov dx, 1 ; horizontal
+    ; horizontal
+    cwd ; risky?
+    inc dx
 V:
 
     ; positive or negative progression ?
@@ -130,21 +129,13 @@ P:
 
     ; draw the 2 pixels line between both dots
     mov byte [bx + si], COLOR_WHITE
-    sub si, dx
+    sub si, dx ; go back half way
     mov byte [bx + si], COLOR_WHITE
 
     loop pick_a_point
 
-; end
+; end - using the random return to end the program
 
-;    ; pause - not necessary
-;    xor ax, ax
-;    int INT_KEYPRESS
-
-;    int INT_EXIT ; exit
-    retn    ; saving one byte
-
-; worst part of it - getting a correct RNG in 16b...
 random:
     mov ax, bp
     mov dx, 8405h
@@ -157,13 +148,15 @@ random:
 
 keep_seed:
     xchg ax, bp
-    mov ax, dx
+    xchg ax, dx
 
     mov dx, 2 * W - 6 ; not sure why '- 6' yet  --  entropy-related?
     mul dx
-    xchg dx, ax
-    
-    ; common to all random calls
-    shl ax, 1
-    add ax, 2
+    xchg dx, ax       ; we want the upper part of the mul
+
+    ; common to most/all random calls
+    inc ax
+    add ax, ax
+
+    mov dx, SCREENWIDTH
     retn
