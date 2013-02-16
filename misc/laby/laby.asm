@@ -1,7 +1,7 @@
 ; a one-solution maze generator
 ; 16b .COM in x86 assembler
 
-; thanks to herm1t, Solar Designer, qkumba
+; thanks to herm1t, Solar Designer, qkumba, Rrrola
 
 ; Ange Albertini BSD licence 2013
 
@@ -27,16 +27,6 @@ start:
 ; graphical mode initialization
     mov al, MODE_320_200
     int INT_VIDEO
-
-; seed initialization
-
-    in ax, 40h
-
-    ; push 0
-    ; pop ds
-    ; mov ax,[46ch]
-
-    xchg ax, bp ; bp = seed
 
 ; point segments to video buffer
     push VIDEOBUFFER
@@ -132,31 +122,23 @@ P:
     sub si, dx ; go back half way
     mov byte [bx + si], COLOR_WHITE
 
+; seed re-initialization (optional)
+    in ax, 40h
+    xor bp, ax
+
     loop pick_a_point
 
 ; end - using the random return to end the program
 
 random:
-    mov ax, bp
-    mov dx, 8405h
-    mul dx
-    inc ax
+    imul bp, 8405h
+    inc bp
 
-    cmp bp, ax
-    jnz keep_seed
-    mov ah, dl
+    mov ax, W - 1  ; 0..FFFF -> 0..W-2
+    mul bp
+    xchg dx, ax
 
-keep_seed:
-    xchg ax, bp
-    xchg ax, dx
-
-    mov dx, 2 * W - 6 ; not sure why '- 6' yet  --  entropy-related?
-    mul dx
-    xchg dx, ax       ; we want the upper part of the mul
-
-    ; common to most/all random calls
     inc ax
     add ax, ax
-
     mov dx, SCREENWIDTH
     retn
