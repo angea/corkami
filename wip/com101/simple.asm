@@ -20,7 +20,7 @@ MAIN_DOS_API equ 21h
     int  MAIN_DOS_API
 
     ; return 1;
-    mov  ax, TERMINATE_WITH_RETURN_CODE << 16 | 1
+    mov  ax, TERMINATE_WITH_RETURN_CODE << 8 | 1
     int  MAIN_DOS_API
 
 msg db 'Hello World!', 0dh, 0dh, 0ah, '$' ; DOS string are $-terminated
