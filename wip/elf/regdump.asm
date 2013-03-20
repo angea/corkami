@@ -9,9 +9,13 @@ ELFBASE equ 08048000h
 
 ; position independant
 
-ehdr: ; Elf32_Ehdr
+ehdr:
 istruc Elf32_Ehdr
-    at Elf32_Ehdr.e_ident,     db 07Fh, "ELF", 1, 1, 1
+    at Elf32_Ehdr.e_ident
+        EI_MAG     db 07Fh, "ELF" 
+        EI_CLASS   db ELFCLASS32
+        EI_DATA    db ELFDATA2LSB
+        EI_VERSION db EV_CURRENT
     at Elf32_Ehdr.e_type,      db ET_EXEC
     at Elf32_Ehdr.e_machine,   db EM_386
     at Elf32_Ehdr.e_version,   db EV_CURRENT
@@ -23,7 +27,7 @@ istruc Elf32_Ehdr
 iend
 EHDRSIZE equ $ - ehdr
 
-phdr: ; Elf32_Phdr
+phdr:
 istruc Elf32_Phdr
     at Elf32_Phdr.p_type,   dd PT_LOAD
     at Elf32_Phdr.p_vaddr,  dd ELFBASE
