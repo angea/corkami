@@ -45,10 +45,10 @@ istruc Elf32_Phdr
     at Elf32_Phdr.p_filesz, dd main - ehdr + MAIN_SIZE
     at Elf32_Phdr.p_memsz,  dd main - ehdr + MAIN_SIZE
     at Elf32_Phdr.p_flags,  dd PF_R + PF_X
-    at Elf32_Phdr.p_align,  dd 1000h
 iend
 PHNUM equ ($ - phdr) / Elf32_Phdr_size
 
+align 16, db 0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; .text section (code)
 
@@ -68,6 +68,19 @@ main:
 
 MAIN_SIZE equ $ - main
 
+align 16, db 0
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; .rodata section (read-only data)
+
+rodata:
+
+msg:
+    db "Hello World!", 0ah
+    MSG_LEN equ $ - msg
+
+RODATA_SIZE equ $ - rodata
+
+align 16, db 0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; .shtstrtab section (section names)
 
@@ -81,17 +94,7 @@ arodata:
     db ".rodata", 0
 NAMES_SIZE equ $ - names
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; .rodata section (read-only data)
-
-rodata:
-
-msg:
-    db "Hello World!", 0ah
-    MSG_LEN equ $ - msg
-
-RODATA_SIZE equ $ - rodata
-
+align 16, db 0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Section header table (optional)
 
@@ -109,16 +112,6 @@ istruc Elf32_Shdr
     at Elf32_Shdr.sh_addr,      dd main
     at Elf32_Shdr.sh_offset,    dd main - ehdr
     at Elf32_Shdr.sh_size,      dd MAIN_SIZE
-    at Elf32_Shdr.sh_addralign, dd 1
-iend
-
-SHSTRNDX equ ($ - shdr) / Elf32_Shdr_size
-istruc Elf32_Shdr
-    at Elf32_Shdr.sh_name,      db ashstrtab - names
-    at Elf32_Shdr.sh_type,      dw SHT_STRTAB
-    at Elf32_Shdr.sh_offset,    dd names - ehdr
-    at Elf32_Shdr.sh_size,      dd NAMES_SIZE
-    at Elf32_Shdr.sh_addralign, dd 1
 iend
 
 istruc Elf32_Shdr
@@ -128,7 +121,14 @@ istruc Elf32_Shdr
     at Elf32_Shdr.sh_addr,      dd rodata
     at Elf32_Shdr.sh_offset,    dd rodata - ehdr
     at Elf32_Shdr.sh_size,      dd RODATA_SIZE
-    at Elf32_Shdr.sh_addralign, dd 1
+iend
+
+SHSTRNDX equ ($ - shdr) / Elf32_Shdr_size
+istruc Elf32_Shdr
+    at Elf32_Shdr.sh_name,      db ashstrtab - names
+    at Elf32_Shdr.sh_type,      dw SHT_STRTAB
+    at Elf32_Shdr.sh_offset,    dd names - ehdr
+    at Elf32_Shdr.sh_size,      dd NAMES_SIZE
 iend
 
 SHNUM equ ($ - shdr) / Elf32_Shdr_size

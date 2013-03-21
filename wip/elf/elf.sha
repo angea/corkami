@@ -1,7 +1,7 @@
 e4a3c658eb1de57c87c52d47067e2f77552dd87f *compiled.elf
 b001c31b5d1ec3ef384aa7e877bf0fcb70c1ced7 *regdump.elf
-4d2934712ddb14429cfa5ed523a776fa7856a27e *simple.elf
-bce0b080e7c5fb29b835b27cae3cb1d3ce31e083 *simple64.elf
-fa9c366e018b0019098b70c18d97fe784ada4ac7 *simpleARM.elf
+2f765dc400dafc64111a77eb063c49402bc1cf1f *simple.elf
+c4a699050da69ad9fc5afb5dfeff57da26318729 *simple64.elf
+b8aea8e92b909f755f84c1398a86f224ed3e6c23 *simpleARM.elf
 8330da84c0c9b9177cf6fd7f3688c8e07422800a *standard.elf
 55e012950154e07bfea165fb3ab68fd8d446b0a3 *tiny.elf
