@@ -17,14 +17,14 @@ MAIN_DOS_API equ 21h
     push cs  ; = mov ds, cs
     pop  ds
 
-    ; printf("Hello World!\r\n\r")
+    ; print("Hello World!\r\n\r")
     mov  dx, msg
     mov  ah, DISPLAY_STRING
     int  MAIN_DOS_API
 
     ; return 1;
     ERRORCODE equ 1
-    mov  ax, TERMINATE_WITH_RETURN_CODE << 8 | ERRORCODE
+    mov  ax, (TERMINATE_WITH_RETURN_CODE << 8) | ERRORCODE
     int  MAIN_DOS_API
 
 msg db 'Hello World!', 0dh, 0dh, 0ah, '$' ; DOS string are $-terminated
