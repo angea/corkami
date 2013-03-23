@@ -69,13 +69,16 @@ _r1 equ 1
 _r2 equ 2
 _pc equ 0fh
 
+SYSCALLBASE equ 0900000h
+
 main:
     mov_r _r0, 0
     adr   _r1, _pc, msg - $ - 8
     mov_r _r2, MSG_LEN
-    swi   0900004h
+    swi   SYSCALLBASE + SC_WRITE
+
     mov_r _r0, 6
-    swi   0900001h
+    swi   SYSCALLBASE + SC_EXIT
 
 MAIN_SIZE equ $ - main
 
