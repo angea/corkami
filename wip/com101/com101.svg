@@ -37,7 +37,7 @@
      showborder="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:snap-global="true"
+     inkscape:snap-global="false"
      inkscape:snap-object-midpoints="false"
      inkscape:snap-bbox-midpoints="true"
      inkscape:bbox-paths="true"
@@ -304,17 +304,12 @@
     <text
        sodipodi:linespacing="125%"
        id="text3488"
-       y="-54.915436"
+       y="-26.990803"
        x="1076.7391"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
        xml:space="preserve"><tspan
-         style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         y="-54.915436"
-         x="1076.7391"
-         sodipodi:role="line"
-         id="tspan3519">Ange Albertini</tspan><tspan
-         style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         y="-27.415438"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
+         y="-26.990803"
          x="1076.7391"
          sodipodi:role="line"
          id="tspan4123">corkami.com</tspan></text>
@@ -706,9 +701,7 @@
          y="193.99091"
          x="720.87653"
          sodipodi:role="line"
-         id="tspan9602"><tspan
-           style="fill:#00ff00"
-           id="tspan5126" /></tspan><tspan
+         id="tspan9602" /><tspan
          y="206.49091"
          x="720.87653"
          sodipodi:role="line"
@@ -716,9 +709,7 @@
            style="fill:#00ff00"
            id="tspan3174">mov  AX,</tspan><tspan
            style="fill:#000080"
-           id="tspan5108"> 0x4C<tspan
-   style="font-style:oblique;-inkscape-font-specification:Lucida Console Oblique"
-   id="tspan3152">01</tspan></tspan></tspan><tspan
+           id="tspan5108"> 0x4C01</tspan></tspan><tspan
          y="218.99091"
          x="720.87653"
          sodipodi:role="line"
@@ -735,9 +726,7 @@
          id="tspan8013"
          y="218.17862"
          x="882.40118"
-         sodipodi:role="line">return <tspan
-   style="font-style:oblique;-inkscape-font-specification:Lucida Console Oblique"
-   id="tspan3154">1</tspan>;</tspan></text>
+         sodipodi:role="line">return 1;</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
@@ -824,7 +813,7 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#cccccc;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Send-59);display:inline"
-       d="m 813.51941,202.39826 106.33345,0 0,6.94238"
+       d="m 812.6749,202.39826 106.10799,0 0,6.94238"
        id="path4737-6-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
@@ -855,7 +844,7 @@
          sodipodi:role="line">String</tspan></text>
     <path
        style="color:#000000;fill:none;stroke:#b3b3b3;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:1, 1;stroke-dashoffset:1.4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 799.87032,197.60291 13.17455,0 0,10.58998 -13.17455,0"
+       d="m 799.87032,197.60291 12.37972,0 0,10.58998 -12.37972,0"
        id="rect4198"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
@@ -876,9 +865,9 @@
        y="197.62296"
        x="719.01477"
        height="23.139526"
-       width="80.920883"
+       width="80.32476"
        id="rect4204"
-       style="color:#000000;fill:none;stroke:#b3b3b3;stroke-width:0.99999964;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:0.9999997, 0.9999997;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:none;stroke:#b3b3b3;stroke-width:0.99999958;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:0.9999997, 0.9999997;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <a
        id="a6399-2"
        xlink:href="http://pe101.corkami.com"
@@ -1105,5 +1094,17 @@
          id="tspan3207"><tspan
    style="fill:#ff0000;font-size:8px"
    id="tspan3253">*</tspan>the DOS CODE OF A standard PORTABLE EXECUTABLE FILE is IDENTICAL</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
+       x="1076.7391"
+       y="-48.915436"
+       id="text3208"
+       sodipodi:linespacing="125%"><tspan
+         id="tspan3215"
+         sodipodi:role="line"
+         x="1076.7391"
+         y="-48.915436"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular">Ange Albertini</tspan></text>
   </g>
 </svg>
