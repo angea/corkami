@@ -1051,24 +1051,24 @@
     <text
        sodipodi:linespacing="125%"
        id="text3220"
-       y="294.54541"
-       x="329.87912"
+       y="314.0336"
+       x="257.2413"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
        xml:space="preserve"><tspan
          id="tspan3224"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         y="294.54541"
-         x="329.87912"
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
+         y="314.0336"
+         x="257.2413"
          sodipodi:role="line">Trivia</tspan><tspan
          id="tspan3240"
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         y="307.97134"
-         x="329.87912"
-         sodipodi:role="line">COM was used by MS-DOS in 1980</tspan><tspan
-         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         y="320.47134"
-         x="329.87912"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
+         y="330.42249"
+         x="257.2413"
+         sodipodi:role="line">COM files were used by MS-DOS in 1980</tspan><tspan
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
+         y="345.42249"
+         x="257.2413"
          sodipodi:role="line"
-         id="tspan3268">and still run on any 32-bit Windows in 2013</tspan></text>
+         id="tspan3268">and still run on any 32-bit Windows today</tspan></text>
   </g>
 </svg>
