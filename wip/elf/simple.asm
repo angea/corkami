@@ -61,7 +61,7 @@ main:
     int 80h
 
 
-    mov ebx, 1
+    mov ebx, 1 ; return code
 
     mov eax, SC_EXIT
     int 80h

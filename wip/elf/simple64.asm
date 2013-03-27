@@ -61,7 +61,7 @@ main:
     syscall
 
 
-    mov rdi, 1
+    mov rdi, 1 ; return code
 
     mov rax, sys_exit
     syscall

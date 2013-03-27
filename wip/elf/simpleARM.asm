@@ -2,6 +2,8 @@
 
 ; Ange Albertini, BSD Licence 2013
 
+;%define ANDROID
+
 BITS 32
 
 %include 'consts.inc'
@@ -67,18 +69,33 @@ align 16, db 0
 _r0 equ 0
 _r1 equ 1
 _r2 equ 2
+_r7 equ 7
 _pc equ 0fh
 
 SYSCALLBASE equ 0900000h
 
 main:
-    mov_r _r0, 0
+
+%ifdef ANDROID
+    mov_r _r0, STDOUT
+    adr   _r1, _pc, msg - $ - 8
+    mov_r _r2, MSG_LEN
+    mov_r _r7, SC_WRITE
+    swi   0
+
+    mov_r _r0, 1 ; return code
+    mov_r _r7, SC_EXIT
+    swi   0
+%else
+ ; Raspberry Pi version
+    mov_r _r0, STDOUT
     adr   _r1, _pc, msg - $ - 8
     mov_r _r2, MSG_LEN
     swi   SYSCALLBASE + SC_WRITE
 
-    mov_r _r0, 6
+    mov_r _r0, 1 ; return code
     swi   SYSCALLBASE + SC_EXIT
+%endif
 
 MAIN_SIZE equ $ - main
 
