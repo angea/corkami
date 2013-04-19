@@ -4,22 +4,18 @@ ml = $(masmdir)\ml /c /Zi /coff
 mlink = $(masmdir)\Link /SUBSYSTEM:WINDOWS
 makepe = $(python) ..\makepe.py
 
-examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
+examples = pe\compiled.exe pe\mz.exe \
 	pe\helloworld-masm.exe pe\console.exe \
 	anti\smsw.exe anti\gs.exe anti\misc.exe \
-	pe\driver.sys pe\tinype.exe \
-	pe\seh_dll.dll pe\seh_loader.exe pe\tls_standard.exe pe\tls_fake.exe \
-	pe\tls_no_user32.exe pe\tls_on_the_fly.exe \
-	pe\helloworld.exe pe\sectionless.exe pe\collapsed.exe \
-	pe\duplicate_section.exe pe\whole_pe_section.exe \
+	pe\driver.sys \
+	pe\seh_dll.dll pe\seh_loader.exe \
+	pe\tls_no_user32.exe \
+	pe\helloworld.exe pe\collapsed.exe \
 	asm\piotr.exe asm\self_generating.exe asm\loops.exe asm\jumps.exe asm\block.exe \
 	asm\opcodes32.bin asm\opcodes32pe.exe asm\undoc.exe \
 	asm\seh_triggers.exe asm\getip.exe asm\nop.exe \
 	asm\inline_strings.exe asm\stack_strings.exe \
-	pe\no_relocs.dll pe\no_relocs_loader.exe \
 	pe\no_relocs_tls_loader.exe \
-	pe\forwarder.dll pe\forwarded.exe pe\own_exports.exe \
-	pe\no_exports.dll pe\no_exports_loader.exe \
 	pe\driver.exe pe\driver-ni.ex pe\ntoskrnl.exe \
 	pe\tls_zeroesSEH.exe pe\tls_zeroesmemnull.exe \
 	pe\dll.dll pe\loader.exe pe\manual_loader.exe \
@@ -37,14 +33,11 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	packer\thread_host.exe packer\remote_thread.exe \
 	packer\eppatched.exe packer\mutated.exe packer\protected.exe packer\virtualized.exe packer\crypted.exe \
 	packer\dropper.exe packer\suspended_process.exe packer\resource_dropper.exe \
-	asm\usermode_test.exe \
 	asm\crypted_strings.exe \
 	anti\int2a_loop.exe \
 	pe\hal.dll \
 	pe\classpnp.sys \
-	pe\resource_loop.exe \
 	pe\resource_fail7.exe \
-	pe\resource_shuffled.exe \
 	anti\flow.exe \
 	imports\kernel31.dll \
 	imports\kernel31.asm \
@@ -56,11 +49,10 @@ examples = pe\compiled.exe pe\tls_import.exe pe\mz.exe \
 	asm\mmx.exe asm\sse.exe asm\fpu.exe anti\fastpeblock.exe asm\small_sc.bin \
 	asm\memscan.exe anti\lowlevel.exe anti\exception_skip.exe anti\exception_overwrite.exe \
     anti\hwbp.exe anti\tf_step.exe asm\vmware.exe anti\ollydbg.exe \
-	pe\sect_phys_order.exe pe\imagebase_null.exe anti\dump.exe asm\apiloop.exe 
+    anti\dump.exe asm\apiloop.exe packer\compressed.exe
 
-notworking = asm\memcopy.exe waitable.exe test.exe vms\binary.exe pe\multisub.exe asm\trampo1.exe 
+notworking = asm\memcopy.exe waitable.exe test.exe vms\binary.exe pe\multisub.exe asm\trampo1.exe
 
-# packer\compressed.exe needs Kabopan, not enabled by default
 # eicar.com # removed to prevent your AV from acting
 
 objects = helloworld-masm.obj
