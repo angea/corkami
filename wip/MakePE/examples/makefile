@@ -6,7 +6,7 @@ makepe = $(python) ..\makepe.py
 
 examples = pe\compiled.exe pe\mz.exe \
 	pe\helloworld-masm.exe pe\console.exe \
-	anti\smsw.exe anti\gs.exe anti\misc.exe \
+	anti\misc.exe \
 	pe\driver.sys \
 	pe\seh_dll.dll pe\seh_loader.exe \
 	pe\tls_no_user32.exe \
@@ -38,7 +38,6 @@ examples = pe\compiled.exe pe\mz.exe \
 	pe\hal.dll \
 	pe\classpnp.sys \
 	pe\resource_fail7.exe \
-	anti\flow.exe \
 	imports\kernel31.dll \
 	imports\kernel31.asm \
 	imports\kernel31_test.exe \
@@ -47,8 +46,8 @@ examples = pe\compiled.exe pe\mz.exe \
 	pe\helloworld64.exe pe\max_sec.exe pe\max_secXP.exe \
 	pe\delayimports.exe pe\shelload.exe \
 	asm\mmx.exe asm\sse.exe asm\fpu.exe anti\fastpeblock.exe asm\small_sc.bin \
-	asm\memscan.exe anti\lowlevel.exe anti\exception_skip.exe anti\exception_overwrite.exe \
-    anti\hwbp.exe anti\tf_step.exe asm\vmware.exe anti\ollydbg.exe \
+	asm\memscan.exe anti\lowlevel.exe \
+    asm\vmware.exe anti\ollydbg.exe \
     anti\dump.exe asm\apiloop.exe packer\compressed.exe
 
 notworking = asm\memcopy.exe waitable.exe test.exe vms\binary.exe pe\multisub.exe asm\trampo1.exe
