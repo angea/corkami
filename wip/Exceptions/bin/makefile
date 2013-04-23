@@ -10,7 +10,7 @@ triggers: trig_invalidmem.exe trig_divzero.exe trig_intov1.exe trig_intov2.exe t
 
 set: set_tibself.exe set_gs.exe set_hardcoded.exe
 
-specials: hwbp.exe overwrite.exe skip.exe tf_step.exe scank32.exe
+specials: hwbp.exe overwrite.exe skip.exe tf_step.exe scank32.exe veh_override.exe
 
 XP:
 
@@ -18,3 +18,6 @@ W7:
 
 %.exe: ..\%.asm
 	yasm -o $@ $<
+
+clean:
+	del *.exe
