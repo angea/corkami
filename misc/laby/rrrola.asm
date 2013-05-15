@@ -21,7 +21,7 @@ INT_VIDEO equ 10h
 new_point:
     xchg ax, bx
     push si
-    imul cx, 233 ; prime, etc...
+    imul cx, -23 ; trick for yasm to encode 233 on a byte / 233 = prime, ...
     js next
 
     neg ax
