@@ -33,6 +33,7 @@ istruc Elf64_Ehdr
     at Elf64_Ehdr.e_shnum,     dw SHNUM
     at Elf64_Ehdr.e_shstrndx,  dw SHSTRNDX
 iend
+align 16, db 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Program header table
