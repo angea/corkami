@@ -1,0 +1,1 @@
+convert -border 5x5 h1.png h2.png +append v1.png -append output.png
