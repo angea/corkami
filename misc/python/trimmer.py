@@ -6,13 +6,8 @@
 # tEXt and FRAM are dropped
 # complex framerate via FRAM not supported
 
-# 1- run to get xxx frames
-# 2- enter your first wanted frame's number as the 'skip' one
-# 3- rerun to trim
-
-DUMP_START = 500
-DUMP_RANGE = 500
-SKIP = 676
+# 1- run with -d <STARTFRAME> <RANGE> to get xxx frames
+# 2- run with -t <FRAMENUMBER> to trim until the chosen is the 1st one
 
 FRAMES_PER_PNG = 3 # FRAM chunks are ignored, PLTE are not expected
 
@@ -93,8 +88,16 @@ def TrimWav(fn, frames, fps):
     s.close()
 
 
-fn = sys.argv[1]
+fn = sys.argv[-1]
 fnt = fn.replace(".mng", "")
+
+# ugly :p
+args = sys.argv[1:]
+DUMP_START, DUMP_RANGE, SKIP = 0, 0, 0
+if args[0] == "-d": #
+    DUMP_START, DUMP_RANGE = int(args[1]), int(args[2])
+elif args[0] == "-t": # trim mode
+    SKIP = int(args[1])
 
 chunks = ReadNG(fn)
 
@@ -104,9 +107,10 @@ print "MNG %i x %i, %i f/s" % (x, y, ticks),
 print "(%i frames)" % ((len(chunks) - 2) / FRAMES_PER_PNG) # 1 MHDR + 1 MEND to be skipped
 
 # dump PNG frames
-#for i in xrange(DUMP_RANGE):
-#    WritePNGFrame(DUMP_START + i)
+for i in xrange(DUMP_RANGE):
+    WritePNGFrame(DUMP_START + i)
 
 #trim MNG and WAV
-TrimMNG(fnt, SKIP)
-TrimWav(fnt, SKIP, ticks)
+if SKIP != 0:
+	TrimMNG(fnt, SKIP)
+	TrimWav(fnt, SKIP, ticks)
