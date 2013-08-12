@@ -9,9 +9,9 @@ for s, f in ([l[:40], l[42:].rstrip()] for l in t):
         fs = sha1(r).hexdigest()
         if s != fs:
             errors += 1
-            print "%s\r\n < %s\r\n > %s" % (f, s, fs)
+            print "%s *%s\r" % (fs, f)
     except IOError:
         errors += 1
-        print "%s\r\n missing" % f
+        print "MISSING: %s\r" % f
 if errors:
     print "\r\n%i error(s)" % errors
