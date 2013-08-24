@@ -1,7 +1,10 @@
 from hashlib import sha1
-with open("bin.sha", "rt") as f:
+import sys
+
+with open(sys.argv[1], "rt") as f:
     t = f.readlines()
 errors = 0
+
 for s, f in ([l[:40], l[42:].rstrip()] for l in t):
     try:
         with open(f, "rb") as f1:
