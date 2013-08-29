@@ -3,6 +3,7 @@ del PE /q /s
 rd PE
 set today=%date:~-4%%date:~-10,2%%date:~-7,2%
 svn export http://corkami.googlecode.com/svn/trunk/src/PE PE --force
+svn info http://corkami.googlecode.com/svn/trunk/src/PE > PE\info
 cd PE\bin
 call make
 :call test > test.txt
