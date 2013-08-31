@@ -1,0 +1,16 @@
+&3
+# final fight: backward jump = 2.L.
+# turn around: 1 frames L.
+# jump after turn around: L2 W2 L.
+# jump = 50 frames (1st jump) 52 (next ones)
+# Guy punch = 12 frames = (1 W12)5
+# guy shifting (1 W6 ^R W6)2 W10 L1..  _R..
+# guy wall jump = R2.12.
+.
+#moving from start to first ennemy _U_R W25 ^U W95 *
+#((1 W12)2 W10 L1..  _R..)2
+*
+ _U_R W40  * W52
+((1 W6 ^R W6)2 W10 L1..  _R..)38
+(1 W6 ^R W6)1
+!

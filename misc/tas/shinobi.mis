@@ -1,0 +1,97 @@
+&1.
+# start 9094
+w191
+# first guy in range 9287
+1
+W28
+# 2nd guy in range, 9315
+1
+W29
+#3rd guy, 9346
+1
+W20
+#3rd guy, 9366
+1
+W24
+#4th, purple, 9386
+1..1
+W18
+#5th 9406
+1
+W31
+#9436
+1
+W31
+#9467 purple
+1
+W20
+#9487
+1
+_R W21 *1..1.
+_L W17 1 W5 *
+W30
+#9548 jumping
+# purple 9566
+1..1 W18
+# 9586
+1 W20
+#9608 purple
+1..1 W18
+# purple 9626
+1..1..1. #W40
+
+# 9646 guy jumping
+#9668 (2 at once)
+_L W20 *1..1.
+_R W20 *
+W30
+#9687 jumping
+
+#9708
+1 W20
+#9727 purple
+1..1. W20
+#9748
+1 W20 
+#9767 purple
+1..1. W5 1 W15
+#9787
+1 W20
+#9808
+1 W20
+#9827
+1 W20
+#9847
+1 W18
+#9867 OK
+1..1 
+#9887 jumping OK
+_R W20 1 ^R _L W20 *
+W20
+#9908 jumping
+W20
+#9947 purple
+1..1 W18
+#9967
+1..1 W18
+1..1 W18
+1..1 W18
+1..1 W18
+.. W18
+.. W18
+1..1 W18
+.. W18
+_L W20 *
+1 W16 1 W24 1 W32 1 
+W24 2
+(W8) 14 1
+#9987 background
+#9988 foreground
+# shoot at 10022-5
+#10047 jumper
+#10068 purple jumper
+#10088
+#10128 purple
+#10158
+.
+!
