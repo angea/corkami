@@ -1,0 +1,28 @@
+#Cream to Red
+#1. Input
+#LP LP R LK HP S+LP
+
+#+1..1..R..4..3..
+
+#Red to Green
+#4. Color
+#P1: LK    MP    U S+LP
+#P2:    HK    MP
+
+#+4..-6..+2..-2..+U..
+
+#Green to blue
+#6. Game data
+#P1:     L    R D    U S+LP
+#P2: R D   HK     LP
+
+#+-R..D..+L..-6.. +R..D..-1..+U..
+
+#Blue to light blue
+#5. Dot cross hatch
+#P1:   MK   D      D   MP   U D    LK S+LP
+#P2: D    R   R HP   L    R     MK
+
+#+-D..+5..-R..+D..-R..3..+D..-L..+2..-R..+U..D..-5..+4..
+
+!
