@@ -1,0 +1,76 @@
+%published in PoC||GTFO Issue 0x01
+
+\documentclass{article}
+\usepackage{listings}
+\usepackage{hyperref}
+\begin{document}
+\lstset{language={[x86masm]Assembler}}
+\section{making a multi-Windows PE}
+\subsection{evolution of the PE loader}
+The {\em Portable Executable} loader of Windows has slowly evolved and became progressively more restrictive. Many oddities that worked in the past are killed by the next version: for example, the notorious TinyPE\footnote{\href{http://www.phreedom.org/research/tinype/}{Creating the smallest possible PE executable}} cannot work after Windows XP, as next revisions of Windows enforce that the {\tt OptionalHeader} is not truncated in the file, thus forcing a TinyPE to be padded (shame!) until 252 bytes (or 268 bytes in 64 bits systems), so that it still works. Windows 8 also brought new requirements like $AddressOfEntryPoint <= SizeOfHeaders $ when $ AddressOfEntryPoint \neq 0$, so any old-school packer such as FSG\footnote{Fast Small Good, by bart/xt} will not work anymore.
+
+So, there are many real-life examples of Windows binaries that will just stop working with the next version. It is, on the other hand, much harder to create a Windows binary that would still work, but differently --- from a loader perspective, not just a version detection in the code. This will imply that Windows is not a single evolving OS, but rather successive distinguishable yet related OSes. While I already\footnote{differentiating OS versions by putting  \href{https://corkami.googlecode.com/svn-history/r889/trunk/asm/PE/tls_aoiOSDET.asm}{TLS AddressOfIndex in an Imports descriptor}.} did something similar, it was only able to differentiate between XP and next generations of Windows.
+
+\subsection{a look at PE relocations}
+PE relocations have been known to produce some weirdness: some Mips-related type have been present on all platforms, x86/Sparc/Alpha/Mips included, one type appeared and disappeared in Windows 2000. Typically, PE relocations are limited to a simple role: whenever a binary needs to be relocated, the standard type 3 (mapped to {\tt HIGH\_LOW}\footnote{relocation names actually use the {\tt IMAGE\_REL\_BASED\_} prefix}) relocations are applied by adding the delta $LoadedImageBase - HeaderImageBase$ to each 32 bits immediate.
+
+However, more types are actually usable, and 2 of them present some interesting differences between OS values that we can use~:
+\begin{description}
+	\item[type 9] This one has a very odd formula\footnote{see Roy G Biv's \href{http://spth.virii.lu/v3/vessel/display/articles/roy g biv/vcode2.txt}{Virtual Code}}, where it can modify 16 bytes altogether under Windows 7, while it only modifies 32 bits under XP. Sadly, it's not supported anymore under Windows 8. It's mapped to {\tt MIPS\_JMPADDR16}, {\tt IA64\_IMM64} and {\tt MACHINE\_SPECIFIC\_9}.
+	\item[type 4] This type is the only one that takes a parameter, which is ignored under versions older than Windows 8. It's mapped to {\tt HIGH\_ADJ}.
+	\item[type 10] This type is supported by all versions of Windows, but it will still help us. It's mapped to {\tt DIR64}.
+\end{description}
+
+So, one relocation type (type 9) is behaving differently under XP and 7, but has no effect under older version than Windows 8.
+On the other hand, type 4 behaves differently under Windows 8, unlike previous versions. In this case, we can use it to turn an unsupported type 9 into a supported type 10. This is possible because relocations are applied directly in memory, where they can freely modify the following relocation entries.
+
+\subsection{Implementation}
+So, here's our plan:
+\begin{enumerate}
+\item give a user-mode PE a kernel-mode ImageBase, to force relocations
+\item add the standard relocations (for code)
+\item make a relocation of type 4 be applied to a further type 9 relocation entry
+\begin{itemize}
+\item under XP or W7, the type 9 relocation will keep its type, with an offset of $0f00h$
+\item under W8, the type will be changed to a supported 10, and the offset will be changed to $0000h$
+\end{itemize}
+\item we end up with a memory location, that is either:
+\begin{description}
+\item[XP] modified on 32b ($00004000h$)
+\item[W7] modified on 64b ($08004000h$)
+\item[W8] left unmodifed ($00000000h$), because a completely different location was modified by a relocation type 10.
+
+\end{description}
+\end{enumerate}
+
+\begin{lstlisting}
+;relocation type 4, to patch unsupported relocation type 9 (Windows 8)
+block_start1:
+    .VirtualAddress dd relocbase - IMAGEBASE
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK1
+
+    ; offset +1 to modify the Type, parameter set to -1
+    dw (IMAGE_REL_BASED_HIGHADJ  << 12) | (reloc4 + 1 - relocbase), -1 
+BASE_RELOC_SIZE_OF_BLOCK1 equ  - block_start1
+\end{lstlisting}
+
+\begin{lstlisting}
+; our type9/type10 relocation block: 
+; type 10 under Windows8, 
+; type 9 under XP/W7, where it behaves differently
+block_start2:
+    .VirtualAddress dd relocbase - IMAGEBASE
+    .SizeOfBlock dd BASE_RELOC_SIZE_OF_BLOCK2
+
+; 9d00h will turn into 9f00h or a000h
+reloc4 dw (IMAGE_REL_BASED_MIPS_JMPADDR16 << 12) | 0d00h
+BASE_RELOC_SIZE_OF_BLOCK2 equ $ - block_start2
+\end{lstlisting}
+
+We now have a memory location modified transparently by the loader, with a different value depending on the OS version. It could be extended to generate different code, this is left as an exercise for the reader.
+
+\subsubsection{Building instructions}
+The entire binary is defined by hand, thus a single invokation of Yasm\footnote{\href{http://yasm.tortall.net/}{The Yasm Modular Assembler Project}} is required:
+$ yasm\ -o\  relocOSdet.exe\ relocOSdet.asm$ 
+is required. The final SHA-1 should be $65427add61db59bdb65daf28c72cc14b2ae309aa$.
+\end{document}
