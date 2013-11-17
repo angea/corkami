@@ -31,7 +31,7 @@
      inkscape:cx="1923.5659"
      inkscape:cy="1381.3062"
      inkscape:document-units="px"
-     inkscape:current-layer="g3778"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:snap-bbox="true"
      showborder="true"
@@ -55,8 +55,8 @@
      inkscape:snap-intersection-paths="true"
      inkscape:snap-to-guides="true"
      inkscape:snap-grids="false"
-     inkscape:window-width="1680"
-     inkscape:window-height="1050"
+     inkscape:window-width="824"
+     inkscape:window-height="982"
      inkscape:window-x="1050"
      inkscape:window-y="329"
      inkscape:window-maximized="0"
@@ -821,7 +821,7 @@
          y="-1271.6285"
          x="1521.4741"
          id="tspan4622-7-3-7"
-         sodipodi:role="line">sections' NAMES</tspan></text>
+         sodipodi:role="line">Sections' names</tspan></text>
     <rect
        y="-1391.4573"
        x="1473.712"
@@ -840,7 +840,7 @@
          y="-1374.9385"
          x="1525.1829"
          sodipodi:role="line"
-         id="tspan4403">CODE</tspan></text>
+         id="tspan4403">Code</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -871,7 +871,7 @@
          y="-1512.6862"
          x="1520.1096"
          id="tspan4622-7-3-7-3-2-1"
-         sodipodi:role="line">Program header table</tspan></text>
+         sodipodi:role="line">Program Header table</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-7-32-1-9-6-6-1"
@@ -883,7 +883,7 @@
          y="-1503.209"
          x="1520.9749"
          id="tspan4622-7-1-3-8-7-0-1"
-         sodipodi:role="line">EXECUTION information</tspan></text>
+         sodipodi:role="line">Execution information</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-3"
@@ -907,7 +907,7 @@
          y="-1451.7767"
          x="1219.8966"
          id="tspan4622"
-         sodipodi:role="line">header 1/2</tspan></text>
+         sodipodi:role="line">Header 1/2</tspan></text>
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999982;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3735-1-6"
@@ -926,7 +926,7 @@
          y="-1130.9575"
          x="1521.4574"
          id="tspan4622-7-1"
-         sodipodi:role="line">LINKING information</tspan></text>
+         sodipodi:role="line">Linking information</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-7"
@@ -938,7 +938,7 @@
          y="-1139.3292"
          x="1521.1801"
          id="tspan4622-7"
-         sodipodi:role="line">SECTION HEADER TABLE</tspan></text>
+         sodipodi:role="line">Section Header table</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4620-98"
@@ -950,7 +950,7 @@
          y="-1353.9946"
          x="1219.8723"
          id="tspan4622-9"
-         sodipodi:role="line">sections/SEGMENTS</tspan></text>
+         sodipodi:role="line">sections/segments</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:71.27302551px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -993,7 +993,7 @@
          y="-1324.3184"
          x="1521.4302"
          id="tspan4622-7-3-7-3"
-         sodipodi:role="line">DATA</tspan></text>
+         sodipodi:role="line">Data</tspan></text>
     <rect
        y="-1574.802"
        x="1463.4143"
@@ -1121,17 +1121,17 @@
          y="-872.71283"
          x="931.39197"
          sodipodi:role="line"
-         id="tspan5708">the  ELF header is parsed</tspan><tspan
+         id="tspan5708">the ELF header is parsed</tspan><tspan
          y="-847.71283"
          x="931.39197"
          sodipodi:role="line"
-         id="tspan3816">the Program header is parsed</tspan><tspan
-         y="-826.78693"
+         id="tspan3816">the Program Header is parsed</tspan><tspan
+         y="-826.06091"
          x="931.39197"
          sodipodi:role="line"
          id="tspan3827"
-         style="font-size:16px">     (the SECTION HEADER IS only for linking)</tspan><tspan
-         y="-806.78693"
+         style="font-size:16px">     (the Section Header is only for linking)</tspan><tspan
+         y="-806.06091"
          x="931.39197"
          sodipodi:role="line"
          id="tspan3825" /></text>
@@ -1145,7 +1145,7 @@
          id="tspan3840-1-6-8-2-4-5-7"
          y="-1781.8262"
          x="1817.1929"
-         sodipodi:role="line">v1.0, ?th DECEMBER 2013</tspan><tspan
+         sodipodi:role="line">v1.0, ?th December 2013</tspan><tspan
          y="-1765.8262"
          x="1817.1929"
          sodipodi:role="line"
@@ -1243,7 +1243,7 @@
          id="tspan3840-1-6-8-2-2"
          y="-1143.9691"
          x="2294.1841"
-         sodipodi:role="line">Section HEADER table</tspan></text>
+         sodipodi:role="line">Section Header table</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
@@ -1342,7 +1342,7 @@
          x="2031.1379"
          y="-856.22296"
          style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         id="tspan3934">ELF is used, AMONG OTHERS, in: </tspan><tspan
+         id="tspan3934">ELF is used, among others, in: </tspan><tspan
          sodipodi:role="line"
          x="2031.1379"
          y="-831.22296"
@@ -1382,7 +1382,7 @@
          y="-1298.4017"
          x="1002.2688"
          id="tspan4622-6"
-         sodipodi:role="line">simple.eLF</tspan></text>
+         sodipodi:role="line">simple.elf</tspan></text>
     <a
        id="a6399-2"
        xlink:href="http://pe101.corkami.com"
@@ -1400,7 +1400,7 @@
            x="-1081.8097"
            id="tspan6393-0"
            sodipodi:role="line"
-           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000080;fill-opacity:1;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular">download @ ELF101.corkami.com</tspan></text>
+           style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000080;fill-opacity:1;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular">download @ elf101.corkami.com</tspan></text>
     </a>
     <text
        xml:space="preserve"
@@ -1469,7 +1469,7 @@
          id="tspan5454"
          x="1219.5016"
          y="-1211.7767"
-         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular">technical DETAILS for  about the OBJECT</tspan></text>
+         style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular">technical details about the object</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -1960,7 +1960,7 @@
          x="2356.2668"
          y="-1632.2168"
          style="font-size:10px;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         id="tspan5781">ADDRESS Where execution starts</tspan><tspan
+         id="tspan5781">Address where execution starts</tspan><tspan
          sodipodi:role="line"
          x="2356.2668"
          y="-1619.7168"
