@@ -20,9 +20,9 @@ istruc Elf64_Ehdr
         EI_CLASS   db ELFCLASS64
         EI_DATA    db ELFDATA2LSB
         EI_VERSION db EV_CURRENT
-    at Elf64_Ehdr.e_type,      db ET_EXEC
-    at Elf64_Ehdr.e_machine,   db EM_AMD64
-    at Elf64_Ehdr.e_version,   db EV_CURRENT
+    at Elf64_Ehdr.e_type,      dw ET_EXEC
+    at Elf64_Ehdr.e_machine,   dw EM_AMD64
+    at Elf64_Ehdr.e_version,   dd EV_CURRENT
     at Elf64_Ehdr.e_entry,     dq main
     at Elf64_Ehdr.e_phoff,     dq phdr - ehdr
     at Elf64_Ehdr.e_shoff,     dq shdr - ehdr
@@ -86,13 +86,10 @@ align 16, db 0
 ; .shtstrtab section (section names)
 
 names:
-    db 0
-ashstrtab:
-    db ".shstrtab", 0
-atext:
-    db ".text", 0
-arodata:
-    db ".rodata", 0
+anullstr  db 0
+ashstrtab db ".shstrtab", 0
+atext     db ".text", 0
+arodata   db ".rodata", 0
 NAMES_SIZE equ $ - names
 
 align 16, db 0
@@ -103,12 +100,13 @@ shdr:
 
 ; section 0, always null
 istruc Elf64_Shdr
-    at Elf64_Shdr.sh_type,      dw SHT_NULL
+    at Elf64_Shdr.sh_name,      dd anullstr - names
+    at Elf64_Shdr.sh_type,      dd SHT_NULL
 iend
 
 istruc Elf64_Shdr
-    at Elf64_Shdr.sh_name,      db atext - names
-    at Elf64_Shdr.sh_type,      dw SHT_PROGBITS
+    at Elf64_Shdr.sh_name,      dd atext - names
+    at Elf64_Shdr.sh_type,      dd SHT_PROGBITS
     at Elf64_Shdr.sh_flags,     dq SHF_ALLOC + SHF_EXECINSTR
     at Elf64_Shdr.sh_addr,      dq main
     at Elf64_Shdr.sh_offset,    dq main - ehdr
@@ -116,8 +114,8 @@ istruc Elf64_Shdr
 iend
 
 istruc Elf64_Shdr
-    at Elf64_Shdr.sh_name,      db arodata - names
-    at Elf64_Shdr.sh_type,      dw SHT_PROGBITS
+    at Elf64_Shdr.sh_name,      dd arodata - names
+    at Elf64_Shdr.sh_type,      dd SHT_PROGBITS
     at Elf64_Shdr.sh_flags,     dq SHF_ALLOC
     at Elf64_Shdr.sh_addr,      dq rodata
     at Elf64_Shdr.sh_offset,    dq rodata - ehdr
@@ -126,8 +124,8 @@ iend
 
 SHSTRNDX equ ($ - shdr) / Elf64_Shdr_size
 istruc Elf64_Shdr
-    at Elf64_Shdr.sh_name,      db ashstrtab - names
-    at Elf64_Shdr.sh_type,      dw SHT_STRTAB
+    at Elf64_Shdr.sh_name,      dd ashstrtab - names
+    at Elf64_Shdr.sh_type,      dd SHT_STRTAB
     at Elf64_Shdr.sh_offset,    dq names - ehdr
     at Elf64_Shdr.sh_size,      dq NAMES_SIZE
 iend
