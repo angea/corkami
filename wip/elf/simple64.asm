@@ -13,6 +13,8 @@ org ELFBASE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ELF Header
 
+segment_start:
+
 ehdr:
 istruc Elf64_Ehdr
     at Elf64_Ehdr.e_ident
@@ -23,7 +25,7 @@ istruc Elf64_Ehdr
     at Elf64_Ehdr.e_type,      dw ET_EXEC
     at Elf64_Ehdr.e_machine,   dw EM_AMD64
     at Elf64_Ehdr.e_version,   dd EV_CURRENT
-    at Elf64_Ehdr.e_entry,     dq main
+    at Elf64_Ehdr.e_entry,     dq entry
     at Elf64_Ehdr.e_phoff,     dq phdr - ehdr
     at Elf64_Ehdr.e_shoff,     dq shdr - ehdr
     at Elf64_Ehdr.e_ehsize,    dw Elf64_Ehdr_size
@@ -42,18 +44,21 @@ phdr:
 istruc Elf64_Phdr
     at Elf64_Phdr.p_type,   dd PT_LOAD
     at Elf64_Phdr.p_flags,  dd PF_R + PF_X
+    at Elf64_Phdr.p_offset, dd segment_start - ehdr
     at Elf64_Phdr.p_vaddr,  dq ELFBASE
     at Elf64_Phdr.p_paddr,  dq ELFBASE
-    at Elf64_Phdr.p_filesz, dq main - ehdr + MAIN_SIZE
-    at Elf64_Phdr.p_memsz,  dq main - ehdr + MAIN_SIZE
+    at Elf64_Phdr.p_filesz, dq SEGMENT_SIZE
+    at Elf64_Phdr.p_memsz,  dq SEGMENT_SIZE
 iend
 PHNUM equ ($ - phdr) / Elf64_Phdr_size
 
 align 16, db 0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; .text section (code)
 
-main:
+text:
+entry:
     mov rsi, msg
     mov rdx, MSG_LEN
     mov rdi, STDOUT
@@ -67,7 +72,7 @@ main:
     mov rax, sys_exit
     syscall
 
-MAIN_SIZE equ $ - main
+TEXT_SIZE equ $ - text
 
 align 16, db 0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -82,6 +87,9 @@ msg:
 RODATA_SIZE equ $ - rodata
 
 align 16, db 0
+
+SEGMENT_SIZE equ $ - segment_start
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; .shtstrtab section (section names)
 
@@ -108,9 +116,9 @@ istruc Elf64_Shdr
     at Elf64_Shdr.sh_name,      dd atext - names
     at Elf64_Shdr.sh_type,      dd SHT_PROGBITS
     at Elf64_Shdr.sh_flags,     dq SHF_ALLOC + SHF_EXECINSTR
-    at Elf64_Shdr.sh_addr,      dq main
-    at Elf64_Shdr.sh_offset,    dq main - ehdr
-    at Elf64_Shdr.sh_size,      dq MAIN_SIZE
+    at Elf64_Shdr.sh_addr,      dq text
+    at Elf64_Shdr.sh_offset,    dq text - ehdr
+    at Elf64_Shdr.sh_size,      dq TEXT_SIZE
 iend
 
 istruc Elf64_Shdr

@@ -1,8 +1,8 @@
 e4a3c658eb1de57c87c52d47067e2f77552dd87f *compiled.elf
 b001c31b5d1ec3ef384aa7e877bf0fcb70c1ced7 *regdump.elf
+67259687b87b749b13fd59b0344a5890ebcadc3b *simple.elf
+eb45e33269cd75c047b6b9a87f53e9ef81581cc2 *simple64.elf
+b975082ddb6ad33c7a7d46455937fb0f99480a85 *simpleARM.elf
+65a80931e026dc07c3f55d568e02df50dbcbfca0 *simpleARM-Android.elf
 8330da84c0c9b9177cf6fd7f3688c8e07422800a *standard.elf
 55e012950154e07bfea165fb3ab68fd8d446b0a3 *tiny.elf
-b21d56319ff64978ec4714f9737dd0d29f6d643a *simpleARM.elf
-e00e55de3ea8be5ff83c52c3cdf3b025cb792a62 *simpleARM-ANDROID.elf
-c4a699050da69ad9fc5afb5dfeff57da26318729 *simple64.elf
-67259687b87b749b13fd59b0344a5890ebcadc3b *simple.elf

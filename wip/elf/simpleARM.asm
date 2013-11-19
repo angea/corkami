@@ -15,6 +15,8 @@ org ELFBASE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ELF Header
 
+segment_start:
+
 ehdr:
 istruc Elf32_Ehdr
     at Elf32_Ehdr.e_ident
@@ -25,7 +27,7 @@ istruc Elf32_Ehdr
     at Elf32_Ehdr.e_type,      dw ET_EXEC
     at Elf32_Ehdr.e_machine,   dw EM_ARM
     at Elf32_Ehdr.e_version,   dd EV_CURRENT
-    at Elf32_Ehdr.e_entry,     dd main
+    at Elf32_Ehdr.e_entry,     dd entry
     at Elf32_Ehdr.e_phoff,     dd phdr - ehdr
     at Elf32_Ehdr.e_shoff,     dd shdr - ehdr
     at Elf32_Ehdr.e_ehsize,    dw Elf32_Ehdr_size
@@ -43,15 +45,17 @@ align 16, db 0
 phdr:
 istruc Elf32_Phdr
     at Elf32_Phdr.p_type,   dd PT_LOAD
+    at Elf32_Phdr.p_offset, dd segment_start - ehdr
     at Elf32_Phdr.p_vaddr,  dd ELFBASE
     at Elf32_Phdr.p_paddr,  dd ELFBASE
-    at Elf32_Phdr.p_filesz, dd main - ehdr + MAIN_SIZE
-    at Elf32_Phdr.p_memsz,  dd main - ehdr + MAIN_SIZE
+    at Elf32_Phdr.p_filesz, dd SEGMENT_SIZE
+    at Elf32_Phdr.p_memsz,  dd SEGMENT_SIZE
     at Elf32_Phdr.p_flags,  dd PF_R + PF_X
 iend
 PHNUM equ ($ - phdr) / Elf32_Phdr_size
 
 align 16, db 0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; .text section (code)
 
@@ -67,6 +71,16 @@ align 16, db 0
     dd (0EFh << 24) | %1
 %endmacro
 
+%macro syscall_ 1
+%ifdef ANDROID
+    mov_r _r7, %1
+    swi   0
+%else
+ ; Raspberry Pi version
+    swi   SYSCALLBASE + %1
+%endif    
+%endmacro
+
 _r0 equ 0
 _r1 equ 1
 _r2 equ 2
@@ -75,30 +89,17 @@ _pc equ 0fh
 
 SYSCALLBASE equ 0900000h
 
-main:
-
-%ifdef ANDROID
+text:
+entry:
     mov_r _r0, STDOUT
     adr   _r1, _pc, msg - $ - 8
     mov_r _r2, MSG_LEN
-    mov_r _r7, SC_WRITE
-    swi   0
+    syscall_ SC_WRITE
 
     mov_r _r0, 1 ; return code
-    mov_r _r7, SC_EXIT
-    swi   0
-%else
- ; Raspberry Pi version
-    mov_r _r0, STDOUT
-    adr   _r1, _pc, msg - $ - 8
-    mov_r _r2, MSG_LEN
-    swi   SYSCALLBASE + SC_WRITE
+    syscall_ SC_EXIT
 
-    mov_r _r0, 1 ; return code
-    swi   SYSCALLBASE + SC_EXIT
-%endif
-
-MAIN_SIZE equ $ - main
+TEXT_SIZE equ $ - text
 
 align 16, db 0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -113,6 +114,9 @@ msg:
 RODATA_SIZE equ $ - rodata
 
 align 16, db 0
+
+SEGMENT_SIZE equ $ - segment_start
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; .shtstrtab section (section names)
 
@@ -132,16 +136,16 @@ shdr:
 ; section 0, always null
 istruc Elf32_Shdr
     at Elf32_Shdr.sh_name,      dd anullstr - names
-    at Elf32_Shdr.sh_type,      dw SHT_NULL
+    at Elf32_Shdr.sh_type,      dd SHT_NULL
 iend
 
 istruc Elf32_Shdr
     at Elf32_Shdr.sh_name,      dd atext - names
     at Elf32_Shdr.sh_type,      dd SHT_PROGBITS
     at Elf32_Shdr.sh_flags,     dd SHF_ALLOC + SHF_EXECINSTR
-    at Elf32_Shdr.sh_addr,      dd main
-    at Elf32_Shdr.sh_offset,    dd main - ehdr
-    at Elf32_Shdr.sh_size,      dd MAIN_SIZE
+    at Elf32_Shdr.sh_addr,      dd text
+    at Elf32_Shdr.sh_offset,    dd text - ehdr
+    at Elf32_Shdr.sh_size,      dd TEXT_SIZE
 iend
 
 istruc Elf32_Shdr

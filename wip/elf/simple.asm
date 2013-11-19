@@ -13,6 +13,8 @@ org ELFBASE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ELF Header
 
+segment_start:
+
 ehdr:
 istruc Elf32_Ehdr
     at Elf32_Ehdr.e_ident
@@ -41,17 +43,17 @@ align 16, db 0
 phdr:
 istruc Elf32_Phdr
     at Elf32_Phdr.p_type,   dd PT_LOAD
+    at Elf32_Phdr.p_offset, dd segment_start - ehdr
     at Elf32_Phdr.p_vaddr,  dd ELFBASE
     at Elf32_Phdr.p_paddr,  dd ELFBASE
-    at Elf32_Phdr.p_filesz, dd segment_start - ehdr + SEGMENT_SIZE
-    at Elf32_Phdr.p_memsz,  dd segment_start - ehdr + SEGMENT_SIZE
+    at Elf32_Phdr.p_filesz, dd SEGMENT_SIZE
+    at Elf32_Phdr.p_memsz,  dd SEGMENT_SIZE
     at Elf32_Phdr.p_flags,  dd PF_R + PF_X
 iend
 PHNUM equ ($ - phdr) / Elf32_Phdr_size
 
 align 16, db 0
 
-segment_start:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; .text section (code)
