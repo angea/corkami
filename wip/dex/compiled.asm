@@ -1,5 +1,4 @@
 ; a ' compiled' hello world .DEX file
-; SHA1: 8dc5490b921841136ba7d5c0adb537bb2104d3ef
 
 ;Ange Albertini 2013
 
@@ -8,8 +7,6 @@
 header:
 istruc header_item
     at header_item.magic           , DEX_FILE_MAGIC
-    at header_item.checksum        , dd 0x1d995f3b
-    at header_item.signature       , db 0x21,0xfd,0x5e,0x3d,0x92,0x18,0x30,0x42,0xb3,0x70,0x4e,0xeb,0xc9,0x9d,0xa9,0xf7,0xa8,0x34,0xc4,0xeb
     at header_item.file_size       , dd FILE_SIZE
     at header_item.header_size     , dd HEADER_SIZE
     at header_item.endian_tag      , dd ENDIAN_CONSTANT
