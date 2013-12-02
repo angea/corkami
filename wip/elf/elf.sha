@@ -1,4 +1,9 @@
 e4a3c658eb1de57c87c52d47067e2f77552dd87f *compiled.elf
+cddcf8355d2ff833139b050648e854ad344c6bf4 *dummy_secnames.elf
+73958d7f41cc675f623ccb86daa3cb2b09639bb9 *dummy_secvals.elf
+3fc6feb523a9ee26f7aa1f6c0e62ac624c338394 *dummy_shnum.elf
+f6af2608070964c03d647303650a0b97ba92549a *no_sechdr.elf
+8dbe1593254cf86c062e299b2639caf1e6f148b5 *no_sections.elf
 b001c31b5d1ec3ef384aa7e877bf0fcb70c1ced7 *regdump.elf
 67259687b87b749b13fd59b0344a5890ebcadc3b *simple.elf
 eb45e33269cd75c047b6b9a87f53e9ef81581cc2 *simple64.elf
