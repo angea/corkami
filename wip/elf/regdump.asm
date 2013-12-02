@@ -43,7 +43,7 @@ PHDRSIZE equ $ - phdr
     pusha
     mov edx, %2
     mov ecx, %1
-    mov ebx, STDOUT
+    mov ebx, STDOUT_FILENO
     mov eax, SC_WRITE
     int 80h
     popa
@@ -153,7 +153,7 @@ printhexnibble:
     mov ecx, hex + ELFBASE - ehdr
     and al, 0fh
     add cl, al
-    mov ebx, STDOUT
+    mov ebx, STDOUT_FILENO
     mov eax, SC_WRITE
     int 80h
     popa

@@ -114,4 +114,4 @@ SC_WRITE equ 4
 sys_write equ 1
 sys_exit equ 60
 
-STDOUT equ 1
+STDOUT_FILENO equ 1

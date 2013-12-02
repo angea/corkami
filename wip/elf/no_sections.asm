@@ -61,7 +61,7 @@ text:
 entry:
     mov ecx, msg
     mov edx, MSG_LEN
-    mov ebx, STDOUT
+    mov ebx, STDOUT_FILENO
 
     mov eax, SC_WRITE
     int 80h

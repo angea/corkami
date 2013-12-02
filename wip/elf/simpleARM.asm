@@ -91,7 +91,7 @@ SYSCALLBASE equ 0900000h
 
 text:
 entry:
-    mov_r _r0, STDOUT
+    mov_r _r0, STDOUT_FILENO
     adr   _r1, _pc, msg - $ - 8
     mov_r _r2, MSG_LEN
     syscall_ SC_WRITE

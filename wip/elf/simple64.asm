@@ -61,7 +61,7 @@ text:
 entry:
     mov rsi, msg
     mov rdx, MSG_LEN
-    mov rdi, STDOUT
+    mov rdi, STDOUT_FILENO
 
     mov rax, sys_write
     syscall
