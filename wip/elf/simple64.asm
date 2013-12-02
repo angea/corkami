@@ -59,16 +59,13 @@ align 16, db 0
 
 text:
 entry:
-    mov rsi, msg
     mov rdx, MSG_LEN
+    mov rsi, msg
     mov rdi, STDOUT_FILENO
-
     mov rax, sys_write
     syscall
 
-
     mov rdi, 1 ; return code
-
     mov rax, sys_exit
     syscall
 
