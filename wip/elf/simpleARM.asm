@@ -2,7 +2,7 @@
 
 ; Ange Albertini, BSD Licence 2013
 
-;%define ANDROID
+;%define ABIR7
 
 BITS 32
 
@@ -72,7 +72,7 @@ align 16, db 0
 %endmacro
 
 %macro syscall_ 1
-%ifdef ANDROID
+%ifdef ABIR7
     mov_r _r7, %1
     swi   0
 %else
@@ -91,9 +91,9 @@ SYSCALLBASE equ 0900000h
 
 text:
 entry:
-    mov_r _r0, STDOUT_FILENO
-    adr   _r1, _pc, msg - $ - 8
     mov_r _r2, MSG_LEN
+    adr   _r1, _pc, msg - $ - 8
+    mov_r _r0, STDOUT_FILENO
     syscall_ SC_WRITE
 
     mov_r _r0, 1 ; return code

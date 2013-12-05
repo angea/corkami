@@ -7,7 +7,7 @@ f6af2608070964c03d647303650a0b97ba92549a *no_sechdr.elf
 b001c31b5d1ec3ef384aa7e877bf0fcb70c1ced7 *regdump.elf
 67259687b87b749b13fd59b0344a5890ebcadc3b *simple.elf
 16829e77a501e43efccbb2eea80ee52e13ef6b3b *simple64.elf
-b975082ddb6ad33c7a7d46455937fb0f99480a85 *simpleARM.elf
-65a80931e026dc07c3f55d568e02df50dbcbfca0 *simpleARM-Android.elf
+8ce024344cd5c57eb162ee798193ea451a8b43e3 *simpleARM.elf
+4709f4a546c384d946e9cf048c1ddd7d5d735592 *simpleARM2.elf
 8330da84c0c9b9177cf6fd7f3688c8e07422800a *standard.elf
 55e012950154e07bfea165fb3ab68fd8d446b0a3 *tiny.elf
