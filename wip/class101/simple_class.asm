@@ -78,6 +78,9 @@ _dw %%end - 1 -$
         _dw %2
 %endmacro
 
+ACC_PUBLIC equ 1
+ACC_STATIC equ 8
+
 ;*******************************************************************************
 ; header
 
@@ -88,6 +91,8 @@ _dw 2dh        ; minor version
 ;*******************************************************************************
 ; constant pool
 _dw 22        ;constant pool count
+
+ ;<always empty>                       ; 00
   classref 2                           ; 01
       utf8 'simple'                    ; 02
 
@@ -117,17 +122,19 @@ _dw 22        ;constant pool count
 
   utf8 '([Ljava/lang/String;)V'        ; 21
 
-_dw 1  ;access_flag: public
+_dw ACC_PUBLIC  ;access_flag
 
 _dw 1 ;this class
 _dw 3 ;super class
 
 _dw 0 ; interfaces_count
+; no interfaces
 
 _dw 0 ; fields_count
+; no fields
 
 _dw 1 ; methods_count
-    _dw 9  ; flags: public, static
+    _dw ACC_PUBLIC + ACC_STATIC
     _dw 5  ; methodname: 'main'
     _dw 21 ; return type: ([Ljava/lang/String;)V
     _dw 1  ; attribute_count
@@ -144,3 +151,4 @@ _dw 1 ; methods_count
             _dw 0 ; attributes_count
 
 _dw 0 ;attributes_count
+; no attributes
