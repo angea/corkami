@@ -36,8 +36,9 @@ endobj
 stream
 BT
   /F1 110
-  Tf 0 0
-  Td(Hello World!)Tj
+  Tf
+  10 400 Td
+  (Hello World!) Tj
 ET
 endstream
 endobj
@@ -56,7 +57,7 @@ trailer
 >>
 
 startxref
-408
+416
 %%EOF
 
 %a simple 'Hello World!' PDF
