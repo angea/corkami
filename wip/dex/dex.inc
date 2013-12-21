@@ -98,7 +98,7 @@ endstruc
 
 %macro __str 1
 db %%end - 2 -$
-    db %1
+    db %1 ; this is actually an uleb128, so it won't work if string is longer than 0x7f
     db 0
 %%end:
 %endmacro
@@ -149,3 +149,8 @@ endstruc
 ;insns ; dw[insns_size]
 ;align 4, db 0
 ;try_item[tries_size]
+
+struc type_list_
+    .size resd 1
+    .list resw 0 ; list = words[size]
+endstruc
