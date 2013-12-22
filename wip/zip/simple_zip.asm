@@ -14,7 +14,7 @@ istruc filerecord
     at filerecord.frCompression,      dw COMP_STORED
     at filerecord.frCrc,              dd DATA_CRC32
     at filerecord.frCompressedSize,   dd DATA_SIZE
-;   at filerecord.frUncompressedSize, dd DATA_SIZE
+    at filerecord.frUncompressedSize, dd DATA_SIZE
 ;   at filerecord.frFileNameLength,   dw FILENAME_LEN
 iend
 ;_filename
