@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.2936455"
+     inkscape:zoom="0.32172314"
      inkscape:cx="1052.3622"
-     inkscape:cy="744.09448"
+     inkscape:cy="744.09449"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -80,7 +80,7 @@
        id="guide6848" />
   </sodipodi:namedview>
   <title
-     id="title3725">ELF 101 - a Linux executable walkthrough v1.0a</title>
+     id="title3725">Mach-O 101 - an OS X executable walkthrough</title>
   <defs
      id="defs4">
     <linearGradient
@@ -238,7 +238,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>ELF 101 - a Linux executable walkthrough v1.0a</dc:title>
+        <dc:title>Mach-O 101 - an OS X executable walkthrough</dc:title>
         <dc:creator>
           <cc:Agent>
             <dc:title>Ange Albertini</dc:title>
@@ -247,9 +247,11 @@
         <dc:source>http://corkami.com</dc:source>
         <dc:subject>
           <rdf:Bag>
-            <rdf:li>ELF</rdf:li>
-            <rdf:li>Executable and Linkable Format</rdf:li>
-            <rdf:li>linux</rdf:li>
+            <rdf:li>Mach-O</rdf:li>
+            <rdf:li>Mach object file format</rdf:li>
+            <rdf:li>mac</rdf:li>
+            <rdf:li>OS X</rdf:li>
+            <rdf:li>iOS</rdf:li>
             <rdf:li>walkthrough</rdf:li>
           </rdf:Bag>
         </dc:subject>
@@ -322,7 +324,6 @@
        x="1152.817"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#b3b3b3;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
@@ -463,7 +464,7 @@
        x="1152.817"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#b3b3b3;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
@@ -497,7 +498,7 @@
        x="908.83875"
        style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#b3b3b3;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
@@ -654,7 +655,7 @@
        height="59.589806"
        x="1178.2623"
        y="-1389.9755"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <rect
@@ -726,7 +727,7 @@
        x="1257.2567"
        style="font-size:71.27302551px;font-style:normal;font-weight:normal;text-align:center;line-height:100%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:100%;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -746,7 +747,7 @@
        x="1257.9457"
        style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -925,11 +926,11 @@
          y="-486.36929"
          x="2603.5481"
          sodipodi:role="line"
-         id="tspan5318">version 0.99</tspan><tspan
+         id="tspan5318">version 1.00</tspan><tspan
          y="-470.36929"
          x="2603.5481"
          sodipodi:role="line"
-         id="tspan5175">2013/12/20</tspan></text>
+         id="tspan5175">2013/12/24</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text3488"
@@ -1102,7 +1103,7 @@
          x="2103.0537"
          y="-648.57813"
          style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         id="tspan6890">  by OSX, IOS, *STEP...</tspan><tspan
+         id="tspan6890">  by OS X, IOS,  STEP...</tspan><tspan
          sodipodi:role="line"
          x="2103.0537"
          y="-613.57813"
@@ -1115,7 +1116,7 @@
        height="65.010292"
        x="916.77167"
        y="-1325.3038"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1126,7 +1127,7 @@
        style="font-size:42px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
        xml:space="preserve"
        transform="scale(0.96863942,1.0323759)"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:42px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -1140,7 +1141,7 @@
        xlink:title="download simple.exe"
        transform="matrix(1,0,0,1.0658001,2090.5126,-1869.898)"
        style="display:inline"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200">
       <text
@@ -1164,7 +1165,7 @@
        id="text6391"
        sodipodi:linespacing="125%"
        transform="scale(0.96863942,1.0323759)"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:6.19425583px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -1202,7 +1203,7 @@
        width="157.04399"
        id="rect5448"
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -1212,7 +1213,7 @@
        y="-1182.0237"
        id="text5452"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -1227,7 +1228,7 @@
        y="-1197.5334"
        id="text5456"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -2114,7 +2115,7 @@
        y="-1394.0504"
        id="text4014"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          sodipodi:role="line"
@@ -2399,11 +2400,11 @@
       <image
          sodipodi:absref="c:\corkami\trunk\wip\macho\..\..\maintenon_xbr2.png"
          xlink:href="..\..\maintenon_xbr2.png"
-         width="324"
-         height="292"
-         id="image3013"
+         y="-2077.6604"
          x="2202.8022"
-         y="-2077.6604" />
+         id="image3013"
+         height="292"
+         width="324" />
       <g
          transform="matrix(0.54012909,-0.02491955,0.05654526,0.40742407,2162.4275,-2155.2167)"
          id="g3015"
@@ -2653,7 +2654,7 @@
        height="76.695488"
        x="943.10144"
        y="-1510.7739"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -2668,7 +2669,7 @@
          sodipodi:role="line"
          id="tspan3881"
          x="953.07904"
-         y="-1494.0642">~$uname -s -m</tspan><tspan
+         y="-1494.0642">~$ uname -s -m</tspan><tspan
          sodipodi:role="line"
          x="953.07904"
          y="-1476.4642"
@@ -2676,7 +2677,7 @@
          sodipodi:role="line"
          x="953.07904"
          y="-1458.8643"
-         id="tspan3889">~$./simple</tspan><tspan
+         id="tspan3889">~$ ./simple</tspan><tspan
          sodipodi:role="line"
          x="953.07904"
          y="-1441.2642"
@@ -3719,7 +3720,7 @@
     <text
        inkscape:export-ydpi="200"
        inkscape:export-xdpi="200"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        sodipodi:linespacing="125%"
        id="text5251"
        y="-1219.5334"
@@ -4112,7 +4113,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
          y="-1528.4735"
          x="2381.304"
-         sodipodi:role="line">size to load from fiLe</tspan><tspan
+         sodipodi:role="line">size to load from file</tspan><tspan
          id="tspan6690"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
          y="-1515.9735"
@@ -4245,5 +4246,34 @@
          x="1994.2366"
          id="tspan6912"
          sodipodi:role="line">Offset:0x01c</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:110.00000238%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
+       x="2198.6074"
+       y="-665.70508"
+       id="text3809"
+       sodipodi:linespacing="110%"><tspan
+         sodipodi:role="line"
+         id="tspan3811"
+         x="2198.6074"
+         y="-665.70508"
+         style="font-size:4px">x/10</tspan></text>
+    <text
+       sodipodi:linespacing="110%"
+       id="text3813"
+       y="-665.20935"
+       x="2262.2588"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:110.00000238%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
+       xml:space="preserve"><tspan
+         style="font-size:4px;text-align:end;text-anchor:end"
+         y="-665.20935"
+         x="2262.2588"
+         id="tspan3815"
+         sodipodi:role="line">NeXT</tspan><tspan
+         style="font-size:4px;text-align:end;text-anchor:end"
+         y="-660.80933"
+         x="2262.2588"
+         sodipodi:role="line"
+         id="tspan3817">Open</tspan></text>
   </g>
 </svg>
