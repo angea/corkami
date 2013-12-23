@@ -20,6 +20,8 @@
    inkscape:export-filename="pdf101.png"
    inkscape:export-xdpi="199.9754"
    inkscape:export-ydpi="199.9754">
+  <title
+     id="title3419">PDF101 an Adobe document walkthrough</title>
   <defs
      id="defs4">
     <linearGradient
@@ -114,9 +116,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.41525628"
-     inkscape:cx="744.09448"
-     inkscape:cy="526.18109"
+     inkscape:zoom="0.47007156"
+     inkscape:cx="739.5169"
+     inkscape:cy="555.82114"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -161,8 +163,39 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title>PDF101 an Adobe document walkthrough</dc:title>
+        <dc:date>2013</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Ange Albertini</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>PDF</rdf:li>
+            <rdf:li>Portable document format</rdf:li>
+            <rdf:li>Adobe</rdf:li>
+            <rdf:li>reader</rdf:li>
+            <rdf:li>acrobat</rdf:li>
+            <rdf:li>walkthrough</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
   <g
@@ -1141,11 +1174,11 @@
          y="772.69177"
          x="1425.354"
          sodipodi:role="line"
-         id="tspan5318">version 0.??</tspan><tspan
+         id="tspan5318">version 1.00</tspan><tspan
          y="788.69177"
          x="1425.354"
          sodipodi:role="line"
-         id="tspan5175">2013/12/21</tspan></text>
+         id="tspan5175">2013/12/24</tspan></text>
     <g
        style="display:inline"
        transform="matrix(0.68699042,0,0,0.68691908,1307.4566,760.56555)"
