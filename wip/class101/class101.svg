@@ -20,6 +20,8 @@
    inkscape:export-filename="class101.png"
    inkscape:export-xdpi="200.02264"
    inkscape:export-ydpi="200.02264">
+  <title
+     id="title3824">Class101 - a Java executable walkthrough</title>
   <defs
      id="defs4">
     <linearGradient
@@ -157,8 +159,42 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title>Class101 - a Java executable walkthrough</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/3.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Ange Albertini</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>CC BY</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date>2013</dc:date>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Class file format</rdf:li>
+            <rdf:li>java</rdf:li>
+            <rdf:li>executable</rdf:li>
+            <rdf:li>walkthrough</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
   <g
@@ -1439,52 +1475,52 @@
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-       x="93.251663"
+       x="73.251663"
        y="361.54388"
        id="text3184"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="361.54388"
-         id="tspan3207">Java was developed by James Gosling</tspan><tspan
+         id="tspan3207">- Java was developed by James Gosling</tspan><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="396.54388"
-         id="tspan4280">it was originally called Oak, in 1991, then Green</tspan><tspan
+         id="tspan4280">- it was originally called Oak, in 1991, then Green</tspan><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="431.54388"
-         id="tspan4282">Java 1.0 was released in 1995, and is open source since 2006</tspan><tspan
+         id="tspan4282">- Java 1.0 was released in 1995, and is open source since 2006</tspan><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="466.54388"
          id="tspan4284" /><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="501.54388"
-         id="tspan4286">JAR (Java ARchive) are ZIP archives containing CLASS files</tspan><tspan
+         id="tspan4286">- JAR (Java ARchive) are ZIP archives containing CLASS files</tspan><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="536.54388"
          id="tspan4296" /><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="571.54388"
          id="tspan4294" /><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="606.54388"
-         id="tspan4288" /><tspan
+         id="tspan4290" /><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="641.54388"
-         id="tspan4290">the <tspan
+         id="tspan3821">- the <tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Envy Code R;-inkscape-font-specification:Envy Code R"
    id="tspan4298">CAFEBABE</tspan> magic is also used in Mach-O fat binaries</tspan><tspan
          sodipodi:role="line"
-         x="93.251663"
+         x="73.251663"
          y="681.01831"
-         id="tspan4322">Java 7 is actually 1.7, and encoded internally 51.0</tspan></text>
+         id="tspan4322">- Java 7 is actually 1.7, and encoded internally 51.0</tspan></text>
     <g
        transform="matrix(0.33755212,0,0,0.33755212,125.29239,-325.27004)"
        id="g3010">
@@ -2192,7 +2228,7 @@
          style="fill:url(#linearGradient4296)" /></text>
     <g
        id="g3534"
-       transform="matrix(0.8081617,0,0,0.8081617,-78.256587,12.934053)">
+       transform="matrix(1.0182377,0,0,1.0182377,-150.38593,-114.64897)">
       <rect
          style="color:#000000;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.99999994;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect3503"
@@ -2826,11 +2862,11 @@
          y="665.96429"
          x="1930.8049"
          sodipodi:role="line"
-         id="tspan5318-1">version 0.??</tspan><tspan
+         id="tspan5318-1">version 1.00</tspan><tspan
          y="681.96429"
          x="1930.8049"
          sodipodi:role="line"
-         id="tspan5175">2013/12/21</tspan></text>
+         id="tspan5175">2013/12/24</tspan></text>
     <g
        style="display:inline"
        transform="matrix(0.68699042,0,0,0.68691908,1812.9075,653.83809)"
@@ -2928,7 +2964,7 @@
       <rect
          inkscape:export-ydpi="200"
          inkscape:export-xdpi="200"
-         inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+         inkscape:export-filename="text3879.png"
          y="333.60599"
          x="91.939651"
          height="65.010292"
@@ -2938,7 +2974,7 @@
       <text
          inkscape:export-ydpi="200"
          inkscape:export-xdpi="200"
-         inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+         inkscape:export-filename="text3879.png"
          transform="scale(0.96863942,1.0323759)"
          xml:space="preserve"
          style="font-size:42px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Lucida Console;-inkscape-font-specification:Lucida Console"
@@ -2954,7 +2990,7 @@
       <a
          inkscape:export-ydpi="200"
          inkscape:export-xdpi="200"
-         inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+         inkscape:export-filename="text3879.png"
          style="display:inline"
          transform="matrix(1,0,0,1.0658001,1282.4976,-210.98818)"
          xlink:title="download simple.exe"
@@ -2976,7 +3012,7 @@
       <text
          inkscape:export-ydpi="200"
          inkscape:export-xdpi="200"
-         inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+         inkscape:export-filename="text3879.png"
          transform="scale(0.96863942,1.0323759)"
          sodipodi:linespacing="125%"
          id="text6391"
@@ -3005,17 +3041,17 @@
     <text
        xml:space="preserve"
        style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-       x="95.145332"
+       x="75.145332"
        y="321.70609"
        id="text4804-4-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4806-0-4"
-         x="95.145332"
+         x="75.145332"
          y="321.70609">Trivia</tspan></text>
     <path
        style="fill:none;stroke:#808080;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       d="m 94.27031,333.23737 586.5999,0"
+       d="m 74.27031,333.23737 686.5999,0"
        id="path5215"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -3088,7 +3124,7 @@
        height="177.19627"
        x="398.03339"
        y="-158.33594"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200" />
     <text
@@ -3098,7 +3134,7 @@
        x="559.53961"
        style="font-size:145.71975708px;font-style:normal;font-weight:normal;text-align:center;line-height:100%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:22.48981667px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:100%;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
@@ -3113,7 +3149,7 @@
        x="560.94824"
        style="font-size:61.33586121px;font-style:normal;font-weight:normal;text-align:center;line-height:100%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Ange\rep\corkami\trunk\wip\macho\text3879.png"
+       inkscape:export-filename="text3879.png"
        inkscape:export-xdpi="200"
        inkscape:export-ydpi="200"><tspan
          style="font-size:61.33586121px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:100%;fill:#000000;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
