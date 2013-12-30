@@ -1,12 +1,21 @@
+; <mach-o/loader.h> unless mentioned
 
-CPU_TYPE_I386 equ 7
+; <mach/machine.h>
+CPU_ARCH_ABI64  equ 001000000h
+;CPU_ARCH_MASK   equ 0ff000000h
 
-CPU_SUBTYPE_I386_ALL equ 3
+CPU_TYPE_X86    equ        7
+CPU_TYPE_I386   equ CPU_TYPE_X86
+CPU_TYPE_X86_64 equ CPU_TYPE_X86 | CPU_ARCH_ABI64
 
-MH_MAGIC equ 0FEEDFACEh
-MH_MAGIC64 equ 0FEEDFACFh
-MH_EXECUTE equ 2
+CPU_SUBTYPE_I386_ALL equ         3
+CPU_SUBTYPE_LIB64    equ 080000000h
+
+MH_MAGIC equ    0FEEDFACEh
+MH_MAGIC_64 equ 0FEEDFACFh
+
 MH_NOUNDEFS equ 1
+MH_EXECUTE  equ 2
 
 struc mach_header
     .magic      resd 1
@@ -29,17 +38,23 @@ struc mach_header64
     .reserved   resd 1
 endstruc
 
-LC_SEGMENT    equ  1
-LC_SYMTAB     equ  2
-LC_UNIXTHREAD equ  5
-LC_SEGMENT64  equ 19h
+LC_SEGMENT        equ         1
+LC_SYMTAB         equ         2
+LC_UNIXTHREAD     equ         5
+LC_LOAD_DYLIB     equ        0ch
+LC_LOAD_DYLINKER  equ        0eh
+LC_SEGMENT_64     equ        19h
+LC_REQ_DYLD       equ 080000000h
+;imageloader.h
+LC_MAIN           equ 028h | LC_REQ_DYLD
 
 
 x86_THREAD_STATE_32 equ 1
+x86_THREAD_STATE_64 equ 4
 
-_x equ 1
-_w equ 2
-_r equ 4
+VM_PROT_READ    equ 1
+VM_PROT_WRITE   equ 2
+VM_PROT_EXECUTE equ 4
 
 struc segment_command
     .cmd      resd 1
@@ -138,3 +153,31 @@ STDOUT_FILENO equ 1
 
 SC_EXIT equ 1
 SC_WRITE equ 4h
+
+struc entry_point_command
+    .cmd       resd 1
+    .cmdsize   resd 1
+    .entryoff  resq 1
+    .stacksize resq 1
+endstruc
+
+struc dylinker_command
+    .cmd     resd 1
+    .cmdsize resd 1
+    .name    resd 1
+endstruc
+
+struc dylib_command
+    .cmd                   resd 1
+    .cmdsize               resd 1
+    .name                  resd 1
+    .timestamp             resd 1
+    .current_version       resd 1
+    .compatibility_version resd 1
+endstruc
+
+;<syscall_sw.h>
+SYSCALL_CLASS_UNIX  equ 2
+SYSCALL_CLASS_SHIFT equ 24
+SYSCALL_CLASS_MASK  equ (0FFh << SYSCALL_CLASS_SHIFT)
+SYSCALL_NUMBER_MASK equ (~SYSCALL_CLASS_MASK)

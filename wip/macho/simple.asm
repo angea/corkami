@@ -1,7 +1,5 @@
 ; a simple Hello-World Mach-O
 
-; SHA-1 : 5933595c6d709c51c1c102f3e51f4e5cb79d4151
-
 ; Ange Albertini, BSD Licence 2013
 
 BITS 32
@@ -29,8 +27,8 @@ istruc segment_command
     at segment_command.vmsize,   dd FILESIZE
     at segment_command.fileoff,  dd 0
     at segment_command.filesize, dd FILESIZE
-    at segment_command.maxprot,  dd _r + _w + _x
-    at segment_command.initprot, dd _r + _x
+    at segment_command.maxprot,  dd VM_PROT_READ + VM_PROT_WRITE + VM_PROT_EXECUTE
+    at segment_command.initprot, dd VM_PROT_READ + VM_PROT_EXECUTE
     at segment_command.nsects,   dd 2 ; text, cstring
 iend
 
