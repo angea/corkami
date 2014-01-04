@@ -1599,11 +1599,11 @@
       <image
          sodipodi:absref="c:\corkami\trunk\wip\wav\..\..\maintenon_xbr2.png"
          xlink:href="..\..\maintenon_xbr2.png"
-         width="324"
-         height="292"
-         id="image3013"
+         y="-2077.6604"
          x="2202.8022"
-         y="-2077.6604" />
+         id="image3013"
+         height="292"
+         width="324" />
       <g
          transform="matrix(0.54012909,-0.02491955,0.05654526,0.40742407,2162.4275,-2155.2167)"
          id="g3015"
@@ -2249,7 +2249,7 @@
          y="-974.60107"
          x="2188.4907"
          sodipodi:role="line"
-         id="tspan5014">AUDIO is stored via Pulse Code Modulation</tspan><tspan
+         id="tspan5014">AUDIO DATA is stored via Pulse Code Modulation</tspan><tspan
          id="tspan6684"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
          y="-962.10107"
@@ -2259,7 +2259,7 @@
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
          y="-949.60107"
          x="2188.4907"
-         sodipodi:role="line">frequency</tspan><tspan
+         sodipodi:role="line">sample frequency</tspan><tspan
          id="tspan6688"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
          y="-937.10107"
@@ -2281,7 +2281,7 @@
          x="2188.4907"
          y="-878.60107"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:110.00000238%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         id="tspan6862">LOREM ipsum</tspan></text>
+         id="tspan6862">one sample takes one byte</tspan></text>
     <text
        id="text6850"
        y="-980.60107"
@@ -2708,7 +2708,7 @@
          y="-725.94507"
          x="1713.2087"
          sodipodi:role="line"
-         id="tspan5866"></tspan><tspan
+         id="tspan5866" /><tspan
          y="-710.94507"
          x="1713.2087"
          sodipodi:role="line"
@@ -2769,7 +2769,7 @@
          id="tspan5890"
          sodipodi:role="line"
          x="1819.2087"
-         y="-725.94507"></tspan><tspan
+         y="-725.94507" /><tspan
          sodipodi:role="line"
          x="1819.2087"
          y="-710.94507"
@@ -2829,7 +2829,7 @@
          x="1308.4042"
          y="-567.58099"
          style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:175%;fill:#000000;fill-opacity:1;font-family:Aracne Regular;-inkscape-font-specification:Aracne Regular"
-         id="tspan5961"></tspan><tspan
+         id="tspan5961" /><tspan
          sodipodi:role="line"
          x="1308.4042"
          y="-546.58099"
