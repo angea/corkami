@@ -6,9 +6,9 @@
 ; after one dash or one dot, one d of silence
 ; between 2 words, 7d of silence.
 
-; text              H         E   L         L         O                 W           O             R         L           D
-; letter codes      ....      .   .-..      .-..      --- /             .--         ---           .-.       .-..        -..
-; actual encoding:  =_=_=_=___=___=_===_=___=_===_=___===_===_===_______=_===_===___===_===_===___=_===_=___=_===_=_=___===_=_=___
+; text              H         E   L           L           O                 W           O             R         L           D
+; letter codes      ....      .   .-..        .-..        ---           /   .--         ---           .-.       .-..        -..
+; actual encoding:  =_=_=_=___=___=_===_=_=___=_===_=_=___===_===_===_______=_===_===___===_===_===___=_===_=___=_===_=_=___===_=_=___
 
 
 DURATION equ 80
