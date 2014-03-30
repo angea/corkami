@@ -1,4 +1,4 @@
-; a JPG/ZIP/PDF 'conjoined' polyglot
+; a JPG/ZIP/PDF chimera
 ; (where all formats share the same image data)
 
 ; Ange Albertini, BSD Licence 2014
