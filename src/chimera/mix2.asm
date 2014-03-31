@@ -148,6 +148,7 @@ db '%%EOF', 0ah
     JPGCMT_END2
 
 ; (not required but more elegant)
-db 0ffh, 0d9h ; JPG 2nd's AOI
+db '%' ; PDF comment
+db 0ffh, 0d9h ; JPG 2nd's EOI
 
     CMT_SIZE equ $ - CmtStart
