@@ -8,6 +8,7 @@
 
 #Ange Albertini 2014, BSD Licence - with the help of Jean-Philippe Aumasson
 
+# - Added FLV support
 
 import struct
 import sys
@@ -15,6 +16,7 @@ import binascii
 
 PNGSIG = '\x89PNG\r\n\x1a\n'
 JPGSIG = "\xff\xd8"
+FLVSIG = "FLV"
 
 source_file, target_file, result_file, encryption_key, algo = sys.argv[1:6]
 
@@ -80,7 +82,20 @@ elif t.startswith(JPGSIG): #JPG
 
     #and append the actual data of t, skipping the sig
     result = result + t[2:]
+elif t.startswith(FLVSIG):
+    assert BS >= 9
+    size = len(s) - BS # we could make this shorter, but then could require padding again
 
+    # reusing FLV's sig and type, data offset, padding
+    c = t[:5] + struct.pack(">I",size + 16) + "\0" * 7
+
+    c = ecb_dec.decrypt(c)
+    IV = "".join([chr(ord(c[i]) ^ ord(p[i])) for i in range(BS)])
+    cbc_enc = algo.new(key, algo.MODE_CBC, IV)
+    result = cbc_enc.encrypt(s)
+
+    #and append the actual data of t, skipping the sig
+    result = result + t[9:]
 elif t.find("%PDF-") > -1:
     assert BS >= 16
     size = len(s) - BS # we take the whole first 16 bits
