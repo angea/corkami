@@ -29,6 +29,8 @@ with open(hexii, "rb") as f:
 cur_off = 0
 d = []
 for l in r:
+    if l.strip() == "":
+        continue
     offset, _, content = l.strip().partition(":")
     offset = int(offset, 16)
 

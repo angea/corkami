@@ -6,23 +6,25 @@
 
 # Ange Albertini, BSD Licence 2014
 
-# v0.11:
+# v0.13:
 # Hex:
 # - ASCII chars are replaced as .<char>
+#   (optionally in colors)
 # - 00 is replaced by "  "
 # - FF is replaced by "##"
 # - other chars are returned as hex
 #
 # Output:
-# - lines are ended with a |
-#   (except last line if it's shorter)
-# - lines full of 00 are skipped
+# - a hex ruler is shown at the top of the 'display'
 # - offsets don't contain superfluous 0
+# - offsets are removed identical starting characters if following the previous
+# - lines full of 00 are skipped
+# - offsets after a skip are fully written
 # - Last_Offset+1 is marked with "]"
 #   (because EOF could be absent)
 
 #todo:
-# - less brutal empty line skipping ?
+# - update hexii2bin (since v0.12)
 # - something about unicode ?
 
 
@@ -40,7 +42,17 @@ except:
 
 ASCII = punctuation + digits + letters
 
-PREFIX = "%%0%iX: " % (math.log(len(r), 16) + 1)
+BLUE = '\033[94m'
+ENDC = '\033[0m'
+CHARS_NEEDED = int(math.log(len(r), 16) + 1)
+
+PREFIX = "%%0%iX: " % CHARS_NEEDED
+
+#this should always be displayed on the top of the screen no matter the scrolling
+print " " * CHARS_NEEDED + "  " + " ".join("% 2X" % i for i in range(LINELEN))
+
+#the first offset on top of a window should be completely displayed
+last_off = None
 
 def subst(c):
     #replace 00 by empty char
@@ -54,6 +66,7 @@ def subst(c):
     #replace printable char by .<char>
     if c in ASCII:
         return "." + c
+#        return BLUE + "." + c + ENDC
 
     #otherwise, return hex
     return "%02X" % ord(c)
@@ -68,10 +81,32 @@ for c in r:
     l += [subst(c)]
 
 l += ["]"]
+skipping = False
+
+print
 
 for i, seq in enumerate(csplit(l, LINELEN)):
     l = " ".join(seq)
     if l.strip() != "":
-        if (len(seq) == LINELEN):
-            l += "|"
-        print (PREFIX + "%s") % (i * LINELEN, l)
+        skipping = False
+
+        prefix = list(PREFIX % (i * LINELEN))
+
+        #we'll skip starting chars if they are redundant
+        if last_off is not None:
+            save = last_off
+            last_off = "".join(prefix)
+            for i, j in enumerate(save):
+                if prefix[i] == j:
+                    prefix[i] = " "
+                else:
+                    break
+        else:
+            last_off = "".join(prefix)
+
+        prefix = "".join(prefix)
+        print "%s%s" % (prefix, l)
+    else:
+        if skipping == False:
+            skipping = True
+            last_off = None
