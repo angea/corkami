@@ -1,0 +1,14 @@
+La cryptographie, c'est compliqué.
+D'ailleurs, je n'y comprends pas grand chose, mais ça ne m'empêche pas de m'amuser avec !
+Après avoir expliqué les bases, je montrerais quelques astuces cryptographiques.
+
+présentation diffusée aux 15èmes Rencontres Mondiales du Logiciel Libre le 9 Juillet 2014.
+
+planches https://speakerdeck.com/ange/joue-a-la-crypto-french
+vidéo    https://www.youtube.com/watch?v=iIesDpv9F4s
+exemples https://corkami.googlecode.com/svn/trunk/src/angecryption/rmll 
+
+Pour être 100% correct, on devrait ajuster le CRC32 du chunk TrueCrypt dans le PNG. En pratique, comme il s'agit d'un chunk auxiliaire, il est complêtement ignoré même si le CRC est incorrect.
+Et la 3ème lettre du type de chunk devrait être majuscule.
+
+Récemment, @reversity a poussé l'expérience encore plus loin et a fait du AngeCryption entre 2 PNGs, sauf que cette fois les fichiers source et cible sont 100% standards (pas de données en fin de fichier, chunk IHDR en premier) moyennant un peu de bruteforce. Il a baptisé ça "DemonCryption".
