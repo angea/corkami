@@ -25,8 +25,7 @@ from Crypto.Cipher import AES
 BS = 16
 
 #pad = lambda s: s + os.urandom(BS - len(s) % BS) # non standard, but better looking ;)
-pad = lambda s: s + "\0" * (BS - len(s) % BS) # non standard, but better looking ;)
-
+pad = lambda s: s + "\0" * ((BS - len(s) % BS) % BS) # non standard, but better looking ;)
 
 with open(source_file, "rb") as f:
     s = f.read()
