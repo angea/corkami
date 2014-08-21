@@ -91,8 +91,6 @@ with open("decrypt-PIP.py", "wb") as f:
 with open(%(source)s, "rb") as f:
 	d = f.read()
 
-d = d + "\\0" * (16 - len(d) %% 16)
-
 d = AES.new(%(key)s, AES.MODE_CBC, %(IV)s).decrypt(d)
 
 with open("dec-" + "%(target)s", "wb") as f:
