@@ -38,23 +38,23 @@ assert t.startswith(PNGSIG)
 
 #we'll first decrypt the source image until the end of its image data
 
-result = s[:0x21] # header until IDAT length
-idat = s[0x25:-16]
-#result = s[:-16] # -16 because of brutal end of IDATA determination ;)
-
-# we pad that to be able to append 'decrypted' target's content
-idat = idat + pad(len(result) + 4 + len(idat))
-
-result += struct.pack(">I",len(idat) - 4 + 4 + len(t[8:]) + len(pad(4 + len(t[8:]))))
-result += idat
-
-# this is the size of info we need to hide in our dummy block
-size = len(idat) +0x15 # (IHDR data + crc + IDAT size + idat)
-
-c = s[:BS] # our first cipher block
+result = s[:-12]
 
 # our dummy chunk type
 chunktype = 'aaaa' # 4 letters, first letter should be lowercase to be ignored
+
+n=4+len(t[8:])+len(pad(4+len(t[8:])))
+result += struct.pack(">I",len(pad(len(result)+8))+n)
+result += chunktype
+
+# we pad that to be able to append 'decrypted' target's content
+result += pad(len(result))
+
+# this is the size of info we need to hide in our dummy block
+#size = len(s[:-16]) -4
+size = len(result) -0x10 + len(pad(4+len(t[8:])))
+
+c = s[:BS] # our first cipher block
 
 # PNG signature, chunk size, our dummy chunk type
 p = PNGSIG + struct.pack(">I",size) + chunktype
@@ -65,7 +65,8 @@ IV = "".join([chr(ord(c[i]) ^ ord(p[i])) for i in range(BS)])
 
 result = AES.new(key, AES.MODE_CBC, IV).decrypt(result)
 
-# fixing the CRC on the decrypted file
+result += pad(4+len(t[8:]))
+#not fixing the CRC on the decrypted file - lazy :D
 result += struct.pack(">I", binascii.crc32(result[0xc:]) % 0x100000000)
 #we append the whole target image
 result += t[8:]
@@ -75,7 +76,7 @@ result += pad(len(result))
 result = AES.new(key, AES.MODE_CBC, IV).encrypt(result)
 #write the CRC of the remaining of s at the end of our dummy block
 
-result += struct.pack(">I", binascii.crc32(result[0x25:]) % 0x100000000)
+result += struct.pack(">I", binascii.crc32(result[len(s)-8:]) % 0x100000000)
 result += s[-12:] # our IEND chunk
 
 #we have our result, key and IV
