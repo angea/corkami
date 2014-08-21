@@ -25,7 +25,7 @@ from Crypto.Cipher import AES
 BS = 16
 
 #pad = lambda s: s + os.urandom(BS - len(s) % BS) # non standard, but better looking ;)
-pad = lambda s: s + "\0" * ((BS - len(s) % BS) % BS) # non standard, but better looking ;)
+pad = lambda n: "\0" * ((BS - n % BS) % BS) # non standard, but better looking ;)
 
 with open(source_file, "rb") as f:
     s = f.read()
@@ -40,15 +40,17 @@ assert t.startswith(PNGSIG)
 #we'll first decrypt the source image until the end of its image data
 
 result = s[:0x21] # header until IDAT length
-result += struct.pack(">I",len(s) + len(t) - 0x30 - 4) # removing other S elements, and adding T length
-result += s[0x25:-16]
+idat = s[0x25:-16]
 #result = s[:-16] # -16 because of brutal end of IDATA determination ;)
 
 # we pad that to be able to append 'decrypted' target's content
-result = pad(result)
+idat = idat + pad(len(result) + 4 + len(idat))
+
+result += struct.pack(">I",len(idat) - 4 + 4 + len(t[8:]) + len(pad(4 + len(t[8:]))))
+result += idat
 
 # this is the size of info we need to hide in our dummy block
-size = len(result) - 0x13
+size = len(idat) +0x15 # (IHDR data + crc + IDAT size + idat)
 
 c = s[:BS] # our first cipher block
 
@@ -65,11 +67,11 @@ IV = "".join([chr(ord(c[i]) ^ ord(p[i])) for i in range(BS)])
 result = AES.new(key, AES.MODE_CBC, IV).decrypt(result)
 
 #not fixing the CRC on the decrypted file - lazy :D
-
+result += 'nnnn'
 #we append the whole target image
 result += t[8:]
 
-result = pad(result)
+result += pad(len(result))
 
 result = AES.new(key, AES.MODE_CBC, IV).encrypt(result)
 #write the CRC of the remaining of s at the end of our dummy block
