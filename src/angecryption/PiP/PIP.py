@@ -67,7 +67,7 @@ result = AES.new(key, AES.MODE_CBC, IV).decrypt(result)
 #not fixing the CRC on the decrypted file - lazy :D
 
 #we append the whole target image
-result += t[7:]
+result += t[8:]
 
 result = pad(result)
 
