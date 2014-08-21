@@ -7,7 +7,6 @@
 
 # lazy version:
 # - only works with [IHDR;IDAT;IEND] PNG
-# - doesn't fix CRC on decrypted file
 
 #Ange Albertini 2014, BSD Licence
 
@@ -66,8 +65,8 @@ IV = "".join([chr(ord(c[i]) ^ ord(p[i])) for i in range(BS)])
 
 result = AES.new(key, AES.MODE_CBC, IV).decrypt(result)
 
-#not fixing the CRC on the decrypted file - lazy :D
-result += 'nnnn'
+# fixing the CRC on the decrypted file
+result += struct.pack(">I", binascii.crc32(result[0xc:]) % 0x100000000)
 #we append the whole target image
 result += t[8:]
 
@@ -76,9 +75,8 @@ result += pad(len(result))
 result = AES.new(key, AES.MODE_CBC, IV).encrypt(result)
 #write the CRC of the remaining of s at the end of our dummy block
 
-result = result + \
-    struct.pack(">I", binascii.crc32(result[0x25:]) % 0x100000000) + \
-    s[-12:] # our IEND chunk
+result += struct.pack(">I", binascii.crc32(result[0x25:]) % 0x100000000)
+result += s[-12:] # our IEND chunk
 
 #we have our result, key and IV
 
