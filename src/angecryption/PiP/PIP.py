@@ -41,7 +41,7 @@ assert t.startswith(PNGSIG)
 result = s[:-12]
 
 # our dummy chunk type
-chunktype = 'aaaa' # 4 letters, first letter should be lowercase to be ignored
+chunktype = 'aaAa' # 4 letters, first letter should be lowercase to be ignored
 
 n=4+len(t[8:])+len(pad(4+len(t[8:])))
 result += struct.pack(">I",len(pad(len(result)+8))+n)
