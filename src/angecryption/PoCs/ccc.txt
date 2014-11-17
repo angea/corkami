@@ -1,0 +1,15 @@
+ccc.jpg is a file that is a valid:
+- JPEG image
+- Java executable
+- PNG image, after AES encryption
+- PDF document, after 3DES decryption
+- Flash video, after AES encryption with another key.
+
+(images were chosen at random)
+
+files:
+ccc.jpg         the PoC
+ccc.py          the script to perform encryption/decryption on the PoC
+ccc.pdf         slides specific for this PoC
+ccc-preview.png a preview of the PoC
+ccc.txt         it's gonna get worse as we go deeper
