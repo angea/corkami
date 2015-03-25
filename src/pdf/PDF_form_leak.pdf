@@ -1,0 +1,70 @@
+%PDF-1.4
+%μῦ
+
+1 0 obj
+<</Type/Annot/T(user:*)/Rect[70 040 155 055]/FT/Tx/V(Dark Helmet)/Subtype/Widget>>
+endobj
+
+2 0 obj
+<</Type/Annot/T(code:*)/Rect[70 015 155 030]/FT/Tx/V(12345)/Subtype/Widget>>
+endobj
+
+3 0 obj
+<</Type/Catalog/AcroForm<</NeedAppearances true>>/Pages 4 0 R>>
+endobj
+
+4 0 obj
+<</Type/Pages/Count 1/Kids[5 0 R]>>
+endobj
+
+5 0 obj
+<</Type/Page/Parent 4 0 R/Resources<</Font<</Arial<</Type/Font/Subtype/Type1/BaseFont/Arial>>>>>>/Contents 6 0 R/MediaBox[00 000 185 100]/Annots[1 0 R 2 0 R]>>
+endobj
+
+6 0 obj
+<</Length 202>>
+stream
+q
+  BT
+    11 0 0 11 40 070 Tm
+    /Arial 2 Tf
+    (PDF Form) Tj
+  ET
+  BT
+    11 0 0 11 30 045 Tm
+    /Arial 1 Tf
+    (user:) Tj
+  ET
+  BT
+    11 0 0 11 30 020 Tm
+    /Arial 1 Tf
+    (code:) Tj
+  ET
+Q
+endstream
+endobj
+
+xref
+0 7
+0000000000 65536 f 
+0000000017 00000 n 
+0000000116 00000 n 
+0000000209 00000 n 
+0000000289 00000 n 
+0000000341 00000 n 
+0000000517 00000 n 
+
+trailer
+<</Size 7/Root 3 0 R>>
+
+% a simple PDF with filled annotations
+% that can accidentally leak information
+% even if they are not displayed by all readers
+%
+% double-check if the values /V are set
+%
+% Ange Albertini BSD Licence 2015
+
+startxref
+768
+%%EOF
