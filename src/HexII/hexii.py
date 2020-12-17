@@ -1,10 +1,23 @@
+#!/usr/bin/env python3
+
 #HexII - a compact binary representation (mixing Hex and ASCII)
 
 # because ASCII dump is usually useless,
 # unless there is an ASCII string,
 # in which case the HEX part is useless
 
-# Ange Albertini, BSD Licence 2014
+# Ange Albertini, BSD Licence 2014-2020
+
+
+# v0.14:
+# - Python 3
+# - ASCII is only turned on if more than 3 characters in a row are ASCII - Too many FPs
+# - Zero display is only turned on if more than 3 characters in a row are zero - Too many FPs
+# - Underscore is now used as a zero character
+# - Hex ruler is displayed at the bottom too
+# - dots interleave line is displayed after a skip
+# - fixed ruler with different line length
+
 
 # v0.13:
 # Hex:
@@ -30,7 +43,7 @@
 
 import sys
 import math
-from string import punctuation, digits, letters
+from string import punctuation, digits, ascii_letters
 
 with open(sys.argv[1], "rb") as f:
     r = f.read()
@@ -40,36 +53,70 @@ try:
 except:
     LINELEN = 16
 
-ASCII = punctuation + digits + letters
+ASCII = punctuation + digits + ascii_letters + " \n\r\x1a"
+ASCII = ASCII.encode()
 
 BLUE = '\033[94m'
 ENDC = '\033[0m'
 CHARS_NEEDED = int(math.log(len(r), 16) + 1)
 
-PREFIX = "%%0%iX: " % CHARS_NEEDED
+PREFIX = b"%%0%iX: " % CHARS_NEEDED
 
 #this should always be displayed on the top of the screen no matter the scrolling
-print " " * CHARS_NEEDED + "  " + " ".join("% 2X" % i for i in range(LINELEN))
+HeaderS = " " * CHARS_NEEDED + "  " + " ".join("%2X".rjust(2) % i for i in range(LINELEN))
+print(HeaderS)
+print("")
 
 #the first offset on top of a window should be completely displayed
 last_off = None
 
-def subst(c):
-    #replace 00 by empty char
-    if c == "\0":
-        return "  "
+
+ZeroT = 3
+AsciiT = 3
+
+def subst(r, i):
+    c = r[i]
 
     #replace 00 by empty char
-    if c == "\xFF":
-        return "##"
+    if c == 0:
+        zcount = 1
+        if i > 1 and r[i-1] == 0:
+            zcount += 1
+            if i > 2 and r[i-2] == 0:
+                zcount += 1
+        if i < len(r) - 1 and r[i+1] == 0:
+            zcount += 1
+            if i < len(r) - 2 and r[i+2] == 0:
+                zcount += 1
+        if zcount >= ZeroT:
+            return b"  "
 
-    #replace printable char by .<char>
     if c in ASCII:
-        return "." + c
+        acount = 1
+        if i > 0 and r[i-1] in ASCII:
+            acount += 1
+            if i > 1 and r[i-2] in ASCII:
+                acount += 1
+
+        if i < len(r) - 1 and r[i+1] in ASCII:
+            acount += 1
+            if i < len(r) - 2 and r[i+2] in ASCII:
+                acount += 1
+        if acount >= AsciiT:
+            if c == ord(" "):
+                return b"__"
+            if c == ord("\n"):
+                return b"\\n"
+            if c == ord("\r"):
+                return b"\\r"
+            if c == 0x1a:
+                return b"^Z"
+            return b"_" + bytes([c])
+
 #        return BLUE + "." + c + ENDC
 
     #otherwise, return hex
-    return "%02X" % ord(c)
+    return b"%02X" % c
 
 def csplit(s, n):
     for i in range(0, len(s), n):
@@ -77,17 +124,18 @@ def csplit(s, n):
 
 
 l = []
-for c in r:
-    l += [subst(c)]
+for i in range(len(r)):
+    l += [subst(r, i)]
 
-l += ["]"]
+l += [b"]]"]
 skipping = False
-
-print
+previous = None
 
 for i, seq in enumerate(csplit(l, LINELEN)):
-    l = " ".join(seq)
-    if l.strip() != "":
+    l = b" ".join(seq)
+    if l.strip() != b"":
+        if skipping == True:
+            print("." * CHARS_NEEDED)
         skipping = False
 
         prefix = list(PREFIX % (i * LINELEN))
@@ -95,18 +143,20 @@ for i, seq in enumerate(csplit(l, LINELEN)):
         #we'll skip starting chars if they are redundant
         if last_off is not None:
             save = last_off
-            last_off = "".join(prefix)
+            last_off = bytes(prefix)
             for i, j in enumerate(save):
                 if prefix[i] == j:
-                    prefix[i] = " "
+                    prefix[i] = ord(" ")
                 else:
                     break
         else:
-            last_off = "".join(prefix)
+            last_off = bytes(prefix)
 
-        prefix = "".join(prefix)
-        print "%s%s" % (prefix, l)
+        prefix = bytes(prefix)
+        print("%s%s" % (prefix.decode("ascii"), l.decode("ascii")))
     else:
         if skipping == False:
             skipping = True
             last_off = None
+print("")
+print(HeaderS)
