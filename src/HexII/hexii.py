@@ -70,39 +70,38 @@ print("")
 #the first offset on top of a window should be completely displayed
 last_off = None
 
-
-ZeroT = 3
+ZeroT = 4
 AsciiT = 3
 
 def subst(r, i):
     c = r[i]
+    ma = 0 if i == 0 else i
 
     #replace 00 by empty char
     if c == 0:
-        zcount = 1
-        if i > 1 and r[i-1] == 0:
-            zcount += 1
-            if i > 2 and r[i-2] == 0:
-                zcount += 1
-        if i < len(r) - 1 and r[i+1] == 0:
-            zcount += 1
-            if i < len(r) - 2 and r[i+2] == 0:
-                zcount += 1
-        if zcount >= ZeroT:
+        count = 1
+        mi = max(i-ZeroT, 0)
+        bef, aft = r[mi:ma][::-1], r[i+1:i+ZeroT]
+        for ss in [bef, aft]:
+            for cc in ss:
+                if cc != 0:
+                    break
+                count += 1
+
+        if count >= ZeroT:
             return b"  "
 
     if c in ASCII:
-        acount = 1
-        if i > 0 and r[i-1] in ASCII:
-            acount += 1
-            if i > 1 and r[i-2] in ASCII:
-                acount += 1
+        count = 1
+        mi = max(i-AsciiT, 0)
+        bef, aft = r[mi:ma][::-1], r[i+1:i+AsciiT]
+        for ss in [bef, aft]:
+            for cc in ss:
+                if not cc in ASCII:
+                    break
+                count += 1
 
-        if i < len(r) - 1 and r[i+1] in ASCII:
-            acount += 1
-            if i < len(r) - 2 and r[i+2] in ASCII:
-                acount += 1
-        if acount >= AsciiT:
+        if count >= AsciiT:
             if c == ord(" "):
                 return b"__"
             if c == ord("\n"):
