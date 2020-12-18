@@ -19,6 +19,7 @@
 # - gap size displayed
 # - fixed ruler with different line length
 # - ANSI colors, themes
+# - filename and hash
 
 # v0.13:
 # Hex:
@@ -42,11 +43,13 @@
 # - something about unicode ?
 
 
+import hashlib
 import sys
 import math
 from string import punctuation, digits, ascii_letters
 
-with open(sys.argv[1], "rb") as f:
+fn = sys.argv[1]
+with open(fn, "rb") as f:
     r = f.read()
 
 try:
@@ -125,6 +128,11 @@ PREFIX = b"%%0%iX: " % CHARS_NEEDED
 
 #this should always be displayed on the top of the screen no matter the scrolling
 HeaderS = " " * CHARS_NEEDED + "  " + theme.ruler + " ".join("%2X".rjust(2) % i for i in range(LINELEN)) + theme.reset
+
+sha256 = hashlib.sha256(r).hexdigest()
+
+print(theme.zero + "%s - %s..%s" % (repr(fn), sha256[:4], sha256[-4:])  + theme.reset)
+print()
 print(HeaderS)
 print("")
 
@@ -169,7 +177,7 @@ def subst(r, i):
                 return theme.alpha + "\\n" + theme.reset
             if c == ord("\r"):
                 return theme.alpha + "\\r" + theme.reset
-            if c == 0x1a:
+            if c == 0x1a: # TODO: only in manual mode
                 return theme.alpha + "^Z" + theme.reset
             return theme.alpha + " " + chr(c) + theme.reset
 
