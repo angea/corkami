@@ -9,18 +9,16 @@
 # Ange Albertini, BSD Licence 2014-2020
 
 
-# v0.15:
-# - ANSI colors, themes
-
 # v0.14:
 # - Python 3
-# - ASCII is only turned on if more than 3 characters in a row are ASCII - Too many FPs
-# - Zero display is only turned on if more than 3 characters in a row are zero - Too many FPs
-# - Underscore is now used as a zero character
-# - Hex ruler is displayed at the bottom too
+# - ASCII is using a threshold - too many FPs
+# - Zero display is using a threshold - too many FPs
+# - no more alpha character
+# - Hex ruler at the bottom
 # - dots interleave line is displayed after a skip
+# - gap size displayed
 # - fixed ruler with different line length
-
+# - ANSI colors, themes
 
 # v0.13:
 # Hex:
@@ -91,9 +89,17 @@ class Ansi:
 class Theme:
     reset  = Ansi.ResetFG
 
+    offset = ""
+    alpha  = ""
+    skip   = ""
+    ruler  = ""
+    end    = ""
+    zero   = ""
+
 class Dark(Theme):
-    offset = Ansi.bBlack   # the offsets on the left before the hex
+    offset = Ansi.Yellow   # the offsets on the left before the hex
     alpha  = Ansi.bCyan    # ASCII and control characters \n ^Z/
+    zero   = Ansi.bBlack   # 
     skip   = Ansi.bYellow  # the dots when skipping ranges of data
     ruler  = Ansi.Green    # the  0  1  2 ... ruler before and after the hex
     end    = Ansi.bRed     # the end marker ]]
@@ -102,14 +108,16 @@ class Dark(Theme):
 class Ascii:
     reset  = ""
 
-    offset = ""
-    alpha  = ""
-    skip   = ""
-    ruler  = ""
-    end    = ""
-
 
 theme = Dark
+
+# "-"
+#   "\xc4" # codepage 437
+#   "\u2500" # box drawing light horizontal
+# "\u2219" Bullet operator
+class charset:
+    end = "]]"
+    skip = "---"
 
 CHARS_NEEDED = int(math.log(len(r), 16) + 1)
 
@@ -165,6 +173,8 @@ def subst(r, i):
                 return theme.alpha + "^Z" + theme.reset
             return theme.alpha + " " + chr(c) + theme.reset
 
+    if c == 0:
+        return theme.zero + "00" + theme.reset
     #otherwise, return hex
     return "%02X" % c
 
@@ -178,16 +188,25 @@ l = []
 for i in range(len(r)):
     l += [subst(r, i).encode("utf-8")]
 
-l += [(theme.end + "]]" + theme.reset).encode("utf-8")]
+l += [(theme.end + charset.end + theme.reset).encode("utf-8")]
 
 skipping = False
-previous = None
-
+before_skip = 0
 for i, seq in enumerate(csplit(l, LINELEN)):
     l = b" ".join(seq)
-    if l.strip() != b"":
+
+    if l.strip() != b"": #
         if skipping == True:
-            print(theme.skip + "." * CHARS_NEEDED + theme.reset)
+            gap_s = i * LINELEN - before_skip
+            gap_str = " +%X" % gap_s
+            gap_strl = len(gap_str)
+            print(theme.skip
+             + ">" * (CHARS_NEEDED)
+             + " "
+             + charset.skip * (LINELEN)
+             + gap_str
+             + theme.reset
+             )
         skipping = False
 
         prefix = list(PREFIX % (i * LINELEN))
@@ -208,6 +227,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
         print("%s%s" % (theme.offset+prefix.decode("ascii")+theme.reset, l.decode("ascii")))
     else:
         if skipping == False:
+            before_skip = i * LINELEN
             skipping = True
             last_off = None
 print("")
