@@ -9,6 +9,9 @@
 # Ange Albertini, BSD Licence 2014-2020
 
 
+# v0.15:
+# - ANSI colors, themes
+
 # v0.14:
 # - Python 3
 # - ASCII is only turned on if more than 3 characters in a row are ASCII - Too many FPs
@@ -36,7 +39,7 @@
 # - Last_Offset+1 is marked with "]"
 #   (because EOF could be absent)
 
-#todo:
+# Todo?
 # - update hexii2bin (since v0.12)
 # - something about unicode ?
 
@@ -56,14 +59,64 @@ except:
 ASCII = punctuation + digits + ascii_letters + " \n\r\x1a"
 ASCII = ASCII.encode()
 
-BLUE = '\033[94m'
-ENDC = '\033[0m'
+def Ansi(l):
+    if isinstance(l, int):
+        l = [l]
+    s = "{esc}[{params}m".format(esc="\x1b", params=";".join("%i" % c for c in l))
+    return s
+
+class Ansi:
+    Black    = Ansi(30)
+    Red      = Ansi(31)
+    Green    = Ansi(32)
+    Yellow   = Ansi(33)
+    Blue     = Ansi(34)
+    Magenta  = Ansi(35)
+    Cyan     = Ansi(36)
+    White    = Ansi(37) # don't use unless you set background
+
+    ResetFG  = Ansi(39)
+
+    bBlack   = Ansi(90)
+    bRed     = Ansi(91)
+    bGreen   = Ansi(92)
+    bYellow  = Ansi(93)
+    bBlue    = Ansi(94)
+    bMagenta = Ansi(95)
+    bCyan    = Ansi(96)
+    bWhite   = Ansi(97) # don't use unless you set background
+
+    ResetBG  = Ansi(49)
+
+class Theme:
+    reset  = Ansi.ResetFG
+
+class Dark(Theme):
+    offset = Ansi.bBlack   # the offsets on the left before the hex
+    alpha  = Ansi.bCyan    # ASCII and control characters \n ^Z/
+    skip   = Ansi.bYellow  # the dots when skipping ranges of data
+    ruler  = Ansi.Green    # the  0  1  2 ... ruler before and after the hex
+    end    = Ansi.bRed     # the end marker ]]
+
+
+class Ascii:
+    reset  = ""
+
+    offset = ""
+    alpha  = ""
+    skip   = ""
+    ruler  = ""
+    end    = ""
+
+
+theme = Dark
+
 CHARS_NEEDED = int(math.log(len(r), 16) + 1)
 
 PREFIX = b"%%0%iX: " % CHARS_NEEDED
 
 #this should always be displayed on the top of the screen no matter the scrolling
-HeaderS = " " * CHARS_NEEDED + "  " + " ".join("%2X".rjust(2) % i for i in range(LINELEN))
+HeaderS = " " * CHARS_NEEDED + "  " + theme.ruler + " ".join("%2X".rjust(2) % i for i in range(LINELEN)) + theme.reset
 print(HeaderS)
 print("")
 
@@ -89,7 +142,7 @@ def subst(r, i):
                 count += 1
 
         if count >= ZeroT:
-            return b"  "
+            return "  "
 
     if c in ASCII:
         count = 1
@@ -103,19 +156,18 @@ def subst(r, i):
 
         if count >= AsciiT:
             if c == ord(" "):
-                return b"__"
+                return theme.alpha + "__" + theme.reset
             if c == ord("\n"):
-                return b"\\n"
+                return theme.alpha + "\\n" + theme.reset
             if c == ord("\r"):
-                return b"\\r"
+                return theme.alpha + "\\r" + theme.reset
             if c == 0x1a:
-                return b"^Z"
-            return b"_" + bytes([c])
-
-#        return BLUE + "." + c + ENDC
+                return theme.alpha + "^Z" + theme.reset
+            return theme.alpha + " " + chr(c) + theme.reset
 
     #otherwise, return hex
-    return b"%02X" % c
+    return "%02X" % c
+
 
 def csplit(s, n):
     for i in range(0, len(s), n):
@@ -124,9 +176,10 @@ def csplit(s, n):
 
 l = []
 for i in range(len(r)):
-    l += [subst(r, i)]
+    l += [subst(r, i).encode("utf-8")]
 
-l += [b"]]"]
+l += [(theme.end + "]]" + theme.reset).encode("utf-8")]
+
 skipping = False
 previous = None
 
@@ -134,7 +187,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
     l = b" ".join(seq)
     if l.strip() != b"":
         if skipping == True:
-            print("." * CHARS_NEEDED)
+            print(theme.skip + "." * CHARS_NEEDED + theme.reset)
         skipping = False
 
         prefix = list(PREFIX % (i * LINELEN))
@@ -152,7 +205,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
             last_off = bytes(prefix)
 
         prefix = bytes(prefix)
-        print("%s%s" % (prefix.decode("ascii"), l.decode("ascii")))
+        print("%s%s" % (theme.offset+prefix.decode("ascii")+theme.reset, l.decode("ascii")))
     else:
         if skipping == False:
             skipping = True
