@@ -19,7 +19,9 @@
 # - gap size displayed
 # - fixed ruler with different line length
 # - ANSI colors, themes
+# - charsets
 # - filename and hash
+# - arguments parsing
 
 # v0.13:
 # Hex:
@@ -38,27 +40,14 @@
 # - Last_Offset+1 is marked with "]"
 #   (because EOF could be absent)
 
-# Todo?
-# - update hexii2bin (since v0.12)
-# - something about unicode ?
+# Todo
+# - text output ?
 
 
 import hashlib
+import argparse
 import sys
-import math
 from string import punctuation, digits, ascii_letters
-
-fn = sys.argv[1]
-with open(fn, "rb") as f:
-    r = f.read()
-
-try:
-    LINELEN = int(sys.argv[2])
-except:
-    LINELEN = 16
-
-ASCII = punctuation + digits + ascii_letters + " \n\r\x1a"
-ASCII = ASCII.encode()
 
 def Ansi(l):
     if isinstance(l, int):
@@ -99,7 +88,7 @@ class Theme:
     end    = ""
     zero   = ""
 
-class Dark(Theme):
+class thDark(Theme):
     offset = Ansi.Yellow   # the offsets on the left before the hex
     alpha  = Ansi.bCyan    # ASCII and control characters \n ^Z/
     zero   = Ansi.bBlack   # 
@@ -108,26 +97,97 @@ class Dark(Theme):
     end    = Ansi.bRed     # the end marker ]]
 
 
-class Ascii:
+class thAscii(Theme):
     reset  = ""
 
+themes = {
+    "dark": thDark,
+    "ascii": thAscii
+}
 
-theme = Dark
 
-# "-"
-#   "\xc4" # codepage 437
-#   "\u2500" # box drawing light horizontal
-# "\u2219" Bullet operator
 class charset:
     end = "]]"
     skip = "---"
+    skOff = ">"
+    digits = ["%X" % i for i in range(16)]
+    numbers = ["%X" % i for i in range(32)]
 
-CHARS_NEEDED = int(math.log(len(r), 16) + 1)
+class csAscii(charset):
+    pass
+
+chrs = lambda start, end: [chr(i) for i in range(start, end)]
+fully_circled_digits = sum([
+    ["\u24ea"], # 0
+    chrs(0x2460, 0x2469), # 1-9
+    chrs(0x2469, 0x246F), # 11-15
+    # chrs(0x24b6, 0x24bb), # A-F
+    # chrs(0x24d0, 0x24d5), # a-z
+    ], [])
+
+neg_circled_digits = sum([
+    ["\u24ff"], # 0
+    chrs(0x2776, 0x277f),   # 1-9
+    chrs(0x1f150, 0x1f155), # A-F
+    ], [])
+
+neg_circled_sserif = sum([
+    ["\U0001f10c"], # 0
+    chrs(0x278A, 0x2792), # 1-9
+    ], [])
+
+class csUnicode(charset):
+    skip = "\u2508" * 3
+    # \u2219 Bullet Operator
+    # \u2500 Box Drawings Light Horizontal
+    # \u2508 Box Drawings Light Quadruple Dash Horizontal
+    skOff = "\u254c"
+
+
+charsets = {
+    "ascii": csAscii,
+    "unicode": csUnicode
+}
+
+
+parser = argparse.ArgumentParser(description="Sbud raw hex viewer.")
+parser.add_argument('file',
+    help="input file.")
+parser.add_argument('-t', '--theme', default="Dark",
+    help="display theme: %s." % ", ".join(themes))
+parser.add_argument('-c', '--charset', default="Unicode",
+    help="charset theme: %s." % ", ".join(themes))
+parser.add_argument('-l', '--length', type=int, default=16,
+    help="row length.")
+
+args = parser.parse_args()
+theme = args.theme.lower()
+charset = args.charset.lower()
+
+fn = args.file
+with open(fn, "rb") as f:
+    r = f.read()
+
+LINELEN = args.length
+
+ASCII = punctuation + digits + ascii_letters + " \n\r\x1a"
+ASCII = ASCII.encode()
+
+if theme not in themes:
+    print("Error: unknown theme %s, aborting." % repr(theme))
+    sys.exit()
+theme = themes[theme]
+if charset not in charsets:
+    print("Error: unknown charset %s, aborting." % repr(charset))
+    sys.exit()
+charset = charsets[charset]
+
+CHARS_NEEDED = len("%x" % len(r))
 
 PREFIX = b"%%0%iX: " % CHARS_NEEDED
 
 #this should always be displayed on the top of the screen no matter the scrolling
-HeaderS = " " * CHARS_NEEDED + "  " + theme.ruler + " ".join("%2X".rjust(2) % i for i in range(LINELEN)) + theme.reset
+HeaderS = " " * CHARS_NEEDED + "  " + theme.ruler + " ".join(charset.numbers[i].rjust(2) for i in range(LINELEN)) + theme.reset
 
 sha256 = hashlib.sha256(r).hexdigest()
 
@@ -136,7 +196,7 @@ print()
 print(HeaderS)
 print("")
 
-#the first offset on top of a window should be completely displayed
+# the first offset on top of a window should be completely displayed
 last_off = None
 
 ZeroT = 4
@@ -209,7 +269,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
             gap_str = " +%X" % gap_s
             gap_strl = len(gap_str)
             print(theme.skip
-             + ">" * (CHARS_NEEDED)
+             + charset.skOff * (CHARS_NEEDED)
              + " "
              + charset.skip * (LINELEN)
              + gap_str
@@ -232,7 +292,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
             last_off = bytes(prefix)
 
         prefix = bytes(prefix)
-        print("%s%s" % (theme.offset+prefix.decode("ascii")+theme.reset, l.decode("ascii")))
+        print("%s%s" % (theme.offset+prefix.decode("utf-8")+theme.reset, l.decode("utf-8")))
     else:
         if skipping == False:
             before_skip = i * LINELEN
