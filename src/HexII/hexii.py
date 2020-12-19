@@ -22,6 +22,8 @@
 # - charsets
 # - filename and hash
 # - arguments parsing
+# - Ansi style optimisation
+# - style propagation over nibbles
 
 # v0.13:
 # Hex:
@@ -49,48 +51,153 @@ import argparse
 import sys
 from string import punctuation, digits, ascii_letters
 
-def Ansi(l):
+def ansi(l):
+    if l == []:
+        return ""
     if isinstance(l, int):
         l = [l]
     s = "{esc}[{params}m".format(esc="\x1b", params=";".join("%i" % c for c in l))
     return s
 
 class Ansi:
-    Black    = Ansi(30)
-    Red      = Ansi(31)
-    Green    = Ansi(32)
-    Yellow   = Ansi(33)
-    Blue     = Ansi(34)
-    Magenta  = Ansi(35)
-    Cyan     = Ansi(36)
-    White    = Ansi(37) # don't use unless you set background
+    Black    = ansi(30)
+    Red      = ansi(31)
+    Green    = ansi(32)
+    Yellow   = ansi(33)
+    Blue     = ansi(34)
+    Magenta  = ansi(35)
+    Cyan     = ansi(36)
+    White    = ansi(37) # don't use unless you set background
 
-    ResetFG  = Ansi(39)
+    ResetFG  = ansi(39)
 
-    bBlack   = Ansi(90)
-    bRed     = Ansi(91)
-    bGreen   = Ansi(92)
-    bYellow  = Ansi(93)
-    bBlue    = Ansi(94)
-    bMagenta = Ansi(95)
-    bCyan    = Ansi(96)
-    bWhite   = Ansi(97) # don't use unless you set background
+    bBlack   = ansi(90)
+    bRed     = ansi(91)
+    bGreen   = ansi(92)
+    bYellow  = ansi(93)
+    bBlue    = ansi(94)
+    bMagenta = ansi(95)
+    bCyan    = ansi(96)
+    bWhite   = ansi(97) # don't use unless you set background
 
-    ResetBG  = Ansi(49)
+    ResetBG    = ansi(49)
+
+    BlackBG    = ansi(40)
+    RedBG      = ansi(41)
+    GreenBG    = ansi(42)
+    YellowBG   = ansi(43)
+    BlueBG     = ansi(44)
+    MagentaBG  = ansi(45)
+    CyanBG     = ansi(46)
+    WhiteBG    = ansi(47)
+    bBlackBG   = ansi(100)
+    bRedBG     = ansi(101)
+    bGreenBG   = ansi(102)
+    bYellowBG  = ansi(103)
+    bBlueBG    = ansi(104)
+    bMagentaBG = ansi(105)
+    bCyanBG    = ansi(106)
+    bWhiteBG   = ansi(107)
+
+
+def getStyles(b):
+    """gets raw string, FGs and BGs styles from an ANSI string"""
+    fgs = {0:39}
+    bgs = {0:49}
+    raw = b""
+    i = 0
+    while i < len(b):
+        c = b[i]
+        if c == 0x1b:
+            idx = b.find(b"m", i)
+            styles_s = b[i + 2:idx]
+            styles = [int(_) for _ in styles_s.split(b";")]
+            pos = len(raw)
+            for s in styles:
+                if s == 39:
+                    fgs[pos] = s
+                elif s == 49:
+                    bgs[pos] = s
+                elif 30 <= s <= 37 or 90 <= s <= 97:
+                    fgs[pos] = s
+                elif 40 <= s <= 47 or 100 <= s <= 107:
+                    bgs[pos] = s
+            # \x1b + [ + styles + m
+            i += 2 + len(styles_s) + 1
+            continue
+        else:
+            raw += bytes([c])
+            i += 1
+    return raw, fgs, bgs
+
+
+def makeAnsi(raw, fgs, bgs, reset=True):
+    """generate an ANSI string from raw text and sets of FG and BG styles"""
+    fg = 39
+    bg = 49
+    s = b""
+    for i, c in enumerate(raw):
+        styles = []
+        if i in fgs:
+            new_fg = fgs[i]
+            if new_fg != fg:
+                styles += [new_fg]
+                fg = new_fg
+        if i in bgs:
+            new_bg = bgs[i]
+            if new_bg != bg:
+                styles += [new_bg]
+                bg = new_bg
+        for style in styles: # some viewers don't support combined settings
+            s += ansi(style).encode("utf-8")
+        s += bytes([c])
+
+    # resetting styles if needed
+    if reset:
+        style = []
+        if fg != 39:
+            styles += [39]
+        if bg != 49:
+            styles += [49]
+        for style in styles: # some viewers don't support combined settings
+            s += ansi(style).encode("utf-8")
+
+    return s
+
+
+def propStyles(b):
+    # propagate styles from one nibble to the next if identical
+    raw, fgs, bgs = getStyles(b)
+
+    for i,c in enumerate(raw):
+        if c == 32 and i in fgs and i+1 in fgs:
+            del(fgs[i])
+        if c == 32 and i in bgs and i+1 in bgs:
+            del(bgs[i])
+
+    result = makeAnsi(raw, fgs, bgs)
+
+    return result
+
 
 class Theme:
-    reset  = Ansi.ResetFG
+    reset  = Ansi.ResetFG + Ansi.ResetBG
 
     offset = ""
-    alpha  = ""
+    alpha  = ["", ""]
     skip   = ""
     ruler  = ""
     end    = ""
     zero   = ""
 
+
 class thDark(Theme):
     offset = Ansi.Yellow   # the offsets on the left before the hex
-    alpha  = Ansi.bCyan    # ASCII and control characters \n ^Z/
+    # ASCII and control characters \n ^Z/
+    alpha  = [
+        Ansi.Cyan + Ansi.BlueBG,
+        Ansi.bCyan + Ansi.bBlueBG,
+    ]
     zero   = Ansi.bBlack   # 
     skip   = Ansi.bYellow  # the dots when skipping ranges of data
     ruler  = Ansi.Green    # the  0  1  2 ... ruler before and after the hex
@@ -99,6 +206,7 @@ class thDark(Theme):
 
 class thAscii(Theme):
     reset  = ""
+
 
 themes = {
     "dark": thDark,
@@ -113,8 +221,10 @@ class charset:
     digits = ["%X" % i for i in range(16)]
     numbers = ["%X" % i for i in range(32)]
 
+
 class csAscii(charset):
     pass
+
 
 chrs = lambda start, end: [chr(i) for i in range(start, end)]
 fully_circled_digits = sum([
@@ -136,6 +246,7 @@ neg_circled_sserif = sum([
     chrs(0x278A, 0x2792), # 1-9
     ], [])
 
+
 class csUnicode(charset):
     skip = "\u2508" * 3
     # \u2219 Bullet Operator
@@ -149,7 +260,7 @@ charsets = {
     "unicode": csUnicode
 }
 
-
+bAlpha = 0
 parser = argparse.ArgumentParser(description="Sbud raw hex viewer.")
 parser.add_argument('file',
     help="input file.")
@@ -167,6 +278,7 @@ charset = args.charset.lower()
 fn = args.file
 with open(fn, "rb") as f:
     r = f.read()
+
 
 LINELEN = args.length
 
@@ -202,7 +314,9 @@ last_off = None
 ZeroT = 4
 AsciiT = 3
 
+
 def subst(r, i):
+    global bAlpha
     c = r[i]
     ma = 0 if i == 0 else i
 
@@ -218,6 +332,7 @@ def subst(r, i):
                 count += 1
 
         if count >= ZeroT:
+            bAlpha = 1 - bAlpha
             return "  "
 
     if c in ASCII:
@@ -232,15 +347,15 @@ def subst(r, i):
 
         if count >= AsciiT:
             if c == ord(" "):
-                return theme.alpha + "__" + theme.reset
+                return theme.alpha[bAlpha] + "__" + theme.reset
             if c == ord("\n"):
-                return theme.alpha + "\\n" + theme.reset
+                return theme.alpha[bAlpha] + "\\n" + theme.reset
             if c == ord("\r"):
-                return theme.alpha + "\\r" + theme.reset
+                return theme.alpha[bAlpha] + "\\r" + theme.reset
             if c == 0x1a: # TODO: only in manual mode
-                return theme.alpha + "^Z" + theme.reset
-            return theme.alpha + " " + chr(c) + theme.reset
-
+                return theme.alpha[bAlpha] + "^Z" + theme.reset
+            return theme.alpha[bAlpha] + " " + chr(c) + theme.reset
+    bAlpha = 1 - bAlpha
     if c == 0:
         return theme.zero + "00" + theme.reset
     #otherwise, return hex
@@ -292,6 +407,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
             last_off = bytes(prefix)
 
         prefix = bytes(prefix)
+        l = propStyles(l)
         print("%s%s" % (theme.offset+prefix.decode("utf-8")+theme.reset, l.decode("utf-8")))
     else:
         if skipping == False:
