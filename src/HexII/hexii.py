@@ -24,6 +24,7 @@
 # - arguments parsing
 # - Ansi style optimisation
 # - style propagation over nibbles
+# - compact mode via alternating backgrounds
 
 # v0.13:
 # Hex:
@@ -44,6 +45,9 @@
 
 # Todo
 # - text output ?
+# - clean compact mode: argument, theme, ascii
+# - ASCII coloring bugged (cf WAD)
+# - alpha coloring lost with compact mode (cf WAD)
 
 
 import hashlib
@@ -58,6 +62,19 @@ def ansi(l):
         l = [l]
     s = "{esc}[{params}m".format(esc="\x1b", params=";".join("%i" % c for c in l))
     return s
+
+def sameColor(fg, bg):
+    if bg - fg == 10:
+        if 30 <= fg <= 37 or 90 <= fg <= 97:
+            return True
+    return False
+
+def switchInt(color):
+    if 30 <= color <= 47:
+        return color + 60
+    if 90 <= color <= 107:
+        return color - 60
+    return color
 
 class Ansi:
     Black    = ansi(30)
@@ -176,6 +193,42 @@ def propStyles(b):
             del(bgs[i])
 
     result = makeAnsi(raw, fgs, bgs)
+    return result
+
+
+def setAltBgs(b, bgs):
+    global COMPACT
+    if not COMPACT:
+        return b
+    bIsStr = False
+    if isinstance(b, str):
+        bIsStr = True
+        b = b.encode("utf-8")
+    bg1, bg2 = bgs
+    raw, fgs, bgs = getStyles(b)
+    bg = 49
+    fg = 39
+    #print(bgs)
+    for i in range(len(raw)):
+        if i in bgs:
+            bg = bgs[i]
+        if i in fgs:
+            fg = fgs[i]
+        if bg != 49:
+            continue
+        if i % 4 == 0:
+            if sameColor(fg, bg1):
+                fgs[i] = switchInt(bg1 - 10)
+                fgs[i+2] = fg
+            bgs[i] = bg1
+        elif i % 4 == 2:
+            if sameColor(fg, bg2):
+                fgs[i] = switchInt(bg2 - 10)
+                fgs[i+2] = fg
+            bgs[i] = bg2
+    result = makeAnsi(raw, fgs, bgs)
+    if bIsStr:
+        result = result.decode("utf-8")
 
     return result
 
@@ -216,7 +269,7 @@ themes = {
 
 class charset:
     end = "]]"
-    skip = "---"
+    skip = "-"
     skOff = ">"
     digits = ["%X" % i for i in range(16)]
     numbers = ["%X" % i for i in range(32)]
@@ -248,7 +301,7 @@ neg_circled_sserif = sum([
 
 
 class csUnicode(charset):
-    skip = "\u2508" * 3
+    skip = "\u2508"
     # \u2219 Bullet Operator
     # \u2500 Box Drawings Light Horizontal
     # \u2508 Box Drawings Light Quadruple Dash Horizontal
@@ -279,6 +332,7 @@ fn = args.file
 with open(fn, "rb") as f:
     r = f.read()
 
+COMPACT = False
 
 LINELEN = args.length
 
@@ -296,10 +350,14 @@ charset = charsets[charset]
 
 CHARS_NEEDED = len("%x" % len(r))
 
-PREFIX = b"%%0%iX: " % CHARS_NEEDED
+PREFIX = b"%%0%iX " % CHARS_NEEDED
 
 #this should always be displayed on the top of the screen no matter the scrolling
-HeaderS = " " * CHARS_NEEDED + "  " + theme.ruler + " ".join(charset.numbers[i].rjust(2) for i in range(LINELEN)) + theme.reset
+skip_l = 3 if not COMPACT else 2
+joiner = " " if not COMPACT else ""
+numbers = joiner.join(charset.numbers[i].rjust(2) for i in range(LINELEN))
+#print (numbers)
+HeaderS = " " * CHARS_NEEDED + " " + ansi(92) + setAltBgs(numbers, [49, 42]) + theme.reset
 
 sha256 = hashlib.sha256(r).hexdigest()
 
@@ -311,7 +369,7 @@ print("")
 # the first offset on top of a window should be completely displayed
 last_off = None
 
-ZeroT = 4
+ZeroT = 5
 AsciiT = 3
 
 
@@ -376,7 +434,7 @@ l += [(theme.end + charset.end + theme.reset).encode("utf-8")]
 skipping = False
 before_skip = 0
 for i, seq in enumerate(csplit(l, LINELEN)):
-    l = b" ".join(seq)
+    l = b" ".join(seq) if not COMPACT else b"".join(seq)
 
     if l.strip() != b"": #
         if skipping == True:
@@ -386,7 +444,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
             print(theme.skip
              + charset.skOff * (CHARS_NEEDED)
              + " "
-             + charset.skip * (LINELEN)
+             + charset.skip * (LINELEN) * skip_l
              + gap_str
              + theme.reset
              )
@@ -408,6 +466,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
 
         prefix = bytes(prefix)
         l = propStyles(l)
+        l = setAltBgs(l, [49, 100])
         print("%s%s" % (theme.offset+prefix.decode("utf-8")+theme.reset, l.decode("utf-8")))
     else:
         if skipping == False:
