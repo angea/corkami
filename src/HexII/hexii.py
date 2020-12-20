@@ -45,7 +45,7 @@
 
 # Todo
 # - text output ?
-# - clean compact mode: argument, theme, ascii
+# - clean compact mode: theme, ascii
 # - ASCII coloring bugged (cf WAD)
 # - alpha coloring lost with compact mode (cf WAD)
 
@@ -197,8 +197,8 @@ def propStyles(b):
 
 
 def setAltBgs(b, bgs):
-    global COMPACT
-    if not COMPACT:
+    global bCompact
+    if not bCompact:
         return b
     bIsStr = False
     if isinstance(b, str):
@@ -323,16 +323,17 @@ parser.add_argument('-c', '--charset', default="Unicode",
     help="charset theme: %s." % ", ".join(themes))
 parser.add_argument('-l', '--length', type=int, default=16,
     help="row length.")
+parser.add_argument('--compact', default=False, action="store_true",
+    help="row length.")
 
 args = parser.parse_args()
 theme = args.theme.lower()
 charset = args.charset.lower()
+bCompact = args.compact
 
 fn = args.file
 with open(fn, "rb") as f:
     r = f.read()
-
-COMPACT = False
 
 LINELEN = args.length
 
@@ -353,8 +354,9 @@ CHARS_NEEDED = len("%x" % len(r))
 PREFIX = b"%%0%iX " % CHARS_NEEDED
 
 #this should always be displayed on the top of the screen no matter the scrolling
-skip_l = 3 if not COMPACT else 2
-joiner = " " if not COMPACT else ""
+skip_l = 3 if not bCompact else 2
+joiner = " " if not bCompact else ""
+
 numbers = joiner.join(charset.numbers[i].rjust(2) for i in range(LINELEN))
 #print (numbers)
 HeaderS = " " * CHARS_NEEDED + " " + ansi(92) + setAltBgs(numbers, [49, 42]) + theme.reset
@@ -434,7 +436,7 @@ l += [(theme.end + charset.end + theme.reset).encode("utf-8")]
 skipping = False
 before_skip = 0
 for i, seq in enumerate(csplit(l, LINELEN)):
-    l = b" ".join(seq) if not COMPACT else b"".join(seq)
+    l = b" ".join(seq) if not bCompact else b"".join(seq)
 
     if l.strip() != b"": #
         if skipping == True:
