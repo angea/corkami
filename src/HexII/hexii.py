@@ -64,44 +64,65 @@ def propStyles(b):
     raw, fgs, bgs = ansi.getStyles(b)
 
     for i,c in enumerate(raw):
-        if c == 32 and i in fgs and i+1 in fgs:
+        if c == ord(" ") and i in fgs and i+1 in fgs:
             del(fgs[i])
-        if c == 32 and i in bgs and i+1 in bgs:
+        if c == ord(" ") and i in bgs and i+1 in bgs:
             del(bgs[i])
 
     result = ansi.generate(raw, fgs, bgs)
     return result
 
 
-def setAltBgs(b, bgs):
+def setAltBgs(b, bg2):
+    """alternate backgrounds for each nibble"""
     global bCompact
     if not bCompact:
         return b
+
     bIsStr = False
     if isinstance(b, str):
         bIsStr = True
         b = b.encode("utf-8")
-    bg1, bg2 = bgs
     raw, fgs, bgs = ansi.getStyles(b)
-    bg = 49
-    fg = 39
-    #print(bgs)
+    bg = ansi.Colors.ResetBG
+    fg = ansi.Colors.ResetFG
     for i in range(len(raw)):
         if i in bgs:
             bg = bgs[i]
         if i in fgs:
             fg = fgs[i]
-        if bg != 49:
+        if bg != ansi.Colors.ResetBG:
             continue
         if i % 4 == 0:
-            if ansi.sameColor(fg, bg1):
-                fgs[i] = ansi.switchInt(bg1 - 10)
-                fgs[i+2] = fg
-            bgs[i] = bg1
+            bgs[i] = ansi.Colors.ResetBG
         elif i % 4 == 2:
+
+            # no need of alternate bg if we're showing an empty space
+            if raw[i:i+2] == b"  ":
+                continue
+
+            # no need of alternate bg if we're surrounded by empty space
+            emptyBef = False
+            if i < 2:
+                emptyBef = True
+            elif raw[i-2:i] == b"  ":
+                emptyBef = True
+
+            emptyAft = False
+            if i >= len(raw) - 2:
+                emptyAft = True
+            elif raw[i+2:i+4] == b"  ":
+                emptyAft = True
+
+            if emptyAft and emptyBef:
+                continue
+
+
             if ansi.sameColor(fg, bg2):
                 fgs[i] = ansi.switchInt(bg2 - 10)
-                fgs[i+2] = fg
+                if i+2 not in fgs:
+                    fgs[i+2] = fg
+
             bgs[i] = bg2
     result = ansi.generate(raw, fgs, bgs)
     if bIsStr:
@@ -115,7 +136,7 @@ class charset:
     skip = "-"
     skOff = ">"
     digits = ["%X" % i for i in range(16)]
-    numbers = ["%X" % i for i in range(32)]
+    numbers = ["%X" % i for i in range(256)]
 
 
 class csAscii(charset):
@@ -210,7 +231,7 @@ joiner = " " if not bCompact else ""
 
 numbers = joiner.join(charset.numbers[i].rjust(2) for i in range(LINELEN))
 #print (numbers)
-HeaderS = " " * CHARS_NEEDED + " " + ansi.marker(92) + setAltBgs(numbers, [49, 42]) + theme.reset
+HeaderS = " " * CHARS_NEEDED + " " + ansi.marker(92) + setAltBgs(numbers, 42) + theme.reset
 
 sha256 = hashlib.sha256(r).hexdigest()
 
@@ -316,7 +337,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
 
         prefix = bytes(prefix)
         l = propStyles(l)
-        l = setAltBgs(l, [49, 100])
+        l = setAltBgs(l, 100)
         print("%s%s" % (theme.offset+prefix.decode("utf-8")+theme.reset, l.decode("utf-8")))
     else:
         if skipping == False:

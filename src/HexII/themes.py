@@ -1,7 +1,7 @@
-from ansi import Ansi
+from ansi import Markers
 
 class Theme:
-    reset  = Ansi.ResetFG + Ansi.ResetBG
+    reset  = Markers.ResetFG + Markers.ResetBG
 
     offset = ""
     alpha  = ["", ""]
@@ -12,16 +12,16 @@ class Theme:
 
 
 class thDark(Theme):
-    offset = Ansi.Yellow   # the offsets on the left before the hex
+    offset = Markers.Yellow   # the offsets on the left before the hex
     # ASCII and control characters \n ^Z/
     alpha  = [
-        Ansi.Cyan + Ansi.BlueBG,
-        Ansi.bCyan + Ansi.bBlueBG,
+        Markers.Cyan + Markers.BlueBG,
+        Markers.bCyan + Markers.bBlueBG,
     ]
-    zero   = Ansi.bBlack   # 
-    skip   = Ansi.bYellow  # the dots when skipping ranges of data
-    ruler  = Ansi.Green    # the  0  1  2 ... ruler before and after the hex
-    end    = Ansi.bRed     # the end marker ]]
+    zero   = Markers.bBlack   # 
+    skip   = Markers.bYellow  # the dots when skipping ranges of data
+    ruler  = Markers.Green    # the  0  1  2 ... ruler before and after the hex
+    end    = Markers.bRed     # the end marker ]]
 
 
 class thAscii(Theme):

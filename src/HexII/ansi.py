@@ -7,7 +7,48 @@ def marker(l):
     return s
 
 
-class Ansi:
+class Colors:
+    Black    = 30
+    Red      = 31
+    Green    = 32
+    Yellow   = 33
+    Blue     = 34
+    Magenta  = 35
+    Cyan     = 36
+    White    = 37 # don't use unless you set background
+
+    ResetFG  = 39
+
+    bBlack   = 90
+    bRed     = 91
+    bGreen   = 92
+    bYellow  = 93
+    bBlue    = 94
+    bMagenta = 95
+    bCyan    = 96
+    bWhite   = 97 # don't use unless you set background
+
+    ResetBG    = 49
+
+    BlackBG    = 40
+    RedBG      = 41
+    GreenBG    = 42
+    YellowBG   = 43
+    BlueBG     = 44
+    MagentaBG  = 45
+    CyanBG     = 46
+    WhiteBG    = 47
+    bBlackBG   = 100
+    bRedBG     = 101
+    bGreenBG   = 102
+    bYellowBG  = 103
+    bBlueBG    = 104
+    bMagentaBG = 105
+    bCyanBG    = 106
+    bWhiteBG   = 107
+
+
+class Markers:
     Black    = marker(30)
     Red      = marker(31)
     Green    = marker(32)
@@ -50,23 +91,25 @@ class Ansi:
 
 def sameColor(fg, bg):
     if bg - fg == 10:
-        if 30 <= fg <= 37 or 90 <= fg <= 97:
+        if Colors.Black <= fg <= Colors.White or \
+        Colors.bBlack <= fg <= Colors.bWhite:
             return True
     return False
 
 
 def switchInt(color):
-    if 30 <= color <= 47:
-        return color + 60
-    if 90 <= color <= 107:
-        return color - 60
-    return color
+	intensify = Colors.bBlack - Colors.Black
+	if Colors.Black <= color <= Colors.WhiteBG:
+	    return color + intensify
+	if Colors.bBlack <= color <= Colors.bWhiteBG:
+	    return color - intensify
+	return color
 
 
 def getStyles(b):
     """gets raw string, FGs and BGs styles from an ANSI string"""
-    fgs = {0:39}
-    bgs = {0:49}
+    fgs = {0:Colors.ResetFG}
+    bgs = {0:Colors.ResetBG}
     raw = b""
     i = 0
     while i < len(b):
@@ -77,9 +120,9 @@ def getStyles(b):
             styles = [int(_) for _ in styles_s.split(b";")]
             pos = len(raw)
             for s in styles:
-                if s == 39:
+                if s == Colors.ResetFG:
                     fgs[pos] = s
-                elif s == 49:
+                elif s == Colors.ResetBG:
                     bgs[pos] = s
                 elif 30 <= s <= 37 or 90 <= s <= 97:
                     fgs[pos] = s
@@ -96,8 +139,8 @@ def getStyles(b):
 
 def generate(raw, fgs, bgs, reset=True):
     """generate an ANSI string from raw text and sets of FG and BG styles"""
-    fg = 39
-    bg = 49
+    fg = Colors.ResetFG
+    bg = Colors.ResetBG
     s = b""
     for i, c in enumerate(raw):
         styles = []
@@ -118,10 +161,10 @@ def generate(raw, fgs, bgs, reset=True):
     # resetting styles if needed
     if reset:
         style = []
-        if fg != 39:
-            styles += [39]
-        if bg != 49:
-            styles += [49]
+        if fg != Colors.ResetFG:
+            styles += [Colors.ResetFG]
+        if bg != Colors.ResetBG:
+            styles += [Colors.ResetBG]
         for style in styles: # some viewers don't support combined settings
             s += marker(style).encode("utf-8")
 
