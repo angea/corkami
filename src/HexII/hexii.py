@@ -48,6 +48,7 @@
 # - text output ?
 # - clean compact mode: theme, ascii
 # - test cases
+# - correct altBG skip with surround already w/ BG
 
 
 import hashlib
@@ -101,16 +102,17 @@ def setAltBgs(b, bg2):
                 continue
 
             # no need of alternate bg if we're surrounded by empty space
+            # TODO: detect BGs in surround
             emptyBef = False
             if i < 2:
                 emptyBef = True
-            elif raw[i-2:i] == b"  " or i-2 in bgs:
+            elif raw[i-2:i] == b"  ":
                 emptyBef = True
 
             emptyAft = False
             if i >= len(raw) - 2:
                 emptyAft = True
-            elif raw[i+2:i+4] == b"  " or i+2 in bgs:
+            elif raw[i+2:i+4] == b"  ":
                 emptyAft = True
 
             if emptyAft and emptyBef:
