@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-#HexII - a compact binary representation (mixing Hex and ASCII)
+# Sbud raw hex viewer
 
-# because ASCII dump is usually useless,
-# unless there is an ASCII string,
-# in which case the HEX part is useless
+# Originally from HexII:
+#  because ASCII dump is usually useless,
+#  unless there is an ASCII string,
+#  in which case the HEX part is useless.
 
 # Ange Albertini, BSD Licence 2014-2020
 
@@ -325,14 +326,17 @@ parser.add_argument('-l', '--length', type=int, default=16,
     help="row length.")
 parser.add_argument('--compact', default=False, action="store_true",
     help="compact view mode.")
-parser.add_argument('--zero', default=3, type=int,
+parser.add_argument('--zero_count', default=3, type=int,
+    help="how many zeros in a row will be hidden.")
+parser.add_argument('--ascii_count', default=3, type=int,
     help="how many zeros in a row will be hidden.")
 
 args = parser.parse_args()
 theme = args.theme.lower()
 charset = args.charset.lower()
 bCompact = args.compact
-ZeroT = args.zero
+ZeroT = args.zero_count
+AsciiT = args.ascii_count
 
 fn = args.file
 with open(fn, "rb") as f:
@@ -373,8 +377,6 @@ print("")
 
 # the first offset on top of a window should be completely displayed
 last_off = None
-
-AsciiT = 3
 
 
 def subst(r, i):
