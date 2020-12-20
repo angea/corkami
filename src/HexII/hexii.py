@@ -25,7 +25,7 @@
 # - arguments parsing
 # - Ansi style optimisation
 # - style propagation over nibbles
-# - compact mode via alternating backgrounds
+# - compact mode via alternating backgrounds, only when needed
 
 # v0.13:
 # Hex:
@@ -105,13 +105,13 @@ def setAltBgs(b, bg2):
             emptyBef = False
             if i < 2:
                 emptyBef = True
-            elif raw[i-2:i] == b"  ":
+            elif raw[i-2:i] == b"  " or i-2 in bgs:
                 emptyBef = True
 
             emptyAft = False
             if i >= len(raw) - 2:
                 emptyAft = True
-            elif raw[i+2:i+4] == b"  ":
+            elif raw[i+2:i+4] == b"  " or i+2 in bgs:
                 emptyAft = True
 
             if emptyAft and emptyBef:
@@ -243,9 +243,18 @@ print("")
 # the first offset on top of a window should be completely displayed
 last_off = None
 
+isAlpha = None
+
+
+def leaveAlpha():
+    global bAlpha, isAlpha
+    if isAlpha == True:
+        bAlpha = 1 - bAlpha
+    isAlpha = False
+
 
 def subst(r, i):
-    global bAlpha
+    global bAlpha, isAlpha
     c = r[i]
     ma = 0 if i == 0 else i
 
@@ -261,7 +270,7 @@ def subst(r, i):
                 count += 1
 
         if count >= ZeroT:
-            bAlpha = 1 - bAlpha
+            leaveAlpha()
             return "  "
 
     if c in ASCII:
@@ -276,15 +285,22 @@ def subst(r, i):
 
         if count >= AsciiT:
             if c == ord(" "):
+                isAlpha = True
                 return theme.alpha[bAlpha] + "__" + theme.reset
             if c == ord("\n"):
+                isAlpha = True
                 return theme.alpha[bAlpha] + "\\n" + theme.reset
             if c == ord("\r"):
+                isAlpha = True
                 return theme.alpha[bAlpha] + "\\r" + theme.reset
             if c == 0x1a: # TODO: only in manual mode
+                isAlpha = True
                 return theme.alpha[bAlpha] + "^Z" + theme.reset
+
+            isAlpha = True
             return theme.alpha[bAlpha] + " " + chr(c) + theme.reset
-    bAlpha = 1 - bAlpha
+    leaveAlpha()
+
     if c == 0:
         return theme.zero + "00" + theme.reset
     #otherwise, return hex
