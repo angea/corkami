@@ -324,12 +324,15 @@ parser.add_argument('-c', '--charset', default="Unicode",
 parser.add_argument('-l', '--length', type=int, default=16,
     help="row length.")
 parser.add_argument('--compact', default=False, action="store_true",
-    help="row length.")
+    help="compact view mode.")
+parser.add_argument('--zero', default=3, type=int,
+    help="how many zeros in a row will be hidden.")
 
 args = parser.parse_args()
 theme = args.theme.lower()
 charset = args.charset.lower()
 bCompact = args.compact
+ZeroT = args.zero
 
 fn = args.file
 with open(fn, "rb") as f:
@@ -371,7 +374,6 @@ print("")
 # the first offset on top of a window should be completely displayed
 last_off = None
 
-ZeroT = 5
 AsciiT = 3
 
 
