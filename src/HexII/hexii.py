@@ -47,8 +47,7 @@
 # Todo
 # - text output ?
 # - clean compact mode: theme, ascii
-# - ASCII coloring bugged (cf WAD)
-# - alpha coloring lost with compact mode (cf WAD)
+# - test cases
 
 
 import hashlib

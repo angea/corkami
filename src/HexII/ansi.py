@@ -38,6 +38,7 @@ class Colors:
     MagentaBG  = 45
     CyanBG     = 46
     WhiteBG    = 47
+    
     bBlackBG   = 100
     bRedBG     = 101
     bGreenBG   = 102
@@ -90,7 +91,7 @@ class Markers:
 
 
 def sameColor(fg, bg):
-    if bg - fg == 10:
+    if bg - fg == Colors.BlackBG - Colors.Black:
         if Colors.Black <= fg <= Colors.White or \
         Colors.bBlack <= fg <= Colors.bWhite:
             return True
@@ -106,32 +107,54 @@ def switchInt(color):
 	return color
 
 
+def isFG(color):
+    if color == Colors.ResetFG or \
+        Colors.Black <= color <= Colors.White or \
+        Colors.bBlack <= color <= Colors.bWhite:
+        return True
+    return False
+
+
+def isBG(color):
+    if color == Colors.ResetBG or \
+        Colors.BlackBG <= color <= Colors.WhiteBG or \
+        Colors.bBlackBG <= color <= Colors.bWhiteBG:
+        return True
+    return False
+
+
 def getStyles(b):
     """gets raw string, FGs and BGs styles from an ANSI string"""
     fgs = {0:Colors.ResetFG}
+    fg = Colors.ResetFG
     bgs = {0:Colors.ResetBG}
+    bg = Colors.ResetBG
     raw = b""
     i = 0
     while i < len(b):
         c = b[i]
+        pos = len(raw)
         if c == 0x1b:
             idx = b.find(b"m", i)
             styles_s = b[i + 2:idx]
             styles = [int(_) for _ in styles_s.split(b";")]
-            pos = len(raw)
             for s in styles:
-                if s == Colors.ResetFG:
+                if isFG(s):
                     fgs[pos] = s
-                elif s == Colors.ResetBG:
+                    fg = s
+                if isBG(s):
                     bgs[pos] = s
-                elif 30 <= s <= 37 or 90 <= s <= 97:
-                    fgs[pos] = s
-                elif 40 <= s <= 47 or 100 <= s <= 107:
-                    bgs[pos] = s
-            # \x1b + [ + styles + m
+                    bg = s
+            # '\x1b' + '['' + styles + 'm'
             i += 2 + len(styles_s) + 1
+
             continue
         else:
+            # style propagation - causing bugs :(
+            #if pos not in fgs:
+            #    fgs[pos] = fg
+            #if pos not in bgs:
+            #    bgs[pos] = bg
             raw += bytes([c])
             i += 1
     return raw, fgs, bgs
