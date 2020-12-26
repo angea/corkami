@@ -10,40 +10,6 @@
 # Ange Albertini, BSD Licence 2014-2020
 
 
-# v0.14:
-# - Python 3
-# - ASCII is using a threshold - too many FPs
-# - Zero display is using a threshold - too many FPs
-# - no more alpha character
-# - Hex ruler at the bottom
-# - dots interleave line is displayed after a skip
-# - gap size displayed
-# - fixed ruler with different line length
-# - ANSI colors, themes
-# - charsets
-# - filename and hash
-# - arguments parsing
-# - Ansi style optimisation
-# - style propagation over nibbles
-# - compact mode via alternating backgrounds, only when needed
-
-# v0.13:
-# Hex:
-# - ASCII chars are replaced as .<char>
-#   (optionally in colors)
-# - 00 is replaced by "  "
-# - FF is replaced by "##"
-# - other chars are returned as hex
-#
-# Output:
-# - a hex ruler is shown at the top of the 'display'
-# - offsets don't contain superfluous 0
-# - offsets are removed identical starting characters if following the previous
-# - lines full of 00 are skipped
-# - offsets after a skip are fully written
-# - Last_Offset+1 is marked with "]"
-#   (because EOF could be absent)
-
 # Todo
 # - text output ?
 # - clean compact mode: theme, ascii
