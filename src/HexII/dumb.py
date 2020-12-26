@@ -33,7 +33,8 @@ args = parser.parse_args()
 codepage = args.codepage.lower()
 out = args.out
 if codepage not in codepages.codepages:
-    print("Error: unknown codepage %s, aborting." % repr(codepages.codepage))
+    print("Error: unknown codepage %s (known: %s), aborting." % (
+    	repr(codepage), ", ".join(sorted(codepages.codepages))))
     sys.exit()
 codepage = codepages.codepages[codepage]
 
