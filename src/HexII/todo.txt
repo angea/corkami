@@ -1,4 +1,3 @@
-- text output ?
 - clean compact mode: theme, ascii
 - test cases
 - correct altBG skip with surround already w/ BG ?

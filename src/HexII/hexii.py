@@ -100,6 +100,8 @@ parser.add_argument('-t', '--theme', default="Dark",
     help="color theme: %s." % ", ".join(sorted(themes.themes)))
 parser.add_argument('-c', '--charset', default="Unicode",
     help="charset: %s." % ", ".join(sorted(charsets.charsets)))
+parser.add_argument('-o', '--out', default=None,
+    help="output to a file.")
 
 parser.add_argument('--compact', action="store_true",
     help="compact view mode.")
@@ -118,6 +120,8 @@ bCompact = args.compact
 ZeroT = args.zero_count
 AsciiT = args.ascii_count
 LINELEN = args.row_length
+out = args.out
+
 
 fn = args.file
 with open(fn, "rb") as f:
@@ -150,10 +154,9 @@ HeaderS = " " * CHARS_NEEDED + " " + ansi.marker(92) + setAltBgs(numbers, 42) + 
 
 sha256 = hashlib.sha256(r).hexdigest()
 
-print(theme.zero + "%s - %s..%s" % (repr(fn), sha256[:4], sha256[-4:])  + theme.reset)
-print()
-print(HeaderS)
-print("")
+output = []
+output += [theme.zero + "%s - %s..%s" % (repr(fn), sha256[:4], sha256[-4:])  + theme.reset]
+output += ["", HeaderS, ""]
 
 # the first offset on top of a window should be completely displayed
 last_off = None
@@ -243,13 +246,13 @@ for i, seq in enumerate(csplit(l, LINELEN)):
             gap_s = i * LINELEN - before_skip
             gap_str = " +%X" % gap_s
             gap_strl = len(gap_str)
-            print(theme.skip
+            output += [theme.skip
              + charset.skOff * (CHARS_NEEDED)
              + " "
              + charset.skip * (LINELEN) * skip_l
              + gap_str
              + theme.reset
-             )
+             ]
         skipping = False
 
         prefix = list(PREFIX % (i * LINELEN))
@@ -269,11 +272,19 @@ for i, seq in enumerate(csplit(l, LINELEN)):
         prefix = bytes(prefix)
         l = propStyles(l)
         l = setAltBgs(l, 100)
-        print("%s%s" % (theme.offset+prefix.decode("utf-8")+theme.reset, l.decode("utf-8")))
+        output += ["%s%s" % (theme.offset+prefix.decode("utf-8")+theme.reset, l.decode("utf-8"))]
     else:
         if skipping == False:
             before_skip = i * LINELEN
             skipping = True
             last_off = None
-print("")
-print(HeaderS)
+
+output += ["", HeaderS, ""]
+
+if out is None:
+    for line in output:
+        print(line)
+else:
+    with open(out, "w", encoding="utf8") as f:
+        output = "\n".join(output)
+        f.write(output)
