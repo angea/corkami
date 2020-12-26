@@ -16,6 +16,7 @@ import sys
 from string import punctuation, digits, ascii_letters
 import ansi
 import themes
+import charsets
 
 
 def propStyles(b):
@@ -91,52 +92,6 @@ def setAltBgs(b, bg2):
     return result
 
 
-class charset:
-    end = "]]"
-    skip = "-"
-    skOff = ">"
-    digits = ["%X" % i for i in range(16)]
-    numbers = ["%X" % i for i in range(256)]
-
-
-class csAscii(charset):
-    pass
-
-
-chrs = lambda start, end: [chr(i) for i in range(start, end)]
-fully_circled_digits = sum([
-    ["\u24ea"], # 0
-    chrs(0x2460, 0x2469), # 1-9
-    chrs(0x2469, 0x246F), # 11-15
-    # chrs(0x24b6, 0x24bb), # A-F
-    # chrs(0x24d0, 0x24d5), # a-z
-    ], [])
-
-neg_circled_digits = sum([
-    ["\u24ff"], # 0
-    chrs(0x2776, 0x277f),   # 1-9
-    chrs(0x1f150, 0x1f155), # A-F
-    ], [])
-
-neg_circled_sserif = sum([
-    ["\U0001f10c"], # 0
-    chrs(0x278A, 0x2792), # 1-9
-    ], [])
-
-
-class csUnicode(charset):
-    skip = "\u2508"
-    # \u2219 Bullet Operator
-    # \u2500 Box Drawings Light Horizontal
-    # \u2508 Box Drawings Light Quadruple Dash Horizontal
-    skOff = "\u254c"
-
-
-charsets = {
-    "ascii": csAscii,
-    "unicode": csUnicode
-}
-
 bAlpha = 0
 parser = argparse.ArgumentParser(description="Sbud raw hex viewer.")
 parser.add_argument('file',
@@ -144,7 +99,7 @@ parser.add_argument('file',
 parser.add_argument('-t', '--theme', default="Dark",
     help="color theme: %s." % ", ".join(sorted(themes.themes)))
 parser.add_argument('-c', '--charset', default="Unicode",
-    help="charset: %s." % ", ".join(sorted(charsets)))
+    help="charset: %s." % ", ".join(sorted(charsets.charsets)))
 
 parser.add_argument('--compact', action="store_true",
     help="compact view mode.")
@@ -176,10 +131,10 @@ if theme not in themes.themes:
     print("Error: unknown theme %s, aborting." % repr(theme))
     sys.exit()
 theme = themes.themes[theme]
-if charset not in charsets:
+if charset not in charsets.charsets:
     print("Error: unknown charset %s, aborting." % repr(charset))
     sys.exit()
-charset = charsets[charset]
+charset = charsets.charsets[charset]
 
 CHARS_NEEDED = len("%x" % len(r))
 
