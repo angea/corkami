@@ -10,13 +10,6 @@
 # Ange Albertini, BSD Licence 2014-2020
 
 
-# Todo
-# - text output ?
-# - clean compact mode: theme, ascii
-# - test cases
-# - correct altBG skip with surround already w/ BG
-
-
 import hashlib
 import argparse
 import sys
