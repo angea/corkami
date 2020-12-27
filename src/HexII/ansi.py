@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+ESC = 0x1b
+
 def marker(l):
     if l == []:
         return ""
@@ -17,7 +21,7 @@ class Colors:
     Cyan     = 36
     White    = 37 # don't use unless you set background
 
-    ResetFG  = 39
+    ResetFg  = 39
 
     bBlack   = 90
     bRed     = 91
@@ -28,25 +32,25 @@ class Colors:
     bCyan    = 96
     bWhite   = 97 # don't use unless you set background
 
-    ResetBG    = 49
+    ResetBg    = 49
 
-    BlackBG    = 40
-    RedBG      = 41
-    GreenBG    = 42
-    YellowBG   = 43
-    BlueBG     = 44
-    MagentaBG  = 45
-    CyanBG     = 46
-    WhiteBG    = 47
+    BlackBg    = 40
+    RedBg      = 41
+    GreenBg    = 42
+    YellowBg   = 43
+    BlueBg     = 44
+    MagentaBg  = 45
+    CyanBg     = 46
+    WhiteBg    = 47
     
-    bBlackBG   = 100
-    bRedBG     = 101
-    bGreenBG   = 102
-    bYellowBG  = 103
-    bBlueBG    = 104
-    bMagentaBG = 105
-    bCyanBG    = 106
-    bWhiteBG   = 107
+    bBlackBg   = 100
+    bRedBg     = 101
+    bGreenBg   = 102
+    bYellowBg  = 103
+    bBlueBg    = 104
+    bMagentaBg = 105
+    bCyanBg    = 106
+    bWhiteBg   = 107
 
 
 class Markers:
@@ -59,7 +63,7 @@ class Markers:
     Cyan     = marker(36)
     White    = marker(37) # don't use unless you set background
 
-    ResetFG  = marker(39)
+    ResetFg  = marker(39)
 
     bBlack   = marker(90)
     bRed     = marker(91)
@@ -70,28 +74,28 @@ class Markers:
     bCyan    = marker(96)
     bWhite   = marker(97) # don't use unless you set background
 
-    ResetBG    = marker(49)
+    ResetBg    = marker(49)
 
-    BlackBG    = marker(40)
-    RedBG      = marker(41)
-    GreenBG    = marker(42)
-    YellowBG   = marker(43)
-    BlueBG     = marker(44)
-    MagentaBG  = marker(45)
-    CyanBG     = marker(46)
-    WhiteBG    = marker(47)
-    bBlackBG   = marker(100)
-    bRedBG     = marker(101)
-    bGreenBG   = marker(102)
-    bYellowBG  = marker(103)
-    bBlueBG    = marker(104)
-    bMagentaBG = marker(105)
-    bCyanBG    = marker(106)
-    bWhiteBG   = marker(107)
+    BlackBg    = marker(40)
+    RedBg      = marker(41)
+    GreenBg    = marker(42)
+    YellowBg   = marker(43)
+    BlueBg     = marker(44)
+    MagentaBg  = marker(45)
+    CyanBg     = marker(46)
+    WhiteBg    = marker(47)
+    bBlackBg   = marker(100)
+    bRedBg     = marker(101)
+    bGreenBg   = marker(102)
+    bYellowBg  = marker(103)
+    bBlueBg    = marker(104)
+    bMagentaBg = marker(105)
+    bCyanBg    = marker(106)
+    bWhiteBg   = marker(107)
 
 
 def sameColor(fg, bg):
-    if bg - fg == Colors.BlackBG - Colors.Black:
+    if bg - fg == Colors.BlackBg - Colors.Black:
         if Colors.Black <= fg <= Colors.White or \
         Colors.bBlack <= fg <= Colors.bWhite:
             return True
@@ -100,49 +104,49 @@ def sameColor(fg, bg):
 
 def switchInt(color):
 	intensify = Colors.bBlack - Colors.Black
-	if Colors.Black <= color <= Colors.WhiteBG:
+	if Colors.Black <= color <= Colors.WhiteBg:
 	    return color + intensify
-	if Colors.bBlack <= color <= Colors.bWhiteBG:
+	if Colors.bBlack <= color <= Colors.bWhiteBg:
 	    return color - intensify
 	return color
 
 
-def isFG(color):
-    if color == Colors.ResetFG or \
+def isFg(color):
+    if color == Colors.ResetFg or \
         Colors.Black <= color <= Colors.White or \
         Colors.bBlack <= color <= Colors.bWhite:
         return True
     return False
 
 
-def isBG(color):
-    if color == Colors.ResetBG or \
-        Colors.BlackBG <= color <= Colors.WhiteBG or \
-        Colors.bBlackBG <= color <= Colors.bWhiteBG:
+def isBg(color):
+    if color == Colors.ResetBg or \
+        Colors.BlackBg <= color <= Colors.WhiteBg or \
+        Colors.bBlackBg <= color <= Colors.bWhiteBg:
         return True
     return False
 
 
 def getStyles(b):
-    """gets raw string, FGs and BGs styles from an ANSI string"""
-    fgs = {0:Colors.ResetFG}
-    fg = Colors.ResetFG
-    bgs = {0:Colors.ResetBG}
-    bg = Colors.ResetBG
+    """gets raw string, Fgs and Bgs styles from an ANSI string"""
+    fgs = {0:Colors.ResetFg}
+    fg = Colors.ResetFg
+    bgs = {0:Colors.ResetBg}
+    bg = Colors.ResetBg
     raw = b""
     i = 0
     while i < len(b):
         c = b[i]
         pos = len(raw)
-        if c == 0x1b:
+        if c == ESC:
             idx = b.find(b"m", i)
             styles_s = b[i + 2:idx]
             styles = [int(_) for _ in styles_s.split(b";")]
             for s in styles:
-                if isFG(s):
+                if isFg(s):
                     fgs[pos] = s
                     fg = s
-                if isBG(s):
+                if isBg(s):
                     bgs[pos] = s
                     bg = s
             # '\x1b' + '['' + styles + 'm'
@@ -161,9 +165,9 @@ def getStyles(b):
 
 
 def generate(raw, fgs, bgs, reset=True):
-    """generate an ANSI string from raw text and sets of FG and BG styles"""
-    fg = Colors.ResetFG
-    bg = Colors.ResetBG
+    """generate an ANSI string from raw text and sets of Fg and Bg styles"""
+    fg = Colors.ResetFg
+    bg = Colors.ResetBg
     s = b""
     for i, c in enumerate(raw):
         styles = []
@@ -184,10 +188,10 @@ def generate(raw, fgs, bgs, reset=True):
     # resetting styles if needed
     if reset:
         style = []
-        if fg != Colors.ResetFG:
-            styles += [Colors.ResetFG]
-        if bg != Colors.ResetBG:
-            styles += [Colors.ResetBG]
+        if fg != Colors.ResetFg:
+            styles += [Colors.ResetFg]
+        if bg != Colors.ResetBg:
+            styles += [Colors.ResetBg]
         for style in styles: # some viewers don't support combined settings
             s += marker(style).encode("utf-8")
 

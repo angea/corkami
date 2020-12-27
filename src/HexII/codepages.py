@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+# Codepages for authentic bytes display
+
 cpascii = [None] * 256
 for i in range(0x20, 0x7f):
 	cpascii[i] = i

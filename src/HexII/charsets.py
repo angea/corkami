@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# sets of characters for interface display (ascii, unicode)
+
 class charset:
     end = "]]"
     skip = "-"
