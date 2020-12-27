@@ -2,6 +2,16 @@
 
 # Codepages for authentic bytes display
 
+def dump_table(table):
+	for i, j in enumerate(table):
+		if i % 16 == 0:
+			print("%02x: " % i, end="")
+		print("%04x " % j, end="")
+		if i % 16 == 15:
+			print("")
+	assert len((set([x for x in table if table.count(x) > 1]))) == 0
+
+
 cpascii = [None] * 256
 for i in range(0x20, 0x7f):
 	cpascii[i] = i
@@ -94,11 +104,29 @@ cpange = cp437[:0x80] + [
 
 # a non-space looking to avoid confusion
 cpange[0] = 0x2591
-# and a full for 255
+# a full square for 255
 cpange[0xff] = 0x2588
 # overwriting 1252 math symbols that don't match
-cpange[0xD7] = 0x0147
-cpange[0xf7] = 0x0148
+cpange[0xd7] = 0x0147 # N with caron
+cpange[0xd7 + 0x20] = 0x0148
+
+# replacing latin-looking cyrillic with greek
+def greekcyl(c, g):
+	cpange[c], cpange[c + 16*2] = cp737[g+24], cp737[g]
+
+greekcyl(0x81, 0x82) # cyrillic 'a'
+greekcyl(0x85, 0x83) # cyrillic 'e'
+greekcyl(0x88, 0x87) # cyrillic 'x'
+greekcyl(0x8b, 0x8a) # cyrillic 'k'
+greekcyl(0x8e, 0x8d) # cyrillic 'h'
+greekcyl(0x8f, 0x8f) # cyrillic 'o'
+greekcyl(0x92, 0x91) # cyrillic 'p'
+greekcyl(0x93, 0x94) # cyrillic 'c'
+greekcyl(0x94, 0x96) # cyrillic 't'
+greekcyl(0x97, 0x97) # cyrillic 'b'
+
+cpange[0x8d] = 0x11b # e with caron
+cpange[0x8d+32] = 0x11a # E with caron
 
 
 codepages = {
