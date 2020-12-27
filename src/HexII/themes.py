@@ -1,27 +1,37 @@
-from ansi import Markers
+from ansi import Markers, Colors
+
+# TODO: consistent with markers and colors
 
 class Theme:
-    reset  = Markers.ResetFG + Markers.ResetBG
+    resetBg = Colors.ResetBg
+    resetFg = Colors.ResetFg
+    reset  = Markers.ResetFg + Markers.ResetBg
 
-    offset = ""
+    offset = ""        # the offsets on the left before the hex
+    # ASCII and control characters \n ^Z/
     alpha  = ["", ""]
-    skip   = ""
-    ruler  = ""
-    end    = ""
-    zero   = ""
+    skip   = ""        # the dots when skipping ranges of data
+    ruler  = ""        # the  0  1  2 ... ruler before and after the hex
+    rulerBg = ""       # alt background for compact mode
+
+    altBg  = ""        # alt background for compact mode
+    end    = ""        # the end marker ]]
+    zero   = ""        # alt color for zeroes
 
 
 class thDark(Theme):
-    offset = Markers.Yellow   # the offsets on the left before the hex
-    # ASCII and control characters \n ^Z/
-    alpha  = [
-        Markers.Cyan + Markers.BlueBG,
-        Markers.bCyan + Markers.bBlueBG,
+    offset  = Markers.Yellow   
+
+    alpha   = [
+        Markers.Cyan + Markers.BlueBg,
+        Markers.bCyan + Markers.bBlueBg,
     ]
-    zero   = Markers.bBlack   # 
-    skip   = Markers.bYellow  # the dots when skipping ranges of data
-    ruler  = Markers.Green    # the  0  1  2 ... ruler before and after the hex
-    end    = Markers.bRed     # the end marker ]]
+    skip    = Markers.bYellow
+    ruler   = Markers.bGreen
+    rulerBg = Colors.GreenBg
+    altBg   = Colors.bBlackBg
+    end     = Markers.bRed
+    zero    = Markers.bBlack
 
 
 class thAscii(Theme):
@@ -29,6 +39,6 @@ class thAscii(Theme):
 
 
 themes = {
-    "dark" : thDark,
-    "ascii": thAscii
+    "dark"  : thDark,
+    "ascii" : thAscii
 }

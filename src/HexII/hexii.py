@@ -44,17 +44,17 @@ def setAltBgs(b, bg2):
         bIsStr = True
         b = b.encode("utf-8")
     raw, fgs, bgs = ansi.getStyles(b)
-    bg = ansi.Colors.ResetBG
-    fg = ansi.Colors.ResetFG
+    bg = theme.resetBg
+    fg = theme.resetFg
     for i in range(len(raw)):
         if i in bgs:
             bg = bgs[i]
         if i in fgs:
             fg = fgs[i]
-        if bg != ansi.Colors.ResetBG:
+        if bg != theme.resetBg:
             continue
         if i % 4 == 0:
-            bgs[i] = ansi.Colors.ResetBG
+            bgs[i] = theme.resetBg
         elif i % 4 == 2:
 
             # no need of alternate bg if we're showing an empty space
@@ -92,7 +92,6 @@ def setAltBgs(b, bg2):
     return result
 
 
-bAlpha = 0
 parser = argparse.ArgumentParser(description="Sbud raw hex viewer.")
 parser.add_argument('file',
     help="input file(s).")
@@ -150,7 +149,9 @@ joiner = " " if not bCompact else ""
 
 numbers = joiner.join(charset.numbers[i].rjust(2) for i in range(LINELEN))
 #print (numbers)
-HeaderS = " " * CHARS_NEEDED + " " + ansi.marker(92) + setAltBgs(numbers, 42) + theme.reset
+HeaderS = " " * CHARS_NEEDED + " " + \
+    theme.ruler + setAltBgs(numbers, theme.rulerBg) + \
+    theme.reset
 
 sha256 = hashlib.sha256(r).hexdigest()
 
@@ -161,6 +162,7 @@ output += ["", HeaderS, ""]
 # the first offset on top of a window should be completely displayed
 last_off = None
 
+bAlpha = 0
 isAlpha = None
 
 
@@ -271,7 +273,7 @@ for i, seq in enumerate(csplit(l, LINELEN)):
 
         prefix = bytes(prefix)
         l = propStyles(l)
-        l = setAltBgs(l, 100)
+        l = setAltBgs(l, theme.altBg)
         output += ["%s%s" % (theme.offset+prefix.decode("utf-8")+theme.reset, l.decode("utf-8"))]
     else:
         if skipping == False:
