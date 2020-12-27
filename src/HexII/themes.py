@@ -34,11 +34,26 @@ class thDark(Theme):
     zero    = Markers.bBlack
 
 
+class thLight(Theme):
+    offset  = Markers.Yellow
+    alpha   = [
+        Markers.Cyan + Markers.BlueBg,
+        Markers.bCyan + Markers.bBlueBg,
+    ]
+    skip    = Markers.Yellow
+    ruler   = Markers.Green
+    rulerBg = Colors.bGreenBg
+    altBg   = Colors.WhiteBg
+    end     = Markers.Red
+    zero    = Markers.bBlack
+
+
 class thAscii(Theme):
     reset  = ""
 
 
 themes = {
     "dark"  : thDark,
+    "light" : thLight,
     "ascii" : thAscii
 }
