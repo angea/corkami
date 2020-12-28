@@ -272,7 +272,7 @@ for i in sorted(chars.keys(), key=getkl):
 
 counts = [i // 8 for i in counts[1:]]
 # [0, 8, 28, 56, 70, 56, 28, 8, 1]
-#counts = [1,3,4,0,4,3,1]
+counts = [1,3,4,0,4,3,1]
 print(counts)
 
 outputs = [""] * 8
