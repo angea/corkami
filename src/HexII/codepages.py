@@ -172,6 +172,14 @@ cpbraille = cp437[:0x80] + [
 # 2800 is just an empty char like space.
 cpbraille[0x00] = 0x2591
 cpbraille[0x80] = 0x2588
+
+
+###############################################################################
+
+# box characters
+cpbox = cp437[:0x80] + [i + 0x2500 for i in range(128)]
+ 
+
 ###############################################################################
 
 codepages = {
@@ -182,6 +190,7 @@ codepages = {
 	"koi8r":    cpkoi8r,   # Russian
 	"ange":     cpange,    # Ange's custom
 	"braille":  cpbraille,
+	"box":      cpbox,
 
 	"ascii": cpascii,
 }
