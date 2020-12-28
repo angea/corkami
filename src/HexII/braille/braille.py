@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
 # braille chars
-#15
-#26
-#37
-#48
 
 chars = {
 # 0:0x2800,
@@ -272,7 +268,7 @@ for i in sorted(chars.keys(), key=getkl):
 
 counts = [i // 8 for i in counts[1:]]
 # [0, 8, 28, 56, 70, 56, 28, 8, 1]
-counts = [1,3,4,0,4,3,1]
+# counts = [1,3,4,0,4,3,1]
 print(counts)
 
 outputs = [""] * 8
@@ -290,6 +286,51 @@ for key_class, kl_count in enumerate(counts):
 			o_ptr += 1
 			if o_ptr >= 8:
 				o_ptr = 0
+
+outputs = [""] * 8
+
+keys = list(chars.keys())
+
+any_ = lambda chrs:len(set(nb).intersection(chrs)) > 0
+all_ = lambda chrs:len(set(nb).intersection(chrs)) == len(set(chrs))
+no   = lambda chrs:len(set(nb).intersection(chrs)) == 0
+
+i = 0
+while i < len(keys):
+	key = keys[i]
+	nb = "%i" % key
+	skipchar = False
+	for c in "14":
+		if c in nb:
+			skipchar = True
+			break
+	if len(nb) > 1 or skipchar:
+		skipchar = False
+		i += 1
+		continue
+	outputs[0] += chr(chars[key])
+	del(keys[i])
+
+print(len(keys))
+
+
+#14
+#25
+#36
+#78
+
+REMAP = "12453687"[::-1]
+
+def remap(in_):
+	out_ = 0
+	for c in "%i" % in_:
+		out_ += 1 << REMAP.index(c)
+	return out_
+
+outputs = [
+	chr(0x2800) +
+	"".join([chr(chars[key]) for key in sorted(chars.keys(), key=remap)])
+]
 
 with open("output", "w", encoding="utf8") as f:
 	outputs = "\n".join(outputs)
